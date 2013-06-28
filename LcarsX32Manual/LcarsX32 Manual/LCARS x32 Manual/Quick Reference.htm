@@ -1,0 +1,96 @@
+﻿<html>
+<head>
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<title>Main Screen Quick Reference</title>
+<style type="text/css">
+    img
+    {
+		position:absolute;
+		top:0;
+		left:0;
+    	width:1280;
+    	height:720;
+		border:0px solid black;
+    }
+	#TextDiv
+	{
+		position:absolute;
+		left:440;
+		top:182;
+		width:586;
+		border:3px solid orange;
+		background-color:black;
+	}
+	#HighlightDiv
+	{
+		position:absolute;
+		border:3px solid cyan;
+	}
+	body
+	{
+		margin:0px;
+	}
+</style>
+<script type="text/javascript">
+function setText(sender, newText){
+	document.getElementById("TextDiv").innerHTML = unescape(newText);
+	var myDiv = document.getElementById("HighlightDiv");
+	var coordinates = sender.coords.split(',');
+	myDiv.style.left = parseInt(coordinates[0]) + 2;
+	myDiv.style.top = parseInt(coordinates[1]) + 2;
+	myDiv.style.width = coordinates[2] - coordinates[0];
+	myDiv.style.height = coordinates[3] - coordinates[1];
+}
+</script>
+</head>
+<body>
+<img id="MainImage" src="Images/MainScreen1.png" />
+<map name="MS1Map">
+<area shape="rect" coords="855,132,908,154" onmouseover="setText(this,'Display the speech console. This button will be lit if speech recognition is active.')" />
+<area shape="rect" coords="807,132,851,154" onmouseover="setText(this,'Display the On-Screen Keyboard')" href="Chapter 7.htm" />
+<area shape="rect" coords="762,132,803,154" onmouseover="setText(this,'Open the manual for LCARS x32.')" />
+<area shape="rect" coords="608,132,707,154" onmouseover="setText(this,'Deactivate LCARS x32 or turn off your computer.')" />
+<area shape="rect" coords="508,132,604,154" onmouseover="setText(this,'Open auto-destruct program. Will not actually damage your computer.')" />
+<area shape="rect" coords="453,131,504,154" onmouseover="setText(this,'Show or hide the upper panel')" />
+<area shape="rect" coords="321,223,423,250" onmouseover="setText(this,'Open My Computer in LCARS Explorer')" href="Chapter 5.htm" />
+<area shape="rect" coords="321,254,423,281" onmouseover="setText(this,'Open Settings for LCARS x32')" href="Chapter 3.htm" />
+<area shape="rect" coords="321,285,423,312" onmouseover="setText(this,'Open Engineering to display system information.')" href="Chapter 8.htm" />
+<area shape="rect" coords="321,316,423,343" onmouseover="setText(this,'Open the photo viewer.')" href="Chapter 10.htm" />
+<area shape="rect" coords="321,633,423,660" onmouseover="setText(this,'Open or close the start menu.')" href="Chapter 4.htm" />
+<area shape="rect" coords="1103,132,1235,154" onmouseover="setText(this,'Open or close the Personal Programs Menu.')" href="Chapter 6.htm" />
+<!-- Personal Programs menu -->
+<area shape="rect" coords="1042,158,1274,180" onmouseover="setText(this,'Display editor for Personal Programs.')" href="Chapter 6.htm" />
+<area shape="rect" coords="1046,184,1258,248" onmouseover="setText(this,'Personal Programs. These function the same way as shortcuts in Windows.')" href="Chapter 6.htm" />
+<area shape="rect" coords="1042,158,1274,720" onmouseover="setText(this,'Personal Programs menu.')" href="Chapter 6.htm" />
+<!-- Top Bar -->
+<area shape="rect" coords="582,106,604,128" onmouseover="setText(this,'Display alert browser to start other alerts.')" />
+<area shape="rect" coords="508,106,578,128" onmouseover="setText(this,'Start red alert, or cancel a running alert.')" />
+<area shape="rect" coords="1152,73,1274,100" onmouseover="setText(this,'Shows tray icons. Click the arrow that appears to hide them again.')" />
+<area shape="rect" coords="859,10,1262,65" onmouseover="setText(this,'Clock. Can display in stardate format or standard date and time.')" />
+<area shape="rect" coords="582,73,1142,100" onmouseover="setText(this,'Taskbar. Click the left and right arrows to move the items left or right if there are more than will fit.')" />
+<area shape="rect" coords="443,13,574,86" onmouseover="setText(this,'Battery monitor. Nonfunctional on systems without a battery.')" />
+<area shape="rect" coords="321,6,423,37" onmouseover="setText(this,'Change main screen.')" />
+<area shape="rect" coords="321,0,1280,130" onmouseover="setText(this,'Upper panel. Can be hidden.')" />
+<!-- Start Menu -->
+<area shape="rect" coords="113,665,302,687" onmouseover="setText(this,'Change page shown in programs list.')" href="Chapter 4.htm" />
+<area shape="rect" coords="113,40,298,607" onmouseover="setText(this,'Programs list')" href="Chapter 4.htm" />
+<area shape="rect" coords="114,638,303,660" onmouseover="setText(this,'Go up a directory in the start menu.')" href="Chapter 4.htm" />
+<area shape="rect" coords="8,638,110,660" onmouseover="setText(this,'Run an application by typing its path.')" />
+<area shape="rect" coords="8,256,110,278" onmouseover="setText(this,'Currently nonfunctional. Will display network resources.')" />
+<area shape="rect" coords="8,230,110,252" onmouseover="setText(this,'Open user desktop files in LCARS Explorer.')" href="Chapter 5.htm" />
+<area shape="rect" coords="8,204,110,226" onmouseover="setText(this,'Open My Videos in LCARS Explorer.')" href="Chapter 5.htm" />
+<area shape="rect" coords="8,178,110,200" onmouseover="setText(this,'Open My Music in LCARS Explorer.')" href="Chapter 5.htm" />
+<area shape="rect" coords="8,152,110,174" onmouseover="setText(this,'Open My Pictures in LCARS Explorer.')" href="Chapter 5.htm" />
+<area shape="rect" coords="8,126,110,148" onmouseover="setText(this,'Open My Documents in LCARS Explorer.')" href="Chapter 5.htm" />
+<area shape="rect" coords="8,100,110,122" onmouseover="setText(this,'Start Web Browser')" href="Chapter 9.htm" />
+<area shape="rect" coords="0,0,311,720," onmouseover="setText(this,'Start Menu.')" href="Chapter 4.htm" />
+<area shape="rect" coords="0,0,1280,720" onmouseover="setText(this,'Mouse over sections of the image to view their descriptions.')" />
+</map>
+<div id="HighlightDiv">
+</div>
+<img src="Images/transparent.gif" style="width:1280; height:720;" usemap="#MS1Map" />
+<div id="TextDiv">
+Mouse over sections of the image to view their descriptions.
+</div>
+</body>
+</html>

@@ -1,0 +1,380 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C9BDBACC-9C69-4571-929D-DAED7874ED41}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>LCARSmain.My.MyApplication</StartupObject>
+    <RootNamespace>LCARSmain</RootNamespace>
+    <AssemblyName>LCARSmain</AssemblyName>
+    <MyType>WindowsForms</MyType>
+    <ApplicationIcon>img\x32.ico</ApplicationIcon>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>LCARSmain.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\debug\</OutputPath>
+    <DocumentationFile>LCARSmain.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="Classes\cWrapExitWindows.vb" />
+    <Compile Include="Forms\frmAlerts.Designer.vb">
+      <DependentUpon>frmAlerts.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmAlerts.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmIconSaver.Designer.vb">
+      <DependentUpon>frmIconSaver.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmIconSaver.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmMainscreen1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmMainscreen1.Designer.vb">
+      <DependentUpon>frmMainscreen1.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmFirstRun.Designer.vb">
+      <DependentUpon>frmFirstRun.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmFirstRun.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmMainscreen3.designer.vb">
+      <DependentUpon>frmMainscreen3.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmMainscreen3.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmManageButtons.Designer.vb">
+      <DependentUpon>frmManageButtons.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmManageButtons.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmPicScreen.Designer.vb">
+      <DependentUpon>ScreenChooserDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmRunProgram.Designer.vb">
+      <DependentUpon>frmRunProgram.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmRunProgram.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmSpeechConsole.Designer.vb">
+      <DependentUpon>frmSpeechConsole.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmSpeechConsole.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ScreenChooserDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmRedAlert.Designer.vb">
+      <DependentUpon>frmRedAlert.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmRedAlert.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmStartup.Designer.vb">
+      <DependentUpon>frmStartup.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmStartup.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmMainscreen4.designer.vb">
+      <DependentUpon>frmMainscreen4.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmMainscreen4.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interfaces\IAutohide.vb" />
+    <Compile Include="Interfaces\IMainScreen.vb" />
+    <Compile Include="Modules\keyboard.vb" />
+    <Compile Include="Forms\frmMainscreen2.Designer.vb">
+      <DependentUpon>frmMainscreen2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmMainscreen2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\modAnimate.vb" />
+    <Compile Include="Modules\modBusiness.vb" />
+    <Compile Include="Modules\modCommon.vb" />
+    <Compile Include="Modules\modSettings.vb" />
+    <Compile Include="Modules\modSpeech.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Modules\MSIparser.vb" />
+    <Compile Include="Modules\programList.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Forms\frmAlerts.resx">
+      <DependentUpon>frmAlerts.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmIconSaver.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmIconSaver.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmMainscreen1.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmMainscreen1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmFirstRun.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmFirstRun.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmMainscreen3.resx">
+      <DependentUpon>frmMainscreen3.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmManageButtons.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmManageButtons.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmRedAlert.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmRedAlert.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmRunProgram.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmRunProgram.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmSpeechConsole.resx">
+      <DependentUpon>frmSpeechConsole.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmStartup.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmStartup.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmMainscreen2.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmMainscreen2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmMainscreen4.resx">
+      <DependentUpon>frmMainscreen4.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ScreenChooserDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ScreenChooserDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\federation-logo.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="IWshRuntimeLibrary">
+      <Guid>{F935DC20-1CF0-11D0-ADB9-00C04FD58A0B}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="SpeechLib">
+      <Guid>{C866CA3A-32F7-11D2-9602-00C04F8EE628}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="img\Federation.ico" />
+    <None Include="Resources\010.wav" />
+    <Content Include="img\folder.png" />
+    <Content Include="img\x32.ico" />
+    <None Include="Resources\box.jpg" />
+    <None Include="Resources\095.wav" />
+    <Content Include="Resources\computer.wav" />
+    <None Include="Resources\Please_confirm.wav" />
+    <None Include="Resources\folder.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Lcars Web Browser\Lcars Web Browser.vbproj">
+      <Project>{B0C6DE26-9870-4CC1-A58F-E30B689D4338}</Project>
+      <Name>Lcars Web Browser</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\LCARSbuttons\LCARSbuttons\LCARSbuttons.vbproj">
+      <Project>{D3ED0098-5647-4C53-B87C-DFBD8BDE7FE5}</Project>
+      <Name>LCARSbuttons</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\LCARSdestruct\LCARSdestruct\LCARSdestruct.vbproj">
+      <Project>{18688100-8577-4902-9EE2-F0130D2DBFA7}</Project>
+      <Name>LCARSdestruct</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\LCARSengineering\LCARSengineering\LCARSengineering.vbproj">
+      <Project>{B884777B-0ED0-49FB-BCA9-918D279F0AA0}</Project>
+      <Name>LCARSengineering</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\LCARSexplorer\LCARSexplorer\LCARSexplorer.vbproj">
+      <Project>{143D31BF-B376-415C-88EF-FA313D85D4F4}</Project>
+      <Name>LCARSexplorer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\LCARSLock\LCARSLock\LCARSLock.vbproj">
+      <Project>{067270F2-6BB1-4B78-BBCF-323085D46520}</Project>
+      <Name>LCARSLock</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\LCARSpic\LCARSpic.vbproj">
+      <Project>{01C0B575-1C11-40E5-9C57-6A2E58A8A3A8}</Project>
+      <Name>LCARSpic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\LCARSsettings\LCARSsettings\LCARSsettings.vbproj">
+      <Project>{9FC894F9-1347-40D7-8388-727AA0A93CE4}</Project>
+      <Name>LCARSsettings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\LCARSshutdown\LCARSshutdown\LCARSshutdown.vbproj">
+      <Project>{EFFA4A24-6AB8-473E-A4A6-38501CE8A278}</Project>
+      <Name>LCARSshutdown</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\LCARSUpdate\LCARSUpdate\LCARSUpdate.vbproj">
+      <Project>{E29F9B56-6C65-4BBB-B52D-FD29A61244C6}</Project>
+      <Name>LCARSUpdate</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\LcarsX32Manual\LcarsX32 Manual\LcarsX32 Manual.vbproj">
+      <Project>{62F03F45-D18A-4B2A-9E5E-BA86BC0A31D1}</Project>
+      <Name>LcarsX32 Manual</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\OnScreenKeyboard\OnScreenKeyboard\OnScreenKeyboard.vbproj">
+      <Project>{C5ACF266-50F1-49F7-8BEE-CD46C8BFA1C2}</Project>
+      <Name>OnScreenKeyboard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\runInstallScript\runInstallScript\runInstallScript.vbproj">
+      <Project>{483DE7B9-4F26-4D1D-AFB8-514076A08573}</Project>
+      <Name>runInstallScript</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SetShell\SetShell\SetShell.vbproj">
+      <Project>{24134098-B08C-4E16-B4AF-865C43DF7313}</Project>
+      <Name>SetShell</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\LCARSTaskManager\LCARSTaskManager.vbproj">
+      <Project>{F42CFF5B-719E-4463-B5A0-A3D5EB9C3525}</Project>
+      <Name>LCARSTaskManager</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>call "$(DevEnvDir)..\..\VC\bin\vcvars32.bat"
+
+call "$(DevEnvDir)..\..\VC\bin\editbin.exe" /NXCOMPAT:NO "$(TargetPath)"
+
+</PostBuildEvent>
+  </PropertyGroup>
+</Project>
