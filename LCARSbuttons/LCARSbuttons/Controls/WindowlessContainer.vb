@@ -63,7 +63,11 @@ Namespace Controls
                     If localPoint = oldMouseDownPoint Then
                         myList(i).doClick()
                     End If
-                    myList(i).doEvent(LightweightControls.ILightweightControl.LightweightEvents.MouseUp)
+                    Try
+                        myList(i).doEvent(LightweightControls.ILightweightControl.LightweightEvents.MouseUp)
+                    Catch ex As Exception
+                        'Click modified the collection
+                    End Try
                     Exit For
                 End If
             Next
