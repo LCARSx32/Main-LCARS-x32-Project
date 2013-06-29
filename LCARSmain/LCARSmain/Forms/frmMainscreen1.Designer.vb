@@ -170,7 +170,7 @@ Partial Class frmMainscreen1
         Me.HalfPillButton1 = New LCARS.Controls.HalfPillButton
         Me.FlatButton30 = New LCARS.Controls.FlatButton
         Me.FlatButton27 = New LCARS.Controls.FlatButton
-        Me.pnlPrograms = New System.Windows.Forms.Panel
+        Me.pnlPrograms = New LCARS.Controls.WindowlessContainer
         Me.FlatButton13 = New LCARS.Controls.FlatButton
         Me.Elbow5 = New LCARS.Controls.Elbow
         Me.myPictures = New LCARS.Controls.FlatButton
@@ -2638,7 +2638,7 @@ Partial Class frmMainscreen1
     Friend WithEvents myPictures As LCARS.Controls.FlatButton
     Friend WithEvents fbMyNetwork As LCARS.Controls.FlatButton
     Friend WithEvents myMusic As LCARS.Controls.FlatButton
-    Friend WithEvents pnlPrograms As System.Windows.Forms.Panel
+    Friend WithEvents pnlPrograms As LCARS.Controls.WindowlessContainer
     Friend WithEvents myDocuments As LCARS.Controls.FlatButton
     Friend WithEvents pnlApps As System.Windows.Forms.Panel
     Friend WithEvents myUserButtons As LCARS.Controls.FlatButton

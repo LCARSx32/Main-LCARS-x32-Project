@@ -127,7 +127,7 @@ Partial Class frmMainscreen3
         Me.myRun = New LCARS.Controls.FlatButton
         Me.fbWebBrowser = New LCARS.Controls.FlatButton
         Me.myPhoto = New LCARS.Controls.FlatButton
-        Me.pnlPrograms = New System.Windows.Forms.Panel
+        Me.pnlPrograms = New LCARS.Controls.WindowlessContainer
         Me.Elbow2 = New LCARS.Controls.Elbow
         Me.FlatButton1 = New LCARS.Controls.FlatButton
         Me.myAlert = New LCARS.Controls.FlatButton
@@ -2041,7 +2041,7 @@ Partial Class frmMainscreen3
     Friend WithEvents myEngineering As LCARS.Controls.FlatButton
     Friend WithEvents myModeSelect As LCARS.Controls.FlatButton
     Friend WithEvents myDeactivate As LCARS.Controls.FlatButton
-    Friend WithEvents pnlPrograms As System.Windows.Forms.Panel
+    Friend WithEvents pnlPrograms As LCARS.Controls.WindowlessContainer
     Friend WithEvents myDestruct As LCARS.Controls.FlatButton
     Friend WithEvents myProgBack As LCARS.Controls.FlatButton
     Friend WithEvents fbProgramPages As LCARS.Controls.FlatButton

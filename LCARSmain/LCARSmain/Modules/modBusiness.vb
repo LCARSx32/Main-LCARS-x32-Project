@@ -40,7 +40,7 @@ public Class modBusiness
     Public myForm As Form
     Public myMainBar As Panel
     Public myMainPanel As Panel
-    Public ProgramsPanel As Panel
+    Public ProgramsPanel As LCARS.Controls.WindowlessContainer
     'Public ProgramsButton As LCARS.LCARSbuttonClass
     'Public MyCompPanel As Panel
     Public UserButtonsPanel As LCARS.Controls.ButtonGrid
@@ -104,9 +104,6 @@ public Class modBusiness
     Dim myWindows(-1) As ExternalApp
     Dim WindowList(-1) As ExternalApp
     Dim excluded(-1) As IntPtr
-
-    'User Buttons
-    Dim ubRowCount As Integer
 
     'Form Methods
     Dim myMethods As FormButtonMethods
@@ -1041,7 +1038,6 @@ public Class modBusiness
             Dim buttonTop As Integer = 0
             Dim myReg As Microsoft.Win32.RegistryKey = Microsoft.Win32.Registry.CurrentUser
 
-            ubRowCount = 0
             UserButtonsPanel.Clear()
             myUserButtonCollection.Clear()
 
@@ -1243,18 +1239,10 @@ public Class modBusiness
 
         myDir = MyPrograms
         ProgPageSize = ProgramsPanel.Height \ 30
-
         For intloop = 0 To ProgDir.GetUpperBound(0)
             myDir = myDir(ProgDir(intloop)).subItems
         Next
-
-        ' visibility = ProgramsPanel.Visible
-
-        'If ProgramsPanel.Visible = True Then
-        '    ProgramsPanel.Visible = False
-        'End If
-
-        ProgramsPanel.Controls.Clear()
+        ProgramsPanel.Clear()
         '  ProgramsPanel.Visible = visibility
 
         pageCount = Int(myDir.Count / ProgPageSize)
@@ -1277,39 +1265,38 @@ public Class modBusiness
         For intloop = index To pageMax
             If myDir(intloop).GetType Is GetType(DirectoryStartItem) Then
                 With CType(myDir(intloop), DirectoryStartItem)
-                    Dim myButton As New LCARS.Controls.ComplexButton
+                    Dim myButton As New LCARS.LightweightControls.LCComplexButton
                     myButton.Width = ProgramsPanel.Width
                     myButton.Height = 25
                     myButton.Left = 0
                     myButton.Color = LCARS.LCARScolorStyles.NavigationFunction
-                    myButton.ButtonText = .Name
+                    myButton.Text = .Name
                     myButton.SideText = .subItems.Count
-                    myButton.ButtonTextHeight = 14
-                    myButton.ButtonTextAlign = ContentAlignment.BottomRight
+                    myButton.TextHeight = 14
+                    myButton.TextAlign = ContentAlignment.BottomRight
                     myButton.Data = intloop
                     myButton.Top = itemCount * 30
-                    myButton.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-                    'myButton.Data = intloop
+                    'myButton.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    '                 Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                     myButton.Beeping = False
-                    myButton.Tag = ((pageMax - index) - (intloop - index)).ToString
-                    ProgramsPanel.Controls.Add(myButton)
+                    myButton.Data2 = ((pageMax - index) - (intloop - index)).ToString
+                    ProgramsPanel.Add(myButton)
                     AddHandler myButton.Click, AddressOf myDir_click
                     itemCount += 1
                 End With
             Else
                 With CType(myDir(intloop), FileStartItem)
-                    Dim myButton As New LCARS.Controls.StandardButton
+                    Dim myButton As New LCARS.LightweightControls.LCStandardButton
                     myButton.Width = ProgramsPanel.Width
                     myButton.Height = 25
                     myButton.Left = 0
                     myButton.Color = LCARS.LCARScolorStyles.MiscFunction
-                    myButton.ButtonText = Path.GetFileNameWithoutExtension(.Name)
+                    myButton.Text = Path.GetFileNameWithoutExtension(.Name)
                     myButton.Data = .Link.Executable
                     myButton.Top = itemCount * 30
                     myButton.Beeping = False
-                    myButton.Tag = ((pageMax - index) - (intloop - index)).ToString
-                    ProgramsPanel.Controls.Add(myButton)
+                    myButton.Data2 = ((pageMax - index) - (intloop - index)).ToString
+                    ProgramsPanel.Add(myButton)
                     AddHandler myButton.Click, AddressOf myfile_click
                     itemCount += 1
                 End With

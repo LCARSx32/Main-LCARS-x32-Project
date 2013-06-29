@@ -117,7 +117,7 @@ Partial Class frmMainscreen4
         Me.pnlProgs = New System.Windows.Forms.Panel
         Me.myProgsNext = New LCARS.Controls.ArrowButton
         Me.fbProgramPages = New LCARS.Controls.FlatButton
-        Me.pnlPrograms = New System.Windows.Forms.Panel
+        Me.pnlPrograms = New LCARS.Controls.WindowlessContainer
         Me.myProgBack = New LCARS.Controls.FlatButton
         Me.myProgsBack = New LCARS.Controls.ArrowButton
         Me.myMusic = New LCARS.Controls.FlatButton
@@ -1681,7 +1681,7 @@ Partial Class frmMainscreen4
     Friend WithEvents myEngineering As LCARS.Controls.FlatButton
     Friend WithEvents myModeSelect As LCARS.Controls.FlatButton
     Friend WithEvents myDeactivate As LCARS.Controls.FlatButton
-    Friend WithEvents pnlPrograms As System.Windows.Forms.Panel
+    Friend WithEvents pnlPrograms As LCARS.Controls.WindowlessContainer
     Friend WithEvents myDestruct As LCARS.Controls.FlatButton
     Friend WithEvents myProgBack As LCARS.Controls.FlatButton
     Friend WithEvents fbProgramPages As LCARS.Controls.FlatButton

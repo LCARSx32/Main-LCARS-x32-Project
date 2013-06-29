@@ -100,7 +100,7 @@ Partial Class frmMainscreen2
         Me.myPhoto = New LCARS.Controls.FlatButton
         Me.myComp = New LCARS.Controls.FlatButton
         Me.myDocuments = New LCARS.Controls.FlatButton
-        Me.pnlPrograms = New System.Windows.Forms.Panel
+        Me.pnlPrograms = New LCARS.Controls.WindowlessContainer
         Me.fbProgBack = New LCARS.Controls.FlatButton
         Me.fbProgramPages = New LCARS.Controls.FlatButton
         Me.abProgsNext = New LCARS.Controls.ArrowButton
@@ -2478,7 +2478,7 @@ Partial Class frmMainscreen2
     Friend WithEvents myComp As LCARS.Controls.FlatButton
     Friend WithEvents mySettings As LCARS.Controls.FlatButton
     Friend WithEvents pnlProgs As System.Windows.Forms.Panel
-    Friend WithEvents pnlPrograms As System.Windows.Forms.Panel
+    Friend WithEvents pnlPrograms As LCARS.Controls.WindowlessContainer
     Friend WithEvents fbMainBar As LCARS.Controls.FlatButton
     Friend WithEvents pnlMainTop As System.Windows.Forms.Panel
     Friend WithEvents abExpand As LCARS.Controls.ArrowButton
