@@ -2902,11 +2902,6 @@ Public Class frmMainscreen1
         If pnlStart.Visible = True Then myStartMenu.doClick(sender, e)
     End Sub
 
-    Private Sub myClock_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles myClock.TextChanged
-        myClock.Left = pnlMainContainer.Width - myClock.Width
-
-    End Sub
-
     Private Sub myRun_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles myRun.Click
         If pnlStart.Visible = True Then myStartMenu.doClick(sender, e)
     End Sub
