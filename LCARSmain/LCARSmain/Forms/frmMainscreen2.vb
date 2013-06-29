@@ -157,7 +157,7 @@ Public Class frmMainscreen2
         End If
 
         myBusiness.progShowing = pnlProgs.Visible
-        myBusiness.userButtonsShowing = pnlUserButtons.Visible
+        myBusiness.userButtonsShowing = gridUserButtons.Visible
 
         pnlMainBar_SizeChanged(sender, e)
 
@@ -165,7 +165,7 @@ Public Class frmMainscreen2
 
 
     Private Sub fbUserButtons_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles myUserButtons.Click
-        If pnlUserButtons.Visible = True Then
+        If gridUserButtons.Visible = True Then
             fbUBEndcap.Visible = False
         Else
             fbUBEndcap.Visible = True
@@ -427,7 +427,7 @@ Public Class frmMainscreen2
             End If
 
             If myBusiness.userButtonsShowing Then
-                myRect.Width = (pnlUserButtons.Left - 6) - myRect.X
+                myRect.Width = (gridUserButtons.Left - 6) - myRect.X
             Else
                 myRect.Width = (fbBarRight.Left - 6) - myRect.X
             End If
@@ -449,11 +449,6 @@ Public Class frmMainscreen2
 
     Private Sub abProgsBack_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles abProgsBack.Click
         myBusiness.previousProgPage()
-    End Sub
-
-    Private Sub pnlUserButtons_SizeChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles pnlUserButtons.SizeChanged
-        myBusiness.myUserButtonCollection.Clear()
-        myBusiness.loadUserButtons()
     End Sub
 
     Private Sub pnlMainElbow_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles pnlMainElbow.Resize

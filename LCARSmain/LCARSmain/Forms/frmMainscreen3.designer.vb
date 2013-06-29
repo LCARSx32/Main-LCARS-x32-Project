@@ -21,6 +21,62 @@ Partial Class frmMainscreen3
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMainscreen3))
+        Dim LcarScolor113 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor114 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor115 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor116 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor117 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor118 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor119 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor120 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor121 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor126 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor127 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor122 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor123 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor128 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor129 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor130 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor131 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor132 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor133 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor134 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor135 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor136 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor137 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor138 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor139 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor140 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor141 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor142 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor143 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor144 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor145 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor146 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor147 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor148 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor149 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor150 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor151 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor152 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor153 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor154 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor155 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor156 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor157 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor158 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor159 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor160 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor161 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor162 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor163 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor164 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor165 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor166 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor167 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor168 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor124 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor125 As LCARS.LCARScolor = New LCARS.LCARScolor
         Me.pnlMainBar = New System.Windows.Forms.Panel
         Me.Panel2 = New System.Windows.Forms.Panel
         Me.myClock = New LCARS.Controls.FlatButton
@@ -41,6 +97,7 @@ Partial Class frmMainscreen3
         Me.StandardButton2 = New LCARS.Controls.StandardButton
         Me.myButtonManager = New LCARS.Controls.FlatButton
         Me.pnlProgs = New System.Windows.Forms.Panel
+        Me.myAlertListButton = New LCARS.Controls.ArrowButton
         Me.FlatButton2 = New LCARS.Controls.FlatButton
         Me.FlatButton6 = New LCARS.Controls.FlatButton
         Me.pnlBatt = New System.Windows.Forms.Panel
@@ -70,7 +127,7 @@ Partial Class frmMainscreen3
         Me.myRun = New LCARS.Controls.FlatButton
         Me.fbWebBrowser = New LCARS.Controls.FlatButton
         Me.myPhoto = New LCARS.Controls.FlatButton
-        Me.pnlPrograms = New System.Windows.Forms.Panel
+        Me.pnlPrograms = New LCARS.Controls.WindowlessContainer
         Me.Elbow2 = New LCARS.Controls.Elbow
         Me.FlatButton1 = New LCARS.Controls.FlatButton
         Me.myAlert = New LCARS.Controls.FlatButton
@@ -85,11 +142,10 @@ Partial Class frmMainscreen3
         Me.myProgsNext = New LCARS.Controls.ArrowButton
         Me.myProgsBack = New LCARS.Controls.ArrowButton
         Me.Elbow1 = New LCARS.Controls.Elbow
-        Me.pnlUserButtons = New System.Windows.Forms.Panel
+        Me.gridUserButtons = New LCARS.Controls.ButtonGrid
         Me.StandardButton1 = New LCARS.Controls.StandardButton
         Me.StandardButton3 = New LCARS.Controls.StandardButton
         Me.tmrAutoHide = New System.Windows.Forms.Timer(Me.components)
-        Me.myAlertListButton = New LCARS.Controls.ArrowButton
         Me.pnlMainBar.SuspendLayout()
         Me.pnlTray.SuspendLayout()
         Me.pnlProgs.SuspendLayout()
@@ -118,7 +174,7 @@ Partial Class frmMainscreen3
         Me.pnlMainBar.Controls.Add(Me.StandardButton2)
         Me.pnlMainBar.Controls.Add(Me.myButtonManager)
         Me.pnlMainBar.Controls.Add(Me.pnlProgs)
-        Me.pnlMainBar.Controls.Add(Me.pnlUserButtons)
+        Me.pnlMainBar.Controls.Add(Me.gridUserButtons)
         Me.pnlMainBar.Controls.Add(Me.StandardButton1)
         Me.pnlMainBar.Controls.Add(Me.StandardButton3)
         Me.pnlMainBar.Location = New System.Drawing.Point(0, 0)
@@ -146,16 +202,15 @@ Partial Class frmMainscreen3
         Me.myClock.ButtonTextHeight = -1
         Me.myClock.Clickable = False
         Me.myClock.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
+        Me.myClock.ColorsAvailable = LcarScolor113
         Me.myClock.CustomAlertColor = System.Drawing.Color.Empty
         Me.myClock.Data = Nothing
         Me.myClock.Data2 = Nothing
         Me.myClock.FlashInterval = 500
         Me.myClock.holdDraw = False
-        Me.myClock.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.myClock.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.myClock.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.myClock.lblTextSize = New System.Drawing.Point(170, 23)
+        Me.myClock.lblTextSize = New System.Drawing.Size(170, 23)
         Me.myClock.lblTextVisible = True
         Me.myClock.Lit = True
         Me.myClock.Location = New System.Drawing.Point(618, 3)
@@ -177,16 +232,15 @@ Partial Class frmMainscreen3
         Me.myStartMenu.ButtonTextHeight = 14
         Me.myStartMenu.Clickable = True
         Me.myStartMenu.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.myStartMenu.ColorsAvailable = LcarScolor114
         Me.myStartMenu.CustomAlertColor = System.Drawing.Color.Empty
         Me.myStartMenu.Data = Nothing
         Me.myStartMenu.Data2 = Nothing
         Me.myStartMenu.FlashInterval = 500
         Me.myStartMenu.holdDraw = False
-        Me.myStartMenu.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.myStartMenu.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.myStartMenu.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.myStartMenu.lblTextSize = New System.Drawing.Point(115, 25)
+        Me.myStartMenu.lblTextSize = New System.Drawing.Size(115, 25)
         Me.myStartMenu.lblTextVisible = True
         Me.myStartMenu.Lit = True
         Me.myStartMenu.Location = New System.Drawing.Point(38, 734)
@@ -217,16 +271,15 @@ Partial Class frmMainscreen3
         Me.FlatButton5.ButtonTextHeight = 14
         Me.FlatButton5.Clickable = False
         Me.FlatButton5.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
+        Me.FlatButton5.ColorsAvailable = LcarScolor115
         Me.FlatButton5.CustomAlertColor = System.Drawing.Color.Empty
         Me.FlatButton5.Data = Nothing
         Me.FlatButton5.Data2 = Nothing
         Me.FlatButton5.FlashInterval = 500
         Me.FlatButton5.holdDraw = False
-        Me.FlatButton5.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.FlatButton5.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.FlatButton5.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.FlatButton5.lblTextSize = New System.Drawing.Point(247, 23)
+        Me.FlatButton5.lblTextSize = New System.Drawing.Size(247, 23)
         Me.FlatButton5.lblTextVisible = True
         Me.FlatButton5.Lit = True
         Me.FlatButton5.Location = New System.Drawing.Point(32, 3)
@@ -247,16 +300,15 @@ Partial Class frmMainscreen3
         Me.StandardButton4.ButtonTextHeight = 14
         Me.StandardButton4.Clickable = False
         Me.StandardButton4.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
+        Me.StandardButton4.ColorsAvailable = LcarScolor116
         Me.StandardButton4.CustomAlertColor = System.Drawing.Color.Empty
         Me.StandardButton4.Data = Nothing
         Me.StandardButton4.Data2 = Nothing
         Me.StandardButton4.FlashInterval = 500
         Me.StandardButton4.holdDraw = False
-        Me.StandardButton4.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.StandardButton4.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.StandardButton4.lblTextLoc = New System.Drawing.Point(11, 0)
-        Me.StandardButton4.lblTextSize = New System.Drawing.Point(61, 23)
+        Me.StandardButton4.lblTextSize = New System.Drawing.Size(61, 23)
         Me.StandardButton4.lblTextVisible = True
         Me.StandardButton4.Lit = True
         Me.StandardButton4.Location = New System.Drawing.Point(5, 3)
@@ -276,16 +328,15 @@ Partial Class frmMainscreen3
         Me.myHelp.ButtonTextHeight = 14
         Me.myHelp.Clickable = True
         Me.myHelp.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.myHelp.ColorsAvailable = LcarScolor117
         Me.myHelp.CustomAlertColor = System.Drawing.Color.Empty
         Me.myHelp.Data = Nothing
         Me.myHelp.Data2 = Nothing
         Me.myHelp.FlashInterval = 500
         Me.myHelp.holdDraw = False
-        Me.myHelp.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.myHelp.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.myHelp.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.myHelp.lblTextSize = New System.Drawing.Point(60, 23)
+        Me.myHelp.lblTextSize = New System.Drawing.Size(60, 23)
         Me.myHelp.lblTextVisible = True
         Me.myHelp.Lit = True
         Me.myHelp.Location = New System.Drawing.Point(411, 3)
@@ -306,16 +357,15 @@ Partial Class frmMainscreen3
         Me.myOSK.ButtonTextHeight = 14
         Me.myOSK.Clickable = True
         Me.myOSK.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.myOSK.ColorsAvailable = LcarScolor118
         Me.myOSK.CustomAlertColor = System.Drawing.Color.Empty
         Me.myOSK.Data = Nothing
         Me.myOSK.Data2 = Nothing
         Me.myOSK.FlashInterval = 500
         Me.myOSK.holdDraw = False
-        Me.myOSK.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.myOSK.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.myOSK.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.myOSK.lblTextSize = New System.Drawing.Point(60, 23)
+        Me.myOSK.lblTextSize = New System.Drawing.Size(60, 23)
         Me.myOSK.lblTextVisible = True
         Me.myOSK.Lit = True
         Me.myOSK.Location = New System.Drawing.Point(345, 3)
@@ -338,16 +388,15 @@ Partial Class frmMainscreen3
         Me.FlatButton4.ButtonTextHeight = 14
         Me.FlatButton4.Clickable = False
         Me.FlatButton4.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
+        Me.FlatButton4.ColorsAvailable = LcarScolor119
         Me.FlatButton4.CustomAlertColor = System.Drawing.Color.Empty
         Me.FlatButton4.Data = Nothing
         Me.FlatButton4.Data2 = Nothing
         Me.FlatButton4.FlashInterval = 500
         Me.FlatButton4.holdDraw = False
-        Me.FlatButton4.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.FlatButton4.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.FlatButton4.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.FlatButton4.lblTextSize = New System.Drawing.Point(143, 23)
+        Me.FlatButton4.lblTextSize = New System.Drawing.Size(143, 23)
         Me.FlatButton4.lblTextVisible = True
         Me.FlatButton4.Lit = True
         Me.FlatButton4.Location = New System.Drawing.Point(477, 3)
@@ -367,16 +416,15 @@ Partial Class frmMainscreen3
         Me.mySpeech.ButtonTextHeight = 14
         Me.mySpeech.Clickable = True
         Me.mySpeech.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.mySpeech.ColorsAvailable = LcarScolor120
         Me.mySpeech.CustomAlertColor = System.Drawing.Color.Empty
         Me.mySpeech.Data = Nothing
         Me.mySpeech.Data2 = Nothing
         Me.mySpeech.FlashInterval = 500
         Me.mySpeech.holdDraw = False
-        Me.mySpeech.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.mySpeech.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.mySpeech.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.mySpeech.lblTextSize = New System.Drawing.Point(54, 23)
+        Me.mySpeech.lblTextSize = New System.Drawing.Size(54, 23)
         Me.mySpeech.lblTextVisible = True
         Me.mySpeech.Lit = False
         Me.mySpeech.Location = New System.Drawing.Point(285, 3)
@@ -398,16 +446,15 @@ Partial Class frmMainscreen3
         Me.myUserButtons.ButtonTextHeight = 14
         Me.myUserButtons.Clickable = True
         Me.myUserButtons.Color = LCARS.LCARScolorStyles.NavigationFunction
+        Me.myUserButtons.ColorsAvailable = LcarScolor121
         Me.myUserButtons.CustomAlertColor = System.Drawing.Color.Empty
         Me.myUserButtons.Data = Nothing
         Me.myUserButtons.Data2 = Nothing
         Me.myUserButtons.FlashInterval = 500
         Me.myUserButtons.holdDraw = False
-        Me.myUserButtons.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.myUserButtons.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.myUserButtons.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.myUserButtons.lblTextSize = New System.Drawing.Point(124, 23)
+        Me.myUserButtons.lblTextSize = New System.Drawing.Size(124, 23)
         Me.myUserButtons.lblTextVisible = True
         Me.myUserButtons.Lit = True
         Me.myUserButtons.Location = New System.Drawing.Point(581, 737)
@@ -459,16 +506,15 @@ Partial Class frmMainscreen3
         Me.HideTrayButton.ButtonTextHeight = 14
         Me.HideTrayButton.Clickable = True
         Me.HideTrayButton.Color = LCARS.LCARScolorStyles.MiscFunction
+        Me.HideTrayButton.ColorsAvailable = LcarScolor126
         Me.HideTrayButton.CustomAlertColor = System.Drawing.Color.Empty
         Me.HideTrayButton.Data = Nothing
         Me.HideTrayButton.Data2 = Nothing
         Me.HideTrayButton.FlashInterval = 500
         Me.HideTrayButton.holdDraw = False
-        Me.HideTrayButton.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.HideTrayButton.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.HideTrayButton.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.HideTrayButton.lblTextSize = New System.Drawing.Point(25, 23)
+        Me.HideTrayButton.lblTextSize = New System.Drawing.Size(25, 23)
         Me.HideTrayButton.lblTextVisible = True
         Me.HideTrayButton.Lit = True
         Me.HideTrayButton.Location = New System.Drawing.Point(95, 0)
@@ -488,16 +534,15 @@ Partial Class frmMainscreen3
         Me.showTrayButton.ButtonTextHeight = 14
         Me.showTrayButton.Clickable = True
         Me.showTrayButton.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.showTrayButton.ColorsAvailable = LcarScolor127
         Me.showTrayButton.CustomAlertColor = System.Drawing.Color.Empty
         Me.showTrayButton.Data = Nothing
         Me.showTrayButton.Data2 = Nothing
         Me.showTrayButton.FlashInterval = 500
         Me.showTrayButton.holdDraw = False
-        Me.showTrayButton.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.showTrayButton.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.showTrayButton.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.showTrayButton.lblTextSize = New System.Drawing.Point(120, 23)
+        Me.showTrayButton.lblTextSize = New System.Drawing.Size(120, 23)
         Me.showTrayButton.lblTextVisible = True
         Me.showTrayButton.Lit = True
         Me.showTrayButton.Location = New System.Drawing.Point(0, 0)
@@ -519,16 +564,15 @@ Partial Class frmMainscreen3
         Me.StandardButton2.ButtonTextHeight = 14
         Me.StandardButton2.Clickable = False
         Me.StandardButton2.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
+        Me.StandardButton2.ColorsAvailable = LcarScolor122
         Me.StandardButton2.CustomAlertColor = System.Drawing.Color.Empty
         Me.StandardButton2.Data = Nothing
         Me.StandardButton2.Data2 = Nothing
         Me.StandardButton2.FlashInterval = 500
         Me.StandardButton2.holdDraw = False
-        Me.StandardButton2.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.StandardButton2.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.StandardButton2.lblTextLoc = New System.Drawing.Point(11, 0)
-        Me.StandardButton2.lblTextSize = New System.Drawing.Point(107, 23)
+        Me.StandardButton2.lblTextSize = New System.Drawing.Size(107, 23)
         Me.StandardButton2.lblTextVisible = True
         Me.StandardButton2.Lit = True
         Me.StandardButton2.Location = New System.Drawing.Point(665, 737)
@@ -549,16 +593,15 @@ Partial Class frmMainscreen3
         Me.myButtonManager.ButtonTextHeight = 14
         Me.myButtonManager.Clickable = True
         Me.myButtonManager.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.myButtonManager.ColorsAvailable = LcarScolor123
         Me.myButtonManager.CustomAlertColor = System.Drawing.Color.Empty
         Me.myButtonManager.Data = Nothing
         Me.myButtonManager.Data2 = Nothing
         Me.myButtonManager.FlashInterval = 500
         Me.myButtonManager.holdDraw = False
-        Me.myButtonManager.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.myButtonManager.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.myButtonManager.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.myButtonManager.lblTextSize = New System.Drawing.Point(214, 20)
+        Me.myButtonManager.lblTextSize = New System.Drawing.Size(214, 20)
         Me.myButtonManager.lblTextVisible = True
         Me.myButtonManager.Lit = True
         Me.myButtonManager.Location = New System.Drawing.Point(581, 711)
@@ -607,6 +650,35 @@ Partial Class frmMainscreen3
         Me.pnlProgs.Tag = "9"
         Me.pnlProgs.Visible = False
         '
+        'myAlertListButton
+        '
+        Me.myAlertListButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.myAlertListButton.ArrowDirection = LCARS.LCARSarrowDirection.Right
+        Me.myAlertListButton.AutoEllipsis = Nothing
+        Me.myAlertListButton.BackgroundImage = CType(resources.GetObject("myAlertListButton.BackgroundImage"), System.Drawing.Image)
+        Me.myAlertListButton.Beeping = False
+        Me.myAlertListButton.ButtonText = ""
+        Me.myAlertListButton.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.myAlertListButton.ButtonTextHeight = 14
+        Me.myAlertListButton.Clickable = True
+        Me.myAlertListButton.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.myAlertListButton.ColorsAvailable = LcarScolor128
+        Me.myAlertListButton.CustomAlertColor = System.Drawing.Color.Empty
+        Me.myAlertListButton.Data = Nothing
+        Me.myAlertListButton.Data2 = Nothing
+        Me.myAlertListButton.FlashInterval = 500
+        Me.myAlertListButton.holdDraw = False
+        Me.myAlertListButton.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
+        Me.myAlertListButton.lblTextLoc = New System.Drawing.Point(0, 0)
+        Me.myAlertListButton.lblTextSize = New System.Drawing.Size(26, 25)
+        Me.myAlertListButton.lblTextVisible = True
+        Me.myAlertListButton.Lit = True
+        Me.myAlertListButton.Location = New System.Drawing.Point(335, 560)
+        Me.myAlertListButton.Name = "myAlertListButton"
+        Me.myAlertListButton.RedAlert = LCARS.LCARSalert.Normal
+        Me.myAlertListButton.Size = New System.Drawing.Size(26, 25)
+        Me.myAlertListButton.TabIndex = 79
+        '
         'FlatButton2
         '
         Me.FlatButton2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -619,16 +691,15 @@ Partial Class frmMainscreen3
         Me.FlatButton2.ButtonTextHeight = 14
         Me.FlatButton2.Clickable = False
         Me.FlatButton2.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
+        Me.FlatButton2.ColorsAvailable = LcarScolor129
         Me.FlatButton2.CustomAlertColor = System.Drawing.Color.Empty
         Me.FlatButton2.Data = Nothing
         Me.FlatButton2.Data2 = Nothing
         Me.FlatButton2.FlashInterval = 500
         Me.FlatButton2.holdDraw = False
-        Me.FlatButton2.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.FlatButton2.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.FlatButton2.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.FlatButton2.lblTextSize = New System.Drawing.Point(124, 59)
+        Me.FlatButton2.lblTextSize = New System.Drawing.Size(124, 59)
         Me.FlatButton2.lblTextVisible = True
         Me.FlatButton2.Lit = True
         Me.FlatButton2.Location = New System.Drawing.Point(237, 31)
@@ -650,16 +721,15 @@ Partial Class frmMainscreen3
         Me.FlatButton6.ButtonTextHeight = 14
         Me.FlatButton6.Clickable = False
         Me.FlatButton6.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
+        Me.FlatButton6.ColorsAvailable = LcarScolor130
         Me.FlatButton6.CustomAlertColor = System.Drawing.Color.Empty
         Me.FlatButton6.Data = Nothing
         Me.FlatButton6.Data2 = Nothing
         Me.FlatButton6.FlashInterval = 500
         Me.FlatButton6.holdDraw = False
-        Me.FlatButton6.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.FlatButton6.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.FlatButton6.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.FlatButton6.lblTextSize = New System.Drawing.Point(124, 12)
+        Me.FlatButton6.lblTextSize = New System.Drawing.Size(124, 12)
         Me.FlatButton6.lblTextVisible = True
         Me.FlatButton6.Lit = True
         Me.FlatButton6.Location = New System.Drawing.Point(237, 337)
@@ -707,16 +777,15 @@ Partial Class frmMainscreen3
         Me.fbBatt8.ButtonTextHeight = 18
         Me.fbBatt8.Clickable = False
         Me.fbBatt8.Color = LCARS.LCARScolorStyles.StaticBlue
+        Me.fbBatt8.ColorsAvailable = LcarScolor131
         Me.fbBatt8.CustomAlertColor = System.Drawing.Color.Empty
         Me.fbBatt8.Data = Nothing
         Me.fbBatt8.Data2 = Nothing
         Me.fbBatt8.FlashInterval = 0
         Me.fbBatt8.holdDraw = False
-        Me.fbBatt8.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.fbBatt8.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.fbBatt8.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.fbBatt8.lblTextSize = New System.Drawing.Point(25, 2)
+        Me.fbBatt8.lblTextSize = New System.Drawing.Size(25, 2)
         Me.fbBatt8.lblTextVisible = True
         Me.fbBatt8.Lit = True
         Me.fbBatt8.Location = New System.Drawing.Point(31, 19)
@@ -736,16 +805,15 @@ Partial Class frmMainscreen3
         Me.fbBatt10.ButtonTextHeight = 18
         Me.fbBatt10.Clickable = False
         Me.fbBatt10.Color = LCARS.LCARScolorStyles.StaticBlue
+        Me.fbBatt10.ColorsAvailable = LcarScolor132
         Me.fbBatt10.CustomAlertColor = System.Drawing.Color.Empty
         Me.fbBatt10.Data = Nothing
         Me.fbBatt10.Data2 = Nothing
         Me.fbBatt10.FlashInterval = 0
         Me.fbBatt10.holdDraw = False
-        Me.fbBatt10.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.fbBatt10.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.fbBatt10.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.fbBatt10.lblTextSize = New System.Drawing.Point(25, 2)
+        Me.fbBatt10.lblTextSize = New System.Drawing.Size(25, 2)
         Me.fbBatt10.lblTextVisible = True
         Me.fbBatt10.Lit = True
         Me.fbBatt10.Location = New System.Drawing.Point(31, 13)
@@ -765,16 +833,15 @@ Partial Class frmMainscreen3
         Me.fbBatt9.ButtonTextHeight = 18
         Me.fbBatt9.Clickable = False
         Me.fbBatt9.Color = LCARS.LCARScolorStyles.StaticBlue
+        Me.fbBatt9.ColorsAvailable = LcarScolor133
         Me.fbBatt9.CustomAlertColor = System.Drawing.Color.Empty
         Me.fbBatt9.Data = Nothing
         Me.fbBatt9.Data2 = Nothing
         Me.fbBatt9.FlashInterval = 0
         Me.fbBatt9.holdDraw = False
-        Me.fbBatt9.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.fbBatt9.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.fbBatt9.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.fbBatt9.lblTextSize = New System.Drawing.Point(25, 2)
+        Me.fbBatt9.lblTextSize = New System.Drawing.Size(25, 2)
         Me.fbBatt9.lblTextVisible = True
         Me.fbBatt9.Lit = True
         Me.fbBatt9.Location = New System.Drawing.Point(31, 16)
@@ -794,16 +861,15 @@ Partial Class frmMainscreen3
         Me.fbBatt7.ButtonTextHeight = 18
         Me.fbBatt7.Clickable = False
         Me.fbBatt7.Color = LCARS.LCARScolorStyles.StaticBlue
+        Me.fbBatt7.ColorsAvailable = LcarScolor134
         Me.fbBatt7.CustomAlertColor = System.Drawing.Color.Empty
         Me.fbBatt7.Data = Nothing
         Me.fbBatt7.Data2 = Nothing
         Me.fbBatt7.FlashInterval = 0
         Me.fbBatt7.holdDraw = False
-        Me.fbBatt7.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.fbBatt7.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.fbBatt7.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.fbBatt7.lblTextSize = New System.Drawing.Point(25, 2)
+        Me.fbBatt7.lblTextSize = New System.Drawing.Size(25, 2)
         Me.fbBatt7.lblTextVisible = True
         Me.fbBatt7.Lit = True
         Me.fbBatt7.Location = New System.Drawing.Point(31, 22)
@@ -823,16 +889,15 @@ Partial Class frmMainscreen3
         Me.fbBatt6.ButtonTextHeight = 18
         Me.fbBatt6.Clickable = False
         Me.fbBatt6.Color = LCARS.LCARScolorStyles.StaticBlue
+        Me.fbBatt6.ColorsAvailable = LcarScolor135
         Me.fbBatt6.CustomAlertColor = System.Drawing.Color.Empty
         Me.fbBatt6.Data = Nothing
         Me.fbBatt6.Data2 = Nothing
         Me.fbBatt6.FlashInterval = 500
         Me.fbBatt6.holdDraw = False
-        Me.fbBatt6.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.fbBatt6.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.fbBatt6.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.fbBatt6.lblTextSize = New System.Drawing.Point(25, 2)
+        Me.fbBatt6.lblTextSize = New System.Drawing.Size(25, 2)
         Me.fbBatt6.lblTextVisible = True
         Me.fbBatt6.Lit = True
         Me.fbBatt6.Location = New System.Drawing.Point(31, 25)
@@ -852,16 +917,15 @@ Partial Class frmMainscreen3
         Me.fbBattTop.ButtonTextHeight = 18
         Me.fbBattTop.Clickable = False
         Me.fbBattTop.Color = LCARS.LCARScolorStyles.StaticBlue
+        Me.fbBattTop.ColorsAvailable = LcarScolor136
         Me.fbBattTop.CustomAlertColor = System.Drawing.Color.Empty
         Me.fbBattTop.Data = Nothing
         Me.fbBattTop.Data2 = Nothing
         Me.fbBattTop.FlashInterval = 0
         Me.fbBattTop.holdDraw = False
-        Me.fbBattTop.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.fbBattTop.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.fbBattTop.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.fbBattTop.lblTextSize = New System.Drawing.Point(8, 5)
+        Me.fbBattTop.lblTextSize = New System.Drawing.Size(8, 5)
         Me.fbBattTop.lblTextVisible = True
         Me.fbBattTop.Lit = True
         Me.fbBattTop.Location = New System.Drawing.Point(39, 5)
@@ -881,16 +945,15 @@ Partial Class frmMainscreen3
         Me.fbBatt3.ButtonTextHeight = 18
         Me.fbBatt3.Clickable = False
         Me.fbBatt3.Color = LCARS.LCARScolorStyles.StaticBlue
+        Me.fbBatt3.ColorsAvailable = LcarScolor137
         Me.fbBatt3.CustomAlertColor = System.Drawing.Color.Empty
         Me.fbBatt3.Data = Nothing
         Me.fbBatt3.Data2 = Nothing
         Me.fbBatt3.FlashInterval = 0
         Me.fbBatt3.holdDraw = False
-        Me.fbBatt3.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.fbBatt3.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.fbBatt3.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.fbBatt3.lblTextSize = New System.Drawing.Point(25, 2)
+        Me.fbBatt3.lblTextSize = New System.Drawing.Size(25, 2)
         Me.fbBatt3.lblTextVisible = True
         Me.fbBatt3.Lit = True
         Me.fbBatt3.Location = New System.Drawing.Point(31, 34)
@@ -910,16 +973,15 @@ Partial Class frmMainscreen3
         Me.fbBatt5.ButtonTextHeight = 18
         Me.fbBatt5.Clickable = False
         Me.fbBatt5.Color = LCARS.LCARScolorStyles.StaticBlue
+        Me.fbBatt5.ColorsAvailable = LcarScolor138
         Me.fbBatt5.CustomAlertColor = System.Drawing.Color.Empty
         Me.fbBatt5.Data = Nothing
         Me.fbBatt5.Data2 = Nothing
         Me.fbBatt5.FlashInterval = 0
         Me.fbBatt5.holdDraw = False
-        Me.fbBatt5.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.fbBatt5.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.fbBatt5.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.fbBatt5.lblTextSize = New System.Drawing.Point(25, 2)
+        Me.fbBatt5.lblTextSize = New System.Drawing.Size(25, 2)
         Me.fbBatt5.lblTextVisible = True
         Me.fbBatt5.Lit = True
         Me.fbBatt5.Location = New System.Drawing.Point(31, 28)
@@ -939,16 +1001,15 @@ Partial Class frmMainscreen3
         Me.fbBatt4.ButtonTextHeight = 18
         Me.fbBatt4.Clickable = False
         Me.fbBatt4.Color = LCARS.LCARScolorStyles.StaticBlue
+        Me.fbBatt4.ColorsAvailable = LcarScolor139
         Me.fbBatt4.CustomAlertColor = System.Drawing.Color.Empty
         Me.fbBatt4.Data = Nothing
         Me.fbBatt4.Data2 = Nothing
         Me.fbBatt4.FlashInterval = 0
         Me.fbBatt4.holdDraw = False
-        Me.fbBatt4.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.fbBatt4.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.fbBatt4.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.fbBatt4.lblTextSize = New System.Drawing.Point(25, 2)
+        Me.fbBatt4.lblTextSize = New System.Drawing.Size(25, 2)
         Me.fbBatt4.lblTextVisible = True
         Me.fbBatt4.Lit = True
         Me.fbBatt4.Location = New System.Drawing.Point(31, 31)
@@ -968,16 +1029,15 @@ Partial Class frmMainscreen3
         Me.fbBatt2.ButtonTextHeight = 18
         Me.fbBatt2.Clickable = False
         Me.fbBatt2.Color = LCARS.LCARScolorStyles.StaticBlue
+        Me.fbBatt2.ColorsAvailable = LcarScolor140
         Me.fbBatt2.CustomAlertColor = System.Drawing.Color.Empty
         Me.fbBatt2.Data = Nothing
         Me.fbBatt2.Data2 = Nothing
         Me.fbBatt2.FlashInterval = 0
         Me.fbBatt2.holdDraw = False
-        Me.fbBatt2.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.fbBatt2.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.fbBatt2.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.fbBatt2.lblTextSize = New System.Drawing.Point(25, 2)
+        Me.fbBatt2.lblTextSize = New System.Drawing.Size(25, 2)
         Me.fbBatt2.lblTextVisible = True
         Me.fbBatt2.Lit = True
         Me.fbBatt2.Location = New System.Drawing.Point(31, 37)
@@ -997,16 +1057,15 @@ Partial Class frmMainscreen3
         Me.fbBatt1.ButtonTextHeight = 18
         Me.fbBatt1.Clickable = False
         Me.fbBatt1.Color = LCARS.LCARScolorStyles.StaticBlue
+        Me.fbBatt1.ColorsAvailable = LcarScolor141
         Me.fbBatt1.CustomAlertColor = System.Drawing.Color.Empty
         Me.fbBatt1.Data = Nothing
         Me.fbBatt1.Data2 = Nothing
         Me.fbBatt1.FlashInterval = 500
         Me.fbBatt1.holdDraw = False
-        Me.fbBatt1.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.fbBatt1.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.fbBatt1.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.fbBatt1.lblTextSize = New System.Drawing.Point(25, 2)
+        Me.fbBatt1.lblTextSize = New System.Drawing.Size(25, 2)
         Me.fbBatt1.lblTextVisible = True
         Me.fbBatt1.Lit = True
         Me.fbBatt1.Location = New System.Drawing.Point(31, 40)
@@ -1026,16 +1085,15 @@ Partial Class frmMainscreen3
         Me.FlatButton19.ButtonTextHeight = 18
         Me.FlatButton19.Clickable = False
         Me.FlatButton19.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
+        Me.FlatButton19.ColorsAvailable = LcarScolor142
         Me.FlatButton19.CustomAlertColor = System.Drawing.Color.Empty
         Me.FlatButton19.Data = Nothing
         Me.FlatButton19.Data2 = Nothing
         Me.FlatButton19.FlashInterval = 0
         Me.FlatButton19.holdDraw = False
-        Me.FlatButton19.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.FlatButton19.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.FlatButton19.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.FlatButton19.lblTextSize = New System.Drawing.Point(5, 18)
+        Me.FlatButton19.lblTextSize = New System.Drawing.Size(5, 18)
         Me.FlatButton19.lblTextVisible = True
         Me.FlatButton19.Lit = True
         Me.FlatButton19.Location = New System.Drawing.Point(24, 16)
@@ -1057,6 +1115,7 @@ Partial Class frmMainscreen3
         Me.Elbow6.ButtonWidth = 5
         Me.Elbow6.Clickable = False
         Me.Elbow6.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
+        Me.Elbow6.ColorsAvailable = LcarScolor143
         Me.Elbow6.CustomAlertColor = System.Drawing.Color.Empty
         Me.Elbow6.Data = Nothing
         Me.Elbow6.Data2 = Nothing
@@ -1064,11 +1123,9 @@ Partial Class frmMainscreen3
         Me.Elbow6.ElbowStyle = LCARS.Controls.Elbow.LCARSelbowStyles.LowerLeft
         Me.Elbow6.FlashInterval = 0
         Me.Elbow6.holdDraw = False
-        Me.Elbow6.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Elbow6.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.Elbow6.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.Elbow6.lblTextSize = New System.Drawing.Point(13, 16)
+        Me.Elbow6.lblTextSize = New System.Drawing.Size(13, 16)
         Me.Elbow6.lblTextVisible = True
         Me.Elbow6.Lit = True
         Me.Elbow6.Location = New System.Drawing.Point(24, 31)
@@ -1088,16 +1145,15 @@ Partial Class frmMainscreen3
         Me.FlatButton15.ButtonTextHeight = 18
         Me.FlatButton15.Clickable = False
         Me.FlatButton15.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
+        Me.FlatButton15.ColorsAvailable = LcarScolor144
         Me.FlatButton15.CustomAlertColor = System.Drawing.Color.Empty
         Me.FlatButton15.Data = Nothing
         Me.FlatButton15.Data2 = Nothing
         Me.FlatButton15.FlashInterval = 0
         Me.FlatButton15.holdDraw = False
-        Me.FlatButton15.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.FlatButton15.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.FlatButton15.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.FlatButton15.lblTextSize = New System.Drawing.Point(5, 18)
+        Me.FlatButton15.lblTextSize = New System.Drawing.Size(5, 18)
         Me.FlatButton15.lblTextVisible = True
         Me.FlatButton15.Lit = True
         Me.FlatButton15.Location = New System.Drawing.Point(58, 19)
@@ -1119,6 +1175,7 @@ Partial Class frmMainscreen3
         Me.Elbow8.ButtonWidth = 5
         Me.Elbow8.Clickable = False
         Me.Elbow8.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
+        Me.Elbow8.ColorsAvailable = LcarScolor145
         Me.Elbow8.CustomAlertColor = System.Drawing.Color.Empty
         Me.Elbow8.Data = Nothing
         Me.Elbow8.Data2 = Nothing
@@ -1126,11 +1183,9 @@ Partial Class frmMainscreen3
         Me.Elbow8.ElbowStyle = LCARS.Controls.Elbow.LCARSelbowStyles.LowerRight
         Me.Elbow8.FlashInterval = 0
         Me.Elbow8.holdDraw = False
-        Me.Elbow8.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Elbow8.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.Elbow8.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.Elbow8.lblTextSize = New System.Drawing.Point(29, 16)
+        Me.Elbow8.lblTextSize = New System.Drawing.Size(29, 16)
         Me.Elbow8.lblTextVisible = True
         Me.Elbow8.Lit = True
         Me.Elbow8.Location = New System.Drawing.Point(34, 31)
@@ -1152,6 +1207,7 @@ Partial Class frmMainscreen3
         Me.Elbow9.ButtonWidth = 5
         Me.Elbow9.Clickable = False
         Me.Elbow9.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
+        Me.Elbow9.ColorsAvailable = LcarScolor146
         Me.Elbow9.CustomAlertColor = System.Drawing.Color.Empty
         Me.Elbow9.Data = Nothing
         Me.Elbow9.Data2 = Nothing
@@ -1159,11 +1215,9 @@ Partial Class frmMainscreen3
         Me.Elbow9.ElbowStyle = LCARS.Controls.Elbow.LCARSelbowStyles.UpperRight
         Me.Elbow9.FlashInterval = 0
         Me.Elbow9.holdDraw = False
-        Me.Elbow9.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Elbow9.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.Elbow9.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.Elbow9.lblTextSize = New System.Drawing.Point(13, 16)
+        Me.Elbow9.lblTextSize = New System.Drawing.Size(13, 16)
         Me.Elbow9.lblTextVisible = True
         Me.Elbow9.Lit = True
         Me.Elbow9.Location = New System.Drawing.Point(50, 8)
@@ -1185,6 +1239,7 @@ Partial Class frmMainscreen3
         Me.Elbow7.ButtonWidth = 5
         Me.Elbow7.Clickable = False
         Me.Elbow7.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
+        Me.Elbow7.ColorsAvailable = LcarScolor147
         Me.Elbow7.CustomAlertColor = System.Drawing.Color.Empty
         Me.Elbow7.Data = Nothing
         Me.Elbow7.Data2 = Nothing
@@ -1192,11 +1247,9 @@ Partial Class frmMainscreen3
         Me.Elbow7.ElbowStyle = LCARS.Controls.Elbow.LCARSelbowStyles.UpperLeft
         Me.Elbow7.FlashInterval = 0
         Me.Elbow7.holdDraw = False
-        Me.Elbow7.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Elbow7.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.Elbow7.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.Elbow7.lblTextSize = New System.Drawing.Point(13, 16)
+        Me.Elbow7.lblTextSize = New System.Drawing.Size(13, 16)
         Me.Elbow7.lblTextVisible = True
         Me.Elbow7.Lit = True
         Me.Elbow7.Location = New System.Drawing.Point(24, 8)
@@ -1241,16 +1294,15 @@ Partial Class frmMainscreen3
         Me.myMusic.ButtonTextHeight = 14
         Me.myMusic.Clickable = True
         Me.myMusic.Color = LCARS.LCARScolorStyles.NavigationFunction
+        Me.myMusic.ColorsAvailable = LcarScolor148
         Me.myMusic.CustomAlertColor = System.Drawing.Color.Empty
         Me.myMusic.Data = Nothing
         Me.myMusic.Data2 = Nothing
         Me.myMusic.FlashInterval = 500
         Me.myMusic.holdDraw = False
-        Me.myMusic.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.myMusic.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.myMusic.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.myMusic.lblTextSize = New System.Drawing.Point(124, 25)
+        Me.myMusic.lblTextSize = New System.Drawing.Size(124, 25)
         Me.myMusic.lblTextVisible = True
         Me.myMusic.Lit = True
         Me.myMusic.Location = New System.Drawing.Point(237, 275)
@@ -1272,16 +1324,15 @@ Partial Class frmMainscreen3
         Me.myVideos.ButtonTextHeight = 14
         Me.myVideos.Clickable = True
         Me.myVideos.Color = LCARS.LCARScolorStyles.NavigationFunction
+        Me.myVideos.ColorsAvailable = LcarScolor149
         Me.myVideos.CustomAlertColor = System.Drawing.Color.Empty
         Me.myVideos.Data = Nothing
         Me.myVideos.Data2 = Nothing
         Me.myVideos.FlashInterval = 500
         Me.myVideos.holdDraw = False
-        Me.myVideos.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.myVideos.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.myVideos.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.myVideos.lblTextSize = New System.Drawing.Point(124, 25)
+        Me.myVideos.lblTextSize = New System.Drawing.Size(124, 25)
         Me.myVideos.lblTextVisible = True
         Me.myVideos.Lit = True
         Me.myVideos.Location = New System.Drawing.Point(237, 306)
@@ -1303,16 +1354,15 @@ Partial Class frmMainscreen3
         Me.myPictures.ButtonTextHeight = 14
         Me.myPictures.Clickable = True
         Me.myPictures.Color = LCARS.LCARScolorStyles.NavigationFunction
+        Me.myPictures.ColorsAvailable = LcarScolor150
         Me.myPictures.CustomAlertColor = System.Drawing.Color.Empty
         Me.myPictures.Data = Nothing
         Me.myPictures.Data2 = Nothing
         Me.myPictures.FlashInterval = 500
         Me.myPictures.holdDraw = False
-        Me.myPictures.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.myPictures.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.myPictures.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.myPictures.lblTextSize = New System.Drawing.Point(124, 25)
+        Me.myPictures.lblTextSize = New System.Drawing.Size(124, 25)
         Me.myPictures.lblTextVisible = True
         Me.myPictures.Lit = True
         Me.myPictures.Location = New System.Drawing.Point(237, 244)
@@ -1334,16 +1384,15 @@ Partial Class frmMainscreen3
         Me.myDocuments.ButtonTextHeight = 14
         Me.myDocuments.Clickable = True
         Me.myDocuments.Color = LCARS.LCARScolorStyles.NavigationFunction
+        Me.myDocuments.ColorsAvailable = LcarScolor151
         Me.myDocuments.CustomAlertColor = System.Drawing.Color.Empty
         Me.myDocuments.Data = Nothing
         Me.myDocuments.Data2 = Nothing
         Me.myDocuments.FlashInterval = 500
         Me.myDocuments.holdDraw = False
-        Me.myDocuments.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.myDocuments.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.myDocuments.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.myDocuments.lblTextSize = New System.Drawing.Point(124, 25)
+        Me.myDocuments.lblTextSize = New System.Drawing.Size(124, 25)
         Me.myDocuments.lblTextVisible = True
         Me.myDocuments.Lit = True
         Me.myDocuments.Location = New System.Drawing.Point(237, 213)
@@ -1365,16 +1414,15 @@ Partial Class frmMainscreen3
         Me.myRun.ButtonTextHeight = 14
         Me.myRun.Clickable = True
         Me.myRun.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.myRun.ColorsAvailable = LcarScolor152
         Me.myRun.CustomAlertColor = System.Drawing.Color.Empty
         Me.myRun.Data = Nothing
         Me.myRun.Data2 = Nothing
         Me.myRun.FlashInterval = 500
         Me.myRun.holdDraw = False
-        Me.myRun.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.myRun.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.myRun.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.myRun.lblTextSize = New System.Drawing.Point(124, 25)
+        Me.myRun.lblTextSize = New System.Drawing.Size(124, 25)
         Me.myRun.lblTextVisible = True
         Me.myRun.Lit = True
         Me.myRun.Location = New System.Drawing.Point(237, 478)
@@ -1396,16 +1444,15 @@ Partial Class frmMainscreen3
         Me.fbWebBrowser.ButtonTextHeight = 14
         Me.fbWebBrowser.Clickable = True
         Me.fbWebBrowser.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.fbWebBrowser.ColorsAvailable = LcarScolor153
         Me.fbWebBrowser.CustomAlertColor = System.Drawing.Color.Empty
         Me.fbWebBrowser.Data = Nothing
         Me.fbWebBrowser.Data2 = Nothing
         Me.fbWebBrowser.FlashInterval = 500
         Me.fbWebBrowser.holdDraw = False
-        Me.fbWebBrowser.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.fbWebBrowser.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.fbWebBrowser.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.fbWebBrowser.lblTextSize = New System.Drawing.Point(124, 25)
+        Me.fbWebBrowser.lblTextSize = New System.Drawing.Size(124, 25)
         Me.fbWebBrowser.lblTextVisible = True
         Me.fbWebBrowser.Lit = True
         Me.fbWebBrowser.Location = New System.Drawing.Point(237, 448)
@@ -1427,16 +1474,15 @@ Partial Class frmMainscreen3
         Me.myPhoto.ButtonTextHeight = 14
         Me.myPhoto.Clickable = True
         Me.myPhoto.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.myPhoto.ColorsAvailable = LcarScolor154
         Me.myPhoto.CustomAlertColor = System.Drawing.Color.Empty
         Me.myPhoto.Data = Nothing
         Me.myPhoto.Data2 = Nothing
         Me.myPhoto.FlashInterval = 500
         Me.myPhoto.holdDraw = False
-        Me.myPhoto.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.myPhoto.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.myPhoto.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.myPhoto.lblTextSize = New System.Drawing.Point(124, 25)
+        Me.myPhoto.lblTextSize = New System.Drawing.Size(124, 25)
         Me.myPhoto.lblTextVisible = True
         Me.myPhoto.Lit = True
         Me.myPhoto.Location = New System.Drawing.Point(237, 417)
@@ -1470,6 +1516,7 @@ Partial Class frmMainscreen3
         Me.Elbow2.ButtonWidth = 200
         Me.Elbow2.Clickable = False
         Me.Elbow2.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
+        Me.Elbow2.ColorsAvailable = LcarScolor155
         Me.Elbow2.CustomAlertColor = System.Drawing.Color.Empty
         Me.Elbow2.Data = Nothing
         Me.Elbow2.Data2 = Nothing
@@ -1477,11 +1524,9 @@ Partial Class frmMainscreen3
         Me.Elbow2.ElbowStyle = LCARS.Controls.Elbow.LCARSelbowStyles.LowerRight
         Me.Elbow2.FlashInterval = 500
         Me.Elbow2.holdDraw = False
-        Me.Elbow2.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Elbow2.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.Elbow2.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.Elbow2.lblTextSize = New System.Drawing.Point(124, 20)
+        Me.Elbow2.lblTextSize = New System.Drawing.Size(124, 20)
         Me.Elbow2.lblTextVisible = True
         Me.Elbow2.Lit = True
         Me.Elbow2.Location = New System.Drawing.Point(237, 674)
@@ -1502,16 +1547,15 @@ Partial Class frmMainscreen3
         Me.FlatButton1.ButtonTextHeight = 14
         Me.FlatButton1.Clickable = False
         Me.FlatButton1.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
+        Me.FlatButton1.ColorsAvailable = LcarScolor156
         Me.FlatButton1.CustomAlertColor = System.Drawing.Color.Empty
         Me.FlatButton1.Data = Nothing
         Me.FlatButton1.Data2 = Nothing
         Me.FlatButton1.FlashInterval = 500
         Me.FlatButton1.holdDraw = False
-        Me.FlatButton1.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.FlatButton1.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.FlatButton1.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.FlatButton1.lblTextSize = New System.Drawing.Point(124, 14)
+        Me.FlatButton1.lblTextSize = New System.Drawing.Size(124, 14)
         Me.FlatButton1.lblTextVisible = True
         Me.FlatButton1.Lit = True
         Me.FlatButton1.Location = New System.Drawing.Point(237, 509)
@@ -1532,16 +1576,15 @@ Partial Class frmMainscreen3
         Me.myAlert.ButtonTextHeight = 14
         Me.myAlert.Clickable = True
         Me.myAlert.Color = LCARS.LCARScolorStyles.PrimaryFunction
+        Me.myAlert.ColorsAvailable = LcarScolor157
         Me.myAlert.CustomAlertColor = System.Drawing.Color.Empty
         Me.myAlert.Data = Nothing
         Me.myAlert.Data2 = Nothing
         Me.myAlert.FlashInterval = 500
         Me.myAlert.holdDraw = False
-        Me.myAlert.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.myAlert.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.myAlert.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.myAlert.lblTextSize = New System.Drawing.Point(92, 25)
+        Me.myAlert.lblTextSize = New System.Drawing.Size(92, 25)
         Me.myAlert.lblTextVisible = True
         Me.myAlert.Lit = True
         Me.myAlert.Location = New System.Drawing.Point(237, 560)
@@ -1563,16 +1606,15 @@ Partial Class frmMainscreen3
         Me.myEngineering.ButtonTextHeight = 14
         Me.myEngineering.Clickable = True
         Me.myEngineering.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.myEngineering.ColorsAvailable = LcarScolor158
         Me.myEngineering.CustomAlertColor = System.Drawing.Color.Empty
         Me.myEngineering.Data = Nothing
         Me.myEngineering.Data2 = Nothing
         Me.myEngineering.FlashInterval = 500
         Me.myEngineering.holdDraw = False
-        Me.myEngineering.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.myEngineering.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.myEngineering.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.myEngineering.lblTextSize = New System.Drawing.Point(124, 25)
+        Me.myEngineering.lblTextSize = New System.Drawing.Size(124, 25)
         Me.myEngineering.lblTextVisible = True
         Me.myEngineering.Lit = True
         Me.myEngineering.Location = New System.Drawing.Point(237, 386)
@@ -1594,16 +1636,15 @@ Partial Class frmMainscreen3
         Me.mySettings.ButtonTextHeight = 14
         Me.mySettings.Clickable = True
         Me.mySettings.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.mySettings.ColorsAvailable = LcarScolor159
         Me.mySettings.CustomAlertColor = System.Drawing.Color.Empty
         Me.mySettings.Data = Nothing
         Me.mySettings.Data2 = Nothing
         Me.mySettings.FlashInterval = 500
         Me.mySettings.holdDraw = False
-        Me.mySettings.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.mySettings.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.mySettings.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.mySettings.lblTextSize = New System.Drawing.Point(124, 25)
+        Me.mySettings.lblTextSize = New System.Drawing.Size(124, 25)
         Me.mySettings.lblTextVisible = True
         Me.mySettings.Lit = True
         Me.mySettings.Location = New System.Drawing.Point(237, 355)
@@ -1625,16 +1666,15 @@ Partial Class frmMainscreen3
         Me.MyComp.ButtonTextHeight = 14
         Me.MyComp.Clickable = True
         Me.MyComp.Color = LCARS.LCARScolorStyles.NavigationFunction
+        Me.MyComp.ColorsAvailable = LcarScolor160
         Me.MyComp.CustomAlertColor = System.Drawing.Color.Empty
         Me.MyComp.Data = Nothing
         Me.MyComp.Data2 = Nothing
         Me.MyComp.FlashInterval = 500
         Me.MyComp.holdDraw = False
-        Me.MyComp.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.MyComp.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.MyComp.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.MyComp.lblTextSize = New System.Drawing.Point(124, 25)
+        Me.MyComp.lblTextSize = New System.Drawing.Size(124, 25)
         Me.MyComp.lblTextVisible = True
         Me.MyComp.Lit = True
         Me.MyComp.Location = New System.Drawing.Point(237, 182)
@@ -1656,16 +1696,15 @@ Partial Class frmMainscreen3
         Me.myModeSelect.ButtonTextHeight = 14
         Me.myModeSelect.Clickable = True
         Me.myModeSelect.Color = LCARS.LCARScolorStyles.FunctionUnavailable
+        Me.myModeSelect.ColorsAvailable = LcarScolor161
         Me.myModeSelect.CustomAlertColor = System.Drawing.Color.Empty
         Me.myModeSelect.Data = Nothing
         Me.myModeSelect.Data2 = Nothing
         Me.myModeSelect.FlashInterval = 500
         Me.myModeSelect.holdDraw = False
-        Me.myModeSelect.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.myModeSelect.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.myModeSelect.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.myModeSelect.lblTextSize = New System.Drawing.Point(124, 25)
+        Me.myModeSelect.lblTextSize = New System.Drawing.Size(124, 25)
         Me.myModeSelect.lblTextVisible = True
         Me.myModeSelect.Lit = True
         Me.myModeSelect.Location = New System.Drawing.Point(237, 529)
@@ -1687,16 +1726,15 @@ Partial Class frmMainscreen3
         Me.myDeactivate.ButtonTextHeight = 14
         Me.myDeactivate.Clickable = True
         Me.myDeactivate.Color = LCARS.LCARScolorStyles.Orange
+        Me.myDeactivate.ColorsAvailable = LcarScolor162
         Me.myDeactivate.CustomAlertColor = System.Drawing.Color.Empty
         Me.myDeactivate.Data = Nothing
         Me.myDeactivate.Data2 = Nothing
         Me.myDeactivate.FlashInterval = 500
         Me.myDeactivate.holdDraw = False
-        Me.myDeactivate.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.myDeactivate.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.myDeactivate.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.myDeactivate.lblTextSize = New System.Drawing.Point(124, 46)
+        Me.myDeactivate.lblTextSize = New System.Drawing.Size(124, 46)
         Me.myDeactivate.lblTextVisible = True
         Me.myDeactivate.Lit = True
         Me.myDeactivate.Location = New System.Drawing.Point(237, 622)
@@ -1718,16 +1756,15 @@ Partial Class frmMainscreen3
         Me.myDestruct.ButtonTextHeight = 14
         Me.myDestruct.Clickable = True
         Me.myDestruct.Color = LCARS.LCARScolorStyles.FunctionOffline
+        Me.myDestruct.ColorsAvailable = LcarScolor163
         Me.myDestruct.CustomAlertColor = System.Drawing.Color.Empty
         Me.myDestruct.Data = Nothing
         Me.myDestruct.Data2 = Nothing
         Me.myDestruct.FlashInterval = 500
         Me.myDestruct.holdDraw = False
-        Me.myDestruct.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.myDestruct.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.myDestruct.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.myDestruct.lblTextSize = New System.Drawing.Point(124, 25)
+        Me.myDestruct.lblTextSize = New System.Drawing.Size(124, 25)
         Me.myDestruct.lblTextVisible = True
         Me.myDestruct.Lit = True
         Me.myDestruct.Location = New System.Drawing.Point(237, 591)
@@ -1750,16 +1787,15 @@ Partial Class frmMainscreen3
         Me.myProgBack.ButtonTextHeight = 14
         Me.myProgBack.Clickable = True
         Me.myProgBack.Color = LCARS.LCARScolorStyles.MiscFunction
+        Me.myProgBack.ColorsAvailable = LcarScolor164
         Me.myProgBack.CustomAlertColor = System.Drawing.Color.Empty
         Me.myProgBack.Data = Nothing
         Me.myProgBack.Data2 = Nothing
         Me.myProgBack.FlashInterval = 500
         Me.myProgBack.holdDraw = False
-        Me.myProgBack.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.myProgBack.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.myProgBack.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.myProgBack.lblTextSize = New System.Drawing.Point(232, 30)
+        Me.myProgBack.lblTextSize = New System.Drawing.Size(232, 30)
         Me.myProgBack.lblTextVisible = True
         Me.myProgBack.Lit = True
         Me.myProgBack.Location = New System.Drawing.Point(-1, 638)
@@ -1782,16 +1818,15 @@ Partial Class frmMainscreen3
         Me.fbProgramPages.ButtonTextHeight = 14
         Me.fbProgramPages.Clickable = False
         Me.fbProgramPages.Color = LCARS.LCARScolorStyles.MiscFunction
+        Me.fbProgramPages.ColorsAvailable = LcarScolor165
         Me.fbProgramPages.CustomAlertColor = System.Drawing.Color.Empty
         Me.fbProgramPages.Data = Nothing
         Me.fbProgramPages.Data2 = Nothing
         Me.fbProgramPages.FlashInterval = 500
         Me.fbProgramPages.holdDraw = False
-        Me.fbProgramPages.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.fbProgramPages.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.fbProgramPages.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.fbProgramPages.lblTextSize = New System.Drawing.Point(179, 20)
+        Me.fbProgramPages.lblTextSize = New System.Drawing.Size(179, 20)
         Me.fbProgramPages.lblTextVisible = True
         Me.fbProgramPages.Lit = True
         Me.fbProgramPages.Location = New System.Drawing.Point(26, 674)
@@ -1814,16 +1849,15 @@ Partial Class frmMainscreen3
         Me.myProgsNext.ButtonTextHeight = 14
         Me.myProgsNext.Clickable = True
         Me.myProgsNext.Color = LCARS.LCARScolorStyles.NavigationFunction
+        Me.myProgsNext.ColorsAvailable = LcarScolor166
         Me.myProgsNext.CustomAlertColor = System.Drawing.Color.Empty
         Me.myProgsNext.Data = Nothing
         Me.myProgsNext.Data2 = Nothing
         Me.myProgsNext.FlashInterval = 500
         Me.myProgsNext.holdDraw = False
-        Me.myProgsNext.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.myProgsNext.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.myProgsNext.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.myProgsNext.lblTextSize = New System.Drawing.Point(20, 20)
+        Me.myProgsNext.lblTextSize = New System.Drawing.Size(20, 20)
         Me.myProgsNext.lblTextVisible = True
         Me.myProgsNext.Lit = True
         Me.myProgsNext.Location = New System.Drawing.Point(211, 674)
@@ -1845,16 +1879,15 @@ Partial Class frmMainscreen3
         Me.myProgsBack.ButtonTextHeight = 14
         Me.myProgsBack.Clickable = True
         Me.myProgsBack.Color = LCARS.LCARScolorStyles.NavigationFunction
+        Me.myProgsBack.ColorsAvailable = LcarScolor167
         Me.myProgsBack.CustomAlertColor = System.Drawing.Color.Empty
         Me.myProgsBack.Data = Nothing
         Me.myProgsBack.Data2 = Nothing
         Me.myProgsBack.FlashInterval = 500
         Me.myProgsBack.holdDraw = False
-        Me.myProgsBack.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.myProgsBack.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.myProgsBack.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.myProgsBack.lblTextSize = New System.Drawing.Point(20, 20)
+        Me.myProgsBack.lblTextSize = New System.Drawing.Size(20, 20)
         Me.myProgsBack.lblTextVisible = True
         Me.myProgsBack.Lit = True
         Me.myProgsBack.Location = New System.Drawing.Point(0, 674)
@@ -1878,6 +1911,7 @@ Partial Class frmMainscreen3
         Me.Elbow1.ButtonWidth = 124
         Me.Elbow1.Clickable = False
         Me.Elbow1.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
+        Me.Elbow1.ColorsAvailable = LcarScolor168
         Me.Elbow1.CustomAlertColor = System.Drawing.Color.Empty
         Me.Elbow1.Data = Nothing
         Me.Elbow1.Data2 = Nothing
@@ -1885,11 +1919,9 @@ Partial Class frmMainscreen3
         Me.Elbow1.ElbowStyle = LCARS.Controls.Elbow.LCARSelbowStyles.UpperRight
         Me.Elbow1.FlashInterval = 500
         Me.Elbow1.holdDraw = False
-        Me.Elbow1.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Elbow1.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.Elbow1.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.Elbow1.lblTextSize = New System.Drawing.Point(362, 54)
+        Me.Elbow1.lblTextSize = New System.Drawing.Size(362, 54)
         Me.Elbow1.lblTextVisible = True
         Me.Elbow1.Lit = True
         Me.Elbow1.Location = New System.Drawing.Point(-1, 0)
@@ -1900,15 +1932,20 @@ Partial Class frmMainscreen3
         Me.Elbow1.Tag = "9"
         Me.Elbow1.Text = "LCARS"
         '
-        'pnlUserButtons
+        'gridUserButtons
         '
-        Me.pnlUserButtons.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.gridUserButtons.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pnlUserButtons.Location = New System.Drawing.Point(581, 32)
-        Me.pnlUserButtons.Name = "pnlUserButtons"
-        Me.pnlUserButtons.Size = New System.Drawing.Size(214, 673)
-        Me.pnlUserButtons.TabIndex = 71
-        Me.pnlUserButtons.Visible = False
+        Me.gridUserButtons.ControlAddingDirection = LCARS.Controls.ButtonGrid.ControlDirection.Horizontal
+        Me.gridUserButtons.ControlPadding = 5
+        Me.gridUserButtons.ControlSize = New System.Drawing.Size(100, 25)
+        Me.gridUserButtons.CurrentPage = 1
+        Me.gridUserButtons.Location = New System.Drawing.Point(581, 32)
+        Me.gridUserButtons.MinimumSize = New System.Drawing.Size(105, 30)
+        Me.gridUserButtons.Name = "gridUserButtons"
+        Me.gridUserButtons.Size = New System.Drawing.Size(214, 673)
+        Me.gridUserButtons.TabIndex = 71
+        Me.gridUserButtons.Visible = False
         '
         'StandardButton1
         '
@@ -1922,16 +1959,15 @@ Partial Class frmMainscreen3
         Me.StandardButton1.ButtonTextHeight = 14
         Me.StandardButton1.Clickable = False
         Me.StandardButton1.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
+        Me.StandardButton1.ColorsAvailable = LcarScolor124
         Me.StandardButton1.CustomAlertColor = System.Drawing.Color.Empty
         Me.StandardButton1.Data = Nothing
         Me.StandardButton1.Data2 = Nothing
         Me.StandardButton1.FlashInterval = 500
         Me.StandardButton1.holdDraw = False
-        Me.StandardButton1.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.StandardButton1.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.StandardButton1.lblTextLoc = New System.Drawing.Point(12, 0)
-        Me.StandardButton1.lblTextSize = New System.Drawing.Point(59, 25)
+        Me.StandardButton1.lblTextSize = New System.Drawing.Size(59, 25)
         Me.StandardButton1.lblTextVisible = True
         Me.StandardButton1.Lit = True
         Me.StandardButton1.Location = New System.Drawing.Point(6, 734)
@@ -1953,16 +1989,15 @@ Partial Class frmMainscreen3
         Me.StandardButton3.ButtonTextHeight = 14
         Me.StandardButton3.Clickable = False
         Me.StandardButton3.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
+        Me.StandardButton3.ColorsAvailable = LcarScolor125
         Me.StandardButton3.CustomAlertColor = System.Drawing.Color.Empty
         Me.StandardButton3.Data = Nothing
         Me.StandardButton3.Data2 = Nothing
         Me.StandardButton3.FlashInterval = 500
         Me.StandardButton3.holdDraw = False
-        Me.StandardButton3.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.StandardButton3.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
         Me.StandardButton3.lblTextLoc = New System.Drawing.Point(11, 0)
-        Me.StandardButton3.lblTextSize = New System.Drawing.Point(61, 23)
+        Me.StandardButton3.lblTextSize = New System.Drawing.Size(61, 23)
         Me.StandardButton3.lblTextVisible = True
         Me.StandardButton3.Lit = True
         Me.StandardButton3.Location = New System.Drawing.Point(716, 3)
@@ -1974,36 +2009,6 @@ Partial Class frmMainscreen3
         '
         'tmrAutoHide
         '
-        '
-        'myAlertListButton
-        '
-        Me.myAlertListButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.myAlertListButton.ArrowDirection = LCARS.LCARSarrowDirection.Right
-        Me.myAlertListButton.AutoEllipsis = Nothing
-        Me.myAlertListButton.BackgroundImage = CType(resources.GetObject("myAlertListButton.BackgroundImage"), System.Drawing.Image)
-        Me.myAlertListButton.Beeping = False
-        Me.myAlertListButton.ButtonText = ""
-        Me.myAlertListButton.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.myAlertListButton.ButtonTextHeight = 14
-        Me.myAlertListButton.Clickable = True
-        Me.myAlertListButton.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.myAlertListButton.CustomAlertColor = System.Drawing.Color.Empty
-        Me.myAlertListButton.Data = Nothing
-        Me.myAlertListButton.Data2 = Nothing
-        Me.myAlertListButton.FlashInterval = 500
-        Me.myAlertListButton.holdDraw = False
-        Me.myAlertListButton.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.myAlertListButton.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.myAlertListButton.lblTextSize = New System.Drawing.Point(26, 25)
-        Me.myAlertListButton.lblTextVisible = True
-        Me.myAlertListButton.Lit = True
-        Me.myAlertListButton.Location = New System.Drawing.Point(335, 560)
-        Me.myAlertListButton.Name = "myAlertListButton"
-        Me.myAlertListButton.RedAlert = LCARS.LCARSalert.Normal
-        Me.myAlertListButton.Size = New System.Drawing.Size(26, 25)
-        Me.myAlertListButton.TabIndex = 79
         '
         'frmMainscreen3
         '
@@ -2025,7 +2030,7 @@ Partial Class frmMainscreen3
 
     End Sub
     Friend WithEvents pnlMainBar As System.Windows.Forms.Panel
-    Friend WithEvents pnlUserButtons As System.Windows.Forms.Panel
+    Friend WithEvents gridUserButtons As LCARS.Controls.ButtonGrid
     Friend WithEvents myUserButtons As LCARS.Controls.FlatButton
     Friend WithEvents myButtonManager As LCARS.Controls.FlatButton
     Friend WithEvents myStartMenu As LCARS.Controls.FlatButton
@@ -2036,7 +2041,7 @@ Partial Class frmMainscreen3
     Friend WithEvents myEngineering As LCARS.Controls.FlatButton
     Friend WithEvents myModeSelect As LCARS.Controls.FlatButton
     Friend WithEvents myDeactivate As LCARS.Controls.FlatButton
-    Friend WithEvents pnlPrograms As System.Windows.Forms.Panel
+    Friend WithEvents pnlPrograms As LCARS.Controls.WindowlessContainer
     Friend WithEvents myDestruct As LCARS.Controls.FlatButton
     Friend WithEvents myProgBack As LCARS.Controls.FlatButton
     Friend WithEvents fbProgramPages As LCARS.Controls.FlatButton

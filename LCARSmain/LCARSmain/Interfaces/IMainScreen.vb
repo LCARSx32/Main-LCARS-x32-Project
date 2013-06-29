@@ -1,4 +1,5 @@
 ﻿Public Interface IMainScreen
+    Inherits IAutohide
     Enum MainScreenControls
         Deactivate = 0
         StartMenu = 1

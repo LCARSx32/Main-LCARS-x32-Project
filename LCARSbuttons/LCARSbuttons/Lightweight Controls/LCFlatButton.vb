@@ -456,7 +456,7 @@ Namespace LightweightControls
                 Return _data2
             End Get
             Set(ByVal value As Object)
-                _data = value
+                _data2 = value
             End Set
         End Property
 
