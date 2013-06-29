@@ -2821,13 +2821,8 @@ Public Class frmMainscreen1
         pnlMainBar_Resize(sender, e)
     End Sub
 
-    Private Sub pnlUserButtons_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles pnlUserButtons.Paint
+    Private Sub pnlUserButtons_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs)
 
-    End Sub
-
-    Private Sub pnlUserButtons_SizeChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles pnlUserButtons.SizeChanged
-        modBusiness.myUserButtonCollection.Clear()
-        modBusiness.loadUserButtons()
     End Sub
 
     Private Sub ArrowButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ArrowButton1.Click
@@ -2885,7 +2880,7 @@ Public Class frmMainscreen1
             myRect.Size = New Size(pnlMainBar.Width - 127, pnlMainBar.Height - 48)
 
             If modBusiness.userButtonsShowing Then
-                myRect.Width = (pnlUserButtons.Left - pnlMain.Left) - 10
+                myRect.Width = (gridUserButtons.Left - pnlMain.Left) - 10
             Else
                 myRect.Width = (pnlMainContainer.Width - pnlMain.Left - 10)
             End If

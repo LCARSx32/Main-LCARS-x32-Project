@@ -113,10 +113,10 @@ Public Class frmMainscreen3
                     MainWidth = pnlMainBar.Width - (pnlProgs.Right + 6)
                     mainLeft = pnlProgs.Right + 6
                 ElseIf modBusiness.userButtonsShowing And modBusiness.progShowing = False Then
-                    MainWidth = pnlUserButtons.Left - 6
+                    MainWidth = gridUserButtons.Left - 6
                     mainLeft = 0
                 ElseIf modBusiness.userButtonsShowing And modBusiness.progShowing Then
-                    MainWidth = (pnlUserButtons.Left - 6) - (pnlProgs.Right + 6)
+                    MainWidth = (gridUserButtons.Left - 6) - (pnlProgs.Right + 6)
                     mainLeft = pnlProgs.Right + 6
                 End If
 
@@ -168,7 +168,7 @@ Public Class frmMainscreen3
         End If
 
         modBusiness.progShowing = pnlProgs.Visible
-        modBusiness.userButtonsShowing = pnlUserButtons.Visible
+        modBusiness.userButtonsShowing = gridUserButtons.Visible
         pnlMainBar_SizeChanged(sender, e)
     End Sub
 

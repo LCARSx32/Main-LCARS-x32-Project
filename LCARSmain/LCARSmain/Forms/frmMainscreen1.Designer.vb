@@ -99,12 +99,12 @@ Partial Class frmMainscreen1
         Me.myAlertListButton = New LCARS.Controls.ArrowButton
         Me.myClock = New System.Windows.Forms.Label
         Me.pnlMainBar = New System.Windows.Forms.Panel
+        Me.gridUserButtons = New LCARS.Controls.ButtonGrid
         Me.mySpeech = New LCARS.Controls.FlatButton
         Me.myHelp = New LCARS.Controls.FlatButton
         Me.FlatButton3 = New LCARS.Controls.FlatButton
         Me.myOSK = New LCARS.Controls.FlatButton
         Me.myButtonManager = New LCARS.Controls.FlatButton
-        Me.pnlUserButtons = New System.Windows.Forms.Panel
         Me.myPhoto = New LCARS.Controls.FlatButton
         Me.ArrowButton1 = New LCARS.Controls.ArrowButton
         Me.myEngineering = New LCARS.Controls.FlatButton
@@ -258,12 +258,12 @@ Partial Class frmMainscreen1
         Me.pnlMainBar.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pnlMainBar.Controls.Add(Me.gridUserButtons)
         Me.pnlMainBar.Controls.Add(Me.mySpeech)
         Me.pnlMainBar.Controls.Add(Me.myHelp)
         Me.pnlMainBar.Controls.Add(Me.FlatButton3)
         Me.pnlMainBar.Controls.Add(Me.myOSK)
         Me.pnlMainBar.Controls.Add(Me.myButtonManager)
-        Me.pnlMainBar.Controls.Add(Me.pnlUserButtons)
         Me.pnlMainBar.Controls.Add(Me.myPhoto)
         Me.pnlMainBar.Controls.Add(Me.ArrowButton1)
         Me.pnlMainBar.Controls.Add(Me.myEngineering)
@@ -287,6 +287,22 @@ Partial Class frmMainscreen1
         Me.pnlMainBar.Size = New System.Drawing.Size(799, 470)
         Me.pnlMainBar.TabIndex = 54
         Me.pnlMainBar.Tag = "18"
+        '
+        'gridUserButtons
+        '
+        Me.gridUserButtons.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.gridUserButtons.ControlAddingDirection = LCARS.Controls.ButtonGrid.ControlDirection.Horizontal
+        Me.gridUserButtons.ControlPadding = 5
+        Me.gridUserButtons.ControlSize = New System.Drawing.Size(100, 25)
+        Me.gridUserButtons.CurrentPage = 1
+        Me.gridUserButtons.Location = New System.Drawing.Point(563, 54)
+        Me.gridUserButtons.MinimumSize = New System.Drawing.Size(105, 30)
+        Me.gridUserButtons.Name = "gridUserButtons"
+        Me.gridUserButtons.Size = New System.Drawing.Size(230, 412)
+        Me.gridUserButtons.TabIndex = 0
+        Me.gridUserButtons.Text = "ButtonGrid1"
+        Me.gridUserButtons.Visible = False
         '
         'mySpeech
         '
@@ -434,17 +450,6 @@ Partial Class frmMainscreen1
         Me.myButtonManager.Tag = "9"
         Me.myButtonManager.Text = "MANAGE PERSONAL PROGRAMS"
         Me.myButtonManager.Visible = False
-        '
-        'pnlUserButtons
-        '
-        Me.pnlUserButtons.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pnlUserButtons.Location = New System.Drawing.Point(563, 55)
-        Me.pnlUserButtons.Name = "pnlUserButtons"
-        Me.pnlUserButtons.Size = New System.Drawing.Size(230, 411)
-        Me.pnlUserButtons.TabIndex = 53
-        Me.pnlUserButtons.Tag = ""
-        Me.pnlUserButtons.Visible = False
         '
         'myPhoto
         '
@@ -2641,7 +2646,6 @@ Partial Class frmMainscreen1
     Friend WithEvents pnlMainBar As System.Windows.Forms.Panel
     Friend WithEvents pnlMain As System.Windows.Forms.Panel
     Friend WithEvents myComp As LCARS.Controls.FlatButton
-    Friend WithEvents pnlUserButtons As System.Windows.Forms.Panel
     Friend WithEvents fbProgBack As LCARS.Controls.FlatButton
     Friend WithEvents abProgsNext As LCARS.Controls.ArrowButton
     Friend WithEvents abProgsBack As LCARS.Controls.ArrowButton
@@ -2715,5 +2719,6 @@ Partial Class frmMainscreen1
     Friend WithEvents FlatButton1 As LCARS.Controls.FlatButton
     Friend WithEvents myAlertListButton As LCARS.Controls.ArrowButton
     Friend WithEvents progGrid As LCARS.Controls.ButtonGrid
+    Friend WithEvents gridUserButtons As LCARS.Controls.ButtonGrid
 
 End Class
