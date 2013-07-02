@@ -486,7 +486,10 @@ Public Enum SetWindowPosFlags As UInteger
     End Sub
 
     Public Sub AlertSoundSub(ByVal soundPath As String)
-        My.Computer.Audio.Play(soundPath)
+        Try
+            My.Computer.Audio.Play(soundPath)
+        Catch ex As Exception
+        End Try
     End Sub
 
     Public Sub GetTaskbarSettings()
