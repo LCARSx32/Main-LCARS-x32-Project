@@ -43,14 +43,15 @@ Public Class frmMyComp
     Dim beeping As Boolean = False
     Dim mySelection As New frmSelect
     Dim maximized As Boolean = True
-    Dim startX As Integer
     Dim CurItems As New exCollection
     Dim showSystem As Boolean = False 'flag to show system files and folders
-    Dim curPage As Integer
     Dim PageCount As Integer
     'Dim bpp As Integer 'Buttons Per Page
     Dim myShift As Boolean = False
     Dim nextInChain As IntPtr
+
+    Private Delegate Sub NoArgs()
+
 #End Region
 
     Private Const WM_DRAWCLIPBOARD As Integer = &H308
@@ -752,6 +753,7 @@ Public Class frmMyComp
                 myfiles(myfiles.GetUpperBound(0)) = myButton.Data
             Next
             Dim form As New frmCopying(myfiles, "", frmCopying.FileActions.Delete)
+            AddHandler form.TaskCompleted, AddressOf Task_Finished
             form.Show()
         End If
 
@@ -788,7 +790,7 @@ Public Class frmMyComp
 
         Dim myfiles(-1) As String
 
-        For Each myButton As LCARS.LCARSbuttonClass In selectedButtons
+        For Each myButton As LCARS.LightweightControls.LCComplexButton In selectedButtons
             ReDim Preserve myfiles(myfiles.GetUpperBound(0) + 1)
             myfiles(myfiles.GetUpperBound(0)) = myButton.Data
         Next
@@ -833,11 +835,13 @@ Public Class frmMyComp
             If flag = 2 Then
                 'cut
                 Dim form As New frmCopying(files, curPath, frmCopying.FileActions.Cut)
+                AddHandler form.TaskCompleted, AddressOf Task_Finished
                 form.Show()
                 Clipboard.Clear()
             Else
                 'copy
                 Dim form As New frmCopying(files, curPath, frmCopying.FileActions.Copy)
+                AddHandler form.TaskCompleted, AddressOf Task_Finished
                 form.Show()
             End If
         End If
@@ -894,7 +898,7 @@ Public Class frmMyComp
 
     Private Sub sbOK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbOK.Click
         Try
-            Dim tmpPage As Integer = curPage
+            Dim tmpPage As Integer = gridMyComp.CurrentPage
             If (System.IO.Path.GetDirectoryName(sbOK.Data).EndsWith("\")) Then 'Error checking added by Tim 5/57/11
                 Rename(sbOK.Data, System.IO.Path.GetDirectoryName(sbOK.Data) & txtNew.Text) 'Corrects renaming bug
             Else
@@ -903,7 +907,7 @@ Public Class frmMyComp
             sbCancel_Click(sender, e)
 
             loadDir(curPath)
-            'loadPage(tmpPage)
+            gridMyComp.CurrentPage = tmpPage
 
         Catch ex As Exception
 
@@ -1167,4 +1171,11 @@ Public Class frmMyComp
         End If
     End Sub
 
+    Private Sub Task_Finished(ByVal sender As Object, ByVal e As System.EventArgs)
+        Me.Invoke(New NoArgs(AddressOf Reload))
+    End Sub
+
+    Private Sub Reload()
+        loadDir(curPath)
+    End Sub
 End Class
