@@ -6,6 +6,7 @@ Public Class frmCopying
     Dim destination As String
     Dim copyAction As FileActions
     Private Event statusChanged(ByVal progress As Decimal, ByVal topText As String, ByVal bottomText As String, ByVal status As String)
+    Public Event TaskCompleted As EventHandler
     Delegate Sub setText(ByVal text As String)
     Dim start As DateTime
 
@@ -151,6 +152,7 @@ Public Class frmCopying
             Next
         End If
         RaiseEvent statusChanged(1, "Completed", "100% complete", "Time Remaining: 0 seconds" & vbNewLine & "Items Remaining: 0" & vbNewLine & "Data Remaining: 0B")
+        RaiseEvent TaskCompleted(Me, New EventArgs)
         Me.Close()
     End Sub
 
