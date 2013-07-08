@@ -747,7 +747,7 @@ Public Class frmMyComp
 
         If result = MsgBoxResult.Yes Then
             Dim myfiles(-1) As String
-            For Each myButton As LCARS.LCARSbuttonClass In selectedButtons
+            For Each myButton As LCARS.LightweightControls.LCComplexButton In selectedButtons
                 ReDim Preserve myfiles(myfiles.GetUpperBound(0) + 1)
                 myfiles(myfiles.GetUpperBound(0)) = myButton.Data
             Next
