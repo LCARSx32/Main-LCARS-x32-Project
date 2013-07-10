@@ -62,7 +62,7 @@ Module modSpeech
 
         'Rewrite commands.xml
         Try
-            Dim myCode As String = GetSetting("LCARSX32", "Application", "SpeechCode", "409")
+            Dim myCode As String = GetSetting("LCARS x32", "Application", "SpeechCode", "409")
             Dim mywriter As New System.IO.StreamWriter(My.Computer.FileSystem.SpecialDirectories.Temp & "/commands.xml")
             With mywriter
                 'Stuff that's in the file regardless
