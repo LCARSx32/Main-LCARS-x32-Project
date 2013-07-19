@@ -19,7 +19,7 @@
 #Region " Events "
     Public Event WorkingAreaChanged(ByVal NewArea As System.Drawing.Rectangle)
     Public Event AlertInitiated(ByVal AlertID As Integer)
-    Public Event AlertEnded As EventHandler
+    Public Event AlertEnded()
     Public Event BeepingChanged(ByVal Beeping As Boolean)
     Public Event ColorsChanged()
     Public Event LCARSx32Closing()
@@ -28,10 +28,24 @@
     Dim x32Handle As IntPtr = IntPtr.Zero
     Dim InterMsgID As Integer
     Protected Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
-        If m.Msg = InterMsgID And m.LParam = 13 Then
-            RaiseEvent LCARSx32Closing()
-            Me.Close()
+        If m.Msg = InterMsgID Then
+            m.Result = 1
+            Select Case m.LParam
+                Case 2
+                    RaiseEvent ColorsChanged()
+                Case 3
+                    RaiseEvent BeepingChanged(GetSetting("LCARS x32", "Application", "ButtonBeep", "TRUE"))
+                Case 11
+                    RaiseEvent AlertInitiated(m.WParam)
+                Case 7
+                    RaiseEvent AlertEnded()
+                Case 13
+                    RaiseEvent LCARSx32Closing()
+                    Me.Close()
+            End Select
+
         ElseIf m.Msg = WM_COPYDATA And m.WParam = x32Handle And Not x32Handle = IntPtr.Zero Then
+            m.Result = 1
             Dim myData As New COPYDATASTRUCT
             myData = System.Runtime.InteropServices.Marshal.PtrToStructure(m.LParam, GetType(COPYDATASTRUCT))
             Dim myRect As New System.Drawing.Rectangle
@@ -40,7 +54,6 @@
         Else
             MyBase.WndProc(m)
         End If
-        MyBase.WndProc(m)
     End Sub
 
     ''' <summary>
@@ -55,6 +68,7 @@
         'Initialize reference to x32 and start receiving events
         InterMsgID = RegisterWindowMessageA("LCARS_X32_MSG")
         x32Handle = GetSetting("LCARS x32", "Application", "MainWindowHandle", "0")
+        lblData.Text = "x32 Handle: " & x32Handle.ToInt64.ToString()
         SendMessage(x32Handle, InterMsgID, Me.Handle, 1)
         Return x32Handle <> 0
     End Function
