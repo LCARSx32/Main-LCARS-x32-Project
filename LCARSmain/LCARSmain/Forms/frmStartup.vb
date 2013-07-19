@@ -80,6 +80,9 @@ Public Class frmStartup
 
                     'Reload the colors of the current mainscreen
                     UpdateColors(myForm)
+                    For Each mywindow As IntPtr In LinkedWindows
+                        SendMessage(mywindow, InterMsgID, 0, 2)
+                    Next
                 Case 3
                     'Set whether buttons should beep or not.
 
@@ -89,6 +92,9 @@ Public Class frmStartup
                     'Set the button beeping of the current mainscreen
                     Dim myValue As Boolean = Marshal.PtrToStructure(myData.lpData, GetType(Boolean))
                     SetBeeping(myValue, myForm)
+                    For Each mywindow As IntPtr In LinkedWindows
+                        SendMessage(mywindow, InterMsgID, 0, 3)
+                    Next
                 Case 4
                     m.Result = 1
                     'Set the wallpaper sizemode of the desktop

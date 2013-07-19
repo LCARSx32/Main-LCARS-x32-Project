@@ -348,6 +348,9 @@ Public Enum SetWindowPosFlags As UInteger
         alertThread = New Threading.Thread(AddressOf MainAlert)
         cancelAlert = False
         alertThread.Start(alertables)
+        For Each mywindow As IntPtr In LinkedWindows
+            SendMessage(mywindow, InterMsgID, type, 11)
+        Next
     End Sub
 
     Private Function GetAlertPanels(ByVal baseControl As Control) As Collection
@@ -483,6 +486,9 @@ Public Enum SetWindowPosFlags As UInteger
             Next
         Next
         inAlert = False
+        For Each mywindow As IntPtr In LinkedWindows
+            SendMessage(mywindow, InterMsgID, 0, 7)
+        Next
     End Sub
 
     Public Sub AlertSoundSub(ByVal soundPath As String)
