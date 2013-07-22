@@ -228,7 +228,6 @@ Public Class frmMyComp
     Private Sub drive_click(ByVal sender As Object, ByVal e As EventArgs)
         If (cancelClick = False And CType(sender, LCARS.LightweightControls.LCComplexButton).SideText <> "--") Then
             loadDir(CType(sender, LCARS.LightweightControls.LCComplexButton).Data)
-
         End If
     End Sub
 
