@@ -40,6 +40,9 @@ Namespace Controls
         ''' Clears all current controls from the grid
         ''' </summary>
         Public Sub Clear()
+            For Each mybutton As LCARS.LightweightControls.ILightweightControl In myList
+                RemoveHandler mybutton.Update, AddressOf drawButton
+            Next
             myList.Clear()
             Me.CreateGraphics().Clear(Color.Black)
         End Sub
@@ -72,7 +75,7 @@ Namespace Controls
                 End If
             Next
         End Sub
-        'Passes MouseOver events to the child controls as MouseOver and MouseOut events
+        'Passes MouseOver events to the child controls as MouseMove, MouseEnter, and MouseLeave events
         Private Sub Me_MouseOver(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.MouseMove
             Dim localPoint As Point = PointToClient(Cursor.Position)
             Dim foundTop As Boolean = False 'Top level control found
