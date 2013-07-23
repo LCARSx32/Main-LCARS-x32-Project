@@ -24,6 +24,7 @@ Module modCommon
     Public closing As Boolean = False
     Public myAlertForm As New frmAlerts()
     Public shellMode As Boolean = False
+    Public alertSoundMode As Microsoft.VisualBasic.AudioPlayMode = AudioPlayMode.WaitToComplete
 
 #Region " API Calls "
 
@@ -390,16 +391,7 @@ Public Enum SetWindowPosFlags As UInteger
         Dim LCARStype As Type = LCARSbutton.GetType
         Dim intloop As Integer
         Dim buffer As Integer
-        'Dim myAlertAudio As irrklang.ISoundEngine
-        'Dim alertables As Collection = CType(parameter, Collection)
-        'Try
-        '    myAlertAudio = New irrklang.ISoundEngine(irrklang.SoundOutputDriver.WinMM)
-        'Catch ex As Exception
-        '    Exit Sub
-        'End Try
-
-        ' redAlertSound.PlayLooping()
-
+        alertSoundMode = GetSetting("LCARS x32", "Application", "AlertSoundMode", AudioPlayMode.WaitToComplete)
         inAlert = True
         Dim highestTag As Integer = 0
 
@@ -410,29 +402,12 @@ Public Enum SetWindowPosFlags As UInteger
                 End If
             End If
         Next
-        Dim mySoundPath As String = alertSound 'GetSetting("LCARS X32", "Application", "RedAlertSound", Application.StartupPath & "\red_alert.wav")
-        'Dim mySound As irrklang.ISoundSource = myAlertAudio.AddSoundSourceFromIOStream(My.Resources.red_alert, "RedAlert")
-        'Dim mySound As irrklang.ISoundSource
-        'If Not (mySoundPath = "") Then
-        '    mySound = myAlertAudio.AddSoundSourceFromFile(mySoundPath)
-        'End If
+        Dim mySoundPath As String = alertSound
         'do the alert until cancelAlert is set to true:
         Do Until cancelAlert = True
             Dim soundThread As New Threading.Thread(AddressOf AlertSoundSub)
             If Not (mySoundPath = "") Then
                 soundThread.Start(mySoundPath)
-                'If myAlertAudio.IsCurrentlyPlaying(mySoundPath) Then
-                '    If muteAlert = True Then
-                '        myAlertAudio.StopAllSounds()
-                '    Else
-                '        Do Until myAlertAudio.IsCurrentlyPlaying(mySoundPath) = False
-                '            Application.DoEvents()
-                '        Loop
-                '    End If
-
-                'End If
-
-                'If muteAlert = False Then myAlertAudio.Play2D(mySound, False, False, False)
             End If
 
             For intloop = 0 To highestTag
@@ -474,7 +449,6 @@ Public Enum SetWindowPosFlags As UInteger
                 soundThread.Join()
             End If
         Loop
-        'My.Computer.Audio.Stop()
 
         For Each myBaseControl As Control In alertables
             For Each mybutton As Control In myBaseControl.Controls
@@ -493,7 +467,7 @@ Public Enum SetWindowPosFlags As UInteger
 
     Public Sub AlertSoundSub(ByVal soundPath As String)
         Try
-            My.Computer.Audio.Play(soundPath)
+            My.Computer.Audio.Play(soundPath, alertSoundMode)
         Catch ex As Exception
         End Try
     End Sub
