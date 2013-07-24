@@ -15,7 +15,7 @@ Imports System.Windows.Forms.Design
 <System.ComponentModel.DefaultEvent("Click"), Designer(GetType(GenericButtonDesigner))> _
 Public Class LCARSbuttonClass
     Inherits System.Windows.Forms.Control
-    Implements LCARS.IAlertable
+    Implements LCARS.IAlertable, LCARS.IBeeping
 
 #Region " Control Design Information "
     ''' <summary>
@@ -610,7 +610,7 @@ Public Class LCARSbuttonClass
     ''' <remarks>
     ''' This property should be set on application startup to match the global setting. This must be done manually.
     ''' </remarks>
-    Public Overridable Property Beeping() As Boolean
+    Public Overridable Property Beeping() As Boolean Implements IBeeping.Beeping
         Get
             Return doBeep
         End Get

@@ -131,6 +131,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Interfaces\IAlertable.vb" />
+    <Compile Include="Interfaces\IBeeping.vb" />
     <Compile Include="LCARS Enumerations.vb" />
     <Compile Include="LCARSfileBrowseDialog.Designer.vb">
       <DependentUpon>LCARSfileBrowseDialog.vb</DependentUpon>
@@ -143,7 +144,6 @@
     <Compile Include="Lightweight Controls\LCStandardButton.vb" />
     <Compile Include="Lightweight Controls\LCHalfPillButton.vb" />
     <Compile Include="Lightweight Controls\LCFlatButton.vb" />
-    <Compile Include="Lightweight Controls\LightweightControlEventArgs.vb" />
     <Compile Include="Modules\Alerts.vb" />
     <Compile Include="Modules\Util.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
