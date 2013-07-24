@@ -1,20 +1,24 @@
 Public Class frmPic
 
 #Region " Window Resizing "
-    Declare Function RegisterWindowMessageA Lib "user32.dll" (ByVal lpString As String) As Integer
-    Public Declare Auto Function SendMessage Lib "user32.dll" (ByVal hWnd As IntPtr, ByVal msg As Integer, ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
-    Private Declare Function PostMessage Lib "user32.dll" Alias "PostMessageA" (ByVal hwnd As Integer, ByVal wMsg As Integer, ByVal wParam As Integer, ByVal lParam As Integer) As Integer
+    Dim WithEvents interop As New LCARS.x32Interop
 
-    Public InterMsgID As Integer
-    Const WM_COPYDATA As Integer = &H4A
-    Dim x32Handle As IntPtr = IntPtr.Zero
-    Public Const HWND_BROADCAST As Integer = &HFFFF
+    Private Sub interop_BeepingChanged(ByVal Beeping As Boolean) Handles interop.BeepingChanged
+        LCARS.SetBeeping(Me, Beeping)
+    End Sub
 
-    Structure COPYDATASTRUCT
-        Public dwData As IntPtr
-        Public cdData As Integer
-        Public lpData As IntPtr
-    End Structure
+    Private Sub interop_ColorsChanged() Handles interop.ColorsChanged
+        LCARS.UpdateColors(Me)
+    End Sub
+
+    Private Sub interop_LCARSx32Closing() Handles interop.LCARSx32Closing
+        Application.Exit()
+    End Sub
+
+    Private Sub WorkingAreaUpdated(ByVal NewArea As System.Drawing.Rectangle) Handles interop.WorkingAreaChanged
+        Me.Bounds = NewArea
+    End Sub
+
 #End Region
 
     'a collection to hold the paths to our pictures
@@ -25,10 +29,7 @@ Public Class frmPic
     Dim index As Integer
 
     Private Sub frmPic_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        InterMsgID = RegisterWindowMessageA("LCARS_X32_MSG")
-        x32Handle = GetSetting("LCARS x32", "Application", "MainWindowHandle", "0")
-        SendMessage(x32Handle, InterMsgID, Me.Handle, 1)
-
+        interop.Init()
         Me.Bounds = Screen.PrimaryScreen.WorkingArea
 
         'sets initial picture box status to empty & prevents icon from displaying in pic box
@@ -49,28 +50,6 @@ Public Class frmPic
             End If
         End If
 
-    End Sub
-
-    Protected Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
-        If m.Msg = InterMsgID And m.LParam = 13 Then
-            Me.Close()
-            End
-
-        ElseIf m.Msg = WM_COPYDATA And m.WParam = x32Handle And Not x32Handle = IntPtr.Zero Then
-            Dim myData As New COPYDATASTRUCT
-            myData = System.Runtime.InteropServices.Marshal.PtrToStructure(m.LParam, GetType(COPYDATASTRUCT))
-
-            Dim myRect As New Rectangle
-            myRect = System.Runtime.InteropServices.Marshal.PtrToStructure(myData.lpData, GetType(Rectangle))
-
-            If Not Me.Bounds = myRect Then
-                Me.Bounds = myRect
-            End If
-
-
-        Else
-            MyBase.WndProc(m)
-        End If
     End Sub
 
     Private Sub loadImages(ByVal curIndex As Integer)
@@ -166,7 +145,7 @@ Public Class frmPic
             index = 1
             loadImages(index)
 
-      
+
 
         End If
 
@@ -254,7 +233,7 @@ Public Class frmPic
 
             pbZoom.ButtonText = "ZOOM: " & Strings.FormatPercent(picturebox1.Width / picturebox1.Image.Width, 0)
 
-  
+
         End If
 
 
@@ -295,7 +274,7 @@ Public Class frmPic
 
     End Sub
 
-  
+
     Private Sub dwn_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles dwn.MouseDown
         If picturebox1.Image IsNot Nothing Then
             tmrdown.Enabled = True
