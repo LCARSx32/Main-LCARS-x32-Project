@@ -6,6 +6,12 @@
 ''' <remarks>Every button has one of these. If you want custom colors, use it!</remarks>
 Public Class LCARScolor
     Dim colors() As String
+
+    '''<summary>
+    ''' Raised when colors have been updated.
+    ''' </summary>
+    Public Event ColorsUpdated As EventHandler
+
     ''' <summary>
     ''' Returns new LCARScolor object
     ''' </summary>
@@ -27,7 +33,8 @@ Public Class LCARScolor
     ''' <summary>
     ''' Refreshes colors
     ''' </summary>
-    ''' <remarks>Retrieves stored colors, or initializes system colors to standard colors if none are saved.</remarks>
+    ''' <remarks>Retrieves stored colors, or initializes system colors to standard colors if none are saved.
+    ''' Will then raise a <see cref="ColorsUpdated">ColorsUpdated</see> event.</remarks>
     Public Sub ReloadColors()
         Dim myColors As String
 
@@ -40,6 +47,7 @@ Public Class LCARScolor
             colors = DefaultColors
             SaveSetting("LCARS x32", "Colors", "ColorMap", Join(colors, ","))
         End If
+        RaiseEvent ColorsUpdated(Me, New EventArgs)
     End Sub
 
     ''' <summary>

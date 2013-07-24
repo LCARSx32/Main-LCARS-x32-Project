@@ -45,37 +45,16 @@ Public Module Util
         For Each myControl As System.Windows.Forms.Control In Container.Controls
             SetBeeping(myControl, Beeping)
         Next
-        If Container.GetType.IsSubclassOf(GetType(LCARS.Controls.WindowlessContainer)) Then
-            SetWindowlessBeeping(CType(Container, LCARS.Controls.WindowlessContainer), Beeping)
-        End If
-    End Sub
-
-    Public Sub SetWindowlessBeeping(ByVal Container As LCARS.Controls.WindowlessContainer, ByVal Beeping As Boolean)
-        For i As Integer = 0 To Container.Count - 1
-            Dim temp As IBeeping = TryCast(Container.Items(i), IBeeping)
-            If Not temp Is Nothing Then
-                temp.Beeping = Beeping
-            End If
-        Next
     End Sub
 
     Public Sub UpdateColors(ByVal Container As System.Windows.Forms.Control)
+        Dim temp As IColorable
+        temp = TryCast(Container, IColorable)
+        If Not temp Is Nothing Then
+            temp.ColorsAvailable.ReloadColors()
+        End If
         For Each myControl As System.Windows.Forms.Control In Container.Controls
-            If myControl.GetType.IsSubclassOf(GetType(LCARS.LCARSbuttonClass)) Then
-                CType(myControl, LCARS.LCARSbuttonClass).ColorsAvailable.ReloadColors()
-                CType(myControl, LCARS.LCARSbuttonClass).DrawAllButtons()
-            ElseIf myControl.GetType.IsSubclassOf(GetType(LCARS.Controls.WindowlessContainer)) Then
-                'My apologies for the long and nested CType statements. The alternative is temp variables.
-                For i As Integer = 0 To CType(Container, LCARS.Controls.WindowlessContainer).Count
-                    If CType(Container, LCARS.Controls.WindowlessContainer).Items(i).GetType.IsSubclassOf(GetType(LCARS.LightweightControls.LCFlatButton)) Then
-                        CType(CType(Container, LCARS.Controls.WindowlessContainer).Items(i), LCARS.LightweightControls.LCFlatButton).ColorsAvailable.ReloadColors()
-                    End If
-                Next
-            Else
-                If myControl.Controls.Count > 0 Then
-                    UpdateColors(myControl)
-                End If
-            End If
+            UpdateColors(myControl)
         Next
     End Sub
 End Module

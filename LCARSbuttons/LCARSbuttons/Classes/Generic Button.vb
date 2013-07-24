@@ -15,7 +15,7 @@ Imports System.Windows.Forms.Design
 <System.ComponentModel.DefaultEvent("Click"), Designer(GetType(GenericButtonDesigner))> _
 Public Class LCARSbuttonClass
     Inherits System.Windows.Forms.Control
-    Implements LCARS.IAlertable, LCARS.IBeeping
+    Implements LCARS.IAlertable, LCARS.IBeeping, LCARS.IColorable
 
 #Region " Control Design Information "
     ''' <summary>
@@ -98,7 +98,7 @@ Public Class LCARSbuttonClass
     Const mButtonUp = &H208
     Const mButtonDouble = &H209
 
-    Private _ColorsAvailable As New LCARS.LCARScolor
+    Private WithEvents _ColorsAvailable As New LCARS.LCARScolor
 
 
     Dim myColor As LCARS.LCARScolorStyles = LCARScolorStyles.MiscFunction
@@ -631,7 +631,7 @@ Public Class LCARSbuttonClass
     ''' </code>
     ''' That code will set all colors used by this control to the defaults. Naturally you can be more specific if needed.
     ''' </remarks>
-    Public Property ColorsAvailable() As LCARScolor
+    Public Property ColorsAvailable() As LCARScolor Implements IColorable.ColorsAvailable
         Get
             Return _ColorsAvailable
         End Get
@@ -850,6 +850,10 @@ Public Class LCARSbuttonClass
             e.Graphics.DrawImage(UnLitButton, 0, 0)
         End If
         'MyBase.OnPaint(e)
+    End Sub
+
+    Private Sub ColorsUpdated(ByVal sender As Object, ByVal e As System.EventArgs) Handles _ColorsAvailable.ColorsUpdated
+        DrawAllButtons()
     End Sub
 #End Region
 

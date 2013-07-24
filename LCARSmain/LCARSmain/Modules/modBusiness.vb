@@ -494,7 +494,7 @@ public Class modBusiness
 
         Dim DoBeeping As Boolean = Boolean.Parse(GetSetting("LCARS x32", "Application", "ButtonBeep", "False"))
 
-        SetBeeping(DoBeeping, myForm)
+        LCARS.SetBeeping(myForm, DoBeeping)
 
         AddHandler mainTimer.Tick, AddressOf mainTimer_Tick
 
