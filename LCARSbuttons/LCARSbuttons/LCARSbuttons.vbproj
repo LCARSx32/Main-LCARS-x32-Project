@@ -70,7 +70,6 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Classes\Constants.vb" />
     <Compile Include="Classes\Generic Button.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -78,9 +77,6 @@
     <Compile Include="Classes\Stardates.vb" />
     <Compile Include="Classes\UI.vb">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Classes\x32Interop.Designer.vb">
-      <DependentUpon>x32Interop.vb</DependentUpon>
     </Compile>
     <Compile Include="Classes\x32Interop.vb">
       <SubType>Form</SubType>
@@ -168,10 +164,6 @@
     <EmbeddedResource Include="Class1.resx">
       <SubType>Designer</SubType>
       <DependentUpon>Class1.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Classes\x32Interop.resx">
-      <DependentUpon>x32Interop.vb</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="LCARSfileBrowseDialog.resx">
       <SubType>Designer</SubType>

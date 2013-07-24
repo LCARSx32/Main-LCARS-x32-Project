@@ -3,10 +3,9 @@
 #Region " API "
     Declare Function RegisterWindowMessageA Lib "user32.dll" (ByVal lpString As String) As Integer
     Public Declare Auto Function SendMessage Lib "user32.dll" (ByVal hWnd As IntPtr, ByVal msg As Integer, ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
-    Private Declare Function PostMessage Lib "user32.dll" Alias "PostMessageA" (ByVal hwnd As Integer, ByVal wMsg As Integer, ByVal wParam As Integer, ByVal lParam As Integer) As Integer
 
     Const WM_COPYDATA As Integer = &H4A
-    Public Const HWND_BROADCAST As Integer = &HFFFF
+    Const HWND_BROADCAST As Integer = &HFFFF
 
     Structure COPYDATASTRUCT
         Public dwData As IntPtr
@@ -27,7 +26,8 @@
 
     Dim x32Handle As IntPtr = IntPtr.Zero
     Dim InterMsgID As Integer
-    Protected Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
+    Dim receiver As New MessageReceiver
+    Private Sub ProcessMessage(ByVal m As System.Windows.Forms.Message)
         If m.Msg = InterMsgID Then
             m.Result = 1
             Select Case m.LParam
@@ -41,7 +41,7 @@
                     RaiseEvent AlertEnded()
                 Case 13
                     RaiseEvent LCARSx32Closing()
-                    Me.Close()
+                    receiver.Close()
             End Select
 
         ElseIf m.Msg = WM_COPYDATA And m.WParam = x32Handle And Not x32Handle = IntPtr.Zero Then
@@ -51,8 +51,6 @@
             Dim myRect As New System.Drawing.Rectangle
             myRect = System.Runtime.InteropServices.Marshal.PtrToStructure(myData.lpData, GetType(System.Drawing.Rectangle))
             RaiseEvent WorkingAreaChanged(myRect)
-        Else
-            MyBase.WndProc(m)
         End If
     End Sub
 
@@ -66,21 +64,20 @@
     ''' </remarks>
     Public Function Init() As Boolean
         'Initialize reference to x32 and start receiving events
+        AddHandler receiver.MessageRecieved, AddressOf ProcessMessage
         InterMsgID = RegisterWindowMessageA("LCARS_X32_MSG")
         x32Handle = GetSetting("LCARS x32", "Application", "MainWindowHandle", "0")
-        lblData.Text = "x32 Handle: " & x32Handle.ToInt64.ToString()
-        SendMessage(x32Handle, InterMsgID, Me.Handle, 1)
+        SendMessage(x32Handle, InterMsgID, receiver.Handle, 1)
         Return x32Handle <> 0
     End Function
 
-    <System.ComponentModel.EditorBrowsable(ComponentModel.EditorBrowsableState.Advanced)> _
-    Public WriteOnly Property DebugMode() As Boolean
-        Set(ByVal value As Boolean)
-            If value Then
-                Me.Show()
-            Else
-                Me.Hide()
-            End If
-        End Set
-    End Property
+    Private Class MessageReceiver
+        Inherits System.Windows.Forms.Form
+
+        Public Event MessageRecieved(ByVal m As System.Windows.Forms.Message)
+        Protected Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
+            RaiseEvent MessageRecieved(m)
+            MyBase.WndProc(m)
+        End Sub
+    End Class
 End Class
