@@ -79,7 +79,7 @@ Public Class frmStartup
                     m.Result = 1
 
                     'Reload the colors of the current mainscreen
-                    UpdateColors(myForm)
+                    LCARS.UpdateColors(myForm)
                     For Each mywindow As IntPtr In LinkedWindows
                         SendMessage(mywindow, InterMsgID, 0, 2)
                     Next
@@ -91,7 +91,7 @@ Public Class frmStartup
 
                     'Set the button beeping of the current mainscreen
                     Dim myValue As Boolean = Marshal.PtrToStructure(myData.lpData, GetType(Boolean))
-                    SetBeeping(myValue, myForm)
+                    LCARS.SetBeeping(myForm, myValue)
                     For Each mywindow As IntPtr In LinkedWindows
                         SendMessage(mywindow, InterMsgID, 0, 3)
                     Next

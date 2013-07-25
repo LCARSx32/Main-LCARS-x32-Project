@@ -4,11 +4,14 @@ Imports System.Windows.Forms
 Namespace Controls
     Public Class WindowlessContainer
         Inherits System.Windows.Forms.Control
+        Implements LCARS.IColorable, IBeeping
+
         'Global Variables
         Protected myList As New List(Of LightweightControls.ILightweightControl)
         Dim oldMouseMovePoint As Point
         Dim oldMouseDownPoint As Point
-
+        Dim _beeping As Boolean = GetSetting("LCARS x32", "Application", "ButtonBeep", "TRUE")
+        Dim WithEvents _colorsAvailable As New LCARS.LCARScolor
         'Events
         Public Event LightweightControlAdded As EventHandler
 
@@ -108,6 +111,17 @@ Namespace Controls
             Next
         End Sub
 
+        'Updates colors of child controls
+        Private Sub ReloadColors() Handles _colorsAvailable.ColorsUpdated
+            Dim temp As IColorable
+            For Each mycontrol As LightweightControls.ILightweightControl In myList
+                temp = TryCast(mycontrol, IColorable)
+                If Not temp Is Nothing Then
+                    temp.ColorsAvailable.ReloadColors()
+                End If
+            Next
+        End Sub
+
 #Region " Properties "
         ''' <summary>
         ''' Gives access to the controls already on the grid.
@@ -139,6 +153,32 @@ Namespace Controls
             End Get
         End Property
 
+
+        Public Property ColorsAvailable() As LCARScolor Implements IColorable.ColorsAvailable
+            Get
+                Return _colorsAvailable
+            End Get
+            Set(ByVal value As LCARScolor)
+                _colorsAvailable = value
+                ReloadColors()
+            End Set
+        End Property
+
+        Public Property Beeping() As Boolean Implements IBeeping.Beeping
+            Get
+                Return _beeping
+            End Get
+            Set(ByVal value As Boolean)
+                _beeping = value
+                Dim temp As IBeeping
+                For Each mycontrol As LCARS.LightweightControls.ILightweightControl In myList
+                    temp = TryCast(mycontrol, IBeeping)
+                    If Not temp Is Nothing Then
+                        temp.Beeping = value
+                    End If
+                Next
+            End Set
+        End Property
 #End Region
     End Class
 End Namespace

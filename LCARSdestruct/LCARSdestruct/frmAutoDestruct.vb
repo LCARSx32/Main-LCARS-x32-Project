@@ -1,46 +1,28 @@
 Public Class frmAutoDestruct
 #Region " Window Resizing "
-    Declare Function RegisterWindowMessageA Lib "user32.dll" (ByVal lpString As String) As Integer
-    Public Declare Auto Function SendMessage Lib "user32.dll" (ByVal hWnd As IntPtr, ByVal msg As Integer, ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
-    Private Declare Function PostMessage Lib "user32.dll" Alias "PostMessageA" (ByVal hwnd As Integer, ByVal wMsg As Integer, ByVal wParam As Integer, ByVal lParam As Integer) As Integer
+    Dim WithEvents interop As New LCARS.x32Interop
 
-    Public InterMsgID As Integer
-    Const WM_COPYDATA As Integer = &H4A
-    Dim x32Handle As IntPtr = IntPtr.Zero
-    Public Const HWND_BROADCAST As Integer = &HFFFF
+    Private Sub interop_BeepingChanged(ByVal Beeping As Boolean) Handles interop.BeepingChanged
+        LCARS.SetBeeping(Me, Beeping)
+    End Sub
 
-    Structure COPYDATASTRUCT
-        Public dwData As IntPtr
-        Public cdData As Integer
-        Public lpData As IntPtr
-    End Structure
+    Private Sub interop_ColorsChanged() Handles interop.ColorsChanged
+        LCARS.UpdateColors(Me)
+    End Sub
+
+    Private Sub interop_LCARSx32Closing() Handles interop.LCARSx32Closing
+        Application.Exit()
+    End Sub
+
+    Private Sub WorkingAreaUpdated(ByVal NewArea As System.Drawing.Rectangle) Handles interop.WorkingAreaChanged
+        Me.Bounds = NewArea
+    End Sub
+
 #End Region
 
     Dim endTime As TimeSpan
     Dim ShutdownOption As String
     Dim shutdownOptions As New cWrapExitWindows
-
-    Protected Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
-        If m.Msg = InterMsgID And m.LParam = 13 Then
-            Me.Close()
-            End
-
-        ElseIf m.Msg = WM_COPYDATA And m.WParam = x32Handle And Not x32Handle = IntPtr.Zero Then
-            Dim myData As New COPYDATASTRUCT
-            myData = System.Runtime.InteropServices.Marshal.PtrToStructure(m.LParam, GetType(COPYDATASTRUCT))
-
-            Dim myRect As New Rectangle
-            myRect = System.Runtime.InteropServices.Marshal.PtrToStructure(myData.lpData, GetType(Rectangle))
-
-            If Not Me.Bounds = myRect Then
-                Me.Bounds = myRect
-            End If
-
-        Else
-            MyBase.WndProc(m)
-        End If
-
-    End Sub
 
     Private Sub sbCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbCancel.Click
         tmrCountdown.Enabled = False
@@ -101,12 +83,6 @@ Public Class frmAutoDestruct
         End If
     End Sub
 
-    Private Sub tmrWA_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrWA.Tick
-        'If Not Me.Bounds = Screen.PrimaryScreen.WorkingArea Then
-        '    Me.Bounds = Screen.PrimaryScreen.WorkingArea
-        'End If
-    End Sub
-
     Private Sub hpShutDown_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles hpShutDown.Click
         fbSelected.Top = hpShutDown.Top
         ShutdownOption = "ShutDown"
@@ -117,10 +93,7 @@ Public Class frmAutoDestruct
     End Sub
 
     Private Sub frmAutoDestruct_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        InterMsgID = RegisterWindowMessageA("LCARS_X32_MSG")
-        x32Handle = GetSetting("LCARS x32", "Application", "MainWindowHandle", "0")
-        SendMessage(x32Handle, InterMsgID, Me.Handle, 1)
-
+        interop.Init()
         ShutdownOption = GetSetting("LCARS x32", "Application", "AutoDestructOption", "alarm")
 
         Select Case ShutdownOption.ToLower
@@ -135,22 +108,7 @@ Public Class frmAutoDestruct
         Me.Bounds = Screen.PrimaryScreen.WorkingArea
         Application.DoEvents()
 
-        Dim beeping As Boolean = Boolean.Parse(GetSetting("LCARS x32", "Application", "ButtonBeep", "FALSE"))
-
-        setBeeping(Me, beeping)
-
     End Sub
-    Private Sub setBeeping(ByVal baseControl As Control, ByVal beep As Boolean)
-        For Each myControl As Control In baseControl.Controls
-            If myControl.GetType.ToString.ToLower.Substring(0, 5) = "lcars" Then
-                CType(myControl, LCARS.LCARSbuttonClass).Beeping = beep
-            ElseIf myControl.Controls.Count > 1 Then
-                setBeeping(myControl, beep)
-
-            End If
-        Next
-    End Sub
-
     Private Sub hpLogOff_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles hpLogOff.Click
         fbSelected.Top = hpLogOff.Top
         ShutdownOption = "LogOff"
@@ -178,9 +136,5 @@ Public Class frmAutoDestruct
         Else
             pnl12hr.Visible = True
         End If
-    End Sub
-
-    Private Sub pnl24hr_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles pnl24hr.Paint
-
     End Sub
 End Class

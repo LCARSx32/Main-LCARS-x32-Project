@@ -10,7 +10,7 @@ Namespace LightweightControls
     ''' Several other controls derive from this one by overriding <see cref="LCFlatButton.Redraw">Redraw</see> and adding properties.
     ''' </remarks>
     Public Class LCFlatButton
-        Implements ILightweightControl, LCARS.IAlertable, IDisposable
+        Implements ILightweightControl, LCARS.IAlertable, IDisposable, IBeeping, IColorable
 
         ''' <summary>
         ''' The bitmap of the control's interface
@@ -44,7 +44,7 @@ Namespace LightweightControls
         Protected _ellipsisMode As EllipsisModes = EllipsisModes.Character
         Protected _textArea As RectangleF
         Protected _parent As System.Windows.Forms.Control
-        Public ColorsAvailable As New LCARScolor()
+        Protected WithEvents _colorsAvailable As New LCARScolor()
         Public Event Update(ByVal sender As ILightweightControl) Implements ILightweightControl.Update
         Public Event Click As EventHandler
         Public Event MouseEnter As EventHandler
@@ -279,6 +279,10 @@ Namespace LightweightControls
             _parent = NewParent
             _tmrFlash.SynchronizingObject = _parent
             _tmrScroll.SynchronizingObject = _parent
+        End Sub
+
+        Private Sub ReloadColors() Handles _colorsAvailable.ColorsUpdated
+            Redraw()
         End Sub
 #Region " Properties "
         ''' <summary>
@@ -632,7 +636,7 @@ Namespace LightweightControls
         ''' <remarks>
         ''' Warning: high-pitched beeps can cause irritation in users. Use with caution!
         ''' </remarks>
-        Public Property Beeping() As Boolean
+        Public Property Beeping() As Boolean Implements IBeeping.Beeping
             Get
                 Return _beeping
             End Get
@@ -698,6 +702,16 @@ Namespace LightweightControls
                     _font = New Font("LCARS", value, FontStyle.Regular, GraphicsUnit.Point)
                     Redraw()
                 End If
+            End Set
+        End Property
+
+        Public Property ColorsAvailable() As LCARS.LCARScolor Implements IColorable.ColorsAvailable
+            Get
+                Return _colorsAvailable
+            End Get
+            Set(ByVal value As LCARS.LCARScolor)
+                _colorsAvailable = value
+                Redraw()
             End Set
         End Property
 #End Region

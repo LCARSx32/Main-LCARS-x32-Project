@@ -37,4 +37,24 @@ Public Module Util
         Return myString
     End Function
 
+    Public Sub SetBeeping(ByVal Container As System.Windows.Forms.Control, ByVal Beeping As Boolean)
+        Dim temp As IBeeping = TryCast(Container, IBeeping)
+        If Not temp Is Nothing Then
+            temp.Beeping = Beeping
+        End If
+        For Each myControl As System.Windows.Forms.Control In Container.Controls
+            SetBeeping(myControl, Beeping)
+        Next
+    End Sub
+
+    Public Sub UpdateColors(ByVal Container As System.Windows.Forms.Control)
+        Dim temp As IColorable
+        temp = TryCast(Container, IColorable)
+        If Not temp Is Nothing Then
+            temp.ColorsAvailable.ReloadColors()
+        End If
+        For Each myControl As System.Windows.Forms.Control In Container.Controls
+            UpdateColors(myControl)
+        Next
+    End Sub
 End Module

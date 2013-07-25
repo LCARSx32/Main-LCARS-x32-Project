@@ -14,29 +14,29 @@ Public Class frmShutdown
         Public cdData As Integer
         Public lpData As IntPtr
     End Structure
+
+    Dim WithEvents interop As New LCARS.x32Interop
+
+    Private Sub interop_BeepingChanged(ByVal Beeping As Boolean) Handles interop.BeepingChanged
+        LCARS.SetBeeping(Me, Beeping)
+    End Sub
+
+    Private Sub interop_ColorsChanged() Handles interop.ColorsChanged
+        LCARS.UpdateColors(Me)
+    End Sub
+
+    Private Sub interop_LCARSx32Closing() Handles interop.LCARSx32Closing
+        Application.Exit()
+    End Sub
+
+    Private Sub WorkingAreaUpdated(ByVal NewArea As System.Drawing.Rectangle) Handles interop.WorkingAreaChanged
+        Me.Bounds = NewArea
+    End Sub
+
 #End Region
 
     Dim shutdownOptions As New cWrapExitWindows
 
-    Protected Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
-        If m.Msg = InterMsgID And m.LParam = 2 Then
-            x32Handle = m.WParam
-
-        ElseIf m.Msg = WM_COPYDATA And m.WParam = x32Handle And Not x32Handle = IntPtr.Zero Then
-            Dim myData As New COPYDATASTRUCT
-            myData = System.Runtime.InteropServices.Marshal.PtrToStructure(m.LParam, GetType(COPYDATASTRUCT))
-
-            Dim myRect As New Rectangle
-            myRect = System.Runtime.InteropServices.Marshal.PtrToStructure(myData.lpData, GetType(Rectangle))
-
-            If Not Me.Bounds = myRect Then
-                Me.Bounds = myRect
-            End If
-
-        Else
-            MyBase.WndProc(m)
-        End If
-    End Sub
 
     Private Sub sbShutdown_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbShutdown.Click
         Me.Hide()
@@ -74,13 +74,11 @@ Public Class frmShutdown
     End Sub
 
     Private Sub frmShutdown_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        interop.Init()
         InterMsgID = RegisterWindowMessageA("LCARS_X32_MSG")
         Dim myCommands() As String = System.Environment.CommandLine.Split("/")
 
-        If myCommands.GetUpperBound(0) > 0 Then
-            x32Handle = myCommands(1) 'GetSetting("LCARS x32", "Application", "MainWindowHandle", "0")
-        End If
-        'x32Handle = GetSetting("LCARS x32", "Application", "MainWindowHandle", "0")
+        x32Handle = GetSetting("LCARS x32", "Application", "MainWindowHandle", "0")
         SendMessage(InterMsgID, InterMsgID, Me.Handle, 1)
 
         Me.Bounds = Screen.PrimaryScreen.WorkingArea
@@ -90,8 +88,6 @@ Public Class frmShutdown
                 sbExit.doClick(New Object, New System.EventArgs)
             End If
         End If
-        'Dim myreg As Microsoft.Win32.RegistryKey = Microsoft.Win32.Registry.CurrentUser
-        ' myreg = myreg.OpenSubKey("\Software\Microsoft\Windows\CurrentVersion\r
     End Sub
 
     Private Sub sbExitMyComp_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbExitMyComp.Click

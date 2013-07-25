@@ -490,19 +490,6 @@ Public Enum SetWindowPosFlags As UInteger
         PostMessage(hwnd, WM_SYSCOMMAND, WM_CLOSE, 0)
     End Sub
 
-    Public Sub SetBeeping(ByVal Enabled As Boolean, ByVal searchContainer As Control)
-
-        For Each myControl As Control In searchContainer.Controls
-            If myControl.GetType().IsSubclassOf(GetType(LCARS.LCARSbuttonClass)) Then
-                CType(myControl, LCARS.LCARSbuttonClass).Beeping = Enabled
-            Else
-                If myControl.Controls.Count > 0 Then
-                    SetBeeping(Enabled, myControl)
-                End If
-            End If
-        Next
-    End Sub
-
     Public Sub ShowTaskBar(ByVal StartVisible As Boolean)
         Dim TaskbarHandle As IntPtr
         Dim StartButtonHandle As IntPtr
@@ -642,22 +629,6 @@ Public Enum SetWindowPosFlags As UInteger
         myDesktop.Close()
         End
 
-    End Sub
-
-
-    Public Sub UpdateColors(ByVal container As Control)
-
-        For Each myControl As Control In container.Controls
-            If myControl.GetType.IsSubclassOf(GetType(LCARS.LCARSbuttonClass)) Then
-                CType(myControl, LCARS.LCARSbuttonClass).ColorsAvailable.ReloadColors()
-                CType(myControl, LCARS.LCARSbuttonClass).DrawAllButtons()
-            Else
-                If myControl.Controls.Count > 0 Then
-                    UpdateColors(myControl)
-                End If
-            End If
-
-        Next
     End Sub
 
 End Module
