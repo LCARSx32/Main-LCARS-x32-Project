@@ -18,7 +18,26 @@ Public Class frmSettings
         Public cdData As Integer
         Public lpData As IntPtr
     End Structure
+    Dim WithEvents interop As New LCARS.x32Interop
+
+    Private Sub interop_BeepingChanged(ByVal Beeping As Boolean) Handles interop.BeepingChanged
+        LCARS.SetBeeping(Me, Beeping)
+    End Sub
+
+    Private Sub interop_ColorsChanged() Handles interop.ColorsChanged
+        LCARS.UpdateColors(Me)
+    End Sub
+
+    Private Sub interop_LCARSx32Closing() Handles interop.LCARSx32Closing
+        Application.Exit()
+    End Sub
+
+    Private Sub WorkingAreaUpdated(ByVal NewArea As System.Drawing.Rectangle) Handles interop.WorkingAreaChanged
+        Me.Bounds = NewArea
+    End Sub
+
 #End Region
+
 
     Dim myColors(-1) As String
     Dim myFiles() As String
@@ -48,31 +67,8 @@ Public Class frmSettings
         End Function
     End Structure
 
-    Protected Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
-        If m.Msg = InterMsgID And m.LParam = 13 Then
-            Me.Close()
-            End
-        ElseIf m.Msg = WM_COPYDATA And m.WParam = x32Handle And Not x32Handle = IntPtr.Zero Then
-            Dim myData As New COPYDATASTRUCT
-            myData = System.Runtime.InteropServices.Marshal.PtrToStructure(m.LParam, GetType(COPYDATASTRUCT))
-
-            Dim myRect As New Rectangle
-            myRect = System.Runtime.InteropServices.Marshal.PtrToStructure(myData.lpData, GetType(Rectangle))
-
-            If Not Me.Bounds = myRect Then
-                Me.Bounds = myRect
-            End If
-        Else
-            MyBase.WndProc(m)
-        End If
-    End Sub
-
-
-
-
-   
-
     Private Sub frmSettings_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        interop.Init()
         InterMsgID = RegisterWindowMessageA("LCARS_X32_MSG")
         Dim myCommands() As String = System.Environment.CommandLine.Split("/")
         If myCommands.GetUpperBound(0) > 0 Then
@@ -287,7 +283,6 @@ Public Class frmSettings
 
     End Sub
 
-
     Private Sub UpdateColors(ByVal container As Control)
 
         For Each myControl As Control In container.Controls
@@ -315,10 +310,7 @@ Public Class frmSettings
         If myColors.GetUpperBound(0) > -1 Then
             SaveSetting("LCARS x32", "Colors", "ColorMap", Join(myColors, ","))
             UpdateMainscreenColors(myColors)
-            UpdateColors(Me)
-
         End If
-
     End Sub
 
  
@@ -352,7 +344,6 @@ Public Class frmSettings
         SaveSetting("LCARS x32", "Application", "ButtonBeep", cbBeeping.Lit)
 
 
-        SetBeeping(cbBeeping.Lit, Me)
         SetMainscreenBeeping(cbBeeping.Lit)
     End Sub
 
@@ -468,24 +459,6 @@ Public Class frmSettings
             LCARS.UI.MsgBox("Could not launch SetShell.exe.  Please make sure it is in the same directory as LCARSsettings.exe." & vbNewLine & vbNewLine & ex.Message, MsgBoxStyle.OkCancel, "ERROR")
         End Try
 
-    End Sub
-
-   
-
-    Public Sub SetBeeping(ByVal Enabled As Boolean, ByVal searchContainer As Control)
-
-        For Each myControl As Control In searchContainer.Controls
-            If myControl.GetType.ToString.Substring(0, 5) = "LCARS" Then
-                Try
-                    CType(myControl, Object).Beeping = Enabled
-                Catch ex As Exception
-                End Try
-            Else
-                If myControl.Controls.Count > 0 Then
-                    SetBeeping(Enabled, myControl)
-                End If
-            End If
-        Next
     End Sub
 
     Private Sub SetMainscreenBeeping(ByVal enabled As Boolean)
