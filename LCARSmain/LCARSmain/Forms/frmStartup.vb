@@ -222,7 +222,7 @@ Public Class frmStartup
         Me.FormBorderStyle = Windows.Forms.FormBorderStyle.None
         If shellMode Then
             Me.Bounds = Screen.AllScreens(screenindex).Bounds
-            SetWindowPos(Me.Handle, 1, 0, 0, 100, 100, SetWindowPosFlags.IgnoreMove Or SetWindowPosFlags.IgnoreResize)
+            'SetWindowPos(Me.Handle, 1, 0, 0, 100, 100, SetWindowPosFlags.IgnoreMove Or SetWindowPosFlags.IgnoreResize)
             Me.SendToBack()
         Else
             Me.Size = New Point(0, 0)
@@ -297,7 +297,7 @@ Public Class frmStartup
 
         myForm.Show()
         myForm.BringToFront()
-        SetWindowPos(myForm.Handle, -1, 0, 0, 0, 0, SetWindowPosFlags.IgnoreMove Or SetWindowPosFlags.IgnoreResize)
+        'SetWindowPos(myForm.Handle, -1, 0, 0, 0, 0, SetWindowPosFlags.IgnoreMove Or SetWindowPosFlags.IgnoreResize)
         If shellMode Then
             Dim startupThread As New Threading.Thread(AddressOf StartupPrograms)
             startupThread.Start()
@@ -343,10 +343,10 @@ Public Class frmStartup
         myBounds.Y = myBounds.Y - topLoc
         If shellMode Then
             Dim currentStyle As Integer = GetWindowLong(Me.Handle, -20)
-            currentStyle = currentStyle Or (&H80)
+            currentStyle = currentStyle Or (&H80) Or (&H8000000)
             SetWindowLong(Me.Handle, -20, currentStyle)
+            'SetWindowPos(Me.Handle, 1, 0, 0, 0, 0, SetWindowPosFlags.IgnoreMove Or SetWindowPosFlags.IgnoreResize Or SetWindowPosFlags.DoNotActivate)
             Me.Bounds = myBounds
-            SetWindowPos(Me.Handle, 1, 0, 0, 0, 0, SetWindowPosFlags.IgnoreMove Or SetWindowPosFlags.IgnoreResize Or SetWindowPosFlags.DoNotActivate)
         End If
         pnlBack.Bounds = myBounds
         pnlDesktop.Bounds = Screen.AllScreens(screenindex).WorkingArea
