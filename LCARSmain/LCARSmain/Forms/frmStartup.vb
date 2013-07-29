@@ -170,6 +170,7 @@ Public Class frmStartup
     End Sub
 
     Private Sub frmStartup_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        CheckComponents()
         If Process.GetProcessesByName("LCARSmain").Length > 1 Then
             End
         End If
@@ -478,4 +479,14 @@ Public Class frmStartup
         Next
     End Sub
 
+    Private Sub CheckComponents()
+        'Checks that critical files have not been deleted. Only files required for running and shutting down
+        'LCARSmain.exe are checked.
+        If System.IO.File.Exists(Application.StartupPath & "\LCARS.dll") And System.IO.File.Exists(Application.StartupPath & "\LCARSshutdown.exe") Then
+        Else
+            Microsoft.VisualBasic.MsgBox("Critical files have been deleted. LCARS x32 is either unable to start, or unable to shut down after being started." _
+                                         & "Reinstalling should fix this problem." & vbNewLine & vbNewLine & "Program will exit.", MsgBoxStyle.Critical, "Fatal error")
+            End
+        End If
+    End Sub
 End Class
