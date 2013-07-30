@@ -1,4 +1,24 @@
 ﻿Public Class form1
+#Region " Window Resizing "
+    Dim WithEvents interop As New LCARS.x32Interop
+
+    Private Sub interop_BeepingChanged(ByVal Beeping As Boolean) Handles interop.BeepingChanged
+        LCARS.SetBeeping(Me, Beeping)
+    End Sub
+
+    Private Sub interop_ColorsChanged() Handles interop.ColorsChanged
+        LCARS.UpdateColors(Me)
+    End Sub
+
+    Private Sub interop_LCARSx32Closing() Handles interop.LCARSx32Closing
+        Application.Exit()
+    End Sub
+
+    Private Sub WorkingAreaUpdated(ByVal NewArea As System.Drawing.Rectangle) Handles interop.WorkingAreaChanged
+        Me.Bounds = NewArea
+    End Sub
+
+#End Region
 
     Dim int1 As Integer = 0
     Private Enum exec
@@ -53,7 +73,7 @@
     End Sub
 
     Private Sub FrmMain_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
+        interop.Init()
         Me.Width = Screen.PrimaryScreen.WorkingArea.Width
         Me.Height = Screen.PrimaryScreen.WorkingArea.Height
 
@@ -113,7 +133,7 @@
         End If
 
         CType(TabControl1.SelectedTab.Controls.Item(0), WebBrowser).ScriptErrorsSuppressed = True
-        SetBeeping(GetSetting("LCARS x32", "Application", "ButtonBeep", "TRUE"), Me)
+        LCARS.SetBeeping(Me, GetSetting("LCARS x32", "Application", "ButtonBeep", "TRUE"))
     End Sub
 
     Private Sub browser_newWindow(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs)
@@ -331,12 +351,6 @@
 
     End Sub
 
-    Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
-        If Not Me.Bounds = Screen.PrimaryScreen.WorkingArea Then
-            Me.Bounds = Screen.PrimaryScreen.WorkingArea
-        End If
-    End Sub
-
     Private Sub Arrowbutton1_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Arrowbutton1.Click
 
 
@@ -548,18 +562,5 @@
             FlatButton18.Color = LCARS.LCARScolorStyles.FunctionUnavailable
         End If
 
-    End Sub
-
-    Public Sub SetBeeping(ByVal Enabled As Boolean, ByVal searchContainer As Control)
-
-        For Each myControl As Control In searchContainer.Controls
-            If myControl.GetType().IsSubclassOf(GetType(LCARS.LCARSbuttonClass)) Then
-                CType(myControl, LCARS.LCARSbuttonClass).Beeping = Enabled
-            Else
-                If myControl.Controls.Count > 0 Then
-                    SetBeeping(Enabled, myControl)
-                End If
-            End If
-        Next
     End Sub
 End Class

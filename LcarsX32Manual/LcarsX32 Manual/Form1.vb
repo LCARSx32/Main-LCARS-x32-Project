@@ -1,5 +1,20 @@
 ﻿Option Explicit On
 Public Class Hlpfrm
+#Region " Window Resizing "
+    Dim WithEvents interop As New LCARS.x32Interop
+
+    Private Sub interop_BeepingChanged(ByVal Beeping As Boolean) Handles interop.BeepingChanged
+        LCARS.SetBeeping(Me, Beeping)
+    End Sub
+
+    Private Sub interop_ColorsChanged() Handles interop.ColorsChanged
+        LCARS.UpdateColors(Me)
+    End Sub
+
+    Private Sub interop_LCARSx32Closing() Handles interop.LCARSx32Closing
+        Application.Exit()
+    End Sub
+#End Region
 
     Dim x32hlpx As Integer
     Dim x32hlpy As Integer
@@ -9,13 +24,6 @@ Public Class Hlpfrm
     Dim isMoving As Boolean = False
     Dim isInit As Boolean = False
     Dim oLoc As Point
-
-    'Rusoaica's variables
-    Dim _number_of_pages As Integer
-    'Dim _chapters() As String
-    Dim LCARSbutton As New LCARS.LCARSbuttonClass
-    Dim LCARStype As Type = LCARSbutton.GetType
-
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
@@ -60,14 +68,14 @@ Public Class Hlpfrm
             MsgBox("Manual index file not found. Program will exit.")
             End
         End If
-
+        Dim pageCount As Integer = 0
         Using myReader As New System.IO.StreamReader(directoryPath & "\Index.txt")
             While myReader.Peek() >= 0
                 Dim chapterData() As String = myReader.ReadLine().Split("|")
-                _number_of_pages += 1
+                pageCount += 1
                 Dim ChapterString As New LCARS.LightweightControls.LCFlatButton
                 With ChapterString
-                    .Text = _number_of_pages & ". " & chapterData(0)
+                    .Text = pageCount & ". " & chapterData(0)
                     .Data = directoryPath & "\" & chapterData(1)
                 End With
                 btgChapters.Add(ChapterString)
@@ -75,24 +83,8 @@ Public Class Hlpfrm
 
             End While
         End Using
-        'Start Rusoaica's code
-        'Dim _directory_info As New IO.DirectoryInfo(directoryPath)
-        'Dim _file_info As IO.FileInfo() = _directory_info.GetFiles("*.htm")
-        'Dim _file_info_ref As IO.FileInfo
-        'For Each _file_info_ref In _file_info
-        '    'ReDim Preserve _chapters(_number_of_pages)
-        '    '_chapters(_number_of_pages) = _file_info_ref.FullName
-        '    _number_of_pages += 1
-        '    Dim ChapterString As New LCARS.LightweightControls.LCFlatButton
-        '    With ChapterString
-        '        .Text = _number_of_pages & ". " & _file_info_ref.Name.Remove(_file_info_ref.Name.Length - _file_info_ref.Extension.Length)
-        '        .Data = _file_info_ref.FullName
-        '    End With
-        '    btgChapters.Add(ChapterString)
-        '    AddHandler ChapterString.Click, AddressOf ChapterString_Click
-        'Next
 
-        SetBeeping(GetSetting("LCARS x32", "Application", "ButtonBeep", "TRUE"), Me)
+        LCARS.SetBeeping(Me, GetSetting("LCARS x32", "Application", "ButtonBeep", "TRUE"))
         btgChapters.Items(0).doClick()
     End Sub
 
