@@ -1,0 +1,19 @@
+LCARS x32 Language File
+<Language:"TNG">
+		myStartMenu = "PROGRAM INDEX"
+        myComp = "COMPUTER CORE"
+        mySettings = "PARAMETERS"
+        myEngineering = "ENGINEERING"
+        myModeSelect = "MODE SELECT"
+        myDeactivate = "DEACTIVATE"
+        myAlert = "RED ALERT"
+        myDestruct = "AUTO DESTRUCT"
+        myPhoto = "IMAGING DATABANK"
+        myButtonManager = "CREWMAN PROGRAM PARAMETERS"
+        myUserButtons = "CREWMAN PROGRAMS"
+        myDocuments = "CREWMAN DATA"
+        myPictures = "CREWMAN IMAGES"
+        ShowTrayButton = "ENABLE ICONS"
+        myOSK = "OSK"
+        mySpeech = "VOICE"
+</Language>
