@@ -280,6 +280,10 @@
     <None Include="Resources\box.jpg" />
     <None Include="Resources\095.wav" />
     <Content Include="Resources\computer.wav" />
+    <None Include="Resources\Images\frmmainscreen4.jpg" />
+    <None Include="Resources\Images\frmmainscreen3.jpg" />
+    <None Include="Resources\Images\frmmainscreen2.jpg" />
+    <None Include="Resources\Images\frmmainscreen1.jpg" />
     <None Include="Resources\Please_confirm.wav" />
     <None Include="Resources\folder.bmp" />
   </ItemGroup>
