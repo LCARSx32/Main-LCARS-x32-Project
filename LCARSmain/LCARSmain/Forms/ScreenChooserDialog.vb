@@ -78,22 +78,22 @@ Public Class ScreenChooserDialog
 
     Private Sub ScreenChooserDialog_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Try
-            picScreen1.Image = System.Drawing.Image.FromFile(Application.StartupPath & "\Images\frmmainscreen1.jpg")
+            picScreen1.Image = System.Drawing.Image.FromFile(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\LCARS x32\Images\frmmainscreen1.jpg")
         Catch ex As Exception
             picScreen1.Image = My.Resources.frmmainscreen1
         End Try
         Try
-            picScreen2.Image = System.Drawing.Image.FromFile(Application.StartupPath & "\Images\frmmainscreen2.jpg")
+            picScreen2.Image = System.Drawing.Image.FromFile(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\LCARS x32\Images\frmmainscreen2.jpg")
         Catch ex As Exception
             picScreen2.Image = My.Resources.frmmainscreen2
         End Try
         Try
-            picScreen3.Image = System.Drawing.Image.FromFile(Application.StartupPath & "\Images\frmmainscreen3.jpg")
+            picScreen3.Image = System.Drawing.Image.FromFile(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\LCARS x32\Images\frmmainscreen3.jpg")
         Catch ex As Exception
             picScreen3.Image = My.Resources.frmmainscreen3
         End Try
         Try
-            picScreen4.Image = System.Drawing.Image.FromFile(Application.StartupPath & "\Images\frmmainscreen4.jpg")
+            picScreen4.Image = System.Drawing.Image.FromFile(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\LCARS x32\Images\frmmainscreen4.jpg")
         Catch ex As Exception
             picScreen4.Image = My.Resources.frmmainscreen4
         End Try

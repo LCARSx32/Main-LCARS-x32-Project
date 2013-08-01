@@ -204,14 +204,18 @@ public Class modBusiness
     Public Sub myModeSelectButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         cancelAlert = True
         Application.DoEvents()
+        'Check that the images directory exists. If not, create it.
+        If Not Directory.Exists(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\LCARS x32\Images") Then
+            Directory.CreateDirectory(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\LCARS x32\Images")
+        End If
         'Save screenshot and show the selection form
         Dim screenImage As New Bitmap(My.Computer.Screen.Bounds.Width, My.Computer.Screen.Bounds.Height)
         Dim g As System.Drawing.Graphics = System.Drawing.Graphics.FromImage(screenImage)
         g.CopyFromScreen(New Point(0, 0), New Point(0, 0), New Size(My.Computer.Screen.Bounds.Width, My.Computer.Screen.Bounds.Height))
         Try
-            screenImage.Save(Application.StartupPath & "\Images\" & myForm.Name.ToLower() & ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg)
+            screenImage.Save(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\LCARS x32\Images\" & myForm.Name.ToLower() & ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg)
         Catch ex As Exception
-            'MsgBox(ex.ToString())
+            MsgBox(ex.ToString())
         End Try
         SetParent(hTrayIcons, hTrayParent)
         Dim myChoice As New ScreenChooserDialog
