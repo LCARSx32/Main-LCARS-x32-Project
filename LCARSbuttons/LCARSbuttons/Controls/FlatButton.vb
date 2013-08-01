@@ -45,14 +45,6 @@ Namespace Controls
         End Sub
 #End Region
 
-#Region " Subs "
-
-        Private Sub FlatButton_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Resize
-            Me.lblTextSize = Me.Size
-        End Sub
-
-#End Region
-
 #Region " Draw Flat Button "
 
         Public Overrides Function DrawButton() As Bitmap
@@ -101,6 +93,7 @@ Namespace Controls
             'End Select
 
             'g.DrawString(Me.ButtonText, myfont, Brushes.Black, textLoc.X, textLoc.Y)
+            Me.lblTextSize = Me.Size
             DrawText(g)
             g.Dispose()
             Return mybitmap
