@@ -124,9 +124,6 @@
   <data name="folder" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\img\folder.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="red_alert" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\red_alert.wav;System.IO.MemoryStream, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="federationLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\federation-logo.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -156,5 +153,8 @@
   </data>
   <data name="frmmainscreen4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\frmmainscreen4.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="red_alert" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\red_alert.wav;System.IO.MemoryStream, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

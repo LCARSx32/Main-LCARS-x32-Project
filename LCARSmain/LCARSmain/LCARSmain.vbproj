@@ -273,6 +273,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="bin\Debug\red_alert.wav" />
     <Content Include="img\Federation.ico" />
     <None Include="Resources\010.wav" />
     <Content Include="img\folder.png" />
