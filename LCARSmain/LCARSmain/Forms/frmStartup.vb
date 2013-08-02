@@ -481,10 +481,15 @@ Public Class frmStartup
 
     Private Sub CheckComponents()
         'Checks that critical files have not been deleted. Only files required for running and shutting down
-        'LCARSmain.exe are checked.
-        If System.IO.File.Exists(Application.StartupPath & "\LCARS.dll") And System.IO.File.Exists(Application.StartupPath & "\LCARSshutdown.exe") Then
+        'LCARSmain.exe, or that might be run on startup are checked.
+        If System.IO.File.Exists(Application.StartupPath & "\LCARS.dll") _
+        And System.IO.File.Exists(Application.StartupPath & "\LCARSshutdown.exe") _
+        And System.IO.File.Exists(Application.StartupPath & "\LCARSUpdate.exe") _
+        Then
+            'Do nothing. Nothing is needed.
         Else
-            Microsoft.VisualBasic.MsgBox("Critical files have been deleted. LCARS x32 is either unable to start, or unable to shut down after being started." _
+            'Use standard message box because there's no telling if LCARS.dll was deleted.
+            Microsoft.VisualBasic.MsgBox("Critical files have been deleted. LCARS x32 is either unable to start, or unable to shut down after being started. " _
                                          & "Reinstalling should fix this problem." & vbNewLine & vbNewLine & "Program will exit.", MsgBoxStyle.Critical, "Fatal error")
             End
         End If
