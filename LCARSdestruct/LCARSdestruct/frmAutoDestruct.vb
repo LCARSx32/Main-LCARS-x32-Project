@@ -20,7 +20,7 @@ Public Class frmAutoDestruct
 
 #End Region
 
-    Dim endTime As TimeSpan
+    Dim endTime As DateTime
     Dim ShutdownOption As String
     Dim shutdownOptions As New cWrapExitWindows
 
@@ -49,7 +49,7 @@ Public Class frmAutoDestruct
             My.Computer.Audio.Play(My.Resources._010, AudioPlayMode.Background)
 
             Dim myTime As TimeSpan = New TimeSpan(0, txtHours.Text, txtMinutes.Text, txtSeconds.Text, txtMilliseconds.Text)
-            endTime = Now.TimeOfDay.Add(myTime)
+            endTime = Now.Add(myTime)
             tmrCountdown.Enabled = True
             sbStart.ButtonText = "PAUSE"
         Else
@@ -59,7 +59,7 @@ Public Class frmAutoDestruct
     End Sub
 
     Private Sub tmrCountdown_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrCountdown.Tick
-        Dim timeleft As TimeSpan = endTime.Subtract(Now.TimeOfDay)
+        Dim timeleft As TimeSpan = endTime.Subtract(Now)
         If timeleft > New TimeSpan(0, 0, 0, 0, 0) Then
             txtHours.Text = timeleft.Hours.ToString("00")
             txtMinutes.Text = timeleft.Minutes.ToString("00")
