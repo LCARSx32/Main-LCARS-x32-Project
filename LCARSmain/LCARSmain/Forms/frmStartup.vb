@@ -170,10 +170,10 @@ Public Class frmStartup
     End Sub
 
     Private Sub frmStartup_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        CheckComponents()
         If Process.GetProcessesByName("LCARSmain").Length > 1 Then
             End
         End If
+        CheckComponents()
         If Command().Contains("-u") Then
             Try
                 My.Computer.FileSystem.DeleteFile(My.Computer.FileSystem.SpecialDirectories.Temp & "\runInstallScript.exe")
@@ -184,7 +184,6 @@ Public Class frmStartup
         modSettings.InitializeSettings()
         If Command().Contains("-s") Then
             shellMode = True
-            'Process.Start(System.Environment.GetFolderPath(Environment.SpecialFolder.System) & "\systray.exe")
         End If
         If Not Command().Contains("-L") Then
             If System.IO.File.Exists(Application.StartupPath & "\LCARSLogin.exe") Then
@@ -211,11 +210,8 @@ Public Class frmStartup
         '        End If
         '    Next
         'End If
-        'If Not shellMode Then
         MoveTrayIcons()
-        'End If
 
-        'This has to be after the message is sent to allow for proper resizing
         If GetSetting("LCARS X32", "Application", "Updates", "FALSE") Then
             Process.Start(Application.StartupPath & "\LCARSUpdate.exe", "-s")
         End If
@@ -223,7 +219,6 @@ Public Class frmStartup
         Me.FormBorderStyle = Windows.Forms.FormBorderStyle.None
         If shellMode Then
             Me.Bounds = Screen.AllScreens(screenindex).Bounds
-            'SetWindowPos(Me.Handle, 1, 0, 0, 100, 100, SetWindowPosFlags.IgnoreMove Or SetWindowPosFlags.IgnoreResize)
             Me.SendToBack()
         Else
             Me.Size = New Point(0, 0)
@@ -292,13 +287,10 @@ Public Class frmStartup
             Case Else
                 myForm = New frmFirstRun
         End Select
-        'If Not shellMode Then
         SaveDesktopIcons()
-        'End If
 
         myForm.Show()
         myForm.BringToFront()
-        'SetWindowPos(myForm.Handle, -1, 0, 0, 0, 0, SetWindowPosFlags.IgnoreMove Or SetWindowPosFlags.IgnoreResize)
         If shellMode Then
             Dim startupThread As New Threading.Thread(AddressOf StartupPrograms)
             startupThread.Start()
@@ -346,7 +338,6 @@ Public Class frmStartup
             Dim currentStyle As Integer = GetWindowLong(Me.Handle, -20)
             currentStyle = currentStyle Or (&H80) Or (&H8000000)
             SetWindowLong(Me.Handle, -20, currentStyle)
-            'SetWindowPos(Me.Handle, 1, 0, 0, 0, 0, SetWindowPosFlags.IgnoreMove Or SetWindowPosFlags.IgnoreResize Or SetWindowPosFlags.DoNotActivate)
             Me.Bounds = myBounds
         End If
         pnlBack.Bounds = myBounds
@@ -453,12 +444,16 @@ Public Class frmStartup
         End Select
         If Not GlobalStartPath = "" Then
             For Each myFile As String In System.IO.Directory.GetFiles(GlobalStartPath)
-                progList.Add(myFile)
+                If Not IO.Path.GetFileName(myFile).ToLower() = "desktop.ini" Then
+                    progList.Add(myFile)
+                End If
             Next
         End If
         If Not UserStartPath = "" Then
             For Each myFile As String In System.IO.Directory.GetFiles(UserStartPath)
-                progList.Add(myFile)
+                If Not IO.Path.GetFileName(myFile).ToLower() = "desktop.ini" Then
+                    progList.Add(myFile)
+                End If
             Next
         End If
         'If not enclosed in quotes, do so
