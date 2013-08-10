@@ -453,12 +453,16 @@ Public Class frmStartup
         End Select
         If Not GlobalStartPath = "" Then
             For Each myFile As String In System.IO.Directory.GetFiles(GlobalStartPath)
-                progList.Add(myFile)
+                If Not IO.Path.GetFileName(myFile).ToLower() = "desktop.ini" Then
+                    progList.Add(myFile)
+                End If
             Next
         End If
         If Not UserStartPath = "" Then
             For Each myFile As String In System.IO.Directory.GetFiles(UserStartPath)
-                progList.Add(myFile)
+                If Not IO.Path.GetFileName(myFile).ToLower() = "desktop.ini" Then
+                    progList.Add(myFile)
+                End If
             Next
         End If
         'If not enclosed in quotes, do so
