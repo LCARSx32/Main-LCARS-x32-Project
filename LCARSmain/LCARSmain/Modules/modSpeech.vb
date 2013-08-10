@@ -137,30 +137,27 @@ Module modSpeech
 
         'Load up the speech recognition
         Try
+            Try
+                RemoveHandler Listener.Recognition, AddressOf OnReco
+            Catch ex As Exception
+                'First start, so no problem.
+            End Try
             Listener = Nothing
             vGrammar = Nothing
             SpeechEngine = Nothing
-            If (Listener Is Nothing) Then
-                SpeechEngine = New SpInprocRecognizer
+            SpeechEngine = New SpInprocRecognizer
 
-                Listener = SpeechEngine.CreateRecoContext     'Create a new Reco Context Class
-                Dim myInputs As ISpeechObjectTokens = Listener.Recognizer.GetAudioInputs
-                Listener.Recognizer.AudioInput = myInputs.Item(0) 'use the default audio input device
-                vGrammar = Listener.CreateGrammar(1)              'Setup the Grammar
-                vGrammar.DictationLoad()                       'Load the Grammar
-                vGrammar.CmdLoadFromFile(My.Computer.FileSystem.SpecialDirectories.Temp & "\commands.xml", SpeechLoadOption.SLOStatic)
-                vGrammar.DictationSetState(SpeechRuleState.SGDSInactive)
-                vGrammar.State = SpeechGrammarState.SGSEnabled
-                vGrammar.CmdSetRuleIdState(1, SpeechRuleState.SGDSActive)
-                AddHandler Listener.Recognition, AddressOf OnReco
-                vox = New SpVoice
-            End If
-            ' Listener.Recognizer.State = SpeechRecognizerState.SRSActiveAlways
-            'ComputerSound.Play()
-            'Do Until True = False
-            '    Application.DoEvents()
-            '    Threading.Thread.Sleep(30000)
-            'Loop
+            Listener = SpeechEngine.CreateRecoContext     'Create a new Reco Context Class
+            Dim myInputs As ISpeechObjectTokens = Listener.Recognizer.GetAudioInputs
+            Listener.Recognizer.AudioInput = myInputs.Item(0) 'use the default audio input device
+            vGrammar = Listener.CreateGrammar(1)              'Setup the Grammar
+            vGrammar.DictationLoad()                       'Load the Grammar
+            vGrammar.CmdLoadFromFile(My.Computer.FileSystem.SpecialDirectories.Temp & "\commands.xml", SpeechLoadOption.SLOStatic)
+            vGrammar.DictationSetState(SpeechRuleState.SGDSInactive)
+            vGrammar.State = SpeechGrammarState.SGSEnabled
+            vGrammar.CmdSetRuleIdState(1, SpeechRuleState.SGDSActive)
+            AddHandler Listener.Recognition, AddressOf OnReco
+            vox = New SpVoice
         Catch ex As Exception
             LCARS.UI.MsgBox("Voice commands failed to initialize.  MS Speech may not be installed or working properly.", MsgBoxStyle.OkCancel, "ERROR:")
             Dim myerrorfile As New System.IO.StreamWriter(My.Computer.FileSystem.SpecialDirectories.Desktop & "\Voice error.txt", True)
@@ -176,8 +173,6 @@ Module modSpeech
         Dim recoResult As String = Result.PhraseInfo.GetText 'Create a new string, and assign the recognized text to it.
         With console.lstHistory
             .Items.Add(recoResult.ToUpper())
-            .SelectedIndex = .Items.Count - 1
-            .SelectedIndex = -1
         End With
         Dim command As String = getCommandName(recoResult.ToLower()).ToLower() 'Find the internal name for the command, if existant
         If command = "computer" Then
