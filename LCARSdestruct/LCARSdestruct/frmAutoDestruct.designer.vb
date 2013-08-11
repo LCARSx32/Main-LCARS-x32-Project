@@ -20,22 +20,6 @@ Partial Class frmAutoDestruct
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmAutoDestruct))
-        Dim LcarScolor1 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor2 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor3 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor4 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor5 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor6 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor7 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor8 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor9 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor10 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor11 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor12 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor13 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor14 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor15 As LCARS.LCARScolor = New LCARS.LCARScolor
         Me.txtHours = New System.Windows.Forms.TextBox
         Me.txtMinutes = New System.Windows.Forms.TextBox
         Me.txtSeconds = New System.Windows.Forms.TextBox
@@ -71,6 +55,7 @@ Partial Class frmAutoDestruct
         Me.tbTitle = New LCARS.Controls.TextButton
         Me.FlatButton1 = New LCARS.Controls.FlatButton
         Me.Label7 = New System.Windows.Forms.Label
+        Me.cbAlertType = New System.Windows.Forms.ComboBox
         Me.pnl12hr.SuspendLayout()
         Me.pnl24hr.SuspendLayout()
         Me.SuspendLayout()
@@ -82,7 +67,7 @@ Partial Class frmAutoDestruct
         Me.txtHours.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtHours.Font = New System.Drawing.Font("LCARS", 60.0!)
         Me.txtHours.ForeColor = System.Drawing.Color.Orange
-        Me.txtHours.Location = New System.Drawing.Point(229, 255)
+        Me.txtHours.Location = New System.Drawing.Point(228, 142)
         Me.txtHours.MaxLength = 2
         Me.txtHours.Multiline = True
         Me.txtHours.Name = "txtHours"
@@ -97,7 +82,7 @@ Partial Class frmAutoDestruct
         Me.txtMinutes.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtMinutes.Font = New System.Drawing.Font("LCARS", 60.0!)
         Me.txtMinutes.ForeColor = System.Drawing.Color.Orange
-        Me.txtMinutes.Location = New System.Drawing.Point(367, 255)
+        Me.txtMinutes.Location = New System.Drawing.Point(366, 142)
         Me.txtMinutes.MaxLength = 2
         Me.txtMinutes.Multiline = True
         Me.txtMinutes.Name = "txtMinutes"
@@ -112,7 +97,7 @@ Partial Class frmAutoDestruct
         Me.txtSeconds.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtSeconds.Font = New System.Drawing.Font("LCARS", 60.0!)
         Me.txtSeconds.ForeColor = System.Drawing.Color.Orange
-        Me.txtSeconds.Location = New System.Drawing.Point(508, 255)
+        Me.txtSeconds.Location = New System.Drawing.Point(507, 142)
         Me.txtSeconds.MaxLength = 2
         Me.txtSeconds.Multiline = True
         Me.txtSeconds.Name = "txtSeconds"
@@ -131,7 +116,7 @@ Partial Class frmAutoDestruct
         Me.txtMilliseconds.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtMilliseconds.Font = New System.Drawing.Font("LCARS", 60.0!)
         Me.txtMilliseconds.ForeColor = System.Drawing.Color.Orange
-        Me.txtMilliseconds.Location = New System.Drawing.Point(649, 255)
+        Me.txtMilliseconds.Location = New System.Drawing.Point(648, 142)
         Me.txtMilliseconds.MaxLength = 2
         Me.txtMilliseconds.Multiline = True
         Me.txtMilliseconds.Name = "txtMilliseconds"
@@ -151,7 +136,7 @@ Partial Class frmAutoDestruct
         Me.pnl12hr.Controls.Add(Me.TextBox2)
         Me.pnl12hr.Controls.Add(Me.TextBox3)
         Me.pnl12hr.Controls.Add(Me.TextBox4)
-        Me.pnl12hr.Location = New System.Drawing.Point(213, 184)
+        Me.pnl12hr.Location = New System.Drawing.Point(212, 83)
         Me.pnl12hr.Name = "pnl12hr"
         Me.pnl12hr.Size = New System.Drawing.Size(591, 158)
         Me.pnl12hr.TabIndex = 109
@@ -160,14 +145,12 @@ Partial Class frmAutoDestruct
         'FlatButton5
         '
         Me.FlatButton5.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.FlatButton5.BackgroundImage = CType(resources.GetObject("FlatButton5.BackgroundImage"), System.Drawing.Image)
         Me.FlatButton5.Beeping = True
         Me.FlatButton5.ButtonText = ""
         Me.FlatButton5.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.FlatButton5.ButtonTextHeight = 14
         Me.FlatButton5.Clickable = True
         Me.FlatButton5.Color = LCARS.LCARScolorStyles.Orange
-        Me.FlatButton5.ColorsAvailable = LcarScolor1
         Me.FlatButton5.CustomAlertColor = System.Drawing.Color.Empty
         Me.FlatButton5.Data = Nothing
         Me.FlatButton5.Data2 = Nothing
@@ -187,7 +170,6 @@ Partial Class frmAutoDestruct
         'HalfPillButton1
         '
         Me.HalfPillButton1.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.HalfPillButton1.BackgroundImage = CType(resources.GetObject("HalfPillButton1.BackgroundImage"), System.Drawing.Image)
         Me.HalfPillButton1.Beeping = True
         Me.HalfPillButton1.ButtonStyle = LCARS.Controls.HalfPillButton.LCARSbuttonStyles.PillRight
         Me.HalfPillButton1.ButtonText = "AM"
@@ -195,7 +177,6 @@ Partial Class frmAutoDestruct
         Me.HalfPillButton1.ButtonTextHeight = 18
         Me.HalfPillButton1.Clickable = True
         Me.HalfPillButton1.Color = LCARS.LCARScolorStyles.PrimaryFunction
-        Me.HalfPillButton1.ColorsAvailable = LcarScolor2
         Me.HalfPillButton1.CustomAlertColor = System.Drawing.Color.Empty
         Me.HalfPillButton1.Data = Nothing
         Me.HalfPillButton1.Data2 = Nothing
@@ -216,7 +197,6 @@ Partial Class frmAutoDestruct
         'HalfPillButton2
         '
         Me.HalfPillButton2.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.HalfPillButton2.BackgroundImage = CType(resources.GetObject("HalfPillButton2.BackgroundImage"), System.Drawing.Image)
         Me.HalfPillButton2.Beeping = True
         Me.HalfPillButton2.ButtonStyle = LCARS.Controls.HalfPillButton.LCARSbuttonStyles.PillRight
         Me.HalfPillButton2.ButtonText = "PM"
@@ -224,7 +204,6 @@ Partial Class frmAutoDestruct
         Me.HalfPillButton2.ButtonTextHeight = 18
         Me.HalfPillButton2.Clickable = True
         Me.HalfPillButton2.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.HalfPillButton2.ColorsAvailable = LcarScolor3
         Me.HalfPillButton2.CustomAlertColor = System.Drawing.Color.Empty
         Me.HalfPillButton2.Data = Nothing
         Me.HalfPillButton2.Data2 = Nothing
@@ -332,7 +311,7 @@ Partial Class frmAutoDestruct
         Me.pnl24hr.Controls.Add(Me.TextBox1)
         Me.pnl24hr.Controls.Add(Me.TextBox5)
         Me.pnl24hr.Controls.Add(Me.TextBox6)
-        Me.pnl24hr.Location = New System.Drawing.Point(213, 184)
+        Me.pnl24hr.Location = New System.Drawing.Point(212, 83)
         Me.pnl24hr.Name = "pnl24hr"
         Me.pnl24hr.Size = New System.Drawing.Size(591, 158)
         Me.pnl24hr.TabIndex = 118
@@ -422,14 +401,12 @@ Partial Class frmAutoDestruct
         'fbMode
         '
         Me.fbMode.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.fbMode.BackgroundImage = CType(resources.GetObject("fbMode.BackgroundImage"), System.Drawing.Image)
         Me.fbMode.Beeping = True
         Me.fbMode.ButtonText = "MODE SELECT"
         Me.fbMode.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.fbMode.ButtonTextHeight = 14
         Me.fbMode.Clickable = True
         Me.fbMode.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.fbMode.ColorsAvailable = LcarScolor4
         Me.fbMode.CustomAlertColor = System.Drawing.Color.Empty
         Me.fbMode.Data = Nothing
         Me.fbMode.Data2 = Nothing
@@ -440,7 +417,7 @@ Partial Class frmAutoDestruct
         Me.fbMode.lblTextSize = New System.Drawing.Size(91, 92)
         Me.fbMode.lblTextVisible = True
         Me.fbMode.Lit = True
-        Me.fbMode.Location = New System.Drawing.Point(810, 250)
+        Me.fbMode.Location = New System.Drawing.Point(809, 137)
         Me.fbMode.Name = "fbMode"
         Me.fbMode.RedAlert = LCARS.LCARSalert.Normal
         Me.fbMode.Size = New System.Drawing.Size(91, 92)
@@ -450,14 +427,12 @@ Partial Class frmAutoDestruct
         'fbSelected
         '
         Me.fbSelected.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.fbSelected.BackgroundImage = CType(resources.GetObject("fbSelected.BackgroundImage"), System.Drawing.Image)
         Me.fbSelected.Beeping = True
         Me.fbSelected.ButtonText = ""
         Me.fbSelected.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.fbSelected.ButtonTextHeight = 14
         Me.fbSelected.Clickable = True
         Me.fbSelected.Color = LCARS.LCARScolorStyles.Orange
-        Me.fbSelected.ColorsAvailable = LcarScolor5
         Me.fbSelected.CustomAlertColor = System.Drawing.Color.Empty
         Me.fbSelected.Data = Nothing
         Me.fbSelected.Data2 = Nothing
@@ -468,7 +443,7 @@ Partial Class frmAutoDestruct
         Me.fbSelected.lblTextSize = New System.Drawing.Size(35, 35)
         Me.fbSelected.lblTextVisible = True
         Me.fbSelected.Lit = True
-        Me.fbSelected.Location = New System.Drawing.Point(268, 360)
+        Me.fbSelected.Location = New System.Drawing.Point(267, 247)
         Me.fbSelected.Name = "fbSelected"
         Me.fbSelected.RedAlert = LCARS.LCARSalert.Normal
         Me.fbSelected.Size = New System.Drawing.Size(35, 35)
@@ -477,7 +452,6 @@ Partial Class frmAutoDestruct
         'hpAlarm
         '
         Me.hpAlarm.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.hpAlarm.BackgroundImage = CType(resources.GetObject("hpAlarm.BackgroundImage"), System.Drawing.Image)
         Me.hpAlarm.Beeping = True
         Me.hpAlarm.ButtonStyle = LCARS.Controls.HalfPillButton.LCARSbuttonStyles.PillRight
         Me.hpAlarm.ButtonText = "ALARM"
@@ -485,7 +459,6 @@ Partial Class frmAutoDestruct
         Me.hpAlarm.ButtonTextHeight = 18
         Me.hpAlarm.Clickable = True
         Me.hpAlarm.Color = LCARS.LCARScolorStyles.PrimaryFunction
-        Me.hpAlarm.ColorsAvailable = LcarScolor6
         Me.hpAlarm.CustomAlertColor = System.Drawing.Color.Empty
         Me.hpAlarm.Data = Nothing
         Me.hpAlarm.Data2 = Nothing
@@ -496,7 +469,7 @@ Partial Class frmAutoDestruct
         Me.hpAlarm.lblTextSize = New System.Drawing.Size(133, 35)
         Me.hpAlarm.lblTextVisible = True
         Me.hpAlarm.Lit = True
-        Me.hpAlarm.Location = New System.Drawing.Point(309, 360)
+        Me.hpAlarm.Location = New System.Drawing.Point(308, 247)
         Me.hpAlarm.Name = "hpAlarm"
         Me.hpAlarm.RedAlert = LCARS.LCARSalert.Normal
         Me.hpAlarm.Size = New System.Drawing.Size(133, 35)
@@ -506,7 +479,6 @@ Partial Class frmAutoDestruct
         'hpLogOff
         '
         Me.hpLogOff.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.hpLogOff.BackgroundImage = CType(resources.GetObject("hpLogOff.BackgroundImage"), System.Drawing.Image)
         Me.hpLogOff.Beeping = True
         Me.hpLogOff.ButtonStyle = LCARS.Controls.HalfPillButton.LCARSbuttonStyles.PillRight
         Me.hpLogOff.ButtonText = "LOG OFF"
@@ -514,7 +486,6 @@ Partial Class frmAutoDestruct
         Me.hpLogOff.ButtonTextHeight = 18
         Me.hpLogOff.Clickable = True
         Me.hpLogOff.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.hpLogOff.ColorsAvailable = LcarScolor7
         Me.hpLogOff.CustomAlertColor = System.Drawing.Color.Empty
         Me.hpLogOff.Data = Nothing
         Me.hpLogOff.Data2 = Nothing
@@ -525,7 +496,7 @@ Partial Class frmAutoDestruct
         Me.hpLogOff.lblTextSize = New System.Drawing.Size(133, 35)
         Me.hpLogOff.lblTextVisible = True
         Me.hpLogOff.Lit = True
-        Me.hpLogOff.Location = New System.Drawing.Point(309, 442)
+        Me.hpLogOff.Location = New System.Drawing.Point(308, 329)
         Me.hpLogOff.Name = "hpLogOff"
         Me.hpLogOff.RedAlert = LCARS.LCARSalert.Normal
         Me.hpLogOff.Size = New System.Drawing.Size(133, 35)
@@ -535,7 +506,6 @@ Partial Class frmAutoDestruct
         'hpShutDown
         '
         Me.hpShutDown.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.hpShutDown.BackgroundImage = CType(resources.GetObject("hpShutDown.BackgroundImage"), System.Drawing.Image)
         Me.hpShutDown.Beeping = True
         Me.hpShutDown.ButtonStyle = LCARS.Controls.HalfPillButton.LCARSbuttonStyles.PillRight
         Me.hpShutDown.ButtonText = "SHUT DOWN"
@@ -543,7 +513,6 @@ Partial Class frmAutoDestruct
         Me.hpShutDown.ButtonTextHeight = 18
         Me.hpShutDown.Clickable = True
         Me.hpShutDown.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.hpShutDown.ColorsAvailable = LcarScolor8
         Me.hpShutDown.CustomAlertColor = System.Drawing.Color.Empty
         Me.hpShutDown.Data = Nothing
         Me.hpShutDown.Data2 = Nothing
@@ -554,7 +523,7 @@ Partial Class frmAutoDestruct
         Me.hpShutDown.lblTextSize = New System.Drawing.Size(133, 35)
         Me.hpShutDown.lblTextVisible = True
         Me.hpShutDown.Lit = True
-        Me.hpShutDown.Location = New System.Drawing.Point(309, 401)
+        Me.hpShutDown.Location = New System.Drawing.Point(308, 288)
         Me.hpShutDown.Name = "hpShutDown"
         Me.hpShutDown.RedAlert = LCARS.LCARSalert.Normal
         Me.hpShutDown.Size = New System.Drawing.Size(133, 35)
@@ -564,14 +533,12 @@ Partial Class frmAutoDestruct
         'FlatButton4
         '
         Me.FlatButton4.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.FlatButton4.BackgroundImage = CType(resources.GetObject("FlatButton4.BackgroundImage"), System.Drawing.Image)
         Me.FlatButton4.Beeping = False
         Me.FlatButton4.ButtonText = "MILLISECONDS"
         Me.FlatButton4.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.FlatButton4.ButtonTextHeight = 14
         Me.FlatButton4.Clickable = False
         Me.FlatButton4.Color = LCARS.LCARScolorStyles.StaticBlue
-        Me.FlatButton4.ColorsAvailable = LcarScolor9
         Me.FlatButton4.CustomAlertColor = System.Drawing.Color.Empty
         Me.FlatButton4.Data = Nothing
         Me.FlatButton4.Data2 = Nothing
@@ -582,7 +549,7 @@ Partial Class frmAutoDestruct
         Me.FlatButton4.lblTextSize = New System.Drawing.Size(160, 92)
         Me.FlatButton4.lblTextVisible = True
         Me.FlatButton4.Lit = True
-        Me.FlatButton4.Location = New System.Drawing.Point(644, 250)
+        Me.FlatButton4.Location = New System.Drawing.Point(643, 137)
         Me.FlatButton4.Name = "FlatButton4"
         Me.FlatButton4.RedAlert = LCARS.LCARSalert.Normal
         Me.FlatButton4.Size = New System.Drawing.Size(160, 92)
@@ -592,7 +559,6 @@ Partial Class frmAutoDestruct
         'sbCancel
         '
         Me.sbCancel.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.sbCancel.BackgroundImage = CType(resources.GetObject("sbCancel.BackgroundImage"), System.Drawing.Image)
         Me.sbCancel.Beeping = False
         Me.sbCancel.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbCancel.ButtonText = "CANCEL"
@@ -600,7 +566,6 @@ Partial Class frmAutoDestruct
         Me.sbCancel.ButtonTextHeight = 22
         Me.sbCancel.Clickable = True
         Me.sbCancel.Color = LCARS.LCARScolorStyles.PrimaryFunction
-        Me.sbCancel.ColorsAvailable = LcarScolor10
         Me.sbCancel.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbCancel.Data = Nothing
         Me.sbCancel.Data2 = Nothing
@@ -611,7 +576,7 @@ Partial Class frmAutoDestruct
         Me.sbCancel.lblTextSize = New System.Drawing.Size(86, 49)
         Me.sbCancel.lblTextVisible = True
         Me.sbCancel.Lit = True
-        Me.sbCancel.Location = New System.Drawing.Point(644, 360)
+        Me.sbCancel.Location = New System.Drawing.Point(643, 247)
         Me.sbCancel.Name = "sbCancel"
         Me.sbCancel.RedAlert = LCARS.LCARSalert.Normal
         Me.sbCancel.Size = New System.Drawing.Size(135, 49)
@@ -621,7 +586,6 @@ Partial Class frmAutoDestruct
         'sbStart
         '
         Me.sbStart.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.sbStart.BackgroundImage = CType(resources.GetObject("sbStart.BackgroundImage"), System.Drawing.Image)
         Me.sbStart.Beeping = False
         Me.sbStart.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbStart.ButtonText = "START"
@@ -629,7 +593,6 @@ Partial Class frmAutoDestruct
         Me.sbStart.ButtonTextHeight = 22
         Me.sbStart.Clickable = True
         Me.sbStart.Color = LCARS.LCARScolorStyles.FunctionOffline
-        Me.sbStart.ColorsAvailable = LcarScolor11
         Me.sbStart.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbStart.Data = Nothing
         Me.sbStart.Data2 = Nothing
@@ -640,7 +603,7 @@ Partial Class frmAutoDestruct
         Me.sbStart.lblTextSize = New System.Drawing.Size(86, 49)
         Me.sbStart.lblTextVisible = True
         Me.sbStart.Lit = True
-        Me.sbStart.Location = New System.Drawing.Point(503, 360)
+        Me.sbStart.Location = New System.Drawing.Point(502, 247)
         Me.sbStart.Name = "sbStart"
         Me.sbStart.RedAlert = LCARS.LCARSalert.Normal
         Me.sbStart.Size = New System.Drawing.Size(135, 49)
@@ -650,14 +613,12 @@ Partial Class frmAutoDestruct
         'FlatButton3
         '
         Me.FlatButton3.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.FlatButton3.BackgroundImage = CType(resources.GetObject("FlatButton3.BackgroundImage"), System.Drawing.Image)
         Me.FlatButton3.Beeping = False
         Me.FlatButton3.ButtonText = "SECONDS"
         Me.FlatButton3.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.FlatButton3.ButtonTextHeight = 14
         Me.FlatButton3.Clickable = False
         Me.FlatButton3.Color = LCARS.LCARScolorStyles.StaticBlue
-        Me.FlatButton3.ColorsAvailable = LcarScolor12
         Me.FlatButton3.CustomAlertColor = System.Drawing.Color.Empty
         Me.FlatButton3.Data = Nothing
         Me.FlatButton3.Data2 = Nothing
@@ -668,7 +629,7 @@ Partial Class frmAutoDestruct
         Me.FlatButton3.lblTextSize = New System.Drawing.Size(135, 92)
         Me.FlatButton3.lblTextVisible = True
         Me.FlatButton3.Lit = True
-        Me.FlatButton3.Location = New System.Drawing.Point(503, 250)
+        Me.FlatButton3.Location = New System.Drawing.Point(502, 137)
         Me.FlatButton3.Name = "FlatButton3"
         Me.FlatButton3.RedAlert = LCARS.LCARSalert.Normal
         Me.FlatButton3.Size = New System.Drawing.Size(135, 92)
@@ -678,14 +639,12 @@ Partial Class frmAutoDestruct
         'FlatButton2
         '
         Me.FlatButton2.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.FlatButton2.BackgroundImage = CType(resources.GetObject("FlatButton2.BackgroundImage"), System.Drawing.Image)
         Me.FlatButton2.Beeping = False
         Me.FlatButton2.ButtonText = "MINUTES"
         Me.FlatButton2.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.FlatButton2.ButtonTextHeight = 14
         Me.FlatButton2.Clickable = False
         Me.FlatButton2.Color = LCARS.LCARScolorStyles.StaticBlue
-        Me.FlatButton2.ColorsAvailable = LcarScolor13
         Me.FlatButton2.CustomAlertColor = System.Drawing.Color.Empty
         Me.FlatButton2.Data = Nothing
         Me.FlatButton2.Data2 = Nothing
@@ -696,7 +655,7 @@ Partial Class frmAutoDestruct
         Me.FlatButton2.lblTextSize = New System.Drawing.Size(135, 92)
         Me.FlatButton2.lblTextVisible = True
         Me.FlatButton2.Lit = True
-        Me.FlatButton2.Location = New System.Drawing.Point(362, 250)
+        Me.FlatButton2.Location = New System.Drawing.Point(361, 137)
         Me.FlatButton2.Name = "FlatButton2"
         Me.FlatButton2.RedAlert = LCARS.LCARSalert.Normal
         Me.FlatButton2.Size = New System.Drawing.Size(135, 92)
@@ -707,7 +666,6 @@ Partial Class frmAutoDestruct
         '
         Me.tbTitle.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbTitle.BackgroundImage = CType(resources.GetObject("tbTitle.BackgroundImage"), System.Drawing.Image)
         Me.tbTitle.Beeping = True
         Me.tbTitle.ButtonText = "INITIATE AUTO DESTRUCT SEQUENCE"
         Me.tbTitle.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -715,7 +673,6 @@ Partial Class frmAutoDestruct
         Me.tbTitle.ButtonType = LCARS.Controls.TextButton.TextButtonType.DoublePills
         Me.tbTitle.Clickable = False
         Me.tbTitle.Color = LCARS.LCARScolorStyles.FunctionOffline
-        Me.tbTitle.ColorsAvailable = LcarScolor14
         Me.tbTitle.CustomAlertColor = System.Drawing.Color.Empty
         Me.tbTitle.Data = Nothing
         Me.tbTitle.Data2 = Nothing
@@ -729,21 +686,19 @@ Partial Class frmAutoDestruct
         Me.tbTitle.Location = New System.Drawing.Point(5, 5)
         Me.tbTitle.Name = "tbTitle"
         Me.tbTitle.RedAlert = LCARS.LCARSalert.Normal
-        Me.tbTitle.Size = New System.Drawing.Size(1014, 35)
+        Me.tbTitle.Size = New System.Drawing.Size(1013, 35)
         Me.tbTitle.TabIndex = 93
         Me.tbTitle.Text = "INITIATE AUTO DESTRUCT SEQUENCE"
         '
         'FlatButton1
         '
         Me.FlatButton1.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.FlatButton1.BackgroundImage = CType(resources.GetObject("FlatButton1.BackgroundImage"), System.Drawing.Image)
         Me.FlatButton1.Beeping = False
         Me.FlatButton1.ButtonText = "HOURS"
         Me.FlatButton1.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.FlatButton1.ButtonTextHeight = 14
         Me.FlatButton1.Clickable = False
         Me.FlatButton1.Color = LCARS.LCARScolorStyles.StaticBlue
-        Me.FlatButton1.ColorsAvailable = LcarScolor15
         Me.FlatButton1.CustomAlertColor = System.Drawing.Color.Empty
         Me.FlatButton1.Data = Nothing
         Me.FlatButton1.Data2 = Nothing
@@ -754,7 +709,7 @@ Partial Class frmAutoDestruct
         Me.FlatButton1.lblTextSize = New System.Drawing.Size(135, 92)
         Me.FlatButton1.lblTextVisible = True
         Me.FlatButton1.Lit = True
-        Me.FlatButton1.Location = New System.Drawing.Point(221, 250)
+        Me.FlatButton1.Location = New System.Drawing.Point(220, 137)
         Me.FlatButton1.Name = "FlatButton1"
         Me.FlatButton1.RedAlert = LCARS.LCARSalert.Normal
         Me.FlatButton1.Size = New System.Drawing.Size(135, 92)
@@ -767,18 +722,34 @@ Partial Class frmAutoDestruct
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("LCARS", 36.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7.ForeColor = System.Drawing.Color.Orange
-        Me.Label7.Location = New System.Drawing.Point(220, 193)
+        Me.Label7.Location = New System.Drawing.Point(219, 80)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(231, 54)
         Me.Label7.TabIndex = 115
         Me.Label7.Text = "TIME REMAINING:"
+        '
+        'cbAlertType
+        '
+        Me.cbAlertType.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.cbAlertType.BackColor = System.Drawing.Color.Black
+        Me.cbAlertType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbAlertType.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cbAlertType.Font = New System.Drawing.Font("LCARS", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbAlertType.ForeColor = System.Drawing.Color.Orange
+        Me.cbAlertType.FormattingEnabled = True
+        Me.cbAlertType.Location = New System.Drawing.Point(100, 247)
+        Me.cbAlertType.Name = "cbAlertType"
+        Me.cbAlertType.Size = New System.Drawing.Size(161, 36)
+        Me.cbAlertType.TabIndex = 119
+        Me.cbAlertType.Visible = False
         '
         'frmAutoDestruct
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Black
-        Me.ClientSize = New System.Drawing.Size(1024, 768)
+        Me.ClientSize = New System.Drawing.Size(1023, 543)
+        Me.Controls.Add(Me.cbAlertType)
         Me.Controls.Add(Me.pnl24hr)
         Me.Controls.Add(Me.pnl12hr)
         Me.Controls.Add(Me.Label7)
@@ -844,4 +815,5 @@ Partial Class frmAutoDestruct
     Friend WithEvents TextBox5 As System.Windows.Forms.TextBox
     Friend WithEvents TextBox6 As System.Windows.Forms.TextBox
     Friend WithEvents Label7 As System.Windows.Forms.Label
+    Friend WithEvents cbAlertType As System.Windows.Forms.ComboBox
 End Class

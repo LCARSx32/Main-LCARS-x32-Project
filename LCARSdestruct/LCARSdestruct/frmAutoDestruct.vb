@@ -23,7 +23,7 @@ Public Class frmAutoDestruct
     Dim endTime As DateTime
     Dim ShutdownOption As String
     Dim shutdownOptions As New cWrapExitWindows
-
+    Dim alertList As List(Of String)
     Private Sub sbCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbCancel.Click
         tmrCountdown.Enabled = False
         LCARS.Alerts.DeactivateAlert(Me.Handle)
@@ -78,7 +78,7 @@ Public Class frmAutoDestruct
                 Case "logoff"
                     shutDownOptions.ExitWindows(cWrapExitWindows.Action.LogOff)
                 Case "alarm"
-                    LCARS.Alerts.ActivateAlert("Red", Me.Handle)
+                    LCARS.Alerts.ActivateAlert(alertList(cbAlertType.SelectedIndex), Me.Handle)
             End Select
         End If
     End Sub
@@ -90,12 +90,17 @@ Public Class frmAutoDestruct
         hpShutDown.Color = LCARS.LCARScolorStyles.PrimaryFunction
         hpLogOff.Color = LCARS.LCARScolorStyles.SystemFunction
         hpAlarm.Color = LCARS.LCARScolorStyles.SystemFunction
+        cbAlertType.Visible = False
     End Sub
 
     Private Sub frmAutoDestruct_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         interop.Init()
         ShutdownOption = GetSetting("LCARS x32", "Application", "AutoDestructOption", "alarm")
-
+        alertList = LCARS.GetAllAlertNames()
+        For Each myName As String In alertList
+            cbAlertType.Items.Add(myName & " Alert")
+        Next
+        cbAlertType.SelectedIndex = 0
         Select Case ShutdownOption.ToLower
             Case "shutdown"
                 hpShutDown_Click(sender, e)
@@ -116,6 +121,7 @@ Public Class frmAutoDestruct
         hpShutDown.Color = LCARS.LCARScolorStyles.SystemFunction
         hpLogOff.Color = LCARS.LCARScolorStyles.PrimaryFunction
         hpAlarm.Color = LCARS.LCARScolorStyles.SystemFunction
+        cbAlertType.Visible = False
     End Sub
 
     Private Sub hpAlarm_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles hpAlarm.Click
@@ -125,6 +131,7 @@ Public Class frmAutoDestruct
         hpShutDown.Color = LCARS.LCARScolorStyles.SystemFunction
         hpLogOff.Color = LCARS.LCARScolorStyles.SystemFunction
         hpAlarm.Color = LCARS.LCARScolorStyles.PrimaryFunction
+        cbAlertType.Visible = True
     End Sub
 
     Private Sub fbMode_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbMode.Click
