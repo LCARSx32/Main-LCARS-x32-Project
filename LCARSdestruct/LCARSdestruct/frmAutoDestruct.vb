@@ -1,3 +1,5 @@
+Imports LCARS.UI
+
 Public Class frmAutoDestruct
 #Region " Window Resizing "
     Dim WithEvents interop As New LCARS.x32Interop
@@ -44,7 +46,10 @@ Public Class frmAutoDestruct
         If txtMilliseconds.Text = "" Then
             txtMilliseconds.Text = "00"
         End If
-
+        If txtExternal.Text = "" And ShutdownOption.ToLower() = "external" Then
+            MsgBox("No external command has been provided.")
+            Exit Sub
+        End If
         If sbStart.ButtonText = "START" Then
             My.Computer.Audio.Play(My.Resources._010, AudioPlayMode.Background)
 
@@ -74,9 +79,9 @@ Public Class frmAutoDestruct
             tmrCountdown.Enabled = False
             Select Case ShutdownOption.ToLower
                 Case "shutdown"
-                    shutDownOptions.ExitWindows(cWrapExitWindows.Action.Shutdown)
+                    shutdownOptions.ExitWindows(cWrapExitWindows.Action.Shutdown)
                 Case "logoff"
-                    shutDownOptions.ExitWindows(cWrapExitWindows.Action.LogOff)
+                    shutdownOptions.ExitWindows(cWrapExitWindows.Action.LogOff)
                 Case "alarm"
                     Try
                         LCARS.Alerts.ActivateAlert(alertList(cbAlertType.SelectedIndex), Me.Handle)
@@ -85,6 +90,11 @@ Public Class frmAutoDestruct
                         MsgBox("Alert was not found")
                     End Try
                 Case "external"
+                    Try
+                        Shell(txtExternal.Text, AppWinStyle.NormalFocus, False)
+                    Catch ex As Exception
+                        MsgBox("Error starting command")
+                    End Try
             End Select
         End If
     End Sub
@@ -96,7 +106,9 @@ Public Class frmAutoDestruct
         hpShutDown.Color = LCARS.LCARScolorStyles.PrimaryFunction
         hpLogOff.Color = LCARS.LCARScolorStyles.SystemFunction
         hpAlarm.Color = LCARS.LCARScolorStyles.SystemFunction
+        hpExternal.Color = LCARS.LCARScolorStyles.SystemFunction
         cbAlertType.Visible = False
+        txtExternal.Visible = False
     End Sub
 
     Private Sub frmAutoDestruct_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -114,8 +126,11 @@ Public Class frmAutoDestruct
                 hpLogOff_Click(sender, e)
             Case "alarm"
                 hpAlarm_Click(sender, e)
+            Case "external"
+                hpExternal_Click(sender, e)
         End Select
-
+        txtExternal.Text = GetSetting("LCARS x32", "Application", "AutoDestructCommand", "")
+        AddHandler txtExternal.TextChanged, AddressOf txtExternal_TextChanged
         Me.Bounds = Screen.PrimaryScreen.WorkingArea
         Application.DoEvents()
 
@@ -127,7 +142,9 @@ Public Class frmAutoDestruct
         hpShutDown.Color = LCARS.LCARScolorStyles.SystemFunction
         hpLogOff.Color = LCARS.LCARScolorStyles.PrimaryFunction
         hpAlarm.Color = LCARS.LCARScolorStyles.SystemFunction
+        hpExternal.Color = LCARS.LCARScolorStyles.SystemFunction
         cbAlertType.Visible = False
+        txtExternal.Visible = False
     End Sub
 
     Private Sub hpAlarm_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles hpAlarm.Click
@@ -137,7 +154,9 @@ Public Class frmAutoDestruct
         hpShutDown.Color = LCARS.LCARScolorStyles.SystemFunction
         hpLogOff.Color = LCARS.LCARScolorStyles.SystemFunction
         hpAlarm.Color = LCARS.LCARScolorStyles.PrimaryFunction
+        hpExternal.Color = LCARS.LCARScolorStyles.SystemFunction
         cbAlertType.Visible = True
+        txtExternal.Visible = False
     End Sub
 
     Private Sub fbMode_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbMode.Click
@@ -149,5 +168,21 @@ Public Class frmAutoDestruct
         Else
             pnl12hr.Visible = True
         End If
+    End Sub
+
+    Private Sub hpExternal_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles hpExternal.Click
+        fbSelected.Top = hpExternal.Top
+        ShutdownOption = "External"
+        SaveSetting("LCARS x32", "Application", "AutoDestructOption", ShutdownOption)
+        hpShutDown.Color = LCARS.LCARScolorStyles.SystemFunction
+        hpLogOff.Color = LCARS.LCARScolorStyles.SystemFunction
+        hpAlarm.Color = LCARS.LCARScolorStyles.SystemFunction
+        hpExternal.Color = LCARS.LCARScolorStyles.PrimaryFunction
+        cbAlertType.Visible = False
+        txtExternal.Visible = True
+    End Sub
+
+    Private Sub txtExternal_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+        SaveSetting("LCARS x32", "Application", "AutoDestructCommand", txtExternal.Text)
     End Sub
 End Class

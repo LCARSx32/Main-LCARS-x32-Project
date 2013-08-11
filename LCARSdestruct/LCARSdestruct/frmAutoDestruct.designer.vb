@@ -56,6 +56,8 @@ Partial Class frmAutoDestruct
         Me.FlatButton1 = New LCARS.Controls.FlatButton
         Me.Label7 = New System.Windows.Forms.Label
         Me.cbAlertType = New System.Windows.Forms.ComboBox
+        Me.hpExternal = New LCARS.Controls.HalfPillButton
+        Me.txtExternal = New System.Windows.Forms.TextBox
         Me.pnl12hr.SuspendLayout()
         Me.pnl24hr.SuspendLayout()
         Me.SuspendLayout()
@@ -743,12 +745,53 @@ Partial Class frmAutoDestruct
         Me.cbAlertType.TabIndex = 119
         Me.cbAlertType.Visible = False
         '
+        'hpExternal
+        '
+        Me.hpExternal.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.hpExternal.Beeping = False
+        Me.hpExternal.ButtonStyle = LCARS.Controls.HalfPillButton.LCARSbuttonStyles.PillRight
+        Me.hpExternal.ButtonText = "EXTERNAL"
+        Me.hpExternal.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.hpExternal.ButtonTextHeight = 18
+        Me.hpExternal.Clickable = True
+        Me.hpExternal.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.hpExternal.CustomAlertColor = System.Drawing.Color.Empty
+        Me.hpExternal.Data = Nothing
+        Me.hpExternal.Data2 = Nothing
+        Me.hpExternal.FlashInterval = 500
+        Me.hpExternal.holdDraw = False
+        Me.hpExternal.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
+        Me.hpExternal.lblTextLoc = New System.Drawing.Point(0, 0)
+        Me.hpExternal.lblTextSize = New System.Drawing.Size(116, 35)
+        Me.hpExternal.lblTextVisible = True
+        Me.hpExternal.Lit = True
+        Me.hpExternal.Location = New System.Drawing.Point(308, 370)
+        Me.hpExternal.Name = "hpExternal"
+        Me.hpExternal.RedAlert = LCARS.LCARSalert.Normal
+        Me.hpExternal.Size = New System.Drawing.Size(133, 35)
+        Me.hpExternal.TabIndex = 120
+        Me.hpExternal.Text = "EXTERNAL"
+        '
+        'txtExternal
+        '
+        Me.txtExternal.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.txtExternal.BackColor = System.Drawing.Color.Black
+        Me.txtExternal.Font = New System.Drawing.Font("LCARS", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtExternal.ForeColor = System.Drawing.Color.Orange
+        Me.txtExternal.Location = New System.Drawing.Point(100, 370)
+        Me.txtExternal.Name = "txtExternal"
+        Me.txtExternal.Size = New System.Drawing.Size(160, 35)
+        Me.txtExternal.TabIndex = 121
+        Me.txtExternal.Visible = False
+        '
         'frmAutoDestruct
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Black
         Me.ClientSize = New System.Drawing.Size(1023, 543)
+        Me.Controls.Add(Me.txtExternal)
+        Me.Controls.Add(Me.hpExternal)
         Me.Controls.Add(Me.cbAlertType)
         Me.Controls.Add(Me.pnl24hr)
         Me.Controls.Add(Me.pnl12hr)
@@ -816,4 +859,6 @@ Partial Class frmAutoDestruct
     Friend WithEvents TextBox6 As System.Windows.Forms.TextBox
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents cbAlertType As System.Windows.Forms.ComboBox
+    Friend WithEvents hpExternal As LCARS.Controls.HalfPillButton
+    Friend WithEvents txtExternal As System.Windows.Forms.TextBox
 End Class
