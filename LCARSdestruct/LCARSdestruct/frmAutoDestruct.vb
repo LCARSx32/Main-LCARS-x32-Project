@@ -78,7 +78,13 @@ Public Class frmAutoDestruct
                 Case "logoff"
                     shutDownOptions.ExitWindows(cWrapExitWindows.Action.LogOff)
                 Case "alarm"
-                    LCARS.Alerts.ActivateAlert(alertList(cbAlertType.SelectedIndex), Me.Handle)
+                    Try
+                        LCARS.Alerts.ActivateAlert(alertList(cbAlertType.SelectedIndex), Me.Handle)
+                    Catch ex As Exception
+                        LCARS.Alerts.ActivateAlert(0, Me.Handle)
+                        MsgBox("Alert was not found")
+                    End Try
+                Case "external"
             End Select
         End If
     End Sub
