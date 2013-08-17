@@ -106,5 +106,51 @@ Namespace LightweightControls
                 End If
             End Set
         End Property
+
+#Region " Conversion "
+        Public Overloads Shared Widening Operator CType(ByVal o As LCStandardButton) As LCARS.Controls.StandardButton
+            Dim newButton As New LCARS.Controls.StandardButton
+            newButton.Text = o.Text
+            newButton.Bounds = o.Bounds
+            newButton.Data = o.Data
+            newButton.Data2 = o.Data2
+            newButton.ColorsAvailable = o.ColorsAvailable
+            newButton.Color = o.Color
+            newButton.AutoEllipsis = o.AutoEllipsis
+            newButton.ButtonTextAlign = o.TextAlign
+            newButton.Clickable = o.Clickable
+            newButton.Flash = o.Flashing
+            newButton.FlashInterval = CInt(o.FlashInterval)
+            newButton.Font = o.Font
+            newButton.holdDraw = o.HoldDraw
+            newButton.CustomAlertColor = o.CustomAlertColor
+            newButton.RedAlert = o.RedAlert
+            newButton._ForceCaps = o.ForceCaps
+            newButton.ButtonStyle = o.ButtonStyle
+            Return newButton
+        End Operator
+        Public Overloads Shared Narrowing Operator CType(ByVal o As LCARS.Controls.StandardButton) As LCStandardButton
+            Dim newButton As New LCStandardButton
+            newButton.Text = o.Text
+            newButton.Bounds = o.Bounds
+            newButton.Data = o.Data
+            newButton.Data2 = o.Data2
+            newButton.ColorsAvailable = o.ColorsAvailable
+            newButton.Color = o.Color
+            newButton.AutoEllipsis = o.AutoEllipsis
+            newButton.TextAlign = o.ButtonTextAlign
+            newButton.Clickable = o.Clickable
+            newButton.Flashing = o.Flash
+            newButton.FlashInterval = CInt(o.FlashInterval)
+            newButton.Font = o.Font
+            newButton.HoldDraw = o.holdDraw
+            newButton.CustomAlertColor = o.CustomAlertColor
+            newButton.RedAlert = o.RedAlert
+            newButton.ForceCaps = o._ForceCaps
+            newButton.ButtonStyle = o.ButtonStyle
+            Return newButton
+        End Operator
+#End Region
     End Class
+
 End Namespace

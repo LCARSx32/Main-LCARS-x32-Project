@@ -2,6 +2,7 @@
 Imports System.Windows.Forms
 
 Namespace Controls
+    <System.ComponentModel.Designer(GetType(WindowlessDesigner))> _
     Public Class WindowlessContainer
         Inherits System.Windows.Forms.Control
         Implements LCARS.IColorable, IBeeping
@@ -180,5 +181,15 @@ Namespace Controls
             End Set
         End Property
 #End Region
+    End Class
+
+    Public Class WindowlessDesigner
+        Inherits System.Windows.Forms.Design.ControlDesigner
+
+        Protected Overrides Sub OnPaintAdornments(ByVal pe As System.Windows.Forms.PaintEventArgs)
+            pe.Graphics.DrawRectangle(Pens.Cyan, 0, 0, Me.Control.Size.Width - 1, Me.Control.Size.Height - 1)
+
+            MyBase.OnPaintAdornments(pe)
+        End Sub
     End Class
 End Namespace

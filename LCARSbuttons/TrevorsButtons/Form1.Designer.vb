@@ -22,42 +22,37 @@ Partial Class Form1
     'Do not modify it using the code editor.
     '<System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim LcarScolor6 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor7 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor5 As LCARS.LCARScolor = New LCARS.LCARScolor
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim LcarScolor1 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor2 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Me.StandardButton1 = New LCARS.Controls.StandardButton
-        Me.FlatButton1 = New LCARS.Controls.FlatButton
+        Dim LcarScolor4 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Me.Panel1 = New System.Windows.Forms.Panel
         Me.Windowless = New LCARS.Controls.WindowlessContainer
-        Me.myGrid = New LCARS.Controls.ButtonGrid
+        Me.FlatButton1 = New LCARS.Controls.FlatButton
+        Me.FlatButton2 = New LCARS.Controls.FlatButton
+        Me.StandardButton1 = New LCARS.Controls.StandardButton
+        Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
-        'StandardButton1
+        'Panel1
         '
-        Me.StandardButton1.BackgroundImage = CType(resources.GetObject("StandardButton1.BackgroundImage"), System.Drawing.Image)
-        Me.StandardButton1.Beeping = False
-        Me.StandardButton1.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquareSlant
-        Me.StandardButton1.ButtonText = "STANDARDBUTTON1"
-        Me.StandardButton1.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.StandardButton1.ButtonTextHeight = 14
-        Me.StandardButton1.Clickable = True
-        Me.StandardButton1.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.StandardButton1.ColorsAvailable = LcarScolor1
-        Me.StandardButton1.CustomAlertColor = System.Drawing.Color.Empty
-        Me.StandardButton1.Data = Nothing
-        Me.StandardButton1.Data2 = Nothing
-        Me.StandardButton1.FlashInterval = 500
-        Me.StandardButton1.holdDraw = False
-        Me.StandardButton1.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
-        Me.StandardButton1.lblTextLoc = New System.Drawing.Point(53, 0)
-        Me.StandardButton1.lblTextSize = New System.Drawing.Size(107, 43)
-        Me.StandardButton1.lblTextVisible = True
-        Me.StandardButton1.Lit = True
-        Me.StandardButton1.Location = New System.Drawing.Point(232, 12)
-        Me.StandardButton1.Name = "StandardButton1"
-        Me.StandardButton1.RedAlert = LCARS.LCARSalert.Normal
-        Me.StandardButton1.Size = New System.Drawing.Size(213, 43)
-        Me.StandardButton1.TabIndex = 2
-        Me.StandardButton1.Text = "STANDARDBUTTON1"
+        Me.Panel1.Controls.Add(Me.StandardButton1)
+        Me.Panel1.Controls.Add(Me.FlatButton2)
+        Me.Panel1.Location = New System.Drawing.Point(13, 68)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(432, 204)
+        Me.Panel1.TabIndex = 4
+        '
+        'Windowless
+        '
+        Me.Windowless.Beeping = False
+        Me.Windowless.ColorsAvailable = LcarScolor6
+        Me.Windowless.Location = New System.Drawing.Point(12, 288)
+        Me.Windowless.Name = "Windowless"
+        Me.Windowless.Size = New System.Drawing.Size(757, 245)
+        Me.Windowless.TabIndex = 3
+        Me.Windowless.Text = "WindowlessContainer1"
         '
         'FlatButton1
         '
@@ -68,7 +63,7 @@ Partial Class Form1
         Me.FlatButton1.ButtonTextHeight = 14
         Me.FlatButton1.Clickable = True
         Me.FlatButton1.Color = LCARS.LCARScolorStyles.FunctionUnavailable
-        Me.FlatButton1.ColorsAvailable = LcarScolor2
+        Me.FlatButton1.ColorsAvailable = LcarScolor7
         Me.FlatButton1.CustomAlertColor = System.Drawing.Color.Empty
         Me.FlatButton1.Data = Nothing
         Me.FlatButton1.Data2 = Nothing
@@ -86,26 +81,60 @@ Partial Class Form1
         Me.FlatButton1.TabIndex = 1
         Me.FlatButton1.Text = "STANDARD"
         '
-        'Windowless
+        'FlatButton2
         '
-        Me.Windowless.Location = New System.Drawing.Point(12, 288)
-        Me.Windowless.Name = "Windowless"
-        Me.Windowless.Size = New System.Drawing.Size(757, 245)
-        Me.Windowless.TabIndex = 3
-        Me.Windowless.Text = "WindowlessContainer1"
+        Me.FlatButton2.BackgroundImage = CType(resources.GetObject("FlatButton2.BackgroundImage"), System.Drawing.Image)
+        Me.FlatButton2.Beeping = False
+        Me.FlatButton2.ButtonText = "FLATBUTTON2"
+        Me.FlatButton2.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.FlatButton2.ButtonTextHeight = 14
+        Me.FlatButton2.Clickable = True
+        Me.FlatButton2.Color = LCARS.LCARScolorStyles.MiscFunction
+        Me.FlatButton2.ColorsAvailable = LcarScolor5
+        Me.FlatButton2.CustomAlertColor = System.Drawing.Color.Empty
+        Me.FlatButton2.Data = Nothing
+        Me.FlatButton2.Data2 = Nothing
+        Me.FlatButton2.FlashInterval = 500
+        Me.FlatButton2.holdDraw = False
+        Me.FlatButton2.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
+        Me.FlatButton2.lblTextLoc = New System.Drawing.Point(0, 0)
+        Me.FlatButton2.lblTextSize = New System.Drawing.Size(200, 100)
+        Me.FlatButton2.lblTextVisible = True
+        Me.FlatButton2.Lit = True
+        Me.FlatButton2.Location = New System.Drawing.Point(3, 3)
+        Me.FlatButton2.Name = "FlatButton2"
+        Me.FlatButton2.RedAlert = LCARS.LCARSalert.Normal
+        Me.FlatButton2.Size = New System.Drawing.Size(200, 100)
+        Me.FlatButton2.TabIndex = 0
+        Me.FlatButton2.Text = "FLATBUTTON2"
         '
-        'myGrid
+        'StandardButton1
         '
-        Me.myGrid.ControlAddingDirection = LCARS.Controls.ButtonGrid.ControlDirection.Vertical
-        Me.myGrid.ControlPadding = 5
-        Me.myGrid.ControlSize = New System.Drawing.Size(150, 40)
-        Me.myGrid.CurrentPage = 1
-        Me.myGrid.Location = New System.Drawing.Point(13, 60)
-        Me.myGrid.MinimumSize = New System.Drawing.Size(155, 45)
-        Me.myGrid.Name = "myGrid"
-        Me.myGrid.Size = New System.Drawing.Size(756, 222)
-        Me.myGrid.TabIndex = 4
-        Me.myGrid.Text = "ButtonGrid1"
+        Me.StandardButton1.BackgroundImage = CType(resources.GetObject("StandardButton1.BackgroundImage"), System.Drawing.Image)
+        Me.StandardButton1.Beeping = False
+        Me.StandardButton1.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
+        Me.StandardButton1.ButtonText = "STANDARDBUTTON1"
+        Me.StandardButton1.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.StandardButton1.ButtonTextHeight = 14
+        Me.StandardButton1.Clickable = True
+        Me.StandardButton1.Color = LCARS.LCARScolorStyles.MiscFunction
+        Me.StandardButton1.ColorsAvailable = LcarScolor4
+        Me.StandardButton1.CustomAlertColor = System.Drawing.Color.Empty
+        Me.StandardButton1.Data = Nothing
+        Me.StandardButton1.Data2 = Nothing
+        Me.StandardButton1.FlashInterval = 500
+        Me.StandardButton1.holdDraw = False
+        Me.StandardButton1.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
+        Me.StandardButton1.lblTextLoc = New System.Drawing.Point(27, 0)
+        Me.StandardButton1.lblTextSize = New System.Drawing.Size(91, 55)
+        Me.StandardButton1.lblTextVisible = True
+        Me.StandardButton1.Lit = True
+        Me.StandardButton1.Location = New System.Drawing.Point(266, 120)
+        Me.StandardButton1.Name = "StandardButton1"
+        Me.StandardButton1.RedAlert = LCARS.LCARSalert.Normal
+        Me.StandardButton1.Size = New System.Drawing.Size(146, 55)
+        Me.StandardButton1.TabIndex = 5
+        Me.StandardButton1.Text = "STANDARDBUTTON1"
         '
         'Form1
         '
@@ -113,19 +142,20 @@ Partial Class Form1
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Black
         Me.ClientSize = New System.Drawing.Size(782, 545)
-        Me.Controls.Add(Me.myGrid)
+        Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Windowless)
-        Me.Controls.Add(Me.StandardButton1)
         Me.Controls.Add(Me.FlatButton1)
         Me.Name = "Form1"
         Me.Text = "Form1"
+        Me.Panel1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
     Friend WithEvents LcarsCalender1 As LCARS.Controls.LCARSCalender
     Friend WithEvents FlatButton1 As LCARS.Controls.FlatButton
-    Friend WithEvents StandardButton1 As LCARS.Controls.StandardButton
     Friend WithEvents Windowless As LCARS.Controls.WindowlessContainer
-    Friend WithEvents myGrid As LCARS.Controls.ButtonGrid
+    Friend WithEvents Panel1 As System.Windows.Forms.Panel
+    Friend WithEvents FlatButton2 As LCARS.Controls.FlatButton
+    Friend WithEvents StandardButton1 As LCARS.Controls.StandardButton
 
 End Class
