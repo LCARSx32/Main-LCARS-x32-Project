@@ -44,7 +44,7 @@ Public Class frmAutoDestruct
             txtSeconds.Text = "00"
         End If
         If txtMilliseconds.Text = "" Then
-            txtMilliseconds.Text = "00"
+            txtMilliseconds.Text = "000"
         End If
         If txtExternal.Text = "" And ShutdownOption.ToLower() = "external" Then
             MsgBox("No external command has been provided.")
@@ -52,9 +52,16 @@ Public Class frmAutoDestruct
         End If
         If sbStart.ButtonText = "START" Then
             My.Computer.Audio.Play(My.Resources._010, AudioPlayMode.Background)
-
-            Dim myTime As TimeSpan = New TimeSpan(0, txtHours.Text, txtMinutes.Text, txtSeconds.Text, txtMilliseconds.Text)
-            endTime = Now.Add(myTime)
+            If lblMode.Text = "TIME REMAINING:" Then
+                Dim myTime As TimeSpan = New TimeSpan(0, txtHours.Text, txtMinutes.Text, txtSeconds.Text, txtMilliseconds.Text)
+                endTime = Now.Add(myTime)
+            Else
+                endTime = New DateTime(Now.Year, Now.Month, Now.Day, CInt(txtHours.Text), CInt(txtMinutes.Text), CInt(txtSeconds.Text), CInt(txtMilliseconds.Text))
+                If DateTime.Compare(endTime, Now) <= 0 Then
+                    endTime = endTime.AddDays(1)
+                End If
+                fbMode_Click(Me, New EventArgs)
+            End If
             tmrCountdown.Enabled = True
             sbStart.ButtonText = "PAUSE"
         Else
@@ -69,7 +76,7 @@ Public Class frmAutoDestruct
             txtHours.Text = timeleft.Hours.ToString("00")
             txtMinutes.Text = timeleft.Minutes.ToString("00")
             txtSeconds.Text = timeleft.Seconds.ToString("00")
-            txtMilliseconds.Text = timeleft.Milliseconds.ToString("00")
+            txtMilliseconds.Text = timeleft.Milliseconds.ToString("000")
             If (timeleft > New TimeSpan(0, 1, 0) And timeleft < New TimeSpan(0, 0, 1, 0, 25)) Then
                 My.Computer.Audio.Play(My.Resources._050, AudioPlayMode.Background)
             End If
@@ -133,7 +140,7 @@ Public Class frmAutoDestruct
         AddHandler txtExternal.TextChanged, AddressOf txtExternal_TextChanged
         Me.Bounds = Screen.PrimaryScreen.WorkingArea
         Application.DoEvents()
-
+        LCARS.Util.SetBeeping(Me, GetSetting("LCARS x32", "Application", "ButtonBeep", "TRUE"))
     End Sub
     Private Sub hpLogOff_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles hpLogOff.Click
         fbSelected.Top = hpLogOff.Top
@@ -160,13 +167,39 @@ Public Class frmAutoDestruct
     End Sub
 
     Private Sub fbMode_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbMode.Click
-        If pnl12hr.Visible = True Then
-            pnl12hr.Visible = False
-            pnl24hr.Visible = True
-        ElseIf pnl24hr.Visible = True Then
-            pnl24hr.Visible = False
+        If lblMode.Text = "TIME REMAINING:" Then
+            fbHours.Text = ":"
+            fbHours.ButtonTextAlign = ContentAlignment.MiddleRight
+            fbHours.ButtonTextHeight = 48
+            fbMinutes.Text = ":"
+            fbMinutes.ButtonTextAlign = ContentAlignment.MiddleRight
+            fbMinutes.ButtonTextHeight = 48
+            fbSeconds.Text = ":"
+            fbSeconds.ButtonTextAlign = ContentAlignment.MiddleRight
+            fbSeconds.ButtonTextHeight = 48
+            fbMilliseconds.Text = ""
+            lblMode.Text = "END TIME (24 hour):"
+            txtHours.Text = Now.Hour
+            txtMinutes.Text = Now.Minute
+            txtSeconds.Text = Now.Second
+            txtMilliseconds.Text = Now.Millisecond
         Else
-            pnl12hr.Visible = True
+            fbHours.Text = "hours"
+            fbHours.ButtonTextAlign = ContentAlignment.BottomRight
+            fbHours.ButtonTextHeight = 14
+            fbMinutes.Text = "minutes"
+            fbMinutes.ButtonTextAlign = ContentAlignment.BottomRight
+            fbMinutes.ButtonTextHeight = 14
+            fbSeconds.Text = "seconds"
+            fbSeconds.ButtonTextAlign = ContentAlignment.BottomRight
+            fbSeconds.ButtonTextHeight = 14
+            fbMilliseconds.Text = "milliseconds"
+            lblMode.Text = "TIME REMAINING:"
+            txtHours.Text = "00"
+            txtMinutes.Text = "00"
+            txtSeconds.Text = "00"
+            txtMilliseconds.Text = "000"
+
         End If
     End Sub
 
