@@ -540,7 +540,7 @@ Public Class LCARSbuttonClass
             Else
                 _font = New Font("LCARS", textHeight, FontStyle.Regular, GraphicsUnit.Point)
             End If
-            Me.Invalidate()
+            DrawAllButtons()
         End Set
     End Property
 
