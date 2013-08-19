@@ -1,5 +1,6 @@
 ﻿Imports System.Drawing
 Imports System.Windows.Forms
+Imports LCARS.LightweightControls
 
 Namespace Controls
     <System.ComponentModel.DefaultEvent("SelectedDateChanged")> _
@@ -12,20 +13,21 @@ Namespace Controls
         Dim _selectedDate As DateTime
         Dim _padding As Integer = 5
         'Permanent Controls
-        Dim myYearButton As New FlatButton
-        Dim myYearRight As New ArrowButton
-        Dim myYearLeft As New ArrowButton
-        Dim myMonthButton As New FlatButton
-        Dim myMonthRight As New ArrowButton
-        Dim myMonthLeft As New ArrowButton
-        Dim myDays As New Panel
-        Dim mySunday As New FlatButton
-        Dim myMonday As New FlatButton
-        Dim myTuesday As New FlatButton
-        Dim myWednesday As New FlatButton
-        Dim myThursday As New FlatButton
-        Dim myFriday As New FlatButton
-        Dim mySaturday As New FlatButton
+        Dim buttonContainer As New WindowlessContainer
+        Dim myYearButton As New LCFlatButton
+        Dim myYearRight As New LCArrowButton
+        Dim myYearLeft As New LCArrowButton
+        Dim myMonthButton As New LCFlatButton
+        Dim myMonthRight As New LCArrowButton
+        Dim myMonthLeft As New LCArrowButton
+        Dim myDays As New WindowlessContainer
+        Dim mySunday As New LCFlatButton
+        Dim myMonday As New LCFlatButton
+        Dim myTuesday As New LCFlatButton
+        Dim myWednesday As New LCFlatButton
+        Dim myThursday As New LCFlatButton
+        Dim myFriday As New LCFlatButton
+        Dim mySaturday As New LCFlatButton
 
         Public Enum Months
             January = 1
@@ -49,7 +51,7 @@ Namespace Controls
             Set(ByVal value As Integer)
                 If value < 10000 And value > 0 Then
                     _year = value
-                    myYearButton.ButtonText = _year
+                    myYearButton.Text = _year
                     ShowDays()
                 Else
                     Throw New ArgumentOutOfRangeException
@@ -64,29 +66,29 @@ Namespace Controls
                 _month = value
                 Select Case _month
                     Case 1
-                        myMonthButton.ButtonText = "January"
+                        myMonthButton.Text = "January"
                     Case 2
-                        myMonthButton.ButtonText = "February"
+                        myMonthButton.Text = "February"
                     Case 3
-                        myMonthButton.ButtonText = "March"
+                        myMonthButton.Text = "March"
                     Case 4
-                        myMonthButton.ButtonText = "April"
+                        myMonthButton.Text = "April"
                     Case 5
-                        myMonthButton.ButtonText = "May"
+                        myMonthButton.Text = "May"
                     Case 6
-                        myMonthButton.ButtonText = "June"
+                        myMonthButton.Text = "June"
                     Case 7
-                        myMonthButton.ButtonText = "July"
+                        myMonthButton.Text = "July"
                     Case 8
-                        myMonthButton.ButtonText = "August"
+                        myMonthButton.Text = "August"
                     Case 9
-                        myMonthButton.ButtonText = "September"
+                        myMonthButton.Text = "September"
                     Case 10
-                        myMonthButton.ButtonText = "October"
+                        myMonthButton.Text = "October"
                     Case 11
-                        myMonthButton.ButtonText = "November"
+                        myMonthButton.Text = "November"
                     Case 12
-                        myMonthButton.ButtonText = "December"
+                        myMonthButton.Text = "December"
                 End Select
                 ShowDays()
             End Set
@@ -147,8 +149,8 @@ Namespace Controls
             For Each mybutton As FlatButton In myDays.Controls
                 mybutton.RedAlert = LCARSalert.Normal
             Next
-            CType(sender, FlatButton).RedAlert = LCARSalert.White
-            _selectedDate = CType(CType(sender, FlatButton).Data, DateTime)
+            CType(sender, LCFlatButton).RedAlert = LCARSalert.White
+            _selectedDate = CType(CType(sender, LCFlatButton).Data, DateTime)
             RaiseEvent SelectedDateChanged(SelectedDate)
         End Sub
 #End Region
@@ -159,87 +161,85 @@ Namespace Controls
             Dim standardSize As New Size((Me.Size.Width + _padding) / 7 - _padding, (Me.Size.Height - _padding) / 9 - _padding)
             'Year buttons
             With myYearLeft
-                .Size = standardSize
-                .Top = 0
-                .Left = 0
+                .Bounds = New Rectangle(0, 0, standardSize.Width, standardSize.Height)
                 .ArrowDirection = LCARSarrowDirection.Left
                 .Color = LCARScolorStyles.MiscFunction
             End With
             AddHandler myYearLeft.Click, AddressOf YearDown
-            Me.Controls.Add(myYearLeft)
+            buttonContainer.Add(myYearLeft)
             With myYearRight
-                .Size = standardSize
-                .Top = 0
-                .Left = Me.Size.Width - standardSize.Width
+                .Bounds = New Rectangle(Me.Size.Width - standardSize.Width, 0, standardSize.Width, standardSize.Height)
                 .ArrowDirection = LCARSarrowDirection.Right
                 .Color = LCARScolorStyles.MiscFunction
             End With
             AddHandler myYearRight.Click, AddressOf YearUp
-            Me.Controls.Add(myYearRight)
+            buttonContainer.Add(myYearRight)
             With myYearButton
                 .Height = standardSize.Height
                 .Width = Me.Size.Width - 2 * (standardSize.Width + _padding)
                 .Top = 0
                 .Left = standardSize.Width + _padding
                 .Clickable = False
-                .ButtonTextAlign = ContentAlignment.MiddleCenter
-                .ButtonText = _year
+                .TextAlign = ContentAlignment.MiddleCenter
+                .Text = _year
             End With
-            Me.Controls.Add(myYearButton)
+            buttonContainer.Add(myYearButton)
             'Month buttons
             With myMonthLeft
-                .Size = standardSize
+                .Height = standardSize.Height
+                .Width = standardSize.Width
                 .Top = standardSize.Height + _padding
                 .Left = 0
                 .ArrowDirection = LCARSarrowDirection.Left
                 .Color = LCARScolorStyles.MiscFunction
             End With
             AddHandler myMonthLeft.Click, AddressOf MonthDown
-            Me.Controls.Add(myMonthLeft)
+            buttonContainer.Add(myMonthLeft)
             With myMonthRight
-                .Size = standardSize
+                .Height = standardSize.Height
+                .Width = standardSize.Width
                 .Top = standardSize.Height + _padding
                 .Left = Me.Size.Width - standardSize.Width
                 .ArrowDirection = LCARSarrowDirection.Right
                 .Color = LCARScolorStyles.MiscFunction
             End With
             AddHandler myMonthRight.Click, AddressOf MonthUp
-            Me.Controls.Add(myMonthRight)
+            buttonContainer.Add(myMonthRight)
             With myMonthButton
                 .Height = standardSize.Height
                 .Width = Me.Size.Width - 2 * (standardSize.Width + _padding)
                 .Top = standardSize.Height + _padding
                 .Left = standardSize.Width + _padding
                 .Clickable = False
-                .ButtonTextAlign = ContentAlignment.MiddleCenter
+                .TextAlign = ContentAlignment.MiddleCenter
                 Select Case _month
                     Case 1
-                        .ButtonText = "January"
+                        .Text = "January"
                     Case 2
-                        .ButtonText = "February"
+                        .Text = "February"
                     Case 3
-                        .ButtonText = "March"
+                        .Text = "March"
                     Case 4
-                        .ButtonText = "April"
+                        .Text = "April"
                     Case 5
-                        .ButtonText = "May"
+                        .Text = "May"
                     Case 6
-                        .ButtonText = "June"
+                        .Text = "June"
                     Case 7
-                        .ButtonText = "July"
+                        .Text = "July"
                     Case 8
-                        .ButtonText = "August"
+                        .Text = "August"
                     Case 9
-                        .ButtonText = "September"
+                        .Text = "September"
                     Case 10
-                        .ButtonText = "October"
+                        .Text = "October"
                     Case 11
-                        .ButtonText = "November"
+                        .Text = "November"
                     Case 12
-                        .ButtonText = "December"
+                        .Text = "December"
                 End Select
             End With
-            Me.Controls.Add(myMonthButton)
+            buttonContainer.Add(myMonthButton)
             'Day of Week buttons
             With mySunday
                 .Top = (standardSize.Height + _padding) * 2
@@ -247,70 +247,75 @@ Namespace Controls
                 .Height = standardSize.Height
                 .Width = standardSize.Width
                 .Color = LCARScolorStyles.CriticalFunction
-                .ButtonText = "Sunday"
+                .Text = "Sunday"
                 .Clickable = False
             End With
-            Me.Controls.Add(mySunday)
+            buttonContainer.Add(mySunday)
             With myMonday
                 .Top = (standardSize.Height + _padding) * 2
                 .Left = (standardSize.Width + _padding) * 1
                 .Height = standardSize.Height
                 .Width = standardSize.Width
                 .Color = LCARScolorStyles.CriticalFunction
-                .ButtonText = "Monday"
+                .Text = "Monday"
                 .Clickable = False
             End With
-            Me.Controls.Add(myMonday)
+            buttonContainer.Add(myMonday)
             With myTuesday
                 .Top = (standardSize.Height + _padding) * 2
                 .Left = (standardSize.Width + _padding) * 2
                 .Height = standardSize.Height
                 .Width = standardSize.Width
                 .Color = LCARScolorStyles.CriticalFunction
-                .ButtonText = "Tuesday"
+                .Text = "Tuesday"
                 .Clickable = False
             End With
-            Me.Controls.Add(myTuesday)
+            buttonContainer.Add(myTuesday)
             With myWednesday
                 .Top = (standardSize.Height + _padding) * 2
                 .Left = (standardSize.Width + _padding) * 3
                 .Height = standardSize.Height
                 .Width = standardSize.Width
                 .Color = LCARScolorStyles.CriticalFunction
-                .ButtonText = "Wednesday"
+                .Text = "Wednesday"
                 .Clickable = False
             End With
-            Me.Controls.Add(myWednesday)
+            buttonContainer.Add(myWednesday)
             With myThursday
                 .Top = (standardSize.Height + _padding) * 2
                 .Left = (standardSize.Width + _padding) * 4
                 .Height = standardSize.Height
                 .Width = standardSize.Width
                 .Color = LCARScolorStyles.CriticalFunction
-                .ButtonText = "Thursday"
+                .Text = "Thursday"
                 .Clickable = False
             End With
-            Me.Controls.Add(myThursday)
+            buttonContainer.Add(myThursday)
             With myFriday
                 .Top = (standardSize.Height + _padding) * 2
                 .Left = (standardSize.Width + _padding) * 5
                 .Height = standardSize.Height
                 .Width = standardSize.Width
                 .Color = LCARScolorStyles.CriticalFunction
-                .ButtonText = "Friday"
+                .Text = "Friday"
                 .Clickable = False
             End With
-            Me.Controls.Add(myFriday)
+            buttonContainer.Add(myFriday)
             With mySaturday
                 .Top = (standardSize.Height + _padding) * 2
                 .Left = (standardSize.Width + _padding) * 6
                 .Height = standardSize.Height
                 .Width = standardSize.Width
                 .Color = LCARScolorStyles.CriticalFunction
-                .ButtonText = "Saturday"
+                .Text = "Saturday"
                 .Clickable = False
             End With
-            Me.Controls.Add(mySaturday)
+            buttonContainer.Add(mySaturday)
+            With buttonContainer
+                .Size = Me.Size
+                .Location = New Point(0, 0)
+            End With
+            Me.Controls.Add(buttonContainer)
             'Panel to hold all the individual date buttons
             With myDays
                 .Top = (standardSize.Height + _padding) * 3
@@ -320,6 +325,7 @@ Namespace Controls
             End With
             ShowDays()
             Me.Controls.Add(myDays)
+            myDays.BringToFront()
         End Sub
         Public Sub InitializeComponent()
             Me.SetStyle(ControlStyles.ContainerControl, True)
@@ -330,31 +336,32 @@ Namespace Controls
             Me.ResumeLayout()
         End Sub
         Public Sub ShowDays()
-            myDays.Controls.Clear()
+            myDays.Clear()
             Dim standardSize As New Size((Me.Size.Width + _padding) / 7 - _padding, (Me.Size.Height + _padding) / 9 - _padding)
             Dim i As Integer
             Dim j As Integer
             Dim x As Integer = 1
             For i = 0 To 5
                 For j = 0 To 6
-                    Dim mybutton As New FlatButton
+                    Dim mybutton As New LCFlatButton
                     Dim myDate As DateTime
                     Try
                         myDate = New DateTime(Year, Month, x)
                         If myDate.DayOfWeek = j Then
                             With mybutton
-                                .Size = standardSize
+                                .Height = standardSize.Height
+                                .Width = standardSize.Width
                                 .Top = i * (standardSize.Height + _padding)
                                 .Left = (j) * (standardSize.Width + _padding)
-                                .ButtonTextAlign = ContentAlignment.MiddleCenter
-                                .ButtonText = x
+                                .TextAlign = ContentAlignment.MiddleCenter
+                                .Text = x
                                 .Data = myDate
                                 If .Data = New Date(SelectedDate.Year, SelectedDate.Month, SelectedDate.Day) Then
                                     .RedAlert = LCARSalert.White
                                 End If
                             End With
                             AddHandler mybutton.Click, AddressOf Day_Click
-                            myDays.Controls.Add(mybutton)
+                            myDays.Add(mybutton)
                             x += 1
                         End If
                     Catch ex As Exception
@@ -363,15 +370,21 @@ Namespace Controls
             Next
         End Sub
         Public Sub Calender_Resize() Handles Me.Resize
+            With buttonContainer
+                .Width = Me.Width
+                .Height = Me.Height
+            End With
             Dim standardSize As New Size((Me.Size.Width + _padding) / 7 - _padding, (Me.Size.Height - _padding) / 9 - _padding)
             'Year buttons
             With myYearLeft
-                .Size = standardSize
+                .Height = standardSize.Height
+                .Width = standardSize.Width
                 .Top = 0
                 .Left = 0
             End With
             With myYearRight
-                .Size = standardSize
+                .Height = standardSize.Height
+                .Width = standardSize.Width
                 .Top = 0
                 .Left = Me.Size.Width - standardSize.Width
             End With
@@ -383,12 +396,14 @@ Namespace Controls
             End With
             'Month buttons
             With myMonthLeft
-                .Size = standardSize
+                .Height = standardSize.Height
+                .Width = standardSize.Width
                 .Top = standardSize.Height + _padding
                 .Left = 0
             End With
             With myMonthRight
-                .Size = standardSize
+                .Height = standardSize.Height
+                .Width = standardSize.Width
                 .Top = standardSize.Height + _padding
                 .Left = Me.Size.Width - standardSize.Width
             End With
@@ -405,49 +420,42 @@ Namespace Controls
                 .Height = standardSize.Height
                 .Width = standardSize.Width
             End With
-            Me.Controls.Add(mySunday)
             With myMonday
                 .Top = (standardSize.Height + _padding) * 2
                 .Left = (standardSize.Width + _padding) * 1
                 .Height = standardSize.Height
                 .Width = standardSize.Width
             End With
-            Me.Controls.Add(myMonday)
             With myTuesday
                 .Top = (standardSize.Height + _padding) * 2
                 .Left = (standardSize.Width + _padding) * 2
                 .Height = standardSize.Height
                 .Width = standardSize.Width
             End With
-            Me.Controls.Add(myTuesday)
             With myWednesday
                 .Top = (standardSize.Height + _padding) * 2
                 .Left = (standardSize.Width + _padding) * 3
                 .Height = standardSize.Height
                 .Width = standardSize.Width
             End With
-            Me.Controls.Add(myWednesday)
             With myThursday
                 .Top = (standardSize.Height + _padding) * 2
                 .Left = (standardSize.Width + _padding) * 4
                 .Height = standardSize.Height
                 .Width = standardSize.Width
             End With
-            Me.Controls.Add(myThursday)
             With myFriday
                 .Top = (standardSize.Height + _padding) * 2
                 .Left = (standardSize.Width + _padding) * 5
                 .Height = standardSize.Height
                 .Width = standardSize.Width
             End With
-            Me.Controls.Add(myFriday)
             With mySaturday
                 .Top = (standardSize.Height + _padding) * 2
                 .Left = (standardSize.Width + _padding) * 6
                 .Height = standardSize.Height
                 .Width = standardSize.Width
             End With
-            Me.Controls.Add(mySaturday)
             'Panel to hold all the individual date buttons
             With myDays
                 .Top = (standardSize.Height + _padding) * 3

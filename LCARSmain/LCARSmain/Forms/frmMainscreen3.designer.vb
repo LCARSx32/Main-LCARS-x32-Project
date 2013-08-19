@@ -20,63 +20,8 @@ Partial Class frmMainscreen3
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMainscreen3))
-        Dim LcarScolor113 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor114 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor115 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor116 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor117 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor118 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor119 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor120 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor121 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor126 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor127 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor122 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor123 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor128 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor129 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor130 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor131 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor132 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor133 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor134 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor135 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor136 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor137 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor138 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor139 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor140 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor141 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor142 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor143 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor144 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor145 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor146 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor147 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor148 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor149 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor150 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor151 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor152 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor153 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor154 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor155 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor156 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor157 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor158 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor159 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor160 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor161 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor162 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor163 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor164 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor165 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor166 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor167 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor168 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor124 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor125 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor1 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor2 As LCARS.LCARScolor = New LCARS.LCARScolor
         Me.pnlMainBar = New System.Windows.Forms.Panel
         Me.Panel2 = New System.Windows.Forms.Panel
         Me.myClock = New LCARS.Controls.FlatButton
@@ -195,14 +140,12 @@ Partial Class frmMainscreen3
         '
         Me.myClock.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.myClock.AutoEllipsis = False
-        Me.myClock.BackgroundImage = CType(resources.GetObject("myClock.BackgroundImage"), System.Drawing.Image)
         Me.myClock.Beeping = False
         Me.myClock.ButtonText = "LOADING CLOCK"
         Me.myClock.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.myClock.ButtonTextHeight = -1
         Me.myClock.Clickable = False
         Me.myClock.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
-        Me.myClock.ColorsAvailable = LcarScolor113
         Me.myClock.CustomAlertColor = System.Drawing.Color.Empty
         Me.myClock.Data = Nothing
         Me.myClock.Data2 = Nothing
@@ -225,14 +168,12 @@ Partial Class frmMainscreen3
         '
         Me.myStartMenu.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.myStartMenu.AutoEllipsis = False
-        Me.myStartMenu.BackgroundImage = CType(resources.GetObject("myStartMenu.BackgroundImage"), System.Drawing.Image)
         Me.myStartMenu.Beeping = False
         Me.myStartMenu.ButtonText = "PROGRAMS"
         Me.myStartMenu.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.myStartMenu.ButtonTextHeight = 14
         Me.myStartMenu.Clickable = True
         Me.myStartMenu.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.myStartMenu.ColorsAvailable = LcarScolor114
         Me.myStartMenu.CustomAlertColor = System.Drawing.Color.Empty
         Me.myStartMenu.Data = Nothing
         Me.myStartMenu.Data2 = Nothing
@@ -264,14 +205,12 @@ Partial Class frmMainscreen3
         'FlatButton5
         '
         Me.FlatButton5.AutoEllipsis = False
-        Me.FlatButton5.BackgroundImage = CType(resources.GetObject("FlatButton5.BackgroundImage"), System.Drawing.Image)
         Me.FlatButton5.Beeping = True
         Me.FlatButton5.ButtonText = "LCARS"
         Me.FlatButton5.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.FlatButton5.ButtonTextHeight = 14
         Me.FlatButton5.Clickable = False
         Me.FlatButton5.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
-        Me.FlatButton5.ColorsAvailable = LcarScolor115
         Me.FlatButton5.CustomAlertColor = System.Drawing.Color.Empty
         Me.FlatButton5.Data = Nothing
         Me.FlatButton5.Data2 = Nothing
@@ -292,7 +231,6 @@ Partial Class frmMainscreen3
         'StandardButton4
         '
         Me.StandardButton4.AutoEllipsis = False
-        Me.StandardButton4.BackgroundImage = CType(resources.GetObject("StandardButton4.BackgroundImage"), System.Drawing.Image)
         Me.StandardButton4.Beeping = True
         Me.StandardButton4.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.StandardButton4.ButtonText = ""
@@ -300,7 +238,6 @@ Partial Class frmMainscreen3
         Me.StandardButton4.ButtonTextHeight = 14
         Me.StandardButton4.Clickable = False
         Me.StandardButton4.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
-        Me.StandardButton4.ColorsAvailable = LcarScolor116
         Me.StandardButton4.CustomAlertColor = System.Drawing.Color.Empty
         Me.StandardButton4.Data = Nothing
         Me.StandardButton4.Data2 = Nothing
@@ -321,14 +258,12 @@ Partial Class frmMainscreen3
         'myHelp
         '
         Me.myHelp.AutoEllipsis = False
-        Me.myHelp.BackgroundImage = CType(resources.GetObject("myHelp.BackgroundImage"), System.Drawing.Image)
         Me.myHelp.Beeping = False
         Me.myHelp.ButtonText = "HELP"
         Me.myHelp.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.myHelp.ButtonTextHeight = 14
         Me.myHelp.Clickable = True
         Me.myHelp.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.myHelp.ColorsAvailable = LcarScolor117
         Me.myHelp.CustomAlertColor = System.Drawing.Color.Empty
         Me.myHelp.Data = Nothing
         Me.myHelp.Data2 = Nothing
@@ -350,14 +285,12 @@ Partial Class frmMainscreen3
         'myOSK
         '
         Me.myOSK.AutoEllipsis = False
-        Me.myOSK.BackgroundImage = CType(resources.GetObject("myOSK.BackgroundImage"), System.Drawing.Image)
         Me.myOSK.Beeping = False
         Me.myOSK.ButtonText = "OSK"
         Me.myOSK.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.myOSK.ButtonTextHeight = 14
         Me.myOSK.Clickable = True
         Me.myOSK.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.myOSK.ColorsAvailable = LcarScolor118
         Me.myOSK.CustomAlertColor = System.Drawing.Color.Empty
         Me.myOSK.Data = Nothing
         Me.myOSK.Data2 = Nothing
@@ -381,14 +314,12 @@ Partial Class frmMainscreen3
         Me.FlatButton4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.FlatButton4.AutoEllipsis = False
-        Me.FlatButton4.BackgroundImage = CType(resources.GetObject("FlatButton4.BackgroundImage"), System.Drawing.Image)
         Me.FlatButton4.Beeping = True
         Me.FlatButton4.ButtonText = "LCARS"
         Me.FlatButton4.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.FlatButton4.ButtonTextHeight = 14
         Me.FlatButton4.Clickable = False
         Me.FlatButton4.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
-        Me.FlatButton4.ColorsAvailable = LcarScolor119
         Me.FlatButton4.CustomAlertColor = System.Drawing.Color.Empty
         Me.FlatButton4.Data = Nothing
         Me.FlatButton4.Data2 = Nothing
@@ -409,14 +340,12 @@ Partial Class frmMainscreen3
         'mySpeech
         '
         Me.mySpeech.AutoEllipsis = False
-        Me.mySpeech.BackgroundImage = CType(resources.GetObject("mySpeech.BackgroundImage"), System.Drawing.Image)
         Me.mySpeech.Beeping = False
         Me.mySpeech.ButtonText = "SPEECH"
         Me.mySpeech.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.mySpeech.ButtonTextHeight = 14
         Me.mySpeech.Clickable = True
         Me.mySpeech.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.mySpeech.ColorsAvailable = LcarScolor120
         Me.mySpeech.CustomAlertColor = System.Drawing.Color.Empty
         Me.mySpeech.Data = Nothing
         Me.mySpeech.Data2 = Nothing
@@ -439,14 +368,12 @@ Partial Class frmMainscreen3
         '
         Me.myUserButtons.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.myUserButtons.AutoEllipsis = False
-        Me.myUserButtons.BackgroundImage = CType(resources.GetObject("myUserButtons.BackgroundImage"), System.Drawing.Image)
         Me.myUserButtons.Beeping = False
         Me.myUserButtons.ButtonText = "PERSONAL"
         Me.myUserButtons.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.myUserButtons.ButtonTextHeight = 14
         Me.myUserButtons.Clickable = True
         Me.myUserButtons.Color = LCARS.LCARScolorStyles.NavigationFunction
-        Me.myUserButtons.ColorsAvailable = LcarScolor121
         Me.myUserButtons.CustomAlertColor = System.Drawing.Color.Empty
         Me.myUserButtons.Data = Nothing
         Me.myUserButtons.Data2 = Nothing
@@ -499,14 +426,12 @@ Partial Class frmMainscreen3
         Me.HideTrayButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.HideTrayButton.ArrowDirection = LCARS.LCARSarrowDirection.Right
         Me.HideTrayButton.AutoEllipsis = Nothing
-        Me.HideTrayButton.BackgroundImage = CType(resources.GetObject("HideTrayButton.BackgroundImage"), System.Drawing.Image)
         Me.HideTrayButton.Beeping = True
         Me.HideTrayButton.ButtonText = ""
         Me.HideTrayButton.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.HideTrayButton.ButtonTextHeight = 14
         Me.HideTrayButton.Clickable = True
         Me.HideTrayButton.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.HideTrayButton.ColorsAvailable = LcarScolor126
         Me.HideTrayButton.CustomAlertColor = System.Drawing.Color.Empty
         Me.HideTrayButton.Data = Nothing
         Me.HideTrayButton.Data2 = Nothing
@@ -527,14 +452,12 @@ Partial Class frmMainscreen3
         'showTrayButton
         '
         Me.showTrayButton.AutoEllipsis = False
-        Me.showTrayButton.BackgroundImage = CType(resources.GetObject("showTrayButton.BackgroundImage"), System.Drawing.Image)
         Me.showTrayButton.Beeping = True
         Me.showTrayButton.ButtonText = "SHOW TRAY ICONS"
         Me.showTrayButton.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.showTrayButton.ButtonTextHeight = 14
         Me.showTrayButton.Clickable = True
         Me.showTrayButton.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.showTrayButton.ColorsAvailable = LcarScolor127
         Me.showTrayButton.CustomAlertColor = System.Drawing.Color.Empty
         Me.showTrayButton.Data = Nothing
         Me.showTrayButton.Data2 = Nothing
@@ -556,7 +479,6 @@ Partial Class frmMainscreen3
         '
         Me.StandardButton2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.StandardButton2.AutoEllipsis = False
-        Me.StandardButton2.BackgroundImage = CType(resources.GetObject("StandardButton2.BackgroundImage"), System.Drawing.Image)
         Me.StandardButton2.Beeping = True
         Me.StandardButton2.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.StandardButton2.ButtonText = ""
@@ -564,7 +486,6 @@ Partial Class frmMainscreen3
         Me.StandardButton2.ButtonTextHeight = 14
         Me.StandardButton2.Clickable = False
         Me.StandardButton2.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
-        Me.StandardButton2.ColorsAvailable = LcarScolor122
         Me.StandardButton2.CustomAlertColor = System.Drawing.Color.Empty
         Me.StandardButton2.Data = Nothing
         Me.StandardButton2.Data2 = Nothing
@@ -586,14 +507,12 @@ Partial Class frmMainscreen3
         '
         Me.myButtonManager.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.myButtonManager.AutoEllipsis = False
-        Me.myButtonManager.BackgroundImage = CType(resources.GetObject("myButtonManager.BackgroundImage"), System.Drawing.Image)
         Me.myButtonManager.Beeping = False
         Me.myButtonManager.ButtonText = "MANAGE YOUR PROGRAMS"
         Me.myButtonManager.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.myButtonManager.ButtonTextHeight = 14
         Me.myButtonManager.Clickable = True
         Me.myButtonManager.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.myButtonManager.ColorsAvailable = LcarScolor123
         Me.myButtonManager.CustomAlertColor = System.Drawing.Color.Empty
         Me.myButtonManager.Data = Nothing
         Me.myButtonManager.Data2 = Nothing
@@ -655,14 +574,12 @@ Partial Class frmMainscreen3
         Me.myAlertListButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.myAlertListButton.ArrowDirection = LCARS.LCARSarrowDirection.Right
         Me.myAlertListButton.AutoEllipsis = Nothing
-        Me.myAlertListButton.BackgroundImage = CType(resources.GetObject("myAlertListButton.BackgroundImage"), System.Drawing.Image)
         Me.myAlertListButton.Beeping = False
         Me.myAlertListButton.ButtonText = ""
         Me.myAlertListButton.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.myAlertListButton.ButtonTextHeight = 14
         Me.myAlertListButton.Clickable = True
         Me.myAlertListButton.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.myAlertListButton.ColorsAvailable = LcarScolor128
         Me.myAlertListButton.CustomAlertColor = System.Drawing.Color.Empty
         Me.myAlertListButton.Data = Nothing
         Me.myAlertListButton.Data2 = Nothing
@@ -684,14 +601,12 @@ Partial Class frmMainscreen3
         Me.FlatButton2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.FlatButton2.AutoEllipsis = False
-        Me.FlatButton2.BackgroundImage = CType(resources.GetObject("FlatButton2.BackgroundImage"), System.Drawing.Image)
         Me.FlatButton2.Beeping = False
         Me.FlatButton2.ButtonText = "LCARS"
         Me.FlatButton2.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.FlatButton2.ButtonTextHeight = 14
         Me.FlatButton2.Clickable = False
         Me.FlatButton2.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
-        Me.FlatButton2.ColorsAvailable = LcarScolor129
         Me.FlatButton2.CustomAlertColor = System.Drawing.Color.Empty
         Me.FlatButton2.Data = Nothing
         Me.FlatButton2.Data2 = Nothing
@@ -714,14 +629,12 @@ Partial Class frmMainscreen3
         '
         Me.FlatButton6.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.FlatButton6.AutoEllipsis = False
-        Me.FlatButton6.BackgroundImage = CType(resources.GetObject("FlatButton6.BackgroundImage"), System.Drawing.Image)
         Me.FlatButton6.Beeping = False
         Me.FlatButton6.ButtonText = ""
         Me.FlatButton6.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.FlatButton6.ButtonTextHeight = 14
         Me.FlatButton6.Clickable = False
         Me.FlatButton6.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
-        Me.FlatButton6.ColorsAvailable = LcarScolor130
         Me.FlatButton6.CustomAlertColor = System.Drawing.Color.Empty
         Me.FlatButton6.Data = Nothing
         Me.FlatButton6.Data2 = Nothing
@@ -770,14 +683,12 @@ Partial Class frmMainscreen3
         'fbBatt8
         '
         Me.fbBatt8.AutoEllipsis = False
-        Me.fbBatt8.BackgroundImage = CType(resources.GetObject("fbBatt8.BackgroundImage"), System.Drawing.Image)
         Me.fbBatt8.Beeping = False
         Me.fbBatt8.ButtonText = ""
         Me.fbBatt8.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.fbBatt8.ButtonTextHeight = 18
         Me.fbBatt8.Clickable = False
         Me.fbBatt8.Color = LCARS.LCARScolorStyles.StaticBlue
-        Me.fbBatt8.ColorsAvailable = LcarScolor131
         Me.fbBatt8.CustomAlertColor = System.Drawing.Color.Empty
         Me.fbBatt8.Data = Nothing
         Me.fbBatt8.Data2 = Nothing
@@ -798,14 +709,12 @@ Partial Class frmMainscreen3
         'fbBatt10
         '
         Me.fbBatt10.AutoEllipsis = False
-        Me.fbBatt10.BackgroundImage = CType(resources.GetObject("fbBatt10.BackgroundImage"), System.Drawing.Image)
         Me.fbBatt10.Beeping = False
         Me.fbBatt10.ButtonText = ""
         Me.fbBatt10.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.fbBatt10.ButtonTextHeight = 18
         Me.fbBatt10.Clickable = False
         Me.fbBatt10.Color = LCARS.LCARScolorStyles.StaticBlue
-        Me.fbBatt10.ColorsAvailable = LcarScolor132
         Me.fbBatt10.CustomAlertColor = System.Drawing.Color.Empty
         Me.fbBatt10.Data = Nothing
         Me.fbBatt10.Data2 = Nothing
@@ -826,14 +735,12 @@ Partial Class frmMainscreen3
         'fbBatt9
         '
         Me.fbBatt9.AutoEllipsis = False
-        Me.fbBatt9.BackgroundImage = CType(resources.GetObject("fbBatt9.BackgroundImage"), System.Drawing.Image)
         Me.fbBatt9.Beeping = False
         Me.fbBatt9.ButtonText = ""
         Me.fbBatt9.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.fbBatt9.ButtonTextHeight = 18
         Me.fbBatt9.Clickable = False
         Me.fbBatt9.Color = LCARS.LCARScolorStyles.StaticBlue
-        Me.fbBatt9.ColorsAvailable = LcarScolor133
         Me.fbBatt9.CustomAlertColor = System.Drawing.Color.Empty
         Me.fbBatt9.Data = Nothing
         Me.fbBatt9.Data2 = Nothing
@@ -854,14 +761,12 @@ Partial Class frmMainscreen3
         'fbBatt7
         '
         Me.fbBatt7.AutoEllipsis = False
-        Me.fbBatt7.BackgroundImage = CType(resources.GetObject("fbBatt7.BackgroundImage"), System.Drawing.Image)
         Me.fbBatt7.Beeping = False
         Me.fbBatt7.ButtonText = ""
         Me.fbBatt7.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.fbBatt7.ButtonTextHeight = 18
         Me.fbBatt7.Clickable = False
         Me.fbBatt7.Color = LCARS.LCARScolorStyles.StaticBlue
-        Me.fbBatt7.ColorsAvailable = LcarScolor134
         Me.fbBatt7.CustomAlertColor = System.Drawing.Color.Empty
         Me.fbBatt7.Data = Nothing
         Me.fbBatt7.Data2 = Nothing
@@ -882,14 +787,12 @@ Partial Class frmMainscreen3
         'fbBatt6
         '
         Me.fbBatt6.AutoEllipsis = False
-        Me.fbBatt6.BackgroundImage = CType(resources.GetObject("fbBatt6.BackgroundImage"), System.Drawing.Image)
         Me.fbBatt6.Beeping = False
         Me.fbBatt6.ButtonText = ""
         Me.fbBatt6.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.fbBatt6.ButtonTextHeight = 18
         Me.fbBatt6.Clickable = False
         Me.fbBatt6.Color = LCARS.LCARScolorStyles.StaticBlue
-        Me.fbBatt6.ColorsAvailable = LcarScolor135
         Me.fbBatt6.CustomAlertColor = System.Drawing.Color.Empty
         Me.fbBatt6.Data = Nothing
         Me.fbBatt6.Data2 = Nothing
@@ -910,14 +813,12 @@ Partial Class frmMainscreen3
         'fbBattTop
         '
         Me.fbBattTop.AutoEllipsis = False
-        Me.fbBattTop.BackgroundImage = CType(resources.GetObject("fbBattTop.BackgroundImage"), System.Drawing.Image)
         Me.fbBattTop.Beeping = False
         Me.fbBattTop.ButtonText = ""
         Me.fbBattTop.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.fbBattTop.ButtonTextHeight = 18
         Me.fbBattTop.Clickable = False
         Me.fbBattTop.Color = LCARS.LCARScolorStyles.StaticBlue
-        Me.fbBattTop.ColorsAvailable = LcarScolor136
         Me.fbBattTop.CustomAlertColor = System.Drawing.Color.Empty
         Me.fbBattTop.Data = Nothing
         Me.fbBattTop.Data2 = Nothing
@@ -938,14 +839,12 @@ Partial Class frmMainscreen3
         'fbBatt3
         '
         Me.fbBatt3.AutoEllipsis = False
-        Me.fbBatt3.BackgroundImage = CType(resources.GetObject("fbBatt3.BackgroundImage"), System.Drawing.Image)
         Me.fbBatt3.Beeping = False
         Me.fbBatt3.ButtonText = ""
         Me.fbBatt3.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.fbBatt3.ButtonTextHeight = 18
         Me.fbBatt3.Clickable = False
         Me.fbBatt3.Color = LCARS.LCARScolorStyles.StaticBlue
-        Me.fbBatt3.ColorsAvailable = LcarScolor137
         Me.fbBatt3.CustomAlertColor = System.Drawing.Color.Empty
         Me.fbBatt3.Data = Nothing
         Me.fbBatt3.Data2 = Nothing
@@ -966,14 +865,12 @@ Partial Class frmMainscreen3
         'fbBatt5
         '
         Me.fbBatt5.AutoEllipsis = False
-        Me.fbBatt5.BackgroundImage = CType(resources.GetObject("fbBatt5.BackgroundImage"), System.Drawing.Image)
         Me.fbBatt5.Beeping = False
         Me.fbBatt5.ButtonText = ""
         Me.fbBatt5.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.fbBatt5.ButtonTextHeight = 18
         Me.fbBatt5.Clickable = False
         Me.fbBatt5.Color = LCARS.LCARScolorStyles.StaticBlue
-        Me.fbBatt5.ColorsAvailable = LcarScolor138
         Me.fbBatt5.CustomAlertColor = System.Drawing.Color.Empty
         Me.fbBatt5.Data = Nothing
         Me.fbBatt5.Data2 = Nothing
@@ -994,14 +891,12 @@ Partial Class frmMainscreen3
         'fbBatt4
         '
         Me.fbBatt4.AutoEllipsis = False
-        Me.fbBatt4.BackgroundImage = CType(resources.GetObject("fbBatt4.BackgroundImage"), System.Drawing.Image)
         Me.fbBatt4.Beeping = False
         Me.fbBatt4.ButtonText = ""
         Me.fbBatt4.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.fbBatt4.ButtonTextHeight = 18
         Me.fbBatt4.Clickable = False
         Me.fbBatt4.Color = LCARS.LCARScolorStyles.StaticBlue
-        Me.fbBatt4.ColorsAvailable = LcarScolor139
         Me.fbBatt4.CustomAlertColor = System.Drawing.Color.Empty
         Me.fbBatt4.Data = Nothing
         Me.fbBatt4.Data2 = Nothing
@@ -1022,14 +917,12 @@ Partial Class frmMainscreen3
         'fbBatt2
         '
         Me.fbBatt2.AutoEllipsis = False
-        Me.fbBatt2.BackgroundImage = CType(resources.GetObject("fbBatt2.BackgroundImage"), System.Drawing.Image)
         Me.fbBatt2.Beeping = False
         Me.fbBatt2.ButtonText = ""
         Me.fbBatt2.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.fbBatt2.ButtonTextHeight = 18
         Me.fbBatt2.Clickable = False
         Me.fbBatt2.Color = LCARS.LCARScolorStyles.StaticBlue
-        Me.fbBatt2.ColorsAvailable = LcarScolor140
         Me.fbBatt2.CustomAlertColor = System.Drawing.Color.Empty
         Me.fbBatt2.Data = Nothing
         Me.fbBatt2.Data2 = Nothing
@@ -1050,14 +943,12 @@ Partial Class frmMainscreen3
         'fbBatt1
         '
         Me.fbBatt1.AutoEllipsis = False
-        Me.fbBatt1.BackgroundImage = CType(resources.GetObject("fbBatt1.BackgroundImage"), System.Drawing.Image)
         Me.fbBatt1.Beeping = False
         Me.fbBatt1.ButtonText = ""
         Me.fbBatt1.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.fbBatt1.ButtonTextHeight = 18
         Me.fbBatt1.Clickable = False
         Me.fbBatt1.Color = LCARS.LCARScolorStyles.StaticBlue
-        Me.fbBatt1.ColorsAvailable = LcarScolor141
         Me.fbBatt1.CustomAlertColor = System.Drawing.Color.Empty
         Me.fbBatt1.Data = Nothing
         Me.fbBatt1.Data2 = Nothing
@@ -1078,14 +969,12 @@ Partial Class frmMainscreen3
         'FlatButton19
         '
         Me.FlatButton19.AutoEllipsis = False
-        Me.FlatButton19.BackgroundImage = CType(resources.GetObject("FlatButton19.BackgroundImage"), System.Drawing.Image)
         Me.FlatButton19.Beeping = False
         Me.FlatButton19.ButtonText = ""
         Me.FlatButton19.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.FlatButton19.ButtonTextHeight = 18
         Me.FlatButton19.Clickable = False
         Me.FlatButton19.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
-        Me.FlatButton19.ColorsAvailable = LcarScolor142
         Me.FlatButton19.CustomAlertColor = System.Drawing.Color.Empty
         Me.FlatButton19.Data = Nothing
         Me.FlatButton19.Data2 = Nothing
@@ -1106,7 +995,6 @@ Partial Class frmMainscreen3
         'Elbow6
         '
         Me.Elbow6.AutoEllipsis = False
-        Me.Elbow6.BackgroundImage = CType(resources.GetObject("Elbow6.BackgroundImage"), System.Drawing.Image)
         Me.Elbow6.Beeping = False
         Me.Elbow6.ButtonHeight = 2
         Me.Elbow6.ButtonText = ""
@@ -1115,7 +1003,6 @@ Partial Class frmMainscreen3
         Me.Elbow6.ButtonWidth = 5
         Me.Elbow6.Clickable = False
         Me.Elbow6.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
-        Me.Elbow6.ColorsAvailable = LcarScolor143
         Me.Elbow6.CustomAlertColor = System.Drawing.Color.Empty
         Me.Elbow6.Data = Nothing
         Me.Elbow6.Data2 = Nothing
@@ -1138,14 +1025,12 @@ Partial Class frmMainscreen3
         'FlatButton15
         '
         Me.FlatButton15.AutoEllipsis = False
-        Me.FlatButton15.BackgroundImage = CType(resources.GetObject("FlatButton15.BackgroundImage"), System.Drawing.Image)
         Me.FlatButton15.Beeping = False
         Me.FlatButton15.ButtonText = ""
         Me.FlatButton15.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.FlatButton15.ButtonTextHeight = 18
         Me.FlatButton15.Clickable = False
         Me.FlatButton15.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
-        Me.FlatButton15.ColorsAvailable = LcarScolor144
         Me.FlatButton15.CustomAlertColor = System.Drawing.Color.Empty
         Me.FlatButton15.Data = Nothing
         Me.FlatButton15.Data2 = Nothing
@@ -1166,7 +1051,6 @@ Partial Class frmMainscreen3
         'Elbow8
         '
         Me.Elbow8.AutoEllipsis = False
-        Me.Elbow8.BackgroundImage = CType(resources.GetObject("Elbow8.BackgroundImage"), System.Drawing.Image)
         Me.Elbow8.Beeping = False
         Me.Elbow8.ButtonHeight = 2
         Me.Elbow8.ButtonText = ""
@@ -1175,7 +1059,6 @@ Partial Class frmMainscreen3
         Me.Elbow8.ButtonWidth = 5
         Me.Elbow8.Clickable = False
         Me.Elbow8.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
-        Me.Elbow8.ColorsAvailable = LcarScolor145
         Me.Elbow8.CustomAlertColor = System.Drawing.Color.Empty
         Me.Elbow8.Data = Nothing
         Me.Elbow8.Data2 = Nothing
@@ -1198,7 +1081,6 @@ Partial Class frmMainscreen3
         'Elbow9
         '
         Me.Elbow9.AutoEllipsis = False
-        Me.Elbow9.BackgroundImage = CType(resources.GetObject("Elbow9.BackgroundImage"), System.Drawing.Image)
         Me.Elbow9.Beeping = False
         Me.Elbow9.ButtonHeight = 2
         Me.Elbow9.ButtonText = ""
@@ -1207,7 +1089,6 @@ Partial Class frmMainscreen3
         Me.Elbow9.ButtonWidth = 5
         Me.Elbow9.Clickable = False
         Me.Elbow9.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
-        Me.Elbow9.ColorsAvailable = LcarScolor146
         Me.Elbow9.CustomAlertColor = System.Drawing.Color.Empty
         Me.Elbow9.Data = Nothing
         Me.Elbow9.Data2 = Nothing
@@ -1230,7 +1111,6 @@ Partial Class frmMainscreen3
         'Elbow7
         '
         Me.Elbow7.AutoEllipsis = False
-        Me.Elbow7.BackgroundImage = CType(resources.GetObject("Elbow7.BackgroundImage"), System.Drawing.Image)
         Me.Elbow7.Beeping = False
         Me.Elbow7.ButtonHeight = 2
         Me.Elbow7.ButtonText = ""
@@ -1239,7 +1119,6 @@ Partial Class frmMainscreen3
         Me.Elbow7.ButtonWidth = 5
         Me.Elbow7.Clickable = False
         Me.Elbow7.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
-        Me.Elbow7.ColorsAvailable = LcarScolor147
         Me.Elbow7.CustomAlertColor = System.Drawing.Color.Empty
         Me.Elbow7.Data = Nothing
         Me.Elbow7.Data2 = Nothing
@@ -1287,14 +1166,12 @@ Partial Class frmMainscreen3
         '
         Me.myMusic.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.myMusic.AutoEllipsis = False
-        Me.myMusic.BackgroundImage = CType(resources.GetObject("myMusic.BackgroundImage"), System.Drawing.Image)
         Me.myMusic.Beeping = False
         Me.myMusic.ButtonText = "MY MUSIC"
         Me.myMusic.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.myMusic.ButtonTextHeight = 14
         Me.myMusic.Clickable = True
         Me.myMusic.Color = LCARS.LCARScolorStyles.NavigationFunction
-        Me.myMusic.ColorsAvailable = LcarScolor148
         Me.myMusic.CustomAlertColor = System.Drawing.Color.Empty
         Me.myMusic.Data = Nothing
         Me.myMusic.Data2 = Nothing
@@ -1317,14 +1194,12 @@ Partial Class frmMainscreen3
         '
         Me.myVideos.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.myVideos.AutoEllipsis = False
-        Me.myVideos.BackgroundImage = CType(resources.GetObject("myVideos.BackgroundImage"), System.Drawing.Image)
         Me.myVideos.Beeping = False
         Me.myVideos.ButtonText = "MY VIDEOS"
         Me.myVideos.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.myVideos.ButtonTextHeight = 14
         Me.myVideos.Clickable = True
         Me.myVideos.Color = LCARS.LCARScolorStyles.NavigationFunction
-        Me.myVideos.ColorsAvailable = LcarScolor149
         Me.myVideos.CustomAlertColor = System.Drawing.Color.Empty
         Me.myVideos.Data = Nothing
         Me.myVideos.Data2 = Nothing
@@ -1347,14 +1222,12 @@ Partial Class frmMainscreen3
         '
         Me.myPictures.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.myPictures.AutoEllipsis = False
-        Me.myPictures.BackgroundImage = CType(resources.GetObject("myPictures.BackgroundImage"), System.Drawing.Image)
         Me.myPictures.Beeping = False
         Me.myPictures.ButtonText = "MY PICTURES"
         Me.myPictures.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.myPictures.ButtonTextHeight = 14
         Me.myPictures.Clickable = True
         Me.myPictures.Color = LCARS.LCARScolorStyles.NavigationFunction
-        Me.myPictures.ColorsAvailable = LcarScolor150
         Me.myPictures.CustomAlertColor = System.Drawing.Color.Empty
         Me.myPictures.Data = Nothing
         Me.myPictures.Data2 = Nothing
@@ -1377,14 +1250,12 @@ Partial Class frmMainscreen3
         '
         Me.myDocuments.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.myDocuments.AutoEllipsis = False
-        Me.myDocuments.BackgroundImage = CType(resources.GetObject("myDocuments.BackgroundImage"), System.Drawing.Image)
         Me.myDocuments.Beeping = False
         Me.myDocuments.ButtonText = "MY DOCUMENTS"
         Me.myDocuments.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.myDocuments.ButtonTextHeight = 14
         Me.myDocuments.Clickable = True
         Me.myDocuments.Color = LCARS.LCARScolorStyles.NavigationFunction
-        Me.myDocuments.ColorsAvailable = LcarScolor151
         Me.myDocuments.CustomAlertColor = System.Drawing.Color.Empty
         Me.myDocuments.Data = Nothing
         Me.myDocuments.Data2 = Nothing
@@ -1407,14 +1278,12 @@ Partial Class frmMainscreen3
         '
         Me.myRun.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.myRun.AutoEllipsis = False
-        Me.myRun.BackgroundImage = CType(resources.GetObject("myRun.BackgroundImage"), System.Drawing.Image)
         Me.myRun.Beeping = False
         Me.myRun.ButtonText = "RUN PROGRAM"
         Me.myRun.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.myRun.ButtonTextHeight = 14
         Me.myRun.Clickable = True
         Me.myRun.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.myRun.ColorsAvailable = LcarScolor152
         Me.myRun.CustomAlertColor = System.Drawing.Color.Empty
         Me.myRun.Data = Nothing
         Me.myRun.Data2 = Nothing
@@ -1437,14 +1306,12 @@ Partial Class frmMainscreen3
         '
         Me.fbWebBrowser.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.fbWebBrowser.AutoEllipsis = False
-        Me.fbWebBrowser.BackgroundImage = CType(resources.GetObject("fbWebBrowser.BackgroundImage"), System.Drawing.Image)
         Me.fbWebBrowser.Beeping = False
         Me.fbWebBrowser.ButtonText = "WEB BROWSER"
         Me.fbWebBrowser.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.fbWebBrowser.ButtonTextHeight = 14
         Me.fbWebBrowser.Clickable = True
         Me.fbWebBrowser.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.fbWebBrowser.ColorsAvailable = LcarScolor153
         Me.fbWebBrowser.CustomAlertColor = System.Drawing.Color.Empty
         Me.fbWebBrowser.Data = Nothing
         Me.fbWebBrowser.Data2 = Nothing
@@ -1467,14 +1334,12 @@ Partial Class frmMainscreen3
         '
         Me.myPhoto.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.myPhoto.AutoEllipsis = False
-        Me.myPhoto.BackgroundImage = CType(resources.GetObject("myPhoto.BackgroundImage"), System.Drawing.Image)
         Me.myPhoto.Beeping = False
         Me.myPhoto.ButtonText = "PHOTO VIEWER"
         Me.myPhoto.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.myPhoto.ButtonTextHeight = 14
         Me.myPhoto.Clickable = True
         Me.myPhoto.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.myPhoto.ColorsAvailable = LcarScolor154
         Me.myPhoto.CustomAlertColor = System.Drawing.Color.Empty
         Me.myPhoto.Data = Nothing
         Me.myPhoto.Data2 = Nothing
@@ -1498,6 +1363,8 @@ Partial Class frmMainscreen3
         Me.pnlPrograms.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pnlPrograms.Beeping = False
+        Me.pnlPrograms.ColorsAvailable = LcarScolor1
         Me.pnlPrograms.Location = New System.Drawing.Point(0, 20)
         Me.pnlPrograms.Name = "pnlPrograms"
         Me.pnlPrograms.Size = New System.Drawing.Size(231, 612)
@@ -1507,7 +1374,6 @@ Partial Class frmMainscreen3
         '
         Me.Elbow2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Elbow2.AutoEllipsis = False
-        Me.Elbow2.BackgroundImage = CType(resources.GetObject("Elbow2.BackgroundImage"), System.Drawing.Image)
         Me.Elbow2.Beeping = True
         Me.Elbow2.ButtonHeight = 25
         Me.Elbow2.ButtonText = ""
@@ -1516,7 +1382,6 @@ Partial Class frmMainscreen3
         Me.Elbow2.ButtonWidth = 200
         Me.Elbow2.Clickable = False
         Me.Elbow2.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
-        Me.Elbow2.ColorsAvailable = LcarScolor155
         Me.Elbow2.CustomAlertColor = System.Drawing.Color.Empty
         Me.Elbow2.Data = Nothing
         Me.Elbow2.Data2 = Nothing
@@ -1540,14 +1405,12 @@ Partial Class frmMainscreen3
         '
         Me.FlatButton1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.FlatButton1.AutoEllipsis = False
-        Me.FlatButton1.BackgroundImage = CType(resources.GetObject("FlatButton1.BackgroundImage"), System.Drawing.Image)
         Me.FlatButton1.Beeping = False
         Me.FlatButton1.ButtonText = ""
         Me.FlatButton1.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.FlatButton1.ButtonTextHeight = 14
         Me.FlatButton1.Clickable = False
         Me.FlatButton1.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
-        Me.FlatButton1.ColorsAvailable = LcarScolor156
         Me.FlatButton1.CustomAlertColor = System.Drawing.Color.Empty
         Me.FlatButton1.Data = Nothing
         Me.FlatButton1.Data2 = Nothing
@@ -1569,14 +1432,12 @@ Partial Class frmMainscreen3
         '
         Me.myAlert.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.myAlert.AutoEllipsis = False
-        Me.myAlert.BackgroundImage = CType(resources.GetObject("myAlert.BackgroundImage"), System.Drawing.Image)
         Me.myAlert.Beeping = False
         Me.myAlert.ButtonText = "RED ALERT"
         Me.myAlert.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.myAlert.ButtonTextHeight = 14
         Me.myAlert.Clickable = True
         Me.myAlert.Color = LCARS.LCARScolorStyles.PrimaryFunction
-        Me.myAlert.ColorsAvailable = LcarScolor157
         Me.myAlert.CustomAlertColor = System.Drawing.Color.Empty
         Me.myAlert.Data = Nothing
         Me.myAlert.Data2 = Nothing
@@ -1599,14 +1460,12 @@ Partial Class frmMainscreen3
         '
         Me.myEngineering.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.myEngineering.AutoEllipsis = False
-        Me.myEngineering.BackgroundImage = CType(resources.GetObject("myEngineering.BackgroundImage"), System.Drawing.Image)
         Me.myEngineering.Beeping = False
         Me.myEngineering.ButtonText = "ENGINEERING"
         Me.myEngineering.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.myEngineering.ButtonTextHeight = 14
         Me.myEngineering.Clickable = True
         Me.myEngineering.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.myEngineering.ColorsAvailable = LcarScolor158
         Me.myEngineering.CustomAlertColor = System.Drawing.Color.Empty
         Me.myEngineering.Data = Nothing
         Me.myEngineering.Data2 = Nothing
@@ -1629,14 +1488,12 @@ Partial Class frmMainscreen3
         '
         Me.mySettings.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.mySettings.AutoEllipsis = False
-        Me.mySettings.BackgroundImage = CType(resources.GetObject("mySettings.BackgroundImage"), System.Drawing.Image)
         Me.mySettings.Beeping = False
         Me.mySettings.ButtonText = "SETTINGS"
         Me.mySettings.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.mySettings.ButtonTextHeight = 14
         Me.mySettings.Clickable = True
         Me.mySettings.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.mySettings.ColorsAvailable = LcarScolor159
         Me.mySettings.CustomAlertColor = System.Drawing.Color.Empty
         Me.mySettings.Data = Nothing
         Me.mySettings.Data2 = Nothing
@@ -1659,14 +1516,12 @@ Partial Class frmMainscreen3
         '
         Me.MyComp.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.MyComp.AutoEllipsis = False
-        Me.MyComp.BackgroundImage = CType(resources.GetObject("MyComp.BackgroundImage"), System.Drawing.Image)
         Me.MyComp.Beeping = False
         Me.MyComp.ButtonText = "MY COMPUTER"
         Me.MyComp.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.MyComp.ButtonTextHeight = 14
         Me.MyComp.Clickable = True
         Me.MyComp.Color = LCARS.LCARScolorStyles.NavigationFunction
-        Me.MyComp.ColorsAvailable = LcarScolor160
         Me.MyComp.CustomAlertColor = System.Drawing.Color.Empty
         Me.MyComp.Data = Nothing
         Me.MyComp.Data2 = Nothing
@@ -1689,14 +1544,12 @@ Partial Class frmMainscreen3
         '
         Me.myModeSelect.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.myModeSelect.AutoEllipsis = False
-        Me.myModeSelect.BackgroundImage = CType(resources.GetObject("myModeSelect.BackgroundImage"), System.Drawing.Image)
         Me.myModeSelect.Beeping = True
         Me.myModeSelect.ButtonText = "MODE SELECT"
         Me.myModeSelect.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.myModeSelect.ButtonTextHeight = 14
         Me.myModeSelect.Clickable = True
         Me.myModeSelect.Color = LCARS.LCARScolorStyles.FunctionUnavailable
-        Me.myModeSelect.ColorsAvailable = LcarScolor161
         Me.myModeSelect.CustomAlertColor = System.Drawing.Color.Empty
         Me.myModeSelect.Data = Nothing
         Me.myModeSelect.Data2 = Nothing
@@ -1719,14 +1572,12 @@ Partial Class frmMainscreen3
         '
         Me.myDeactivate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.myDeactivate.AutoEllipsis = False
-        Me.myDeactivate.BackgroundImage = CType(resources.GetObject("myDeactivate.BackgroundImage"), System.Drawing.Image)
         Me.myDeactivate.Beeping = False
         Me.myDeactivate.ButtonText = "DEACTIVATE"
         Me.myDeactivate.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.myDeactivate.ButtonTextHeight = 14
         Me.myDeactivate.Clickable = True
         Me.myDeactivate.Color = LCARS.LCARScolorStyles.Orange
-        Me.myDeactivate.ColorsAvailable = LcarScolor162
         Me.myDeactivate.CustomAlertColor = System.Drawing.Color.Empty
         Me.myDeactivate.Data = Nothing
         Me.myDeactivate.Data2 = Nothing
@@ -1749,14 +1600,12 @@ Partial Class frmMainscreen3
         '
         Me.myDestruct.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.myDestruct.AutoEllipsis = False
-        Me.myDestruct.BackgroundImage = CType(resources.GetObject("myDestruct.BackgroundImage"), System.Drawing.Image)
         Me.myDestruct.Beeping = False
         Me.myDestruct.ButtonText = "AUTO DESTRUCT"
         Me.myDestruct.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.myDestruct.ButtonTextHeight = 14
         Me.myDestruct.Clickable = True
         Me.myDestruct.Color = LCARS.LCARScolorStyles.FunctionOffline
-        Me.myDestruct.ColorsAvailable = LcarScolor163
         Me.myDestruct.CustomAlertColor = System.Drawing.Color.Empty
         Me.myDestruct.Data = Nothing
         Me.myDestruct.Data2 = Nothing
@@ -1780,14 +1629,12 @@ Partial Class frmMainscreen3
         Me.myProgBack.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.myProgBack.AutoEllipsis = False
-        Me.myProgBack.BackgroundImage = CType(resources.GetObject("myProgBack.BackgroundImage"), System.Drawing.Image)
         Me.myProgBack.Beeping = False
         Me.myProgBack.ButtonText = "BACK"
         Me.myProgBack.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.myProgBack.ButtonTextHeight = 14
         Me.myProgBack.Clickable = True
         Me.myProgBack.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.myProgBack.ColorsAvailable = LcarScolor164
         Me.myProgBack.CustomAlertColor = System.Drawing.Color.Empty
         Me.myProgBack.Data = Nothing
         Me.myProgBack.Data2 = Nothing
@@ -1811,14 +1658,12 @@ Partial Class frmMainscreen3
         Me.fbProgramPages.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.fbProgramPages.AutoEllipsis = False
-        Me.fbProgramPages.BackgroundImage = CType(resources.GetObject("fbProgramPages.BackgroundImage"), System.Drawing.Image)
         Me.fbProgramPages.Beeping = False
         Me.fbProgramPages.ButtonText = "1/15"
         Me.fbProgramPages.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.fbProgramPages.ButtonTextHeight = 14
         Me.fbProgramPages.Clickable = False
         Me.fbProgramPages.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.fbProgramPages.ColorsAvailable = LcarScolor165
         Me.fbProgramPages.CustomAlertColor = System.Drawing.Color.Empty
         Me.fbProgramPages.Data = Nothing
         Me.fbProgramPages.Data2 = Nothing
@@ -1842,14 +1687,12 @@ Partial Class frmMainscreen3
         Me.myProgsNext.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.myProgsNext.ArrowDirection = LCARS.LCARSarrowDirection.Right
         Me.myProgsNext.AutoEllipsis = Nothing
-        Me.myProgsNext.BackgroundImage = CType(resources.GetObject("myProgsNext.BackgroundImage"), System.Drawing.Image)
         Me.myProgsNext.Beeping = False
         Me.myProgsNext.ButtonText = ""
         Me.myProgsNext.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.myProgsNext.ButtonTextHeight = 14
         Me.myProgsNext.Clickable = True
         Me.myProgsNext.Color = LCARS.LCARScolorStyles.NavigationFunction
-        Me.myProgsNext.ColorsAvailable = LcarScolor166
         Me.myProgsNext.CustomAlertColor = System.Drawing.Color.Empty
         Me.myProgsNext.Data = Nothing
         Me.myProgsNext.Data2 = Nothing
@@ -1872,14 +1715,12 @@ Partial Class frmMainscreen3
         Me.myProgsBack.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.myProgsBack.ArrowDirection = LCARS.LCARSarrowDirection.Left
         Me.myProgsBack.AutoEllipsis = Nothing
-        Me.myProgsBack.BackgroundImage = CType(resources.GetObject("myProgsBack.BackgroundImage"), System.Drawing.Image)
         Me.myProgsBack.Beeping = False
         Me.myProgsBack.ButtonText = ""
         Me.myProgsBack.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.myProgsBack.ButtonTextHeight = 14
         Me.myProgsBack.Clickable = True
         Me.myProgsBack.Color = LCARS.LCARScolorStyles.NavigationFunction
-        Me.myProgsBack.ColorsAvailable = LcarScolor167
         Me.myProgsBack.CustomAlertColor = System.Drawing.Color.Empty
         Me.myProgsBack.Data = Nothing
         Me.myProgsBack.Data2 = Nothing
@@ -1902,7 +1743,6 @@ Partial Class frmMainscreen3
         Me.Elbow1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Elbow1.AutoEllipsis = False
-        Me.Elbow1.BackgroundImage = CType(resources.GetObject("Elbow1.BackgroundImage"), System.Drawing.Image)
         Me.Elbow1.Beeping = True
         Me.Elbow1.ButtonHeight = 10
         Me.Elbow1.ButtonText = "LCARS"
@@ -1911,7 +1751,6 @@ Partial Class frmMainscreen3
         Me.Elbow1.ButtonWidth = 124
         Me.Elbow1.Clickable = False
         Me.Elbow1.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
-        Me.Elbow1.ColorsAvailable = LcarScolor168
         Me.Elbow1.CustomAlertColor = System.Drawing.Color.Empty
         Me.Elbow1.Data = Nothing
         Me.Elbow1.Data2 = Nothing
@@ -1936,6 +1775,8 @@ Partial Class frmMainscreen3
         '
         Me.gridUserButtons.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.gridUserButtons.Beeping = False
+        Me.gridUserButtons.ColorsAvailable = LcarScolor2
         Me.gridUserButtons.ControlAddingDirection = LCARS.Controls.ButtonGrid.ControlDirection.Horizontal
         Me.gridUserButtons.ControlPadding = 5
         Me.gridUserButtons.ControlSize = New System.Drawing.Size(100, 25)
@@ -1951,7 +1792,6 @@ Partial Class frmMainscreen3
         '
         Me.StandardButton1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.StandardButton1.AutoEllipsis = False
-        Me.StandardButton1.BackgroundImage = CType(resources.GetObject("StandardButton1.BackgroundImage"), System.Drawing.Image)
         Me.StandardButton1.Beeping = True
         Me.StandardButton1.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.StandardButton1.ButtonText = ""
@@ -1959,7 +1799,6 @@ Partial Class frmMainscreen3
         Me.StandardButton1.ButtonTextHeight = 14
         Me.StandardButton1.Clickable = False
         Me.StandardButton1.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
-        Me.StandardButton1.ColorsAvailable = LcarScolor124
         Me.StandardButton1.CustomAlertColor = System.Drawing.Color.Empty
         Me.StandardButton1.Data = Nothing
         Me.StandardButton1.Data2 = Nothing
@@ -1981,7 +1820,6 @@ Partial Class frmMainscreen3
         '
         Me.StandardButton3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.StandardButton3.AutoEllipsis = False
-        Me.StandardButton3.BackgroundImage = CType(resources.GetObject("StandardButton3.BackgroundImage"), System.Drawing.Image)
         Me.StandardButton3.Beeping = True
         Me.StandardButton3.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.StandardButton3.ButtonText = ""
@@ -1989,7 +1827,6 @@ Partial Class frmMainscreen3
         Me.StandardButton3.ButtonTextHeight = 14
         Me.StandardButton3.Clickable = False
         Me.StandardButton3.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
-        Me.StandardButton3.ColorsAvailable = LcarScolor125
         Me.StandardButton3.CustomAlertColor = System.Drawing.Color.Empty
         Me.StandardButton3.Data = Nothing
         Me.StandardButton3.Data2 = Nothing

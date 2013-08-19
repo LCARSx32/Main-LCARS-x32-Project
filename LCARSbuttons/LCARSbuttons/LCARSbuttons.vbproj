@@ -137,6 +137,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Interfaces\ILightweightControl.vb" />
+    <Compile Include="Lightweight Controls\LCArrowButton.vb" />
     <Compile Include="Lightweight Controls\LCComplexButton.vb" />
     <Compile Include="Lightweight Controls\LCStandardButton.vb" />
     <Compile Include="Lightweight Controls\LCHalfPillButton.vb" />

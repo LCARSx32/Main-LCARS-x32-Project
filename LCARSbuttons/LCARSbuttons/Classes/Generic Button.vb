@@ -181,7 +181,7 @@ Public Class LCARSbuttonClass
     ''' This property is hidden by default, and would be protected if it could be. It is used internally to draw the button, 
     ''' so should not be modified. 
     ''' </remarks>
-    <Browsable(False), EditorBrowsable(EditorBrowsableState.Never)> _
+    <Browsable(False), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)> _
         Public Overrides Property BackgroundImage() As System.Drawing.Image
         Get
             Return MyBase.BackgroundImage
@@ -540,7 +540,7 @@ Public Class LCARSbuttonClass
             Else
                 _font = New Font("LCARS", textHeight, FontStyle.Regular, GraphicsUnit.Point)
             End If
-            Me.Invalidate()
+            DrawAllButtons()
         End Set
     End Property
 
@@ -631,6 +631,7 @@ Public Class LCARSbuttonClass
     ''' </code>
     ''' That code will set all colors used by this control to the defaults. Naturally you can be more specific if needed.
     ''' </remarks>
+    <DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)> _
     Public Property ColorsAvailable() As LCARScolor Implements IColorable.ColorsAvailable
         Get
             Return _ColorsAvailable
