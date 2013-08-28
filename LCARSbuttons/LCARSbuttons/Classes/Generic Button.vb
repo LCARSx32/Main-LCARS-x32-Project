@@ -451,13 +451,9 @@ Public Class LCARSbuttonClass
         End Set
     End Property
     ''' <summary>
-    ''' Sets the visibility of the label used to display text
+    ''' Sets the visibility of the text
     ''' </summary>
-    ''' <remarks>
-    ''' This property is used by the <see cref="LCARS.Controls.TextButton">TextButton</see>. If you set it to true,
-    ''' be sure to remove all the event handlers on the label, or events will not be properly raised by the control.
-    ''' </remarks>
-    <Browsable(False), EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)> _
+    <Browsable(False), EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), Obsolete("This property is deprecated; text drawing is now handled by DrawButton")> _
             Public Overridable Property lblTextVisible() As Boolean
         Get
             Return _textVisible
@@ -470,7 +466,7 @@ Public Class LCARSbuttonClass
     ''' <summary>
     ''' Sets anchor for label used to display text
     ''' </summary>
-    <Browsable(False), EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)> _
+    <Browsable(False), EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)> _
         Public Overridable Property lblTextAnchor() As AnchorStyles
         Get
             Return AnchorStyles.None
@@ -483,7 +479,7 @@ Public Class LCARSbuttonClass
     ''' <summary>
     ''' Location of label used to display text
     ''' </summary>
-    <Browsable(False), EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)> _
+    <Browsable(False), EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)> _
        Public Overridable Property lblTextLoc() As Point
         Get
             Return _textLocation
@@ -497,7 +493,7 @@ Public Class LCARSbuttonClass
     ''' Size of label used to display text
     ''' </summary>
     ''' <remarks>This label does not auto-size, and should be handled accordingly.</remarks>
-    <Browsable(False), EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)> _
+    <Browsable(False), EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)> _
         Public Overridable Property lblTextSize() As Size
         Get
             Return _textSize
@@ -711,14 +707,16 @@ Public Class LCARSbuttonClass
     End Sub
 
     Protected Sub lblText_MouseLeave(ByVal sener As Object, ByVal e As EventArgs) Handles Me.MouseLeave
-        tmrTextScroll.Enabled = False
+        If tmrTextScroll.Enabled Then
+            tmrTextScroll.Enabled = False
 
-        If oAlign > 0 Then
-            _textAlign = oAlign
+            If oAlign > 0 Then
+                _textAlign = oAlign
+            End If
+
+            tmpStr = myText
+            DrawAllButtons()
         End If
-
-        tmpStr = myText
-        DrawAllButtons()
     End Sub
 
     Private Sub tmrTextScroll_Tick(ByVal sender As Object, ByVal e As EventArgs) Handles tmrTextScroll.Tick
