@@ -2096,7 +2096,7 @@ Partial Class frmKeyboard
         Me.sb7.Color = LCARS.LCARScolorStyles.MiscFunction
         Me.sb7.CustomAlertColor = System.Drawing.Color.Empty
         Me.sb7.Data = "7"
-        Me.sb7.Data2 = "&&"
+        Me.sb7.Data2 = "&"
         Me.sb7.FlashInterval = 500
         Me.sb7.holdDraw = False
         Me.sb7.Lit = True
