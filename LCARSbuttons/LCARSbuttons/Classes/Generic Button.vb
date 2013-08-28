@@ -435,19 +435,22 @@ Public Class LCARSbuttonClass
             Return myText
         End Get
         Set(ByVal value As String)
+            Dim redraw As Boolean
             If value Is Nothing Then
                 value = New String("")
             End If
             If forceCapital Then
-                myText = value.ToString.ToUpper
+                redraw = Not (myText = value.ToUpper)
+                myText = value.ToUpper
             Else
+                redraw = Not (myText = value)
                 myText = value
             End If
             tmpStr = myText
             If textHeight = -1 Then
                 ButtonTextHeight = -1
             End If
-            DrawAllButtons()
+            If redraw Then DrawAllButtons()
         End Set
     End Property
     ''' <summary>

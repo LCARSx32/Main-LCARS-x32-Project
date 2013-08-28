@@ -121,8 +121,8 @@ Partial Class frmKeyboard
         Me.sbE = New LCARS.Controls.StandardButton
         Me.sbW = New LCARS.Controls.StandardButton
         Me.sbQ = New LCARS.Controls.StandardButton
-        Me.btnnumlok = New LCARS.Controls.StandardButton
-        Me.btnscrllk = New LCARS.Controls.StandardButton
+        Me.btnnumlock = New LCARS.Controls.StandardButton
+        Me.btnScrollLock = New LCARS.Controls.StandardButton
         Me.sbPgDown = New LCARS.Controls.StandardButton
         Me.sbPgUp = New LCARS.Controls.StandardButton
         Me.sbREnter = New LCARS.Controls.StandardButton
@@ -394,8 +394,8 @@ Partial Class frmKeyboard
         '
         'SplitContainer1.Panel2
         '
-        Me.SplitContainer1.Panel2.Controls.Add(Me.btnnumlok)
-        Me.SplitContainer1.Panel2.Controls.Add(Me.btnscrllk)
+        Me.SplitContainer1.Panel2.Controls.Add(Me.btnnumlock)
+        Me.SplitContainer1.Panel2.Controls.Add(Me.btnScrollLock)
         Me.SplitContainer1.Panel2.Controls.Add(Me.sbPgDown)
         Me.SplitContainer1.Panel2.Controls.Add(Me.sbPgUp)
         Me.SplitContainer1.Panel2.Controls.Add(Me.sbREnter)
@@ -2733,53 +2733,53 @@ Partial Class frmKeyboard
         Me.sbQ.Tag = "15"
         Me.sbQ.Text = "q"
         '
-        'btnnumlok
+        'btnnumlock
         '
-        Me.btnnumlok.AutoEllipsis = False
-        Me.btnnumlok.Beeping = False
-        Me.btnnumlok.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
-        Me.btnnumlok.ButtonText = "NUM LOCK"
-        Me.btnnumlok.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.btnnumlok.ButtonTextHeight = -1
-        Me.btnnumlok.Clickable = True
-        Me.btnnumlok.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.btnnumlok.CustomAlertColor = System.Drawing.Color.Empty
-        Me.btnnumlok.Data = "NUM LOCK"
-        Me.btnnumlok.Data2 = "NUM LOCK"
-        Me.btnnumlok.FlashInterval = 500
-        Me.btnnumlok.holdDraw = False
-        Me.btnnumlok.Lit = True
-        Me.btnnumlok.Location = New System.Drawing.Point(165, 7)
-        Me.btnnumlok.Name = "btnnumlok"
-        Me.btnnumlok.RedAlert = LCARS.LCARSalert.Normal
-        Me.btnnumlok.Size = New System.Drawing.Size(97, 48)
-        Me.btnnumlok.TabIndex = 417
-        Me.btnnumlok.Tag = "15"
-        Me.btnnumlok.Text = "NUM LOCK"
+        Me.btnnumlock.AutoEllipsis = False
+        Me.btnnumlock.Beeping = False
+        Me.btnnumlock.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
+        Me.btnnumlock.ButtonText = "NUM LOCK"
+        Me.btnnumlock.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.btnnumlock.ButtonTextHeight = -1
+        Me.btnnumlock.Clickable = True
+        Me.btnnumlock.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.btnnumlock.CustomAlertColor = System.Drawing.Color.Empty
+        Me.btnnumlock.Data = "NUM LOCK"
+        Me.btnnumlock.Data2 = "NUM LOCK"
+        Me.btnnumlock.FlashInterval = 500
+        Me.btnnumlock.holdDraw = False
+        Me.btnnumlock.Lit = True
+        Me.btnnumlock.Location = New System.Drawing.Point(165, 7)
+        Me.btnnumlock.Name = "btnnumlock"
+        Me.btnnumlock.RedAlert = LCARS.LCARSalert.Normal
+        Me.btnnumlock.Size = New System.Drawing.Size(97, 48)
+        Me.btnnumlock.TabIndex = 417
+        Me.btnnumlock.Tag = "15"
+        Me.btnnumlock.Text = "NUM LOCK"
         '
-        'btnscrllk
+        'btnScrollLock
         '
-        Me.btnscrllk.AutoEllipsis = False
-        Me.btnscrllk.Beeping = False
-        Me.btnscrllk.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
-        Me.btnscrllk.ButtonText = "SCROLL LOK"
-        Me.btnscrllk.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.btnscrllk.ButtonTextHeight = -1
-        Me.btnscrllk.Clickable = True
-        Me.btnscrllk.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.btnscrllk.CustomAlertColor = System.Drawing.Color.Empty
-        Me.btnscrllk.Data = "SCROLL LOK"
-        Me.btnscrllk.Data2 = "SCROLL LOK"
-        Me.btnscrllk.FlashInterval = 500
-        Me.btnscrllk.holdDraw = False
-        Me.btnscrllk.Lit = True
-        Me.btnscrllk.Location = New System.Drawing.Point(165, 61)
-        Me.btnscrllk.Name = "btnscrllk"
-        Me.btnscrllk.RedAlert = LCARS.LCARSalert.Normal
-        Me.btnscrllk.Size = New System.Drawing.Size(97, 48)
-        Me.btnscrllk.TabIndex = 416
-        Me.btnscrllk.Tag = "15"
-        Me.btnscrllk.Text = "SCROLL LOK"
+        Me.btnScrollLock.AutoEllipsis = False
+        Me.btnScrollLock.Beeping = False
+        Me.btnScrollLock.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
+        Me.btnScrollLock.ButtonText = "SCROLL LOK"
+        Me.btnScrollLock.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.btnScrollLock.ButtonTextHeight = -1
+        Me.btnScrollLock.Clickable = True
+        Me.btnScrollLock.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.btnScrollLock.CustomAlertColor = System.Drawing.Color.Empty
+        Me.btnScrollLock.Data = "SCROLL LOK"
+        Me.btnScrollLock.Data2 = "SCROLL LOK"
+        Me.btnScrollLock.FlashInterval = 500
+        Me.btnScrollLock.holdDraw = False
+        Me.btnScrollLock.Lit = True
+        Me.btnScrollLock.Location = New System.Drawing.Point(165, 61)
+        Me.btnScrollLock.Name = "btnScrollLock"
+        Me.btnScrollLock.RedAlert = LCARS.LCARSalert.Normal
+        Me.btnScrollLock.Size = New System.Drawing.Size(97, 48)
+        Me.btnScrollLock.TabIndex = 416
+        Me.btnScrollLock.Tag = "15"
+        Me.btnScrollLock.Text = "SCROLL LOK"
         '
         'sbPgDown
         '
@@ -3451,8 +3451,8 @@ Partial Class frmKeyboard
     Friend WithEvents sbFN3 As LCARS.Controls.StandardButton
     Friend WithEvents sbFn2 As LCARS.Controls.StandardButton
     Friend WithEvents sbLock As LCARS.Controls.StandardButton
-    Friend WithEvents btnscrllk As LCARS.Controls.StandardButton
-    Friend WithEvents btnnumlok As LCARS.Controls.StandardButton
+    Friend WithEvents btnScrollLock As LCARS.Controls.StandardButton
+    Friend WithEvents btnnumlock As LCARS.Controls.StandardButton
     Friend WithEvents Timer1 As System.Windows.Forms.Timer
     Friend WithEvents Timer2 As System.Windows.Forms.Timer
     Friend WithEvents Timer3 As System.Windows.Forms.Timer
