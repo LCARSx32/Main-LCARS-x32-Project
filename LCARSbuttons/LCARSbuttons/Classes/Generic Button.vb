@@ -766,10 +766,6 @@ Public Class LCARSbuttonClass
     Public Sub DrawAllButtons()
         If noDraw = False Then
             If Not (Me.Width = 0 Or Me.Height = 0) Then
-                If textHeight = -1 Then
-                    ButtonTextHeight = -1 'resize the text
-
-                End If
                 'Draw and show the standard "normal" button.
                 '----------------------------------------------------------------------
                 NormalButton = DrawButton()
@@ -790,6 +786,9 @@ Public Class LCARSbuttonClass
     End Sub
 
     Private Sub Button_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Resize
+        If textHeight = -1 Then
+            ButtonTextHeight = -1 'resize the text
+        End If
         DrawAllButtons()
     End Sub
 
