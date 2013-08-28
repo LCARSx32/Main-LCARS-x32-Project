@@ -1453,7 +1453,7 @@ Public Class frmKeyboard
     Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
         'NUMBERS LOCK DETECTION
         'If numbers lock is on, sets numbers lock button to primary colour.
-        If GetKeyState(Keys.NumLock) = 1 Then
+        If Control.IsKeyLocked(Keys.NumLock) Then
             btnnumlock.Color = LCARS.LCARScolorStyles.PrimaryFunction
         Else
             btnnumlock.Color = LCARS.LCARScolorStyles.SystemFunction
@@ -1470,13 +1470,13 @@ Public Class frmKeyboard
         Dim newNumLockShift As Boolean = (btnnumlock.Color = LCARS.LCARScolorStyles.PrimaryFunction) Xor SHIFT
 
 
-        If btnnumlock.Color = LCARS.LCARScolorStyles.SystemFunction And SHIFT = True Then
+        If (btnnumlock.Color = LCARS.LCARScolorStyles.SystemFunction) And SHIFT = True Then
 
             For Each myButton As LCARS.LCARSbuttonClass In SplitContainer1.Panel2.Controls
                 myButton.ButtonText = myButton.Data2
             Next
         Else
-            If btnnumlock.Color = LCARS.LCARScolorStyles.PrimaryFunction And SHIFT = True Then
+            If (btnnumlock.Color = LCARS.LCARScolorStyles.PrimaryFunction) And SHIFT = True Then
                 For Each myButton As LCARS.LCARSbuttonClass In SplitContainer1.Panel2.Controls
                     myButton.ButtonText = myButton.Data
                 Next
