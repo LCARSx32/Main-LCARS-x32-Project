@@ -498,27 +498,6 @@ Public Class frmKeyboard
 
     End Sub
 
-
-    Private Sub sbLWin_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbLWin.Click 'sbRwin.Click
-
-
-        'WIN = Not WIN
-
-        'If WIN = True Then
-        ' Simulate key press
-        'Call keybd_event(VK_LWIN, 0, KEYEVENTF_EXTENDEDKEY, 0)
-        'sbLWin.Color = LCARS.LCARScolorStyles.PrimaryFunction
-        'sbRwin.Color = LCARS.LCARScolorStyles.PrimaryFunction
-
-        'Else
-        ' Simulate key release
-        'Call keybd_event(VK_LWIN, 0, KEYEVENTF_EXTENDEDKEY Or KEYEVENTF_KEYUP, 0)
-        'sbLWin.Color = LCARS.LCARScolorStyles.SystemFunction
-        'sbRwin.Color = LCARS.LCARScolorStyles.SystemFunction
-        'End If
-
-    End Sub
-
     Private Sub sbRwin_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles sbRwin.MouseDown, sbLWin.MouseDown
 
         'Enables timer to detect short or long click & release of windows keys
@@ -2102,9 +2081,4 @@ Public Class frmKeyboard
         End If
         Timer2.Enabled = False
     End Sub
-
-
-
-
-
 End Class
