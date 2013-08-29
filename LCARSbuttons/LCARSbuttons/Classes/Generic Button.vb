@@ -970,8 +970,6 @@ Public Class GenericButtonDesigner
     'see which ones (they are commented).
     Inherits ControlDesigner
     Protected Overrides Sub PostFilterProperties(ByVal Properties As System.Collections.IDictionary)
-        Dim myButton As New LCARS.Controls.FlatButton
-
         Properties.Remove("AccessibleName")
         Properties.Remove("AccessibleRole")
         Properties.Remove("AccessibleDescription")
