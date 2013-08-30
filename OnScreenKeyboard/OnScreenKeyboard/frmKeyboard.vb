@@ -81,8 +81,8 @@ Public Class frmKeyboard
     Dim o2Height As Integer
     Dim isInit As Boolean = False
 
-
-
+    Dim uppercase As Boolean = False
+    Dim numLockShift As Boolean = False
 
     Dim increment As Integer = 20
 
@@ -183,16 +183,16 @@ Public Class frmKeyboard
 
         'If numbers lock is on, sets numbers lock button to primary colour.
         If GetKeyState(Keys.NumLock) = 1 Then
-            btnnumlok.Color = LCARS.LCARScolorStyles.PrimaryFunction
+            btnnumlock.Color = LCARS.LCARScolorStyles.PrimaryFunction
         Else
-            btnnumlok.Color = LCARS.LCARScolorStyles.SystemFunction
+            btnnumlock.Color = LCARS.LCARScolorStyles.SystemFunction
         End If
 
         'If scroll lock is on, sets scroll lock button to primary colour.
         If GetKeyState(Keys.Scroll) = 1 Then
-            btnscrllk.Color = LCARS.LCARScolorStyles.PrimaryFunction
+            btnScrollLock.Color = LCARS.LCARScolorStyles.PrimaryFunction
         Else
-            btnscrllk.Color = LCARS.LCARScolorStyles.SystemFunction
+            btnScrollLock.Color = LCARS.LCARScolorStyles.SystemFunction
         End If
 
         'Code for size mode on start up
@@ -425,7 +425,7 @@ Public Class frmKeyboard
 
         If SHIFT = True Then
 
-            If btnnumlok.Color = LCARS.LCARScolorStyles.SystemFunction Then
+            If btnnumlock.Color = LCARS.LCARScolorStyles.SystemFunction Then
                 For Each myButton As LCARS.LCARSbuttonClass In SplitContainer1.Panel2.Controls
                     myButton.ButtonText = myButton.Data2
                 Next
@@ -439,12 +439,12 @@ Public Class frmKeyboard
             End If
 
 
-        sbLShift.Color = LCARS.LCARScolorStyles.PrimaryFunction
-        sbRShift.Color = LCARS.LCARScolorStyles.PrimaryFunction
+            sbLShift.Color = LCARS.LCARScolorStyles.PrimaryFunction
+            sbRShift.Color = LCARS.LCARScolorStyles.PrimaryFunction
 
         Else
             If SHIFT = False Then
-                If btnnumlok.Color = LCARS.LCARScolorStyles.SystemFunction Then
+                If btnnumlock.Color = LCARS.LCARScolorStyles.SystemFunction Then
                     For Each myButton As LCARS.LCARSbuttonClass In SplitContainer1.Panel2.Controls
                         myButton.ButtonText = myButton.Data
                     Next
@@ -498,27 +498,6 @@ Public Class frmKeyboard
 
     End Sub
 
-
-    Private Sub sbLWin_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbLWin.Click 'sbRwin.Click
-
-
-        'WIN = Not WIN
-
-        'If WIN = True Then
-        ' Simulate key press
-        'Call keybd_event(VK_LWIN, 0, KEYEVENTF_EXTENDEDKEY, 0)
-        'sbLWin.Color = LCARS.LCARScolorStyles.PrimaryFunction
-        'sbRwin.Color = LCARS.LCARScolorStyles.PrimaryFunction
-
-        'Else
-        ' Simulate key release
-        'Call keybd_event(VK_LWIN, 0, KEYEVENTF_EXTENDEDKEY Or KEYEVENTF_KEYUP, 0)
-        'sbLWin.Color = LCARS.LCARScolorStyles.SystemFunction
-        'sbRwin.Color = LCARS.LCARScolorStyles.SystemFunction
-        'End If
-
-    End Sub
-
     Private Sub sbRwin_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles sbRwin.MouseDown, sbLWin.MouseDown
 
         'Enables timer to detect short or long click & release of windows keys
@@ -554,7 +533,7 @@ Public Class frmKeyboard
                     sbLWin.Color = LCARS.LCARScolorStyles.SystemFunction
 
                 End If
-                End If
+            End If
 
         End If
 
@@ -1142,7 +1121,7 @@ Public Class frmKeyboard
 
         If NumLockState <> True Then
 
-            If SHIFT = True And btnnumlok.Color = LCARS.LCARScolorStyles.SystemFunction Then
+            If SHIFT = True And btnnumlock.Color = LCARS.LCARScolorStyles.SystemFunction Then
                 SendKeys.Send("{pgup}")
             Else
                 SendKeys.Send("{9}")
@@ -1160,7 +1139,7 @@ Public Class frmKeyboard
 
         Dim keyData As String = ""
 
-        If SHIFT = True And btnnumlok.Color = LCARS.LCARScolorStyles.SystemFunction Then
+        If SHIFT = True And btnnumlock.Color = LCARS.LCARScolorStyles.SystemFunction Then
             SendKeys.Send("{UP}")
         Else
             SendKeys.Send("{8}")
@@ -1176,7 +1155,7 @@ Public Class frmKeyboard
     Private Sub sbR7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbR7.Click
 
         Dim keyData As String = ""
-        If SHIFT = True And btnnumlok.Color = LCARS.LCARScolorStyles.SystemFunction Then
+        If SHIFT = True And btnnumlock.Color = LCARS.LCARScolorStyles.SystemFunction Then
             SendKeys.Send("{HOME}")
         Else
             SendKeys.Send("{7}")
@@ -1191,7 +1170,7 @@ Public Class frmKeyboard
     Private Sub sbR6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbR6.Click
 
         Dim keyData As String = ""
-        If SHIFT = True And btnnumlok.Color = LCARS.LCARScolorStyles.SystemFunction Then
+        If SHIFT = True And btnnumlock.Color = LCARS.LCARScolorStyles.SystemFunction Then
 
             SendKeys.Send("{RIGHT}")
         Else
@@ -1213,7 +1192,7 @@ Public Class frmKeyboard
 
         If NumLockState <> True Then
 
-            If SHIFT = True And btnnumlok.Color = LCARS.LCARScolorStyles.SystemFunction Then
+            If SHIFT = True And btnnumlock.Color = LCARS.LCARScolorStyles.SystemFunction Then
                 SendKeys.Send("{5}")
             Else
                 SendKeys.Send("{5}")
@@ -1231,7 +1210,7 @@ Public Class frmKeyboard
 
         Dim keyData As String = ""
 
-        If SHIFT = True And btnnumlok.Color = LCARS.LCARScolorStyles.SystemFunction Then
+        If SHIFT = True And btnnumlock.Color = LCARS.LCARScolorStyles.SystemFunction Then
             SendKeys.Send("{LEFT}")
         Else
             SendKeys.Send("{4}")
@@ -1248,7 +1227,7 @@ Public Class frmKeyboard
 
         Dim keyData As String = ""
 
-        If SHIFT = True And btnnumlok.Color = LCARS.LCARScolorStyles.SystemFunction Then
+        If SHIFT = True And btnnumlock.Color = LCARS.LCARScolorStyles.SystemFunction Then
             SendKeys.Send("{pgdn}")
         Else
             SendKeys.Send("{3}")
@@ -1265,7 +1244,7 @@ Public Class frmKeyboard
 
         Dim keyData As String = ""
 
-        If SHIFT = True And btnnumlok.Color = LCARS.LCARScolorStyles.SystemFunction Then
+        If SHIFT = True And btnnumlock.Color = LCARS.LCARScolorStyles.SystemFunction Then
             SendKeys.Send("{DOWN}")
         Else
             SendKeys.Send("{2}")
@@ -1282,7 +1261,7 @@ Public Class frmKeyboard
 
         Dim keyData As String = ""
 
-        If SHIFT = True And btnnumlok.Color = LCARS.LCARScolorStyles.SystemFunction Then
+        If SHIFT = True And btnnumlock.Color = LCARS.LCARScolorStyles.SystemFunction Then
             SendKeys.Send("{END}")
         Else
             SendKeys.Send("{1}")
@@ -1299,7 +1278,7 @@ Public Class frmKeyboard
 
         Dim keyData As String = ""
 
-        If SHIFT = True And btnnumlok.Color = LCARS.LCARScolorStyles.SystemFunction Then
+        If SHIFT = True And btnnumlock.Color = LCARS.LCARScolorStyles.SystemFunction Then
             SendKeys.Send("{INSERT}")
         Else
             SendKeys.Send("{0}")
@@ -1318,7 +1297,7 @@ Public Class frmKeyboard
 
         Dim keyData As String = ""
 
-        If SHIFT = True And btnnumlok.Color = LCARS.LCARScolorStyles.SystemFunction Then
+        If SHIFT = True And btnnumlock.Color = LCARS.LCARScolorStyles.SystemFunction Then
             SendKeys.Send("{/}")
         Else
             SendKeys.Send("{/}")
@@ -1335,7 +1314,7 @@ Public Class frmKeyboard
 
         Dim keyData As String = ""
 
-        If SHIFT = True And btnnumlok.Color = LCARS.LCARScolorStyles.SystemFunction Then
+        If SHIFT = True And btnnumlock.Color = LCARS.LCARScolorStyles.SystemFunction Then
             SendKeys.Send("{*}")
         Else
             SendKeys.Send("{*}")
@@ -1352,7 +1331,7 @@ Public Class frmKeyboard
 
         Dim keyData As String = ""
 
-        If SHIFT = True And btnnumlok.Color = LCARS.LCARScolorStyles.SystemFunction Then
+        If SHIFT = True And btnnumlock.Color = LCARS.LCARScolorStyles.SystemFunction Then
             SendKeys.Send("{-}")
         Else
             SendKeys.Send("{-}")
@@ -1369,7 +1348,7 @@ Public Class frmKeyboard
 
         Dim keyData As String = ""
 
-        If SHIFT = True And btnnumlok.Color = LCARS.LCARScolorStyles.SystemFunction Then
+        If SHIFT = True And btnnumlock.Color = LCARS.LCARScolorStyles.SystemFunction Then
             SendKeys.Send("{+}")
         Else
             SendKeys.Send("{+}")
@@ -1386,7 +1365,7 @@ Public Class frmKeyboard
 
         Dim keyData As String = ""
 
-        If SHIFT = True And btnnumlok.Color = LCARS.LCARScolorStyles.SystemFunction Then
+        If SHIFT = True And btnnumlock.Color = LCARS.LCARScolorStyles.SystemFunction Then
             SendKeys.Send("{=}")
         Else
             SendKeys.Send("{=}")
@@ -1403,7 +1382,7 @@ Public Class frmKeyboard
 
         Dim keyData As String = ""
 
-        If SHIFT = True And btnnumlok.Color = LCARS.LCARScolorStyles.SystemFunction Then
+        If SHIFT = True And btnnumlock.Color = LCARS.LCARScolorStyles.SystemFunction Then
             SendKeys.Send("{.}")
         Else
             SendKeys.Send("{.}")
@@ -1416,20 +1395,20 @@ Public Class frmKeyboard
 
     End Sub
 
-    Private Sub btnscrllk_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnscrllk.Click
+    Private Sub btnscrllk_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnScrollLock.Click
 
 
-        If btnscrllk.Color = LCARS.LCARScolorStyles.SystemFunction Then
+        If btnScrollLock.Color = LCARS.LCARScolorStyles.SystemFunction Then
 
             Call keybd_event(VK_SCROLL, 0, KEYEVENTF_EXTENDEDKEY, 0)
             Call keybd_event(VK_SCROLL, 0, KEYEVENTF_EXTENDEDKEY Or KEYEVENTF_KEYUP, 0)
-            btnscrllk.Color = LCARS.LCARScolorStyles.PrimaryFunction
+            btnScrollLock.Color = LCARS.LCARScolorStyles.PrimaryFunction
         Else
 
-            If btnscrllk.Color = LCARS.LCARScolorStyles.PrimaryFunction Then
+            If btnScrollLock.Color = LCARS.LCARScolorStyles.PrimaryFunction Then
                 Call keybd_event(VK_SCROLL, 0, KEYEVENTF_EXTENDEDKEY, 0)
                 Call keybd_event(VK_SCROLL, 0, KEYEVENTF_EXTENDEDKEY Or KEYEVENTF_KEYUP, 0)
-                btnscrllk.Color = LCARS.LCARScolorStyles.SystemFunction
+                btnScrollLock.Color = LCARS.LCARScolorStyles.SystemFunction
             End If
 
         End If
@@ -1439,25 +1418,20 @@ Public Class frmKeyboard
 
     End Sub
 
-    Private Sub btnnumlok_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnnumlok.Click
+    Private Sub btnnumlok_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnnumlock.Click
 
-        If btnnumlok.Color = LCARS.LCARScolorStyles.SystemFunction Then
+        If btnnumlock.Color = LCARS.LCARScolorStyles.SystemFunction Then
 
             Call keybd_event(VK_NUMLOCK, 0, KEYEVENTF_EXTENDEDKEY, 0)
             Call keybd_event(VK_NUMLOCK, 0, KEYEVENTF_EXTENDEDKEY Or KEYEVENTF_KEYUP, 0)
-            btnnumlok.Color = LCARS.LCARScolorStyles.PrimaryFunction
-
+            btnnumlock.Color = LCARS.LCARScolorStyles.PrimaryFunction
         Else
-
-            If btnnumlok.Color = LCARS.LCARScolorStyles.PrimaryFunction Then
-                Call keybd_event(VK_NUMLOCK, 0, KEYEVENTF_EXTENDEDKEY, 0)
-                Call keybd_event(VK_NUMLOCK, 0, KEYEVENTF_EXTENDEDKEY Or KEYEVENTF_KEYUP, 0)
-                btnnumlok.Color = LCARS.LCARScolorStyles.SystemFunction
-            End If
-
+            Call keybd_event(VK_NUMLOCK, 0, KEYEVENTF_EXTENDEDKEY, 0)
+            Call keybd_event(VK_NUMLOCK, 0, KEYEVENTF_EXTENDEDKEY Or KEYEVENTF_KEYUP, 0)
+            btnnumlock.Color = LCARS.LCARScolorStyles.SystemFunction
         End If
 
-        If btnnumlok.Color = LCARS.LCARScolorStyles.SystemFunction And SHIFT = True Then
+        If btnnumlock.Color = LCARS.LCARScolorStyles.SystemFunction And SHIFT = True Then
 
             For Each myButton As LCARS.LCARSbuttonClass In SplitContainer1.Panel2.Controls
                 myButton.ButtonText = myButton.Data2
@@ -1465,7 +1439,7 @@ Public Class frmKeyboard
 
         Else
 
-            If btnnumlok.Color = LCARS.LCARScolorStyles.PrimaryFunction And SHIFT = True Then
+            If btnnumlock.Color = LCARS.LCARScolorStyles.PrimaryFunction And SHIFT = True Then
 
                 For Each myButton As LCARS.LCARSbuttonClass In SplitContainer1.Panel2.Controls
                     myButton.ButtonText = myButton.Data
@@ -1477,74 +1451,64 @@ Public Class frmKeyboard
     End Sub
 
     Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
-
-        'NUMBERS LOCK DETECTION
-        'If numbers lock is on, sets numbers lock button to primary colour.
-        If GetKeyState(Keys.NumLock) = 1 Then
-            btnnumlok.Color = LCARS.LCARScolorStyles.PrimaryFunction
-        Else
-            btnnumlok.Color = LCARS.LCARScolorStyles.SystemFunction
-        End If
-
         'SCROLL LOCK DETECTION
         'If scroll lock is on, sets scroll lock button to primary colour.
         If GetKeyState(Keys.Scroll) = 1 Then
-            btnscrllk.Color = LCARS.LCARScolorStyles.PrimaryFunction
+            If btnScrollLock.Color = LCARS.LCARScolorStyles.SystemFunction Then btnScrollLock.Color = LCARS.LCARScolorStyles.PrimaryFunction
         Else
-            btnscrllk.Color = LCARS.LCARScolorStyles.SystemFunction
+            If btnScrollLock.Color = LCARS.LCARScolorStyles.PrimaryFunction Then btnScrollLock.Color = LCARS.LCARScolorStyles.SystemFunction
         End If
 
-        If btnnumlok.Color = LCARS.LCARScolorStyles.SystemFunction And SHIFT = True Then
-
-            For Each myButton As LCARS.LCARSbuttonClass In SplitContainer1.Panel2.Controls
-                myButton.ButtonText = myButton.Data2
-            Next
+        'NUMBERS LOCK DETECTION
+        Dim updateNumLock As Boolean = (IsKeyLocked(Keys.NumLock)) Xor (btnnumlock.Color = LCARS.LCARScolorStyles.PrimaryFunction)
+        'If numbers lock is on, sets numbers lock button to primary colour.
+        If Control.IsKeyLocked(Keys.NumLock) Then
+            If btnnumlock.Color = LCARS.LCARScolorStyles.SystemFunction Then btnnumlock.Color = LCARS.LCARScolorStyles.PrimaryFunction
         Else
-            If btnnumlok.Color = LCARS.LCARScolorStyles.PrimaryFunction And SHIFT = True Then
+            If btnnumlock.Color = LCARS.LCARScolorStyles.PrimaryFunction Then btnnumlock.Color = LCARS.LCARScolorStyles.SystemFunction
+        End If
+
+        If updateNumLock Then
+            If (btnnumlock.Color = LCARS.LCARScolorStyles.SystemFunction) And SHIFT = True Then
+
                 For Each myButton As LCARS.LCARSbuttonClass In SplitContainer1.Panel2.Controls
-                    myButton.ButtonText = myButton.Data
+                    myButton.ButtonText = myButton.Data2
                 Next
+            Else
+                If (btnnumlock.Color = LCARS.LCARScolorStyles.PrimaryFunction) And SHIFT = True Then
+                    For Each myButton As LCARS.LCARSbuttonClass In SplitContainer1.Panel2.Controls
+                        myButton.ButtonText = myButton.Data
+                    Next
+                End If
             End If
         End If
-
 
         'CAPS LOCK DETECTION
         'Syncronises the real world keyboard and on screen keyboard caps lock button.
         If Control.IsKeyLocked(Keys.CapsLock) Then
-            sbCaps.Color = LCARS.LCARScolorStyles.PrimaryFunction
+            If sbCaps.Color = LCARS.LCARScolorStyles.SystemFunction Then sbCaps.Color = LCARS.LCARScolorStyles.PrimaryFunction
         Else
             If CAPS = False Then
-                sbCaps.Color = LCARS.LCARScolorStyles.SystemFunction
+                If sbCaps.Color = LCARS.LCARScolorStyles.PrimaryFunction Then sbCaps.Color = LCARS.LCARScolorStyles.SystemFunction
             End If
         End If
 
-        'Sets the on screen letterkeys to UPPERCASE with CAPS LOCK ON
-        If sbCaps.Color = LCARS.LCARScolorStyles.PrimaryFunction Then
+        'True if the letters should be uppercase, false otherwise
+        Dim newuppercase As Boolean = (sbCaps.Color = LCARS.LCARScolorStyles.PrimaryFunction) Xor (sbLShift.Color = LCARS.LCARScolorStyles.PrimaryFunction)
+        If newuppercase And Not uppercase Then
             For Each mybutton As LCARS.LCARSbuttonClass In SplitContainer1.Panel1.Controls
                 If mybutton.ButtonText.Length = 1 And Char.IsLetter(mybutton.ButtonText) Then
                     mybutton.ButtonText = mybutton.Data2
                 End If
             Next
-        End If
-
-        'Sets the on screen letterkeys to LOWERCASE with CAPS LOCK OFF and SHIFT OFF.
-        If sbCaps.Color = LCARS.LCARScolorStyles.SystemFunction AndAlso sbLShift.Color = LCARS.LCARScolorStyles.SystemFunction Then
+        ElseIf uppercase And Not newuppercase Then
             For Each mybutton As LCARS.LCARSbuttonClass In SplitContainer1.Panel1.Controls
                 If mybutton.ButtonText.Length = 1 And Char.IsLetter(mybutton.ButtonText) Then
                     mybutton.ButtonText = mybutton.Data
                 End If
             Next
         End If
-
-        'Sets the on screen letterkeys to LOWERCASE with CAPS LOCK ON and SHIFT ON.
-        If sbCaps.Color = LCARS.LCARScolorStyles.PrimaryFunction AndAlso sbLShift.Color = LCARS.LCARScolorStyles.PrimaryFunction Then
-            For Each mybutton As LCARS.LCARSbuttonClass In SplitContainer1.Panel1.Controls
-                If mybutton.ButtonText.Length = 1 And Char.IsLetter(mybutton.ButtonText) Then
-                    mybutton.ButtonText = mybutton.Data
-                End If
-            Next
-        End If
-
+        uppercase = newuppercase 'Update stored value so we don't redraw unnecessarily
 
     End Sub
 
@@ -2102,9 +2066,4 @@ Public Class frmKeyboard
         End If
         Timer2.Enabled = False
     End Sub
-
-
-
-
-
 End Class
