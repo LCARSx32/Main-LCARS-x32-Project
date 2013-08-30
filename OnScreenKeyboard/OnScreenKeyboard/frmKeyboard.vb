@@ -1454,17 +1454,17 @@ Public Class frmKeyboard
         'NUMBERS LOCK DETECTION
         'If numbers lock is on, sets numbers lock button to primary colour.
         If Control.IsKeyLocked(Keys.NumLock) Then
-            btnnumlock.Color = LCARS.LCARScolorStyles.PrimaryFunction
+            If btnnumlock.Color = LCARS.LCARScolorStyles.SystemFunction Then btnnumlock.Color = LCARS.LCARScolorStyles.PrimaryFunction
         Else
-            btnnumlock.Color = LCARS.LCARScolorStyles.SystemFunction
+            If btnnumlock.Color = LCARS.LCARScolorStyles.PrimaryFunction Then btnnumlock.Color = LCARS.LCARScolorStyles.SystemFunction
         End If
 
         'SCROLL LOCK DETECTION
         'If scroll lock is on, sets scroll lock button to primary colour.
         If GetKeyState(Keys.Scroll) = 1 Then
-            btnScrollLock.Color = LCARS.LCARScolorStyles.PrimaryFunction
+            If btnnumlock.Color = LCARS.LCARScolorStyles.SystemFunction Then btnScrollLock.Color = LCARS.LCARScolorStyles.PrimaryFunction
         Else
-            btnScrollLock.Color = LCARS.LCARScolorStyles.SystemFunction
+            If btnnumlock.Color = LCARS.LCARScolorStyles.PrimaryFunction Then btnScrollLock.Color = LCARS.LCARScolorStyles.SystemFunction
         End If
 
         Dim newNumLockShift As Boolean = (btnnumlock.Color = LCARS.LCARScolorStyles.PrimaryFunction) Xor SHIFT
@@ -1487,10 +1487,10 @@ Public Class frmKeyboard
         'CAPS LOCK DETECTION
         'Syncronises the real world keyboard and on screen keyboard caps lock button.
         If Control.IsKeyLocked(Keys.CapsLock) Then
-            sbCaps.Color = LCARS.LCARScolorStyles.PrimaryFunction
+            If sbCaps.Color = LCARS.LCARScolorStyles.SystemFunction Then sbCaps.Color = LCARS.LCARScolorStyles.PrimaryFunction
         Else
             If CAPS = False Then
-                sbCaps.Color = LCARS.LCARScolorStyles.SystemFunction
+                If sbCaps.Color = LCARS.LCARScolorStyles.PrimaryFunction Then sbCaps.Color = LCARS.LCARScolorStyles.SystemFunction
             End If
         End If
 
