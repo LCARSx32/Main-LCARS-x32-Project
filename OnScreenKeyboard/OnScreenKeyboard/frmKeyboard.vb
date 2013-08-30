@@ -1451,7 +1451,16 @@ Public Class frmKeyboard
     End Sub
 
     Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
+        'SCROLL LOCK DETECTION
+        'If scroll lock is on, sets scroll lock button to primary colour.
+        If GetKeyState(Keys.Scroll) = 1 Then
+            If btnScrollLock.Color = LCARS.LCARScolorStyles.SystemFunction Then btnScrollLock.Color = LCARS.LCARScolorStyles.PrimaryFunction
+        Else
+            If btnScrollLock.Color = LCARS.LCARScolorStyles.PrimaryFunction Then btnScrollLock.Color = LCARS.LCARScolorStyles.SystemFunction
+        End If
+
         'NUMBERS LOCK DETECTION
+        Dim updateNumLock As Boolean = (IsKeyLocked(Keys.NumLock)) Xor (btnnumlock.Color = LCARS.LCARScolorStyles.PrimaryFunction)
         'If numbers lock is on, sets numbers lock button to primary colour.
         If Control.IsKeyLocked(Keys.NumLock) Then
             If btnnumlock.Color = LCARS.LCARScolorStyles.SystemFunction Then btnnumlock.Color = LCARS.LCARScolorStyles.PrimaryFunction
@@ -1459,30 +1468,20 @@ Public Class frmKeyboard
             If btnnumlock.Color = LCARS.LCARScolorStyles.PrimaryFunction Then btnnumlock.Color = LCARS.LCARScolorStyles.SystemFunction
         End If
 
-        'SCROLL LOCK DETECTION
-        'If scroll lock is on, sets scroll lock button to primary colour.
-        If GetKeyState(Keys.Scroll) = 1 Then
-            If btnnumlock.Color = LCARS.LCARScolorStyles.SystemFunction Then btnScrollLock.Color = LCARS.LCARScolorStyles.PrimaryFunction
-        Else
-            If btnnumlock.Color = LCARS.LCARScolorStyles.PrimaryFunction Then btnScrollLock.Color = LCARS.LCARScolorStyles.SystemFunction
-        End If
+        If updateNumLock Then
+            If (btnnumlock.Color = LCARS.LCARScolorStyles.SystemFunction) And SHIFT = True Then
 
-        Dim newNumLockShift As Boolean = (btnnumlock.Color = LCARS.LCARScolorStyles.PrimaryFunction) Xor SHIFT
-
-
-        If (btnnumlock.Color = LCARS.LCARScolorStyles.SystemFunction) And SHIFT = True Then
-
-            For Each myButton As LCARS.LCARSbuttonClass In SplitContainer1.Panel2.Controls
-                myButton.ButtonText = myButton.Data2
-            Next
-        Else
-            If (btnnumlock.Color = LCARS.LCARScolorStyles.PrimaryFunction) And SHIFT = True Then
                 For Each myButton As LCARS.LCARSbuttonClass In SplitContainer1.Panel2.Controls
-                    myButton.ButtonText = myButton.Data
+                    myButton.ButtonText = myButton.Data2
                 Next
+            Else
+                If (btnnumlock.Color = LCARS.LCARScolorStyles.PrimaryFunction) And SHIFT = True Then
+                    For Each myButton As LCARS.LCARSbuttonClass In SplitContainer1.Panel2.Controls
+                        myButton.ButtonText = myButton.Data
+                    Next
+                End If
             End If
         End If
-
 
         'CAPS LOCK DETECTION
         'Syncronises the real world keyboard and on screen keyboard caps lock button.
