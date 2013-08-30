@@ -31,6 +31,7 @@ Voice Commands
 <tr><td>My Documents</td><td>Opens LCARS file browser to show the "My Documents" folder.</td></tr>
 <tr><td>My Pictures</td><td>Opens LCARS file browser to show the "My Pictures" folder.</td></tr>
 <tr><td>My Music</td><td>Opens LCARS file browser to show the "My Music" folder.</td></tr>
+<tr><td>My Videos</td><td>Opens LCARS file browser to show the "My Videos" folder.</td></tr>
 <tr><td>Deactivate</td><td>Closes LCARS.</td></tr>
 <tr><td>Self Destruct</td><td>Opens self destruct program.</td></tr>
 <tr><td>Log off</td><td>Logs off computer. Requires confirmation</td></tr>
@@ -44,13 +45,16 @@ Voice Commands
 <tr><td>Date</td><td>Gives the current date.</td></tr>
 <tr><td>Time</td><td>Gives the current time.</td></tr>
 <tr><td>Keyboard</td><td>Shows the On Screen Keyboard.</td></tr>
-<tr><td>Task Manager</td><td>Opens incomplete LCARS task manager.</td></tr>
+<tr><td>Task Manager</td><td>Opens task manager.</td></tr>
 <tr><td>Continuous Commands</td><td>Removes need to say "computer" before every command.</td></tr>
 <tr><td>Yellow Alert</td><td>Initiates a yellow alert.</td></tr>
 <tr><td>Confirmed</td><td>Used to confirm a voice command.</td></tr>
 <tr><td>Help</td><td>Opens this manual.</td></tr>
+<tr><td>Show Console</td><td>Shows the voice commands console</td></tr>
+<tr><td>Hide Console</td><td>Hides the voice commands console</td></tr>
+<tr><td>?</td><td>Easter egg</td></tr>
 </table>
 <h3>Technical Information</h3>
-<p>LCARS x32 uses a static xml file to create its voice command grammar. While this will probably be upgraded to a dynamically declared grammar, much of the current system is designed to work around the limitations of this.</p>
+<p>LCARS x32 uses a static xml file to create its voice command grammar. This file is re-generated every time the speech commands are initialized. While this will probably be upgraded to a dynamically declared grammar, much of the current system is designed to work around the limitations of this. All command aliases and custom commands are stored in the registry.</p>
 </body>
 </html>
