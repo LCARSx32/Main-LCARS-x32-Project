@@ -28,7 +28,7 @@ Namespace Controls
             Dim g As Graphics = Me.CreateGraphics()
             g.Clear(Color.Black)
             For i As Integer = 0 To myList.Count - 1
-                g.DrawImage(myList(i).GetBitmap(), myList(i).Bounds)
+                If Not myList(i).HoldDraw then g.DrawImage(myList(i).GetBitmap(), myList(i).Bounds)
             Next
         End Sub
         Private Sub drawButton(ByVal sender As LightweightControls.ILightweightControl)
