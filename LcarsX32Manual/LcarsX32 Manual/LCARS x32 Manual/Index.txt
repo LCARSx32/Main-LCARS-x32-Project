@@ -3,7 +3,7 @@ Quick Reference|Quick Reference.htm
 Installation|Installation.htm
 Settings|Settings.htm
 Start Menu|Start Menu.htm
-My Computer|File Browser.htm
+File Browser|File Browser.htm
 Personal Programs|Personal Programs.htm
 On-Screen Keyboard|OSK.htm
 Engineering|Engineering.htm
