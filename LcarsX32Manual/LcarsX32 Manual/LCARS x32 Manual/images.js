@@ -20,9 +20,10 @@ function init(){
 	mydiv.appendChild(myImage);
 }
 
-function onImageClick(){
+function onImageClick(event){
 	//Show div tag and set src to proper image
-    var mytarget = event.target || event.srcElement;
+	event = event || window.event;
+	var mytarget = event.target || event.srcElement;
 	var source = mytarget.src;
 	myImage.src = source;
 	mydiv.style.visibility = "visible";
