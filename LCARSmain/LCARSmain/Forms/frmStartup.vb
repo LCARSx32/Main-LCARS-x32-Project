@@ -79,7 +79,7 @@ Public Class frmStartup
                     m.Result = 1
 
                     'Reload the colors of the current mainscreen
-                    LCARS.UpdateColors(myForm)
+                    LCARS.UpdateColors(curBusiness.myForm)
                     For Each mywindow As IntPtr In LinkedWindows
                         SendMessage(mywindow, InterMsgID, 0, 2)
                     Next
