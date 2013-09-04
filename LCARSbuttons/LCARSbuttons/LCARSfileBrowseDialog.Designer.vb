@@ -19,7 +19,6 @@ Partial Class LCARSfileBrowseDialog
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(LCARSfileBrowseDialog))
         Me.Label2 = New System.Windows.Forms.Label
         Me.lblFileName = New System.Windows.Forms.Label
         Me.txtFileName = New System.Windows.Forms.TextBox
@@ -99,23 +98,17 @@ Partial Class LCARSfileBrowseDialog
         '
         'fbUpDir
         '
-        Me.fbUpDir.BackgroundImage = CType(resources.GetObject("fbUpDir.BackgroundImage"), System.Drawing.Image)
         Me.fbUpDir.Beeping = False
         Me.fbUpDir.ButtonText = "UP A DIRECTORY"
         Me.fbUpDir.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.fbUpDir.ButtonTextHeight = 14
         Me.fbUpDir.Clickable = True
         Me.fbUpDir.Color = LCARS.LCARScolorStyles.NavigationFunction
+        Me.fbUpDir.CustomAlertColor = System.Drawing.Color.Empty
         Me.fbUpDir.Data = Nothing
         Me.fbUpDir.Data2 = Nothing
         Me.fbUpDir.FlashInterval = 500
         Me.fbUpDir.holdDraw = False
-        Me.fbUpDir.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.fbUpDir.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.fbUpDir.lblTextSize = New System.Drawing.Point(106, 35)
-        Me.fbUpDir.lblTextVisible = True
         Me.fbUpDir.Lit = True
         Me.fbUpDir.Location = New System.Drawing.Point(155, 37)
         Me.fbUpDir.Name = "fbUpDir"
@@ -127,7 +120,6 @@ Partial Class LCARSfileBrowseDialog
         'sbSaveOK
         '
         Me.sbSaveOK.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbSaveOK.BackgroundImage = CType(resources.GetObject("sbSaveOK.BackgroundImage"), System.Drawing.Image)
         Me.sbSaveOK.Beeping = False
         Me.sbSaveOK.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbSaveOK.ButtonText = "OK"
@@ -135,16 +127,11 @@ Partial Class LCARSfileBrowseDialog
         Me.sbSaveOK.ButtonTextHeight = 14
         Me.sbSaveOK.Clickable = True
         Me.sbSaveOK.Color = LCARS.LCARScolorStyles.PrimaryFunction
+        Me.sbSaveOK.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbSaveOK.Data = Nothing
         Me.sbSaveOK.Data2 = Nothing
         Me.sbSaveOK.FlashInterval = 500
         Me.sbSaveOK.holdDraw = False
-        Me.sbSaveOK.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbSaveOK.lblTextLoc = New System.Drawing.Point(17, 0)
-        Me.sbSaveOK.lblTextSize = New System.Drawing.Point(78, 35)
-        Me.sbSaveOK.lblTextVisible = True
         Me.sbSaveOK.Lit = True
         Me.sbSaveOK.Location = New System.Drawing.Point(433, 454)
         Me.sbSaveOK.Name = "sbSaveOK"
@@ -156,7 +143,6 @@ Partial Class LCARSfileBrowseDialog
         'sbSaveCancel
         '
         Me.sbSaveCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbSaveCancel.BackgroundImage = CType(resources.GetObject("sbSaveCancel.BackgroundImage"), System.Drawing.Image)
         Me.sbSaveCancel.Beeping = False
         Me.sbSaveCancel.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbSaveCancel.ButtonText = "CANCEL"
@@ -164,16 +150,11 @@ Partial Class LCARSfileBrowseDialog
         Me.sbSaveCancel.ButtonTextHeight = 14
         Me.sbSaveCancel.Clickable = True
         Me.sbSaveCancel.Color = LCARS.LCARScolorStyles.CriticalFunction
+        Me.sbSaveCancel.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbSaveCancel.Data = Nothing
         Me.sbSaveCancel.Data2 = Nothing
         Me.sbSaveCancel.FlashInterval = 500
         Me.sbSaveCancel.holdDraw = False
-        Me.sbSaveCancel.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbSaveCancel.lblTextLoc = New System.Drawing.Point(17, 0)
-        Me.sbSaveCancel.lblTextSize = New System.Drawing.Point(78, 35)
-        Me.sbSaveCancel.lblTextVisible = True
         Me.sbSaveCancel.Lit = True
         Me.sbSaveCancel.Location = New System.Drawing.Point(552, 454)
         Me.sbSaveCancel.Name = "sbSaveCancel"
@@ -184,7 +165,6 @@ Partial Class LCARSfileBrowseDialog
         '
         'sbMyComp
         '
-        Me.sbMyComp.BackgroundImage = CType(resources.GetObject("sbMyComp.BackgroundImage"), System.Drawing.Image)
         Me.sbMyComp.Beeping = False
         Me.sbMyComp.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbMyComp.ButtonText = "MY COMPUTER"
@@ -192,16 +172,11 @@ Partial Class LCARSfileBrowseDialog
         Me.sbMyComp.ButtonTextHeight = 14
         Me.sbMyComp.Clickable = True
         Me.sbMyComp.Color = LCARS.LCARScolorStyles.NavigationFunction
+        Me.sbMyComp.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbMyComp.Data = Nothing
         Me.sbMyComp.Data2 = Nothing
         Me.sbMyComp.FlashInterval = 500
         Me.sbMyComp.holdDraw = False
-        Me.sbMyComp.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbMyComp.lblTextLoc = New System.Drawing.Point(17, 0)
-        Me.sbMyComp.lblTextSize = New System.Drawing.Point(90, 35)
-        Me.sbMyComp.lblTextVisible = True
         Me.sbMyComp.Lit = True
         Me.sbMyComp.Location = New System.Drawing.Point(12, 67)
         Me.sbMyComp.Name = "sbMyComp"
@@ -212,7 +187,6 @@ Partial Class LCARSfileBrowseDialog
         '
         'sbMyDocs
         '
-        Me.sbMyDocs.BackgroundImage = CType(resources.GetObject("sbMyDocs.BackgroundImage"), System.Drawing.Image)
         Me.sbMyDocs.Beeping = False
         Me.sbMyDocs.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbMyDocs.ButtonText = "MY DOCUMENTS"
@@ -220,16 +194,11 @@ Partial Class LCARSfileBrowseDialog
         Me.sbMyDocs.ButtonTextHeight = 14
         Me.sbMyDocs.Clickable = True
         Me.sbMyDocs.Color = LCARS.LCARScolorStyles.NavigationFunction
+        Me.sbMyDocs.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbMyDocs.Data = Nothing
         Me.sbMyDocs.Data2 = Nothing
         Me.sbMyDocs.FlashInterval = 500
         Me.sbMyDocs.holdDraw = False
-        Me.sbMyDocs.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbMyDocs.lblTextLoc = New System.Drawing.Point(17, 0)
-        Me.sbMyDocs.lblTextSize = New System.Drawing.Point(90, 35)
-        Me.sbMyDocs.lblTextVisible = True
         Me.sbMyDocs.Lit = True
         Me.sbMyDocs.Location = New System.Drawing.Point(12, 108)
         Me.sbMyDocs.Name = "sbMyDocs"
@@ -240,7 +209,6 @@ Partial Class LCARSfileBrowseDialog
         '
         'sbNetwork
         '
-        Me.sbNetwork.BackgroundImage = CType(resources.GetObject("sbNetwork.BackgroundImage"), System.Drawing.Image)
         Me.sbNetwork.Beeping = False
         Me.sbNetwork.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbNetwork.ButtonText = "NETWORK"
@@ -248,16 +216,11 @@ Partial Class LCARSfileBrowseDialog
         Me.sbNetwork.ButtonTextHeight = 14
         Me.sbNetwork.Clickable = True
         Me.sbNetwork.Color = LCARS.LCARScolorStyles.NavigationFunction
+        Me.sbNetwork.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbNetwork.Data = Nothing
         Me.sbNetwork.Data2 = Nothing
         Me.sbNetwork.FlashInterval = 500
         Me.sbNetwork.holdDraw = False
-        Me.sbNetwork.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbNetwork.lblTextLoc = New System.Drawing.Point(17, 0)
-        Me.sbNetwork.lblTextSize = New System.Drawing.Point(90, 35)
-        Me.sbNetwork.lblTextVisible = True
         Me.sbNetwork.Lit = False
         Me.sbNetwork.Location = New System.Drawing.Point(12, 190)
         Me.sbNetwork.Name = "sbNetwork"
@@ -270,7 +233,6 @@ Partial Class LCARSfileBrowseDialog
         '
         Me.sbTitleBottom.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbTitleBottom.BackgroundImage = CType(resources.GetObject("sbTitleBottom.BackgroundImage"), System.Drawing.Image)
         Me.sbTitleBottom.Beeping = True
         Me.sbTitleBottom.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbTitleBottom.ButtonText = "SAVE"
@@ -278,16 +240,11 @@ Partial Class LCARSfileBrowseDialog
         Me.sbTitleBottom.ButtonTextHeight = 14
         Me.sbTitleBottom.Clickable = True
         Me.sbTitleBottom.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
+        Me.sbTitleBottom.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbTitleBottom.Data = Nothing
         Me.sbTitleBottom.Data2 = Nothing
         Me.sbTitleBottom.FlashInterval = 500
         Me.sbTitleBottom.holdDraw = False
-        Me.sbTitleBottom.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbTitleBottom.lblTextLoc = New System.Drawing.Point(11, 0)
-        Me.sbTitleBottom.lblTextSize = New System.Drawing.Point(637, 22)
-        Me.sbTitleBottom.lblTextVisible = True
         Me.sbTitleBottom.Lit = True
         Me.sbTitleBottom.Location = New System.Drawing.Point(6, 495)
         Me.sbTitleBottom.Name = "sbTitleBottom"
@@ -298,7 +255,6 @@ Partial Class LCARSfileBrowseDialog
         '
         'sbDesktop
         '
-        Me.sbDesktop.BackgroundImage = CType(resources.GetObject("sbDesktop.BackgroundImage"), System.Drawing.Image)
         Me.sbDesktop.Beeping = False
         Me.sbDesktop.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbDesktop.ButtonText = "DESKTOP"
@@ -306,16 +262,11 @@ Partial Class LCARSfileBrowseDialog
         Me.sbDesktop.ButtonTextHeight = 14
         Me.sbDesktop.Clickable = True
         Me.sbDesktop.Color = LCARS.LCARScolorStyles.NavigationFunction
+        Me.sbDesktop.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbDesktop.Data = Nothing
         Me.sbDesktop.Data2 = Nothing
         Me.sbDesktop.FlashInterval = 500
         Me.sbDesktop.holdDraw = False
-        Me.sbDesktop.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbDesktop.lblTextLoc = New System.Drawing.Point(17, 0)
-        Me.sbDesktop.lblTextSize = New System.Drawing.Point(90, 35)
-        Me.sbDesktop.lblTextVisible = True
         Me.sbDesktop.Lit = True
         Me.sbDesktop.Location = New System.Drawing.Point(12, 149)
         Me.sbDesktop.Name = "sbDesktop"
@@ -328,7 +279,6 @@ Partial Class LCARSfileBrowseDialog
         '
         Me.sbTitle.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbTitle.BackgroundImage = CType(resources.GetObject("sbTitle.BackgroundImage"), System.Drawing.Image)
         Me.sbTitle.Beeping = True
         Me.sbTitle.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbTitle.ButtonText = "SAVE"
@@ -336,16 +286,11 @@ Partial Class LCARSfileBrowseDialog
         Me.sbTitle.ButtonTextHeight = 14
         Me.sbTitle.Clickable = True
         Me.sbTitle.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
+        Me.sbTitle.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbTitle.Data = Nothing
         Me.sbTitle.Data2 = Nothing
         Me.sbTitle.FlashInterval = 500
         Me.sbTitle.holdDraw = False
-        Me.sbTitle.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbTitle.lblTextLoc = New System.Drawing.Point(11, 0)
-        Me.sbTitle.lblTextSize = New System.Drawing.Point(637, 22)
-        Me.sbTitle.lblTextVisible = True
         Me.sbTitle.Lit = True
         Me.sbTitle.Location = New System.Drawing.Point(6, 6)
         Me.sbTitle.Name = "sbTitle"

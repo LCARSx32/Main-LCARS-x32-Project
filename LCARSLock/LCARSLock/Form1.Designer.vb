@@ -22,23 +22,15 @@ Partial Class frmLock
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmLock))
-        Dim LcarScolor1 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor2 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor3 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor4 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor5 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor6 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor7 As LCARS.LCARScolor = New LCARS.LCARScolor
         Me.lblLocked = New System.Windows.Forms.Label
         Me.lblEnter = New System.Windows.Forms.Label
         Me.txtCode = New System.Windows.Forms.TextBox
         Me.pnlSettings = New System.Windows.Forms.Panel
+        Me.sbReset = New LCARS.Controls.StandardButton
         Me.txtOld = New System.Windows.Forms.TextBox
         Me.txtNew = New System.Windows.Forms.TextBox
         Me.lblReset = New System.Windows.Forms.Label
         Me.picUFP = New System.Windows.Forms.PictureBox
-        Me.sbReset = New LCARS.Controls.StandardButton
         Me.Settings = New LCARS.Controls.FlatButton
         Me.FlatButton1 = New LCARS.Controls.FlatButton
         Me.HalfPillButton2 = New LCARS.Controls.HalfPillButton
@@ -101,6 +93,29 @@ Partial Class frmLock
         Me.pnlSettings.TabIndex = 7
         Me.pnlSettings.Visible = False
         '
+        'sbReset
+        '
+        Me.sbReset.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.sbReset.Beeping = False
+        Me.sbReset.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
+        Me.sbReset.ButtonText = "SUBMIT"
+        Me.sbReset.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.sbReset.ButtonTextHeight = 14
+        Me.sbReset.Clickable = True
+        Me.sbReset.Color = LCARS.LCARScolorStyles.PrimaryFunction
+        Me.sbReset.CustomAlertColor = System.Drawing.Color.Empty
+        Me.sbReset.Data = Nothing
+        Me.sbReset.Data2 = Nothing
+        Me.sbReset.FlashInterval = 500
+        Me.sbReset.holdDraw = False
+        Me.sbReset.Lit = True
+        Me.sbReset.Location = New System.Drawing.Point(466, 429)
+        Me.sbReset.Name = "sbReset"
+        Me.sbReset.RedAlert = LCARS.LCARSalert.Normal
+        Me.sbReset.Size = New System.Drawing.Size(133, 47)
+        Me.sbReset.TabIndex = 4
+        Me.sbReset.Text = "SUBMIT"
+        '
         'txtOld
         '
         Me.txtOld.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
@@ -151,55 +166,20 @@ Partial Class frmLock
         Me.picUFP.TabIndex = 8
         Me.picUFP.TabStop = False
         '
-        'sbReset
-        '
-        Me.sbReset.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbReset.BackgroundImage = CType(resources.GetObject("sbReset.BackgroundImage"), System.Drawing.Image)
-        Me.sbReset.Beeping = False
-        Me.sbReset.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
-        Me.sbReset.ButtonText = "SUBMIT"
-        Me.sbReset.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.sbReset.ButtonTextHeight = 14
-        Me.sbReset.Clickable = True
-        Me.sbReset.Color = LCARS.LCARScolorStyles.PrimaryFunction
-        Me.sbReset.ColorsAvailable = LcarScolor1
-        Me.sbReset.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbReset.Data = Nothing
-        Me.sbReset.Data2 = Nothing
-        Me.sbReset.FlashInterval = 500
-        Me.sbReset.holdDraw = False
-        Me.sbReset.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
-        Me.sbReset.lblTextLoc = New System.Drawing.Point(23, 0)
-        Me.sbReset.lblTextSize = New System.Drawing.Size(86, 47)
-        Me.sbReset.lblTextVisible = True
-        Me.sbReset.Lit = True
-        Me.sbReset.Location = New System.Drawing.Point(466, 429)
-        Me.sbReset.Name = "sbReset"
-        Me.sbReset.RedAlert = LCARS.LCARSalert.Normal
-        Me.sbReset.Size = New System.Drawing.Size(133, 47)
-        Me.sbReset.TabIndex = 4
-        Me.sbReset.Text = "SUBMIT"
-        '
         'Settings
         '
         Me.Settings.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Settings.BackgroundImage = CType(resources.GetObject("Settings.BackgroundImage"), System.Drawing.Image)
         Me.Settings.Beeping = False
         Me.Settings.ButtonText = "SETTINGS"
         Me.Settings.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.Settings.ButtonTextHeight = 14
         Me.Settings.Clickable = True
         Me.Settings.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.Settings.ColorsAvailable = LcarScolor2
         Me.Settings.CustomAlertColor = System.Drawing.Color.Empty
         Me.Settings.Data = Nothing
         Me.Settings.Data2 = Nothing
         Me.Settings.FlashInterval = 500
         Me.Settings.holdDraw = False
-        Me.Settings.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
-        Me.Settings.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.Settings.lblTextSize = New System.Drawing.Size(74, 27)
-        Me.Settings.lblTextVisible = True
         Me.Settings.Lit = True
         Me.Settings.Location = New System.Drawing.Point(46, 534)
         Me.Settings.Name = "Settings"
@@ -212,23 +192,17 @@ Partial Class frmLock
         '
         Me.FlatButton1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.FlatButton1.BackgroundImage = CType(resources.GetObject("FlatButton1.BackgroundImage"), System.Drawing.Image)
         Me.FlatButton1.Beeping = False
         Me.FlatButton1.ButtonText = ""
         Me.FlatButton1.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.FlatButton1.ButtonTextHeight = 14
         Me.FlatButton1.Clickable = False
         Me.FlatButton1.Color = LCARS.LCARScolorStyles.StaticTan
-        Me.FlatButton1.ColorsAvailable = LcarScolor3
         Me.FlatButton1.CustomAlertColor = System.Drawing.Color.Empty
         Me.FlatButton1.Data = Nothing
         Me.FlatButton1.Data2 = Nothing
         Me.FlatButton1.FlashInterval = 500
         Me.FlatButton1.holdDraw = False
-        Me.FlatButton1.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
-        Me.FlatButton1.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.FlatButton1.lblTextSize = New System.Drawing.Size(465, 27)
-        Me.FlatButton1.lblTextVisible = True
         Me.FlatButton1.Lit = True
         Me.FlatButton1.Location = New System.Drawing.Point(126, 534)
         Me.FlatButton1.Name = "FlatButton1"
@@ -239,7 +213,6 @@ Partial Class frmLock
         'HalfPillButton2
         '
         Me.HalfPillButton2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.HalfPillButton2.BackgroundImage = CType(resources.GetObject("HalfPillButton2.BackgroundImage"), System.Drawing.Image)
         Me.HalfPillButton2.Beeping = False
         Me.HalfPillButton2.ButtonStyle = LCARS.Controls.HalfPillButton.LCARSbuttonStyles.PillLeft
         Me.HalfPillButton2.ButtonText = ""
@@ -247,16 +220,11 @@ Partial Class frmLock
         Me.HalfPillButton2.ButtonTextHeight = 14
         Me.HalfPillButton2.Clickable = False
         Me.HalfPillButton2.Color = LCARS.LCARScolorStyles.StaticTan
-        Me.HalfPillButton2.ColorsAvailable = LcarScolor4
         Me.HalfPillButton2.CustomAlertColor = System.Drawing.Color.Empty
         Me.HalfPillButton2.Data = Nothing
         Me.HalfPillButton2.Data2 = Nothing
         Me.HalfPillButton2.FlashInterval = 500
         Me.HalfPillButton2.holdDraw = False
-        Me.HalfPillButton2.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
-        Me.HalfPillButton2.lblTextLoc = New System.Drawing.Point(13, 0)
-        Me.HalfPillButton2.lblTextSize = New System.Drawing.Size(28, 27)
-        Me.HalfPillButton2.lblTextVisible = True
         Me.HalfPillButton2.Lit = True
         Me.HalfPillButton2.Location = New System.Drawing.Point(12, 534)
         Me.HalfPillButton2.Name = "HalfPillButton2"
@@ -267,7 +235,6 @@ Partial Class frmLock
         'HalfPillButton1
         '
         Me.HalfPillButton1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.HalfPillButton1.BackgroundImage = CType(resources.GetObject("HalfPillButton1.BackgroundImage"), System.Drawing.Image)
         Me.HalfPillButton1.Beeping = False
         Me.HalfPillButton1.ButtonStyle = LCARS.Controls.HalfPillButton.LCARSbuttonStyles.PillRight
         Me.HalfPillButton1.ButtonText = ""
@@ -275,16 +242,11 @@ Partial Class frmLock
         Me.HalfPillButton1.ButtonTextHeight = 14
         Me.HalfPillButton1.Clickable = False
         Me.HalfPillButton1.Color = LCARS.LCARScolorStyles.StaticTan
-        Me.HalfPillButton1.ColorsAvailable = LcarScolor5
         Me.HalfPillButton1.CustomAlertColor = System.Drawing.Color.Empty
         Me.HalfPillButton1.Data = Nothing
         Me.HalfPillButton1.Data2 = Nothing
         Me.HalfPillButton1.FlashInterval = 500
         Me.HalfPillButton1.holdDraw = False
-        Me.HalfPillButton1.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
-        Me.HalfPillButton1.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.HalfPillButton1.lblTextSize = New System.Drawing.Size(28, 27)
-        Me.HalfPillButton1.lblTextVisible = True
         Me.HalfPillButton1.Lit = True
         Me.HalfPillButton1.Location = New System.Drawing.Point(597, 534)
         Me.HalfPillButton1.Name = "HalfPillButton1"
@@ -295,7 +257,6 @@ Partial Class frmLock
         'sbSubmit
         '
         Me.sbSubmit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbSubmit.BackgroundImage = CType(resources.GetObject("sbSubmit.BackgroundImage"), System.Drawing.Image)
         Me.sbSubmit.Beeping = False
         Me.sbSubmit.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbSubmit.ButtonText = "SUBMIT"
@@ -303,16 +264,11 @@ Partial Class frmLock
         Me.sbSubmit.ButtonTextHeight = 14
         Me.sbSubmit.Clickable = True
         Me.sbSubmit.Color = LCARS.LCARScolorStyles.CriticalFunction
-        Me.sbSubmit.ColorsAvailable = LcarScolor6
         Me.sbSubmit.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbSubmit.Data = Nothing
         Me.sbSubmit.Data2 = Nothing
         Me.sbSubmit.FlashInterval = 500
         Me.sbSubmit.holdDraw = False
-        Me.sbSubmit.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
-        Me.sbSubmit.lblTextLoc = New System.Drawing.Point(18, 0)
-        Me.sbSubmit.lblTextSize = New System.Drawing.Size(111, 36)
-        Me.sbSubmit.lblTextVisible = True
         Me.sbSubmit.Lit = True
         Me.sbSubmit.Location = New System.Drawing.Point(478, 477)
         Me.sbSubmit.Name = "sbSubmit"
@@ -325,7 +281,6 @@ Partial Class frmLock
         '
         Me.tbTop.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbTop.BackgroundImage = CType(resources.GetObject("tbTop.BackgroundImage"), System.Drawing.Image)
         Me.tbTop.Beeping = False
         Me.tbTop.ButtonText = "SYSTEM LOCKED"
         Me.tbTop.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -333,16 +288,11 @@ Partial Class frmLock
         Me.tbTop.ButtonType = LCARS.Controls.TextButton.TextButtonType.DoublePills
         Me.tbTop.Clickable = False
         Me.tbTop.Color = LCARS.LCARScolorStyles.StaticTan
-        Me.tbTop.ColorsAvailable = LcarScolor7
         Me.tbTop.CustomAlertColor = System.Drawing.Color.Empty
         Me.tbTop.Data = Nothing
         Me.tbTop.Data2 = Nothing
         Me.tbTop.FlashInterval = 500
         Me.tbTop.holdDraw = False
-        Me.tbTop.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
-        Me.tbTop.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.tbTop.lblTextSize = New System.Drawing.Size(613, 29)
-        Me.tbTop.lblTextVisible = True
         Me.tbTop.Lit = True
         Me.tbTop.Location = New System.Drawing.Point(12, 12)
         Me.tbTop.Name = "tbTop"

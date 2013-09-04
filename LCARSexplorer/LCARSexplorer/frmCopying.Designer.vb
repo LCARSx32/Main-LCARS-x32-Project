@@ -22,7 +22,6 @@ Partial Class frmCopying
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmCopying))
         Me.tbTitle = New LCARS.Controls.TextButton
         Me.elbTop = New LCARS.Controls.Elbow
         Me.FlatButton1 = New LCARS.Controls.FlatButton
@@ -36,7 +35,6 @@ Partial Class frmCopying
         '
         'tbTitle
         '
-        Me.tbTitle.BackgroundImage = CType(resources.GetObject("tbTitle.BackgroundImage"), System.Drawing.Image)
         Me.tbTitle.Beeping = False
         Me.tbTitle.ButtonText = "COPYING FILES"
         Me.tbTitle.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -44,16 +42,11 @@ Partial Class frmCopying
         Me.tbTitle.ButtonType = LCARS.Controls.TextButton.TextButtonType.DoublePills
         Me.tbTitle.Clickable = False
         Me.tbTitle.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.tbTitle.CustomAlertColor = System.Drawing.Color.Empty
         Me.tbTitle.Data = Nothing
         Me.tbTitle.Data2 = Nothing
         Me.tbTitle.FlashInterval = 500
         Me.tbTitle.holdDraw = False
-        Me.tbTitle.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbTitle.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.tbTitle.lblTextSize = New System.Drawing.Point(456, 22)
-        Me.tbTitle.lblTextVisible = False
         Me.tbTitle.Lit = True
         Me.tbTitle.Location = New System.Drawing.Point(129, 12)
         Me.tbTitle.Name = "tbTitle"
@@ -64,7 +57,6 @@ Partial Class frmCopying
         '
         'elbTop
         '
-        Me.elbTop.BackgroundImage = CType(resources.GetObject("elbTop.BackgroundImage"), System.Drawing.Image)
         Me.elbTop.Beeping = False
         Me.elbTop.ButtonHeight = 22
         Me.elbTop.ButtonText = ""
@@ -73,18 +65,13 @@ Partial Class frmCopying
         Me.elbTop.ButtonWidth = 100
         Me.elbTop.Clickable = False
         Me.elbTop.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.elbTop.CustomAlertColor = System.Drawing.Color.Empty
         Me.elbTop.Data = Nothing
         Me.elbTop.Data2 = Nothing
         Me.elbTop.ElbowRatio = New System.Drawing.Point(1, 1)
         Me.elbTop.ElbowStyle = LCARS.Controls.Elbow.LCARSelbowStyles.UpperLeft
         Me.elbTop.FlashInterval = 500
         Me.elbTop.holdDraw = False
-        Me.elbTop.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.elbTop.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.elbTop.lblTextSize = New System.Drawing.Point(139, 47)
-        Me.elbTop.lblTextVisible = True
         Me.elbTop.Lit = True
         Me.elbTop.Location = New System.Drawing.Point(12, 12)
         Me.elbTop.Name = "elbTop"
@@ -94,23 +81,17 @@ Partial Class frmCopying
         '
         'FlatButton1
         '
-        Me.FlatButton1.BackgroundImage = CType(resources.GetObject("FlatButton1.BackgroundImage"), System.Drawing.Image)
         Me.FlatButton1.Beeping = False
         Me.FlatButton1.ButtonText = ""
         Me.FlatButton1.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.FlatButton1.ButtonTextHeight = 14
         Me.FlatButton1.Clickable = True
         Me.FlatButton1.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.FlatButton1.CustomAlertColor = System.Drawing.Color.Empty
         Me.FlatButton1.Data = Nothing
         Me.FlatButton1.Data2 = Nothing
         Me.FlatButton1.FlashInterval = 500
         Me.FlatButton1.holdDraw = False
-        Me.FlatButton1.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.FlatButton1.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.FlatButton1.lblTextSize = New System.Drawing.Point(100, 153)
-        Me.FlatButton1.lblTextVisible = True
         Me.FlatButton1.Lit = True
         Me.FlatButton1.Location = New System.Drawing.Point(12, 65)
         Me.FlatButton1.Name = "FlatButton1"
@@ -120,7 +101,6 @@ Partial Class frmCopying
         '
         'Elbow1
         '
-        Me.Elbow1.BackgroundImage = CType(resources.GetObject("Elbow1.BackgroundImage"), System.Drawing.Image)
         Me.Elbow1.Beeping = False
         Me.Elbow1.ButtonHeight = 22
         Me.Elbow1.ButtonText = ""
@@ -129,18 +109,13 @@ Partial Class frmCopying
         Me.Elbow1.ButtonWidth = 100
         Me.Elbow1.Clickable = False
         Me.Elbow1.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.Elbow1.CustomAlertColor = System.Drawing.Color.Empty
         Me.Elbow1.Data = Nothing
         Me.Elbow1.Data2 = Nothing
         Me.Elbow1.ElbowRatio = New System.Drawing.Point(1, 1)
         Me.Elbow1.ElbowStyle = LCARS.Controls.Elbow.LCARSelbowStyles.LowerLeft
         Me.Elbow1.FlashInterval = 500
         Me.Elbow1.holdDraw = False
-        Me.Elbow1.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Elbow1.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.Elbow1.lblTextSize = New System.Drawing.Point(139, 47)
-        Me.Elbow1.lblTextVisible = True
         Me.Elbow1.Lit = True
         Me.Elbow1.Location = New System.Drawing.Point(12, 224)
         Me.Elbow1.Name = "Elbow1"
@@ -150,7 +125,6 @@ Partial Class frmCopying
         '
         'TextButton1
         '
-        Me.TextButton1.BackgroundImage = CType(resources.GetObject("TextButton1.BackgroundImage"), System.Drawing.Image)
         Me.TextButton1.Beeping = False
         Me.TextButton1.ButtonText = ""
         Me.TextButton1.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -158,16 +132,11 @@ Partial Class frmCopying
         Me.TextButton1.ButtonType = LCARS.Controls.TextButton.TextButtonType.DoublePills
         Me.TextButton1.Clickable = False
         Me.TextButton1.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.TextButton1.CustomAlertColor = System.Drawing.Color.Empty
         Me.TextButton1.Data = Nothing
         Me.TextButton1.Data2 = Nothing
         Me.TextButton1.FlashInterval = 500
         Me.TextButton1.holdDraw = False
-        Me.TextButton1.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextButton1.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.TextButton1.lblTextSize = New System.Drawing.Point(456, 22)
-        Me.TextButton1.lblTextVisible = False
         Me.TextButton1.Lit = True
         Me.TextButton1.Location = New System.Drawing.Point(129, 249)
         Me.TextButton1.Name = "TextButton1"
@@ -215,7 +184,6 @@ Partial Class frmCopying
         '
         'sbCancel
         '
-        Me.sbCancel.BackgroundImage = CType(resources.GetObject("sbCancel.BackgroundImage"), System.Drawing.Image)
         Me.sbCancel.Beeping = False
         Me.sbCancel.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbCancel.ButtonText = "CANCEL"
@@ -223,16 +191,11 @@ Partial Class frmCopying
         Me.sbCancel.ButtonTextHeight = 14
         Me.sbCancel.Clickable = True
         Me.sbCancel.Color = LCARS.LCARScolorStyles.CriticalFunction
+        Me.sbCancel.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbCancel.Data = Nothing
         Me.sbCancel.Data2 = Nothing
         Me.sbCancel.FlashInterval = 500
         Me.sbCancel.holdDraw = False
-        Me.sbCancel.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbCancel.lblTextLoc = New System.Drawing.Point(11, 0)
-        Me.sbCancel.lblTextSize = New System.Drawing.Point(70, 22)
-        Me.sbCancel.lblTextVisible = True
         Me.sbCancel.Lit = True
         Me.sbCancel.Location = New System.Drawing.Point(493, 221)
         Me.sbCancel.Name = "sbCancel"

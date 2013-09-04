@@ -22,7 +22,7 @@ Partial Class frmFileSelect
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmFileSelect))
+        Dim LcarScolor1 As LCARS.LCARScolor = New LCARS.LCARScolor
         Me.elbTop = New LCARS.Controls.Elbow
         Me.elbBottom = New LCARS.Controls.Elbow
         Me.sbUp = New LCARS.Controls.FlatButton
@@ -37,7 +37,6 @@ Partial Class frmFileSelect
         '
         'elbTop
         '
-        Me.elbTop.BackgroundImage = CType(resources.GetObject("elbTop.BackgroundImage"), System.Drawing.Image)
         Me.elbTop.Beeping = False
         Me.elbTop.ButtonHeight = 25
         Me.elbTop.ButtonText = ""
@@ -53,12 +52,6 @@ Partial Class frmFileSelect
         Me.elbTop.ElbowStyle = LCARS.Controls.Elbow.LCARSelbowStyles.UpperLeft
         Me.elbTop.FlashInterval = 500
         Me.elbTop.holdDraw = False
-        Me.elbTop.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.elbTop.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.elbTop.lblTextSize = New System.Drawing.Point(141, 44)
-        Me.elbTop.lblTextVisible = True
         Me.elbTop.Lit = True
         Me.elbTop.Location = New System.Drawing.Point(12, 12)
         Me.elbTop.Name = "elbTop"
@@ -68,7 +61,6 @@ Partial Class frmFileSelect
         '
         'elbBottom
         '
-        Me.elbBottom.BackgroundImage = CType(resources.GetObject("elbBottom.BackgroundImage"), System.Drawing.Image)
         Me.elbBottom.Beeping = False
         Me.elbBottom.ButtonHeight = 25
         Me.elbBottom.ButtonText = ""
@@ -84,12 +76,6 @@ Partial Class frmFileSelect
         Me.elbBottom.ElbowStyle = LCARS.Controls.Elbow.LCARSelbowStyles.LowerLeft
         Me.elbBottom.FlashInterval = 500
         Me.elbBottom.holdDraw = False
-        Me.elbBottom.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.elbBottom.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.elbBottom.lblTextSize = New System.Drawing.Point(141, 44)
-        Me.elbBottom.lblTextVisible = True
         Me.elbBottom.Lit = True
         Me.elbBottom.Location = New System.Drawing.Point(12, 441)
         Me.elbBottom.Name = "elbBottom"
@@ -99,7 +85,6 @@ Partial Class frmFileSelect
         '
         'sbUp
         '
-        Me.sbUp.BackgroundImage = CType(resources.GetObject("sbUp.BackgroundImage"), System.Drawing.Image)
         Me.sbUp.Beeping = False
         Me.sbUp.ButtonText = "UP A DIRECTORY"
         Me.sbUp.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -111,12 +96,6 @@ Partial Class frmFileSelect
         Me.sbUp.Data2 = Nothing
         Me.sbUp.FlashInterval = 500
         Me.sbUp.holdDraw = False
-        Me.sbUp.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbUp.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.sbUp.lblTextSize = New System.Drawing.Point(100, 25)
-        Me.sbUp.lblTextVisible = True
         Me.sbUp.Lit = False
         Me.sbUp.Location = New System.Drawing.Point(12, 62)
         Me.sbUp.Name = "sbUp"
@@ -127,7 +106,6 @@ Partial Class frmFileSelect
         '
         'fbExt
         '
-        Me.fbExt.BackgroundImage = CType(resources.GetObject("fbExt.BackgroundImage"), System.Drawing.Image)
         Me.fbExt.Beeping = False
         Me.fbExt.ButtonText = ""
         Me.fbExt.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
@@ -139,12 +117,6 @@ Partial Class frmFileSelect
         Me.fbExt.Data2 = Nothing
         Me.fbExt.FlashInterval = 500
         Me.fbExt.holdDraw = False
-        Me.fbExt.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.fbExt.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.fbExt.lblTextSize = New System.Drawing.Point(100, 341)
-        Me.fbExt.lblTextVisible = True
         Me.fbExt.Lit = True
         Me.fbExt.Location = New System.Drawing.Point(12, 94)
         Me.fbExt.Name = "fbExt"
@@ -154,7 +126,6 @@ Partial Class frmFileSelect
         '
         'sbOK
         '
-        Me.sbOK.BackgroundImage = CType(resources.GetObject("sbOK.BackgroundImage"), System.Drawing.Image)
         Me.sbOK.Beeping = False
         Me.sbOK.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbOK.ButtonText = "OK"
@@ -167,12 +138,6 @@ Partial Class frmFileSelect
         Me.sbOK.Data2 = Nothing
         Me.sbOK.FlashInterval = 500
         Me.sbOK.holdDraw = False
-        Me.sbOK.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbOK.lblTextLoc = New System.Drawing.Point(14, 0)
-        Me.sbOK.lblTextSize = New System.Drawing.Point(46, 28)
-        Me.sbOK.lblTextVisible = True
         Me.sbOK.Lit = True
         Me.sbOK.Location = New System.Drawing.Point(420, 421)
         Me.sbOK.Name = "sbOK"
@@ -183,7 +148,6 @@ Partial Class frmFileSelect
         '
         'sbCancel
         '
-        Me.sbCancel.BackgroundImage = CType(resources.GetObject("sbCancel.BackgroundImage"), System.Drawing.Image)
         Me.sbCancel.Beeping = False
         Me.sbCancel.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbCancel.ButtonText = "CANCEL"
@@ -196,12 +160,6 @@ Partial Class frmFileSelect
         Me.sbCancel.Data2 = Nothing
         Me.sbCancel.FlashInterval = 500
         Me.sbCancel.holdDraw = False
-        Me.sbCancel.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbCancel.lblTextLoc = New System.Drawing.Point(14, 0)
-        Me.sbCancel.lblTextSize = New System.Drawing.Point(46, 28)
-        Me.sbCancel.lblTextVisible = True
         Me.sbCancel.Lit = True
         Me.sbCancel.Location = New System.Drawing.Point(328, 421)
         Me.sbCancel.Name = "sbCancel"
@@ -222,7 +180,6 @@ Partial Class frmFileSelect
         '
         'hpLocation
         '
-        Me.hpLocation.BackgroundImage = CType(resources.GetObject("hpLocation.BackgroundImage"), System.Drawing.Image)
         Me.hpLocation.Beeping = False
         Me.hpLocation.ButtonStyle = LCARS.Controls.HalfPillButton.LCARSbuttonStyles.PillRight
         Me.hpLocation.ButtonText = "C:\"
@@ -235,12 +192,6 @@ Partial Class frmFileSelect
         Me.hpLocation.Data2 = Nothing
         Me.hpLocation.FlashInterval = 500
         Me.hpLocation.holdDraw = False
-        Me.hpLocation.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.hpLocation.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.hpLocation.lblTextSize = New System.Drawing.Point(334, 25)
-        Me.hpLocation.lblTextVisible = True
         Me.hpLocation.Lit = True
         Me.hpLocation.Location = New System.Drawing.Point(159, 12)
         Me.hpLocation.Name = "hpLocation"
@@ -251,7 +202,6 @@ Partial Class frmFileSelect
         '
         'hpPrompt
         '
-        Me.hpPrompt.BackgroundImage = CType(resources.GetObject("hpPrompt.BackgroundImage"), System.Drawing.Image)
         Me.hpPrompt.Beeping = False
         Me.hpPrompt.ButtonStyle = LCARS.Controls.HalfPillButton.LCARSbuttonStyles.PillRight
         Me.hpPrompt.ButtonText = ""
@@ -264,12 +214,6 @@ Partial Class frmFileSelect
         Me.hpPrompt.Data2 = Nothing
         Me.hpPrompt.FlashInterval = 500
         Me.hpPrompt.holdDraw = False
-        Me.hpPrompt.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.hpPrompt.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.hpPrompt.lblTextSize = New System.Drawing.Point(334, 25)
-        Me.hpPrompt.lblTextVisible = True
         Me.hpPrompt.Lit = True
         Me.hpPrompt.Location = New System.Drawing.Point(159, 460)
         Me.hpPrompt.Name = "hpPrompt"
@@ -279,6 +223,8 @@ Partial Class frmFileSelect
         '
         'gridMyComp
         '
+        Me.gridMyComp.Beeping = False
+        Me.gridMyComp.ColorsAvailable = LcarScolor1
         Me.gridMyComp.ControlAddingDirection = LCARS.Controls.ButtonGrid.ControlDirection.Vertical
         Me.gridMyComp.ControlPadding = 5
         Me.gridMyComp.ControlSize = New System.Drawing.Size(150, 70)

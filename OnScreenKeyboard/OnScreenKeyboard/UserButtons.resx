@@ -117,35 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="sbDone.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAFAAAAAYCAYAAABtGnqsAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADISURBVFhHY2BgYPiv5+rwP6a74X/1zlWjmIgwAIWVVXjA
-        f1DYMYACbzTgyEs4drGh/xlSpnWNBiARqQ5bIiteO/8/w2jqIy/1wcJtNADJTH2jAUhhwI0G4GgAUlZ2
-        UavsHy0DKUyJowE4GoADm5VHU+BoChxNgUO6KzmahUez8GgWHs3C1GrVD0VzRsvA0TJwtAwc2mVgzqKp
-        Q9oDA1lulm9e+p/BNSNhNADJLAcDKwv+M7Cwsf73LckaDUQSAzGiteo/Bw/3fwBI22rR+SfvTwAAAABJ
-        RU5ErkJggg==
-</value>
-  </data>
-  <data name="sbBrowse.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAFAAAAAYCAYAAABtGnqsAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADISURBVFhHY2BgYPiv5+rwP6a74X/1zlWjmIgwAIWVVXjA
-        f1DYMYACbzTgyEs4drGh/xlSpnWNBiARqQ5bIiteO/8/w2jqIy/1wcJtNADJTH2jAUhhwI0G4GgAUlZ2
-        UavsHy0DKUyJowE4GoADm5VHU+BoChxNgUO6KzmahUez8GgWHs3C1GrVD0VzRsvA0TJwtAwc2mVgzqKp
-        Q9oDA1lulm9e+p/BNSNhNADJLAcDKwv+M7Cwsf73LckaDUQSAzGiteo/Bw/3fwBI22rR+SfvTwAAAABJ
-        RU5ErkJggg==
-</value>
-  </data>
-  <data name="sbMove.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAFAAAAAYCAYAAABtGnqsAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADISURBVFhHY2BgYPiv5+rwP6a74X/1zlWjmIgwAIWVVXjA
-        f1DYMYACbzTgyEs4drGh/xlSpnWNBiARqQ5bIiteO/8/w2jqIy/1wcJtNADJTH2jAUhhwI0G4GgAUlZ2
-        UavsHy0DKUyJowE4GoADm5VHU+BoChxNgUO6KzmahUez8GgWHs3C1GrVD0VzRsvA0TJwtAwc2mVgzqKp
-        Q9oDA1lulm9e+p/BNSNhNADJLAcDKwv+M7Cwsf73LckaDUQSAzGiteo/Bw/3fwBI22rR+SfvTwAAAABJ
-        RU5ErkJggg==
-</value>
-  </data>
 </root>

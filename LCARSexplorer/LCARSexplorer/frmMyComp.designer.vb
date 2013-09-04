@@ -20,7 +20,7 @@ Partial Class frmMyComp
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMyComp))
+        Dim LcarScolor1 As LCARS.LCARScolor = New LCARS.LCARScolor
         Me.pnlProperties = New System.Windows.Forms.Panel
         Me.pnlMultiple = New System.Windows.Forms.Panel
         Me.lblMultipleOut = New System.Windows.Forms.Label
@@ -280,7 +280,6 @@ Partial Class frmMyComp
         '
         'liDrive
         '
-        Me.liDrive.BackgroundImage = CType(resources.GetObject("liDrive.BackgroundImage"), System.Drawing.Image)
         Me.liDrive.Beeping = False
         Me.liDrive.ButtonText = "50%"
         Me.liDrive.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -293,12 +292,6 @@ Partial Class frmMyComp
         Me.liDrive.Data2 = Nothing
         Me.liDrive.FlashInterval = 500
         Me.liDrive.holdDraw = False
-        Me.liDrive.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.liDrive.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.liDrive.lblTextSize = New System.Drawing.Point(147, 164)
-        Me.liDrive.lblTextVisible = True
         Me.liDrive.Lit = True
         Me.liDrive.Location = New System.Drawing.Point(148, 31)
         Me.liDrive.Name = "liDrive"
@@ -457,7 +450,6 @@ Partial Class frmMyComp
         '
         'sbChangeProgram
         '
-        Me.sbChangeProgram.BackgroundImage = CType(resources.GetObject("sbChangeProgram.BackgroundImage"), System.Drawing.Image)
         Me.sbChangeProgram.Beeping = False
         Me.sbChangeProgram.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbChangeProgram.ButtonText = "CHANGE"
@@ -470,12 +462,6 @@ Partial Class frmMyComp
         Me.sbChangeProgram.Data2 = Nothing
         Me.sbChangeProgram.FlashInterval = 500
         Me.sbChangeProgram.holdDraw = False
-        Me.sbChangeProgram.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbChangeProgram.lblTextLoc = New System.Drawing.Point(10, 0)
-        Me.sbChangeProgram.lblTextSize = New System.Drawing.Point(46, 20)
-        Me.sbChangeProgram.lblTextVisible = True
         Me.sbChangeProgram.Lit = True
         Me.sbChangeProgram.Location = New System.Drawing.Point(9, 205)
         Me.sbChangeProgram.Name = "sbChangeProgram"
@@ -604,7 +590,6 @@ Partial Class frmMyComp
         'sbCloseProperties
         '
         Me.sbCloseProperties.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbCloseProperties.BackgroundImage = CType(resources.GetObject("sbCloseProperties.BackgroundImage"), System.Drawing.Image)
         Me.sbCloseProperties.Beeping = False
         Me.sbCloseProperties.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbCloseProperties.ButtonText = "CLOSE"
@@ -617,12 +602,6 @@ Partial Class frmMyComp
         Me.sbCloseProperties.Data2 = Nothing
         Me.sbCloseProperties.FlashInterval = 500
         Me.sbCloseProperties.holdDraw = False
-        Me.sbCloseProperties.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbCloseProperties.lblTextLoc = New System.Drawing.Point(13, 0)
-        Me.sbCloseProperties.lblTextSize = New System.Drawing.Point(61, 26)
-        Me.sbCloseProperties.lblTextVisible = True
         Me.sbCloseProperties.Lit = True
         Me.sbCloseProperties.Location = New System.Drawing.Point(407, 477)
         Me.sbCloseProperties.Name = "sbCloseProperties"
@@ -665,7 +644,6 @@ Partial Class frmMyComp
         'sbOK
         '
         Me.sbOK.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbOK.BackgroundImage = CType(resources.GetObject("sbOK.BackgroundImage"), System.Drawing.Image)
         Me.sbOK.Beeping = False
         Me.sbOK.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbOK.ButtonText = "OK"
@@ -678,12 +656,6 @@ Partial Class frmMyComp
         Me.sbOK.Data2 = Nothing
         Me.sbOK.FlashInterval = 500
         Me.sbOK.holdDraw = False
-        Me.sbOK.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbOK.lblTextLoc = New System.Drawing.Point(13, 0)
-        Me.sbOK.lblTextSize = New System.Drawing.Point(61, 26)
-        Me.sbOK.lblTextVisible = True
         Me.sbOK.Lit = True
         Me.sbOK.Location = New System.Drawing.Point(356, 456)
         Me.sbOK.Name = "sbOK"
@@ -728,7 +700,6 @@ Partial Class frmMyComp
         'sbCancel
         '
         Me.sbCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbCancel.BackgroundImage = CType(resources.GetObject("sbCancel.BackgroundImage"), System.Drawing.Image)
         Me.sbCancel.Beeping = False
         Me.sbCancel.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbCancel.ButtonText = "CANCEL"
@@ -741,12 +712,6 @@ Partial Class frmMyComp
         Me.sbCancel.Data2 = Nothing
         Me.sbCancel.FlashInterval = 500
         Me.sbCancel.holdDraw = False
-        Me.sbCancel.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbCancel.lblTextLoc = New System.Drawing.Point(13, 0)
-        Me.sbCancel.lblTextSize = New System.Drawing.Point(61, 26)
-        Me.sbCancel.lblTextVisible = True
         Me.sbCancel.Lit = True
         Me.sbCancel.Location = New System.Drawing.Point(263, 456)
         Me.sbCancel.Name = "sbCancel"
@@ -772,7 +737,6 @@ Partial Class frmMyComp
         'sbRename
         '
         Me.sbRename.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbRename.BackgroundImage = CType(resources.GetObject("sbRename.BackgroundImage"), System.Drawing.Image)
         Me.sbRename.Beeping = False
         Me.sbRename.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbRename.ButtonText = "RENAME"
@@ -785,12 +749,6 @@ Partial Class frmMyComp
         Me.sbRename.Data2 = Nothing
         Me.sbRename.FlashInterval = 500
         Me.sbRename.holdDraw = False
-        Me.sbRename.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbRename.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.sbRename.lblTextSize = New System.Drawing.Point(87, 26)
-        Me.sbRename.lblTextVisible = True
         Me.sbRename.Lit = False
         Me.sbRename.Location = New System.Drawing.Point(5, 3)
         Me.sbRename.Name = "sbRename"
@@ -802,7 +760,6 @@ Partial Class frmMyComp
         'sbCut
         '
         Me.sbCut.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbCut.BackgroundImage = CType(resources.GetObject("sbCut.BackgroundImage"), System.Drawing.Image)
         Me.sbCut.Beeping = False
         Me.sbCut.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbCut.ButtonText = "CUT"
@@ -815,12 +772,6 @@ Partial Class frmMyComp
         Me.sbCut.Data2 = Nothing
         Me.sbCut.FlashInterval = 500
         Me.sbCut.holdDraw = False
-        Me.sbCut.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbCut.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.sbCut.lblTextSize = New System.Drawing.Point(87, 26)
-        Me.sbCut.lblTextVisible = True
         Me.sbCut.Lit = True
         Me.sbCut.Location = New System.Drawing.Point(5, 99)
         Me.sbCut.Name = "sbCut"
@@ -832,7 +783,6 @@ Partial Class frmMyComp
         'sbPaste
         '
         Me.sbPaste.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbPaste.BackgroundImage = CType(resources.GetObject("sbPaste.BackgroundImage"), System.Drawing.Image)
         Me.sbPaste.Beeping = False
         Me.sbPaste.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbPaste.ButtonText = "PASTE"
@@ -845,12 +795,6 @@ Partial Class frmMyComp
         Me.sbPaste.Data2 = Nothing
         Me.sbPaste.FlashInterval = 500
         Me.sbPaste.holdDraw = False
-        Me.sbPaste.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbPaste.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.sbPaste.lblTextSize = New System.Drawing.Point(87, 26)
-        Me.sbPaste.lblTextVisible = True
         Me.sbPaste.Lit = True
         Me.sbPaste.Location = New System.Drawing.Point(5, 67)
         Me.sbPaste.Name = "sbPaste"
@@ -862,7 +806,6 @@ Partial Class frmMyComp
         'sbDelete
         '
         Me.sbDelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbDelete.BackgroundImage = CType(resources.GetObject("sbDelete.BackgroundImage"), System.Drawing.Image)
         Me.sbDelete.Beeping = False
         Me.sbDelete.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbDelete.ButtonText = "DELETE"
@@ -875,12 +818,6 @@ Partial Class frmMyComp
         Me.sbDelete.Data2 = Nothing
         Me.sbDelete.FlashInterval = 500
         Me.sbDelete.holdDraw = False
-        Me.sbDelete.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbDelete.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.sbDelete.lblTextSize = New System.Drawing.Point(87, 26)
-        Me.sbDelete.lblTextVisible = True
         Me.sbDelete.Lit = True
         Me.sbDelete.Location = New System.Drawing.Point(5, 131)
         Me.sbDelete.Name = "sbDelete"
@@ -892,7 +829,6 @@ Partial Class frmMyComp
         'sbCopy
         '
         Me.sbCopy.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbCopy.BackgroundImage = CType(resources.GetObject("sbCopy.BackgroundImage"), System.Drawing.Image)
         Me.sbCopy.Beeping = False
         Me.sbCopy.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbCopy.ButtonText = "COPY"
@@ -905,12 +841,6 @@ Partial Class frmMyComp
         Me.sbCopy.Data2 = Nothing
         Me.sbCopy.FlashInterval = 500
         Me.sbCopy.holdDraw = False
-        Me.sbCopy.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbCopy.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.sbCopy.lblTextSize = New System.Drawing.Point(87, 26)
-        Me.sbCopy.lblTextVisible = True
         Me.sbCopy.Lit = True
         Me.sbCopy.Location = New System.Drawing.Point(5, 35)
         Me.sbCopy.Name = "sbCopy"
@@ -936,7 +866,6 @@ Partial Class frmMyComp
         'sbEdit
         '
         Me.sbEdit.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbEdit.BackgroundImage = CType(resources.GetObject("sbEdit.BackgroundImage"), System.Drawing.Image)
         Me.sbEdit.Beeping = False
         Me.sbEdit.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbEdit.ButtonText = "EDIT"
@@ -949,12 +878,6 @@ Partial Class frmMyComp
         Me.sbEdit.Data2 = Nothing
         Me.sbEdit.FlashInterval = 500
         Me.sbEdit.holdDraw = False
-        Me.sbEdit.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbEdit.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.sbEdit.lblTextSize = New System.Drawing.Point(87, 26)
-        Me.sbEdit.lblTextVisible = True
         Me.sbEdit.Lit = True
         Me.sbEdit.Location = New System.Drawing.Point(0, 3)
         Me.sbEdit.Name = "sbEdit"
@@ -966,7 +889,6 @@ Partial Class frmMyComp
         'sbFormat
         '
         Me.sbFormat.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbFormat.BackgroundImage = CType(resources.GetObject("sbFormat.BackgroundImage"), System.Drawing.Image)
         Me.sbFormat.Beeping = False
         Me.sbFormat.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbFormat.ButtonText = "FORMAT"
@@ -979,12 +901,6 @@ Partial Class frmMyComp
         Me.sbFormat.Data2 = Nothing
         Me.sbFormat.FlashInterval = 500
         Me.sbFormat.holdDraw = False
-        Me.sbFormat.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbFormat.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.sbFormat.lblTextSize = New System.Drawing.Point(87, 26)
-        Me.sbFormat.lblTextVisible = True
         Me.sbFormat.Lit = True
         Me.sbFormat.Location = New System.Drawing.Point(0, 35)
         Me.sbFormat.Name = "sbFormat"
@@ -996,7 +912,6 @@ Partial Class frmMyComp
         'sbOpenWith
         '
         Me.sbOpenWith.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbOpenWith.BackgroundImage = CType(resources.GetObject("sbOpenWith.BackgroundImage"), System.Drawing.Image)
         Me.sbOpenWith.Beeping = False
         Me.sbOpenWith.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbOpenWith.ButtonText = "OPEN WITH"
@@ -1009,12 +924,6 @@ Partial Class frmMyComp
         Me.sbOpenWith.Data2 = Nothing
         Me.sbOpenWith.FlashInterval = 500
         Me.sbOpenWith.holdDraw = False
-        Me.sbOpenWith.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbOpenWith.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.sbOpenWith.lblTextSize = New System.Drawing.Point(87, 26)
-        Me.sbOpenWith.lblTextVisible = True
         Me.sbOpenWith.Lit = True
         Me.sbOpenWith.Location = New System.Drawing.Point(0, 99)
         Me.sbOpenWith.Name = "sbOpenWith"
@@ -1026,7 +935,6 @@ Partial Class frmMyComp
         'sbNewFolder
         '
         Me.sbNewFolder.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbNewFolder.BackgroundImage = CType(resources.GetObject("sbNewFolder.BackgroundImage"), System.Drawing.Image)
         Me.sbNewFolder.Beeping = False
         Me.sbNewFolder.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbNewFolder.ButtonText = "NEW FOLDER"
@@ -1039,12 +947,6 @@ Partial Class frmMyComp
         Me.sbNewFolder.Data2 = Nothing
         Me.sbNewFolder.FlashInterval = 500
         Me.sbNewFolder.holdDraw = False
-        Me.sbNewFolder.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbNewFolder.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.sbNewFolder.lblTextSize = New System.Drawing.Point(87, 26)
-        Me.sbNewFolder.lblTextVisible = True
         Me.sbNewFolder.Lit = True
         Me.sbNewFolder.Location = New System.Drawing.Point(0, 67)
         Me.sbNewFolder.Name = "sbNewFolder"
@@ -1086,7 +988,6 @@ Partial Class frmMyComp
         '
         'fbShortcutsBorder
         '
-        Me.fbShortcutsBorder.BackgroundImage = CType(resources.GetObject("fbShortcutsBorder.BackgroundImage"), System.Drawing.Image)
         Me.fbShortcutsBorder.Beeping = False
         Me.fbShortcutsBorder.ButtonText = ""
         Me.fbShortcutsBorder.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
@@ -1098,12 +999,6 @@ Partial Class frmMyComp
         Me.fbShortcutsBorder.Data2 = Nothing
         Me.fbShortcutsBorder.FlashInterval = 500
         Me.fbShortcutsBorder.holdDraw = False
-        Me.fbShortcutsBorder.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.fbShortcutsBorder.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.fbShortcutsBorder.lblTextSize = New System.Drawing.Point(5, 240)
-        Me.fbShortcutsBorder.lblTextVisible = True
         Me.fbShortcutsBorder.Lit = True
         Me.fbShortcutsBorder.Location = New System.Drawing.Point(3, 43)
         Me.fbShortcutsBorder.Name = "fbShortcutsBorder"
@@ -1114,7 +1009,6 @@ Partial Class frmMyComp
         'sbSaveCurrent
         '
         Me.sbSaveCurrent.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbSaveCurrent.BackgroundImage = CType(resources.GetObject("sbSaveCurrent.BackgroundImage"), System.Drawing.Image)
         Me.sbSaveCurrent.Beeping = False
         Me.sbSaveCurrent.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbSaveCurrent.ButtonText = "SAVE CURRENT"
@@ -1127,12 +1021,6 @@ Partial Class frmMyComp
         Me.sbSaveCurrent.Data2 = Nothing
         Me.sbSaveCurrent.FlashInterval = 500
         Me.sbSaveCurrent.holdDraw = False
-        Me.sbSaveCurrent.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbSaveCurrent.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.sbSaveCurrent.lblTextSize = New System.Drawing.Point(87, 26)
-        Me.sbSaveCurrent.lblTextVisible = True
         Me.sbSaveCurrent.Lit = True
         Me.sbSaveCurrent.Location = New System.Drawing.Point(14, 253)
         Me.sbSaveCurrent.Name = "sbSaveCurrent"
@@ -1144,7 +1032,6 @@ Partial Class frmMyComp
         'sbEnterPath
         '
         Me.sbEnterPath.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbEnterPath.BackgroundImage = CType(resources.GetObject("sbEnterPath.BackgroundImage"), System.Drawing.Image)
         Me.sbEnterPath.Beeping = False
         Me.sbEnterPath.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbEnterPath.ButtonText = "ENTER PATH"
@@ -1157,12 +1044,6 @@ Partial Class frmMyComp
         Me.sbEnterPath.Data2 = Nothing
         Me.sbEnterPath.FlashInterval = 500
         Me.sbEnterPath.holdDraw = False
-        Me.sbEnterPath.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbEnterPath.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.sbEnterPath.lblTextSize = New System.Drawing.Point(87, 26)
-        Me.sbEnterPath.lblTextVisible = True
         Me.sbEnterPath.Lit = True
         Me.sbEnterPath.Location = New System.Drawing.Point(14, 221)
         Me.sbEnterPath.Name = "sbEnterPath"
@@ -1174,7 +1055,6 @@ Partial Class frmMyComp
         'sbVideos
         '
         Me.sbVideos.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbVideos.BackgroundImage = CType(resources.GetObject("sbVideos.BackgroundImage"), System.Drawing.Image)
         Me.sbVideos.Beeping = False
         Me.sbVideos.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbVideos.ButtonText = "MY VIDEOS"
@@ -1187,12 +1067,6 @@ Partial Class frmMyComp
         Me.sbVideos.Data2 = Nothing
         Me.sbVideos.FlashInterval = 500
         Me.sbVideos.holdDraw = False
-        Me.sbVideos.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbVideos.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.sbVideos.lblTextSize = New System.Drawing.Point(87, 26)
-        Me.sbVideos.lblTextVisible = True
         Me.sbVideos.Lit = True
         Me.sbVideos.Location = New System.Drawing.Point(14, 189)
         Me.sbVideos.Name = "sbVideos"
@@ -1204,7 +1078,6 @@ Partial Class frmMyComp
         'sbMusic
         '
         Me.sbMusic.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbMusic.BackgroundImage = CType(resources.GetObject("sbMusic.BackgroundImage"), System.Drawing.Image)
         Me.sbMusic.Beeping = False
         Me.sbMusic.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbMusic.ButtonText = "MY MUSIC"
@@ -1217,12 +1090,6 @@ Partial Class frmMyComp
         Me.sbMusic.Data2 = Nothing
         Me.sbMusic.FlashInterval = 500
         Me.sbMusic.holdDraw = False
-        Me.sbMusic.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbMusic.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.sbMusic.lblTextSize = New System.Drawing.Point(87, 26)
-        Me.sbMusic.lblTextVisible = True
         Me.sbMusic.Lit = True
         Me.sbMusic.Location = New System.Drawing.Point(14, 157)
         Me.sbMusic.Name = "sbMusic"
@@ -1234,7 +1101,6 @@ Partial Class frmMyComp
         'sbPictures
         '
         Me.sbPictures.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbPictures.BackgroundImage = CType(resources.GetObject("sbPictures.BackgroundImage"), System.Drawing.Image)
         Me.sbPictures.Beeping = False
         Me.sbPictures.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbPictures.ButtonText = "MY PICTURES"
@@ -1247,12 +1113,6 @@ Partial Class frmMyComp
         Me.sbPictures.Data2 = Nothing
         Me.sbPictures.FlashInterval = 500
         Me.sbPictures.holdDraw = False
-        Me.sbPictures.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbPictures.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.sbPictures.lblTextSize = New System.Drawing.Point(87, 26)
-        Me.sbPictures.lblTextVisible = True
         Me.sbPictures.Lit = True
         Me.sbPictures.Location = New System.Drawing.Point(14, 125)
         Me.sbPictures.Name = "sbPictures"
@@ -1264,7 +1124,6 @@ Partial Class frmMyComp
         'sbDocuments
         '
         Me.sbDocuments.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbDocuments.BackgroundImage = CType(resources.GetObject("sbDocuments.BackgroundImage"), System.Drawing.Image)
         Me.sbDocuments.Beeping = False
         Me.sbDocuments.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbDocuments.ButtonText = "MY DOCUMENTS"
@@ -1277,12 +1136,6 @@ Partial Class frmMyComp
         Me.sbDocuments.Data2 = Nothing
         Me.sbDocuments.FlashInterval = 500
         Me.sbDocuments.holdDraw = False
-        Me.sbDocuments.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbDocuments.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.sbDocuments.lblTextSize = New System.Drawing.Point(87, 26)
-        Me.sbDocuments.lblTextVisible = True
         Me.sbDocuments.Lit = True
         Me.sbDocuments.Location = New System.Drawing.Point(14, 93)
         Me.sbDocuments.Name = "sbDocuments"
@@ -1294,7 +1147,6 @@ Partial Class frmMyComp
         'sbDesktop
         '
         Me.sbDesktop.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbDesktop.BackgroundImage = CType(resources.GetObject("sbDesktop.BackgroundImage"), System.Drawing.Image)
         Me.sbDesktop.Beeping = False
         Me.sbDesktop.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbDesktop.ButtonText = "DESKTOP"
@@ -1307,12 +1159,6 @@ Partial Class frmMyComp
         Me.sbDesktop.Data2 = Nothing
         Me.sbDesktop.FlashInterval = 500
         Me.sbDesktop.holdDraw = False
-        Me.sbDesktop.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbDesktop.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.sbDesktop.lblTextSize = New System.Drawing.Point(87, 26)
-        Me.sbDesktop.lblTextVisible = True
         Me.sbDesktop.Lit = True
         Me.sbDesktop.Location = New System.Drawing.Point(14, 61)
         Me.sbDesktop.Name = "sbDesktop"
@@ -1324,7 +1170,6 @@ Partial Class frmMyComp
         'sbMyComp
         '
         Me.sbMyComp.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbMyComp.BackgroundImage = CType(resources.GetObject("sbMyComp.BackgroundImage"), System.Drawing.Image)
         Me.sbMyComp.Beeping = False
         Me.sbMyComp.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbMyComp.ButtonText = "MY COMPUTER"
@@ -1337,12 +1182,6 @@ Partial Class frmMyComp
         Me.sbMyComp.Data2 = Nothing
         Me.sbMyComp.FlashInterval = 500
         Me.sbMyComp.holdDraw = False
-        Me.sbMyComp.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbMyComp.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.sbMyComp.lblTextSize = New System.Drawing.Point(87, 26)
-        Me.sbMyComp.lblTextVisible = True
         Me.sbMyComp.Lit = True
         Me.sbMyComp.Location = New System.Drawing.Point(14, 29)
         Me.sbMyComp.Name = "sbMyComp"
@@ -1353,7 +1192,6 @@ Partial Class frmMyComp
         '
         'elbShortcutsBottom
         '
-        Me.elbShortcutsBottom.BackgroundImage = CType(resources.GetObject("elbShortcutsBottom.BackgroundImage"), System.Drawing.Image)
         Me.elbShortcutsBottom.Beeping = False
         Me.elbShortcutsBottom.ButtonHeight = 20
         Me.elbShortcutsBottom.ButtonText = ""
@@ -1369,12 +1207,6 @@ Partial Class frmMyComp
         Me.elbShortcutsBottom.ElbowStyle = LCARS.Controls.Elbow.LCARSelbowStyles.LowerLeft
         Me.elbShortcutsBottom.FlashInterval = 500
         Me.elbShortcutsBottom.holdDraw = False
-        Me.elbShortcutsBottom.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.elbShortcutsBottom.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.elbShortcutsBottom.lblTextSize = New System.Drawing.Point(197, 34)
-        Me.elbShortcutsBottom.lblTextVisible = True
         Me.elbShortcutsBottom.Lit = True
         Me.elbShortcutsBottom.Location = New System.Drawing.Point(3, 289)
         Me.elbShortcutsBottom.Name = "elbShortcutsBottom"
@@ -1384,7 +1216,6 @@ Partial Class frmMyComp
         '
         'elbShortcutsTop
         '
-        Me.elbShortcutsTop.BackgroundImage = CType(resources.GetObject("elbShortcutsTop.BackgroundImage"), System.Drawing.Image)
         Me.elbShortcutsTop.Beeping = False
         Me.elbShortcutsTop.ButtonHeight = 20
         Me.elbShortcutsTop.ButtonText = "SYSTEM SHORTCUTS"
@@ -1400,12 +1231,6 @@ Partial Class frmMyComp
         Me.elbShortcutsTop.ElbowStyle = LCARS.Controls.Elbow.LCARSelbowStyles.UpperLeft
         Me.elbShortcutsTop.FlashInterval = 500
         Me.elbShortcutsTop.holdDraw = False
-        Me.elbShortcutsTop.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.elbShortcutsTop.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.elbShortcutsTop.lblTextSize = New System.Drawing.Point(197, 34)
-        Me.elbShortcutsTop.lblTextVisible = True
         Me.elbShortcutsTop.Lit = True
         Me.elbShortcutsTop.Location = New System.Drawing.Point(3, 3)
         Me.elbShortcutsTop.Name = "elbShortcutsTop"
@@ -1417,7 +1242,6 @@ Partial Class frmMyComp
         'sbClose
         '
         Me.sbClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbClose.BackgroundImage = CType(resources.GetObject("sbClose.BackgroundImage"), System.Drawing.Image)
         Me.sbClose.Beeping = False
         Me.sbClose.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbClose.ButtonText = "X"
@@ -1430,12 +1254,6 @@ Partial Class frmMyComp
         Me.sbClose.Data2 = Nothing
         Me.sbClose.FlashInterval = 500
         Me.sbClose.holdDraw = False
-        Me.sbClose.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbClose.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.sbClose.lblTextSize = New System.Drawing.Point(29, 29)
-        Me.sbClose.lblTextVisible = True
         Me.sbClose.Lit = True
         Me.sbClose.Location = New System.Drawing.Point(607, 4)
         Me.sbClose.Name = "sbClose"
@@ -1447,7 +1265,6 @@ Partial Class frmMyComp
         'sbGoTo
         '
         Me.sbGoTo.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbGoTo.BackgroundImage = CType(resources.GetObject("sbGoTo.BackgroundImage"), System.Drawing.Image)
         Me.sbGoTo.Beeping = False
         Me.sbGoTo.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbGoTo.ButtonText = "GO TO"
@@ -1460,12 +1277,6 @@ Partial Class frmMyComp
         Me.sbGoTo.Data2 = Nothing
         Me.sbGoTo.FlashInterval = 500
         Me.sbGoTo.holdDraw = False
-        Me.sbGoTo.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbGoTo.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.sbGoTo.lblTextSize = New System.Drawing.Point(87, 26)
-        Me.sbGoTo.lblTextVisible = True
         Me.sbGoTo.Lit = True
         Me.sbGoTo.Location = New System.Drawing.Point(533, 177)
         Me.sbGoTo.Name = "sbGoTo"
@@ -1477,7 +1288,6 @@ Partial Class frmMyComp
         'sbOptions
         '
         Me.sbOptions.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbOptions.BackgroundImage = CType(resources.GetObject("sbOptions.BackgroundImage"), System.Drawing.Image)
         Me.sbOptions.Beeping = False
         Me.sbOptions.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbOptions.ButtonText = "OPTIONS"
@@ -1490,12 +1300,6 @@ Partial Class frmMyComp
         Me.sbOptions.Data2 = Nothing
         Me.sbOptions.FlashInterval = 500
         Me.sbOptions.holdDraw = False
-        Me.sbOptions.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbOptions.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.sbOptions.lblTextSize = New System.Drawing.Point(87, 26)
-        Me.sbOptions.lblTextVisible = True
         Me.sbOptions.Lit = True
         Me.sbOptions.Location = New System.Drawing.Point(533, 145)
         Me.sbOptions.Name = "sbOptions"
@@ -1508,7 +1312,6 @@ Partial Class frmMyComp
         '
         Me.tbTitle.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbTitle.BackgroundImage = CType(resources.GetObject("tbTitle.BackgroundImage"), System.Drawing.Image)
         Me.tbTitle.Beeping = True
         Me.tbTitle.ButtonText = "MY COMPUTER"
         Me.tbTitle.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -1521,12 +1324,6 @@ Partial Class frmMyComp
         Me.tbTitle.Data2 = Nothing
         Me.tbTitle.FlashInterval = 500
         Me.tbTitle.holdDraw = False
-        Me.tbTitle.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbTitle.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.tbTitle.lblTextSize = New System.Drawing.Point(595, 31)
-        Me.tbTitle.lblTextVisible = True
         Me.tbTitle.Lit = True
         Me.tbTitle.Location = New System.Drawing.Point(6, 4)
         Me.tbTitle.Name = "tbTitle"
@@ -1538,7 +1335,6 @@ Partial Class frmMyComp
         'sbUpDir
         '
         Me.sbUpDir.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbUpDir.BackgroundImage = CType(resources.GetObject("sbUpDir.BackgroundImage"), System.Drawing.Image)
         Me.sbUpDir.Beeping = False
         Me.sbUpDir.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbUpDir.ButtonText = "UP A DIRECTORY"
@@ -1551,12 +1347,6 @@ Partial Class frmMyComp
         Me.sbUpDir.Data2 = Nothing
         Me.sbUpDir.FlashInterval = 500
         Me.sbUpDir.holdDraw = False
-        Me.sbUpDir.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbUpDir.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.sbUpDir.lblTextSize = New System.Drawing.Point(87, 26)
-        Me.sbUpDir.lblTextVisible = True
         Me.sbUpDir.Lit = False
         Me.sbUpDir.Location = New System.Drawing.Point(533, 113)
         Me.sbUpDir.Name = "sbUpDir"
@@ -1569,7 +1359,6 @@ Partial Class frmMyComp
         '
         Me.fbActionsBorderRight.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.fbActionsBorderRight.BackgroundImage = CType(resources.GetObject("fbActionsBorderRight.BackgroundImage"), System.Drawing.Image)
         Me.fbActionsBorderRight.Beeping = False
         Me.fbActionsBorderRight.ButtonText = ""
         Me.fbActionsBorderRight.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
@@ -1581,12 +1370,6 @@ Partial Class frmMyComp
         Me.fbActionsBorderRight.Data2 = Nothing
         Me.fbActionsBorderRight.FlashInterval = 500
         Me.fbActionsBorderRight.holdDraw = False
-        Me.fbActionsBorderRight.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.fbActionsBorderRight.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.fbActionsBorderRight.lblTextSize = New System.Drawing.Point(10, 508)
-        Me.fbActionsBorderRight.lblTextVisible = True
         Me.fbActionsBorderRight.Lit = True
         Me.fbActionsBorderRight.Location = New System.Drawing.Point(626, 49)
         Me.fbActionsBorderRight.Name = "fbActionsBorderRight"
@@ -1598,7 +1381,6 @@ Partial Class frmMyComp
         '
         Me.fbActionsBorderLeft.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.fbActionsBorderLeft.BackgroundImage = CType(resources.GetObject("fbActionsBorderLeft.BackgroundImage"), System.Drawing.Image)
         Me.fbActionsBorderLeft.Beeping = False
         Me.fbActionsBorderLeft.ButtonText = ""
         Me.fbActionsBorderLeft.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
@@ -1610,12 +1392,6 @@ Partial Class frmMyComp
         Me.fbActionsBorderLeft.Data2 = Nothing
         Me.fbActionsBorderLeft.FlashInterval = 500
         Me.fbActionsBorderLeft.holdDraw = False
-        Me.fbActionsBorderLeft.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.fbActionsBorderLeft.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.fbActionsBorderLeft.lblTextSize = New System.Drawing.Point(5, 419)
-        Me.fbActionsBorderLeft.lblTextVisible = True
         Me.fbActionsBorderLeft.Lit = True
         Me.fbActionsBorderLeft.Location = New System.Drawing.Point(522, 93)
         Me.fbActionsBorderLeft.Name = "fbActionsBorderLeft"
@@ -1626,7 +1402,6 @@ Partial Class frmMyComp
         'sbRefresh
         '
         Me.sbRefresh.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbRefresh.BackgroundImage = CType(resources.GetObject("sbRefresh.BackgroundImage"), System.Drawing.Image)
         Me.sbRefresh.Beeping = False
         Me.sbRefresh.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbRefresh.ButtonText = "REFRESH"
@@ -1639,12 +1414,6 @@ Partial Class frmMyComp
         Me.sbRefresh.Data2 = Nothing
         Me.sbRefresh.FlashInterval = 500
         Me.sbRefresh.holdDraw = False
-        Me.sbRefresh.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbRefresh.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.sbRefresh.lblTextSize = New System.Drawing.Point(87, 26)
-        Me.sbRefresh.lblTextVisible = True
         Me.sbRefresh.Lit = True
         Me.sbRefresh.Location = New System.Drawing.Point(533, 209)
         Me.sbRefresh.Name = "sbRefresh"
@@ -1656,7 +1425,6 @@ Partial Class frmMyComp
         'sbProperties
         '
         Me.sbProperties.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbProperties.BackgroundImage = CType(resources.GetObject("sbProperties.BackgroundImage"), System.Drawing.Image)
         Me.sbProperties.Beeping = False
         Me.sbProperties.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbProperties.ButtonText = "PROPERTIES"
@@ -1669,12 +1437,6 @@ Partial Class frmMyComp
         Me.sbProperties.Data2 = Nothing
         Me.sbProperties.FlashInterval = 500
         Me.sbProperties.holdDraw = False
-        Me.sbProperties.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbProperties.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.sbProperties.lblTextSize = New System.Drawing.Point(87, 26)
-        Me.sbProperties.lblTextVisible = True
         Me.sbProperties.Lit = True
         Me.sbProperties.Location = New System.Drawing.Point(533, 81)
         Me.sbProperties.Name = "sbProperties"
@@ -1686,7 +1448,6 @@ Partial Class frmMyComp
         'elbActionsTop
         '
         Me.elbActionsTop.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.elbActionsTop.BackgroundImage = CType(resources.GetObject("elbActionsTop.BackgroundImage"), System.Drawing.Image)
         Me.elbActionsTop.Beeping = False
         Me.elbActionsTop.ButtonHeight = 25
         Me.elbActionsTop.ButtonText = "ACTIONS"
@@ -1702,12 +1463,6 @@ Partial Class frmMyComp
         Me.elbActionsTop.ElbowStyle = LCARS.Controls.Elbow.LCARSelbowStyles.UpperLeft
         Me.elbActionsTop.FlashInterval = 500
         Me.elbActionsTop.holdDraw = False
-        Me.elbActionsTop.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.elbActionsTop.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.elbActionsTop.lblTextSize = New System.Drawing.Point(113, 38)
-        Me.elbActionsTop.lblTextVisible = True
         Me.elbActionsTop.Lit = True
         Me.elbActionsTop.Location = New System.Drawing.Point(522, 49)
         Me.elbActionsTop.Name = "elbActionsTop"
@@ -1719,7 +1474,6 @@ Partial Class frmMyComp
         'elbActionsBottom
         '
         Me.elbActionsBottom.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.elbActionsBottom.BackgroundImage = CType(resources.GetObject("elbActionsBottom.BackgroundImage"), System.Drawing.Image)
         Me.elbActionsBottom.Beeping = False
         Me.elbActionsBottom.ButtonHeight = 25
         Me.elbActionsBottom.ButtonText = ""
@@ -1735,12 +1489,6 @@ Partial Class frmMyComp
         Me.elbActionsBottom.ElbowStyle = LCARS.Controls.Elbow.LCARSelbowStyles.LowerLeft
         Me.elbActionsBottom.FlashInterval = 500
         Me.elbActionsBottom.holdDraw = False
-        Me.elbActionsBottom.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.elbActionsBottom.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.elbActionsBottom.lblTextSize = New System.Drawing.Point(113, 39)
-        Me.elbActionsBottom.lblTextVisible = True
         Me.elbActionsBottom.Lit = True
         Me.elbActionsBottom.Location = New System.Drawing.Point(522, 518)
         Me.elbActionsBottom.Name = "elbActionsBottom"
@@ -1753,6 +1501,8 @@ Partial Class frmMyComp
         Me.gridMyComp.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.gridMyComp.Beeping = False
+        Me.gridMyComp.ColorsAvailable = LcarScolor1
         Me.gridMyComp.ControlAddingDirection = LCARS.Controls.ButtonGrid.ControlDirection.Vertical
         Me.gridMyComp.ControlPadding = 5
         Me.gridMyComp.ControlSize = New System.Drawing.Size(150, 30)

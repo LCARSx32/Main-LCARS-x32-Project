@@ -20,7 +20,6 @@ Partial Class frmRedAlert
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmRedAlert))
         Me.sbProperties = New LCARS.Controls.StandardButton
         Me.FlatButton14 = New LCARS.Controls.FlatButton
         Me.Elbow5 = New LCARS.Controls.Elbow
@@ -37,7 +36,6 @@ Partial Class frmRedAlert
         'sbProperties
         '
         Me.sbProperties.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbProperties.BackgroundImage = CType(resources.GetObject("sbProperties.BackgroundImage"), System.Drawing.Image)
         Me.sbProperties.Beeping = False
         Me.sbProperties.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbProperties.ButtonText = "MUTE"
@@ -50,12 +48,6 @@ Partial Class frmRedAlert
         Me.sbProperties.Data2 = Nothing
         Me.sbProperties.FlashInterval = 500
         Me.sbProperties.holdDraw = False
-        Me.sbProperties.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbProperties.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.sbProperties.lblTextSize = New System.Drawing.Point(87, 26)
-        Me.sbProperties.lblTextVisible = True
         Me.sbProperties.Lit = True
         Me.sbProperties.Location = New System.Drawing.Point(520, 89)
         Me.sbProperties.Name = "sbProperties"
@@ -68,7 +60,6 @@ Partial Class frmRedAlert
         '
         Me.FlatButton14.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.FlatButton14.BackgroundImage = CType(resources.GetObject("FlatButton14.BackgroundImage"), System.Drawing.Image)
         Me.FlatButton14.Beeping = False
         Me.FlatButton14.ButtonText = ""
         Me.FlatButton14.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
@@ -80,12 +71,6 @@ Partial Class frmRedAlert
         Me.FlatButton14.Data2 = Nothing
         Me.FlatButton14.FlashInterval = 500
         Me.FlatButton14.holdDraw = False
-        Me.FlatButton14.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.FlatButton14.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.FlatButton14.lblTextSize = New System.Drawing.Point(5, 316)
-        Me.FlatButton14.lblTextVisible = True
         Me.FlatButton14.Lit = True
         Me.FlatButton14.Location = New System.Drawing.Point(509, 89)
         Me.FlatButton14.Name = "FlatButton14"
@@ -96,7 +81,6 @@ Partial Class frmRedAlert
         'Elbow5
         '
         Me.Elbow5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Elbow5.BackgroundImage = CType(resources.GetObject("Elbow5.BackgroundImage"), System.Drawing.Image)
         Me.Elbow5.Beeping = False
         Me.Elbow5.ButtonHeight = 25
         Me.Elbow5.ButtonText = "OPTIONS"
@@ -112,12 +96,6 @@ Partial Class frmRedAlert
         Me.Elbow5.ElbowStyle = LCARS.Controls.Elbow.LCARSelbowStyles.UpperLeft
         Me.Elbow5.FlashInterval = 500
         Me.Elbow5.holdDraw = False
-        Me.Elbow5.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Elbow5.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.Elbow5.lblTextSize = New System.Drawing.Point(113, 38)
-        Me.Elbow5.lblTextVisible = True
         Me.Elbow5.Lit = True
         Me.Elbow5.Location = New System.Drawing.Point(509, 45)
         Me.Elbow5.Name = "Elbow5"
@@ -137,7 +115,6 @@ Partial Class frmRedAlert
         'Elbow6
         '
         Me.Elbow6.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Elbow6.BackgroundImage = CType(resources.GetObject("Elbow6.BackgroundImage"), System.Drawing.Image)
         Me.Elbow6.Beeping = False
         Me.Elbow6.ButtonHeight = 25
         Me.Elbow6.ButtonText = ""
@@ -153,12 +130,6 @@ Partial Class frmRedAlert
         Me.Elbow6.ElbowStyle = LCARS.Controls.Elbow.LCARSelbowStyles.LowerLeft
         Me.Elbow6.FlashInterval = 500
         Me.Elbow6.holdDraw = False
-        Me.Elbow6.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Elbow6.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.Elbow6.lblTextSize = New System.Drawing.Point(113, 39)
-        Me.Elbow6.lblTextVisible = True
         Me.Elbow6.Lit = True
         Me.Elbow6.Location = New System.Drawing.Point(509, 411)
         Me.Elbow6.Name = "Elbow6"
@@ -169,7 +140,6 @@ Partial Class frmRedAlert
         'StandardButton1
         '
         Me.StandardButton1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.StandardButton1.BackgroundImage = CType(resources.GetObject("StandardButton1.BackgroundImage"), System.Drawing.Image)
         Me.StandardButton1.Beeping = False
         Me.StandardButton1.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.StandardButton1.ButtonText = "CANCEL ALERT"
@@ -182,12 +152,6 @@ Partial Class frmRedAlert
         Me.StandardButton1.Data2 = Nothing
         Me.StandardButton1.FlashInterval = 500
         Me.StandardButton1.holdDraw = False
-        Me.StandardButton1.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.StandardButton1.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.StandardButton1.lblTextSize = New System.Drawing.Point(87, 26)
-        Me.StandardButton1.lblTextVisible = True
         Me.StandardButton1.Lit = True
         Me.StandardButton1.Location = New System.Drawing.Point(520, 121)
         Me.StandardButton1.Name = "StandardButton1"
@@ -199,7 +163,6 @@ Partial Class frmRedAlert
         'StandardButton2
         '
         Me.StandardButton2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.StandardButton2.BackgroundImage = CType(resources.GetObject("StandardButton2.BackgroundImage"), System.Drawing.Image)
         Me.StandardButton2.Beeping = False
         Me.StandardButton2.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.StandardButton2.ButtonText = "TECHNICAL DATA"
@@ -212,12 +175,6 @@ Partial Class frmRedAlert
         Me.StandardButton2.Data2 = Nothing
         Me.StandardButton2.FlashInterval = 500
         Me.StandardButton2.holdDraw = False
-        Me.StandardButton2.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.StandardButton2.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.StandardButton2.lblTextSize = New System.Drawing.Point(87, 26)
-        Me.StandardButton2.lblTextVisible = True
         Me.StandardButton2.Lit = True
         Me.StandardButton2.Location = New System.Drawing.Point(520, 171)
         Me.StandardButton2.Name = "StandardButton2"
@@ -256,7 +213,6 @@ Partial Class frmRedAlert
         '
         Me.FlatButton1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.FlatButton1.BackgroundImage = CType(resources.GetObject("FlatButton1.BackgroundImage"), System.Drawing.Image)
         Me.FlatButton1.Beeping = False
         Me.FlatButton1.ButtonText = ""
         Me.FlatButton1.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
@@ -268,12 +224,6 @@ Partial Class frmRedAlert
         Me.FlatButton1.Data2 = Nothing
         Me.FlatButton1.FlashInterval = 500
         Me.FlatButton1.holdDraw = False
-        Me.FlatButton1.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.FlatButton1.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.FlatButton1.lblTextSize = New System.Drawing.Point(5, 363)
-        Me.FlatButton1.lblTextVisible = True
         Me.FlatButton1.Lit = True
         Me.FlatButton1.Location = New System.Drawing.Point(617, 64)
         Me.FlatButton1.Name = "FlatButton1"

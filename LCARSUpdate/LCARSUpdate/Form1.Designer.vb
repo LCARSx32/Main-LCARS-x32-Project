@@ -23,7 +23,6 @@ Partial Class frmUpdate
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmUpdate))
         Me.sbCancel = New LCARS.Controls.StandardButton
         Me.tbTitle = New LCARS.Controls.TextButton
         Me.lblMessage = New System.Windows.Forms.Label
@@ -37,7 +36,6 @@ Partial Class frmUpdate
         'sbCancel
         '
         Me.sbCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbCancel.BackgroundImage = CType(resources.GetObject("sbCancel.BackgroundImage"), System.Drawing.Image)
         Me.sbCancel.Beeping = False
         Me.sbCancel.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbCancel.ButtonText = "CANCEL"
@@ -50,12 +48,6 @@ Partial Class frmUpdate
         Me.sbCancel.Data2 = Nothing
         Me.sbCancel.FlashInterval = 500
         Me.sbCancel.holdDraw = False
-        Me.sbCancel.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbCancel.lblTextLoc = New System.Drawing.Point(17, 0)
-        Me.sbCancel.lblTextSize = New System.Drawing.Point(91, 35)
-        Me.sbCancel.lblTextVisible = True
         Me.sbCancel.Lit = True
         Me.sbCancel.Location = New System.Drawing.Point(518, 387)
         Me.sbCancel.Name = "sbCancel"
@@ -68,7 +60,6 @@ Partial Class frmUpdate
         '
         Me.tbTitle.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbTitle.BackgroundImage = CType(resources.GetObject("tbTitle.BackgroundImage"), System.Drawing.Image)
         Me.tbTitle.Beeping = False
         Me.tbTitle.ButtonText = "LCARS UPDATE"
         Me.tbTitle.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -81,12 +72,6 @@ Partial Class frmUpdate
         Me.tbTitle.Data2 = Nothing
         Me.tbTitle.FlashInterval = 500
         Me.tbTitle.holdDraw = False
-        Me.tbTitle.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbTitle.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.tbTitle.lblTextSize = New System.Drawing.Point(631, 22)
-        Me.tbTitle.lblTextVisible = True
         Me.tbTitle.Lit = True
         Me.tbTitle.Location = New System.Drawing.Point(13, 13)
         Me.tbTitle.Name = "tbTitle"
@@ -124,7 +109,6 @@ Partial Class frmUpdate
         'sbNext
         '
         Me.sbNext.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbNext.BackgroundImage = CType(resources.GetObject("sbNext.BackgroundImage"), System.Drawing.Image)
         Me.sbNext.Beeping = False
         Me.sbNext.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbNext.ButtonText = "NEXT"
@@ -137,12 +121,6 @@ Partial Class frmUpdate
         Me.sbNext.Data2 = Nothing
         Me.sbNext.FlashInterval = 500
         Me.sbNext.holdDraw = False
-        Me.sbNext.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbNext.lblTextLoc = New System.Drawing.Point(17, 0)
-        Me.sbNext.lblTextSize = New System.Drawing.Point(91, 35)
-        Me.sbNext.lblTextVisible = True
         Me.sbNext.Lit = True
         Me.sbNext.Location = New System.Drawing.Point(386, 387)
         Me.sbNext.Name = "sbNext"

@@ -22,7 +22,6 @@ Partial Class frmSpeechConsole
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmSpeechConsole))
         Me.tbTitle = New LCARS.Controls.TextButton
         Me.elbTop = New LCARS.Controls.Elbow
         Me.fbHide = New LCARS.Controls.FlatButton
@@ -40,7 +39,6 @@ Partial Class frmSpeechConsole
         '
         'tbTitle
         '
-        Me.tbTitle.BackgroundImage = CType(resources.GetObject("tbTitle.BackgroundImage"), System.Drawing.Image)
         Me.tbTitle.Beeping = False
         Me.tbTitle.ButtonText = "VOICE RECOGNITION CONSOLE"
         Me.tbTitle.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -48,16 +46,11 @@ Partial Class frmSpeechConsole
         Me.tbTitle.ButtonType = LCARS.Controls.TextButton.TextButtonType.DoublePills
         Me.tbTitle.Clickable = False
         Me.tbTitle.Color = LCARS.LCARScolorStyles.StaticBlue
+        Me.tbTitle.CustomAlertColor = System.Drawing.Color.Empty
         Me.tbTitle.Data = Nothing
         Me.tbTitle.Data2 = Nothing
         Me.tbTitle.FlashInterval = 500
         Me.tbTitle.holdDraw = False
-        Me.tbTitle.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbTitle.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.tbTitle.lblTextSize = New System.Drawing.Point(457, 23)
-        Me.tbTitle.lblTextVisible = True
         Me.tbTitle.Lit = True
         Me.tbTitle.Location = New System.Drawing.Point(172, 12)
         Me.tbTitle.Name = "tbTitle"
@@ -68,7 +61,6 @@ Partial Class frmSpeechConsole
         '
         'elbTop
         '
-        Me.elbTop.BackgroundImage = CType(resources.GetObject("elbTop.BackgroundImage"), System.Drawing.Image)
         Me.elbTop.Beeping = False
         Me.elbTop.ButtonHeight = 23
         Me.elbTop.ButtonText = "COMMAND HISTORY"
@@ -77,18 +69,13 @@ Partial Class frmSpeechConsole
         Me.elbTop.ButtonWidth = 100
         Me.elbTop.Clickable = True
         Me.elbTop.Color = LCARS.LCARScolorStyles.StaticBlue
+        Me.elbTop.CustomAlertColor = System.Drawing.Color.Empty
         Me.elbTop.Data = Nothing
         Me.elbTop.Data2 = Nothing
         Me.elbTop.ElbowRatio = New System.Drawing.Point(1, 1)
         Me.elbTop.ElbowStyle = LCARS.Controls.Elbow.LCARSelbowStyles.UpperLeft
         Me.elbTop.FlashInterval = 500
         Me.elbTop.holdDraw = False
-        Me.elbTop.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.elbTop.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.elbTop.lblTextSize = New System.Drawing.Point(182, 44)
-        Me.elbTop.lblTextVisible = True
         Me.elbTop.Lit = True
         Me.elbTop.Location = New System.Drawing.Point(12, 12)
         Me.elbTop.Name = "elbTop"
@@ -99,23 +86,17 @@ Partial Class frmSpeechConsole
         '
         'fbHide
         '
-        Me.fbHide.BackgroundImage = CType(resources.GetObject("fbHide.BackgroundImage"), System.Drawing.Image)
         Me.fbHide.Beeping = False
         Me.fbHide.ButtonText = "HIDE"
         Me.fbHide.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.fbHide.ButtonTextHeight = 14
         Me.fbHide.Clickable = True
         Me.fbHide.Color = LCARS.LCARScolorStyles.MiscFunction
+        Me.fbHide.CustomAlertColor = System.Drawing.Color.Empty
         Me.fbHide.Data = Nothing
         Me.fbHide.Data2 = Nothing
         Me.fbHide.FlashInterval = 500
         Me.fbHide.holdDraw = False
-        Me.fbHide.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.fbHide.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.fbHide.lblTextSize = New System.Drawing.Point(100, 23)
-        Me.fbHide.lblTextVisible = True
         Me.fbHide.Lit = True
         Me.fbHide.Location = New System.Drawing.Point(12, 62)
         Me.fbHide.Name = "fbHide"
@@ -126,23 +107,17 @@ Partial Class frmSpeechConsole
         '
         'fbOnOff
         '
-        Me.fbOnOff.BackgroundImage = CType(resources.GetObject("fbOnOff.BackgroundImage"), System.Drawing.Image)
         Me.fbOnOff.Beeping = False
         Me.fbOnOff.ButtonText = "RECOGNITION ON"
         Me.fbOnOff.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.fbOnOff.ButtonTextHeight = 14
         Me.fbOnOff.Clickable = True
         Me.fbOnOff.Color = LCARS.LCARScolorStyles.CriticalFunction
+        Me.fbOnOff.CustomAlertColor = System.Drawing.Color.Empty
         Me.fbOnOff.Data = Nothing
         Me.fbOnOff.Data2 = Nothing
         Me.fbOnOff.FlashInterval = 500
         Me.fbOnOff.holdDraw = False
-        Me.fbOnOff.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.fbOnOff.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.fbOnOff.lblTextSize = New System.Drawing.Point(100, 23)
-        Me.fbOnOff.lblTextVisible = True
         Me.fbOnOff.Lit = True
         Me.fbOnOff.Location = New System.Drawing.Point(12, 91)
         Me.fbOnOff.Name = "fbOnOff"
@@ -175,7 +150,6 @@ Partial Class frmSpeechConsole
         '
         'elbReferenceBottom
         '
-        Me.elbReferenceBottom.BackgroundImage = CType(resources.GetObject("elbReferenceBottom.BackgroundImage"), System.Drawing.Image)
         Me.elbReferenceBottom.Beeping = False
         Me.elbReferenceBottom.ButtonHeight = 23
         Me.elbReferenceBottom.ButtonText = ""
@@ -184,18 +158,13 @@ Partial Class frmSpeechConsole
         Me.elbReferenceBottom.ButtonWidth = 100
         Me.elbReferenceBottom.Clickable = False
         Me.elbReferenceBottom.Color = LCARS.LCARScolorStyles.StaticTan
+        Me.elbReferenceBottom.CustomAlertColor = System.Drawing.Color.Empty
         Me.elbReferenceBottom.Data = Nothing
         Me.elbReferenceBottom.Data2 = Nothing
         Me.elbReferenceBottom.ElbowRatio = New System.Drawing.Point(1, 1)
         Me.elbReferenceBottom.ElbowStyle = LCARS.Controls.Elbow.LCARSelbowStyles.LowerLeft
         Me.elbReferenceBottom.FlashInterval = 500
         Me.elbReferenceBottom.holdDraw = False
-        Me.elbReferenceBottom.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.elbReferenceBottom.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.elbReferenceBottom.lblTextSize = New System.Drawing.Point(182, 44)
-        Me.elbReferenceBottom.lblTextVisible = True
         Me.elbReferenceBottom.Lit = True
         Me.elbReferenceBottom.Location = New System.Drawing.Point(12, 364)
         Me.elbReferenceBottom.Name = "elbReferenceBottom"
@@ -205,7 +174,6 @@ Partial Class frmSpeechConsole
         '
         'tbBottom
         '
-        Me.tbBottom.BackgroundImage = CType(resources.GetObject("tbBottom.BackgroundImage"), System.Drawing.Image)
         Me.tbBottom.Beeping = False
         Me.tbBottom.ButtonText = "COMMAND REFERENCE"
         Me.tbBottom.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -213,16 +181,11 @@ Partial Class frmSpeechConsole
         Me.tbBottom.ButtonType = LCARS.Controls.TextButton.TextButtonType.DoublePills
         Me.tbBottom.Clickable = False
         Me.tbBottom.Color = LCARS.LCARScolorStyles.StaticTan
+        Me.tbBottom.CustomAlertColor = System.Drawing.Color.Empty
         Me.tbBottom.Data = Nothing
         Me.tbBottom.Data2 = Nothing
         Me.tbBottom.FlashInterval = 500
         Me.tbBottom.holdDraw = False
-        Me.tbBottom.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbBottom.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.tbBottom.lblTextSize = New System.Drawing.Point(457, 23)
-        Me.tbBottom.lblTextVisible = True
         Me.tbBottom.Lit = True
         Me.tbBottom.Location = New System.Drawing.Point(172, 385)
         Me.tbBottom.Name = "tbBottom"
@@ -233,7 +196,6 @@ Partial Class frmSpeechConsole
         '
         'elbHistoryBottom
         '
-        Me.elbHistoryBottom.BackgroundImage = CType(resources.GetObject("elbHistoryBottom.BackgroundImage"), System.Drawing.Image)
         Me.elbHistoryBottom.Beeping = False
         Me.elbHistoryBottom.ButtonHeight = 10
         Me.elbHistoryBottom.ButtonText = "ENTER COMMAND"
@@ -242,18 +204,13 @@ Partial Class frmSpeechConsole
         Me.elbHistoryBottom.ButtonWidth = 100
         Me.elbHistoryBottom.Clickable = False
         Me.elbHistoryBottom.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.elbHistoryBottom.CustomAlertColor = System.Drawing.Color.Empty
         Me.elbHistoryBottom.Data = Nothing
         Me.elbHistoryBottom.Data2 = Nothing
         Me.elbHistoryBottom.ElbowRatio = New System.Drawing.Point(1, 1)
         Me.elbHistoryBottom.ElbowStyle = LCARS.Controls.Elbow.LCARSelbowStyles.LowerLeft
         Me.elbHistoryBottom.FlashInterval = 500
         Me.elbHistoryBottom.holdDraw = False
-        Me.elbHistoryBottom.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.elbHistoryBottom.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.elbHistoryBottom.lblTextSize = New System.Drawing.Point(617, 30)
-        Me.elbHistoryBottom.lblTextVisible = True
         Me.elbHistoryBottom.Lit = True
         Me.elbHistoryBottom.Location = New System.Drawing.Point(12, 230)
         Me.elbHistoryBottom.Name = "elbHistoryBottom"
@@ -264,7 +221,6 @@ Partial Class frmSpeechConsole
         '
         'elbReferenceTop
         '
-        Me.elbReferenceTop.BackgroundImage = CType(resources.GetObject("elbReferenceTop.BackgroundImage"), System.Drawing.Image)
         Me.elbReferenceTop.Beeping = False
         Me.elbReferenceTop.ButtonHeight = 10
         Me.elbReferenceTop.ButtonText = ""
@@ -273,18 +229,13 @@ Partial Class frmSpeechConsole
         Me.elbReferenceTop.ButtonWidth = 100
         Me.elbReferenceTop.Clickable = False
         Me.elbReferenceTop.Color = LCARS.LCARScolorStyles.StaticTan
+        Me.elbReferenceTop.CustomAlertColor = System.Drawing.Color.Empty
         Me.elbReferenceTop.Data = Nothing
         Me.elbReferenceTop.Data2 = Nothing
         Me.elbReferenceTop.ElbowRatio = New System.Drawing.Point(1, 1)
         Me.elbReferenceTop.ElbowStyle = LCARS.Controls.Elbow.LCARSelbowStyles.UpperLeft
         Me.elbReferenceTop.FlashInterval = 500
         Me.elbReferenceTop.holdDraw = False
-        Me.elbReferenceTop.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.elbReferenceTop.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.elbReferenceTop.lblTextSize = New System.Drawing.Point(617, 30)
-        Me.elbReferenceTop.lblTextVisible = True
         Me.elbReferenceTop.Lit = True
         Me.elbReferenceTop.Location = New System.Drawing.Point(12, 266)
         Me.elbReferenceTop.Name = "elbReferenceTop"
@@ -294,23 +245,17 @@ Partial Class frmSpeechConsole
         '
         'fbReferenceBorder
         '
-        Me.fbReferenceBorder.BackgroundImage = CType(resources.GetObject("fbReferenceBorder.BackgroundImage"), System.Drawing.Image)
         Me.fbReferenceBorder.Beeping = False
         Me.fbReferenceBorder.ButtonText = ""
         Me.fbReferenceBorder.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.fbReferenceBorder.ButtonTextHeight = 14
         Me.fbReferenceBorder.Clickable = False
         Me.fbReferenceBorder.Color = LCARS.LCARScolorStyles.StaticTan
+        Me.fbReferenceBorder.CustomAlertColor = System.Drawing.Color.Empty
         Me.fbReferenceBorder.Data = Nothing
         Me.fbReferenceBorder.Data2 = Nothing
         Me.fbReferenceBorder.FlashInterval = 500
         Me.fbReferenceBorder.holdDraw = False
-        Me.fbReferenceBorder.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.fbReferenceBorder.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.fbReferenceBorder.lblTextSize = New System.Drawing.Point(100, 56)
-        Me.fbReferenceBorder.lblTextVisible = True
         Me.fbReferenceBorder.Lit = True
         Me.fbReferenceBorder.Location = New System.Drawing.Point(12, 302)
         Me.fbReferenceBorder.Name = "fbReferenceBorder"
@@ -320,23 +265,17 @@ Partial Class frmSpeechConsole
         '
         'fbHistoryBorder
         '
-        Me.fbHistoryBorder.BackgroundImage = CType(resources.GetObject("fbHistoryBorder.BackgroundImage"), System.Drawing.Image)
         Me.fbHistoryBorder.Beeping = False
         Me.fbHistoryBorder.ButtonText = ""
         Me.fbHistoryBorder.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.fbHistoryBorder.ButtonTextHeight = 14
         Me.fbHistoryBorder.Clickable = False
         Me.fbHistoryBorder.Color = LCARS.LCARScolorStyles.StaticBlue
+        Me.fbHistoryBorder.CustomAlertColor = System.Drawing.Color.Empty
         Me.fbHistoryBorder.Data = Nothing
         Me.fbHistoryBorder.Data2 = Nothing
         Me.fbHistoryBorder.FlashInterval = 500
         Me.fbHistoryBorder.holdDraw = False
-        Me.fbHistoryBorder.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.fbHistoryBorder.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.fbHistoryBorder.lblTextSize = New System.Drawing.Point(100, 104)
-        Me.fbHistoryBorder.lblTextVisible = True
         Me.fbHistoryBorder.Lit = True
         Me.fbHistoryBorder.Location = New System.Drawing.Point(12, 120)
         Me.fbHistoryBorder.Name = "fbHistoryBorder"

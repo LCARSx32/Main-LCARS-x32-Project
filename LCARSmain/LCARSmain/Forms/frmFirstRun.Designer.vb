@@ -76,7 +76,6 @@ Partial Class frmFirstRun
         '
         Me.Elbow1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Elbow1.BackgroundImage = CType(resources.GetObject("Elbow1.BackgroundImage"), System.Drawing.Image)
         Me.Elbow1.Beeping = True
         Me.Elbow1.ButtonHeight = 25
         Me.Elbow1.ButtonText = "LCARS X32 INITIATION SEQUENCE"
@@ -85,6 +84,7 @@ Partial Class frmFirstRun
         Me.Elbow1.ButtonWidth = 200
         Me.Elbow1.Clickable = False
         Me.Elbow1.Color = LCARS.LCARScolorStyles.StaticTan
+        Me.Elbow1.CustomAlertColor = System.Drawing.Color.Empty
         Me.Elbow1.Data = Nothing
         Me.Elbow1.Data2 = Nothing
         Me.Elbow1.ElbowRatio = New System.Drawing.Point(1, 1)
@@ -97,16 +97,17 @@ Partial Class frmFirstRun
         Me.Elbow1.RedAlert = LCARS.LCARSalert.Normal
         Me.Elbow1.Size = New System.Drawing.Size(616, 104)
         Me.Elbow1.TabIndex = 3
+        Me.Elbow1.Text = "LCARS X32 INITIATION SEQUENCE"
         '
         'fbBeep
         '
-        Me.fbBeep.BackgroundImage = CType(resources.GetObject("fbBeep.BackgroundImage"), System.Drawing.Image)
         Me.fbBeep.Beeping = True
         Me.fbBeep.ButtonText = "TURN OFF BUTTON BEEPS"
         Me.fbBeep.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.fbBeep.ButtonTextHeight = 14
         Me.fbBeep.Clickable = True
         Me.fbBeep.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.fbBeep.CustomAlertColor = System.Drawing.Color.Empty
         Me.fbBeep.Data = Nothing
         Me.fbBeep.Data2 = Nothing
         Me.fbBeep.FlashInterval = 500
@@ -117,18 +118,19 @@ Partial Class frmFirstRun
         Me.fbBeep.RedAlert = LCARS.LCARSalert.Normal
         Me.fbBeep.Size = New System.Drawing.Size(200, 36)
         Me.fbBeep.TabIndex = 4
+        Me.fbBeep.Text = "TURN OFF BUTTON BEEPS"
         '
         'FlatButton1
         '
         Me.FlatButton1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.FlatButton1.BackgroundImage = CType(resources.GetObject("FlatButton1.BackgroundImage"), System.Drawing.Image)
         Me.FlatButton1.Beeping = True
         Me.FlatButton1.ButtonText = "X32"
         Me.FlatButton1.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.FlatButton1.ButtonTextHeight = 14
         Me.FlatButton1.Clickable = False
         Me.FlatButton1.Color = LCARS.LCARScolorStyles.MiscFunction
+        Me.FlatButton1.CustomAlertColor = System.Drawing.Color.Empty
         Me.FlatButton1.Data = Nothing
         Me.FlatButton1.Data2 = Nothing
         Me.FlatButton1.FlashInterval = 500
@@ -139,12 +141,12 @@ Partial Class frmFirstRun
         Me.FlatButton1.RedAlert = LCARS.LCARSalert.Normal
         Me.FlatButton1.Size = New System.Drawing.Size(200, 152)
         Me.FlatButton1.TabIndex = 5
+        Me.FlatButton1.Text = "X32"
         '
         'Elbow2
         '
         Me.Elbow2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Elbow2.BackgroundImage = CType(resources.GetObject("Elbow2.BackgroundImage"), System.Drawing.Image)
         Me.Elbow2.Beeping = True
         Me.Elbow2.ButtonHeight = 25
         Me.Elbow2.ButtonText = "JUPITER STATION SOFTWORKS 2009"
@@ -153,6 +155,7 @@ Partial Class frmFirstRun
         Me.Elbow2.ButtonWidth = 200
         Me.Elbow2.Clickable = False
         Me.Elbow2.Color = LCARS.LCARScolorStyles.StaticTan
+        Me.Elbow2.CustomAlertColor = System.Drawing.Color.Empty
         Me.Elbow2.Data = Nothing
         Me.Elbow2.Data2 = Nothing
         Me.Elbow2.ElbowRatio = New System.Drawing.Point(1, 1)
@@ -165,17 +168,18 @@ Partial Class frmFirstRun
         Me.Elbow2.RedAlert = LCARS.LCARSalert.Normal
         Me.Elbow2.Size = New System.Drawing.Size(487, 104)
         Me.Elbow2.TabIndex = 6
+        Me.Elbow2.Text = "JUPITER STATION SOFTWORKS 2009"
         '
         'FlatButton2
         '
         Me.FlatButton2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.FlatButton2.BackgroundImage = CType(resources.GetObject("FlatButton2.BackgroundImage"), System.Drawing.Image)
         Me.FlatButton2.Beeping = True
         Me.FlatButton2.ButtonText = "CONTINUE"
         Me.FlatButton2.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.FlatButton2.ButtonTextHeight = 14
         Me.FlatButton2.Clickable = True
         Me.FlatButton2.Color = LCARS.LCARScolorStyles.NavigationFunction
+        Me.FlatButton2.CustomAlertColor = System.Drawing.Color.Empty
         Me.FlatButton2.Data = Nothing
         Me.FlatButton2.Data2 = Nothing
         Me.FlatButton2.Flash = True
@@ -187,17 +191,18 @@ Partial Class frmFirstRun
         Me.FlatButton2.RedAlert = LCARS.LCARSalert.Normal
         Me.FlatButton2.Size = New System.Drawing.Size(200, 36)
         Me.FlatButton2.TabIndex = 7
+        Me.FlatButton2.Text = "CONTINUE"
         '
         'fbExit
         '
         Me.fbExit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.fbExit.BackgroundImage = CType(resources.GetObject("fbExit.BackgroundImage"), System.Drawing.Image)
         Me.fbExit.Beeping = True
         Me.fbExit.ButtonText = "EXIT"
         Me.fbExit.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.fbExit.ButtonTextHeight = 14
         Me.fbExit.Clickable = True
         Me.fbExit.Color = LCARS.LCARScolorStyles.NavigationFunction
+        Me.fbExit.CustomAlertColor = System.Drawing.Color.Empty
         Me.fbExit.Data = Nothing
         Me.fbExit.Data2 = Nothing
         Me.fbExit.FlashInterval = 500
@@ -208,6 +213,7 @@ Partial Class frmFirstRun
         Me.fbExit.RedAlert = LCARS.LCARSalert.Normal
         Me.fbExit.Size = New System.Drawing.Size(123, 25)
         Me.fbExit.TabIndex = 8
+        Me.fbExit.Text = "EXIT"
         '
         'TabControl1
         '

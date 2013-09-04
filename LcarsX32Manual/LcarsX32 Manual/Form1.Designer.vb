@@ -22,21 +22,7 @@ Partial Class Hlpfrm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Hlpfrm))
         Dim LcarScolor1 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor2 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor3 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor4 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor5 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor6 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor7 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor8 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor9 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor10 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor11 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor12 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor13 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor14 As LCARS.LCARScolor = New LCARS.LCARScolor
         Me.FlatButton1 = New LCARS.Controls.FlatButton
         Me.FlatButton2 = New LCARS.Controls.FlatButton
         Me.btnwidth = New LCARS.Controls.FlatButton
@@ -59,23 +45,17 @@ Partial Class Hlpfrm
         'FlatButton1
         '
         Me.FlatButton1.AutoEllipsis = False
-        Me.FlatButton1.BackgroundImage = CType(resources.GetObject("FlatButton1.BackgroundImage"), System.Drawing.Image)
         Me.FlatButton1.Beeping = False
         Me.FlatButton1.ButtonText = "PAGE UP"
         Me.FlatButton1.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.FlatButton1.ButtonTextHeight = 14
         Me.FlatButton1.Clickable = True
         Me.FlatButton1.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.FlatButton1.ColorsAvailable = LcarScolor1
         Me.FlatButton1.CustomAlertColor = System.Drawing.Color.Empty
         Me.FlatButton1.Data = Nothing
         Me.FlatButton1.Data2 = Nothing
         Me.FlatButton1.FlashInterval = 500
         Me.FlatButton1.holdDraw = False
-        Me.FlatButton1.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
-        Me.FlatButton1.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.FlatButton1.lblTextSize = New System.Drawing.Size(85, 28)
-        Me.FlatButton1.lblTextVisible = True
         Me.FlatButton1.Lit = True
         Me.FlatButton1.Location = New System.Drawing.Point(12, 83)
         Me.FlatButton1.Name = "FlatButton1"
@@ -88,23 +68,17 @@ Partial Class Hlpfrm
         'FlatButton2
         '
         Me.FlatButton2.AutoEllipsis = False
-        Me.FlatButton2.BackgroundImage = CType(resources.GetObject("FlatButton2.BackgroundImage"), System.Drawing.Image)
         Me.FlatButton2.Beeping = False
         Me.FlatButton2.ButtonText = "PAGE DOWN"
         Me.FlatButton2.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.FlatButton2.ButtonTextHeight = 14
         Me.FlatButton2.Clickable = True
         Me.FlatButton2.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.FlatButton2.ColorsAvailable = LcarScolor2
         Me.FlatButton2.CustomAlertColor = System.Drawing.Color.Empty
         Me.FlatButton2.Data = Nothing
         Me.FlatButton2.Data2 = Nothing
         Me.FlatButton2.FlashInterval = 500
         Me.FlatButton2.holdDraw = False
-        Me.FlatButton2.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
-        Me.FlatButton2.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.FlatButton2.lblTextSize = New System.Drawing.Size(85, 28)
-        Me.FlatButton2.lblTextVisible = True
         Me.FlatButton2.Lit = True
         Me.FlatButton2.Location = New System.Drawing.Point(12, 114)
         Me.FlatButton2.Name = "FlatButton2"
@@ -119,23 +93,17 @@ Partial Class Hlpfrm
         Me.btnwidth.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnwidth.AutoEllipsis = False
-        Me.btnwidth.BackgroundImage = CType(resources.GetObject("btnwidth.BackgroundImage"), System.Drawing.Image)
         Me.btnwidth.Beeping = False
         Me.btnwidth.ButtonText = ""
         Me.btnwidth.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnwidth.ButtonTextHeight = 14
         Me.btnwidth.Clickable = True
         Me.btnwidth.Color = LCARS.LCARScolorStyles.NavigationFunction
-        Me.btnwidth.ColorsAvailable = LcarScolor3
         Me.btnwidth.CustomAlertColor = System.Drawing.Color.Empty
         Me.btnwidth.Data = Nothing
         Me.btnwidth.Data2 = Nothing
         Me.btnwidth.FlashInterval = 500
         Me.btnwidth.holdDraw = False
-        Me.btnwidth.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
-        Me.btnwidth.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.btnwidth.lblTextSize = New System.Drawing.Size(85, 179)
-        Me.btnwidth.lblTextVisible = True
         Me.btnwidth.Lit = True
         Me.btnwidth.Location = New System.Drawing.Point(12, 177)
         Me.btnwidth.Name = "btnwidth"
@@ -147,23 +115,17 @@ Partial Class Hlpfrm
         'exitbtn
         '
         Me.exitbtn.AutoEllipsis = False
-        Me.exitbtn.BackgroundImage = CType(resources.GetObject("exitbtn.BackgroundImage"), System.Drawing.Image)
         Me.exitbtn.Beeping = False
         Me.exitbtn.ButtonText = "CLOSE"
         Me.exitbtn.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.exitbtn.ButtonTextHeight = 14
         Me.exitbtn.Clickable = True
         Me.exitbtn.Color = LCARS.LCARScolorStyles.Orange
-        Me.exitbtn.ColorsAvailable = LcarScolor4
         Me.exitbtn.CustomAlertColor = System.Drawing.Color.Empty
         Me.exitbtn.Data = Nothing
         Me.exitbtn.Data2 = Nothing
         Me.exitbtn.FlashInterval = 500
         Me.exitbtn.holdDraw = False
-        Me.exitbtn.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
-        Me.exitbtn.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.exitbtn.lblTextSize = New System.Drawing.Size(85, 29)
-        Me.exitbtn.lblTextVisible = True
         Me.exitbtn.Lit = True
         Me.exitbtn.Location = New System.Drawing.Point(12, 145)
         Me.exitbtn.Name = "exitbtn"
@@ -178,7 +140,6 @@ Partial Class Hlpfrm
         Me.Elbow1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Elbow1.AutoEllipsis = False
-        Me.Elbow1.BackgroundImage = CType(resources.GetObject("Elbow1.BackgroundImage"), System.Drawing.Image)
         Me.Elbow1.Beeping = False
         Me.Elbow1.ButtonHeight = 25
         Me.Elbow1.ButtonText = ""
@@ -187,7 +148,6 @@ Partial Class Hlpfrm
         Me.Elbow1.ButtonWidth = 85
         Me.Elbow1.Clickable = True
         Me.Elbow1.Color = LCARS.LCARScolorStyles.NavigationFunction
-        Me.Elbow1.ColorsAvailable = LcarScolor5
         Me.Elbow1.CustomAlertColor = System.Drawing.Color.Empty
         Me.Elbow1.Data = Nothing
         Me.Elbow1.Data2 = Nothing
@@ -195,10 +155,6 @@ Partial Class Hlpfrm
         Me.Elbow1.ElbowStyle = LCARS.Controls.Elbow.LCARSelbowStyles.LowerLeft
         Me.Elbow1.FlashInterval = 500
         Me.Elbow1.holdDraw = False
-        Me.Elbow1.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
-        Me.Elbow1.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.Elbow1.lblTextSize = New System.Drawing.Size(339, 53)
-        Me.Elbow1.lblTextVisible = True
         Me.Elbow1.Lit = True
         Me.Elbow1.Location = New System.Drawing.Point(12, 541)
         Me.Elbow1.Name = "Elbow1"
@@ -209,23 +165,17 @@ Partial Class Hlpfrm
         'FlatButton5
         '
         Me.FlatButton5.AutoEllipsis = False
-        Me.FlatButton5.BackgroundImage = CType(resources.GetObject("FlatButton5.BackgroundImage"), System.Drawing.Image)
         Me.FlatButton5.Beeping = False
         Me.FlatButton5.ButtonText = ""
         Me.FlatButton5.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.FlatButton5.ButtonTextHeight = 14
         Me.FlatButton5.Clickable = False
         Me.FlatButton5.Color = LCARS.LCARScolorStyles.StaticTan
-        Me.FlatButton5.ColorsAvailable = LcarScolor6
         Me.FlatButton5.CustomAlertColor = System.Drawing.Color.Empty
         Me.FlatButton5.Data = Nothing
         Me.FlatButton5.Data2 = Nothing
         Me.FlatButton5.FlashInterval = 500
         Me.FlatButton5.holdDraw = False
-        Me.FlatButton5.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
-        Me.FlatButton5.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.FlatButton5.lblTextSize = New System.Drawing.Size(30, 30)
-        Me.FlatButton5.lblTextVisible = True
         Me.FlatButton5.Lit = True
         Me.FlatButton5.Location = New System.Drawing.Point(172, 12)
         Me.FlatButton5.Name = "FlatButton5"
@@ -249,23 +199,17 @@ Partial Class Hlpfrm
         'FlatButton9
         '
         Me.FlatButton9.AutoEllipsis = False
-        Me.FlatButton9.BackgroundImage = CType(resources.GetObject("FlatButton9.BackgroundImage"), System.Drawing.Image)
         Me.FlatButton9.Beeping = False
         Me.FlatButton9.ButtonText = ""
         Me.FlatButton9.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.FlatButton9.ButtonTextHeight = 14
         Me.FlatButton9.Clickable = False
         Me.FlatButton9.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
-        Me.FlatButton9.ColorsAvailable = LcarScolor7
         Me.FlatButton9.CustomAlertColor = System.Drawing.Color.Empty
         Me.FlatButton9.Data = Nothing
         Me.FlatButton9.Data2 = Nothing
         Me.FlatButton9.FlashInterval = 500
         Me.FlatButton9.holdDraw = False
-        Me.FlatButton9.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
-        Me.FlatButton9.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.FlatButton9.lblTextSize = New System.Drawing.Size(73, 5)
-        Me.FlatButton9.lblTextVisible = True
         Me.FlatButton9.Lit = True
         Me.FlatButton9.Location = New System.Drawing.Point(205, 12)
         Me.FlatButton9.Name = "FlatButton9"
@@ -278,23 +222,17 @@ Partial Class Hlpfrm
         '
         Me.FlatButton12.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.FlatButton12.AutoEllipsis = False
-        Me.FlatButton12.BackgroundImage = CType(resources.GetObject("FlatButton12.BackgroundImage"), System.Drawing.Image)
         Me.FlatButton12.Beeping = False
         Me.FlatButton12.ButtonText = ""
         Me.FlatButton12.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.FlatButton12.ButtonTextHeight = 14
         Me.FlatButton12.Clickable = True
         Me.FlatButton12.Color = LCARS.LCARScolorStyles.FunctionUnavailable
-        Me.FlatButton12.ColorsAvailable = LcarScolor8
         Me.FlatButton12.CustomAlertColor = System.Drawing.Color.Empty
         Me.FlatButton12.Data = Nothing
         Me.FlatButton12.Data2 = Nothing
         Me.FlatButton12.FlashInterval = 500
         Me.FlatButton12.holdDraw = False
-        Me.FlatButton12.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
-        Me.FlatButton12.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.FlatButton12.lblTextSize = New System.Drawing.Size(284, 25)
-        Me.FlatButton12.lblTextVisible = True
         Me.FlatButton12.Lit = True
         Me.FlatButton12.Location = New System.Drawing.Point(357, 570)
         Me.FlatButton12.Name = "FlatButton12"
@@ -306,23 +244,17 @@ Partial Class Hlpfrm
         'FlatButton7
         '
         Me.FlatButton7.AutoEllipsis = False
-        Me.FlatButton7.BackgroundImage = CType(resources.GetObject("FlatButton7.BackgroundImage"), System.Drawing.Image)
         Me.FlatButton7.Beeping = False
         Me.FlatButton7.ButtonText = ""
         Me.FlatButton7.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.FlatButton7.ButtonTextHeight = 14
         Me.FlatButton7.Clickable = False
         Me.FlatButton7.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
-        Me.FlatButton7.ColorsAvailable = LcarScolor9
         Me.FlatButton7.CustomAlertColor = System.Drawing.Color.Empty
         Me.FlatButton7.Data = Nothing
         Me.FlatButton7.Data2 = Nothing
         Me.FlatButton7.FlashInterval = 500
         Me.FlatButton7.holdDraw = False
-        Me.FlatButton7.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
-        Me.FlatButton7.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.FlatButton7.lblTextSize = New System.Drawing.Size(73, 5)
-        Me.FlatButton7.lblTextVisible = True
         Me.FlatButton7.Lit = True
         Me.FlatButton7.Location = New System.Drawing.Point(205, 37)
         Me.FlatButton7.Name = "FlatButton7"
@@ -334,23 +266,17 @@ Partial Class Hlpfrm
         'FlatButton8
         '
         Me.FlatButton8.AutoEllipsis = False
-        Me.FlatButton8.BackgroundImage = CType(resources.GetObject("FlatButton8.BackgroundImage"), System.Drawing.Image)
         Me.FlatButton8.Beeping = False
         Me.FlatButton8.ButtonText = ""
         Me.FlatButton8.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.FlatButton8.ButtonTextHeight = 14
         Me.FlatButton8.Clickable = True
         Me.FlatButton8.Color = LCARS.LCARScolorStyles.NavigationFunction
-        Me.FlatButton8.ColorsAvailable = LcarScolor10
         Me.FlatButton8.CustomAlertColor = System.Drawing.Color.Empty
         Me.FlatButton8.Data = Nothing
         Me.FlatButton8.Data2 = Nothing
         Me.FlatButton8.FlashInterval = 500
         Me.FlatButton8.holdDraw = False
-        Me.FlatButton8.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
-        Me.FlatButton8.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.FlatButton8.lblTextSize = New System.Drawing.Size(73, 14)
-        Me.FlatButton8.lblTextVisible = True
         Me.FlatButton8.Lit = True
         Me.FlatButton8.Location = New System.Drawing.Point(205, 20)
         Me.FlatButton8.Name = "FlatButton8"
@@ -363,23 +289,17 @@ Partial Class Hlpfrm
         '
         Me.FlatButton3.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.FlatButton3.AutoEllipsis = False
-        Me.FlatButton3.BackgroundImage = CType(resources.GetObject("FlatButton3.BackgroundImage"), System.Drawing.Image)
         Me.FlatButton3.Beeping = False
         Me.FlatButton3.ButtonText = ""
         Me.FlatButton3.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.FlatButton3.ButtonTextHeight = 14
         Me.FlatButton3.Clickable = True
         Me.FlatButton3.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
-        Me.FlatButton3.ColorsAvailable = LcarScolor11
         Me.FlatButton3.CustomAlertColor = System.Drawing.Color.Empty
         Me.FlatButton3.Data = Nothing
         Me.FlatButton3.Data2 = Nothing
         Me.FlatButton3.FlashInterval = 500
         Me.FlatButton3.holdDraw = False
-        Me.FlatButton3.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
-        Me.FlatButton3.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.FlatButton3.lblTextSize = New System.Drawing.Size(85, 176)
-        Me.FlatButton3.lblTextVisible = True
         Me.FlatButton3.Lit = True
         Me.FlatButton3.Location = New System.Drawing.Point(12, 359)
         Me.FlatButton3.Name = "FlatButton3"
@@ -392,23 +312,17 @@ Partial Class Hlpfrm
         '
         Me.cpxManualName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cpxManualName.AutoEllipsis = False
-        Me.cpxManualName.BackgroundImage = CType(resources.GetObject("cpxManualName.BackgroundImage"), System.Drawing.Image)
         Me.cpxManualName.Beeping = True
         Me.cpxManualName.ButtonText = ""
         Me.cpxManualName.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.cpxManualName.ButtonTextHeight = 14
         Me.cpxManualName.Clickable = True
         Me.cpxManualName.Color = LCARS.LCARScolorStyles.StaticBlue
-        Me.cpxManualName.ColorsAvailable = LcarScolor12
         Me.cpxManualName.CustomAlertColor = System.Drawing.Color.Empty
         Me.cpxManualName.Data = Nothing
         Me.cpxManualName.Data2 = Nothing
         Me.cpxManualName.FlashInterval = 500
         Me.cpxManualName.holdDraw = False
-        Me.cpxManualName.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
-        Me.cpxManualName.lblTextLoc = New System.Drawing.Point(190, 0)
-        Me.cpxManualName.lblTextSize = New System.Drawing.Size(15, 30)
-        Me.cpxManualName.lblTextVisible = True
         Me.cpxManualName.Lit = True
         Me.cpxManualName.Location = New System.Drawing.Point(418, 12)
         Me.cpxManualName.Name = "cpxManualName"
@@ -425,23 +339,17 @@ Partial Class Hlpfrm
         Me.FlatButton4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.FlatButton4.AutoEllipsis = False
-        Me.FlatButton4.BackgroundImage = CType(resources.GetObject("FlatButton4.BackgroundImage"), System.Drawing.Image)
         Me.FlatButton4.Beeping = False
         Me.FlatButton4.ButtonText = ""
         Me.FlatButton4.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.FlatButton4.ButtonTextHeight = 14
         Me.FlatButton4.Clickable = False
         Me.FlatButton4.Color = LCARS.LCARScolorStyles.StaticTan
-        Me.FlatButton4.ColorsAvailable = LcarScolor13
         Me.FlatButton4.CustomAlertColor = System.Drawing.Color.Empty
         Me.FlatButton4.Data = Nothing
         Me.FlatButton4.Data2 = Nothing
         Me.FlatButton4.FlashInterval = 500
         Me.FlatButton4.holdDraw = False
-        Me.FlatButton4.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
-        Me.FlatButton4.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.FlatButton4.lblTextSize = New System.Drawing.Size(132, 30)
-        Me.FlatButton4.lblTextVisible = True
         Me.FlatButton4.Lit = True
         Me.FlatButton4.Location = New System.Drawing.Point(280, 12)
         Me.FlatButton4.Name = "FlatButton4"
@@ -453,7 +361,6 @@ Partial Class Hlpfrm
         'Elbow4
         '
         Me.Elbow4.AutoEllipsis = False
-        Me.Elbow4.BackgroundImage = CType(resources.GetObject("Elbow4.BackgroundImage"), System.Drawing.Image)
         Me.Elbow4.Beeping = False
         Me.Elbow4.ButtonHeight = 30
         Me.Elbow4.ButtonText = ""
@@ -462,7 +369,6 @@ Partial Class Hlpfrm
         Me.Elbow4.ButtonWidth = 85
         Me.Elbow4.Clickable = True
         Me.Elbow4.Color = LCARS.LCARScolorStyles.NavigationFunction
-        Me.Elbow4.ColorsAvailable = LcarScolor14
         Me.Elbow4.CustomAlertColor = System.Drawing.Color.Empty
         Me.Elbow4.Data = Nothing
         Me.Elbow4.Data2 = Nothing
@@ -470,10 +376,6 @@ Partial Class Hlpfrm
         Me.Elbow4.ElbowStyle = LCARS.Controls.Elbow.LCARSelbowStyles.UpperLeft
         Me.Elbow4.FlashInterval = 500
         Me.Elbow4.holdDraw = False
-        Me.Elbow4.lblTextAnchor = System.Windows.Forms.AnchorStyles.None
-        Me.Elbow4.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.Elbow4.lblTextSize = New System.Drawing.Size(157, 68)
-        Me.Elbow4.lblTextVisible = True
         Me.Elbow4.Lit = True
         Me.Elbow4.Location = New System.Drawing.Point(12, 12)
         Me.Elbow4.Name = "Elbow4"
@@ -496,6 +398,8 @@ Partial Class Hlpfrm
         '
         Me.btgChapters.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btgChapters.Beeping = False
+        Me.btgChapters.ColorsAvailable = LcarScolor1
         Me.btgChapters.ControlAddingDirection = LCARS.Controls.ButtonGrid.ControlDirection.Horizontal
         Me.btgChapters.ControlPadding = 5
         Me.btgChapters.ControlSize = New System.Drawing.Size(150, 30)

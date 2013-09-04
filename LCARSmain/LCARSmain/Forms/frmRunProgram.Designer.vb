@@ -22,7 +22,6 @@ Partial Class frmRunProgram
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmRunProgram))
         Me.TextButton1 = New LCARS.Controls.TextButton
         Me.txtCommand = New System.Windows.Forms.TextBox
         Me.fbBrowse = New LCARS.Controls.FlatButton
@@ -34,7 +33,6 @@ Partial Class frmRunProgram
         '
         'TextButton1
         '
-        Me.TextButton1.BackgroundImage = CType(resources.GetObject("TextButton1.BackgroundImage"), System.Drawing.Image)
         Me.TextButton1.Beeping = False
         Me.TextButton1.ButtonText = "RUN PROGRAM"
         Me.TextButton1.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -42,16 +40,11 @@ Partial Class frmRunProgram
         Me.TextButton1.ButtonType = LCARS.Controls.TextButton.TextButtonType.DoublePills
         Me.TextButton1.Clickable = False
         Me.TextButton1.Color = LCARS.LCARScolorStyles.MiscFunction
+        Me.TextButton1.CustomAlertColor = System.Drawing.Color.Empty
         Me.TextButton1.Data = Nothing
         Me.TextButton1.Data2 = Nothing
         Me.TextButton1.FlashInterval = 500
         Me.TextButton1.holdDraw = False
-        Me.TextButton1.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextButton1.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.TextButton1.lblTextSize = New System.Drawing.Point(405, 22)
-        Me.TextButton1.lblTextVisible = False
         Me.TextButton1.Lit = True
         Me.TextButton1.Location = New System.Drawing.Point(13, 13)
         Me.TextButton1.Name = "TextButton1"
@@ -72,23 +65,17 @@ Partial Class frmRunProgram
         '
         'fbBrowse
         '
-        Me.fbBrowse.BackgroundImage = CType(resources.GetObject("fbBrowse.BackgroundImage"), System.Drawing.Image)
         Me.fbBrowse.Beeping = False
         Me.fbBrowse.ButtonText = "..."
         Me.fbBrowse.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.fbBrowse.ButtonTextHeight = 14
         Me.fbBrowse.Clickable = True
         Me.fbBrowse.Color = LCARS.LCARScolorStyles.MiscFunction
+        Me.fbBrowse.CustomAlertColor = System.Drawing.Color.Empty
         Me.fbBrowse.Data = Nothing
         Me.fbBrowse.Data2 = Nothing
         Me.fbBrowse.FlashInterval = 500
         Me.fbBrowse.holdDraw = False
-        Me.fbBrowse.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.fbBrowse.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.fbBrowse.lblTextSize = New System.Drawing.Point(29, 29)
-        Me.fbBrowse.lblTextVisible = True
         Me.fbBrowse.Lit = True
         Me.fbBrowse.Location = New System.Drawing.Point(389, 67)
         Me.fbBrowse.Name = "fbBrowse"
@@ -99,7 +86,6 @@ Partial Class frmRunProgram
         '
         'sbOK
         '
-        Me.sbOK.BackgroundImage = CType(resources.GetObject("sbOK.BackgroundImage"), System.Drawing.Image)
         Me.sbOK.Beeping = False
         Me.sbOK.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbOK.ButtonText = "OK"
@@ -107,16 +93,11 @@ Partial Class frmRunProgram
         Me.sbOK.ButtonTextHeight = 14
         Me.sbOK.Clickable = True
         Me.sbOK.Color = LCARS.LCARScolorStyles.PrimaryFunction
+        Me.sbOK.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbOK.Data = Nothing
         Me.sbOK.Data2 = Nothing
         Me.sbOK.FlashInterval = 500
         Me.sbOK.holdDraw = False
-        Me.sbOK.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbOK.lblTextLoc = New System.Drawing.Point(15, 0)
-        Me.sbOK.lblTextSize = New System.Drawing.Point(92, 31)
-        Me.sbOK.lblTextVisible = True
         Me.sbOK.Lit = True
         Me.sbOK.Location = New System.Drawing.Point(295, 129)
         Me.sbOK.Name = "sbOK"
@@ -127,7 +108,6 @@ Partial Class frmRunProgram
         '
         'sbCancel
         '
-        Me.sbCancel.BackgroundImage = CType(resources.GetObject("sbCancel.BackgroundImage"), System.Drawing.Image)
         Me.sbCancel.Beeping = False
         Me.sbCancel.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbCancel.ButtonText = "CANCEL"
@@ -135,16 +115,11 @@ Partial Class frmRunProgram
         Me.sbCancel.ButtonTextHeight = 14
         Me.sbCancel.Clickable = True
         Me.sbCancel.Color = LCARS.LCARScolorStyles.CriticalFunction
+        Me.sbCancel.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbCancel.Data = Nothing
         Me.sbCancel.Data2 = Nothing
         Me.sbCancel.FlashInterval = 500
         Me.sbCancel.holdDraw = False
-        Me.sbCancel.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbCancel.lblTextLoc = New System.Drawing.Point(15, 0)
-        Me.sbCancel.lblTextSize = New System.Drawing.Point(92, 31)
-        Me.sbCancel.lblTextVisible = True
         Me.sbCancel.Lit = True
         Me.sbCancel.Location = New System.Drawing.Point(166, 129)
         Me.sbCancel.Name = "sbCancel"

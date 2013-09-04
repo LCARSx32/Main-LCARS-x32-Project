@@ -22,7 +22,6 @@ Partial Class UserButtons
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(UserButtons))
         Me.lblFBTitle = New System.Windows.Forms.Label
         Me.sbDone = New LCARS.Controls.StandardButton
         Me.txtUBName = New System.Windows.Forms.TextBox
@@ -48,7 +47,6 @@ Partial Class UserButtons
         'sbDone
         '
         Me.sbDone.AutoEllipsis = False
-        Me.sbDone.BackgroundImage = CType(resources.GetObject("sbDone.BackgroundImage"), System.Drawing.Image)
         Me.sbDone.Beeping = False
         Me.sbDone.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbDone.ButtonText = "OK"
@@ -56,16 +54,11 @@ Partial Class UserButtons
         Me.sbDone.ButtonTextHeight = -1
         Me.sbDone.Clickable = True
         Me.sbDone.Color = LCARS.LCARScolorStyles.MiscFunction
+        Me.sbDone.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbDone.Data = Nothing
         Me.sbDone.Data2 = Nothing
         Me.sbDone.FlashInterval = 500
         Me.sbDone.holdDraw = False
-        Me.sbDone.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbDone.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.sbDone.lblTextSize = New System.Drawing.Point(80, 24)
-        Me.sbDone.lblTextVisible = True
         Me.sbDone.Lit = True
         Me.sbDone.Location = New System.Drawing.Point(396, 12)
         Me.sbDone.Name = "sbDone"
@@ -117,7 +110,6 @@ Partial Class UserButtons
         'sbBrowse
         '
         Me.sbBrowse.AutoEllipsis = False
-        Me.sbBrowse.BackgroundImage = CType(resources.GetObject("sbBrowse.BackgroundImage"), System.Drawing.Image)
         Me.sbBrowse.Beeping = False
         Me.sbBrowse.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbBrowse.ButtonText = "BROWSE"
@@ -125,16 +117,11 @@ Partial Class UserButtons
         Me.sbBrowse.ButtonTextHeight = -1
         Me.sbBrowse.Clickable = True
         Me.sbBrowse.Color = LCARS.LCARScolorStyles.MiscFunction
+        Me.sbBrowse.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbBrowse.Data = Nothing
         Me.sbBrowse.Data2 = Nothing
         Me.sbBrowse.FlashInterval = 500
         Me.sbBrowse.holdDraw = False
-        Me.sbBrowse.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbBrowse.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.sbBrowse.lblTextSize = New System.Drawing.Point(80, 24)
-        Me.sbBrowse.lblTextVisible = True
         Me.sbBrowse.Lit = True
         Me.sbBrowse.Location = New System.Drawing.Point(392, 148)
         Me.sbBrowse.Name = "sbBrowse"
@@ -146,7 +133,6 @@ Partial Class UserButtons
         'sbMove
         '
         Me.sbMove.AutoEllipsis = False
-        Me.sbMove.BackgroundImage = CType(resources.GetObject("sbMove.BackgroundImage"), System.Drawing.Image)
         Me.sbMove.Beeping = False
         Me.sbMove.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbMove.ButtonText = "MOVE"
@@ -154,16 +140,11 @@ Partial Class UserButtons
         Me.sbMove.ButtonTextHeight = -1
         Me.sbMove.Clickable = True
         Me.sbMove.Color = LCARS.LCARScolorStyles.MiscFunction
+        Me.sbMove.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbMove.Data = Nothing
         Me.sbMove.Data2 = Nothing
         Me.sbMove.FlashInterval = 500
         Me.sbMove.holdDraw = False
-        Me.sbMove.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbMove.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.sbMove.lblTextSize = New System.Drawing.Point(80, 24)
-        Me.sbMove.lblTextVisible = True
         Me.sbMove.Lit = True
         Me.sbMove.Location = New System.Drawing.Point(288, 12)
         Me.sbMove.Name = "sbMove"

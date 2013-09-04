@@ -19,7 +19,6 @@ Partial Class ScreenChooserDialog
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ScreenChooserDialog))
         Me.StandardButton1 = New LCARS.Controls.StandardButton
         Me.btnOK = New LCARS.Controls.StandardButton
         Me.picScreen4 = New System.Windows.Forms.PictureBox
@@ -37,7 +36,6 @@ Partial Class ScreenChooserDialog
         '
         'StandardButton1
         '
-        Me.StandardButton1.BackgroundImage = CType(resources.GetObject("StandardButton1.BackgroundImage"), System.Drawing.Image)
         Me.StandardButton1.Beeping = False
         Me.StandardButton1.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.StandardButton1.ButtonText = "CANCEL"
@@ -45,16 +43,11 @@ Partial Class ScreenChooserDialog
         Me.StandardButton1.ButtonTextHeight = 14
         Me.StandardButton1.Clickable = True
         Me.StandardButton1.Color = LCARS.LCARScolorStyles.CriticalFunction
+        Me.StandardButton1.CustomAlertColor = System.Drawing.Color.Empty
         Me.StandardButton1.Data = Nothing
         Me.StandardButton1.Data2 = Nothing
         Me.StandardButton1.FlashInterval = 500
         Me.StandardButton1.holdDraw = False
-        Me.StandardButton1.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.StandardButton1.lblTextLoc = New System.Drawing.Point(15, 0)
-        Me.StandardButton1.lblTextSize = New System.Drawing.Point(83, 31)
-        Me.StandardButton1.lblTextVisible = True
         Me.StandardButton1.Lit = True
         Me.StandardButton1.Location = New System.Drawing.Point(215, 403)
         Me.StandardButton1.Name = "StandardButton1"
@@ -65,7 +58,6 @@ Partial Class ScreenChooserDialog
         '
         'btnOK
         '
-        Me.btnOK.BackgroundImage = CType(resources.GetObject("btnOK.BackgroundImage"), System.Drawing.Image)
         Me.btnOK.Beeping = False
         Me.btnOK.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.btnOK.ButtonText = "SELECT SCREEN"
@@ -73,16 +65,11 @@ Partial Class ScreenChooserDialog
         Me.btnOK.ButtonTextHeight = 14
         Me.btnOK.Clickable = True
         Me.btnOK.Color = LCARS.LCARScolorStyles.PrimaryFunction
+        Me.btnOK.CustomAlertColor = System.Drawing.Color.Empty
         Me.btnOK.Data = Nothing
         Me.btnOK.Data2 = Nothing
         Me.btnOK.FlashInterval = 500
         Me.btnOK.holdDraw = False
-        Me.btnOK.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnOK.lblTextLoc = New System.Drawing.Point(15, 0)
-        Me.btnOK.lblTextSize = New System.Drawing.Point(83, 31)
-        Me.btnOK.lblTextVisible = True
         Me.btnOK.Lit = True
         Me.btnOK.Location = New System.Drawing.Point(335, 403)
         Me.btnOK.Name = "btnOK"
@@ -129,7 +116,6 @@ Partial Class ScreenChooserDialog
         '
         'tbTitle
         '
-        Me.tbTitle.BackgroundImage = CType(resources.GetObject("tbTitle.BackgroundImage"), System.Drawing.Image)
         Me.tbTitle.Beeping = False
         Me.tbTitle.ButtonText = "INTERFACE SELECTOR"
         Me.tbTitle.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -137,16 +123,11 @@ Partial Class ScreenChooserDialog
         Me.tbTitle.ButtonType = LCARS.Controls.TextButton.TextButtonType.DoublePills
         Me.tbTitle.Clickable = True
         Me.tbTitle.Color = LCARS.LCARScolorStyles.MiscFunction
+        Me.tbTitle.CustomAlertColor = System.Drawing.Color.Empty
         Me.tbTitle.Data = Nothing
         Me.tbTitle.Data2 = Nothing
         Me.tbTitle.FlashInterval = 500
         Me.tbTitle.holdDraw = False
-        Me.tbTitle.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbTitle.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.tbTitle.lblTextSize = New System.Drawing.Point(437, 22)
-        Me.tbTitle.lblTextVisible = False
         Me.tbTitle.Lit = True
         Me.tbTitle.Location = New System.Drawing.Point(12, 12)
         Me.tbTitle.Name = "tbTitle"

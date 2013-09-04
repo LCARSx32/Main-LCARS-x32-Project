@@ -22,7 +22,6 @@ Partial Class Resize_Keypad
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Resize_Keypad))
         Me.lblResizeTitle = New System.Windows.Forms.Label
         Me.sbIncrementMinus = New LCARS.Controls.StandardButton
         Me.sbIncrementPlus = New LCARS.Controls.StandardButton
@@ -52,7 +51,6 @@ Partial Class Resize_Keypad
         'sbIncrementMinus
         '
         Me.sbIncrementMinus.AutoEllipsis = False
-        Me.sbIncrementMinus.BackgroundImage = CType(resources.GetObject("sbIncrementMinus.BackgroundImage"), System.Drawing.Image)
         Me.sbIncrementMinus.Beeping = False
         Me.sbIncrementMinus.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbIncrementMinus.ButtonText = "–"
@@ -60,16 +58,11 @@ Partial Class Resize_Keypad
         Me.sbIncrementMinus.ButtonTextHeight = -1
         Me.sbIncrementMinus.Clickable = True
         Me.sbIncrementMinus.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.sbIncrementMinus.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbIncrementMinus.Data = Nothing
         Me.sbIncrementMinus.Data2 = Nothing
         Me.sbIncrementMinus.FlashInterval = 500
         Me.sbIncrementMinus.holdDraw = False
-        Me.sbIncrementMinus.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbIncrementMinus.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.sbIncrementMinus.lblTextSize = New System.Drawing.Point(43, 35)
-        Me.sbIncrementMinus.lblTextVisible = True
         Me.sbIncrementMinus.Lit = True
         Me.sbIncrementMinus.Location = New System.Drawing.Point(310, 103)
         Me.sbIncrementMinus.Name = "sbIncrementMinus"
@@ -81,7 +74,6 @@ Partial Class Resize_Keypad
         'sbIncrementPlus
         '
         Me.sbIncrementPlus.AutoEllipsis = False
-        Me.sbIncrementPlus.BackgroundImage = CType(resources.GetObject("sbIncrementPlus.BackgroundImage"), System.Drawing.Image)
         Me.sbIncrementPlus.Beeping = False
         Me.sbIncrementPlus.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbIncrementPlus.ButtonText = "+"
@@ -89,16 +81,11 @@ Partial Class Resize_Keypad
         Me.sbIncrementPlus.ButtonTextHeight = -1
         Me.sbIncrementPlus.Clickable = True
         Me.sbIncrementPlus.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.sbIncrementPlus.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbIncrementPlus.Data = Nothing
         Me.sbIncrementPlus.Data2 = Nothing
         Me.sbIncrementPlus.FlashInterval = 500
         Me.sbIncrementPlus.holdDraw = False
-        Me.sbIncrementPlus.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbIncrementPlus.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.sbIncrementPlus.lblTextSize = New System.Drawing.Point(43, 35)
-        Me.sbIncrementPlus.lblTextVisible = True
         Me.sbIncrementPlus.Lit = True
         Me.sbIncrementPlus.Location = New System.Drawing.Point(370, 103)
         Me.sbIncrementPlus.Name = "sbIncrementPlus"
@@ -143,7 +130,6 @@ Partial Class Resize_Keypad
         'sbHeightMinus
         '
         Me.sbHeightMinus.AutoEllipsis = False
-        Me.sbHeightMinus.BackgroundImage = CType(resources.GetObject("sbHeightMinus.BackgroundImage"), System.Drawing.Image)
         Me.sbHeightMinus.Beeping = False
         Me.sbHeightMinus.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbHeightMinus.ButtonText = "–"
@@ -151,16 +137,11 @@ Partial Class Resize_Keypad
         Me.sbHeightMinus.ButtonTextHeight = -1
         Me.sbHeightMinus.Clickable = True
         Me.sbHeightMinus.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.sbHeightMinus.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbHeightMinus.Data = Nothing
         Me.sbHeightMinus.Data2 = Nothing
         Me.sbHeightMinus.FlashInterval = 500
         Me.sbHeightMinus.holdDraw = False
-        Me.sbHeightMinus.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbHeightMinus.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.sbHeightMinus.lblTextSize = New System.Drawing.Point(43, 35)
-        Me.sbHeightMinus.lblTextVisible = True
         Me.sbHeightMinus.Lit = True
         Me.sbHeightMinus.Location = New System.Drawing.Point(164, 103)
         Me.sbHeightMinus.Name = "sbHeightMinus"
@@ -172,7 +153,6 @@ Partial Class Resize_Keypad
         'sbHeightPlus
         '
         Me.sbHeightPlus.AutoEllipsis = False
-        Me.sbHeightPlus.BackgroundImage = CType(resources.GetObject("sbHeightPlus.BackgroundImage"), System.Drawing.Image)
         Me.sbHeightPlus.Beeping = False
         Me.sbHeightPlus.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbHeightPlus.ButtonText = "+"
@@ -180,16 +160,11 @@ Partial Class Resize_Keypad
         Me.sbHeightPlus.ButtonTextHeight = -1
         Me.sbHeightPlus.Clickable = True
         Me.sbHeightPlus.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.sbHeightPlus.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbHeightPlus.Data = Nothing
         Me.sbHeightPlus.Data2 = Nothing
         Me.sbHeightPlus.FlashInterval = 500
         Me.sbHeightPlus.holdDraw = False
-        Me.sbHeightPlus.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbHeightPlus.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.sbHeightPlus.lblTextSize = New System.Drawing.Point(43, 35)
-        Me.sbHeightPlus.lblTextVisible = True
         Me.sbHeightPlus.Lit = True
         Me.sbHeightPlus.Location = New System.Drawing.Point(229, 103)
         Me.sbHeightPlus.Name = "sbHeightPlus"
@@ -201,7 +176,6 @@ Partial Class Resize_Keypad
         'sbWidthMinus
         '
         Me.sbWidthMinus.AutoEllipsis = False
-        Me.sbWidthMinus.BackgroundImage = CType(resources.GetObject("sbWidthMinus.BackgroundImage"), System.Drawing.Image)
         Me.sbWidthMinus.Beeping = False
         Me.sbWidthMinus.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbWidthMinus.ButtonText = "–"
@@ -209,16 +183,11 @@ Partial Class Resize_Keypad
         Me.sbWidthMinus.ButtonTextHeight = -1
         Me.sbWidthMinus.Clickable = True
         Me.sbWidthMinus.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.sbWidthMinus.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbWidthMinus.Data = Nothing
         Me.sbWidthMinus.Data2 = Nothing
         Me.sbWidthMinus.FlashInterval = 500
         Me.sbWidthMinus.holdDraw = False
-        Me.sbWidthMinus.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbWidthMinus.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.sbWidthMinus.lblTextSize = New System.Drawing.Point(43, 35)
-        Me.sbWidthMinus.lblTextVisible = True
         Me.sbWidthMinus.Lit = True
         Me.sbWidthMinus.Location = New System.Drawing.Point(38, 103)
         Me.sbWidthMinus.Name = "sbWidthMinus"
@@ -230,7 +199,6 @@ Partial Class Resize_Keypad
         'sbWidthPlus
         '
         Me.sbWidthPlus.AutoEllipsis = False
-        Me.sbWidthPlus.BackgroundImage = CType(resources.GetObject("sbWidthPlus.BackgroundImage"), System.Drawing.Image)
         Me.sbWidthPlus.Beeping = False
         Me.sbWidthPlus.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbWidthPlus.ButtonText = "+"
@@ -238,16 +206,11 @@ Partial Class Resize_Keypad
         Me.sbWidthPlus.ButtonTextHeight = -1
         Me.sbWidthPlus.Clickable = True
         Me.sbWidthPlus.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.sbWidthPlus.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbWidthPlus.Data = Nothing
         Me.sbWidthPlus.Data2 = Nothing
         Me.sbWidthPlus.FlashInterval = 500
         Me.sbWidthPlus.holdDraw = False
-        Me.sbWidthPlus.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbWidthPlus.lblTextLoc = New System.Drawing.Point(0, 0)
-        Me.sbWidthPlus.lblTextSize = New System.Drawing.Point(43, 35)
-        Me.sbWidthPlus.lblTextVisible = True
         Me.sbWidthPlus.Lit = True
         Me.sbWidthPlus.Location = New System.Drawing.Point(95, 103)
         Me.sbWidthPlus.Name = "sbWidthPlus"
@@ -270,7 +233,6 @@ Partial Class Resize_Keypad
         'sbDone
         '
         Me.sbDone.AutoEllipsis = False
-        Me.sbDone.BackgroundImage = CType(resources.GetObject("sbDone.BackgroundImage"), System.Drawing.Image)
         Me.sbDone.Beeping = False
         Me.sbDone.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbDone.ButtonText = "DONE"
@@ -278,17 +240,12 @@ Partial Class Resize_Keypad
         Me.sbDone.ButtonTextHeight = -1
         Me.sbDone.Clickable = True
         Me.sbDone.Color = LCARS.LCARScolorStyles.MiscFunction
+        Me.sbDone.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbDone.Data = Nothing
         Me.sbDone.Data2 = Nothing
         Me.sbDone.Flash = True
         Me.sbDone.FlashInterval = 500
         Me.sbDone.holdDraw = False
-        Me.sbDone.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbDone.lblTextLoc = New System.Drawing.Point(17, 0)
-        Me.sbDone.lblTextSize = New System.Drawing.Point(77, 35)
-        Me.sbDone.lblTextVisible = True
         Me.sbDone.Lit = True
         Me.sbDone.Location = New System.Drawing.Point(301, 151)
         Me.sbDone.Name = "sbDone"
@@ -300,7 +257,6 @@ Partial Class Resize_Keypad
         'sbMove
         '
         Me.sbMove.AutoEllipsis = False
-        Me.sbMove.BackgroundImage = CType(resources.GetObject("sbMove.BackgroundImage"), System.Drawing.Image)
         Me.sbMove.Beeping = False
         Me.sbMove.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbMove.ButtonText = "MOVE RESIZE PAD"
@@ -308,16 +264,11 @@ Partial Class Resize_Keypad
         Me.sbMove.ButtonTextHeight = -1
         Me.sbMove.Clickable = True
         Me.sbMove.Color = LCARS.LCARScolorStyles.MiscFunction
+        Me.sbMove.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbMove.Data = Nothing
         Me.sbMove.Data2 = Nothing
         Me.sbMove.FlashInterval = 500
         Me.sbMove.holdDraw = False
-        Me.sbMove.lblTextAnchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbMove.lblTextLoc = New System.Drawing.Point(17, 0)
-        Me.sbMove.lblTextSize = New System.Drawing.Point(199, 35)
-        Me.sbMove.lblTextVisible = True
         Me.sbMove.Lit = True
         Me.sbMove.Location = New System.Drawing.Point(38, 151)
         Me.sbMove.Name = "sbMove"
