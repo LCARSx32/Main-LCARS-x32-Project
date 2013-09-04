@@ -845,11 +845,11 @@ Public Class LCARSbuttonClass
     End Sub
 
     Protected Overrides Sub OnPaint(ByVal e As System.Windows.Forms.PaintEventArgs)
-        If isLit Then
-            e.Graphics.DrawImage(NormalButton, 0, 0)
-        Else
-            e.Graphics.DrawImage(UnLitButton, 0, 0)
-        End If
+        'If isLit Then
+        '    e.Graphics.DrawImage(NormalButton, 0, 0)
+        'Else
+        '    e.Graphics.DrawImage(UnLitButton, 0, 0)
+        'End If
         'MyBase.OnPaint(e)
     End Sub
 
