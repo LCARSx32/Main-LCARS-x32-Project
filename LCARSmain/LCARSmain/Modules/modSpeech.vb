@@ -1,4 +1,5 @@
 Imports SpeechLib
+Imports LCARS.UI
 
 Module modSpeech
     Dim SpeechEngine As SpInprocRecognizer
@@ -71,7 +72,6 @@ Module modSpeech
                 .WriteLine("  <DEFINE>")
                 .WriteLine("    <ID NAME=""Initiator"" VAL=""1""/>")
                 .WriteLine("    <ID NAME=""MainCommands"" VAL=""2""/>")
-                .WriteLine("    <ID NAME=""SystemDrives"" VAL=""3""/>")
                 .WriteLine("  </DEFINE>")
                 .WriteLine("  <!-- Rule definitions -->")
                 .WriteLine("  <RULE NAME=""Init"" ID=""Initiator"" TOPLEVEL=""ACTIVE"">")
@@ -123,11 +123,6 @@ Module modSpeech
                 'More stuff that's always the same
                 .WriteLine("    </L>")
                 .WriteLine("  </RULE>")
-                .WriteLine("  <RULE NAME=""Drives"" ID=""SystemDrives"" TOPLEVEL=""ACTIVE"">")
-                .WriteLine("    <L>")
-                .WriteLine("      <P>notepad</P>")
-                .WriteLine("    </L>")
-                .WriteLine("  </RULE>")
                 .WriteLine("</GRAMMAR>")
             End With
             mywriter.Close()
@@ -158,6 +153,16 @@ Module modSpeech
             vGrammar.CmdSetRuleIdState(1, SpeechRuleState.SGDSActive)
             AddHandler Listener.Recognition, AddressOf OnReco
             vox = New SpVoice
+        Catch ex As Runtime.InteropServices.COMException
+            Select Case ex.ErrorCode
+                Case -2147201021
+                    MsgBox("Invalid language code. If your computer's speech recognition is not set to English (US), please change the language code.", MsgBoxStyle.OkOnly, "Error:")
+                Case Else
+                    LCARS.UI.MsgBox("Voice commands failed to initialize.  MS Speech may not be installed or working properly.", MsgBoxStyle.OkCancel, "ERROR:")
+                    Dim myerrorfile As New System.IO.StreamWriter(My.Computer.FileSystem.SpecialDirectories.Desktop & "\Voice error.txt", True)
+                    myerrorfile.WriteLine(ex.ToString)
+                    myerrorfile.Close()
+            End Select
         Catch ex As Exception
             LCARS.UI.MsgBox("Voice commands failed to initialize.  MS Speech may not be installed or working properly.", MsgBoxStyle.OkCancel, "ERROR:")
             Dim myerrorfile As New System.IO.StreamWriter(My.Computer.FileSystem.SpecialDirectories.Desktop & "\Voice error.txt", True)
