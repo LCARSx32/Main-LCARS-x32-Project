@@ -74,8 +74,7 @@
 
     Private Sub FrmMain_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Load
         interop.Init()
-        Me.Width = Screen.PrimaryScreen.WorkingArea.Width
-        Me.Height = Screen.PrimaryScreen.WorkingArea.Height
+        Me.Bounds = Screen.PrimaryScreen.WorkingArea
 
         'For zoom function
         FlatButton15.Visible = False
