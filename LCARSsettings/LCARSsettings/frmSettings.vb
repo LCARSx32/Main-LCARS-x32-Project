@@ -189,7 +189,7 @@ Public Class frmSettings
                                          "stardate", "run program", "date", "time", "keyboard", _
                                          "task manager", "continuous commands", "yellow alert", _
                                          "confirmed", "help", "authorization", "show console", _
-                                         "hide console"}
+                                         "hide console", "web browser"}
         ReDim aliasList(myCommandList.Length - 1)
         For i As Integer = 0 To myCommandList.Length - 1
             aliasList(i).Command = myCommandList(i)
@@ -706,6 +706,8 @@ Public Class frmSettings
                 lblDescription.Text = "Description: Shows the speech console."
             Case "hide console"
                 lblDescription.Text = "Description: Hides the speech console."
+            Case "web browser"
+                lblDescription.Text = "Description: Starts the LCARS web browser."
         End Select
     End Sub
 
