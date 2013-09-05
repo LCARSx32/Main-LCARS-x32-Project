@@ -22,15 +22,9 @@ Partial Class frmStartup
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
-        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.pnlDesktop = New System.Windows.Forms.Panel
         Me.pnlBack = New System.Windows.Forms.Panel
         Me.SuspendLayout()
-        '
-        'Timer1
-        '
-        Me.Timer1.Enabled = True
         '
         'pnlDesktop
         '
@@ -65,7 +59,6 @@ Partial Class frmStartup
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents Timer1 As System.Windows.Forms.Timer
     Friend WithEvents pnlDesktop As System.Windows.Forms.Panel
     Friend WithEvents pnlBack As System.Windows.Forms.Panel
 End Class
