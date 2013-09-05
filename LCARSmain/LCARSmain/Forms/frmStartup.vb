@@ -212,10 +212,6 @@ Public Class frmStartup
         'End If
         MoveTrayIcons()
 
-        If GetSetting("LCARS X32", "Application", "Updates", "FALSE") Then
-            Process.Start(Application.StartupPath & "\LCARSUpdate.exe", "-s")
-        End If
-
         Me.FormBorderStyle = Windows.Forms.FormBorderStyle.None
         If shellMode Then
             Me.Bounds = Screen.AllScreens(screenindex).Bounds
@@ -291,6 +287,11 @@ Public Class frmStartup
 
         myForm.Show()
         myForm.BringToFront()
+
+        If GetSetting("LCARS X32", "Application", "Updates", "FALSE") Then
+            Process.Start(Application.StartupPath & "\LCARSUpdate.exe", "-s")
+        End If
+
         If shellMode Then
             Dim startupThread As New Threading.Thread(AddressOf StartupPrograms)
             startupThread.Start()
@@ -343,7 +344,7 @@ Public Class frmStartup
         pnlBack.Bounds = myBounds
         pnlDesktop.Bounds = Screen.AllScreens(screenindex).WorkingArea
         pnlBack.BringToFront()
-        pnlDesktop.BringToFront()
+        'pnlDesktop.BringToFront()
 
 
         myIconSaver.Bounds = Screen.AllScreens(screenindex).Bounds
