@@ -1,13 +1,13 @@
-History and Ongoing Development|Chapter 1.htm
+History and Ongoing Development|History.htm
 Quick Reference|Quick Reference.htm
-Installation|Chapter 2.htm
-Settings|Chapter 3.htm
-Start Menu|Chapter 4.htm
-My Computer|Chapter 5.htm
-Personal Programs|Chapter 6.htm
-On-Screen Keyboard|Chapter 7.htm
-Engineering|Chapter 8.htm
-Web Browser|Chapter 9.htm
-Picture Viewer|Chapter 10.htm
-Add-on Programs|Chapter 11.htm
+Installation|Installation.htm
+Settings|Settings.htm
+Start Menu|Start Menu.htm
+File Browser|File Browser.htm
+Personal Programs|Personal Programs.htm
+On-Screen Keyboard|OSK.htm
+Engineering|Engineering.htm
+Web Browser|Web Browser.htm
+Picture Viewer|Picture Viewer.htm
+Add-on Programs|Add-ons.htm
 Acknowledgements|Ack.htm

@@ -1,0 +1,45 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script type="text/javascript" src="images.js" ></script>
+<title>
+File Browser
+</title>
+<body>
+<h2>General</h2>
+<img src="Images/Mycomputer.png" />
+<p>The LCARS x32 file browser is launched whenever you click on a button to show a folder from the main screen or use the equivalent voice command. This file browser is able to view all mounted drives and logged-in network shares.</p>
+<h2>Interface</h2>
+<p>LCARS Explorer displays drives and files and folders in the main area of its screen. Folders will be coloured differently from files. The side text of each button will either show the capacity of the drive, the extension of the file, or the number of files and folders in a directory. The name of the current folder will be displayed on the title bar. Selections may be made in two ways: By clicking and dragging to make a rectangular selection, or by clicking and holding the mouse on one file for one second. There is currently no support for multiple selections. To clear a selection, click on a blank area of the file area, or reload the directory.</p>
+<p>LCARS Explorer cannot access all files, folders, and drives, either because they are not "real" but show up in the file system, or because a drive is inaccessible. These files, folders, and drives will be coloured differently, and will initiate a red alert if you attempt to access them. By default they are hidden, but this behaviour can be turned off in the <a href="#Settings">options menu</a>. An inactive drive will still be visible, but not accessible.</p>
+<p>Along the right-hand side of the window is a column of buttons in a menu titled "Actions". These are the primary command buttons for the file browser. The "Go To" and "Edit" buttons will display a sub-menu to the left of this main menu when clicked.</p>
+<h2>Actions Menu</h2>
+<p>The following buttons are always visible in this menu:</p>
+<ul>
+<li>PROPERTIES: Will display information about the currently selected item(s). </li>
+<li>UP A DIRECTORY: Clicking this button moves the display backwards through sub folders.</li>
+<li>OPTIONS: Used to access the <a href="#Settings">options menu</a> where you can set up links to other drives, or folders.</li>
+<li>REFRESH: Used to reload the current folder. Click this button if a file is not showing up in the current view.</li>
+<li>GO TO: Please see the <a href="#Shortcuts">Shortcuts</a> section for details on this button</li>
+</ul>
+<p>The following buttons are only visible if the current directory is not the top-level drive list</p>
+<ul>
+<li>EDIT: This button bring us a menu of other buttons including rename, copy, paste, cut and delete. These are all standard file explorer features and the purpose of each button is self-explanatory.</li>
+<li>NEW FOLDER: Click this button to create a new folder. Enter the folder name then click OK to create it.</li>
+<li>OPEN WITH: If a file has been selected, clicking this button will bring up a menu from which you can choose an application with which to open the selected file type. The application selected will not permanently change the file association.</li>
+</ul>
+<h2><a name="Shortcuts"></a>Shortcuts</h2>
+<p>The Go To menu provides several navigation aids. Along the left side are a list of system-defined locations (The same system-defined locations accessible through voice commands and buttons on the main screen) and two other buttons. The right side is a list of user-defined shortcuts. Clicking any of these shortcuts will display the directory that they are linked to.</p>
+<p>The "Enter Path" button allows you to directly enter a path if it would be easier to type than navigate to it. Also, it can be used to access any logged-in network shares directly. Unfortunately, there is not yet a provision for listing all network shares that you have access to, nor is there a provision for logging in through LCARS x32.</p>
+<p>The "Save Current" button will store a new shortcut for the current path, with the directory name as the label.</p>
+<p>Shortcuts may be edited at any time through the <a href="#Settings">options menu</a>. There is no limit to the number of shortcuts you may have.</p>
+<h2><a name="Settings"></a>Options Menu</h2>
+<p>LCARS Explorer has its own settings separate from those of LCARS x32. At some point these settings will be integrated with the main LCARS x32 settings. Currently there is no guarantee that settings for LCARS Explorer will persist through an upgrade. The options menu allows both editing of shortcuts and editing of the general settings. After settings have been changed, the current directory will be reloaded. The following options can be configured:</p>
+<ul>
+<li>CHECK ACCESS: Checks that LCARS Explorer will be able to access a file before displaying it. Turn off to view all sorts of dummy files and reparse points that are hidden in the file system</li>
+<li>COLOUR FILES BY EXTENSION: Changes the colour of files based on their extensions. This makes finding files of a particular type easier</li>
+<li>Start Directory: The directory to display when LCARS Explorer is opened, unless another directory was specified. If empty, the start directory is the drive list.</li>
+<li>Click Mode: Permits changing the method of opening files and directories between a single or double click. The default (and standard for all other sections of LCARS x32) is a single click.</li>
+</ul>
+</body>
+</html>
