@@ -7,6 +7,7 @@ Public Class Form1
     Private Event InstallFinished()
     Private Delegate Sub SetProgress(ByVal CurrentProgress As Decimal)
     Private Delegate Sub AddItem(ByVal NewItem As Object)
+    Private Delegate Sub NoArgs()
 #Region " API calls "
     <DllImport("gdi32")> _
     Public Shared Function AddFontResource(ByVal lpFileName As String) As Integer
@@ -109,11 +110,19 @@ Shared Function WriteProfileString(ByVal lpszSection As String, ByVal lpszKeyNam
         End Try
     End Sub
     Private Sub FinishInstall() Handles Me.InstallFinished
-        Try
-            MsgBox("LCARS x32 has finished installing." & vbNewLine & "You are now running version 0.6.2")
+        If Me.InvokeRequired Then
+            Me.Invoke(New NoArgs(AddressOf FinishInstall))
+        Else
+            Dim version As String = "ERROR"
+            Try
+                Using myreader As New System.IO.StreamReader(txtInstallPath.Text & "\versions.txt")
+                    version = myreader.ReadLine()
+                End Using
+            Catch ex As Exception
+            End Try
+            MsgBox("LCARS x32 has finished installing." & vbNewLine & "You are now running version " & Version)
             End
-        Catch ex As Exception
-        End Try
+        End If
     End Sub
 
     Private Sub ChangeProgress(ByVal CurrentProgress As Decimal)
