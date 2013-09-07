@@ -1,8 +1,16 @@
-﻿Public Class x32Interop
+﻿''' <summary>
+''' Allows for automatic notification of changes to the LCARS environment.
+''' </summary>
+''' <remarks>
+''' This class links its window to the current running instance of LCARS x32, then receives messages
+''' for the object that created it. These LCARS-specific messages are then passed on to standard
+''' events for processing.
+''' </remarks>
+Public Class x32Interop
 
 #Region " API "
     Declare Function RegisterWindowMessageA Lib "user32.dll" (ByVal lpString As String) As Integer
-    Public Declare Auto Function SendMessage Lib "user32.dll" (ByVal hWnd As IntPtr, ByVal msg As Integer, ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
+    Declare Auto Function SendMessage Lib "user32.dll" (ByVal hWnd As IntPtr, ByVal msg As Integer, ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
 
     Const WM_COPYDATA As Integer = &H4A
     Const HWND_BROADCAST As Integer = &HFFFF
@@ -16,11 +24,48 @@
 #End Region
 
 #Region " Events "
+    ''' <summary>
+    ''' Raised when the working area changes
+    ''' </summary>
+    ''' <param name="NewArea">Bounds of the new working area</param>
+    ''' <remarks>
+    ''' This event will not be raised immediately after the current instance has subscribed to LCARS
+    ''' messages. The window that needs to resize will need to do so on its own on startup.
+    ''' </remarks>
     Public Event WorkingAreaChanged(ByVal NewArea As System.Drawing.Rectangle)
+    ''' <summary>
+    ''' Raised when an alert is initiated.
+    ''' </summary>
+    ''' <param name="AlertID">ID of the alert initiated</param>
     Public Event AlertInitiated(ByVal AlertID As Integer)
+    ''' <summary>
+    ''' Raised when the current alert has ended
+    ''' </summary>
+    ''' <remarks>
+    ''' If an alert ends because another alert has replaced it, this event will not be raised, only a
+    ''' new <see cref="AlertInitiated">AlertInitiated</see> event
+    ''' </remarks>
     Public Event AlertEnded()
+    ''' <summary>
+    ''' Raised when the global beeping setting has changed
+    ''' </summary>
+    ''' <param name="Beeping">The new global beeping setting</param>
     Public Event BeepingChanged(ByVal Beeping As Boolean)
+    ''' <summary>
+    ''' Raised when the global color settings have been changed.
+    ''' </summary>
+    ''' <remarks>
+    ''' No additional data is provided because the <see cref="LCARScolor">LCARS color</see> class
+    ''' contains a method to reload the colors from the registry.
+    ''' </remarks>
     Public Event ColorsChanged()
+    ''' <summary>
+    ''' Raised when the current instance of LCARS x32 is closing.
+    ''' </summary>
+    ''' <remarks>
+    ''' When this is called, the window used to capture messages will also be closed. If further
+    ''' LCARS message capturing is required, a new instance will need to be created.
+    ''' </remarks>
     Public Event LCARSx32Closing()
 #End Region
 
