@@ -422,6 +422,7 @@ Public Class frmMyComp
                 Dim myProcess As Process
 
                 myNewProcess.FileName = sender.data
+                myNewProcess.WorkingDirectory = curPath
                 '  myProcess.WindowStyle = ProcessWindowStyle.Minimized
                 myProcess = Process.Start(myNewProcess)
             Catch
