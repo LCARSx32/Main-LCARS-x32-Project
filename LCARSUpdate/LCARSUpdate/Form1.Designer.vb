@@ -86,10 +86,9 @@ Partial Class frmUpdate
         Me.lblMessage.Font = New System.Drawing.Font("LCARS", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblMessage.Location = New System.Drawing.Point(13, 42)
         Me.lblMessage.Name = "lblMessage"
-        Me.lblMessage.Size = New System.Drawing.Size(493, 24)
+        Me.lblMessage.Size = New System.Drawing.Size(119, 24)
         Me.lblMessage.TabIndex = 2
-        Me.lblMessage.Text = "The following components must be updated. You cannot turn off your computer durin" & _
-            "g the update."
+        Me.lblMessage.Text = "Checking for updates."
         '
         'lstUpdates
         '
@@ -114,14 +113,14 @@ Partial Class frmUpdate
         Me.sbNext.ButtonText = "NEXT"
         Me.sbNext.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbNext.ButtonTextHeight = 14
-        Me.sbNext.Clickable = True
+        Me.sbNext.Clickable = False
         Me.sbNext.Color = LCARS.LCARScolorStyles.PrimaryFunction
         Me.sbNext.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbNext.Data = Nothing
         Me.sbNext.Data2 = Nothing
         Me.sbNext.FlashInterval = 500
         Me.sbNext.holdDraw = False
-        Me.sbNext.Lit = True
+        Me.sbNext.Lit = False
         Me.sbNext.Location = New System.Drawing.Point(386, 387)
         Me.sbNext.Name = "sbNext"
         Me.sbNext.RedAlert = LCARS.LCARSalert.Normal
