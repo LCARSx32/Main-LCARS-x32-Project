@@ -37,6 +37,15 @@ Public Module Util
         Return myString
     End Function
 
+    ''' <summary>
+    ''' Sets the beeping of a control and all subcontrols
+    ''' </summary>
+    ''' <param name="Container">The control to set the beeping for</param>
+    ''' <param name="Beeping">The beeping value to use</param>
+    ''' <remarks>
+    ''' If you are using windowless controls, the <see cref="Controls.WindowlessContainer">Windowless 
+    ''' Container</see> will set the beeping for all of its windowless controls if its own beeping is set.
+    ''' </remarks>
     Public Sub SetBeeping(ByVal Container As System.Windows.Forms.Control, ByVal Beeping As Boolean)
         Dim temp As IBeeping = TryCast(Container, IBeeping)
         If Not temp Is Nothing Then
@@ -47,6 +56,10 @@ Public Module Util
         Next
     End Sub
 
+    ''' <summary>
+    ''' Reloads all colors from the registry for the specified container
+    ''' </summary>
+    ''' <param name="Container">The control to reload the colors for.</param>
     Public Sub UpdateColors(ByVal Container As System.Windows.Forms.Control)
         Dim temp As IColorable
         temp = TryCast(Container, IColorable)
