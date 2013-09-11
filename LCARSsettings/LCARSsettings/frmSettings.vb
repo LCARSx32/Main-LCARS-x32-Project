@@ -735,10 +735,6 @@ Public Class frmSettings
 
     Private Sub sbOK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbOK.Click
         Dim myCheck As Boolean = True
-        If Not System.IO.File.Exists(txtCommandPath.Text) Then
-            myCheck = False
-            lblError.Text = "Command path does not exist"
-        End If
         For Each myelement As CustomEntry In customList
             If myelement.CommandName = txtCommandName.Text Then
                 myCheck = False

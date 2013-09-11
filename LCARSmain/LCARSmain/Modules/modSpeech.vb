@@ -347,10 +347,49 @@ Module modSpeech
                 Case "tea earl grey hot"
                     My.Computer.Audio.Play(My.Resources._095, AudioPlayMode.Background)
                 Case Else 'Searches for .exe files for custom commands
+                    Dim inputString As String = getCustomCommand(command.ToLower())
                     Try
-                        Process.Start(getCustomCommand(command))
+                        If IO.File.Exists(inputString) Then
+                            'The command string is an absolute path.
+                            Dim myprocess As New Process
+                            myprocess.StartInfo.FileName = inputString
+                            myprocess.StartInfo.WorkingDirectory = IO.Path.GetDirectoryName(inputString)
+                            myprocess.Start()
+                        Else
+                            'It isn't, so jump to the catch
+                            Throw New Exception
+                        End If
                     Catch ex As Exception
-                        MsgBox("Problem starting program or invalid command entry" & vbNewLine & vbNewLine & ex.ToString())
+                        'The command will be interpreted as an absolute path, followed by arguments
+                        Try
+                            Dim myProcess As New Process()
+                            If (inputString.Substring(0, 1) = """") Then
+                                Dim splitIndex As Integer = inputString.Substring(1).IndexOf("""") + 2
+                                myProcess.StartInfo.FileName = inputString.Substring(0, splitIndex)
+                                myProcess.StartInfo.Arguments = inputString.Substring(splitIndex + 1)
+                                myProcess.StartInfo.WorkingDirectory = IO.Path.GetDirectoryName(myProcess.StartInfo.FileName)
+                            Else
+                                myProcess.StartInfo.FileName = inputString.Split(" ")(0)
+                                myProcess.StartInfo.Arguments = inputString.Substring(myProcess.StartInfo.FileName.Length + 1)
+                                myProcess.StartInfo.WorkingDirectory = IO.Path.GetDirectoryName(myProcess.StartInfo.FileName)
+                            End If
+                            myProcess.Start()
+                        Catch ex1 As Exception
+                            'Throw it to shell and see what happens.
+                            Try
+                                Dim myID As Integer
+                                myID = Shell(inputString, AppWinStyle.NormalFocus)
+                                Dim myprocess As Process = Process.GetProcessById(myID)
+                            Catch ex2 As Exception
+                                'Throw it to Process.Start and hope for the best
+                                Try
+                                    Dim myProcess As Process = Process.Start(inputString)
+                                Catch ex3 As Exception
+                                    MsgBox("Error: " & vbNewLine & vbNewLine & ex3.Message)
+                                End Try
+                            End Try
+                        End Try
+
                     End Try
             End Select
         End If
