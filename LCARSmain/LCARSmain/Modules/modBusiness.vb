@@ -1391,20 +1391,50 @@ public Class modBusiness
 
                 MoveToScreen(Screen.FromHandle(myForm.Handle), myProcess.MainWindowHandle)
             Else
-                Try
-                    Dim myID As Integer
-                    myID = Shell(sender.data, AppWinStyle.NormalFocus)
-                    Dim myprocess As Process = Process.GetProcessById(myID)
-                    MoveToScreen(Screen.FromHandle(myForm.Handle), myprocess.MainWindowHandle)
-                Catch ex2 As Exception
+                If File.Exists(sender.data) Then
+                    'The command string is an absolute path.
                     Try
-                        Dim myProcess As Process = Process.Start(sender.data)
-                        'MoveToScreen(Screen.FromHandle(myForm.Handle), myProcess.MainWindowHandle)
-
+                        Dim myprocess As New Process
+                        myprocess.StartInfo.FileName = sender.data
+                        myprocess.StartInfo.WorkingDirectory = Path.GetDirectoryName(sender.data)
+                        myprocess.Start()
                     Catch ex As Exception
-                        MsgBox("Error: " & vbNewLine & vbNewLine & ex2.Message)
+                        GoTo Retry 'Yes, I know. If you have a better way, go for it.
                     End Try
-                End Try
+                Else
+Retry:
+                    'The command will be interpreted as an absolute path, followed by arguments
+                    Try
+                        Dim myProcess As New Process()
+                        If (sender.data.Substring(0, 1) = """") Then
+                            Dim splitIndex As Integer = sender.data.Substring(1).IndexOf("""") + 2
+                            myProcess.StartInfo.FileName = sender.data.Substring(0, splitIndex)
+                            myProcess.StartInfo.Arguments = sender.data.Substring(splitIndex + 1)
+                            myProcess.StartInfo.WorkingDirectory = IO.Path.GetDirectoryName(myProcess.StartInfo.FileName)
+                        Else
+                            myProcess.StartInfo.FileName = sender.data.Split(" ")(0)
+                            myProcess.StartInfo.Arguments = sender.data.Substring(myProcess.StartInfo.FileName.Length + 1)
+                            myProcess.StartInfo.WorkingDirectory = IO.Path.GetDirectoryName(myProcess.StartInfo.FileName)
+                        End If
+                        myProcess.Start()
+                    Catch ex As Exception
+                        'Throw it to shell and see what happens.
+                        Try
+                            Dim myID As Integer
+                            myID = Shell(sender.data, AppWinStyle.NormalFocus)
+                            Dim myprocess As Process = Process.GetProcessById(myID)
+                            MoveToScreen(Screen.FromHandle(myForm.Handle), myprocess.MainWindowHandle)
+                        Catch ex2 As Exception
+                            'Throw it to Process.Start and hope for the best
+                            Try
+                                Dim myProcess As Process = Process.Start(sender.data)
+                                MoveToScreen(Screen.FromHandle(myForm.Handle), myProcess.MainWindowHandle)
+                            Catch ex3 As Exception
+                                MsgBox("Error: " & vbNewLine & vbNewLine & ex3.Message)
+                            End Try
+                        End Try
+                    End Try
+                End If
 
             End If
 

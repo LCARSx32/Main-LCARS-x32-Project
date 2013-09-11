@@ -84,12 +84,20 @@ Public Class frmUpdate
             path(r) = temp
         Next
 
+        Dim checkThread As New Threading.Thread(AddressOf CheckServers)
+        checkThread.Start(path)
+    End Sub
+
+    Private Sub CheckServers(ByVal path() As String)
         'Download version file and compare
         Dim found As Boolean = False
         For Each myPath As String In path
             Dim res As Boolean = CheckVersion(myPath)
             If res Then
+                lblMessage.Text = "The following components must be updated. You cannot turn off your computer during the update."
                 rtbServer.Text = myPath
+                sbNext.Clickable = True
+                sbNext.Lit = True
                 found = True
                 Exit For
             End If
