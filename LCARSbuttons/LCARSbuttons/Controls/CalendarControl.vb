@@ -3,9 +3,16 @@ Imports System.Windows.Forms
 Imports LCARS.LightweightControls
 
 Namespace Controls
+    ''' <summary>
+    ''' Displays an LCARS Earth calendar
+    ''' </summary>
     <System.ComponentModel.DefaultEvent("SelectedDateChanged")> _
-    Public Class LCARSCalender
+        Public Class LCARSCalender
         Inherits Windows.Forms.Control
+        ''' <summary>
+        ''' Raised when the selected date changes.
+        ''' </summary>
+        ''' <param name="SelectedDate">Currently selected date</param>
         Public Event SelectedDateChanged(ByVal SelectedDate As DateTime)
         'Global Variables
         Dim _year As Integer = 2000
@@ -29,6 +36,9 @@ Namespace Controls
         Dim myFriday As New LCFlatButton
         Dim mySaturday As New LCFlatButton
 
+        ''' <summary>
+        ''' Months recognized by this control
+        ''' </summary>
         Public Enum Months
             January = 1
             February = 2
@@ -44,6 +54,9 @@ Namespace Controls
             December = 12
         End Enum
 #Region " Properties "
+        ''' <summary>
+        ''' Currently selected year
+        ''' </summary>
         Public Property Year() As Integer
             Get
                 Return _year
@@ -58,6 +71,9 @@ Namespace Controls
                 End If
             End Set
         End Property
+        ''' <summary>
+        ''' Currently selected month
+        ''' </summary>
         Public Property Month() As Months
             Get
                 Return _month
@@ -93,6 +109,9 @@ Namespace Controls
                 ShowDays()
             End Set
         End Property
+        ''' <summary>
+        ''' Amount of padding to put between buttons in calendar
+        ''' </summary>
         Public Property ButtonPadding() As Integer
             Get
                 Return _padding
@@ -105,6 +124,9 @@ Namespace Controls
                 End If
             End Set
         End Property
+        ''' <summary>
+        ''' Currently selected date
+        ''' </summary>
         Public Property SelectedDate() As DateTime
             Get
                 Return _selectedDate
@@ -113,23 +135,22 @@ Namespace Controls
                 _selectedDate = value
                 Year = _selectedDate.Year
                 Month = _selectedDate.Month
-                'ShowDays()
             End Set
         End Property
 #End Region
 
 #Region " Event Handlers "
-        Public Sub YearUp()
+        Private Sub YearUp()
             If _year < 9999 Then
                 Year += 1
             End If
         End Sub
-        Public Sub YearDown()
+        Private Sub YearDown()
             If _year > 1 Then
                 Year -= 1
             End If
         End Sub
-        Public Sub MonthUp()
+        Private Sub MonthUp()
             If _month < 12 Then
                 Month += 1
             Else
@@ -137,7 +158,7 @@ Namespace Controls
                 Month = 1
             End If
         End Sub
-        Public Sub MonthDown()
+        Private Sub MonthDown()
             If _month > 1 Then
                 Month -= 1
             Else
@@ -145,7 +166,7 @@ Namespace Controls
                 Month = 12
             End If
         End Sub
-        Public Sub Day_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+        Private Sub Day_Click(ByVal sender As Object, ByVal e As System.EventArgs)
             For Each mybutton As FlatButton In myDays.Controls
                 mybutton.RedAlert = LCARSalert.Normal
             Next
@@ -335,7 +356,7 @@ Namespace Controls
             Me.Size = New Size(250, 250)
             Me.ResumeLayout()
         End Sub
-        Public Sub ShowDays()
+        Private Sub ShowDays()
             myDays.Clear()
             Dim standardSize As New Size((Me.Size.Width + _padding) / 7 - _padding, (Me.Size.Height + _padding) / 9 - _padding)
             Dim i As Integer
@@ -369,7 +390,7 @@ Namespace Controls
                 Next
             Next
         End Sub
-        Public Sub Calender_Resize() Handles Me.Resize
+        Private Sub Calender_Resize() Handles Me.Resize
             With buttonContainer
                 .Width = Me.Width
                 .Height = Me.Height

@@ -102,6 +102,8 @@ Namespace LightweightControls
         ''' This property should intercept all redraw and other update commands until it is set to false. This is to permit the setting
         ''' of multiple properties in quick succession without redrawing each time. Parent controls should use this to maximum
         ''' effect with hidden controls.
+        ''' 
+        ''' The Windowless Container will not draw a control with this property set.
         ''' </remarks>
         Property HoldDraw() As Boolean
         ''' <summary>

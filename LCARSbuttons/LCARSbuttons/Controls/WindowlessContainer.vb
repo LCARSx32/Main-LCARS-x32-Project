@@ -2,8 +2,13 @@
 Imports System.Windows.Forms
 
 Namespace Controls
+    ''' <summary>
+    ''' Draws windowless controls and passes events to them.
+    ''' </summary>
+    ''' <remarks>
+    ''' </remarks>
     <System.ComponentModel.Designer(GetType(WindowlessDesigner))> _
-    Public Class WindowlessContainer
+        Public Class WindowlessContainer
         Inherits System.Windows.Forms.Control
         Implements LCARS.IColorable, IBeeping
 
@@ -14,8 +19,19 @@ Namespace Controls
         Dim _beeping As Boolean = GetSetting("LCARS x32", "Application", "ButtonBeep", "TRUE")
         Dim WithEvents _colorsAvailable As New LCARS.LCARScolor
         'Events
+        ''' <summary>
+        ''' Raised when a windowless control has been added.
+        ''' </summary>
         Public Event LightweightControlAdded As EventHandler
 
+        ''' <summary>
+        ''' Adds a lightweight control to the current instance
+        ''' </summary>
+        ''' <param name="item">The lightweight control to add</param>
+        ''' <remarks>
+        ''' The lightweight control's parent property will be set to the current instance for the 
+        ''' purposes of easier multithreading.
+        ''' </remarks>
         Public Sub Add(ByVal item As LightweightControls.ILightweightControl)
             item.SetParent(Me)
             myList.Add(item)
@@ -23,12 +39,21 @@ Namespace Controls
             RaiseEvent LightweightControlAdded(Me, New EventArgs)
             Me.Invalidate()
         End Sub
+        ''' <summary>
+        ''' Paints the windowless container and all visible windowless controls
+        ''' </summary>
+        ''' <param name="e">Standard paint event args</param>
+        ''' <remarks>
+        ''' Controls with their <see cref="LightweightControls.ilightweightcontrol.HoldDraw">HoldDraw
+        ''' </see> property set will not be drawn. Controls will be drawn in the order they were added,
+        ''' resulting in the last-added control having the highest z-order.
+        ''' </remarks>
         Protected Overrides Sub OnPaint(ByVal e As PaintEventArgs)
             MyBase.OnPaint(e)
             Dim g As Graphics = Me.CreateGraphics()
             g.Clear(Color.Black)
             For i As Integer = 0 To myList.Count - 1
-                If Not myList(i).HoldDraw then g.DrawImage(myList(i).GetBitmap(), myList(i).Bounds)
+                If Not myList(i).HoldDraw Then g.DrawImage(myList(i).GetBitmap(), myList(i).Bounds)
             Next
         End Sub
         Private Sub drawButton(ByVal sender As LightweightControls.ILightweightControl)
@@ -41,7 +66,7 @@ Namespace Controls
             End Try
         End Sub
         ''' <summary>
-        ''' Clears all current controls from the grid
+        ''' Clears all current controls from the control
         ''' </summary>
         Public Sub Clear()
             For Each mybutton As LCARS.LightweightControls.ILightweightControl In myList
@@ -125,7 +150,7 @@ Namespace Controls
 
 #Region " Properties "
         ''' <summary>
-        ''' Gives access to the controls already on the grid.
+        ''' Gives access to the windowless controls already added to the control.
         ''' </summary>
         ''' <param name="index">Zero-based index of the control to access</param>
         ''' <value>The control to assign at that point</value>
@@ -148,6 +173,9 @@ Namespace Controls
             End Set
         End Property
 
+        ''' <summary>
+        ''' Returns the number of windowless controls in this instance
+        ''' </summary>
         Public ReadOnly Property Count() As Integer
             Get
                 Return myList.Count
@@ -155,6 +183,12 @@ Namespace Controls
         End Property
 
 
+        ''' <summary>
+        ''' Allows access to the LCARS color class used by this control
+        ''' </summary>
+        ''' <remarks>
+        ''' Setting this property will cause all subcontrols to reload their colors
+        ''' </remarks>
         Public Property ColorsAvailable() As LCARScolor Implements IColorable.ColorsAvailable
             Get
                 Return _colorsAvailable
@@ -165,6 +199,9 @@ Namespace Controls
             End Set
         End Property
 
+        ''' <summary>
+        ''' Allows beeping to be set for all current windowless controls
+        ''' </summary>
         Public Property Beeping() As Boolean Implements IBeeping.Beeping
             Get
                 Return _beeping
@@ -183,9 +220,16 @@ Namespace Controls
 #End Region
     End Class
 
+    ''' <summary>
+    ''' Designer for <see cref="WindowlessContainer">Windowless Container</see>
+    ''' </summary>
     Public Class WindowlessDesigner
         Inherits System.Windows.Forms.Design.ControlDesigner
 
+        ''' <summary>
+        ''' Paints a cyan border around the control to make it more visible.
+        ''' </summary>
+        ''' <param name="pe">PaintEventArgs used for drawing</param>
         Protected Overrides Sub OnPaintAdornments(ByVal pe As System.Windows.Forms.PaintEventArgs)
             pe.Graphics.DrawRectangle(Pens.Cyan, 0, 0, Me.Control.Size.Width - 1, Me.Control.Size.Height - 1)
 

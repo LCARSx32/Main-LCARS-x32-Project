@@ -121,14 +121,6 @@ Public Class LCARSbuttonClass
     Dim isFlashing As Boolean
     Dim canClick As Boolean = True
     Dim oAlign As System.Drawing.ContentAlignment
-    '''' <summary>
-    '''' Label used to show text of control
-    '''' </summary>
-    '''' <remarks>
-    '''' If you don't want to use this to show your text, be sure to remove its event handlers.
-    '''' The TextButton is a good example of how to do this properly.
-    '''' </remarks>
-    'Protected WithEvents lblText As New Label
     Dim scaleHight As Double = 14
     Dim WithEvents tmrTextScroll As New Timer
     Protected myText As String = "LCARS"
@@ -146,10 +138,25 @@ Public Class LCARSbuttonClass
 
 #Region " Events "
 
+    ''' <summary>
+    ''' Raised when the button is clicked
+    ''' </summary>
     Public Shadows Event Click(ByVal sender As Object, ByVal e As EventArgs)
+    ''' <summary>
+    ''' Raised when the button is double-clicked
+    ''' </summary>
     Public Shadows Event DoubleClick(ByVal sender As Object, ByVal e As EventArgs)
+    ''' <summary>
+    ''' Raised when a mouse button is depressed while the mouse is over the button
+    ''' </summary>
     Public Shadows Event MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)
+    ''' <summary>
+    ''' Raised when a mouse button is released while the mouse is over the button
+    ''' </summary>
     Public Shadows Event MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)
+    ''' <summary>
+    ''' Raised when the mouse moves over the button
+    ''' </summary>
     Public Shadows Event MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)
 #End Region
 
@@ -675,7 +682,7 @@ Public Class LCARSbuttonClass
         MyBase.ScaleControl(factor, specified)
     End Sub
 
-    Public Sub lblText_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Click
+    Private Sub lblText_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Click
         If Me.canClick Then
             buttonDown()
         End If
@@ -688,7 +695,7 @@ Public Class LCARSbuttonClass
         End If
     End Sub
 
-    Protected Sub lblText_MouseEnter(ByVal sender As Object, ByVal e As EventArgs) Handles Me.MouseEnter
+    Private Sub lblText_MouseEnter(ByVal sender As Object, ByVal e As EventArgs) Handles Me.MouseEnter
         If Me.CreateGraphics.MeasureString(myText, _font).Width > lblTextSize.width Then
             tmrTextScroll.Interval = 200
             oAlign = _textAlign
@@ -709,7 +716,7 @@ Public Class LCARSbuttonClass
 
     End Sub
 
-    Protected Sub lblText_MouseLeave(ByVal sener As Object, ByVal e As EventArgs) Handles Me.MouseLeave
+    Private Sub lblText_MouseLeave(ByVal sener As Object, ByVal e As EventArgs) Handles Me.MouseLeave
         If tmrTextScroll.Enabled Then
             tmrTextScroll.Enabled = False
 
