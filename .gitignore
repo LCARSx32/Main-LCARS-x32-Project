@@ -99,5 +99,4 @@ Backup*/
 UpgradeLog*.XML
 Standard Installer/Standard Installer/Resources/CurrentVersion.zip
 Build/ILMerge.exe
-Build/Out/CurrentVersion.zip
-Build/Out/LCARSx32Installer.exe
+Build/Out
