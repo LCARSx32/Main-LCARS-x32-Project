@@ -522,7 +522,7 @@ Public Class frmSettings
     End Sub
 
     Private Sub ltcSettings_SelectedTabChanged(ByVal Tab As LCARS.Controls.x32TabPage, ByVal TabIndex As System.Int32) Handles ltcSettings.SelectedTabChanged
-        If ltcSettings.SelectedTab.Text = "APPEARENCE" Then
+        If ltcSettings.SelectedTab.Text = "APPEARANCE" Then
             myFiles = System.IO.Directory.GetFiles(Application.StartupPath & "\colors", "*.lxcp")
 
             lstColors.Items.Clear()
