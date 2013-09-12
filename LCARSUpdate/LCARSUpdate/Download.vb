@@ -16,6 +16,8 @@ Friend Class Download
     Private _retryCount As Integer = 0
     Private downloadThread As System.Threading.Thread
 
+    Private Delegate Sub SingleLongArg(ByVal status As Long)
+
     Public Property RetryCount() As Integer
         Get
             Return _retryCount
@@ -97,9 +99,13 @@ Friend Class Download
     End Sub
 
     Public Sub Me_ProgressChanged(ByVal currentProgress As Long) Handles Me.StatusChanged
-        Dim percent As Decimal = currentProgress / downloadSize
-        Me.Value = percent
-        Me.BottomText = (percent * 100).ToString("F") & "% of " & downloadSize & " bytes."
+        If Me.InvokeRequired() Then
+            Me.Invoke(New SingleLongArg(AddressOf Me_ProgressChanged), currentProgress)
+        Else
+            Dim percent As Decimal = currentProgress / downloadSize
+            Me.Value = percent
+            Me.BottomText = (percent * 100).ToString("F") & "% of " & downloadSize & " bytes."
+        End If
     End Sub
 
     Public Sub Me_SizeAcquired(ByVal size As Long) Handles Me.SizeAcquired
