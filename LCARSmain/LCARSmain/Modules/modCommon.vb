@@ -81,12 +81,35 @@ Module modCommon
     Public Const SPIF_SENDWININICHANGE = &H2
     Public Const SPIF_UPDATEINIFILE = &H1
     Public Const SPIF_change = SPIF_UPDATEINIFILE Or SPIF_SENDWININICHANGE
+    'Constants for hiding minimized windows in shell mode
+    Public Const SPI_GETMINIMIZEDMETRICS = &H2B
+    Public Const SPI_SETMINIMIZEDMETRICS = &H2C
 
+    <StructLayout(LayoutKind.Sequential)> _
+    Public Structure MinimizedMetrics
+        Public cbSize As UInteger
+        Public iWidth As Integer
+        Public iHorzGap As Integer
+        Public iVertGap As Integer
+        Public iArrange As MinimizedMetricsArrangement
+    End Structure
 
+    <Flags()> _
+    Public Enum MinimizedMetricsArrangement
+        BottomLeft = 0
+        BottomRight = 1
+        TopLeft = 2
+        TopRight = 3
+        Left = 0
+        Right = 0
+        Up = 4
+        Down = 4
+        Hide = 8
+    End Enum
 
     'used to set the working area
     <System.Runtime.InteropServices.DllImport("user32.dll", EntryPoint:="SystemParametersInfoA")> _
-    Public Function SystemParametersInfo(ByVal uAction As Int32, ByVal uParam As Int32, ByVal lpvParam As IntPtr, ByVal fuWinIni As Int32) As Int32
+    Public Function SystemParametersInfo(ByVal uAction As UInteger, ByVal uParam As UInteger, ByVal lpvParam As IntPtr, ByVal fuWinIni As UInteger) As Int32
     End Function
 #End Region
 

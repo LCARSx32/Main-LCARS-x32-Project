@@ -211,7 +211,7 @@ Public Class frmStartup
         '    Next
         'End If
         MoveTrayIcons()
-
+        HideMinimizedWindows()
         Me.FormBorderStyle = Windows.Forms.FormBorderStyle.None
         If shellMode Then
             Me.Bounds = Screen.AllScreens(screenindex).Bounds
@@ -489,5 +489,19 @@ Public Class frmStartup
                                          & "Reinstalling should fix this problem." & vbNewLine & vbNewLine & "Program will exit.", MsgBoxStyle.Critical, "Fatal error")
             End
         End If
+    End Sub
+
+    Private Sub HideMinimizedWindows()
+        Dim myMetrics As MinimizedMetrics
+        myMetrics.cbSize = Marshal.SizeOf(myMetrics)
+        Dim myPtr As IntPtr = Marshal.AllocCoTaskMem(myMetrics.cbSize)
+        Marshal.StructureToPtr(myMetrics, myPtr, True)
+        'Get current information
+        SystemParametersInfo(SPI_GETMINIMIZEDMETRICS, 0, myPtr, 0)
+        myMetrics.iArrange = MinimizedMetricsArrangement.Hide
+        myMetrics.cbSize = Marshal.SizeOf(myMetrics)
+        Marshal.StructureToPtr(myMetrics, myPtr, True)
+        'Set minimized windows to actually hide
+        SystemParametersInfo(SPI_SETMINIMIZEDMETRICS, 0, myPtr, 0)
     End Sub
 End Class
