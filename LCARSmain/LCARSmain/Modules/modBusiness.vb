@@ -400,7 +400,6 @@ public Class modBusiness
 
         ReDim myWindows(-1)
         myForm = curForm
-        SetParent(myForm.Handle, myDesktop.pnlBack.Handle)
 
         AddHandler Microsoft.Win32.SystemEvents.DisplaySettingsChanged, AddressOf System_DisplayChanged
 

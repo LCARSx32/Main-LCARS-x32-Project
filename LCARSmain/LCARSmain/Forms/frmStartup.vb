@@ -213,13 +213,8 @@ Public Class frmStartup
         MoveTrayIcons()
         HideMinimizedWindows()
         Me.FormBorderStyle = Windows.Forms.FormBorderStyle.None
-        If shellMode Then
-            Me.Bounds = Screen.AllScreens(screenindex).Bounds
-            Me.SendToBack()
-        Else
-            Me.Size = New Point(0, 0)
-            Me.Visible = False
-        End If
+        Me.Size = New Point(0, 0)
+        Me.Visible = False
 
         Dim result As Boolean = SetShellReadyEvent("msgina: ShellReadyEvent")
         If result = False Then
@@ -314,11 +309,13 @@ Public Class frmStartup
                 count += 1
             Loop While hwndSHELLDLL_DefView = IntPtr.Zero And count < 20
         End If
-        If Not shellMode Then
-            SysListView = FindWindowEx(hwndSHELLDLL_DefView, IntPtr.Zero, "SysListView32", IntPtr.Zero)
-            SetParent(pnlBack.Handle, hwndProgMan)
-            SetParent(pnlDesktop.Handle, hwndProgMan)
+        If shellMode Then
+            hwndProgMan = IntPtr.Zero
+            hwndSHELLDLL_DefView = IntPtr.Zero
         End If
+        SysListView = FindWindowEx(hwndSHELLDLL_DefView, IntPtr.Zero, "SysListView32", IntPtr.Zero)
+        SetParent(pnlBack.Handle, hwndProgMan)
+        SetParent(pnlDesktop.Handle, hwndProgMan)
 
         Dim leftLoc As Integer = 0
         Dim topLoc As Integer = 0
@@ -335,16 +332,10 @@ Public Class frmStartup
         Dim myBounds As Rectangle = Screen.AllScreens(screenindex).Bounds
         myBounds.X = myBounds.X - leftLoc
         myBounds.Y = myBounds.Y - topLoc
-        If shellMode Then
-            Dim currentStyle As Integer = GetWindowLong(Me.Handle, -20)
-            currentStyle = currentStyle Or (&H80) Or (&H8000000)
-            SetWindowLong(Me.Handle, -20, currentStyle)
-            Me.Bounds = myBounds
-        End If
         pnlBack.Bounds = myBounds
         pnlDesktop.Bounds = Screen.AllScreens(screenindex).WorkingArea
         pnlBack.BringToFront()
-        'pnlDesktop.BringToFront()
+        pnlDesktop.BringToFront()
 
 
         myIconSaver.Bounds = Screen.AllScreens(screenindex).Bounds
