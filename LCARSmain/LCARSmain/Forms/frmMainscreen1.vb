@@ -274,7 +274,6 @@ Public Class frmMainscreen1
         Me.Show()
 
         Application.DoEvents()
-        AddHandler modBusiness.programsPageDataChanged, AddressOf programDataChanged
 
 
         isInit = True
@@ -318,11 +317,6 @@ Public Class frmMainscreen1
 
         ' AnimatePanel(Me, True, 150, True, True)
     End Sub
-
-    Private Sub programDataChanged(ByVal data As String)
-        fbProgramPages.ButtonText = data
-    End Sub
-
 
 #Region " Old Code "
     '    Private Sub loadSettings()
@@ -2841,12 +2835,6 @@ Public Class frmMainscreen1
             fbClock.ButtonText = "X32"
         End If
     End Sub
-
-    Private Sub pnlMain_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles pnlMain.Paint
-
-    End Sub
-
-
 
     Private Sub fbMyPictures_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles myPictures.Click
         If pnlStart.Visible = True Then myStartMenu.doClick(sender, e)
