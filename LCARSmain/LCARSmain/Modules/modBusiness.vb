@@ -215,7 +215,12 @@ public Class modBusiness
         Try
             screenImage.Save(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\LCARS x32\Images\" & myForm.Name.ToLower() & ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg)
         Catch ex As Exception
-            MsgBox(ex.ToString())
+            ' Save will throw an exception if the given path is not yet available for writing.
+            ' Unfortunately, .Save takes its sweet time releasing the file, so if you try to
+            ' call .Save on the same file within a few seconds, it throws an exception. There
+            ' isn't a straightforward way to test if the file is in use, so just catch and
+            ' ignore the exception for now.
+            'MsgBox(ex.ToString())
         End Try
         SetParent(hTrayIcons, hTrayParent)
         Dim myChoice As New ScreenChooserDialog
@@ -243,6 +248,7 @@ public Class modBusiness
             End Select
             'loadUserButtons()
         End If
+
     End Sub
 
     Public Sub myDeactivateButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
