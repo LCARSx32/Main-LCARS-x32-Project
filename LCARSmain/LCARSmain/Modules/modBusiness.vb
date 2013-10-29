@@ -26,12 +26,6 @@ public Class modBusiness
 
 #End Region
 
-#Region " Custom Events "
-
-    Public Event programsPageDataChanged(ByVal data As String)
-
-#End Region
-
 #Region " Global Variables "
 
 #Region " Public Global Variables "
@@ -75,6 +69,7 @@ public Class modBusiness
     Public myHelp As LCARS.LCARSbuttonClass
     Public myRun As LCARS.LCARSbuttonClass
     Public myAlertListButton As LCARS.LCARSbuttonClass
+    Public myProgramPagesDisplay As LCARS.LCARSbuttonClass
 
     Public myProgGrid As LCARS.Controls.ButtonGrid
 
@@ -446,6 +441,7 @@ public Class modBusiness
         myHelp = myForm.Controls.Find("myHelp", True)(0)
         myRun = myForm.Controls.Find("myRun", True)(0)
         myAlertListButton = myForm.Controls.Find("myAlertListButton", True)(0)
+        myProgramPagesDisplay = myForm.Controls.Find("fbProgramPages", True)(0)
         Try
             myProgGrid = myForm.Controls.Find("progGrid", True)(0)
         Catch ex As Exception
@@ -1256,7 +1252,7 @@ public Class modBusiness
 
         curProgPage = (index \ ProgPageSize) + 1
 
-        RaiseEvent programsPageDataChanged("PAGES " & curProgPage & " of " & pageCount)
+        myProgramPagesDisplay.Text = "PAGES " & curProgPage & " of " & pageCount
 
 
         pageMax = ProgPageSize + (index - 1)

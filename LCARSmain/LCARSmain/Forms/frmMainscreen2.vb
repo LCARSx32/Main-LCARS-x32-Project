@@ -177,8 +177,6 @@ Public Class frmMainscreen2
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         'tmrClock_Tick(sender, e)
-        AddHandler myBusiness.programsPageDataChanged, AddressOf programDataChanged
-
 
 
         pnlMainBar.Visible = False
@@ -199,11 +197,6 @@ Public Class frmMainscreen2
         pnlMainBar_SizeChanged(sender, e)
         myBusiness.mainTimer.Enabled = True
     End Sub
-
-    Private Sub programDataChanged(ByVal data As String)
-        fbProgramPages.ButtonText = data
-    End Sub
-
 
     'Public Sub GameLoop()
     '    Dim fireRate As Integer = 20

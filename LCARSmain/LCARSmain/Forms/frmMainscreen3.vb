@@ -81,11 +81,8 @@ Public Class frmMainscreen3
         Me.Bounds = Screen.AllScreens(modBusiness.ScreenIndex).Bounds
         '  Me.WindowState = FormWindowState.Maximized
         Me.Show()
-        AddHandler modBusiness.programsPageDataChanged, AddressOf programDataChanged
 
         Application.DoEvents()
-        'AddHandler modBusiness.programsPageDataChanged, AddressOf programDataChanged
-
 
         modBusiness.mainTimer.Enabled = True
         isInit = True
@@ -93,9 +90,6 @@ Public Class frmMainscreen3
         pnlMainBar_SizeChanged(New Object, New System.EventArgs)
 
 
-    End Sub
-    Private Sub programDataChanged(ByVal data As String)
-        fbProgramPages.ButtonText = data
     End Sub
 
     Private Sub pnlMainBar_SizeChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles pnlMainBar.SizeChanged
