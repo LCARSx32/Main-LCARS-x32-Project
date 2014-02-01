@@ -75,6 +75,7 @@
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="Classes\cWrapExitWindows.vb" />
+    <Compile Include="Classes\LCScreenImage.vb" />
     <Compile Include="Forms\frmAlerts.Designer.vb">
       <DependentUpon>frmAlerts.vb</DependentUpon>
     </Compile>
@@ -380,7 +381,7 @@
     <ItemGroup>
       <ManualSourceFiles Include="..\..\LCARSx32Manual\LCARSx32 Manual\LCARS x32 Manual\**\*.*" />
     </ItemGroup>
-	<RemoveDir Directories="$(OutputPath)\LCARS x32 Manual" />
+    <RemoveDir Directories="$(OutputPath)\LCARS x32 Manual" />
     <Copy DestinationFiles="@(ManualSourceFiles->'$(OutputPath)\LCARS x32 Manual\%(RecursiveDir)%(Filename)%(Extension)')" SourceFiles="@(ManualSourceFiles)" SkipUnchangedFiles="true" />
     <ItemGroup>
       <FileWrites Include="@(ManualSourceFiles->'$(OutputPath)\LCARS x32 Manual\%(RecursiveDir)%(Filename)%(Extension)')" />
