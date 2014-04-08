@@ -654,4 +654,15 @@ Public Enum SetWindowPosFlags As UInteger
 
     End Sub
 
+    Public Function getMainScreenTypes() As List(Of Type)
+        Dim typeList As New List(Of Type)
+        typeList.Add(GetType(frmMainscreen1))
+        typeList.Add(GetType(frmMainscreen2))
+        typeList.Add(GetType(frmMainscreen3))
+        typeList.Add(GetType(frmMainscreen4))
+
+        'Further code to find custom main screens
+        Return typeList
+    End Function
+
 End Module
