@@ -68,6 +68,7 @@ Public Class ScreenChooserDialog
         End Get
     End Property
     Private Sub btnOK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOK.Click
+
         Me.Close()
     End Sub
 
@@ -77,45 +78,28 @@ Public Class ScreenChooserDialog
     End Sub
 
     Private Sub ScreenChooserDialog_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Try
-            picScreen1.Image = System.Drawing.Image.FromFile(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\LCARS x32\Images\frmmainscreen1.jpg")
-        Catch ex As Exception
-            picScreen1.Image = My.Resources.frmmainscreen1
-        End Try
-        Try
-            picScreen2.Image = System.Drawing.Image.FromFile(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\LCARS x32\Images\frmmainscreen2.jpg")
-        Catch ex As Exception
-            picScreen2.Image = My.Resources.frmmainscreen2
-        End Try
-        Try
-            picScreen3.Image = System.Drawing.Image.FromFile(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\LCARS x32\Images\frmmainscreen3.jpg")
-        Catch ex As Exception
-            picScreen3.Image = My.Resources.frmmainscreen3
-        End Try
-        Try
-            picScreen4.Image = System.Drawing.Image.FromFile(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\LCARS x32\Images\frmmainscreen4.jpg")
-        Catch ex As Exception
-            picScreen4.Image = My.Resources.frmmainscreen4
-        End Try
+        Dim i As Integer = 1
+        For Each myScreenType As Type In getMainScreenTypes()
+            Dim myScreen As New LCScreenImage()
+            myScreen.Text = myScreenType.Name
+            myScreen.Data = i
+            AddHandler myScreen.Click, AddressOf myScreen_Click
+            Try
+                myScreen.Image = System.Drawing.Image.FromFile(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\LCARS x32\Images\" & myScreenType.Name & ".jpg")
+            Catch ex As Exception
+                'Load image from static member
+                MsgBox("Unable to find image")
+            End Try
+            gridScreens.Add(myScreen)
+            i += 1
+        Next
     End Sub
 
-    Private Sub picScreen1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles picScreen1.Click
-        _ScreenId = 1
-        picSelect.Location = New Point(picScreen1.Location.X - 21, picScreen1.Location.Y - 14)
-    End Sub
-
-    Private Sub picScreen2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles picScreen2.Click
-        _ScreenId = 2
-        picSelect.Location = New Point(picScreen2.Location.X - 21, picScreen2.Location.Y - 14)
-    End Sub
-
-    Private Sub picScreen3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles picScreen3.Click
-        _ScreenId = 3
-        picSelect.Location = New Point(picScreen3.Location.X - 21, picScreen3.Location.Y - 14)
-    End Sub
-
-    Private Sub picScreen4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles picScreen4.Click
-        _ScreenId = 4
-        picSelect.Location = New Point(picScreen4.Location.X - 21, picScreen4.Location.Y - 14)
+    Private Sub myScreen_Click(ByVal sender As Object, ByVal e As EventArgs)
+        For i As Integer = 0 To gridScreens.Count - 1
+            CType(gridScreens.Items(i), LCScreenImage).Selected = False
+        Next
+        CType(sender, LCScreenImage).Selected = True
+        _ScreenId = CType(CType(sender, LCScreenImage).Data, Integer)
     End Sub
 End Class
