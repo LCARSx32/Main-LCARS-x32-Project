@@ -33,7 +33,7 @@ Partial Class ScreenChooserDialog
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.gridScreens.Beeping = False
         Me.gridScreens.ColorsAvailable = LcarScolor1
-        Me.gridScreens.ControlAddingDirection = LCARS.Controls.ButtonGrid.ControlDirection.Vertical
+        Me.gridScreens.ControlAddingDirection = LCARS.Controls.ButtonGrid.ControlDirection.Horizontal
         Me.gridScreens.ControlPadding = 5
         Me.gridScreens.ControlSize = New System.Drawing.Size(210, 150)
         Me.gridScreens.CurrentPage = 1
