@@ -218,4 +218,10 @@ Public Class frmMainscreen3
     Private Sub myVideos_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles myVideos.Click, myMusic.Click
         If pnlProgs.Visible Then myStartMenu.doClick(sender, e)
     End Sub
+
+    Public Shared ReadOnly Property ScreenImage() As Image
+        Get
+            Return My.Resources.frmmainscreen1
+        End Get
+    End Property
 End Class

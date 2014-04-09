@@ -85,10 +85,18 @@ Public Class ScreenChooserDialog
             myScreen.Data = i
             AddHandler myScreen.Click, AddressOf myScreen_Click
             Try
+                'Get cached files (Will match screen aspect ratio)
                 myScreen.Image = System.Drawing.Image.FromFile(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\LCARS x32\Images\" & myScreenType.Name & ".jpg")
             Catch ex As Exception
-                'Load image from static member
-                MsgBox("Unable to find image")
+                'File didn't exist or was in use
+                Try
+                    'Get file from static member
+                    Dim pInfo As Reflection.PropertyInfo = myScreenType.GetProperty("ScreenImage")
+                    myScreen.Image = pInfo.GetValue(Nothing, Nothing)
+                Catch ex2 As Exception
+                    'Static member not implemented; display missing image
+                    MsgBox("Unable to find image")
+                End Try
             End Try
             gridScreens.Add(myScreen)
             i += 1
