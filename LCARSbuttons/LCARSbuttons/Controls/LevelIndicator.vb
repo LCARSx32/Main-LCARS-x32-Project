@@ -134,7 +134,6 @@ Namespace Controls
                 End If
 
             Next
-            DrawText(g)
             lblTextSize = Me.Size
             g.Dispose()
 

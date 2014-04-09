@@ -74,27 +74,8 @@ Namespace Controls
 
             g.FillRectangle(myBrush, 0, 0, mybitmap.Width, mybitmap.Height)
 
-            'Select Case Me.ButtonTextAlign
-            '    Case LCARStextStyles.TopLeft
-            '        textLoc.X = 0
-            '        textLoc.Y = 0
-            '    Case LCARStextStyles.TopRight
-            '        textLoc.X = (Me.Width - textSize.Width)
-            '        textLoc.Y = 0
-
-            '    Case LCARStextStyles.BottomLeft
-            '        textLoc.X = 0
-            '        textLoc.Y = (Me.Height - textSize.Height)
-
-            '    Case LCARStextStyles.BottomRight
-            '        textLoc.X = (Me.Width - textSize.Width)
-            '        textLoc.Y = (Me.Height - textSize.Height)
-
-            'End Select
-
-            'g.DrawString(Me.ButtonText, myfont, Brushes.Black, textLoc.X, textLoc.Y)
+            'Set up text:
             Me.lblTextSize = Me.Size
-            DrawText(g)
             g.Dispose()
             Return mybitmap
         End Function
