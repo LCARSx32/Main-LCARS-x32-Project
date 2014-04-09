@@ -115,7 +115,6 @@ Namespace Controls
 
 
             End Select
-            DrawText(g)
             g.Dispose()
             Return mybitmap
         End Function

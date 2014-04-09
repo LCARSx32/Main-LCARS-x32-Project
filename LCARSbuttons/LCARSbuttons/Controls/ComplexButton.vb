@@ -191,8 +191,6 @@ Namespace Controls
 
             'draw the curved end
             g.FillEllipse(myBrush, curLeft, 0, Me.Height, Me.Height)
-            'draw the button text
-            DrawText(g)
             Return mybitmap
 
         End Function

@@ -175,7 +175,6 @@ Namespace Controls
 
             g.DrawImage(buffer, myPoints)
             Me.lblTextSize = Me.Size
-            DrawText(g)
             g.Dispose()
             Return mybitmap
 
