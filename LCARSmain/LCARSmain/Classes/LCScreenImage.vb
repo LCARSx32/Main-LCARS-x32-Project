@@ -76,6 +76,11 @@ Public Class LCScreenImage
                 Dim centerX As Integer = _BoxWidth * 2 + ((_bounds.Width - 4 * _BoxWidth) - NewWidth) / 2
                 Dim centerY As Integer = _BoxWidth * 1.5 + ((_bounds.Height - 3 * _BoxWidth) - NewHeight) / 2
                 g.DrawImage(_image, centerX, centerY, NewWidth, NewHeight)
+            Else
+                Dim format As New StringFormat
+                format.Alignment = StringAlignment.Center
+                format.LineAlignment = StringAlignment.Center
+                g.DrawString("NO IMAGE", _font, myBrush, New PointF(_bounds.Width / 2, _bounds.Height / 2), format)
             End If
 
             If _selected Then

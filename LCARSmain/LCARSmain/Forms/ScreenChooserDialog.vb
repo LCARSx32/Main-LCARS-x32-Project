@@ -89,14 +89,10 @@ Public Class ScreenChooserDialog
                 myScreen.Image = System.Drawing.Image.FromFile(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\LCARS x32\Images\" & myScreenType.Name & ".jpg")
             Catch ex As Exception
                 'File didn't exist or was in use
-                Try
-                    'Get file from static member
-                    Dim pInfo As Reflection.PropertyInfo = myScreenType.GetProperty("ScreenImage")
+                Dim pInfo As Reflection.PropertyInfo = myScreenType.GetProperty("ScreenImage")
+                If Not pInfo Is Nothing Then
                     myScreen.Image = pInfo.GetValue(Nothing, Nothing)
-                Catch ex2 As Exception
-                    'Static member not implemented; display missing image
-                    MsgBox("Unable to find image")
-                End Try
+                End If
             End Try
             gridScreens.Add(myScreen)
             i += 1
