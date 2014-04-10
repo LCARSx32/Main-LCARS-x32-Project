@@ -2900,6 +2900,11 @@ Public Class frmMainscreen1
         If pnlStart.Visible Then myStartMenu.doClick(New Object, New EventArgs)
     End Sub
 
+    Public Shared ReadOnly Property ScreenImage() As Image
+        Get
+            Return My.Resources.frmmainscreen1
+        End Get
+    End Property
     'Private Sub myAlertListButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles myAlertListButton.Click
     '    If frmAlerts.Visible Then
     '        frmAlerts.Hide()

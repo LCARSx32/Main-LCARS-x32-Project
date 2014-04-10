@@ -218,32 +218,8 @@ public Class modBusiness
             'MsgBox(ex.ToString())
         End Try
         SetParent(hTrayIcons, hTrayParent)
-        Dim myChoice As New ScreenChooserDialog
-        myChoice.ShowDialog()
-        If (myChoice.ScreenID <> 0) Then 'if it isn't a cancel
-            mainTimer.Enabled = False
-            myForm.Dispose()
-
-            Select Case myChoice.ScreenID
-                Case 1
-                    Dim myMainScreen As New frmMainscreen1(ScreenIndex)
-                    myMainScreen.Show()
-                Case 2
-                    Dim myMainScreen As New frmMainscreen2(ScreenIndex)
-                    myMainScreen.Show()
-                Case 3
-                    Dim myMainScreen As New frmMainscreen3(ScreenIndex)
-                    myMainScreen.Show()
-                Case 4
-                    Dim myMainScreen As New frmMainscreen4(ScreenIndex)
-                    myMainScreen.Show()
-                Case Else 'Shouldn't happen, but included anyway.
-                    Dim myMainscreen As New frmMainscreen1(ScreenIndex)
-                    myMainscreen.Show()
-            End Select
-            'loadUserButtons()
-        End If
-
+        Dim myChoice As New ScreenChooserDialog(ScreenIndex)
+        myChoice.Show()
     End Sub
 
     Public Sub myDeactivateButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
