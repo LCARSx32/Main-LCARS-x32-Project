@@ -218,8 +218,8 @@ public Class modBusiness
             'MsgBox(ex.ToString())
         End Try
         SetParent(hTrayIcons, hTrayParent)
-        Dim myChoice As New ScreenChooserDialog
-        myChoice.ShowDialog()
+        Dim myChoice As New ScreenChooserDialog(ScreenIndex)
+        myChoice.Show()
     End Sub
 
     Public Sub myDeactivateButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
