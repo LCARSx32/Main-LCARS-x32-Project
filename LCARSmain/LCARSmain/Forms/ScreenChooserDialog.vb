@@ -1,17 +1,24 @@
 Public Class ScreenChooserDialog
     Private screenType As Type = Nothing
+    Private WithEvents interop As LCARS.x32Interop
+    Private _screenIndex As Integer
+
+    Public Sub New(ByVal screenIndex As Integer)
+        InitializeComponent()
+        _screenIndex = screenIndex
+    End Sub
 
     Private Sub btnOK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOK.Click
         If Not screenType Is Nothing Then
             curBusiness.mainTimer.Enabled = False
             curBusiness.myForm.Dispose()
-            Dim myForm As Form = CType(Activator.CreateInstance(screenType, 0), Form)
+            Dim myForm As Form = CType(Activator.CreateInstance(screenType, _screenIndex), Form)
             myForm.Show()
         End If
         Me.Close()
     End Sub
 
-    Private Sub StandardButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles StandardButton1.Click
+    Private Sub sbCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbCancel.Click
         Me.Close()
     End Sub
 
@@ -33,6 +40,9 @@ Public Class ScreenChooserDialog
             End Try
             gridScreens.Add(myScreen)
         Next
+        interop = New LCARS.x32Interop()
+        interop.Init()
+        Me.Bounds = Screen.AllScreens(_screenIndex).WorkingArea
     End Sub
 
     Private Sub myScreen_Click(ByVal sender As Object, ByVal e As EventArgs)
@@ -41,5 +51,9 @@ Public Class ScreenChooserDialog
         Next
         CType(sender, LCScreenImage).Selected = True
         screenType = CType(CType(sender, LCScreenImage).Data, Type)
+    End Sub
+
+    Private Sub boundsChanged(ByVal newArea As System.Drawing.Rectangle) Handles interop.WorkingAreaChanged
+        Me.Bounds = newArea
     End Sub
 End Class

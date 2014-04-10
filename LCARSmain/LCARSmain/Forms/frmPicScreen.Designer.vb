@@ -19,9 +19,9 @@ Partial Class ScreenChooserDialog
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim LcarScolor1 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor2 As LCARS.LCARScolor = New LCARS.LCARScolor
         Me.gridScreens = New LCARS.Controls.ButtonGrid
-        Me.StandardButton1 = New LCARS.Controls.StandardButton
+        Me.sbCancel = New LCARS.Controls.StandardButton
         Me.btnOK = New LCARS.Controls.StandardButton
         Me.tbTitle = New LCARS.Controls.TextButton
         Me.SuspendLayout()
@@ -32,7 +32,7 @@ Partial Class ScreenChooserDialog
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.gridScreens.Beeping = False
-        Me.gridScreens.ColorsAvailable = LcarScolor1
+        Me.gridScreens.ColorsAvailable = LcarScolor2
         Me.gridScreens.ControlAddingDirection = LCARS.Controls.ButtonGrid.ControlDirection.Horizontal
         Me.gridScreens.ControlPadding = 5
         Me.gridScreens.ControlSize = New System.Drawing.Size(210, 150)
@@ -44,30 +44,32 @@ Partial Class ScreenChooserDialog
         Me.gridScreens.TabIndex = 3
         Me.gridScreens.Text = "ButtonGrid1"
         '
-        'StandardButton1
+        'sbCancel
         '
-        Me.StandardButton1.Beeping = False
-        Me.StandardButton1.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
-        Me.StandardButton1.ButtonText = "CANCEL"
-        Me.StandardButton1.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.StandardButton1.ButtonTextHeight = 14
-        Me.StandardButton1.Clickable = True
-        Me.StandardButton1.Color = LCARS.LCARScolorStyles.CriticalFunction
-        Me.StandardButton1.CustomAlertColor = System.Drawing.Color.Empty
-        Me.StandardButton1.Data = Nothing
-        Me.StandardButton1.Data2 = Nothing
-        Me.StandardButton1.FlashInterval = 500
-        Me.StandardButton1.holdDraw = False
-        Me.StandardButton1.Lit = True
-        Me.StandardButton1.Location = New System.Drawing.Point(215, 403)
-        Me.StandardButton1.Name = "StandardButton1"
-        Me.StandardButton1.RedAlert = LCARS.LCARSalert.Normal
-        Me.StandardButton1.Size = New System.Drawing.Size(114, 31)
-        Me.StandardButton1.TabIndex = 2
-        Me.StandardButton1.Text = "CANCEL"
+        Me.sbCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.sbCancel.Beeping = False
+        Me.sbCancel.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
+        Me.sbCancel.ButtonText = "CANCEL"
+        Me.sbCancel.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.sbCancel.ButtonTextHeight = 14
+        Me.sbCancel.Clickable = True
+        Me.sbCancel.Color = LCARS.LCARScolorStyles.CriticalFunction
+        Me.sbCancel.CustomAlertColor = System.Drawing.Color.Empty
+        Me.sbCancel.Data = Nothing
+        Me.sbCancel.Data2 = Nothing
+        Me.sbCancel.FlashInterval = 500
+        Me.sbCancel.holdDraw = False
+        Me.sbCancel.Lit = True
+        Me.sbCancel.Location = New System.Drawing.Point(215, 403)
+        Me.sbCancel.Name = "sbCancel"
+        Me.sbCancel.RedAlert = LCARS.LCARSalert.Normal
+        Me.sbCancel.Size = New System.Drawing.Size(114, 31)
+        Me.sbCancel.TabIndex = 2
+        Me.sbCancel.Text = "CANCEL"
         '
         'btnOK
         '
+        Me.btnOK.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnOK.Beeping = False
         Me.btnOK.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.btnOK.ButtonText = "SELECT SCREEN"
@@ -90,12 +92,14 @@ Partial Class ScreenChooserDialog
         '
         'tbTitle
         '
+        Me.tbTitle.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.tbTitle.Beeping = False
         Me.tbTitle.ButtonText = "INTERFACE SELECTOR"
         Me.tbTitle.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.tbTitle.ButtonTextHeight = 24
         Me.tbTitle.ButtonType = LCARS.Controls.TextButton.TextButtonType.DoublePills
-        Me.tbTitle.Clickable = True
+        Me.tbTitle.Clickable = False
         Me.tbTitle.Color = LCARS.LCARScolorStyles.MiscFunction
         Me.tbTitle.CustomAlertColor = System.Drawing.Color.Empty
         Me.tbTitle.Data = Nothing
@@ -117,18 +121,19 @@ Partial Class ScreenChooserDialog
         Me.BackColor = System.Drawing.Color.Black
         Me.ClientSize = New System.Drawing.Size(461, 446)
         Me.Controls.Add(Me.gridScreens)
-        Me.Controls.Add(Me.StandardButton1)
+        Me.Controls.Add(Me.sbCancel)
         Me.Controls.Add(Me.btnOK)
         Me.Controls.Add(Me.tbTitle)
         Me.ForeColor = System.Drawing.Color.Black
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "ScreenChooserDialog"
         Me.Text = "Interface Selector"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.ResumeLayout(False)
 
     End Sub
     Friend WithEvents tbTitle As LCARS.Controls.TextButton
     Friend WithEvents btnOK As LCARS.Controls.StandardButton
-    Friend WithEvents StandardButton1 As LCARS.Controls.StandardButton
+    Friend WithEvents sbCancel As LCARS.Controls.StandardButton
     Friend WithEvents gridScreens As LCARS.Controls.ButtonGrid
 End Class
