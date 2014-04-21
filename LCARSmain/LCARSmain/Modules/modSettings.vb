@@ -95,4 +95,58 @@
             SaveSetting("LCARSUpdate", "Config", "UpdatePath", "Experimental")
         End If
     End Sub
+
+    Public Property Wallpaper(ByVal screenIndex As Integer) As String
+        Get
+            Return GetSetting("LCARS x32", "Screen" & screenIndex, "Wallpaper", "FederationLogo")
+        End Get
+        Set(ByVal value As String)
+            SaveSetting("LCARS x32", "Screen" & screenIndex, "Wallpaper", value)
+        End Set
+    End Property
+
+    Public Property WallpaperSizeMode(ByVal screenIndex As Integer) As Integer
+        Get
+            Return GetSetting("LCARS x32", "Screen" & screenIndex, "WallpaperSizeMode", "2")
+        End Get
+        Set(ByVal value As Integer)
+            SaveSetting("LCARS x32", "Screen" & screenIndex, "WallpaperSizeMode", value)
+        End Set
+    End Property
+
+    Public Property MainScreen(ByVal screenIndex As Integer) As Integer
+        Get
+            Return GetSetting("LCARS x32", "Screen" & screenIndex, "GUI form", "1")
+        End Get
+        Set(ByVal value As Integer)
+            SaveSetting("LCARS x32", "Screen" & screenIndex, "GUI form", value)
+        End Set
+    End Property
+
+    Public Property AutoHide(ByVal screenIndex As Integer) As Boolean
+        Get
+            Return GetSetting("LCARS x32", "Screen" & screenIndex, "Autohide", "0")
+        End Get
+        Set(ByVal value As Boolean)
+            SaveSetting("LCARS x32", "Screen" & screenIndex, "Autohide", value)
+        End Set
+    End Property
+
+    Public Property ShowTrayIcons(ByVal screenIndex As Integer) As Boolean
+        Get
+            Return GetSetting("LCARS x32", "Screen" & screenIndex, "ShowTrayIcons", "FALSE")
+        End Get
+        Set(ByVal value As Boolean)
+            SaveSetting("LCARS x32", "Screen" & screenIndex, "ShowTrayIcons", value)
+        End Set
+    End Property
+
+    Public Property LanguageFileName(ByVal screenIndex As Integer) As String
+        Get
+            Return GetSetting("LCARS x32", "Screen" & screenIndex, "LanguageFile", "Standard.lng")
+        End Get
+        Set(ByVal value As String)
+            SaveSetting("LCARS x32", "Screen" & screenIndex, "LanguageFile", value)
+        End Set
+    End Property
 End Module
