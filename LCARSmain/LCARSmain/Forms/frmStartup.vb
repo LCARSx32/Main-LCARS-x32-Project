@@ -237,7 +237,7 @@ Public Class frmStartup
         Dim wallpaper As String
         Dim sizeMode As Integer
 
-        sizeMode = GetSetting("LCARS x32", "Application", "WallpaperSizeMode", 2)
+        sizeMode = modSettings.WallpaperSizeMode(0)
         Select Case sizeMode
             Case 0
                 setWallpaperSizeMode(ImageLayout.Zoom)
@@ -251,7 +251,7 @@ Public Class frmStartup
                 Exit Sub
         End Select
 
-        wallpaper = GetSetting("LCARS x32", "Application", "Wallpaper", "FederationLogo")
+        wallpaper = modSettings.Wallpaper(0)
         If wallpaper = "FederationLogo" Then
             SetWallpaper(My.Resources.federationLogo)
         Else
@@ -264,7 +264,7 @@ Public Class frmStartup
         End If
 
         Dim chosenForm As String
-        chosenForm = GetSetting("LCARS X32", "Load", "GUI Form", 1)
+        chosenForm = modSettings.MainScreen(0)
 
         Select Case chosenForm.ToLower
             Case "1"

@@ -295,7 +295,7 @@ public Class modBusiness
     End Sub
 
     Public Sub myShowTrayButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        SaveSetting("LCARS x32", "Application", "ShowTrayIcons", "TRUE")
+        modSettings.ShowTrayIcons(ScreenIndex) = True
         Dim myPlacement As New WINDOWPLACEMENT
         GetWindowPlacement(hTrayIcons, myPlacement)
         Dim myWidth As Integer = myPlacement.rcNormalPosition.Right_Renamed - myPlacement.rcNormalPosition.Left_Renamed
@@ -312,7 +312,7 @@ public Class modBusiness
     End Sub
 
     Public Sub myHideTrayButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        SaveSetting("LCARS x32", "Application", "ShowTrayIcons", "FALSE")
+        modSettings.ShowTrayIcons(ScreenIndex) = False
         Dim mywidth As Integer = myShowTrayButton.Width - myTrayPanel.Width
         myTrayPanel.Width = myShowTrayButton.Width
         myTrayPanel.Left -= mywidth
@@ -481,9 +481,9 @@ public Class modBusiness
 
 
         'load Mainscreen Settings:
-        Dim AutoHideMode As Integer = GetSetting("LCARS X32", "Load", "AutoHide", "0")
+        Dim AutoHideMode As Integer = modSettings.AutoHide(ScreenIndex)
         SetAutoHide(AutoHideMode)
-        If GetSetting("LCARS x32", "Application", "ShowTrayIcons", "FALSE") Then
+        If modSettings.ShowTrayIcons(ScreenIndex) = True Then
             myShowTrayButton_Click(New Object, New EventArgs)
         End If
 
