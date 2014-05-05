@@ -1,6 +1,11 @@
-﻿Module modSettings
+﻿Public NotInheritable Class modSettings
     'To-Do:
     'Add some sort of handler for version numbers.
+
+    Private Sub New()
+        'Private constructor to prevent initialization
+    End Sub
+
     ''' <summary>
     ''' Options for InitializeSettings
     ''' </summary>
@@ -16,7 +21,7 @@
     ''' </summary>
     ''' <param name="mode">Sets mode for initialization. Can specify subsection</param>
     ''' <remarks></remarks>
-    Public Sub InitializeSettings(Optional ByVal mode As SettingInitializationOptions = SettingInitializationOptions.All)
+    Public Shared Sub InitializeSettings(Optional ByVal mode As SettingInitializationOptions = SettingInitializationOptions.All)
         If mode = SettingInitializationOptions.All Then
             SaveSetting("LCARS X32", "Application", "AutoDestructOption", GetSetting("LCARS X32", "Application", "AutoDestructOption", "Alarm"))
             SaveSetting("LCARS X32", "Application", "ButtonBeep", GetSetting("LCARS X32", "Application", "ButtonBeep", "TRUE"))
@@ -96,7 +101,7 @@
         End If
     End Sub
 
-    Public Property Wallpaper(ByVal screenIndex As Integer) As String
+    Public Shared Property Wallpaper(ByVal screenIndex As Integer) As String
         Get
             Return GetSetting("LCARS x32", "Screen" & screenIndex, "Wallpaper", "FederationLogo")
         End Get
@@ -105,7 +110,7 @@
         End Set
     End Property
 
-    Public Property WallpaperSizeMode(ByVal screenIndex As Integer) As Integer
+    Public Shared Property WallpaperSizeMode(ByVal screenIndex As Integer) As Integer
         Get
             Return GetSetting("LCARS x32", "Screen" & screenIndex, "WallpaperSizeMode", "2")
         End Get
@@ -114,7 +119,7 @@
         End Set
     End Property
 
-    Public Property MainScreen(ByVal screenIndex As Integer) As Integer
+    Public Shared Property MainScreen(ByVal screenIndex As Integer) As Integer
         Get
             Return GetSetting("LCARS x32", "Screen" & screenIndex, "GUI form", "1")
         End Get
@@ -123,7 +128,7 @@
         End Set
     End Property
 
-    Public Property AutoHide(ByVal screenIndex As Integer) As Boolean
+    Public Shared Property AutoHide(ByVal screenIndex As Integer) As Boolean
         Get
             Return GetSetting("LCARS x32", "Screen" & screenIndex, "Autohide", "0")
         End Get
@@ -132,7 +137,7 @@
         End Set
     End Property
 
-    Public Property ShowTrayIcons(ByVal screenIndex As Integer) As Boolean
+    Public Shared Property ShowTrayIcons(ByVal screenIndex As Integer) As Boolean
         Get
             Return GetSetting("LCARS x32", "Screen" & screenIndex, "ShowTrayIcons", "FALSE")
         End Get
@@ -141,7 +146,7 @@
         End Set
     End Property
 
-    Public Property LanguageFileName(ByVal screenIndex As Integer) As String
+    Public Shared Property LanguageFileName(ByVal screenIndex As Integer) As String
         Get
             Return GetSetting("LCARS x32", "Screen" & screenIndex, "LanguageFile", "Standard.lng")
         End Get
@@ -149,4 +154,4 @@
             SaveSetting("LCARS x32", "Screen" & screenIndex, "LanguageFile", value)
         End Set
     End Property
-End Module
+End Class
