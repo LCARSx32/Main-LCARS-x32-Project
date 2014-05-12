@@ -161,7 +161,6 @@
     <Compile Include="Modules\modAnimate.vb" />
     <Compile Include="Modules\modBusiness.vb" />
     <Compile Include="Modules\modCommon.vb" />
-    <Compile Include="Modules\modSettings.vb" />
     <Compile Include="Modules\modSpeech.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">

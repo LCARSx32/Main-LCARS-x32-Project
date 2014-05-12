@@ -1,5 +1,7 @@
 Imports System.Runtime.InteropServices
 Imports Microsoft.Win32
+Imports LCARS.x32
+
 Public Class frmStartup
 
     'Constants used to make this form act like the Windows desktop (stay in back, don't get activated)
@@ -180,6 +182,9 @@ Public Class frmStartup
                 My.Computer.FileSystem.DeleteFile(My.Computer.FileSystem.SpecialDirectories.Temp & "\Ionic.Zip.Reduced.dll")
             Catch ex As Exception
             End Try
+        End If
+        If modSettings.InstallPath = "" Then
+            modSettings.InstallPath = Application.StartupPath
         End If
         modSettings.InitializeSettings()
         If Command().Contains("-s") Then

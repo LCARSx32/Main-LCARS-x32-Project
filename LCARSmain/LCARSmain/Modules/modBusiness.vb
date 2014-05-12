@@ -1,5 +1,6 @@
 Imports System.IO
-Imports system.Runtime.InteropServices
+Imports System.Runtime.InteropServices
+Imports LCARS.x32
 
 public Class modBusiness
 
