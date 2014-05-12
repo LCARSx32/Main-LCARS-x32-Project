@@ -1,5 +1,6 @@
 'Imports LCARS.UI
 Imports System.Runtime.InteropServices
+Imports LCARS.x32.modSettings
 
 Public Class frmSettings
 
@@ -46,6 +47,8 @@ Public Class frmSettings
     Dim aliasList() As AliasEntry
     Dim customList As New List(Of CustomEntry)
     Dim alertList As New List(Of AlertEntry)
+    Dim screenIndex As Integer = 0
+
     Public Structure AliasEntry
         Dim Command As String
         Dim CommandAlias As String
@@ -83,7 +86,7 @@ Public Class frmSettings
 
         Me.Bounds = Screen.PrimaryScreen.WorkingArea
 
-
+        screenIndex = Array.IndexOf(Screen.AllScreens, Screen.FromHandle(Me.Handle))
 
         cbBeeping.Lit = beeping
         If cbBeeping.Lit Then
