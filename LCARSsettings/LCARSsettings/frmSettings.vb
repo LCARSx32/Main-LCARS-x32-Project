@@ -1,5 +1,6 @@
 'Imports LCARS.UI
 Imports System.Runtime.InteropServices
+Imports LCARS.x32.modSettings
 
 Public Class frmSettings
 
@@ -46,6 +47,8 @@ Public Class frmSettings
     Dim aliasList() As AliasEntry
     Dim customList As New List(Of CustomEntry)
     Dim alertList As New List(Of AlertEntry)
+    Dim screenIndex As Integer = 0
+
     Public Structure AliasEntry
         Dim Command As String
         Dim CommandAlias As String
@@ -83,7 +86,7 @@ Public Class frmSettings
 
         Me.Bounds = Screen.PrimaryScreen.WorkingArea
 
-
+        screenIndex = Array.IndexOf(Screen.AllScreens, Screen.FromHandle(Me.Handle))
 
         cbBeeping.Lit = beeping
         If cbBeeping.Lit Then
@@ -155,7 +158,7 @@ Public Class frmSettings
             cbDates.SideText = "OFF"
         End If
 
-        selectedMainScreen = GetSetting("LCARS X32", "Load", "GUI Form", 1)
+        selectedMainScreen = MainScreen(screenIndex)
 
         Select Case selectedMainScreen
             Case "1"
@@ -169,7 +172,7 @@ Public Class frmSettings
 
         End Select
 
-        cbAutoHide.Lit = CBool(GetSetting("LCARS X32", "LOAD", "AutoHide", "0"))
+        cbAutoHide.Lit = AutoHide(screenIndex)
 
         If cbAutoHide.Lit Then
             cbAutoHide.SideText = "ON"
@@ -317,17 +320,17 @@ Public Class frmSettings
 
     Private Sub picMain1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles picMain1.Click
         picSelect.Location = New Point(picMain1.Left - 19, picMain1.Top - 15)
-        SaveSetting("LCARS X32", "Load", "GUI Form", 1)
+        MainScreen(screenIndex) = 1
     End Sub
 
     Private Sub picMain2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles picMain2.Click
         picSelect.Location = New Point(picMain2.Left - 19, picMain2.Top - 15)
-        SaveSetting("LCARS X32", "Load", "GUI Form", 2)
+        MainScreen(screenIndex) = 2
     End Sub
 
     Private Sub picMain3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles picMain3.Click
         picSelect.Location = New Point(picMain3.Left - 19, picMain3.Top - 15)
-        SaveSetting("LCARS X32", "Load", "GUI Form", 3)
+        MainScreen(screenIndex) = 3
     End Sub
 
 
@@ -398,7 +401,7 @@ Public Class frmSettings
     Private Sub sbDefault_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbDefault.Click
         picWallpaper.Image = My.Resources.federation_logo
         SetWallpaper(picWallpaper.Image)
-        SaveSetting("LCARS x32", "Application", "Wallpaper", "FederationLogo")
+        Wallpaper(screenIndex) = "FederationLogo"
     End Sub
 
     Private Sub sbChangeWallpaper_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbChangeWallpaper.Click
@@ -410,7 +413,7 @@ Public Class frmSettings
         If result = Windows.Forms.DialogResult.OK Then
             picWallpaper.Image = Image.FromFile(myFile.FileName)
             SetWallpaper(picWallpaper.Image)
-            SaveSetting("LCARS x32", "Application", "Wallpaper", myFile.FileName)
+            Wallpaper(screenIndex) = myFile.FileName
         End If
     End Sub
 
@@ -430,7 +433,7 @@ Public Class frmSettings
                 Exit Sub
         End Select
 
-        SaveSetting("LCARS x32", "Application", "WallpaperSizeMode", lstSizeMode.SelectedIndex)
+        WallpaperSizeMode(screenIndex) = lstSizeMode.SelectedIndex
     End Sub
 
     Private Sub SetWallpaperSizeMode(ByVal sizemode As ImageLayout)
@@ -500,7 +503,7 @@ Public Class frmSettings
 
     Private Sub picMain4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles picMain4.Click
         picSelect.Location = New Point(picMain4.Left - 19, picMain4.Top - 15)
-        SaveSetting("LCARS X32", "Load", "GUI Form", 4)
+        MainScreen(screenIndex) = 4
 
     End Sub
 
@@ -516,8 +519,7 @@ Public Class frmSettings
             setMainscreenData(9, 0)
         End If
 
-        SaveSetting("LCARS X32", "Load", "AutoHide", Convert.ToInt32(cbAutoHide.Lit))
-
+        AutoHide(screenIndex) = cbAutoHide.Lit
 
     End Sub
 
@@ -577,7 +579,7 @@ Public Class frmSettings
 
     Private Sub sbUseLanguage_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbUseLanguage.Click
         If lstLanguages.SelectedIndex > -1 Then
-            SaveSetting("LCARS X32", "Application", "LangFile", lstLanguages.SelectedItem & ".lng")
+            LanguageFileName(screenIndex) = lstLanguages.SelectedItem & ".lng"
             setMainscreenData(10, Nothing)
         End If
     End Sub

@@ -1,5 +1,7 @@
 Imports System.Runtime.InteropServices
 Imports Microsoft.Win32
+Imports LCARS.x32
+
 Public Class frmStartup
 
     'Constants used to make this form act like the Windows desktop (stay in back, don't get activated)
@@ -181,6 +183,9 @@ Public Class frmStartup
             Catch ex As Exception
             End Try
         End If
+        If modSettings.InstallPath = "" Then
+            modSettings.InstallPath = Application.StartupPath
+        End If
         modSettings.InitializeSettings()
         If Command().Contains("-s") Then
             shellMode = True
@@ -237,7 +242,7 @@ Public Class frmStartup
         Dim wallpaper As String
         Dim sizeMode As Integer
 
-        sizeMode = GetSetting("LCARS x32", "Application", "WallpaperSizeMode", 2)
+        sizeMode = modSettings.WallpaperSizeMode(0)
         Select Case sizeMode
             Case 0
                 setWallpaperSizeMode(ImageLayout.Zoom)
@@ -251,7 +256,7 @@ Public Class frmStartup
                 Exit Sub
         End Select
 
-        wallpaper = GetSetting("LCARS x32", "Application", "Wallpaper", "FederationLogo")
+        wallpaper = modSettings.Wallpaper(0)
         If wallpaper = "FederationLogo" Then
             SetWallpaper(My.Resources.federationLogo)
         Else
@@ -264,7 +269,7 @@ Public Class frmStartup
         End If
 
         Dim chosenForm As String
-        chosenForm = GetSetting("LCARS X32", "Load", "GUI Form", 1)
+        chosenForm = modSettings.MainScreen(0)
 
         Select Case chosenForm.ToLower
             Case "1"
