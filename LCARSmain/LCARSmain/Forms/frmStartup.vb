@@ -324,19 +324,25 @@ Public Class frmStartup
 
         Dim leftLoc As Integer = 0
         Dim topLoc As Integer = 0
+        Dim right As Integer = 0
+        Dim bottom As Integer = 0
 
         For Each myScreen As Screen In Screen.AllScreens
-            If myScreen.Bounds.X < leftLoc Then
-                leftLoc = myScreen.Bounds.X
+            If myScreen.Bounds.Left < leftLoc Then
+                leftLoc = myScreen.Bounds.Left
             End If
-            If myScreen.Bounds.Y < topLoc Then
-                topLoc = myScreen.Bounds.Y
+            If myScreen.Bounds.Top < topLoc Then
+                topLoc = myScreen.Bounds.Top
+            End If
+            If myScreen.Bounds.Right > right Then
+                right = myScreen.Bounds.Right
+            End If
+            If myScreen.Bounds.Bottom > bottom Then
+                bottom = myScreen.Bounds.Bottom
             End If
         Next
 
-        Dim myBounds As Rectangle = Screen.AllScreens(screenindex).Bounds
-        myBounds.X = myBounds.X - leftLoc
-        myBounds.Y = myBounds.Y - topLoc
+        Dim myBounds As Rectangle = New Rectangle(leftLoc, topLoc, right - leftLoc, bottom - topLoc)
         pnlBack.Bounds = myBounds
         pnlDesktop.Bounds = Screen.AllScreens(screenindex).WorkingArea
         pnlBack.BringToFront()
