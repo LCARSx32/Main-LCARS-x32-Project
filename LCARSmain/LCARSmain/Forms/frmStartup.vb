@@ -146,6 +146,13 @@ Public Class frmStartup
                         Catch ex As Exception
                         End Try
                     End If
+                    For Each myBusiness As modBusiness In curBusiness
+                        If result = 0 Then
+                            myBusiness.mySpeech.Lit = False
+                        Else
+                            myBusiness.mySpeech.Lit = True
+                        End If
+                    Next
                 Case 9
                     m.Result = 1
 
