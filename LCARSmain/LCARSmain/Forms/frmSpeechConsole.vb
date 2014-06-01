@@ -1,11 +1,13 @@
-﻿Public Class frmSpeechConsole
+﻿'TODO: Show by screen index
+
+Public Class frmSpeechConsole
     Dim oloc As Point
     Private Sub fbHide_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbHide.Click
         Me.Hide()
     End Sub
 
     Private Sub fbOnOff_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbOnOff.Click
-        With modCommon.curBusiness
+        With modCommon.curBusiness(0)
             .mySpeech.Lit = Not .mySpeech.Lit
             If .mySpeech.Lit Then
                 If Listener Is Nothing Then Listener = New SpeechLib.SpInProcRecoContextClass

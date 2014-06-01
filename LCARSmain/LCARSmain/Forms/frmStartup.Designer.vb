@@ -22,19 +22,8 @@ Partial Class frmStartup
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.pnlDesktop = New System.Windows.Forms.Panel
         Me.pnlBack = New System.Windows.Forms.Panel
         Me.SuspendLayout()
-        '
-        'pnlDesktop
-        '
-        Me.pnlDesktop.BackColor = System.Drawing.Color.Black
-        Me.pnlDesktop.BackgroundImage = Global.LCARSmain.My.Resources.Resources.federationLogo
-        Me.pnlDesktop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.pnlDesktop.Location = New System.Drawing.Point(132, 13)
-        Me.pnlDesktop.Name = "pnlDesktop"
-        Me.pnlDesktop.Size = New System.Drawing.Size(151, 134)
-        Me.pnlDesktop.TabIndex = 3
         '
         'pnlBack
         '
@@ -51,7 +40,6 @@ Partial Class frmStartup
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.ClientSize = New System.Drawing.Size(297, 159)
         Me.Controls.Add(Me.pnlBack)
-        Me.Controls.Add(Me.pnlDesktop)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmStartup"
         Me.ShowInTaskbar = False
@@ -59,6 +47,5 @@ Partial Class frmStartup
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents pnlDesktop As System.Windows.Forms.Panel
     Friend WithEvents pnlBack As System.Windows.Forms.Panel
 End Class

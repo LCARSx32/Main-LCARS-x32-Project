@@ -4,12 +4,12 @@ Imports System.Runtime.InteropServices
 Module modCommon
 
     Public LinkedWindows As New List(Of IntPtr)
-    Public StartingWorkingArea As Rectangle
+    Public StartingWorkingArea As New List(Of Rectangle)
     Public TaskBarState As Integer
     Public cancelAlert As Boolean = True
     Public shutDownOptions As New cWrapExitWindows
     Public myDesktop As frmStartup
-    Public curBusiness As modBusiness
+    Public curBusiness As New List(Of modBusiness)
     Public SysListView As IntPtr
     Public hTrayIcons As IntPtr
     Public hTrayParent As IntPtr
@@ -336,22 +336,22 @@ Public Enum SetWindowPosFlags As UInteger
 
 #End Region
 
-    Public Sub setBusiness(ByRef business As modBusiness)
-        curBusiness = business
+    Public Sub setBusiness(ByRef business As modBusiness, ByVal ScreenIndex As Integer)
+        curBusiness(ScreenIndex) = business
     End Sub
 
-    Public Sub SetWallpaper(ByVal wall As Image)
-        myDesktop.pnlDesktop.BackgroundImage = wall
+    Public Sub SetWallpaper(ByVal wall As Image, ByVal ScreenIndex As Integer)
+        myDesktop.curDesktop(ScreenIndex).BackgroundImage = wall
     End Sub
 
-    Public Sub setWallpaperSizeMode(ByVal sizemode As ImageLayout)
-        myDesktop.pnlDesktop.BackgroundImageLayout = sizemode
+    Public Sub setWallpaperSizeMode(ByVal sizemode As ImageLayout, ByVal ScreenIndex As Integer)
+        myDesktop.curDesktop(ScreenIndex).BackgroundImageLayout = sizemode
     End Sub
 
 
 
-    Public Sub SetAutoHide(ByVal hide As Integer)
-        CType(curBusiness.myForm, IAutohide).SetAutoHide(hide)
+    Public Sub SetAutoHide(ByVal hide As Integer, ByVal ScreenIndex As Integer)
+        CType(curBusiness(ScreenIndex).myForm, IAutohide).SetAutoHide(hide)
     End Sub
 
     Public Sub SetDesktop(ByVal desktop As Form)
@@ -368,7 +368,8 @@ Public Enum SetWindowPosFlags As UInteger
         Dim startIndex As Integer = alertstring.IndexOf("|")
         alertColor = ColorTranslator.FromHtml(alertstring.Substring(startIndex + 1, 7))
         alertSound = alertstring.Substring(startIndex + 9)
-        Dim alertables As Collection = GetAlertPanels(curBusiness.myForm)
+        'TODO: Set by screen index
+        Dim alertables As Collection = GetAlertPanels(curBusiness(0).myForm)
         alertThread = New Threading.Thread(AddressOf MainAlert)
         cancelAlert = False
         alertThread.Start(alertables)
@@ -612,16 +613,19 @@ Public Enum SetWindowPosFlags As UInteger
         End If
         ' End If
 
-
-        curBusiness.mainTimer.Enabled = False
-        If Not curBusiness.myForm Is Nothing Then
-            curBusiness.myForm.Dispose()
-        End If
-        If Not StartingWorkingArea = New Rectangle(0, 0, 0, 0) Then
-            With StartingWorkingArea
-                resizeWorkingArea(.X, .Y, .Width, .Height)
-            End With
-        End If
+        For Each myBusiness As modBusiness In curBusiness
+            myBusiness.mainTimer.Enabled = False
+            If Not myBusiness.myForm Is Nothing Then
+                myBusiness.myForm.Dispose()
+            End If
+        Next
+        For Each myArea As Rectangle In StartingWorkingArea
+            If Not myArea = New Rectangle(0, 0, 0, 0) Then
+                With myArea
+                    resizeWorkingArea(.X, .Y, .Width, .Height)
+                End With
+            End If
+        Next
 
         Dim hwndProgMan As IntPtr = FindWindow("ProgMan", Nothing)
         Dim hwndSHELLDLL_DefView As IntPtr = FindWindowEx(hwndProgMan, IntPtr.Zero, "SHELLDLL_DefView", IntPtr.Zero)
