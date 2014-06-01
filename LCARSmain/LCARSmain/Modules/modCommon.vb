@@ -448,20 +448,7 @@ Public Enum SetWindowPosFlags As UInteger
                         End If
                         Dim myLCARSButton As LCARS.LCARSbuttonClass = TryCast(myButton, LCARS.LCARSbuttonClass)
                         If Not myLCARSButton Is Nothing Then
-                            With myLCARSButton
-                                If .CustomAlertColor <> alertColor Then
-                                    .CustomAlertColor = alertColor
-                                End If
-                                If myButton.Tag = intloop Then
-                                    .RedAlert = LCARS.LCARSalert.White
-                                    Application.DoEvents()
-                                Else
-                                    If .RedAlert <> LCARS.LCARSalert.Custom Then
-                                        .RedAlert = LCARS.LCARSalert.Custom
-                                        Application.DoEvents()
-                                    End If
-                                End If
-                            End With
+                            processButton(intloop, myLCARSButton)
                         End If
 
                         Application.DoEvents()
@@ -487,6 +474,29 @@ Public Enum SetWindowPosFlags As UInteger
         For Each mywindow As IntPtr In LinkedWindows
             SendMessage(mywindow, InterMsgID, 0, 7)
         Next
+    End Sub
+
+    Private Delegate Sub processButtonDelegate(ByVal index As Integer, ByVal Button As LCARS.LCARSbuttonClass)
+
+    Private Sub processButton(ByVal index As Integer, ByVal button As LCARS.LCARSbuttonClass)
+        If (button.InvokeRequired) Then
+            button.Invoke(New processButtonDelegate(AddressOf processButton), index, button)
+        Else
+            With button
+                If .CustomAlertColor <> alertColor Then
+                    .CustomAlertColor = alertColor
+                End If
+                If .Tag = index Then
+                    .RedAlert = LCARS.LCARSalert.White
+                    Application.DoEvents()
+                Else
+                    If .RedAlert <> LCARS.LCARSalert.Custom Then
+                        .RedAlert = LCARS.LCARSalert.Custom
+                        Application.DoEvents()
+                    End If
+                End If
+            End With
+        End If
     End Sub
 
     Public Sub AlertSoundSub(ByVal soundPath As String)
