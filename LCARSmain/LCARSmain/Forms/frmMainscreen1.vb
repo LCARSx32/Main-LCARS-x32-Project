@@ -172,10 +172,8 @@ Public Class frmMainscreen1
         Dim myRegion As Region = New Region(New RectangleF(0, 0, Me.Width, Me.Height))
         Try
             Dim mainRect As New Rectangle
-            Dim myLoc As Point = pnlMainBar.PointToScreen(pnlMain.Location)
-
-            mainRect.X = myLoc.X
-            mainRect.Y = myLoc.Y
+            mainRect.X = pnlMainBar.Left + pnlMain.Left + pnlMainContainer.Left
+            mainRect.Y = pnlMainBar.Top + pnlMain.Top + pnlMainContainer.Top
             mainRect.Width = pnlMain.Width
             mainRect.Height = pnlMain.Height
 
