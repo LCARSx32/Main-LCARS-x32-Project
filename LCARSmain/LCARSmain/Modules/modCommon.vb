@@ -464,9 +464,7 @@ Public Enum SetWindowPosFlags As UInteger
         For Each myBaseControl As Control In alertables
             For Each mybutton As Control In myBaseControl.Controls
                 If mybutton.GetType.IsSubclassOf(LCARStype) Then
-                    With CType(mybutton, LCARS.LCARSbuttonClass)
-                        .RedAlert = LCARS.LCARSalert.Normal
-                    End With
+                    resetAlert(CType(mybutton, LCARS.LCARSbuttonClass))
                 End If
             Next
         Next
@@ -496,6 +494,16 @@ Public Enum SetWindowPosFlags As UInteger
                     End If
                 End If
             End With
+        End If
+    End Sub
+
+    Private Delegate Sub resetAlertDelegate(ByVal button As LCARS.LCARSbuttonClass)
+
+    Private Sub resetAlert(ByVal button As LCARS.LCARSbuttonClass)
+        If button.InvokeRequired Then
+            button.Invoke(New resetAlertDelegate(AddressOf resetAlert), button)
+        Else
+            button.RedAlert = LCARS.LCARSalert.Normal
         End If
     End Sub
 
