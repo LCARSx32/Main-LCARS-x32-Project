@@ -25,6 +25,7 @@ Module modCommon
     Public myAlertForm As New frmAlerts()
     Public shellMode As Boolean = False
     Public alertSoundMode As Microsoft.VisualBasic.AudioPlayMode = AudioPlayMode.WaitToComplete
+    Public displayOffset As Point
 
 #Region " API Calls "
 
@@ -687,4 +688,9 @@ Public Enum SetWindowPosFlags As UInteger
         Return typeList
     End Function
 
+    Public Sub updateDesktopBounds(ByVal ScreenIndex As Integer)
+        myDesktop.curDesktop(ScreenIndex).Bounds = _
+            New Rectangle(Screen.AllScreens(ScreenIndex).WorkingArea.Location - displayOffset, _
+                          Screen.AllScreens(ScreenIndex).WorkingArea.Size)
+    End Sub
 End Module

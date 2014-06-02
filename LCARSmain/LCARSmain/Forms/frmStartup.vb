@@ -344,12 +344,12 @@ Public Class frmStartup
         SysListView = FindWindowEx(hwndSHELLDLL_DefView, IntPtr.Zero, "SysListView32", IntPtr.Zero)
         SetParent(pnlBack.Handle, hwndProgMan)
         For Each myback As Panel In curDesktop
-            SetParent(myback.Handle, hwndProgMan)
+            SetParent(myback.Handle, pnlBack.Handle)
         Next
-        Dim leftLoc As Integer = 0
-        Dim topLoc As Integer = 0
-        Dim right As Integer = 0
-        Dim bottom As Integer = 0
+        Dim leftLoc As Integer = Integer.MaxValue
+        Dim topLoc As Integer = Integer.MaxValue
+        Dim right As Integer = Integer.MinValue
+        Dim bottom As Integer = Integer.MinValue
 
         For Each myScreen As Screen In Screen.AllScreens
             If myScreen.Bounds.Left < leftLoc Then
@@ -365,11 +365,16 @@ Public Class frmStartup
                 bottom = myScreen.Bounds.Bottom
             End If
         Next
-
-        Dim myBounds As Rectangle = New Rectangle(leftLoc, topLoc, right - leftLoc, bottom - topLoc)
+        displayOffset = New Point(leftLoc, topLoc)
+        Dim myBounds As Rectangle
+        If shellMode Then
+            myBounds = New Rectangle(leftLoc, topLoc, right - leftLoc, bottom - topLoc)
+        Else
+            myBounds = New Rectangle(0, 0, right - leftLoc, bottom - topLoc)
+        End If
         pnlBack.Bounds = myBounds
         For i As Integer = 0 To Screen.AllScreens.Length - 1
-            curDesktop(i).Bounds = Screen.AllScreens(i).WorkingArea
+            updateDesktopBounds(i)
         Next
         pnlBack.BringToFront()
         For Each myBack As Panel In curDesktop

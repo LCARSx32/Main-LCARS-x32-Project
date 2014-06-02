@@ -789,14 +789,8 @@ public Class modBusiness
         End If
 
         If Not myDesktop.curDesktop(ScreenIndex).Size = adjustedBounds.Size Then
-            Dim xOffset As Integer = SystemInformation.VirtualScreen.X 'Screen.AllScreens(screenIndex).Bounds.X - SystemInformation.VirtualScreen.X
-            Dim yOffset As Integer = SystemInformation.VirtualScreen.Y 'Screen.AllScreens(screenIndex).Bounds.Y - SystemInformation.VirtualScreen.Y
-
-            myDesktop.curDesktop(ScreenIndex).Bounds = New Rectangle(adjustedBounds.X - xOffset, adjustedBounds.Y - yOffset, adjustedBounds.Width, adjustedBounds.Height)
-            'myDesktop.curDesktop(ScreenIndex).Bounds = New Rectangle(adjustedBounds.X, adjustedBounds.Y, adjustedBounds.Width, adjustedBounds.Height)
+            updateDesktopBounds(ScreenIndex)
         End If
-
-
 
         'Deal with resizing the tray icon panel if necessary
         If myHideTrayButton.Visible = True Then
