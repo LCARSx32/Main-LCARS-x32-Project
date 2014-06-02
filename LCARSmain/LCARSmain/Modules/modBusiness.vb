@@ -172,11 +172,11 @@ public Class modBusiness
     End Function
 
     Public Sub SetWallpaper(ByVal wall As Image)
-        myDesktop.pnlDesktop.BackgroundImage = wall
+        myDesktop.curDesktop(ScreenIndex).BackgroundImage = wall
     End Sub
 
     Public Sub setWallpaperSizeMode(ByVal sizemode As ImageLayout)
-        myDesktop.pnlDesktop.BackgroundImageLayout = sizemode
+        myDesktop.curDesktop(ScreenIndex).BackgroundImageLayout = sizemode
     End Sub
 
 
@@ -372,8 +372,7 @@ public Class modBusiness
         'that it is now the mainscreen.  Since most of the functions of the
         'mainscreen are done through this module, it is imperitive that they
         'call this sub as soon as they load.
-
-        setBusiness(Me)
+        setBusiness(Me, ScreenIndex)
 
 
         ReDim myWindows(-1)
@@ -483,7 +482,7 @@ public Class modBusiness
 
         'load Mainscreen Settings:
         Dim AutoHideMode As Integer = modSettings.AutoHide(ScreenIndex)
-        SetAutoHide(AutoHideMode)
+        SetAutoHide(AutoHideMode, ScreenIndex)
         If modSettings.ShowTrayIcons(ScreenIndex) = True Then
             myShowTrayButton_Click(New Object, New EventArgs)
         End If
@@ -525,6 +524,7 @@ public Class modBusiness
 
     Private Sub System_DisplayChanged(ByVal sender As Object, ByVal e As System.EventArgs)
         myForm.Bounds = Screen.AllScreens(ScreenIndex).Bounds
+        'TODO: Move to frmStartup
         myDesktop.pnlBack.Bounds = Screen.AllScreens(ScreenIndex).Bounds
 
     End Sub
@@ -785,18 +785,12 @@ public Class modBusiness
                 Next
             End If
             resizeWorkingArea(adjustedBounds.X, adjustedBounds.Y, adjustedBounds.Width, adjustedBounds.Height)
-
+            'myDesktop.curDesktop(ScreenIndex).Bounds = Screen.AllScreens(ScreenIndex).WorkingArea
         End If
 
-        If Not myDesktop.pnlDesktop.Size = adjustedBounds.Size Then
-            Dim xOffset As Integer = SystemInformation.VirtualScreen.X 'Screen.AllScreens(screenIndex).Bounds.X - SystemInformation.VirtualScreen.X
-            Dim yOffset As Integer = SystemInformation.VirtualScreen.Y 'Screen.AllScreens(screenIndex).Bounds.Y - SystemInformation.VirtualScreen.Y
-
-            myDesktop.pnlDesktop.Bounds = New Rectangle(adjustedBounds.X - xOffset, adjustedBounds.Y - yOffset, adjustedBounds.Width, adjustedBounds.Height)
-
+        If Not myDesktop.curDesktop(ScreenIndex).Size = adjustedBounds.Size Then
+            updateDesktopBounds(ScreenIndex)
         End If
-
-
 
         'Deal with resizing the tray icon panel if necessary
         If myHideTrayButton.Visible = True Then
