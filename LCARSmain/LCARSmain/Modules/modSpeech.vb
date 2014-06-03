@@ -133,11 +133,9 @@ Module modSpeech
 
         'Load up the speech recognition
         Try
-            Try
+            If Not Listener Is Nothing Then
                 RemoveHandler Listener.Recognition, AddressOf OnReco
-            Catch ex As Exception
-                'First start, so no problem.
-            End Try
+            End If
             Listener = Nothing
             vGrammar = Nothing
             SpeechEngine = Nothing
