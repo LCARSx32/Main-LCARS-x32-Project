@@ -1298,65 +1298,20 @@ public Class modBusiness
 
     'Used for programs in start menu and in Personal Programs (userbuttons)
     Private Sub myfile_click(ByVal sender As Object, ByVal e As System.EventArgs)
+        If ProgramsPanel.Visible Then
+            myStartMenu.doClick(sender, e)
+        End If
+        If UserButtonsPanel.Visible Then
+            myUserButtons.doClick(sender, e)
+        End If
+        Application.DoEvents()
         Try
             If Path.GetExtension(sender.data.ToString.ToLower) = ".lnk" Then
+
                 Dim myProcess As New System.Diagnostics.Process
-                Dim WshShell As New IWshRuntimeLibrary.WshShell
-                Dim oShellLink As IWshRuntimeLibrary.WshShortcut
-                oShellLink = WshShell.CreateShortcut(sender.data)
+                myProcess.StartInfo.FileName = sender.data
+                launchProcessOnScreen(myProcess)
 
-                Dim before() As Process = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(oShellLink.TargetPath))
-
-                Process.Start(sender.data)
-
-
-
-                If ProgramsPanel.Visible Then
-                    myStartMenu.doClick(sender, e)
-                End If
-                If UserButtonsPanel.Visible Then
-                    myUserButtons.doClick(sender, e)
-                End If
-                Application.DoEvents()
-
-
-                Do Until Process.GetProcessesByName(Path.GetFileNameWithoutExtension(oShellLink.TargetPath)).Length > before.Length
-                    Application.DoEvents()
-                Loop
-
-                Dim after() As Process = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(oShellLink.TargetPath))
-                Dim found As Boolean = False
-
-                For Each myAfter As Process In after
-                    found = False
-
-                    For Each myBefore As Process In before
-                        If myBefore Is myAfter Then
-                            found = True
-                        End If
-                    Next
-                    If found = False Then
-                        myProcess = myAfter
-                    End If
-                Next
-
-
-                Dim myID As Integer = myProcess.Id
-
-                Do Until myProcess.MainWindowHandle <> 0
-                    If Now.Subtract(myProcess.StartTime) > New TimeSpan(0, 0, 15) Then
-                        Exit Do
-                    Else
-                        myProcess = Process.GetProcessById(myID)
-
-                        Application.DoEvents()
-                    End If
-
-
-
-                Loop
-
-                MoveToScreen(Screen.FromHandle(myForm.Handle), myProcess.MainWindowHandle)
             Else
                 If File.Exists(sender.data) Then
                     'The command string is an absolute path.
@@ -1364,7 +1319,7 @@ public Class modBusiness
                         Dim myprocess As New Process
                         myprocess.StartInfo.FileName = sender.data
                         myprocess.StartInfo.WorkingDirectory = Path.GetDirectoryName(sender.data)
-                        myprocess.Start()
+                        launchProcessOnScreen(myprocess)
                     Catch ex As Exception
                         GoTo Retry 'Yes, I know. If you have a better way, go for it.
                     End Try
@@ -1383,18 +1338,35 @@ Retry:
                             myProcess.StartInfo.Arguments = sender.data.Substring(myProcess.StartInfo.FileName.Length + 1)
                             myProcess.StartInfo.WorkingDirectory = IO.Path.GetDirectoryName(myProcess.StartInfo.FileName)
                         End If
-                        myProcess.Start()
+                        launchProcessOnScreen(myProcess)
                     Catch ex As Exception
                         'Throw it to shell and see what happens.
                         Try
                             Dim myID As Integer
                             myID = Shell(sender.data, AppWinStyle.NormalFocus)
                             Dim myprocess As Process = Process.GetProcessById(myID)
+                            Do Until myprocess.MainWindowHandle <> 0
+                                If Now.Subtract(myprocess.StartTime) > New TimeSpan(0, 0, 15) Then
+                                    Exit Do
+                                Else
+                                    myprocess = Process.GetProcessById(myID)
+                                    Application.DoEvents()
+                                End If
+                            Loop
                             MoveToScreen(Screen.FromHandle(myForm.Handle), myprocess.MainWindowHandle)
                         Catch ex2 As Exception
                             'Throw it to Process.Start and hope for the best
                             Try
                                 Dim myProcess As Process = Process.Start(sender.data)
+                                Dim myID As Integer = myProcess.Id
+                                Do Until myProcess.MainWindowHandle <> 0
+                                    If Now.Subtract(myProcess.StartTime) > New TimeSpan(0, 0, 15) Then
+                                        Exit Do
+                                    Else
+                                        myProcess = Process.GetProcessById(myID)
+                                        Application.DoEvents()
+                                    End If
+                                Loop
                                 MoveToScreen(Screen.FromHandle(myForm.Handle), myProcess.MainWindowHandle)
                             Catch ex3 As Exception
                                 MsgBox("Error: " & vbNewLine & vbNewLine & ex3.Message)
@@ -1417,11 +1389,25 @@ Retry:
                 MsgBox("Error: " & vbNewLine & vbNewLine & ex2.Message)
             End Try
         End Try
-
-        If UserButtonsPanel.Visible Then
-            myUserButtons.doClick(sender, e)
-        End If
     End Sub
+
+    Public Sub launchProcessOnScreen(ByVal myProcess As Process)
+        myProcess.Start()
+        Dim myID As Integer = myProcess.Id
+
+        Do Until myProcess.MainWindowHandle <> 0
+            If Now.Subtract(myProcess.StartTime) > New TimeSpan(0, 0, 15) Then
+                Exit Do
+            Else
+                myProcess = Process.GetProcessById(myID)
+                Application.DoEvents()
+            End If
+        Loop
+
+        MoveToScreen(Screen.FromHandle(myForm.Handle), myProcess.MainWindowHandle)
+
+    End Sub
+
 
     Private Sub MoveToScreen(ByVal myScreen As Screen, ByVal hWnd As IntPtr)
         Dim myPlacement As New WINDOWPLACEMENT
