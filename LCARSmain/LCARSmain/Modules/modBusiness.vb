@@ -72,8 +72,6 @@ public Class modBusiness
     Public myAlertListButton As LCARS.LCARSbuttonClass
     Public myProgramPagesDisplay As LCARS.LCARSbuttonClass
 
-    Public myProgGrid As LCARS.Controls.ButtonGrid
-
     Public adjustedBounds As Rectangle
     Public MyPrograms As Collection = New Collection
     Public myUserButtonCollection As New List(Of UserButtonInfo)
@@ -424,10 +422,7 @@ public Class modBusiness
         myRun = myForm.Controls.Find("myRun", True)(0)
         myAlertListButton = myForm.Controls.Find("myAlertListButton", True)(0)
         myProgramPagesDisplay = myForm.Controls.Find("fbProgramPages", True)(0)
-        Try
-            myProgGrid = myForm.Controls.Find("progGrid", True)(0)
-        Catch ex As Exception
-        End Try
+
         If Listener Is Nothing OrElse Listener.State <> SpeechLib.SpeechRecoContextState.SRCS_Enabled Then
             mySpeech.Lit = False
         Else
