@@ -256,6 +256,7 @@ Partial Class frmShutdown
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmShutdown"
         Me.Text = "DEACTIVATE"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.ResumeLayout(False)
 
     End Sub

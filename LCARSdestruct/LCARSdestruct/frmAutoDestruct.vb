@@ -16,10 +16,6 @@ Public Class frmAutoDestruct
         Application.Exit()
     End Sub
 
-    Private Sub WorkingAreaUpdated(ByVal NewArea As System.Drawing.Rectangle) Handles interop.WorkingAreaChanged
-        Me.Bounds = NewArea
-    End Sub
-
 #End Region
 
     Dim endTime As DateTime
@@ -217,5 +213,13 @@ Public Class frmAutoDestruct
 
     Private Sub txtExternal_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         SaveSetting("LCARS x32", "Application", "AutoDestructCommand", txtExternal.Text)
+    End Sub
+
+    Private Sub frmAutoDestruct_LocationChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.LocationChanged, Me.SizeChanged
+        Dim adjustedBounds As Rectangle = Screen.FromHandle(Me.Handle).WorkingArea
+        adjustedBounds.Location -= Screen.FromHandle(Me.Handle).Bounds.Location
+        If Not Me.MaximizedBounds = adjustedBounds Then
+            Me.MaximizedBounds = adjustedBounds
+        End If
     End Sub
 End Class

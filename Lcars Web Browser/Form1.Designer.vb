@@ -1208,6 +1208,7 @@ Partial Class form1
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Tag = "20"
         Me.Text = " Lcars Web Browser"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.ResumeLayout(False)
