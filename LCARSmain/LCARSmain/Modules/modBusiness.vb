@@ -184,15 +184,22 @@ public Class modBusiness
     End Sub
 
     Public Sub myCompButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Process.Start(Application.StartupPath & "\LCARSexplorer.exe")
+        Dim myProcess As New Process()
+        myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSexplorer.exe"
+        launchProcessOnScreen(myProcess)
     End Sub
 
     Public Sub mySettingsButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Process.Start(Application.StartupPath & "\LCARSsettings.exe", "/" & myDesktop.Handle.ToString)
+        Dim myProcess As New Process()
+        myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSsettings.exe"
+        myProcess.StartInfo.Arguments = "/" & myDesktop.Handle.ToString()
+        launchProcessOnScreen(myProcess)
     End Sub
 
     Public Sub myEngineeringButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Process.Start(Application.StartupPath & "\LCARSengineering.exe")
+        Dim myProcess As New Process()
+        myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSengineering.exe"
+        launchProcessOnScreen(myProcess)
     End Sub
 
     Public Sub myModeSelectButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
@@ -202,6 +209,7 @@ public Class modBusiness
         If Not Directory.Exists(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\LCARS x32\Images") Then
             Directory.CreateDirectory(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\LCARS x32\Images")
         End If
+        'TODO: Save screenshots by screen index
         'Save screenshot and show the selection form
         Dim screenImage As New Bitmap(My.Computer.Screen.Bounds.Width, My.Computer.Screen.Bounds.Height)
         Dim g As System.Drawing.Graphics = System.Drawing.Graphics.FromImage(screenImage)
@@ -218,11 +226,16 @@ public Class modBusiness
         End Try
         SetParent(hTrayIcons, hTrayParent)
         Dim myChoice As New ScreenChooserDialog(ScreenIndex)
+        MoveToScreen(Screen.FromHandle(myForm.Handle), myChoice.Handle)
         myChoice.Show()
     End Sub
 
     Public Sub myDeactivateButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Process.Start(Application.StartupPath & "\LCARSshutdown.exe", "/" & myDesktop.Handle.ToString)
+        Dim myProcess As New Process()
+        myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSshutdown.exe"
+        myProcess.StartInfo.Arguments = "/" & myDesktop.Handle.ToString()
+        launchProcessOnScreen(myProcess)
+        'Process.Start(Application.StartupPath & "\LCARSshutdown.exe", "/" & myDesktop.Handle.ToString)
     End Sub
 
     Public Sub myAlertButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
@@ -244,15 +257,24 @@ public Class modBusiness
     End Sub
 
     Public Sub myDestructButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Process.Start(Application.StartupPath & "\LCARSdestruct.exe")
+        Dim myProcess As New Process()
+        myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSdestruct.exe"
+        launchProcessOnScreen(myProcess)
+        'Process.Start(Application.StartupPath & "\LCARSdestruct.exe")
     End Sub
 
     Public Sub myPhoto_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Process.Start(Application.StartupPath & "\LCARSpic.exe")
+        Dim myProcess As New Process()
+        myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSpic.exe"
+        launchProcessOnScreen(myProcess)
+        'Process.Start(Application.StartupPath & "\LCARSpic.exe")
     End Sub
 
     Public Sub myWebBrowser_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Process.Start(Application.StartupPath & "\LCARSWebBrowser.exe")
+        Dim myProcess As New Process()
+        myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSWebBrowser.exe"
+        launchProcessOnScreen(myProcess)
+        'Process.Start(Application.StartupPath & "\LCARSWebBrowser.exe")
     End Sub
 
     Public Sub myButtonManager_Click(ByVal sender As Object, ByVal e As System.EventArgs)
@@ -278,19 +300,35 @@ public Class modBusiness
     End Sub
 
     Public Sub myDocuments_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Process.Start(Application.StartupPath & "\LCARSexplorer.exe", System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments))
+        Dim myProcess As New Process()
+        myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSexplorer.exe"
+        myProcess.StartInfo.Arguments = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+        launchProcessOnScreen(myProcess)
+        'Process.Start(Application.StartupPath & "\LCARSexplorer.exe", System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments))
         ' myStartMenu.doClick(sender, e)
     End Sub
 
     Public Sub myPictures_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Process.Start(Application.StartupPath & "\LCARSexplorer.exe", System.Environment.GetFolderPath(Environment.SpecialFolder.MyPictures))
+        Dim myProcess As New Process()
+        myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSexplorer.exe"
+        myProcess.StartInfo.Arguments = System.Environment.GetFolderPath(Environment.SpecialFolder.MyPictures)
+        launchProcessOnScreen(myProcess)
+        'Process.Start(Application.StartupPath & "\LCARSexplorer.exe", System.Environment.GetFolderPath(Environment.SpecialFolder.MyPictures))
     End Sub
     Public Sub myVideos_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Process.Start(Application.StartupPath & "\LCARSexplorer.exe", GetMyVideosPath())
+        Dim myProcess As New Process()
+        myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSexplorer.exe"
+        myProcess.StartInfo.Arguments = GetMyVideosPath()
+        launchProcessOnScreen(myProcess)
+        'Process.Start(Application.StartupPath & "\LCARSexplorer.exe", GetMyVideosPath())
     End Sub
 
     Public Sub myMusic_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Process.Start(Application.StartupPath & "\LCARSexplorer.exe", System.Environment.GetFolderPath(Environment.SpecialFolder.MyMusic))
+        Dim myProcess As New Process()
+        myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSexplorer.exe"
+        myProcess.StartInfo.Arguments = System.Environment.GetFolderPath(Environment.SpecialFolder.MyMusic)
+        launchProcessOnScreen(myProcess)
+        'Process.Start(Application.StartupPath & "\LCARSexplorer.exe", System.Environment.GetFolderPath(Environment.SpecialFolder.MyMusic))
     End Sub
 
     Public Sub myShowTrayButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
@@ -349,12 +387,17 @@ public Class modBusiness
     End Sub
 
     Public Sub myHelp_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Process.Start(Application.StartupPath & "\Lcarsx32 Manual.exe", Application.StartupPath & "\LCARS x32 Manual")
+        Dim myProcess As New Process()
+        myProcess.StartInfo.FileName = Application.StartupPath & "\Lcarsx32 Manual.exe"
+        myProcess.StartInfo.Arguments = Application.StartupPath & "\LCARS x32 Manual"
+        launchProcessOnScreen(myProcess)
+        'Process.Start(Application.StartupPath & "\Lcarsx32 Manual.exe", Application.StartupPath & "\LCARS x32 Manual")
     End Sub
 
     Public Sub myRun_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         Dim myRunDialog As New frmRunProgram
-        myRunDialog.ShowDialog()
+        MoveToScreen(Screen.FromHandle(myForm.Handle), myRunDialog.Handle)
+        myRunDialog.Show()
     End Sub
 
     Public Sub myAlertListButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
@@ -520,6 +563,7 @@ public Class modBusiness
     Private Sub System_DisplayChanged(ByVal sender As Object, ByVal e As System.EventArgs)
         myForm.Bounds = Screen.AllScreens(ScreenIndex).Bounds
         'TODO: Move to frmStartup
+        'TODO: Handle changes to number of displays
         myDesktop.pnlBack.Bounds = Screen.AllScreens(ScreenIndex).Bounds
 
     End Sub
