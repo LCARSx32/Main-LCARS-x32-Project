@@ -184,15 +184,22 @@ public Class modBusiness
     End Sub
 
     Public Sub myCompButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Process.Start(Application.StartupPath & "\LCARSexplorer.exe")
+        Dim myProcess As New Process()
+        myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSexplorer.exe"
+        launchProcessOnScreen(myProcess)
     End Sub
 
     Public Sub mySettingsButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Process.Start(Application.StartupPath & "\LCARSsettings.exe", "/" & myDesktop.Handle.ToString)
+        Dim myProcess As New Process()
+        myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSsettings.exe"
+        myProcess.StartInfo.Arguments = "/" & myDesktop.Handle.ToString()
+        launchProcessOnScreen(myProcess)
     End Sub
 
     Public Sub myEngineeringButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Process.Start(Application.StartupPath & "\LCARSengineering.exe")
+        Dim myProcess As New Process()
+        myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSengineering.exe"
+        launchProcessOnScreen(myProcess)
     End Sub
 
     Public Sub myModeSelectButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
@@ -202,6 +209,7 @@ public Class modBusiness
         If Not Directory.Exists(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\LCARS x32\Images") Then
             Directory.CreateDirectory(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\LCARS x32\Images")
         End If
+        'TODO: Save screenshots by screen index
         'Save screenshot and show the selection form
         Dim screenImage As New Bitmap(My.Computer.Screen.Bounds.Width, My.Computer.Screen.Bounds.Height)
         Dim g As System.Drawing.Graphics = System.Drawing.Graphics.FromImage(screenImage)
@@ -218,11 +226,16 @@ public Class modBusiness
         End Try
         SetParent(hTrayIcons, hTrayParent)
         Dim myChoice As New ScreenChooserDialog(ScreenIndex)
+        MoveToScreen(Screen.FromHandle(myForm.Handle), myChoice.Handle)
         myChoice.Show()
     End Sub
 
     Public Sub myDeactivateButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Process.Start(Application.StartupPath & "\LCARSshutdown.exe", "/" & myDesktop.Handle.ToString)
+        Dim myProcess As New Process()
+        myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSshutdown.exe"
+        myProcess.StartInfo.Arguments = "/" & myDesktop.Handle.ToString()
+        launchProcessOnScreen(myProcess)
+        'Process.Start(Application.StartupPath & "\LCARSshutdown.exe", "/" & myDesktop.Handle.ToString)
     End Sub
 
     Public Sub myAlertButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
@@ -244,15 +257,24 @@ public Class modBusiness
     End Sub
 
     Public Sub myDestructButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Process.Start(Application.StartupPath & "\LCARSdestruct.exe")
+        Dim myProcess As New Process()
+        myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSdestruct.exe"
+        launchProcessOnScreen(myProcess)
+        'Process.Start(Application.StartupPath & "\LCARSdestruct.exe")
     End Sub
 
     Public Sub myPhoto_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Process.Start(Application.StartupPath & "\LCARSpic.exe")
+        Dim myProcess As New Process()
+        myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSpic.exe"
+        launchProcessOnScreen(myProcess)
+        'Process.Start(Application.StartupPath & "\LCARSpic.exe")
     End Sub
 
     Public Sub myWebBrowser_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Process.Start(Application.StartupPath & "\LCARSWebBrowser.exe")
+        Dim myProcess As New Process()
+        myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSWebBrowser.exe"
+        launchProcessOnScreen(myProcess)
+        'Process.Start(Application.StartupPath & "\LCARSWebBrowser.exe")
     End Sub
 
     Public Sub myButtonManager_Click(ByVal sender As Object, ByVal e As System.EventArgs)
@@ -278,19 +300,35 @@ public Class modBusiness
     End Sub
 
     Public Sub myDocuments_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Process.Start(Application.StartupPath & "\LCARSexplorer.exe", System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments))
+        Dim myProcess As New Process()
+        myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSexplorer.exe"
+        myProcess.StartInfo.Arguments = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+        launchProcessOnScreen(myProcess)
+        'Process.Start(Application.StartupPath & "\LCARSexplorer.exe", System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments))
         ' myStartMenu.doClick(sender, e)
     End Sub
 
     Public Sub myPictures_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Process.Start(Application.StartupPath & "\LCARSexplorer.exe", System.Environment.GetFolderPath(Environment.SpecialFolder.MyPictures))
+        Dim myProcess As New Process()
+        myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSexplorer.exe"
+        myProcess.StartInfo.Arguments = System.Environment.GetFolderPath(Environment.SpecialFolder.MyPictures)
+        launchProcessOnScreen(myProcess)
+        'Process.Start(Application.StartupPath & "\LCARSexplorer.exe", System.Environment.GetFolderPath(Environment.SpecialFolder.MyPictures))
     End Sub
     Public Sub myVideos_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Process.Start(Application.StartupPath & "\LCARSexplorer.exe", GetMyVideosPath())
+        Dim myProcess As New Process()
+        myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSexplorer.exe"
+        myProcess.StartInfo.Arguments = GetMyVideosPath()
+        launchProcessOnScreen(myProcess)
+        'Process.Start(Application.StartupPath & "\LCARSexplorer.exe", GetMyVideosPath())
     End Sub
 
     Public Sub myMusic_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Process.Start(Application.StartupPath & "\LCARSexplorer.exe", System.Environment.GetFolderPath(Environment.SpecialFolder.MyMusic))
+        Dim myProcess As New Process()
+        myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSexplorer.exe"
+        myProcess.StartInfo.Arguments = System.Environment.GetFolderPath(Environment.SpecialFolder.MyMusic)
+        launchProcessOnScreen(myProcess)
+        'Process.Start(Application.StartupPath & "\LCARSexplorer.exe", System.Environment.GetFolderPath(Environment.SpecialFolder.MyMusic))
     End Sub
 
     Public Sub myShowTrayButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
@@ -349,12 +387,17 @@ public Class modBusiness
     End Sub
 
     Public Sub myHelp_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Process.Start(Application.StartupPath & "\Lcarsx32 Manual.exe", Application.StartupPath & "\LCARS x32 Manual")
+        Dim myProcess As New Process()
+        myProcess.StartInfo.FileName = Application.StartupPath & "\Lcarsx32 Manual.exe"
+        myProcess.StartInfo.Arguments = Application.StartupPath & "\LCARS x32 Manual"
+        launchProcessOnScreen(myProcess)
+        'Process.Start(Application.StartupPath & "\Lcarsx32 Manual.exe", Application.StartupPath & "\LCARS x32 Manual")
     End Sub
 
     Public Sub myRun_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         Dim myRunDialog As New frmRunProgram
-        myRunDialog.ShowDialog()
+        MoveToScreen(Screen.FromHandle(myForm.Handle), myRunDialog.Handle)
+        myRunDialog.Show()
     End Sub
 
     Public Sub myAlertListButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
@@ -520,6 +563,7 @@ public Class modBusiness
     Private Sub System_DisplayChanged(ByVal sender As Object, ByVal e As System.EventArgs)
         myForm.Bounds = Screen.AllScreens(ScreenIndex).Bounds
         'TODO: Move to frmStartup
+        'TODO: Handle changes to number of displays
         myDesktop.pnlBack.Bounds = Screen.AllScreens(ScreenIndex).Bounds
 
     End Sub
@@ -776,7 +820,10 @@ public Class modBusiness
                 Marshal.StructureToPtr(myRectData, MyCopyData, False)
                 'Do not use SendDataToLinkedWindows; it uses PostMessage, not SendMessage
                 For Each targetHandle As IntPtr In LinkedWindows
-                    Dim res As Integer = SendMessage(targetHandle, WM_COPYDATA, myDesktop.Handle, MyCopyData)
+                    'Compare working areas because no equality operator for screens
+                    If Screen.FromHandle(targetHandle).WorkingArea = Screen.FromHandle(myForm.Handle).WorkingArea Then
+                        Dim res As Integer = SendMessage(targetHandle, WM_COPYDATA, myDesktop.Handle, MyCopyData)
+                    End If
                 Next
             End If
             resizeWorkingArea(adjustedBounds.X, adjustedBounds.Y, adjustedBounds.Width, adjustedBounds.Height)
@@ -1298,65 +1345,20 @@ public Class modBusiness
 
     'Used for programs in start menu and in Personal Programs (userbuttons)
     Private Sub myfile_click(ByVal sender As Object, ByVal e As System.EventArgs)
+        If ProgramsPanel.Visible Then
+            myStartMenu.doClick(sender, e)
+        End If
+        If UserButtonsPanel.Visible Then
+            myUserButtons.doClick(sender, e)
+        End If
+        Application.DoEvents()
         Try
             If Path.GetExtension(sender.data.ToString.ToLower) = ".lnk" Then
+
                 Dim myProcess As New System.Diagnostics.Process
-                Dim WshShell As New IWshRuntimeLibrary.WshShell
-                Dim oShellLink As IWshRuntimeLibrary.WshShortcut
-                oShellLink = WshShell.CreateShortcut(sender.data)
+                myProcess.StartInfo.FileName = sender.data
+                launchProcessOnScreen(myProcess)
 
-                Dim before() As Process = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(oShellLink.TargetPath))
-
-                Process.Start(sender.data)
-
-
-
-                If ProgramsPanel.Visible Then
-                    myStartMenu.doClick(sender, e)
-                End If
-                If UserButtonsPanel.Visible Then
-                    myUserButtons.doClick(sender, e)
-                End If
-                Application.DoEvents()
-
-
-                Do Until Process.GetProcessesByName(Path.GetFileNameWithoutExtension(oShellLink.TargetPath)).Length > before.Length
-                    Application.DoEvents()
-                Loop
-
-                Dim after() As Process = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(oShellLink.TargetPath))
-                Dim found As Boolean = False
-
-                For Each myAfter As Process In after
-                    found = False
-
-                    For Each myBefore As Process In before
-                        If myBefore Is myAfter Then
-                            found = True
-                        End If
-                    Next
-                    If found = False Then
-                        myProcess = myAfter
-                    End If
-                Next
-
-
-                Dim myID As Integer = myProcess.Id
-
-                Do Until myProcess.MainWindowHandle <> 0
-                    If Now.Subtract(myProcess.StartTime) > New TimeSpan(0, 0, 15) Then
-                        Exit Do
-                    Else
-                        myProcess = Process.GetProcessById(myID)
-
-                        Application.DoEvents()
-                    End If
-
-
-
-                Loop
-
-                MoveToScreen(Screen.FromHandle(myForm.Handle), myProcess.MainWindowHandle)
             Else
                 If File.Exists(sender.data) Then
                     'The command string is an absolute path.
@@ -1364,7 +1366,7 @@ public Class modBusiness
                         Dim myprocess As New Process
                         myprocess.StartInfo.FileName = sender.data
                         myprocess.StartInfo.WorkingDirectory = Path.GetDirectoryName(sender.data)
-                        myprocess.Start()
+                        launchProcessOnScreen(myprocess)
                     Catch ex As Exception
                         GoTo Retry 'Yes, I know. If you have a better way, go for it.
                     End Try
@@ -1383,18 +1385,35 @@ Retry:
                             myProcess.StartInfo.Arguments = sender.data.Substring(myProcess.StartInfo.FileName.Length + 1)
                             myProcess.StartInfo.WorkingDirectory = IO.Path.GetDirectoryName(myProcess.StartInfo.FileName)
                         End If
-                        myProcess.Start()
+                        launchProcessOnScreen(myProcess)
                     Catch ex As Exception
                         'Throw it to shell and see what happens.
                         Try
                             Dim myID As Integer
                             myID = Shell(sender.data, AppWinStyle.NormalFocus)
                             Dim myprocess As Process = Process.GetProcessById(myID)
+                            Do Until myprocess.MainWindowHandle <> 0
+                                If Now.Subtract(myprocess.StartTime) > New TimeSpan(0, 0, 15) Then
+                                    Exit Do
+                                Else
+                                    myprocess = Process.GetProcessById(myID)
+                                    Application.DoEvents()
+                                End If
+                            Loop
                             MoveToScreen(Screen.FromHandle(myForm.Handle), myprocess.MainWindowHandle)
                         Catch ex2 As Exception
                             'Throw it to Process.Start and hope for the best
                             Try
                                 Dim myProcess As Process = Process.Start(sender.data)
+                                Dim myID As Integer = myProcess.Id
+                                Do Until myProcess.MainWindowHandle <> 0
+                                    If Now.Subtract(myProcess.StartTime) > New TimeSpan(0, 0, 15) Then
+                                        Exit Do
+                                    Else
+                                        myProcess = Process.GetProcessById(myID)
+                                        Application.DoEvents()
+                                    End If
+                                Loop
                                 MoveToScreen(Screen.FromHandle(myForm.Handle), myProcess.MainWindowHandle)
                             Catch ex3 As Exception
                                 MsgBox("Error: " & vbNewLine & vbNewLine & ex3.Message)
@@ -1417,11 +1436,25 @@ Retry:
                 MsgBox("Error: " & vbNewLine & vbNewLine & ex2.Message)
             End Try
         End Try
-
-        If UserButtonsPanel.Visible Then
-            myUserButtons.doClick(sender, e)
-        End If
     End Sub
+
+    Public Sub launchProcessOnScreen(ByVal myProcess As Process)
+        myProcess.Start()
+        Dim myID As Integer = myProcess.Id
+
+        Do Until myProcess.MainWindowHandle <> 0
+            If Now.Subtract(myProcess.StartTime) > New TimeSpan(0, 0, 15) Then
+                Exit Do
+            Else
+                myProcess = Process.GetProcessById(myID)
+                Application.DoEvents()
+            End If
+        Loop
+
+        MoveToScreen(Screen.FromHandle(myForm.Handle), myProcess.MainWindowHandle)
+
+    End Sub
+
 
     Private Sub MoveToScreen(ByVal myScreen As Screen, ByVal hWnd As IntPtr)
         Dim myPlacement As New WINDOWPLACEMENT

@@ -1542,6 +1542,7 @@ Partial Class frmMyComp
         Me.KeyPreview = True
         Me.Name = "frmMyComp"
         Me.Text = "My Computer"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.pnlProperties.ResumeLayout(False)
         Me.pnlMultiple.ResumeLayout(False)
         Me.pnlMultiple.PerformLayout()

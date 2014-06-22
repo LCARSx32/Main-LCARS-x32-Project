@@ -72,7 +72,7 @@ Module modCommon
 
     Public Declare Function GetWindowPlacement Lib "user32" (ByVal hwnd As Integer, ByRef lpwndpl As WINDOWPLACEMENT) As Integer
 
-
+    Public Declare Function GetWindowRect Lib "user32" (ByVal hwnd As IntPtr, ByRef rectangle As RECT) As Integer
 
 #End Region
 

@@ -14,10 +14,6 @@
         Application.Exit()
     End Sub
 
-    Private Sub WorkingAreaUpdated(ByVal NewArea As System.Drawing.Rectangle) Handles interop.WorkingAreaChanged
-        Me.Bounds = NewArea
-    End Sub
-
 #End Region
 
     Dim int1 As Integer = 0
@@ -561,5 +557,13 @@
             FlatButton18.Color = LCARS.LCARScolorStyles.FunctionUnavailable
         End If
 
+    End Sub
+
+    Private Sub form1_LocationChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.LocationChanged, Me.SizeChanged
+        Dim adjustedBounds As Rectangle = Screen.FromHandle(Me.Handle).WorkingArea
+        adjustedBounds.Location -= Screen.FromHandle(Me.Handle).Bounds.Location
+        If Not Me.MaximizedBounds = adjustedBounds Then
+            Me.MaximizedBounds = adjustedBounds
+        End If
     End Sub
 End Class
