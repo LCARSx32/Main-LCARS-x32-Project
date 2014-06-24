@@ -9,6 +9,12 @@
     ' NetworkAvailabilityChanged: Raised when the network connection is connected or disconnected.
     Partial Friend Class MyApplication
         Dim hasfailed As Boolean = False
+
+        Private Sub MyApplication_Startup(ByVal sender As Object, ByVal e As Microsoft.VisualBasic.ApplicationServices.StartupEventArgs) Handles Me.Startup
+            If Command().ToLower().Contains("--settings") Then
+                MainForm = frmSettings
+            End If
+        End Sub
         Private Sub MyApplication_UnhandledException(ByVal sender As Object, ByVal e As Microsoft.VisualBasic.ApplicationServices.UnhandledExceptionEventArgs) Handles Me.UnhandledException
             If Not hasfailed Then
                 hasfailed = True
