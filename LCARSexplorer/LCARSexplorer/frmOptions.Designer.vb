@@ -28,13 +28,13 @@ Partial Class frmOptions
         Me.lblStartDir = New System.Windows.Forms.Label
         Me.txtStartDir = New System.Windows.Forms.TextBox
         Me.tcOptions = New LCARS.Controls.x32TabControl
-        Me.tabMain = New LCARS.Controls.x32TabPage
+        Me.tabMain = CType(New LCARS.Controls.x32TabPage, LCARS.Controls.x32TabPage)
         Me.sbColors = New LCARS.Controls.StandardButton
         Me.fbClickMode = New LCARS.Controls.FlatButton
         Me.hpDouble = New LCARS.Controls.HalfPillButton
         Me.hpSingle = New LCARS.Controls.HalfPillButton
         Me.lblClickMode = New System.Windows.Forms.Label
-        Me.tabShortcuts = New LCARS.Controls.x32TabPage
+        Me.tabShortcuts = CType(New LCARS.Controls.x32TabPage, LCARS.Controls.x32TabPage)
         Me.fbEdit = New LCARS.Controls.FlatButton
         Me.fbDown = New LCARS.Controls.FlatButton
         Me.fbAdd = New LCARS.Controls.FlatButton
@@ -139,11 +139,11 @@ Partial Class frmOptions
         'tcOptions
         '
         Me.tcOptions.BackColor = System.Drawing.Color.Black
-        Me.tcOptions.Controls.Add(Me.tabMain)
         Me.tcOptions.Controls.Add(Me.tabShortcuts)
+        Me.tcOptions.Controls.Add(Me.tabMain)
         Me.tcOptions.Location = New System.Drawing.Point(12, 12)
         Me.tcOptions.Name = "tcOptions"
-        Me.tcOptions.SelectedTab = Me.tabMain
+        Me.tcOptions.SelectedTab = Me.tabShortcuts
         Me.tcOptions.Size = New System.Drawing.Size(511, 306)
         Me.tcOptions.TabIndex = 5
         Me.tcOptions.TabPages.Add(Me.tabMain)
@@ -156,6 +156,7 @@ Partial Class frmOptions
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.tabMain.BackColor = System.Drawing.Color.Black
+        Me.tabMain.Color = LCARS.LCARScolorStyles.SystemFunction
         Me.tabMain.Controls.Add(Me.sbColors)
         Me.tabMain.Controls.Add(Me.fbClickMode)
         Me.tabMain.Controls.Add(Me.hpDouble)
@@ -274,6 +275,7 @@ Partial Class frmOptions
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.tabShortcuts.BackColor = System.Drawing.Color.Black
+        Me.tabShortcuts.Color = LCARS.LCARScolorStyles.NavigationFunction
         Me.tabShortcuts.Controls.Add(Me.fbEdit)
         Me.tabShortcuts.Controls.Add(Me.fbDown)
         Me.tabShortcuts.Controls.Add(Me.fbAdd)

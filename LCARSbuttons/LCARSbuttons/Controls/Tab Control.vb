@@ -176,11 +176,7 @@ Namespace Controls
                 mybutton.Height = 35
                 mybutton.ButtonText = mytab.Text
                 mybutton.ButtonTextAlign = ContentAlignment.BottomRight
-
-                'It might be a good idea to make it so the user can select the color of the
-                'tab.  It would make things more consistant.  For now, they are just set to 
-                'MiscFunction.
-                mybutton.Color = LCARScolorStyles.MiscFunction
+                mybutton.Color = mytab.Color
 
                 'Button beeping also needs to be handled.  I'm working on a way for new controls
                 'and community made programs to easily interface with LCARSmain so they know when
@@ -262,12 +258,12 @@ Namespace Controls
                 'Set the heading(the bar at the top)'s text to the tab's text
                 myHeading.text = Tab.Text
 
-                'Set the selected tabs button's color to white and all of the others to 'MiscFunction'
+                'Set the selected tabs button's red alert to white and all others to normal
                 For Each mybutton As FlatButton In buttonPanel.Controls
                     If mybutton.Tag Is Tab Then
-                        mybutton.Color = LCARScolorStyles.PrimaryFunction
+                        mybutton.RedAlert = LCARSalert.White
                     Else
-                        mybutton.Color = LCARScolorStyles.MiscFunction
+                        mybutton.RedAlert = LCARSalert.Normal
                     End If
                 Next
             End If
@@ -587,16 +583,17 @@ Namespace Controls
 
         'The text of the x32TabPage (what shows on the button and the heading).
         Dim _text As String = "NEW TAB"
+        Dim _Color As LCARScolorStyles = LCARScolorStyles.MiscFunction
 
         Sub New()
             _text = "NEW TAB"
             'This is LCARS after all.  We can't settle for a gray background.
-            Me.BackColor = Color.Black
+            Me.BackColor = System.Drawing.Color.Black
         End Sub
 
         Sub New(ByVal TabText As String)
             _text = TabText
-            Me.BackColor = Color.Black
+            Me.BackColor = System.Drawing.Color.Black
         End Sub
 
         Public Overrides Property Text() As String
@@ -610,6 +607,19 @@ Namespace Controls
 
                 If Me.Parent IsNot Nothing Then
                     'Update the tabs
+                    CType(Me.Parent, x32TabControl).TabPagesChanged()
+                End If
+            End Set
+        End Property
+
+        <DefaultValue(LCARScolorStyles.MiscFunction)> _
+        Public Property Color() As LCARS.LCARScolorStyles
+            Get
+                Return _Color
+            End Get
+            Set(ByVal value As LCARS.LCARScolorStyles)
+                _Color = value
+                If Me.Parent IsNot Nothing Then
                     CType(Me.Parent, x32TabControl).TabPagesChanged()
                 End If
             End Set
