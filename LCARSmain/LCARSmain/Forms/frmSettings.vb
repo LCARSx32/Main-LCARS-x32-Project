@@ -49,6 +49,12 @@ Public Class frmSettings
             MyBase.WndProc(m)
         End If
     End Sub
+
+    ''' <summary>
+    ''' Active instance of x32 is running
+    ''' </summary>
+    Dim isActive As Boolean = True
+
 #End Region
 
     Dim myColors(-1) As String
@@ -93,7 +99,9 @@ Public Class frmSettings
         If My.Application.IsSettingsMode Then
             tbTitle.Color = LCARS.LCARScolorStyles.FunctionOffline
             tbTitle.Text = "Settings: System Offline"
+            isActive = False
         Else
+            isActive = True
             x32Handle = myDesktop.Handle
         End If
 
@@ -391,27 +399,29 @@ Public Class frmSettings
     End Sub
 
     Private Sub SetWallpaper(ByVal bg As Image)
-        Dim myImageData As Byte()
+        If isActive Then
+            Dim myImageData As Byte()
 
-       
-        Using ms As New System.IO.MemoryStream()
-            bg.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp)
-            myImageData = ms.ToArray()
-        End Using
 
-        Dim myData As New COPYDATASTRUCT
-        myData.dwData = 1
-        myData.cdData = myImageData.Length
+            Using ms As New System.IO.MemoryStream()
+                bg.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp)
+                myImageData = ms.ToArray()
+            End Using
 
-        Dim myPtr As IntPtr = Marshal.AllocCoTaskMem(myImageData.Length)
-        Marshal.Copy(myImageData, 0, myPtr, myImageData.Length)
+            Dim myData As New COPYDATASTRUCT
+            myData.dwData = 1
+            myData.cdData = myImageData.Length
 
-        myData.lpData = myPtr
+            Dim myPtr As IntPtr = Marshal.AllocCoTaskMem(myImageData.Length)
+            Marshal.Copy(myImageData, 0, myPtr, myImageData.Length)
 
-        Dim MyCopyData As IntPtr = Marshal.AllocCoTaskMem(Marshal.SizeOf(GetType(COPYDATASTRUCT)))
-        Marshal.StructureToPtr(myData, MyCopyData, False)
+            myData.lpData = myPtr
 
-        Dim res As Integer = SendMessage(x32Handle, WM_COPYDATA, Me.Handle, MyCopyData)
+            Dim MyCopyData As IntPtr = Marshal.AllocCoTaskMem(Marshal.SizeOf(GetType(COPYDATASTRUCT)))
+            Marshal.StructureToPtr(myData, MyCopyData, False)
+
+            Dim res As Integer = SendMessage(x32Handle, WM_COPYDATA, Me.Handle, MyCopyData)
+        End If
     End Sub
 
     Private Sub sbDefault_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbDefault.Click
@@ -485,20 +495,22 @@ Public Class frmSettings
     End Sub
 
     Private Sub setMainscreenData(ByVal code As Integer, ByVal data As Object)
-        Dim myData As New COPYDATASTRUCT
-        myData.dwData = code
+        If isActive Then
+            Dim myData As New COPYDATASTRUCT
+            myData.dwData = code
 
-        If Not data Is Nothing Then
-            myData.cdData = Marshal.SizeOf(data.GetType)
-            Dim myPtr As IntPtr = Marshal.AllocCoTaskMem(myData.cdData)
-            Marshal.StructureToPtr(data, myPtr, False)
-            myData.lpData = myPtr
+            If Not data Is Nothing Then
+                myData.cdData = Marshal.SizeOf(data.GetType)
+                Dim myPtr As IntPtr = Marshal.AllocCoTaskMem(myData.cdData)
+                Marshal.StructureToPtr(data, myPtr, False)
+                myData.lpData = myPtr
+            End If
+
+            Dim MyCopyData As IntPtr = Marshal.AllocCoTaskMem(Marshal.SizeOf(GetType(COPYDATASTRUCT)))
+            Marshal.StructureToPtr(myData, MyCopyData, False)
+
+            Dim res As Integer = SendMessage(x32Handle, WM_COPYDATA, Me.Handle, MyCopyData)
         End If
-
-        Dim MyCopyData As IntPtr = Marshal.AllocCoTaskMem(Marshal.SizeOf(GetType(COPYDATASTRUCT)))
-        Marshal.StructureToPtr(myData, MyCopyData, False)
-
-        Dim res As Integer = SendMessage(x32Handle, WM_COPYDATA, Me.Handle, MyCopyData)
     End Sub
 
    
