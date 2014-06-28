@@ -214,11 +214,11 @@ public Class modBusiness
         End If
         'TODO: Save screenshots by screen index
         'Save screenshot and show the selection form
-        Dim screenImage As New Bitmap(My.Computer.Screen.Bounds.Width, My.Computer.Screen.Bounds.Height)
+        Dim screenImage As New Bitmap(myForm.Width, myForm.Height)
         Dim g As System.Drawing.Graphics = System.Drawing.Graphics.FromImage(screenImage)
-        g.CopyFromScreen(New Point(0, 0), New Point(0, 0), New Size(My.Computer.Screen.Bounds.Width, My.Computer.Screen.Bounds.Height))
+        g.CopyFromScreen(myForm.PointToScreen(New Point(0, 0)), New Point(0, 0), myForm.Size)
         Try
-            screenImage.Save(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\LCARS x32\Images\" & myForm.Name.ToLower() & ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg)
+            screenImage.Save(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\LCARS x32\Images\" & myForm.Name.ToLower() & "_" & ScreenIndex & ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg)
         Catch ex As Exception
             ' Save will throw an exception if the given path is not yet available for writing.
             ' Unfortunately, .Save takes its sweet time releasing the file, so if you try to
