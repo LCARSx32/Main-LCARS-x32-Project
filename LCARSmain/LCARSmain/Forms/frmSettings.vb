@@ -566,9 +566,13 @@ Public Class frmSettings
                 lstLanguages.Items.Add(System.IO.Path.GetFileNameWithoutExtension(myFile))
             Next
         ElseIf ltcSettings.SelectedTab.Text = "ABOUT" Then
-            Dim myreader As New System.IO.StreamReader(Application.StartupPath & "\About.txt")
-            lblAbout.Text = myreader.ReadToEnd()
-            myreader.Close()
+            Try
+                Dim myreader As New System.IO.StreamReader(Application.StartupPath & "\About.txt")
+                lblAbout.Text = myreader.ReadToEnd()
+                myreader.Close()
+            Catch ex As Exception
+                lblAbout.Text = "Unable to load about message"
+            End Try
         End If
     End Sub
 
