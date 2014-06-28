@@ -35,6 +35,21 @@ Public Class frmSettings
 
 #End Region
 
+#Region " Mode changing "
+    Protected Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
+        If m.Msg = InterMsgID And My.Application.IsSettingsMode Then
+            m.Result = 1
+            If m.LParam = 3 Then
+                'They are telling this (settings) instance to run as a shell
+                My.Application.SwitchToShellFromSettings()
+                tbTitle.Color = LCARS.LCARScolorStyles.MiscFunction
+                tbTitle.Text = "Settings"
+            End If
+        Else
+            MyBase.WndProc(m)
+        End If
+    End Sub
+#End Region
 
     Dim myColors(-1) As String
     Dim myFiles() As String
@@ -75,7 +90,12 @@ Public Class frmSettings
         'End If
 
         'SendMessage(x32Handle, InterMsgID, Me.Handle, 1)
-        x32Handle = myDesktop.Handle
+        If My.Application.IsSettingsMode Then
+            tbTitle.Color = LCARS.LCARScolorStyles.FunctionOffline
+            tbTitle.Text = "Settings: System Offline"
+        Else
+            x32Handle = myDesktop.Handle
+        End If
 
         Dim beeping As Boolean = Boolean.Parse(GetSetting("LCARS x32", "Application", "ButtonBeep", "False"))
         Dim shellPath As String = ""

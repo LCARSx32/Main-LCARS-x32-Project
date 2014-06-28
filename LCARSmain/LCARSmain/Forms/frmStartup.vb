@@ -43,6 +43,9 @@ Public Class frmStartup
                 'Send them the window handle for x32 so they can communicate directly, otherwise they have
                 'to broadcast the message to all windows.
                 PostMessage(targetWnd, InterMsgID, Me.Handle, 2)
+            ElseIf m.LParam = 2 Then
+                'They are telling this instance to load settings.
+                curBusiness(0).mySettingsButton_Click(Nothing, Nothing)
             End If
 
             'WM_COPYDATA is used when more than just a number needs to be sent to x32.
@@ -187,9 +190,6 @@ Public Class frmStartup
     End Sub
 
     Private Sub frmStartup_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        If Process.GetProcessesByName("LCARSmain").Length > 1 Then
-            End
-        End If
         CheckComponents()
         If Command().Contains("-u") Then
             Try
