@@ -190,10 +190,13 @@ public Class modBusiness
     End Sub
 
     Public Sub mySettingsButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Dim myProcess As New Process()
-        myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSsettings.exe"
-        myProcess.StartInfo.Arguments = "/" & myDesktop.Handle.ToString()
-        launchProcessOnScreen(myProcess)
+        Dim mySettings As New frmSettings()
+        MoveToScreen(Screen.FromHandle(myForm.Handle), mySettings.Handle)
+        mySettings.Show()
+        'Dim myProcess As New Process()
+        'myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSsettings.exe"
+        'myProcess.StartInfo.Arguments = "/" & myDesktop.Handle.ToString()
+        'launchProcessOnScreen(myProcess)
     End Sub
 
     Public Sub myEngineeringButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)

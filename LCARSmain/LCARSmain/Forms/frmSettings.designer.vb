@@ -751,7 +751,7 @@ Partial Class frmSettings
         '
         'PictureBox6
         '
-        Me.PictureBox6.Image = Global.LCARSsettings.My.Resources.Resources.federation_logo
+        Me.PictureBox6.Image = Global.LCARSmain.My.Resources.Resources.federationLogo
         Me.PictureBox6.Location = New System.Drawing.Point(21, 50)
         Me.PictureBox6.Name = "PictureBox6"
         Me.PictureBox6.Size = New System.Drawing.Size(126, 104)
@@ -1639,7 +1639,7 @@ Partial Class frmSettings
         '
         'picWallpaper
         '
-        Me.picWallpaper.Image = Global.LCARSsettings.My.Resources.Resources.federation_logo
+        Me.picWallpaper.Image = Global.LCARSmain.My.Resources.Resources.federationLogo
         Me.picWallpaper.Location = New System.Drawing.Point(121, 149)
         Me.picWallpaper.Name = "picWallpaper"
         Me.picWallpaper.Size = New System.Drawing.Size(126, 104)

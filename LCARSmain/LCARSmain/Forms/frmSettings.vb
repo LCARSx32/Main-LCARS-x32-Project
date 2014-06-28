@@ -35,6 +35,27 @@ Public Class frmSettings
 
 #End Region
 
+#Region " Mode changing "
+    Protected Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
+        If m.Msg = InterMsgID And My.Application.IsSettingsMode Then
+            m.Result = 1
+            If m.LParam = 3 Then
+                'They are telling this (settings) instance to run as a shell
+                My.Application.SwitchToShellFromSettings()
+                tbTitle.Color = LCARS.LCARScolorStyles.MiscFunction
+                tbTitle.Text = "Settings"
+            End If
+        Else
+            MyBase.WndProc(m)
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' Active instance of x32 is running
+    ''' </summary>
+    Dim isActive As Boolean = True
+
+#End Region
 
     Dim myColors(-1) As String
     Dim myFiles() As String
@@ -61,7 +82,7 @@ Public Class frmSettings
         Dim Name As String
         Dim Color As String
         Dim Sound As String
-        Function CompareTo(ByVal other As AlertEntry) As Integer Implements IComparable(Of LCARSsettings.frmSettings.AlertEntry).CompareTo
+        Function CompareTo(ByVal other As AlertEntry) As Integer Implements IComparable(Of AlertEntry).CompareTo
             Return Me.id.CompareTo(other.id)
         End Function
     End Structure
@@ -69,13 +90,20 @@ Public Class frmSettings
     Private Sub frmSettings_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         interop.Init()
         InterMsgID = RegisterWindowMessageA("LCARS_X32_MSG")
-        Dim myCommands() As String = System.Environment.CommandLine.Split("/")
-        If myCommands.GetUpperBound(0) > 0 Then
-            x32Handle = myCommands(1) 'GetSetting("LCARS x32", "Application", "MainWindowHandle", "0")
+        'Dim myCommands() As String = System.Environment.CommandLine.Split("/")
+        'If myCommands.GetUpperBound(0) > 0 Then
+        '    x32Handle = myCommands(1) 'GetSetting("LCARS x32", "Application", "MainWindowHandle", "0")
+        'End If
+
+        'SendMessage(x32Handle, InterMsgID, Me.Handle, 1)
+        If My.Application.IsSettingsMode Then
+            tbTitle.Color = LCARS.LCARScolorStyles.FunctionOffline
+            tbTitle.Text = "Settings: System Offline"
+            isActive = False
+        Else
+            isActive = True
+            x32Handle = myDesktop.Handle
         End If
-
-        SendMessage(x32Handle, InterMsgID, Me.Handle, 1)
-
 
         Dim beeping As Boolean = Boolean.Parse(GetSetting("LCARS x32", "Application", "ButtonBeep", "False"))
         Dim shellPath As String = ""
@@ -213,7 +241,7 @@ Public Class frmSettings
         'lblRedAlert.Text = "Red Alert Sound Path: " & GetSetting("LCARS X32", "Application", "RedAlertSound", Application.StartupPath & "\red_alert.wav")
 
         'Updates
-        lblVersion.Text = "Program Version: " & New ProgramVersions(Application.StartupPath & "\versions.txt").getGlobalVersion()
+        lblVersion.Text = "Program Version: " & New LCARSUpdate.ProgramVersions(Application.StartupPath & "\versions.txt").getGlobalVersion()
         cpxAutoUpdates.Lit = GetSetting("LCARS X32", "Application", "Updates", "FALSE")
         If cpxAutoUpdates.Lit Then
             cpxAutoUpdates.SideText = "ON"
@@ -356,13 +384,13 @@ Public Class frmSettings
         lstSizeMode.SelectedIndex = GetSetting("LCARS x32", "Application", "WallpaperSizeMode", 0)
         wallpaper = GetSetting("LCARS x32", "Application", "Wallpaper", "FederationLogo")
         If wallpaper = "FederationLogo" Then
-            picWallpaper.Image = My.Resources.federation_logo
+            picWallpaper.Image = My.Resources.federationLogo
         Else
             Try
                 picWallpaper.Image = Image.FromFile(wallpaper)
             Catch ex As Exception
                 LCARS.UI.MsgBox("Unable to find user-defined wallpaper. Reverting to default.", MsgBoxStyle.OkOnly, "Error:")
-                picWallpaper.Image = My.Resources.federation_logo
+                picWallpaper.Image = My.Resources.federationLogo
             End Try
         End If
 
@@ -371,31 +399,33 @@ Public Class frmSettings
     End Sub
 
     Private Sub SetWallpaper(ByVal bg As Image)
-        Dim myImageData As Byte()
+        If isActive Then
+            Dim myImageData As Byte()
 
-       
-        Using ms As New System.IO.MemoryStream()
-            bg.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp)
-            myImageData = ms.ToArray()
-        End Using
 
-        Dim myData As New COPYDATASTRUCT
-        myData.dwData = 1
-        myData.cdData = myImageData.Length
+            Using ms As New System.IO.MemoryStream()
+                bg.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp)
+                myImageData = ms.ToArray()
+            End Using
 
-        Dim myPtr As IntPtr = Marshal.AllocCoTaskMem(myImageData.Length)
-        Marshal.Copy(myImageData, 0, myPtr, myImageData.Length)
+            Dim myData As New COPYDATASTRUCT
+            myData.dwData = 1
+            myData.cdData = myImageData.Length
 
-        myData.lpData = myPtr
+            Dim myPtr As IntPtr = Marshal.AllocCoTaskMem(myImageData.Length)
+            Marshal.Copy(myImageData, 0, myPtr, myImageData.Length)
 
-        Dim MyCopyData As IntPtr = Marshal.AllocCoTaskMem(Marshal.SizeOf(GetType(COPYDATASTRUCT)))
-        Marshal.StructureToPtr(myData, MyCopyData, False)
+            myData.lpData = myPtr
 
-        Dim res As Integer = SendMessage(x32Handle, WM_COPYDATA, Me.Handle, MyCopyData)
+            Dim MyCopyData As IntPtr = Marshal.AllocCoTaskMem(Marshal.SizeOf(GetType(COPYDATASTRUCT)))
+            Marshal.StructureToPtr(myData, MyCopyData, False)
+
+            Dim res As Integer = SendMessage(x32Handle, WM_COPYDATA, Me.Handle, MyCopyData)
+        End If
     End Sub
 
     Private Sub sbDefault_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbDefault.Click
-        picWallpaper.Image = My.Resources.federation_logo
+        picWallpaper.Image = My.Resources.federationLogo
         SetWallpaper(picWallpaper.Image)
         Wallpaper(screenIndex) = "FederationLogo"
     End Sub
@@ -444,7 +474,7 @@ Public Class frmSettings
         Try
             Process.Start(Application.StartupPath & "\SetShell.exe", "/q /set:lcars")
         Catch ex As Exception
-            LCARS.UI.MsgBox("Could not launch SetShell.exe.  Please make sure it is in the same directory as LCARSsettings.exe." & vbNewLine & vbNewLine & ex.Message, MsgBoxStyle.OkCancel, "ERROR")
+            LCARS.UI.MsgBox("Could not launch SetShell.exe.  Please make sure it is in the same directory as LCARSmain.exe." & vbNewLine & vbNewLine & ex.Message, MsgBoxStyle.OkCancel, "ERROR")
         End Try
     End Sub
 
@@ -455,7 +485,7 @@ Public Class frmSettings
         Try
             Process.Start(Application.StartupPath & "\SetShell.exe", "/q /set:explorer")
         Catch ex As Exception
-            LCARS.UI.MsgBox("Could not launch SetShell.exe.  Please make sure it is in the same directory as LCARSsettings.exe." & vbNewLine & vbNewLine & ex.Message, MsgBoxStyle.OkCancel, "ERROR")
+            LCARS.UI.MsgBox("Could not launch SetShell.exe.  Please make sure it is in the same directory as LCARSmain.exe." & vbNewLine & vbNewLine & ex.Message, MsgBoxStyle.OkCancel, "ERROR")
         End Try
 
     End Sub
@@ -465,20 +495,22 @@ Public Class frmSettings
     End Sub
 
     Private Sub setMainscreenData(ByVal code As Integer, ByVal data As Object)
-        Dim myData As New COPYDATASTRUCT
-        myData.dwData = code
+        If isActive Then
+            Dim myData As New COPYDATASTRUCT
+            myData.dwData = code
 
-        If Not data Is Nothing Then
-            myData.cdData = Marshal.SizeOf(data.GetType)
-            Dim myPtr As IntPtr = Marshal.AllocCoTaskMem(myData.cdData)
-            Marshal.StructureToPtr(data, myPtr, False)
-            myData.lpData = myPtr
+            If Not data Is Nothing Then
+                myData.cdData = Marshal.SizeOf(data.GetType)
+                Dim myPtr As IntPtr = Marshal.AllocCoTaskMem(myData.cdData)
+                Marshal.StructureToPtr(data, myPtr, False)
+                myData.lpData = myPtr
+            End If
+
+            Dim MyCopyData As IntPtr = Marshal.AllocCoTaskMem(Marshal.SizeOf(GetType(COPYDATASTRUCT)))
+            Marshal.StructureToPtr(myData, MyCopyData, False)
+
+            Dim res As Integer = SendMessage(x32Handle, WM_COPYDATA, Me.Handle, MyCopyData)
         End If
-
-        Dim MyCopyData As IntPtr = Marshal.AllocCoTaskMem(Marshal.SizeOf(GetType(COPYDATASTRUCT)))
-        Marshal.StructureToPtr(myData, MyCopyData, False)
-
-        Dim res As Integer = SendMessage(x32Handle, WM_COPYDATA, Me.Handle, MyCopyData)
     End Sub
 
    
@@ -581,12 +613,12 @@ Public Class frmSettings
     End Sub
 
     Private Sub fbChangeSound_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbChangeSound.Click
-        Dim myFileSelect As New frmFileSelect(Application.StartupPath, ".wav,", "Select a sound file")
+        Dim myFileSelect As New LCARSexplorer.frmFileSelect(Application.StartupPath, ".wav,", "Select a sound file")
         myFileSelect.ShowDialog()
         If myFileSelect.Result = Windows.Forms.DialogResult.OK Then
-            If System.IO.File.Exists(myFileSelect.lblCurrentSelected.Text) Then
-                SaveSetting("LCARS X32", "Application", "ButtonSound", myFileSelect.lblCurrentSelected.Text)
-                txtSoundPath.Text = "Button sound path: " & myFileSelect.lblCurrentSelected.Text
+            If System.IO.File.Exists(myFileSelect.ReturnPath) Then
+                SaveSetting("LCARS X32", "Application", "ButtonSound", myFileSelect.ReturnPath)
+                txtSoundPath.Text = "Button sound path: " & myFileSelect.ReturnPath
             End If
         End If
     End Sub
@@ -903,7 +935,7 @@ Public Class frmSettings
     End Sub
 
     Private Sub fbBrowseSound_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbBrowseSound.Click
-        Dim myFileSelect As New frmFileSelect(Application.StartupPath, ".wav,", "Select a sound file")
+        Dim myFileSelect As New LCARSexplorer.frmFileSelect(Application.StartupPath, ".wav,", "Select a sound file")
         myFileSelect.ShowDialog()
         If myFileSelect.Result = Windows.Forms.DialogResult.OK Then
             If System.IO.File.Exists(myFileSelect.ReturnPath) Then
