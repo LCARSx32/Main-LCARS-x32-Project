@@ -30,7 +30,7 @@ Public Class ScreenChooserDialog
             AddHandler myScreen.Click, AddressOf myScreen_Click
             Try
                 'Get cached files (Will match screen aspect ratio)
-                myScreen.Image = System.Drawing.Image.FromFile(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\LCARS x32\Images\" & myScreenType.Name & ".jpg")
+                myScreen.Image = System.Drawing.Image.FromFile(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\LCARS x32\Images\" & myScreenType.Name & "_" & _screenIndex & ".jpg")
             Catch ex As Exception
                 'File didn't exist or was in use
                 Dim pInfo As Reflection.PropertyInfo = myScreenType.GetProperty("ScreenImage")

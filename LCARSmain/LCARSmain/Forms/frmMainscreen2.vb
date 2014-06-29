@@ -458,7 +458,7 @@ Public Class frmMainscreen2
 
     Public Shared ReadOnly Property ScreenImage() As Image
         Get
-            Return My.Resources.frmmainscreen1
+            Return My.Resources.frmmainscreen2
         End Get
     End Property
 End Class
