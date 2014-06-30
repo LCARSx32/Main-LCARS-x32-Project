@@ -108,9 +108,8 @@ Public Class frmSettings
         Dim beeping As Boolean = Boolean.Parse(GetSetting("LCARS x32", "Application", "ButtonBeep", "False"))
         Dim shellPath As String = ""
 
-        Me.Bounds = Screen.PrimaryScreen.WorkingArea
-
         screenIndex = Array.IndexOf(Screen.AllScreens, Screen.FromHandle(Me.Handle))
+        Me.Bounds = Screen.AllScreens(screenIndex).WorkingArea
 
         cbBeeping.Lit = beeping
         If cbBeeping.Lit Then
