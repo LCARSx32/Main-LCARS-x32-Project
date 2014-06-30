@@ -572,6 +572,64 @@ Public Class frmSettings
             Catch ex As Exception
                 lblAbout.Text = "Unable to load about message"
             End Try
+        ElseIf ltcSettings.SelectedTab Is tabScreenSpecific Then
+            'This code is here instead of in frmSettings_Load because it would need to be re-run
+            'whenever the form changes size anyway.
+
+            'Load screens
+            pnlScreens.Controls.Clear()
+            SyncLock Screen.AllScreens 'Prevents problems with a screen being removed while loading, hopefully
+                Dim screenBounds(Screen.AllScreens.Length - 1) As RectangleF
+                Dim screenLeft As Integer = 0
+                Dim screenTop As Integer = 0
+                Dim screenRight As Integer = 0
+                Dim screenBottom As Integer = 0
+                For i As Integer = 0 To screenBounds.Length - 1
+                    screenBounds(i) = Screen.AllScreens(i).Bounds
+                    If screenBounds(i).Left < screenLeft Then
+                        screenLeft = screenBounds(i).Left
+                    End If
+                    If screenBounds(i).Top < screenTop Then
+                        screenTop = screenBounds(i).Top
+                    End If
+                    If screenBounds(i).Right > screenRight Then
+                        screenRight = screenBounds(i).Right
+                    End If
+                    If screenBounds(i).Bottom > screenBottom Then
+                        screenBottom = screenBounds(i).Bottom
+                    End If
+                Next
+                Dim hScale As Double = pnlScreens.Width / (screenRight - screenLeft)
+                Dim vScale As Double = pnlScreens.Height / (screenBottom - screenTop)
+                Dim scaleFactor As Double
+                If hScale > vScale Then
+                    scaleFactor = vScale
+                Else
+                    scaleFactor = hScale
+                End If
+                For i As Integer = 0 To screenBounds.Length - 1
+                    screenBounds(i).Offset(-1 * screenLeft, -1 * screenTop)
+                    screenBounds(i).X = screenBounds(i).X * scaleFactor
+                    screenBounds(i).Y = screenBounds(i).Y * scaleFactor
+                    screenBounds(i).Height = screenBounds(i).Height * scaleFactor
+                    screenBounds(i).Width = screenBounds(i).Width * scaleFactor
+                Next
+                For i As Integer = 0 To screenBounds.Length - 1
+                    'TODO: Use windowless controls, with a better representation of a screen
+                    Dim myLabel As New Label()
+                    With myLabel
+                        .Text = i.ToString()
+                        .BorderStyle = BorderStyle.FixedSingle
+                        .Font = New Font("LCARS", 26, FontStyle.Regular, GraphicsUnit.Point)
+                        .TextAlign = ContentAlignment.MiddleCenter
+                        .BackColor = Color.Black
+                        .ForeColor = Color.Orange
+                        .Bounds = Rectangle.Round(screenBounds(i))
+                    End With
+                    AddHandler myLabel.Click, AddressOf myScreen_Click
+                    pnlScreens.Controls.Add(myLabel)
+                Next
+            End SyncLock
         End If
     End Sub
 
@@ -957,5 +1015,9 @@ Public Class frmSettings
         If Not Me.MaximizedBounds = adjustedBounds Then
             Me.MaximizedBounds = adjustedBounds
         End If
+    End Sub
+
+    Private Sub myScreen_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+        MsgBox("Not implemented yet" & vbNewLine & "Editing settings for screen: " & CType(sender, Label).Text)
     End Sub
 End Class
