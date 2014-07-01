@@ -212,7 +212,6 @@ public Class modBusiness
         If Not Directory.Exists(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\LCARS x32\Images") Then
             Directory.CreateDirectory(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\LCARS x32\Images")
         End If
-        'TODO: Save screenshots by screen index
         'Save screenshot and show the selection form
         Dim screenImage As New Bitmap(myForm.Width, myForm.Height)
         Dim g As System.Drawing.Graphics = System.Drawing.Graphics.FromImage(screenImage)
