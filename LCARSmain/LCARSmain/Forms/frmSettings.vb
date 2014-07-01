@@ -108,9 +108,8 @@ Public Class frmSettings
         Dim beeping As Boolean = Boolean.Parse(GetSetting("LCARS x32", "Application", "ButtonBeep", "False"))
         Dim shellPath As String = ""
 
-        Me.Bounds = Screen.PrimaryScreen.WorkingArea
-
         screenIndex = Array.IndexOf(Screen.AllScreens, Screen.FromHandle(Me.Handle))
+        Me.Bounds = Screen.AllScreens(screenIndex).WorkingArea
 
         cbBeeping.Lit = beeping
         If cbBeeping.Lit Then
@@ -283,6 +282,21 @@ Public Class frmSettings
         If cbDebug.Lit Then
             cbDebug.SideText = "ON"
         End If
+
+        'Load Colors
+        myFiles = System.IO.Directory.GetFiles(Application.StartupPath & "\colors", "*.lxcp")
+        lstColors.Items.Clear()
+        For Each myFile As String In myFiles
+            lstColors.Items.Add(System.IO.Path.GetFileNameWithoutExtension(myFile))
+        Next
+
+        'Load languages
+        myLanguageFiles = System.IO.Directory.GetFiles(Application.StartupPath & "\lang", "*.lng")
+        lstLanguages.Items.Clear()
+        For Each myFile As String In myLanguageFiles
+            lstLanguages.Items.Add(System.IO.Path.GetFileNameWithoutExtension(myFile))
+        Next
+
     End Sub
 
 
@@ -552,20 +566,7 @@ Public Class frmSettings
     End Sub
 
     Private Sub ltcSettings_SelectedTabChanged(ByVal Tab As LCARS.Controls.x32TabPage, ByVal TabIndex As System.Int32) Handles ltcSettings.SelectedTabChanged
-        If ltcSettings.SelectedTab.Text = "APPEARANCE" Then
-            myFiles = System.IO.Directory.GetFiles(Application.StartupPath & "\colors", "*.lxcp")
-
-            lstColors.Items.Clear()
-
-            For Each myFile As String In myFiles
-                lstColors.Items.Add(System.IO.Path.GetFileNameWithoutExtension(myFile))
-            Next
-            myLanguageFiles = System.IO.Directory.GetFiles(Application.StartupPath & "\lang", "*.lng")
-            lstLanguages.Items.Clear()
-            For Each myFile As String In myLanguageFiles
-                lstLanguages.Items.Add(System.IO.Path.GetFileNameWithoutExtension(myFile))
-            Next
-        ElseIf ltcSettings.SelectedTab.Text = "ABOUT" Then
+        If ltcSettings.SelectedTab.Text = "ABOUT" Then
             Try
                 Dim myreader As New System.IO.StreamReader(Application.StartupPath & "\About.txt")
                 lblAbout.Text = myreader.ReadToEnd()
@@ -573,6 +574,64 @@ Public Class frmSettings
             Catch ex As Exception
                 lblAbout.Text = "Unable to load about message"
             End Try
+        ElseIf ltcSettings.SelectedTab Is tabScreenSpecific Then
+            'This code is here instead of in frmSettings_Load because it would need to be re-run
+            'whenever the form changes size anyway.
+
+            'Load screens
+            pnlScreens.Controls.Clear()
+            SyncLock Screen.AllScreens 'Prevents problems with a screen being removed while loading, hopefully
+                Dim screenBounds(Screen.AllScreens.Length - 1) As RectangleF
+                Dim screenLeft As Integer = 0
+                Dim screenTop As Integer = 0
+                Dim screenRight As Integer = 0
+                Dim screenBottom As Integer = 0
+                For i As Integer = 0 To screenBounds.Length - 1
+                    screenBounds(i) = Screen.AllScreens(i).Bounds
+                    If screenBounds(i).Left < screenLeft Then
+                        screenLeft = screenBounds(i).Left
+                    End If
+                    If screenBounds(i).Top < screenTop Then
+                        screenTop = screenBounds(i).Top
+                    End If
+                    If screenBounds(i).Right > screenRight Then
+                        screenRight = screenBounds(i).Right
+                    End If
+                    If screenBounds(i).Bottom > screenBottom Then
+                        screenBottom = screenBounds(i).Bottom
+                    End If
+                Next
+                Dim hScale As Double = pnlScreens.Width / (screenRight - screenLeft)
+                Dim vScale As Double = pnlScreens.Height / (screenBottom - screenTop)
+                Dim scaleFactor As Double
+                If hScale > vScale Then
+                    scaleFactor = vScale
+                Else
+                    scaleFactor = hScale
+                End If
+                For i As Integer = 0 To screenBounds.Length - 1
+                    screenBounds(i).Offset(-1 * screenLeft, -1 * screenTop)
+                    screenBounds(i).X = screenBounds(i).X * scaleFactor
+                    screenBounds(i).Y = screenBounds(i).Y * scaleFactor
+                    screenBounds(i).Height = screenBounds(i).Height * scaleFactor
+                    screenBounds(i).Width = screenBounds(i).Width * scaleFactor
+                Next
+                For i As Integer = 0 To screenBounds.Length - 1
+                    'TODO: Use windowless controls, with a better representation of a screen
+                    Dim myLabel As New Label()
+                    With myLabel
+                        .Text = i.ToString()
+                        .BorderStyle = BorderStyle.FixedSingle
+                        .Font = New Font("LCARS", 26, FontStyle.Regular, GraphicsUnit.Point)
+                        .TextAlign = ContentAlignment.MiddleCenter
+                        .BackColor = Color.Black
+                        .ForeColor = Color.Orange
+                        .Bounds = Rectangle.Round(screenBounds(i))
+                    End With
+                    AddHandler myLabel.Click, AddressOf myScreen_Click
+                    pnlScreens.Controls.Add(myLabel)
+                Next
+            End SyncLock
         End If
     End Sub
 
@@ -958,5 +1017,77 @@ Public Class frmSettings
         If Not Me.MaximizedBounds = adjustedBounds Then
             Me.MaximizedBounds = adjustedBounds
         End If
+    End Sub
+
+    Private Sub myScreen_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+        pnlScreenSpecific.Visible = True
+        screenIndex = Integer.Parse(CType(sender, Label).Text)
+        'Main screen
+        Select Case MainScreen(screenIndex)
+            Case 1
+                picMain1_Click(Nothing, Nothing)
+            Case 2
+                picMain2_Click(Nothing, Nothing)
+            Case 3
+                picMain3_Click(Nothing, Nothing)
+            Case 4
+                picMain4_Click(Nothing, Nothing)
+        End Select
+        'Autohide
+        cbAutoHide.Lit = AutoHide(screenIndex)
+        cbAutoHide.SideText = If(AutoHide(screenIndex), "ON", "OFF")
+        'Wallpaper
+        If Wallpaper(screenIndex) = "FederationLogo" Then
+            picWallpaper.Image = My.Resources.federationLogo
+        Else
+            Try
+                picWallpaper.Image = Image.FromFile(Wallpaper(screenIndex))
+            Catch ex As Exception
+                LCARS.UI.MsgBox("Unable to find user-defined wallpaper. Reverting to default.", MsgBoxStyle.OkOnly, "Error:")
+                picWallpaper.Image = My.Resources.federationLogo
+            End Try
+        End If
+
+        'Wallpaper size mode
+        lstSizeMode.SelectedIndex = WallpaperSizeMode(screenIndex)
+        'Language file
+        Dim language As String = LanguageFileName(screenIndex).ToLower()
+        For i As Integer = 0 To myLanguageFiles.Length - 1
+            If language = System.IO.Path.GetFileName(myLanguageFiles(i)).ToLower() Then
+                lstLanguages.SelectedIndex = i
+                Exit For
+            End If
+        Next
+    End Sub
+
+    Private Sub fbBack_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbBack.Click
+        pnlScreenSpecific.Visible = False
+    End Sub
+
+    Private Sub fbWallpaper_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbWallpaper.Click
+        pnlWallpaper.Visible = True
+        pnlMainScreen.Visible = False
+        pnlLanguage.Visible = False
+        fbWallpaper.RedAlert = LCARS.LCARSalert.White
+        fbMainScreen.RedAlert = LCARS.LCARSalert.Normal
+        fbLanguage.RedAlert = LCARS.LCARSalert.Normal
+    End Sub
+
+    Private Sub fbMainScreen_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbMainScreen.Click
+        pnlWallpaper.Visible = False
+        pnlMainScreen.Visible = True
+        pnlLanguage.Visible = False
+        fbWallpaper.RedAlert = LCARS.LCARSalert.Normal
+        fbMainScreen.RedAlert = LCARS.LCARSalert.White
+        fbLanguage.RedAlert = LCARS.LCARSalert.Normal
+    End Sub
+
+    Private Sub fbLanguage_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbLanguage.Click
+        pnlWallpaper.Visible = False
+        pnlMainScreen.Visible = False
+        pnlLanguage.Visible = True
+        fbWallpaper.RedAlert = LCARS.LCARSalert.Normal
+        fbMainScreen.RedAlert = LCARS.LCARSalert.Normal
+        fbLanguage.RedAlert = LCARS.LCARSalert.White
     End Sub
 End Class
