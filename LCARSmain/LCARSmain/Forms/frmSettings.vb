@@ -86,9 +86,6 @@ Public Class frmSettings
         Dim beeping As Boolean = Boolean.Parse(GetSetting("LCARS x32", "Application", "ButtonBeep", "False"))
         Dim shellPath As String = ""
 
-        screenIndex = Array.IndexOf(Screen.AllScreens, Screen.FromHandle(Me.Handle))
-        Me.Bounds = Screen.AllScreens(screenIndex).WorkingArea
-
         cbBeeping.Lit = beeping
         If cbBeeping.Lit Then
             cbBeeping.SideText = "ON"
@@ -906,6 +903,7 @@ Public Class frmSettings
     Private Sub frmSettings_LocationChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.LocationChanged, Me.SizeChanged
         Dim adjustedBounds As Rectangle = Screen.FromHandle(Me.Handle).WorkingArea
         adjustedBounds.Location -= Screen.FromHandle(Me.Handle).Bounds.Location
+        Me.WindowState = FormWindowState.Maximized
         If Not Me.MaximizedBounds = adjustedBounds Then
             Me.MaximizedBounds = adjustedBounds
         End If
