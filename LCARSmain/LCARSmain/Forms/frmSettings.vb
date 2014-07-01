@@ -283,14 +283,14 @@ Public Class frmSettings
             cbDebug.SideText = "ON"
         End If
 
-        'Load languages
+        'Load Colors
         myFiles = System.IO.Directory.GetFiles(Application.StartupPath & "\colors", "*.lxcp")
-
         lstColors.Items.Clear()
-
         For Each myFile As String In myFiles
             lstColors.Items.Add(System.IO.Path.GetFileNameWithoutExtension(myFile))
         Next
+
+        'Load languages
         myLanguageFiles = System.IO.Directory.GetFiles(Application.StartupPath & "\lang", "*.lng")
         lstLanguages.Items.Clear()
         For Each myFile As String In myLanguageFiles
@@ -1020,10 +1020,44 @@ Public Class frmSettings
     End Sub
 
     Private Sub myScreen_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        'MsgBox("Not implemented yet" & vbNewLine & "Editing settings for screen: " & CType(sender, Label).Text)
         pnlScreenSpecific.Visible = True
         screenIndex = Integer.Parse(CType(sender, Label).Text)
+        'Main screen
+        Select Case MainScreen(screenIndex)
+            Case 1
+                picMain1_Click(Nothing, Nothing)
+            Case 2
+                picMain2_Click(Nothing, Nothing)
+            Case 3
+                picMain3_Click(Nothing, Nothing)
+            Case 4
+                picMain4_Click(Nothing, Nothing)
+        End Select
+        'Autohide
+        cbAutoHide.Lit = AutoHide(screenIndex)
+        cbAutoHide.SideText = If(AutoHide(screenIndex), "ON", "OFF")
+        'Wallpaper
+        If Wallpaper(screenIndex) = "FederationLogo" Then
+            picWallpaper.Image = My.Resources.federationLogo
+        Else
+            Try
+                picWallpaper.Image = Image.FromFile(Wallpaper(screenIndex))
+            Catch ex As Exception
+                LCARS.UI.MsgBox("Unable to find user-defined wallpaper. Reverting to default.", MsgBoxStyle.OkOnly, "Error:")
+                picWallpaper.Image = My.Resources.federationLogo
+            End Try
+        End If
 
+        'Wallpaper size mode
+        lstSizeMode.SelectedIndex = WallpaperSizeMode(screenIndex)
+        'Language file
+        Dim language As String = LanguageFileName(screenIndex).ToLower()
+        For i As Integer = 0 To myLanguageFiles.Length - 1
+            If language = System.IO.Path.GetFileName(myLanguageFiles(i)).ToLower() Then
+                lstLanguages.SelectedIndex = i
+                Exit For
+            End If
+        Next
     End Sub
 
     Private Sub fbBack_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbBack.Click
