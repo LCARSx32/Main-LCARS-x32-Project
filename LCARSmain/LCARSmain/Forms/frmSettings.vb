@@ -282,6 +282,21 @@ Public Class frmSettings
         If cbDebug.Lit Then
             cbDebug.SideText = "ON"
         End If
+
+        'Load languages
+        myFiles = System.IO.Directory.GetFiles(Application.StartupPath & "\colors", "*.lxcp")
+
+        lstColors.Items.Clear()
+
+        For Each myFile As String In myFiles
+            lstColors.Items.Add(System.IO.Path.GetFileNameWithoutExtension(myFile))
+        Next
+        myLanguageFiles = System.IO.Directory.GetFiles(Application.StartupPath & "\lang", "*.lng")
+        lstLanguages.Items.Clear()
+        For Each myFile As String In myLanguageFiles
+            lstLanguages.Items.Add(System.IO.Path.GetFileNameWithoutExtension(myFile))
+        Next
+
     End Sub
 
 
@@ -551,20 +566,7 @@ Public Class frmSettings
     End Sub
 
     Private Sub ltcSettings_SelectedTabChanged(ByVal Tab As LCARS.Controls.x32TabPage, ByVal TabIndex As System.Int32) Handles ltcSettings.SelectedTabChanged
-        If ltcSettings.SelectedTab.Text = "APPEARANCE" Then
-            myFiles = System.IO.Directory.GetFiles(Application.StartupPath & "\colors", "*.lxcp")
-
-            lstColors.Items.Clear()
-
-            For Each myFile As String In myFiles
-                lstColors.Items.Add(System.IO.Path.GetFileNameWithoutExtension(myFile))
-            Next
-            myLanguageFiles = System.IO.Directory.GetFiles(Application.StartupPath & "\lang", "*.lng")
-            lstLanguages.Items.Clear()
-            For Each myFile As String In myLanguageFiles
-                lstLanguages.Items.Add(System.IO.Path.GetFileNameWithoutExtension(myFile))
-            Next
-        ElseIf ltcSettings.SelectedTab.Text = "ABOUT" Then
+        If ltcSettings.SelectedTab.Text = "ABOUT" Then
             Try
                 Dim myreader As New System.IO.StreamReader(Application.StartupPath & "\About.txt")
                 lblAbout.Text = myreader.ReadToEnd()
@@ -1018,6 +1020,40 @@ Public Class frmSettings
     End Sub
 
     Private Sub myScreen_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        MsgBox("Not implemented yet" & vbNewLine & "Editing settings for screen: " & CType(sender, Label).Text)
+        'MsgBox("Not implemented yet" & vbNewLine & "Editing settings for screen: " & CType(sender, Label).Text)
+        pnlScreenSpecific.Visible = True
+        screenIndex = Integer.Parse(CType(sender, Label).Text)
+
+    End Sub
+
+    Private Sub fbBack_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbBack.Click
+        pnlScreenSpecific.Visible = False
+    End Sub
+
+    Private Sub fbWallpaper_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbWallpaper.Click
+        pnlWallpaper.Visible = True
+        pnlMainScreen.Visible = False
+        pnlLanguage.Visible = False
+        fbWallpaper.RedAlert = LCARS.LCARSalert.White
+        fbMainScreen.RedAlert = LCARS.LCARSalert.Normal
+        fbLanguage.RedAlert = LCARS.LCARSalert.Normal
+    End Sub
+
+    Private Sub fbMainScreen_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbMainScreen.Click
+        pnlWallpaper.Visible = False
+        pnlMainScreen.Visible = True
+        pnlLanguage.Visible = False
+        fbWallpaper.RedAlert = LCARS.LCARSalert.Normal
+        fbMainScreen.RedAlert = LCARS.LCARSalert.White
+        fbLanguage.RedAlert = LCARS.LCARSalert.Normal
+    End Sub
+
+    Private Sub fbLanguage_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbLanguage.Click
+        pnlWallpaper.Visible = False
+        pnlMainScreen.Visible = False
+        pnlLanguage.Visible = True
+        fbWallpaper.RedAlert = LCARS.LCARSalert.Normal
+        fbMainScreen.RedAlert = LCARS.LCARSalert.Normal
+        fbLanguage.RedAlert = LCARS.LCARSalert.White
     End Sub
 End Class
