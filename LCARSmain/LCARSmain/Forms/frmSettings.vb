@@ -5,20 +5,6 @@ Imports LCARS.x32.modSettings
 Public Class frmSettings
 
 #Region " Window Resizing "
-    Declare Function RegisterWindowMessageA Lib "user32.dll" (ByVal lpString As String) As Integer
-    Public Declare Auto Function SendMessage Lib "user32.dll" (ByVal hWnd As IntPtr, ByVal msg As Integer, ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
-    Private Declare Function PostMessage Lib "user32.dll" Alias "PostMessageA" (ByVal hwnd As Integer, ByVal wMsg As Integer, ByVal wParam As Integer, ByVal lParam As Integer) As Integer
-
-    Public InterMsgID As Integer
-    Const WM_COPYDATA As Integer = &H4A
-    Dim x32Handle As IntPtr = IntPtr.Zero
-    Public Const HWND_BROADCAST As Integer = &HFFFF
-
-    Structure COPYDATASTRUCT
-        Public dwData As IntPtr
-        Public cdData As Integer
-        Public lpData As IntPtr
-    End Structure
     Dim WithEvents interop As New LCARS.x32Interop
 
     Private Sub interop_BeepingChanged(ByVal Beeping As Boolean) Handles interop.BeepingChanged
@@ -89,20 +75,12 @@ Public Class frmSettings
 
     Private Sub frmSettings_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         interop.Init()
-        InterMsgID = RegisterWindowMessageA("LCARS_X32_MSG")
-        'Dim myCommands() As String = System.Environment.CommandLine.Split("/")
-        'If myCommands.GetUpperBound(0) > 0 Then
-        '    x32Handle = myCommands(1) 'GetSetting("LCARS x32", "Application", "MainWindowHandle", "0")
-        'End If
-
-        'SendMessage(x32Handle, InterMsgID, Me.Handle, 1)
         If My.Application.IsSettingsMode Then
             tbTitle.Color = LCARS.LCARScolorStyles.FunctionOffline
             tbTitle.Text = "Settings: System Offline"
             isActive = False
         Else
             isActive = True
-            x32Handle = myDesktop.Handle
         End If
 
         Dim beeping As Boolean = Boolean.Parse(GetSetting("LCARS x32", "Application", "ButtonBeep", "False"))
@@ -237,7 +215,6 @@ Public Class frmSettings
         End If
         'Sounds
         txtSoundPath.Text = "Button Sound Path: " & GetSetting("LCARS X32", "Application", "ButtonSound", Application.StartupPath & "\207.wav")
-        'lblRedAlert.Text = "Red Alert Sound Path: " & GetSetting("LCARS X32", "Application", "RedAlertSound", Application.StartupPath & "\red_alert.wav")
 
         'Updates
         lblVersion.Text = "Program Version: " & New LCARSUpdate.ProgramVersions(Application.StartupPath & "\versions.txt").getGlobalVersion()
