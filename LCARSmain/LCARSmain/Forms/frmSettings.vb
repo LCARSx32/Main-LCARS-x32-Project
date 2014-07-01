@@ -343,14 +343,10 @@ Public Class frmSettings
         Next
     End Sub
 
-    Private Sub UpdateMainscreenColors(ByVal Colors() As String)
-        setMainscreenData(2, Nothing)
-    End Sub
-
     Private Sub sbUseScheme_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbUseScheme.Click
         If myColors.GetUpperBound(0) > -1 Then
             SaveSetting("LCARS x32", "Colors", "ColorMap", Join(myColors, ","))
-            UpdateMainscreenColors(myColors)
+            RefreshColors()
         End If
     End Sub
 
@@ -385,62 +381,16 @@ Public Class frmSettings
         SaveSetting("LCARS x32", "Application", "ButtonBeep", cbBeeping.Lit)
 
 
-        SetMainscreenBeeping(cbBeeping.Lit)
+        SetBeeping(cbBeeping.Lit)
     End Sub
 
     Private Sub sbExitMyComp_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbExitMyComp.Click
         Me.Close()
     End Sub
 
-    Private Sub hpbDesktop_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        Dim wallpaper As String
-
-        lstSizeMode.SelectedIndex = GetSetting("LCARS x32", "Application", "WallpaperSizeMode", 0)
-        wallpaper = GetSetting("LCARS x32", "Application", "Wallpaper", "FederationLogo")
-        If wallpaper = "FederationLogo" Then
-            picWallpaper.Image = My.Resources.federationLogo
-        Else
-            Try
-                picWallpaper.Image = Image.FromFile(wallpaper)
-            Catch ex As Exception
-                LCARS.UI.MsgBox("Unable to find user-defined wallpaper. Reverting to default.", MsgBoxStyle.OkOnly, "Error:")
-                picWallpaper.Image = My.Resources.federationLogo
-            End Try
-        End If
-
-        SetWallpaper(picWallpaper.Image)
-
-    End Sub
-
-    Private Sub SetWallpaper(ByVal bg As Image)
-        If isActive Then
-            Dim myImageData As Byte()
-
-
-            Using ms As New System.IO.MemoryStream()
-                bg.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp)
-                myImageData = ms.ToArray()
-            End Using
-
-            Dim myData As New COPYDATASTRUCT
-            myData.dwData = 1
-            myData.cdData = myImageData.Length
-
-            Dim myPtr As IntPtr = Marshal.AllocCoTaskMem(myImageData.Length)
-            Marshal.Copy(myImageData, 0, myPtr, myImageData.Length)
-
-            myData.lpData = myPtr
-
-            Dim MyCopyData As IntPtr = Marshal.AllocCoTaskMem(Marshal.SizeOf(GetType(COPYDATASTRUCT)))
-            Marshal.StructureToPtr(myData, MyCopyData, False)
-
-            Dim res As Integer = SendMessage(x32Handle, WM_COPYDATA, Me.Handle, MyCopyData)
-        End If
-    End Sub
-
     Private Sub sbDefault_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbDefault.Click
         picWallpaper.Image = My.Resources.federationLogo
-        SetWallpaper(picWallpaper.Image)
+        SetWallpaper(picWallpaper.Image, screenIndex)
         Wallpaper(screenIndex) = "FederationLogo"
     End Sub
 
@@ -452,7 +402,7 @@ Public Class frmSettings
         result = myFile.ShowDialog
         If result = Windows.Forms.DialogResult.OK Then
             picWallpaper.Image = Image.FromFile(myFile.FileName)
-            SetWallpaper(picWallpaper.Image)
+            SetWallpaper(picWallpaper.Image, screenIndex)
             Wallpaper(screenIndex) = myFile.FileName
         End If
     End Sub
@@ -462,23 +412,18 @@ Public Class frmSettings
     Private Sub lstSizeMode_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lstSizeMode.SelectedIndexChanged
         Select Case lstSizeMode.SelectedIndex
             Case 0
-                SetWallpaperSizeMode(ImageLayout.Zoom)
+                setWallpaperSizeMode(ImageLayout.Zoom, screenIndex)
             Case 1
-                SetWallpaperSizeMode(ImageLayout.Stretch)
+                setWallpaperSizeMode(ImageLayout.Stretch, screenIndex)
             Case 2
-                SetWallpaperSizeMode(ImageLayout.Center)
+                setWallpaperSizeMode(ImageLayout.Center, screenIndex)
             Case 3
-                SetWallpaperSizeMode(ImageLayout.Tile)
+                setWallpaperSizeMode(ImageLayout.Tile, screenIndex)
             Case Else
                 Exit Sub
         End Select
 
         WallpaperSizeMode(screenIndex) = lstSizeMode.SelectedIndex
-    End Sub
-
-    Private Sub SetWallpaperSizeMode(ByVal sizemode As ImageLayout)
-        setMainscreenData(4, Int(sizemode))
-
     End Sub
 
     Private Sub hpbLCARS_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles hpbLCARS.Click
@@ -504,31 +449,6 @@ Public Class frmSettings
 
     End Sub
 
-    Private Sub SetMainscreenBeeping(ByVal enabled As Boolean)
-        setMainscreenData(3, enabled)
-    End Sub
-
-    Private Sub setMainscreenData(ByVal code As Integer, ByVal data As Object)
-        If isActive Then
-            Dim myData As New COPYDATASTRUCT
-            myData.dwData = code
-
-            If Not data Is Nothing Then
-                myData.cdData = Marshal.SizeOf(data.GetType)
-                Dim myPtr As IntPtr = Marshal.AllocCoTaskMem(myData.cdData)
-                Marshal.StructureToPtr(data, myPtr, False)
-                myData.lpData = myPtr
-            End If
-
-            Dim MyCopyData As IntPtr = Marshal.AllocCoTaskMem(Marshal.SizeOf(GetType(COPYDATASTRUCT)))
-            Marshal.StructureToPtr(myData, MyCopyData, False)
-
-            Dim res As Integer = SendMessage(x32Handle, WM_COPYDATA, Me.Handle, MyCopyData)
-        End If
-    End Sub
-
-   
-
     Private Sub cbVoice_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbVoice.Click
         cbVoice.Lit = Not cbVoice.Lit
 
@@ -536,11 +456,10 @@ Public Class frmSettings
 
         If cbVoice.Lit Then
             cbVoice.SideText = "ON"
-            setMainscreenData(8, 1)
         Else
             cbVoice.SideText = "OFF"
-            setMainscreenData(8, 0)
         End If
+        RefreshVoiceCommands(cbVoice.Lit)
     End Sub
 
     Private Sub picMain4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles picMain4.Click
@@ -554,11 +473,11 @@ Public Class frmSettings
 
         If cbAutoHide.Lit Then
             cbAutoHide.SideText = "ON"
-            setMainscreenData(9, 1)
+            SetAutoHide(IAutohide.AutoHideModes.Hidden, screenIndex)
 
         Else
             cbAutoHide.SideText = "OFF"
-            setMainscreenData(9, 0)
+            SetAutoHide(IAutohide.AutoHideModes.Disabled, screenIndex)
         End If
 
         AutoHide(screenIndex) = cbAutoHide.Lit
@@ -671,7 +590,7 @@ Public Class frmSettings
     Private Sub sbUseLanguage_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbUseLanguage.Click
         If lstLanguages.SelectedIndex > -1 Then
             LanguageFileName(screenIndex) = lstLanguages.SelectedItem & ".lng"
-            setMainscreenData(10, Nothing)
+            curBusiness(screenIndex).loadLanguage()
         End If
     End Sub
 
@@ -708,11 +627,7 @@ Public Class frmSettings
         For Each mycommand As CustomEntry In customList
             SaveSetting("LCARS X32", "CustomVoiceCommands", mycommand.CommandName, mycommand.Command)
         Next
-        If cbVoice.Lit Then
-            setMainscreenData(8, 1)
-        Else
-            setMainscreenData(8, 0)
-        End If
+        RefreshVoiceCommands(cbVoice.Lit)
     End Sub
 
     Private Sub sbInternal_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbInternal.Click

@@ -349,14 +349,48 @@ Public Enum SetWindowPosFlags As UInteger
         myDesktop.curDesktop(ScreenIndex).BackgroundImageLayout = sizemode
     End Sub
 
-
-
-    Public Sub SetAutoHide(ByVal hide As Integer, ByVal ScreenIndex As Integer)
+    Public Sub SetAutoHide(ByVal hide As IAutohide.AutoHideModes, ByVal ScreenIndex As Integer)
         CType(curBusiness(ScreenIndex).myForm, IAutohide).SetAutoHide(hide)
     End Sub
 
     Public Sub SetDesktop(ByVal desktop As Form)
         myDesktop = desktop
+    End Sub
+
+    Public Sub RefreshColors()
+        For Each myBusiness As modBusiness In curBusiness
+            LCARS.UpdateColors(myBusiness.myForm)
+        Next
+        For Each mywindow As IntPtr In LinkedWindows
+            SendMessage(mywindow, InterMsgID, 0, 2)
+        Next
+    End Sub
+
+    Public Sub SetBeeping(ByVal value As Boolean)
+        For Each myBusiness As modBusiness In curBusiness
+            LCARS.SetBeeping(myBusiness.myForm, value)
+        Next
+        For Each mywindow As IntPtr In LinkedWindows
+            SendMessage(mywindow, InterMsgID, 0, 3)
+        Next
+    End Sub
+
+    Public Sub RefreshVoiceCommands(ByVal active As Boolean)
+        If active = False Then
+            'turn off voice commands
+            Try
+                Listener.Recognizer.State = SpeechLib.SpeechRecognizerState.SRSInactive
+            Catch ex As Exception
+            End Try
+        Else
+            Try
+                beginVoiceRecognition()
+            Catch ex As Exception
+            End Try
+        End If
+        For Each myBusiness As modBusiness In curBusiness
+            myBusiness.mySpeech.Lit = active
+        Next
     End Sub
 
     Public Sub GeneralAlert(ByVal type As Integer)
