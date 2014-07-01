@@ -60,39 +60,15 @@ Public Class frmStartup
                 Case 1
                     'They want to set the wallpaper
 
-                    'We received it!
-                    m.Result = 1
-
-                    'Set wallpaper
-                    Dim myimage As Image
-                    Dim myImageData(myData.cdData) As Byte
-
-                    'Copy the image byte by byte 
-                    For intloop As Integer = 0 To myData.cdData
-                        myImageData(intloop) = Marshal.ReadByte(myData.lpData, intloop)
-                    Next
-
-                    'Use a MemoryStream to write the bytes to an image object
-                    Dim ms As System.IO.MemoryStream = New System.IO.MemoryStream(myImageData, 0, myImageData.Length)
-                    myimage = Image.FromStream(ms)
-
-                    'Set the wallpaper to that image.  They (the other program) are responsible for saving the 
-                    'path of the image in x32's settings (registry)
-                    'TODO: Set by screen index
-                    SetWallpaper(myimage, 0)
+                    'Deprecated message; can't handle multiple screens
+                    m.Result = 0
                 Case 2
                     'Reload x32's colors (presumably, after they have changed them in the registry)
 
                     'Yeah, yeah, we got the message
                     m.Result = 1
 
-                    'Reload the colors of the current mainscreen
-                    For Each myBusiness As modBusiness In curBusiness
-                        LCARS.UpdateColors(myBusiness.myForm)
-                    Next
-                    For Each mywindow As IntPtr In LinkedWindows
-                        SendMessage(mywindow, InterMsgID, 0, 2)
-                    Next
+                    RefreshColors()
                 Case 3
                     'Set whether buttons should beep or not.
 
@@ -101,16 +77,12 @@ Public Class frmStartup
 
                     'Set the button beeping of the current mainscreen
                     Dim myValue As Boolean = Marshal.PtrToStructure(myData.lpData, GetType(Boolean))
-                    LCARS.SetBeeping(myForm, myValue)
-                    For Each mywindow As IntPtr In LinkedWindows
-                        SendMessage(mywindow, InterMsgID, 0, 3)
-                    Next
+                    SetBeeping(myValue)
                 Case 4
-                    m.Result = 1
                     'Set the wallpaper sizemode of the desktop
-                    Dim mySizeMode As ImageLayout = Marshal.PtrToStructure(myData.lpData, GetType(Integer))
-                    'TODO: Set by screen index
-                    setWallpaperSizeMode(mySizeMode, 0)
+
+                    'Deprecated message; can't handle multiple screens.
+                    m.Result = 0
                 Case 5
                     'They want to close LCARS x32.
 
@@ -137,41 +109,17 @@ Public Class frmStartup
 
                     'Turn on/off Voice commands.
                     Dim result As Integer = Marshal.PtrToStructure(myData.lpData, GetType(Integer))
-                    If result = 0 Then
-                        'turn off voice commands
-                        Try
-                            Listener.Recognizer.State = SpeechLib.SpeechRecognizerState.SRSInactive
-                        Catch ex As Exception
-                        End Try
-                    Else
-                        Try
-                            beginVoiceRecognition()
-                        Catch ex As Exception
-                        End Try
-                    End If
-                    For Each myBusiness As modBusiness In curBusiness
-                        If result = 0 Then
-                            myBusiness.mySpeech.Lit = False
-                        Else
-                            myBusiness.mySpeech.Lit = True
-                        End If
-                    Next
+                    RefreshVoiceCommands(result)
                 Case 9
-                    m.Result = 1
-
                     'Turn on/off AutoHide
-                    Dim result As Integer = Marshal.PtrToStructure(myData.lpData, GetType(Integer))
-                    'TODO: Set by screen index
-                    If result = 0 Then
-                        SetAutoHide(0, 0)
-                    Else
-                        SetAutoHide(1, 0)
-                    End If
+
+                    'Deprecated message; can't handle multiple screens
+                    m.Result = 0
                 Case 10
-                    m.Result = 1
                     'set language of mainscreens
-                    'TODO: Set by screen
-                    curBusiness(0).loadLanguage()
+
+                    'Deprecated message; can't handle multiple screens
+                    m.Result = 0
                 Case 11
                     m.Result = 1
 
