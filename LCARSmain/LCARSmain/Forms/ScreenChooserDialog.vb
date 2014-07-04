@@ -11,6 +11,7 @@ Public Class ScreenChooserDialog
     Private Sub btnOK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOK.Click
         If Not screenType Is Nothing Then
             curBusiness(_screenIndex).mainTimer.Enabled = False
+            curBusiness(_screenIndex).tmrAutohide.enabled = False
             curBusiness(_screenIndex).myForm.Dispose()
             Dim myForm As Form = CType(Activator.CreateInstance(screenType, _screenIndex), Form)
             myForm.Show()

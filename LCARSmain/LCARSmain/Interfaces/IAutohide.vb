@@ -5,6 +5,14 @@
         Hidden = 2
     End Enum
 
-    Sub SetAutoHide(ByVal value As AutoHideModes)
+    <Flags()> _
+    Enum AutohideEdges
+        Top = 1
+        Left = 2
+        Bottom = 4
+        Right = 8
+    End Enum
+
+    Function getAutohideEdges() As AutohideEdges
 
 End Interface
