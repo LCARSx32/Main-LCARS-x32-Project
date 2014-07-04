@@ -76,6 +76,7 @@ public Class modBusiness
     Public MyPrograms As Collection = New Collection
     Public myUserButtonCollection As New List(Of UserButtonInfo)
     Public mainTimer As New Timer
+    Public WithEvents tmrAutohide As New Timer()
     Public ScreenIndex As Integer
 
 
@@ -110,6 +111,9 @@ public Class modBusiness
     Dim OSKproc As New Process
     Dim isVisible As Boolean = False
 
+    'Autohide
+    Dim autohide As IAutohide.AutoHideModes
+    Dim hideCount As Integer = 0
 #End Region
 
 #End Region
@@ -521,8 +525,9 @@ public Class modBusiness
 
 
         'load Mainscreen Settings:
+        tmrAutohide.Interval = 100
         Dim AutoHideMode As Integer = modSettings.AutoHide(ScreenIndex)
-        SetAutoHide(AutoHideMode, ScreenIndex)
+        SetAutoHide(AutoHideMode)
         If modSettings.ShowTrayIcons(ScreenIndex) = True Then
             myShowTrayButton_Click(New Object, New EventArgs)
         End If
@@ -805,7 +810,9 @@ public Class modBusiness
         ReDim WindowList(-1)
 
         adjustedBounds = New Rectangle(myMainBar.PointToScreen(myMainPanel.Location).X, myMainBar.PointToScreen(myMainPanel.Location).Y, myMainPanel.Width, myMainPanel.Height)
-
+        If autohide = IAutohide.AutoHideModes.Hidden Then
+            adjustedBounds = Screen.FromHandle(myForm.Handle).Bounds
+        End If
         If Not adjustedBounds = Screen.AllScreens(ScreenIndex).WorkingArea Then
             'The working area has changed, alert the linked windows (if there are any).
             If LinkedWindows.Count > 0 Then
@@ -1512,6 +1519,77 @@ Retry:
             e.Cancel = True
             myDeactivate.doClick(sender, e)
         End If
+    End Sub
+
+    Private Function FindRoot(ByVal hWnd As Int32) As Int32
+        Do
+            Dim parent_hwnd As Int32 = GetParent(hWnd)
+            If parent_hwnd = 0 Then Return hWnd
+            hWnd = parent_hwnd
+        Loop
+    End Function
+
+    Public Sub SetAutoHide(ByVal value As IAutohide.AutoHideModes)
+
+        autohide = value
+        If autohide = IAutohide.AutoHideModes.Disabled Then
+            tmrAutohide.Enabled = False
+            hideCount = 0
+            myForm.Visible = True
+        Else
+            autohide = IAutohide.AutoHideModes.Visible
+            tmrAutohide.Enabled = True
+        End If
+    End Sub
+
+    Private Sub tmrAutoHide_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrAutohide.Tick
+        If Not autohide = IAutohide.AutoHideModes.Disabled Then
+            Dim myPoint As POINTAPI
+            myPoint.X = Cursor.Position.X
+            myPoint.Y = Cursor.Position.Y
+
+            Dim rootHwnd As IntPtr = FindRoot(WindowFromPoint(myPoint))
+
+            'The mouse must be within this many pixels of the edge to show the screen
+            Const edgeWidth As Integer = 1
+
+            Dim edges As IAutohide.AutohideEdges = CType(myForm, IAutohide).getAutohideEdges()
+            Dim isAtEdge As Boolean = False
+
+            If myForm.Bounds.Contains(myPoint.X, myPoint.Y) Then
+                If (edges And IAutohide.AutohideEdges.Top) = IAutohide.AutohideEdges.Top Then
+                    isAtEdge = isAtEdge Or (myPoint.Y < myForm.Top + edgeWidth And myPoint.Y >= myForm.Top)
+                End If
+                If (edges And IAutohide.AutohideEdges.Left) = IAutohide.AutohideEdges.Left Then
+                    isAtEdge = isAtEdge Or (myPoint.X < myForm.Left + edgeWidth And myPoint.X >= myForm.Left)
+                End If
+                If (edges And IAutohide.AutohideEdges.Bottom) = IAutohide.AutohideEdges.Bottom Then
+                    isAtEdge = isAtEdge Or (myPoint.Y >= myForm.Bottom - edgeWidth And myPoint.Y <= myForm.Bottom)
+                End If
+                If (edges And IAutohide.AutohideEdges.Right) = IAutohide.AutohideEdges.Right Then
+                    isAtEdge = isAtEdge Or (myPoint.X >= myForm.Right - edgeWidth And myPoint.X <= myForm.Right)
+                End If
+            End If
+            If rootHwnd = myForm.Handle Or isAtEdge Or _
+                    progShowing = True Or userButtonsShowing = True Then
+                hideCount = 0
+
+                If Not autohide = IAutohide.AutoHideModes.Visible Or myForm.Visible = False Then
+                    myForm.Visible = True
+                    autohide = IAutohide.AutoHideModes.Visible
+                End If
+            End If
+
+            If hideCount <= 30 Then
+                hideCount += 1
+            Else
+                autohide = IAutohide.AutoHideModes.Hidden
+                myForm.Visible = False
+            End If
+        Else
+            tmrAutohide.Enabled = False
+        End If
+
     End Sub
 
     '    Private Sub myFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)

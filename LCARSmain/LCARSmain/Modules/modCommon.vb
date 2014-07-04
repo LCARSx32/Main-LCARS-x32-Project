@@ -350,7 +350,7 @@ Public Enum SetWindowPosFlags As UInteger
     End Sub
 
     Public Sub SetAutoHide(ByVal hide As IAutohide.AutoHideModes, ByVal ScreenIndex As Integer)
-        CType(curBusiness(ScreenIndex).myForm, IAutohide).SetAutoHide(hide)
+        curBusiness(ScreenIndex).SetAutoHide(hide)
     End Sub
 
     Public Sub SetDesktop(ByVal desktop As Form)

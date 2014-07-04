@@ -6,18 +6,6 @@ Public Class frmMainscreen4
 
 #Region " AutoHide "
 
-    Public autohide As IAutohide.AutoHideModes = IAutohide.AutoHideModes.Disabled
-    Dim hideCount As Integer = 0
-
-
-    Private Function FindRoot(ByVal hWnd As Int32) As Int32
-        Do
-            Dim parent_hwnd As Int32 = GetParent(hWnd)
-            If parent_hwnd = 0 Then Return hWnd
-            hWnd = parent_hwnd
-        Loop
-    End Function
-
     Private Sub UpdateRegion()
         Dim myRegion As Region = New Region(New RectangleF(0, 0, Me.Width, Me.Height))
         Try
@@ -33,53 +21,9 @@ Public Class frmMainscreen4
         End Try
     End Sub
 
-    Public Sub SetAutoHide(ByVal value As IAutohide.AutoHideModes) Implements IAutohide.SetAutoHide
-        autohide = value
-        If autohide = IAutohide.AutoHideModes.Disabled Then
-            tmrAutoHide.Enabled = False
-            hideCount = 0
-            ' pnlMainBar.Height = Me.Height
-            pnlMainBar_SizeChanged(New Object, New System.EventArgs)
-            Me.Visible = True
-        Else
-            tmrAutoHide.Enabled = True
-        End If
-    End Sub
-
-    Private Sub tmrAutoHide_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrAutoHide.Tick
-        If Not autohide = IAutohide.AutoHideModes.Disabled Then
-            Dim myPoint As POINTAPI
-            myPoint.X = MousePosition.X
-            myPoint.Y = MousePosition.Y
-
-            Dim rootHwnd As IntPtr = FindRoot(WindowFromPoint(myPoint))
-
-            If rootHwnd = Me.Handle Or _
-             myPoint.Y < 1 Or _
-             myBusiness.progShowing = True Or myBusiness.userButtonsShowing = True Then
-
-                hideCount = 0
-                ' pnlMainBar.Height = Me.Height
-                pnlMainBar_SizeChanged(sender, e)
-                Me.Visible = True
-
-            End If
-
-
-            If hideCount <= 30 Then
-                hideCount += 1
-            Else
-                autohide = IAutohide.AutoHideModes.Hidden
-                pnlMain.Bounds = Screen.AllScreens(myBusiness.ScreenIndex).Bounds
-                UpdateRegion()
-                Me.Visible = False
-                ' pnlMainBar.Height = Screen.AllScreens(modBusiness.ScreenIndex).Bounds.Height + 70
-            End If
-        Else
-            tmrAutoHide.Enabled = False
-        End If
-
-    End Sub
+    Public Function getAutohideEdges() As IAutohide.AutohideEdges Implements IAutohide.getAutohideEdges
+        Return IAutohide.AutohideEdges.Top
+    End Function
 
 #End Region
 
@@ -197,10 +141,6 @@ Public Class frmMainscreen4
     Private Sub myProgBack_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles myProgBack.Click
         myBusiness.ProgBack()
 
-    End Sub
-
-    Private Sub frmMainscreen3_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles Me.MouseMove
-        hideCount = 0
     End Sub
 
     Public Shared ReadOnly Property ScreenImage() As Image
