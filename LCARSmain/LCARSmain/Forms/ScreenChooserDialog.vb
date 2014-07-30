@@ -23,6 +23,15 @@ Public Class ScreenChooserDialog
         Me.Close()
     End Sub
 
+    Private Sub ScreenChooserDialog_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
+        For i As Integer = 0 To gridScreens.Count - 1
+            Dim myScreenImage As LCScreenImage = CType(gridScreens.Items(i), LCScreenImage)
+            If Not myScreenImage.Image Is Nothing Then
+                myScreenImage.Image.Dispose()
+            End If
+        Next
+    End Sub
+
     Private Sub ScreenChooserDialog_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         For Each myScreenType As Type In getMainScreenTypes()
             Dim myScreen As New LCScreenImage()
