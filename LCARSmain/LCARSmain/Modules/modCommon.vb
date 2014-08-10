@@ -469,10 +469,12 @@ Public Enum SetWindowPosFlags As UInteger
         Dim screenThreads(alertables.Length - 1) As Threading.Thread
         'do the alert until cancelAlert is set to true:
         Do Until cancelAlert = True
+            'Start the sound off
             If Not (mySoundPath = "") Then
                 soundThread = New Threading.Thread(AddressOf AlertSoundSub)
                 soundThread.Start(mySoundPath)
             End If
+            'Start the flashing on each screen
             For i As Integer = 0 To alertables.Length - 1
                 screenThreads(i) = New Threading.Thread(AddressOf AlertScreenSub)
                 Dim myparams As New AlertScreenSubParameters()
@@ -480,13 +482,14 @@ Public Enum SetWindowPosFlags As UInteger
                 myparams.highestTag = highestTag(i)
                 screenThreads(i).Start(myparams)
             Next
+            'Wait for flash to end
             For Each mythread As Threading.Thread In screenThreads
                 mythread.Join()
             Next
+            'Wait for sound to end
             If Not mySoundPath = "" Then
                 soundThread.Join()
             End If
-            GC.Collect()
         Loop
 
         For i As Integer = 0 To alertables.Length - 1 'For each screen
