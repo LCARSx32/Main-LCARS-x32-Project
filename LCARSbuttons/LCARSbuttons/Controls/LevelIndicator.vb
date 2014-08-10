@@ -68,7 +68,7 @@ Namespace Controls
                         Me.ButtonText = "0%"
                     End If
 
-                    Me.Invalidate()
+                    Me.DrawAllButtons()
                 Else
                     MsgBox("The Value MUST be between Min and Max.")
                 End If
