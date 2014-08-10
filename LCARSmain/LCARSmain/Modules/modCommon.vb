@@ -404,7 +404,10 @@ Public Enum SetWindowPosFlags As UInteger
         alertColor = ColorTranslator.FromHtml(alertstring.Substring(startIndex + 1, 7))
         alertSound = alertstring.Substring(startIndex + 9)
         'TODO: Set by screen index
-        Dim alertables As Collection = GetAlertPanels(curBusiness(0).myForm)
+        Dim alertables(curBusiness.Count - 1) As Collection
+        For i As Integer = 0 To alertables.Length - 1
+            alertables(i) = GetAlertPanels(curBusiness(i).myForm)
+        Next
         alertThread = New Threading.Thread(AddressOf MainAlert)
         cancelAlert = False
         alertThread.Start(alertables)
@@ -445,62 +448,54 @@ Public Enum SetWindowPosFlags As UInteger
         Return Alertables
     End Function
 
-    Private Sub MainAlert(ByVal alertables As Collection)
+    Private Sub MainAlert(ByVal alertables() As Collection)
         Dim LCARSbutton As New LCARS.LCARSbuttonClass
         Dim LCARStype As Type = LCARSbutton.GetType
-        Dim intloop As Integer
         Dim buffer As Integer
         alertSoundMode = GetSetting("LCARS x32", "Application", "AlertSoundMode", AudioPlayMode.WaitToComplete)
         inAlert = True
-        Dim highestTag As Integer = 0
-
-        For Each myControl As Control In alertables
-            If Not myControl.Tag Is Nothing And myControl.Tag <> "" And Integer.TryParse(myControl.Tag, buffer) = True Then
-                If buffer > highestTag Then
-                    highestTag = buffer
+        Dim highestTag(alertables.Length - 1) As Integer
+        For i As Integer = 0 To alertables.Length - 1 'For each screen
+            For Each myControl As Control In alertables(i)
+                If Not myControl.Tag Is Nothing And myControl.Tag <> "" And Integer.TryParse(myControl.Tag, buffer) = True Then
+                    If buffer > highestTag(i) Then
+                        highestTag(i) = buffer
+                    End If
                 End If
-            End If
+            Next
         Next
         Dim mySoundPath As String = alertSound
+        Dim soundThread As Threading.Thread
+        Dim screenThreads(alertables.Length - 1) As Threading.Thread
         'do the alert until cancelAlert is set to true:
         Do Until cancelAlert = True
-            Dim soundThread As New Threading.Thread(AddressOf AlertSoundSub)
             If Not (mySoundPath = "") Then
+                soundThread = New Threading.Thread(AddressOf AlertSoundSub)
                 soundThread.Start(mySoundPath)
             End If
-
-            For intloop = 0 To highestTag
-                For Each myBaseControl As Control In alertables
-
-                    If cancelAlert = True Then
-                        Exit Do
-                    End If
-
-                    For Each myButton As Control In myBaseControl.Controls
-
-                        If cancelAlert = True Then
-                            Exit Do
-                        End If
-                        Dim myLCARSButton As LCARS.LCARSbuttonClass = TryCast(myButton, LCARS.LCARSbuttonClass)
-                        If Not myLCARSButton Is Nothing Then
-                            processButton(intloop, myLCARSButton)
-                        End If
-
-                        Application.DoEvents()
-                    Next
-                Next
-                Threading.Thread.Sleep(50)
+            For i As Integer = 0 To alertables.Length - 1
+                screenThreads(i) = New Threading.Thread(AddressOf AlertScreenSub)
+                Dim myparams As New AlertScreenSubParameters()
+                myparams.alertables = alertables(i)
+                myparams.highestTag = highestTag(i)
+                screenThreads(i).Start(myparams)
+            Next
+            For Each mythread As Threading.Thread In screenThreads
+                mythread.Join()
             Next
             If Not mySoundPath = "" Then
                 soundThread.Join()
             End If
+            GC.Collect()
         Loop
 
-        For Each myBaseControl As Control In alertables
-            For Each mybutton As Control In myBaseControl.Controls
-                If mybutton.GetType.IsSubclassOf(LCARStype) Then
-                    resetAlert(CType(mybutton, LCARS.LCARSbuttonClass))
-                End If
+        For i As Integer = 0 To alertables.Length - 1 'For each screen
+            For Each myBaseControl As Control In alertables(i)
+                For Each mybutton As Control In myBaseControl.Controls
+                    If mybutton.GetType.IsSubclassOf(LCARStype) Then
+                        resetAlert(CType(mybutton, LCARS.LCARSbuttonClass))
+                    End If
+                Next
             Next
         Next
         inAlert = False
@@ -547,6 +542,37 @@ Public Enum SetWindowPosFlags As UInteger
             My.Computer.Audio.Play(soundPath, alertSoundMode)
         Catch ex As Exception
         End Try
+    End Sub
+
+    Public Structure AlertScreenSubParameters
+        Dim alertables As Collection
+        Dim highestTag As Integer
+    End Structure
+
+    Public Sub AlertScreenSub(ByVal params As AlertScreenSubParameters)
+        For intloop As Integer = 0 To params.highestTag
+            For Each myBaseControl As Control In params.alertables
+
+                If cancelAlert = True Then
+                    Exit Sub
+                End If
+
+                For Each myButton As Control In myBaseControl.Controls
+
+                    If cancelAlert = True Then
+                        Exit Sub
+                    End If
+                    Dim myLCARSButton As LCARS.LCARSbuttonClass = TryCast(myButton, LCARS.LCARSbuttonClass)
+                    If Not myLCARSButton Is Nothing Then
+                        processButton(intloop, myLCARSButton)
+                    End If
+
+                    Application.DoEvents()
+                Next
+            Next
+            Threading.Thread.Sleep(50)
+        Next
+
     End Sub
 
     Public Sub GetTaskbarSettings()
