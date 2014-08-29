@@ -743,6 +743,11 @@ Public Class LCARSbuttonClass
     Public Sub DrawAllButtons()
         If noDraw = False Then
             If Not (Me.Width = 0 Or Me.Height = 0) Then
+                If Not NormalButton Is Nothing Then
+                    'UnlitButton does not require null check
+                    NormalButton.Dispose()
+                    UnLitButton.Dispose()
+                End If
                 'Draw and show the standard "normal" button.
                 '----------------------------------------------------------------------
                 NormalButton = DrawButton()
