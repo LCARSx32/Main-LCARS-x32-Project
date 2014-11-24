@@ -987,6 +987,19 @@ public Class modBusiness
                 Next
             Next
         End If
+
+        'Display topmost window
+        Dim topmost As Integer = GetForegroundWindow()
+        For Each mybutton As LCARS.LCARSbuttonClass In myAppsPanel.Controls
+            If Not mybutton.Color = LCARS.LCARScolorStyles.FunctionOffline Then
+                If mybutton.Data = topmost Then
+                    mybutton.Color = LCARS.LCARScolorStyles.PrimaryFunction
+                Else
+                    mybutton.Color = LCARS.LCARScolorStyles.MiscFunction
+                End If
+            End If
+        Next
+
     End Sub
     'Moves the taskbar buttons to the right
     Private Sub rightArrow_Click(ByVal sender As Object, ByVal e As System.EventArgs)
