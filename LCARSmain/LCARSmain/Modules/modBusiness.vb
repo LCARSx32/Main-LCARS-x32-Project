@@ -993,7 +993,7 @@ public Class modBusiness
 
         'Display topmost window
         Dim topmost As Integer = GetForegroundWindow()
-        If topmost <> myForm.Handle And Not mouseDown Then
+        If Not mouseDown Then
             For Each mybutton As LCARS.LCARSbuttonClass In myAppsPanel.Controls
                 If Not mybutton.Color = LCARS.LCARScolorStyles.FunctionOffline Then
                     If mybutton.Data = topmost Then
