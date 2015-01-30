@@ -99,6 +99,7 @@ public Class modBusiness
     Dim myWindows(-1) As ExternalApp
     Dim WindowList(-1) As ExternalApp
     Dim excluded(-1) As IntPtr
+    Dim mouseDown As Boolean = False
 
     'Form Methods
     Dim myMethods As FormButtonMethods
@@ -946,6 +947,8 @@ public Class modBusiness
                 myAppsPanel.Controls.Add(myButton)
 
                 AddHandler myButton.Click, AddressOf AppsButton_Click
+                AddHandler myButton.MouseDown, AddressOf AppsButton_MouseDown
+                AddHandler myButton.MouseUp, AddressOf AppsButton_MouseUp
             Next
             rightArrow.Location = New Point(myAppsPanel.Width - 31, 0)
             myAppsPanel.Controls.Add(rightArrow)
@@ -987,6 +990,20 @@ public Class modBusiness
                 Next
             Next
         End If
+
+        'Display topmost window
+        Dim topmost As Integer = GetForegroundWindow()
+        If Not mouseDown Then
+            For Each mybutton As LCARS.LCARSbuttonClass In myAppsPanel.Controls
+                If Not mybutton.Color = LCARS.LCARScolorStyles.FunctionOffline Then
+                    If mybutton.Data = topmost Then
+                        mybutton.Color = LCARS.LCARScolorStyles.PrimaryFunction
+                    Else
+                        mybutton.Color = LCARS.LCARScolorStyles.MiscFunction
+                    End If
+                End If
+            Next
+        End If
     End Sub
     'Moves the taskbar buttons to the right
     Private Sub rightArrow_Click(ByVal sender As Object, ByVal e As System.EventArgs)
@@ -1012,9 +1029,8 @@ public Class modBusiness
     Private Sub AppsButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         Dim myButton As LCARS.LCARSbuttonClass = CType(sender, LCARS.LCARSbuttonClass)
         Dim myHandle As Integer = myButton.Data
-        Dim curFrontWindow As Integer = GetTopWindow()
 
-        If curFrontWindow = myHandle Then
+        If myButton.Color = LCARS.LCARScolorStyles.PrimaryFunction Then
             If getWindowState(myHandle) <> WindowStates.MINIMIZED Then
                 myButton.Data2 = getWindowState(myHandle)
                 SetWindowState(myHandle, WindowStates.MINIMIZED)
@@ -1035,6 +1051,15 @@ public Class modBusiness
             End If
             SetTopWindow(myHandle)
         End If
+    End Sub
+
+    'Mouse up/down for window hiding
+    Private Sub AppsButton_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs)
+        mouseDown = True
+    End Sub
+
+    Private Sub AppsButton_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs)
+        mouseDown = False
     End Sub
 
     Public Sub loadUserButtons()

@@ -19,7 +19,6 @@ Module modCommon
     Public alertColor As Color
     Public alertSound As String
     Dim inAlert As Boolean = False
-    Dim CurTopWindow As Integer
     Dim alertThread As Threading.Thread
     Public closing As Boolean = False
     Public myAlertForm As New frmAlerts()
@@ -627,7 +626,6 @@ Public Enum SetWindowPosFlags As UInteger
 
     Public Sub SetTopWindow(ByVal hWnd As IntPtr)
         SetForegroundWindow(hWnd)
-        CurTopWindow = hWnd
     End Sub
 
     Public Function getWindowState(ByVal hwnd As IntPtr) As WindowStates
@@ -635,10 +633,6 @@ Public Enum SetWindowPosFlags As UInteger
         myPlacement.Length = Len(myPlacement)
         GetWindowPlacement(hwnd.ToInt32, myPlacement)
         Return myPlacement.ShowCmd
-    End Function
-
-    Public Function GetTopWindow() As Integer
-        Return CurTopWindow
     End Function
 
     Public Sub resizeWorkingArea(ByVal x As Integer, ByVal y As Integer, ByVal width As Integer, ByVal height As Integer)
