@@ -26,10 +26,6 @@ Public Class frmMyComp
         Application.Exit()
     End Sub
 
-    Private Sub WorkingAreaUpdated(ByVal NewArea As System.Drawing.Rectangle) Handles interop.WorkingAreaChanged
-        Me.Bounds = NewArea
-    End Sub
-
 #End Region
     Public Declare Auto Function SendMessage Lib "user32.dll" (ByVal hWnd As IntPtr, ByVal msg As Integer, ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
 
@@ -1143,6 +1139,14 @@ Public Class frmMyComp
         My.Settings.shortcutNames.Add(tbTitle.Text)
         My.Settings.Save()
         loadShortcuts()
+    End Sub
+
+    Private Sub frmMyComp_LocationChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.LocationChanged, Me.Resize
+        Dim adjustedBounds As Rectangle = Screen.FromHandle(Me.Handle).WorkingArea
+        adjustedBounds.Location -= Screen.FromHandle(Me.Handle).Bounds.Location
+        If Not Me.MaximizedBounds = adjustedBounds Then
+            Me.MaximizedBounds = adjustedBounds
+        End If
     End Sub
 
     'Changes page on mouse scroll

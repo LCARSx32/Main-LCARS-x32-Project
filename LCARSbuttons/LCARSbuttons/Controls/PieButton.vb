@@ -207,7 +207,6 @@ Namespace Controls
 
             gPath.AddLines(points)
 
-            DrawText(g)
             g.Dispose()
             Dim myRegion As New Region(gPath)
 

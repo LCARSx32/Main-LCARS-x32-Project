@@ -1,5 +1,6 @@
 Imports System.IO
-Imports system.Runtime.InteropServices
+Imports System.Runtime.InteropServices
+Imports LCARS.x32
 
 public Class modBusiness
 
@@ -71,12 +72,11 @@ public Class modBusiness
     Public myAlertListButton As LCARS.LCARSbuttonClass
     Public myProgramPagesDisplay As LCARS.LCARSbuttonClass
 
-    Public myProgGrid As LCARS.Controls.ButtonGrid
-
     Public adjustedBounds As Rectangle
     Public MyPrograms As Collection = New Collection
     Public myUserButtonCollection As New List(Of UserButtonInfo)
     Public mainTimer As New Timer
+    Public WithEvents tmrAutohide As New Timer()
     Public ScreenIndex As Integer
 
 
@@ -99,6 +99,7 @@ public Class modBusiness
     Dim myWindows(-1) As ExternalApp
     Dim WindowList(-1) As ExternalApp
     Dim excluded(-1) As IntPtr
+    Dim mouseDown As Boolean = False
 
     'Form Methods
     Dim myMethods As FormButtonMethods
@@ -111,6 +112,9 @@ public Class modBusiness
     Dim OSKproc As New Process
     Dim isVisible As Boolean = False
 
+    'Autohide
+    Dim autohide As IAutohide.AutoHideModes
+    Dim hideCount As Integer = 0
 #End Region
 
 #End Region
@@ -171,11 +175,11 @@ public Class modBusiness
     End Function
 
     Public Sub SetWallpaper(ByVal wall As Image)
-        myDesktop.pnlDesktop.BackgroundImage = wall
+        myDesktop.curDesktop(ScreenIndex).BackgroundImage = wall
     End Sub
 
     Public Sub setWallpaperSizeMode(ByVal sizemode As ImageLayout)
-        myDesktop.pnlDesktop.BackgroundImageLayout = sizemode
+        myDesktop.curDesktop(ScreenIndex).BackgroundImageLayout = sizemode
     End Sub
 
 
@@ -185,15 +189,25 @@ public Class modBusiness
     End Sub
 
     Public Sub myCompButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Process.Start(Application.StartupPath & "\LCARSexplorer.exe")
+        Dim myProcess As New Process()
+        myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSexplorer.exe"
+        launchProcessOnScreen(myProcess)
     End Sub
 
     Public Sub mySettingsButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Process.Start(Application.StartupPath & "\LCARSsettings.exe", "/" & myDesktop.Handle.ToString)
+        Dim mySettings As New frmSettings()
+        MoveToScreen(Screen.FromHandle(myForm.Handle), mySettings.Handle)
+        mySettings.Show()
+        'Dim myProcess As New Process()
+        'myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSsettings.exe"
+        'myProcess.StartInfo.Arguments = "/" & myDesktop.Handle.ToString()
+        'launchProcessOnScreen(myProcess)
     End Sub
 
     Public Sub myEngineeringButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Process.Start(Application.StartupPath & "\LCARSengineering.exe")
+        Dim myProcess As New Process()
+        myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSengineering.exe"
+        launchProcessOnScreen(myProcess)
     End Sub
 
     Public Sub myModeSelectButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
@@ -204,50 +218,26 @@ public Class modBusiness
             Directory.CreateDirectory(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\LCARS x32\Images")
         End If
         'Save screenshot and show the selection form
-        Dim screenImage As New Bitmap(My.Computer.Screen.Bounds.Width, My.Computer.Screen.Bounds.Height)
+        Dim screenImage As New Bitmap(myForm.Width, myForm.Height)
         Dim g As System.Drawing.Graphics = System.Drawing.Graphics.FromImage(screenImage)
-        g.CopyFromScreen(New Point(0, 0), New Point(0, 0), New Size(My.Computer.Screen.Bounds.Width, My.Computer.Screen.Bounds.Height))
+        g.CopyFromScreen(myForm.PointToScreen(New Point(0, 0)), New Point(0, 0), myForm.Size)
         Try
-            screenImage.Save(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\LCARS x32\Images\" & myForm.Name.ToLower() & ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg)
+            screenImage.Save(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\LCARS x32\Images\" & myForm.Name.ToLower() & "_" & ScreenIndex & ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg)
         Catch ex As Exception
-            ' Save will throw an exception if the given path is not yet available for writing.
-            ' Unfortunately, .Save takes its sweet time releasing the file, so if you try to
-            ' call .Save on the same file within a few seconds, it throws an exception. There
-            ' isn't a straightforward way to test if the file is in use, so just catch and
-            ' ignore the exception for now.
-            'MsgBox(ex.ToString())
+            MsgBox("Error saving image for interface " & myForm.Name & " on screen " & ScreenIndex & ".")
         End Try
         SetParent(hTrayIcons, hTrayParent)
-        Dim myChoice As New ScreenChooserDialog
-        myChoice.ShowDialog()
-        If (myChoice.ScreenID <> 0) Then 'if it isn't a cancel
-            mainTimer.Enabled = False
-            myForm.Dispose()
-
-            Select Case myChoice.ScreenID
-                Case 1
-                    Dim myMainScreen As New frmMainscreen1(ScreenIndex)
-                    myMainScreen.Show()
-                Case 2
-                    Dim myMainScreen As New frmMainscreen2(ScreenIndex)
-                    myMainScreen.Show()
-                Case 3
-                    Dim myMainScreen As New frmMainscreen3(ScreenIndex)
-                    myMainScreen.Show()
-                Case 4
-                    Dim myMainScreen As New frmMainscreen4(ScreenIndex)
-                    myMainScreen.Show()
-                Case Else 'Shouldn't happen, but included anyway.
-                    Dim myMainscreen As New frmMainscreen1(ScreenIndex)
-                    myMainscreen.Show()
-            End Select
-            'loadUserButtons()
-        End If
-
+        Dim myChoice As New ScreenChooserDialog(ScreenIndex)
+        MoveToScreen(Screen.FromHandle(myForm.Handle), myChoice.Handle)
+        myChoice.Show()
     End Sub
 
     Public Sub myDeactivateButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Process.Start(Application.StartupPath & "\LCARSshutdown.exe", "/" & myDesktop.Handle.ToString)
+        Dim myProcess As New Process()
+        myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSshutdown.exe"
+        myProcess.StartInfo.Arguments = "/" & myDesktop.Handle.ToString()
+        launchProcessOnScreen(myProcess)
+        'Process.Start(Application.StartupPath & "\LCARSshutdown.exe", "/" & myDesktop.Handle.ToString)
     End Sub
 
     Public Sub myAlertButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
@@ -269,15 +259,24 @@ public Class modBusiness
     End Sub
 
     Public Sub myDestructButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Process.Start(Application.StartupPath & "\LCARSdestruct.exe")
+        Dim myProcess As New Process()
+        myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSdestruct.exe"
+        launchProcessOnScreen(myProcess)
+        'Process.Start(Application.StartupPath & "\LCARSdestruct.exe")
     End Sub
 
     Public Sub myPhoto_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Process.Start(Application.StartupPath & "\LCARSpic.exe")
+        Dim myProcess As New Process()
+        myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSpic.exe"
+        launchProcessOnScreen(myProcess)
+        'Process.Start(Application.StartupPath & "\LCARSpic.exe")
     End Sub
 
     Public Sub myWebBrowser_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Process.Start(Application.StartupPath & "\LCARSWebBrowser.exe")
+        Dim myProcess As New Process()
+        myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSWebBrowser.exe"
+        launchProcessOnScreen(myProcess)
+        'Process.Start(Application.StartupPath & "\LCARSWebBrowser.exe")
     End Sub
 
     Public Sub myButtonManager_Click(ByVal sender As Object, ByVal e As System.EventArgs)
@@ -303,23 +302,39 @@ public Class modBusiness
     End Sub
 
     Public Sub myDocuments_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Process.Start(Application.StartupPath & "\LCARSexplorer.exe", System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments))
+        Dim myProcess As New Process()
+        myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSexplorer.exe"
+        myProcess.StartInfo.Arguments = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+        launchProcessOnScreen(myProcess)
+        'Process.Start(Application.StartupPath & "\LCARSexplorer.exe", System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments))
         ' myStartMenu.doClick(sender, e)
     End Sub
 
     Public Sub myPictures_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Process.Start(Application.StartupPath & "\LCARSexplorer.exe", System.Environment.GetFolderPath(Environment.SpecialFolder.MyPictures))
+        Dim myProcess As New Process()
+        myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSexplorer.exe"
+        myProcess.StartInfo.Arguments = System.Environment.GetFolderPath(Environment.SpecialFolder.MyPictures)
+        launchProcessOnScreen(myProcess)
+        'Process.Start(Application.StartupPath & "\LCARSexplorer.exe", System.Environment.GetFolderPath(Environment.SpecialFolder.MyPictures))
     End Sub
     Public Sub myVideos_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Process.Start(Application.StartupPath & "\LCARSexplorer.exe", GetMyVideosPath())
+        Dim myProcess As New Process()
+        myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSexplorer.exe"
+        myProcess.StartInfo.Arguments = GetMyVideosPath()
+        launchProcessOnScreen(myProcess)
+        'Process.Start(Application.StartupPath & "\LCARSexplorer.exe", GetMyVideosPath())
     End Sub
 
     Public Sub myMusic_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Process.Start(Application.StartupPath & "\LCARSexplorer.exe", System.Environment.GetFolderPath(Environment.SpecialFolder.MyMusic))
+        Dim myProcess As New Process()
+        myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSexplorer.exe"
+        myProcess.StartInfo.Arguments = System.Environment.GetFolderPath(Environment.SpecialFolder.MyMusic)
+        launchProcessOnScreen(myProcess)
+        'Process.Start(Application.StartupPath & "\LCARSexplorer.exe", System.Environment.GetFolderPath(Environment.SpecialFolder.MyMusic))
     End Sub
 
     Public Sub myShowTrayButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        SaveSetting("LCARS x32", "Application", "ShowTrayIcons", "TRUE")
+        modSettings.ShowTrayIcons(ScreenIndex) = True
         Dim myPlacement As New WINDOWPLACEMENT
         GetWindowPlacement(hTrayIcons, myPlacement)
         Dim myWidth As Integer = myPlacement.rcNormalPosition.Right_Renamed - myPlacement.rcNormalPosition.Left_Renamed
@@ -336,7 +351,7 @@ public Class modBusiness
     End Sub
 
     Public Sub myHideTrayButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        SaveSetting("LCARS x32", "Application", "ShowTrayIcons", "FALSE")
+        modSettings.ShowTrayIcons(ScreenIndex) = False
         Dim mywidth As Integer = myShowTrayButton.Width - myTrayPanel.Width
         myTrayPanel.Width = myShowTrayButton.Width
         myTrayPanel.Left -= mywidth
@@ -374,12 +389,17 @@ public Class modBusiness
     End Sub
 
     Public Sub myHelp_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Process.Start(Application.StartupPath & "\Lcarsx32 Manual.exe", Application.StartupPath & "\LCARS x32 Manual")
+        Dim myProcess As New Process()
+        myProcess.StartInfo.FileName = Application.StartupPath & "\Lcarsx32 Manual.exe"
+        myProcess.StartInfo.Arguments = Application.StartupPath & "\LCARS x32 Manual"
+        launchProcessOnScreen(myProcess)
+        'Process.Start(Application.StartupPath & "\Lcarsx32 Manual.exe", Application.StartupPath & "\LCARS x32 Manual")
     End Sub
 
     Public Sub myRun_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         Dim myRunDialog As New frmRunProgram
-        myRunDialog.ShowDialog()
+        MoveToScreen(Screen.FromHandle(myForm.Handle), myRunDialog.Handle)
+        myRunDialog.Show()
     End Sub
 
     Public Sub myAlertListButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
@@ -395,8 +415,7 @@ public Class modBusiness
         'that it is now the mainscreen.  Since most of the functions of the
         'mainscreen are done through this module, it is imperitive that they
         'call this sub as soon as they load.
-
-        setBusiness(Me)
+        setBusiness(Me, ScreenIndex)
 
 
         ReDim myWindows(-1)
@@ -448,10 +467,7 @@ public Class modBusiness
         myRun = myForm.Controls.Find("myRun", True)(0)
         myAlertListButton = myForm.Controls.Find("myAlertListButton", True)(0)
         myProgramPagesDisplay = myForm.Controls.Find("fbProgramPages", True)(0)
-        Try
-            myProgGrid = myForm.Controls.Find("progGrid", True)(0)
-        Catch ex As Exception
-        End Try
+
         If Listener Is Nothing OrElse Listener.State <> SpeechLib.SpeechRecoContextState.SRCS_Enabled Then
             mySpeech.Lit = False
         Else
@@ -505,9 +521,10 @@ public Class modBusiness
 
 
         'load Mainscreen Settings:
-        Dim AutoHideMode As Integer = GetSetting("LCARS X32", "Load", "AutoHide", "0")
+        tmrAutohide.Interval = 100
+        Dim AutoHideMode As Integer = modSettings.AutoHide(ScreenIndex)
         SetAutoHide(AutoHideMode)
-        If GetSetting("LCARS x32", "Application", "ShowTrayIcons", "FALSE") Then
+        If modSettings.ShowTrayIcons(ScreenIndex) = True Then
             myShowTrayButton_Click(New Object, New EventArgs)
         End If
 
@@ -548,6 +565,8 @@ public Class modBusiness
 
     Private Sub System_DisplayChanged(ByVal sender As Object, ByVal e As System.EventArgs)
         myForm.Bounds = Screen.AllScreens(ScreenIndex).Bounds
+        'TODO: Move to frmStartup
+        'TODO: Handle changes to number of displays
         myDesktop.pnlBack.Bounds = Screen.AllScreens(ScreenIndex).Bounds
 
     End Sub
@@ -787,7 +806,9 @@ public Class modBusiness
         ReDim WindowList(-1)
 
         adjustedBounds = New Rectangle(myMainBar.PointToScreen(myMainPanel.Location).X, myMainBar.PointToScreen(myMainPanel.Location).Y, myMainPanel.Width, myMainPanel.Height)
-
+        If autohide = IAutohide.AutoHideModes.Hidden Then
+            adjustedBounds = Screen.FromHandle(myForm.Handle).Bounds
+        End If
         If Not adjustedBounds = Screen.AllScreens(ScreenIndex).WorkingArea Then
             'The working area has changed, alert the linked windows (if there are any).
             If LinkedWindows.Count > 0 Then
@@ -804,22 +825,19 @@ public Class modBusiness
                 Marshal.StructureToPtr(myRectData, MyCopyData, False)
                 'Do not use SendDataToLinkedWindows; it uses PostMessage, not SendMessage
                 For Each targetHandle As IntPtr In LinkedWindows
-                    Dim res As Integer = SendMessage(targetHandle, WM_COPYDATA, myDesktop.Handle, MyCopyData)
+                    'Compare working areas because no equality operator for screens
+                    If Screen.FromHandle(targetHandle).WorkingArea = Screen.FromHandle(myForm.Handle).WorkingArea Then
+                        Dim res As Integer = SendMessage(targetHandle, WM_COPYDATA, myDesktop.Handle, MyCopyData)
+                    End If
                 Next
             End If
             resizeWorkingArea(adjustedBounds.X, adjustedBounds.Y, adjustedBounds.Width, adjustedBounds.Height)
-
+            'myDesktop.curDesktop(ScreenIndex).Bounds = Screen.AllScreens(ScreenIndex).WorkingArea
         End If
 
-        If Not myDesktop.pnlDesktop.Size = adjustedBounds.Size Then
-            Dim xOffset As Integer = SystemInformation.VirtualScreen.X 'Screen.AllScreens(screenIndex).Bounds.X - SystemInformation.VirtualScreen.X
-            Dim yOffset As Integer = SystemInformation.VirtualScreen.Y 'Screen.AllScreens(screenIndex).Bounds.Y - SystemInformation.VirtualScreen.Y
-
-            myDesktop.pnlDesktop.Bounds = New Rectangle(adjustedBounds.X - xOffset, adjustedBounds.Y - yOffset, adjustedBounds.Width, adjustedBounds.Height)
-
+        If Not myDesktop.curDesktop(ScreenIndex).Size = adjustedBounds.Size Then
+            updateDesktopBounds(ScreenIndex)
         End If
-
-
 
         'Deal with resizing the tray icon panel if necessary
         If myHideTrayButton.Visible = True Then
@@ -929,6 +947,8 @@ public Class modBusiness
                 myAppsPanel.Controls.Add(myButton)
 
                 AddHandler myButton.Click, AddressOf AppsButton_Click
+                AddHandler myButton.MouseDown, AddressOf AppsButton_MouseDown
+                AddHandler myButton.MouseUp, AddressOf AppsButton_MouseUp
             Next
             rightArrow.Location = New Point(myAppsPanel.Width - 31, 0)
             myAppsPanel.Controls.Add(rightArrow)
@@ -970,6 +990,20 @@ public Class modBusiness
                 Next
             Next
         End If
+
+        'Display topmost window
+        Dim topmost As Integer = GetForegroundWindow()
+        If Not mouseDown Then
+            For Each mybutton As LCARS.LCARSbuttonClass In myAppsPanel.Controls
+                If Not mybutton.Color = LCARS.LCARScolorStyles.FunctionOffline Then
+                    If mybutton.Data = topmost Then
+                        mybutton.Color = LCARS.LCARScolorStyles.PrimaryFunction
+                    Else
+                        mybutton.Color = LCARS.LCARScolorStyles.MiscFunction
+                    End If
+                End If
+            Next
+        End If
     End Sub
     'Moves the taskbar buttons to the right
     Private Sub rightArrow_Click(ByVal sender As Object, ByVal e As System.EventArgs)
@@ -995,9 +1029,8 @@ public Class modBusiness
     Private Sub AppsButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         Dim myButton As LCARS.LCARSbuttonClass = CType(sender, LCARS.LCARSbuttonClass)
         Dim myHandle As Integer = myButton.Data
-        Dim curFrontWindow As Integer = GetTopWindow()
 
-        If curFrontWindow = myHandle Then
+        If myButton.Color = LCARS.LCARScolorStyles.PrimaryFunction Then
             If getWindowState(myHandle) <> WindowStates.MINIMIZED Then
                 myButton.Data2 = getWindowState(myHandle)
                 SetWindowState(myHandle, WindowStates.MINIMIZED)
@@ -1018,6 +1051,15 @@ public Class modBusiness
             End If
             SetTopWindow(myHandle)
         End If
+    End Sub
+
+    'Mouse up/down for window hiding
+    Private Sub AppsButton_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs)
+        mouseDown = True
+    End Sub
+
+    Private Sub AppsButton_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs)
+        mouseDown = False
     End Sub
 
     Public Sub loadUserButtons()
@@ -1332,65 +1374,20 @@ public Class modBusiness
 
     'Used for programs in start menu and in Personal Programs (userbuttons)
     Private Sub myfile_click(ByVal sender As Object, ByVal e As System.EventArgs)
+        If ProgramsPanel.Visible Then
+            myStartMenu.doClick(sender, e)
+        End If
+        If UserButtonsPanel.Visible Then
+            myUserButtons.doClick(sender, e)
+        End If
+        Application.DoEvents()
         Try
             If Path.GetExtension(sender.data.ToString.ToLower) = ".lnk" Then
+
                 Dim myProcess As New System.Diagnostics.Process
-                Dim WshShell As New IWshRuntimeLibrary.WshShell
-                Dim oShellLink As IWshRuntimeLibrary.WshShortcut
-                oShellLink = WshShell.CreateShortcut(sender.data)
+                myProcess.StartInfo.FileName = sender.data
+                launchProcessOnScreen(myProcess)
 
-                Dim before() As Process = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(oShellLink.TargetPath))
-
-                Process.Start(sender.data)
-
-
-
-                If ProgramsPanel.Visible Then
-                    myStartMenu.doClick(sender, e)
-                End If
-                If UserButtonsPanel.Visible Then
-                    myUserButtons.doClick(sender, e)
-                End If
-                Application.DoEvents()
-
-
-                Do Until Process.GetProcessesByName(Path.GetFileNameWithoutExtension(oShellLink.TargetPath)).Length > before.Length
-                    Application.DoEvents()
-                Loop
-
-                Dim after() As Process = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(oShellLink.TargetPath))
-                Dim found As Boolean = False
-
-                For Each myAfter As Process In after
-                    found = False
-
-                    For Each myBefore As Process In before
-                        If myBefore Is myAfter Then
-                            found = True
-                        End If
-                    Next
-                    If found = False Then
-                        myProcess = myAfter
-                    End If
-                Next
-
-
-                Dim myID As Integer = myProcess.Id
-
-                Do Until myProcess.MainWindowHandle <> 0
-                    If Now.Subtract(myProcess.StartTime) > New TimeSpan(0, 0, 15) Then
-                        Exit Do
-                    Else
-                        myProcess = Process.GetProcessById(myID)
-
-                        Application.DoEvents()
-                    End If
-
-
-
-                Loop
-
-                MoveToScreen(Screen.FromHandle(myForm.Handle), myProcess.MainWindowHandle)
             Else
                 If File.Exists(sender.data) Then
                     'The command string is an absolute path.
@@ -1398,7 +1395,7 @@ public Class modBusiness
                         Dim myprocess As New Process
                         myprocess.StartInfo.FileName = sender.data
                         myprocess.StartInfo.WorkingDirectory = Path.GetDirectoryName(sender.data)
-                        myprocess.Start()
+                        launchProcessOnScreen(myprocess)
                     Catch ex As Exception
                         GoTo Retry 'Yes, I know. If you have a better way, go for it.
                     End Try
@@ -1417,18 +1414,35 @@ Retry:
                             myProcess.StartInfo.Arguments = sender.data.Substring(myProcess.StartInfo.FileName.Length + 1)
                             myProcess.StartInfo.WorkingDirectory = IO.Path.GetDirectoryName(myProcess.StartInfo.FileName)
                         End If
-                        myProcess.Start()
+                        launchProcessOnScreen(myProcess)
                     Catch ex As Exception
                         'Throw it to shell and see what happens.
                         Try
                             Dim myID As Integer
                             myID = Shell(sender.data, AppWinStyle.NormalFocus)
                             Dim myprocess As Process = Process.GetProcessById(myID)
+                            Do Until myprocess.MainWindowHandle <> 0
+                                If Now.Subtract(myprocess.StartTime) > New TimeSpan(0, 0, 15) Then
+                                    Exit Do
+                                Else
+                                    myprocess = Process.GetProcessById(myID)
+                                    Application.DoEvents()
+                                End If
+                            Loop
                             MoveToScreen(Screen.FromHandle(myForm.Handle), myprocess.MainWindowHandle)
                         Catch ex2 As Exception
                             'Throw it to Process.Start and hope for the best
                             Try
                                 Dim myProcess As Process = Process.Start(sender.data)
+                                Dim myID As Integer = myProcess.Id
+                                Do Until myProcess.MainWindowHandle <> 0
+                                    If Now.Subtract(myProcess.StartTime) > New TimeSpan(0, 0, 15) Then
+                                        Exit Do
+                                    Else
+                                        myProcess = Process.GetProcessById(myID)
+                                        Application.DoEvents()
+                                    End If
+                                Loop
                                 MoveToScreen(Screen.FromHandle(myForm.Handle), myProcess.MainWindowHandle)
                             Catch ex3 As Exception
                                 MsgBox("Error: " & vbNewLine & vbNewLine & ex3.Message)
@@ -1451,11 +1465,25 @@ Retry:
                 MsgBox("Error: " & vbNewLine & vbNewLine & ex2.Message)
             End Try
         End Try
-
-        If UserButtonsPanel.Visible Then
-            myUserButtons.doClick(sender, e)
-        End If
     End Sub
+
+    Public Sub launchProcessOnScreen(ByVal myProcess As Process)
+        myProcess.Start()
+        Dim myID As Integer = myProcess.Id
+
+        Do Until myProcess.MainWindowHandle <> 0
+            If Now.Subtract(myProcess.StartTime) > New TimeSpan(0, 0, 15) Then
+                Exit Do
+            Else
+                myProcess = Process.GetProcessById(myID)
+                Application.DoEvents()
+            End If
+        Loop
+
+        MoveToScreen(Screen.FromHandle(myForm.Handle), myProcess.MainWindowHandle)
+
+    End Sub
+
 
     Private Sub MoveToScreen(ByVal myScreen As Screen, ByVal hWnd As IntPtr)
         Dim myPlacement As New WINDOWPLACEMENT
@@ -1511,6 +1539,77 @@ Retry:
             e.Cancel = True
             myDeactivate.doClick(sender, e)
         End If
+    End Sub
+
+    Private Function FindRoot(ByVal hWnd As Int32) As Int32
+        Do
+            Dim parent_hwnd As Int32 = GetParent(hWnd)
+            If parent_hwnd = 0 Then Return hWnd
+            hWnd = parent_hwnd
+        Loop
+    End Function
+
+    Public Sub SetAutoHide(ByVal value As IAutohide.AutoHideModes)
+
+        autohide = value
+        If autohide = IAutohide.AutoHideModes.Disabled Then
+            tmrAutohide.Enabled = False
+            hideCount = 0
+            myForm.Visible = True
+        Else
+            autohide = IAutohide.AutoHideModes.Visible
+            tmrAutohide.Enabled = True
+        End If
+    End Sub
+
+    Private Sub tmrAutoHide_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrAutohide.Tick
+        If Not autohide = IAutohide.AutoHideModes.Disabled Then
+            Dim myPoint As POINTAPI
+            myPoint.X = Cursor.Position.X
+            myPoint.Y = Cursor.Position.Y
+
+            Dim rootHwnd As IntPtr = FindRoot(WindowFromPoint(myPoint))
+
+            'The mouse must be within this many pixels of the edge to show the screen
+            Const edgeWidth As Integer = 1
+
+            Dim edges As IAutohide.AutohideEdges = CType(myForm, IAutohide).getAutohideEdges()
+            Dim isAtEdge As Boolean = False
+
+            If myForm.Bounds.Contains(myPoint.X, myPoint.Y) Then
+                If (edges And IAutohide.AutohideEdges.Top) = IAutohide.AutohideEdges.Top Then
+                    isAtEdge = isAtEdge Or (myPoint.Y < myForm.Top + edgeWidth And myPoint.Y >= myForm.Top)
+                End If
+                If (edges And IAutohide.AutohideEdges.Left) = IAutohide.AutohideEdges.Left Then
+                    isAtEdge = isAtEdge Or (myPoint.X < myForm.Left + edgeWidth And myPoint.X >= myForm.Left)
+                End If
+                If (edges And IAutohide.AutohideEdges.Bottom) = IAutohide.AutohideEdges.Bottom Then
+                    isAtEdge = isAtEdge Or (myPoint.Y >= myForm.Bottom - edgeWidth And myPoint.Y <= myForm.Bottom)
+                End If
+                If (edges And IAutohide.AutohideEdges.Right) = IAutohide.AutohideEdges.Right Then
+                    isAtEdge = isAtEdge Or (myPoint.X >= myForm.Right - edgeWidth And myPoint.X <= myForm.Right)
+                End If
+            End If
+            If rootHwnd = myForm.Handle Or isAtEdge Or _
+                    progShowing = True Or userButtonsShowing = True Then
+                hideCount = 0
+
+                If Not autohide = IAutohide.AutoHideModes.Visible Or myForm.Visible = False Then
+                    myForm.Visible = True
+                    autohide = IAutohide.AutoHideModes.Visible
+                End If
+            End If
+
+            If hideCount <= 30 Then
+                hideCount += 1
+            Else
+                autohide = IAutohide.AutoHideModes.Hidden
+                myForm.Visible = False
+            End If
+        Else
+            tmrAutohide.Enabled = False
+        End If
+
     End Sub
 
     '    Private Sub myFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)

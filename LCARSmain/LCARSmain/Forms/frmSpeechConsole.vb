@@ -1,23 +1,27 @@
-﻿Public Class frmSpeechConsole
+﻿'TODO: Show by screen index
+
+Public Class frmSpeechConsole
     Dim oloc As Point
     Private Sub fbHide_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbHide.Click
         Me.Hide()
     End Sub
 
     Private Sub fbOnOff_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbOnOff.Click
-        With modCommon.curBusiness
-            .mySpeech.Lit = Not .mySpeech.Lit
-            If .mySpeech.Lit Then
-                If Listener Is Nothing Then Listener = New SpeechLib.SpInProcRecoContextClass
-                Listener.State = SpeechLib.SpeechRecoContextState.SRCS_Enabled
-                fbOnOff.Lit = True
-                fbOnOff.Text = "Recognition on"
-            Else
-                Listener.State = SpeechLib.SpeechRecoContextState.SRCS_Disabled
-                fbOnOff.Lit = False
-                fbOnOff.Text = "Recognition off"
-            End If
-        End With
+        For Each myBusiness As modBusiness In curBusiness
+            With myBusiness
+                .mySpeech.Lit = Not .mySpeech.Lit
+            End With
+        Next
+        If curBusiness(0).mySpeech.Lit Then
+            If Listener Is Nothing Then Listener = New SpeechLib.SpInProcRecoContextClass
+            Listener.State = SpeechLib.SpeechRecoContextState.SRCS_Enabled
+            fbOnOff.Lit = True
+            fbOnOff.Text = "Recognition on"
+        Else
+            Listener.State = SpeechLib.SpeechRecoContextState.SRCS_Disabled
+            fbOnOff.Lit = False
+            fbOnOff.Text = "Recognition off"
+        End If
     End Sub
 
     Private Sub txtEntry_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtEntry.KeyDown

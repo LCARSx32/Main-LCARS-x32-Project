@@ -29,10 +29,6 @@ Public Class frmShutdown
         Application.Exit()
     End Sub
 
-    Private Sub WorkingAreaUpdated(ByVal NewArea As System.Drawing.Rectangle) Handles interop.WorkingAreaChanged
-        Me.Bounds = NewArea
-    End Sub
-
 #End Region
 
     Dim shutdownOptions As New cWrapExitWindows
@@ -110,5 +106,13 @@ Public Class frmShutdown
             Process.Start(Application.StartupPath & "\LCARSLock.exe")
         Catch ex As Exception
         End Try
+    End Sub
+
+    Private Sub frmShutdown_LocationChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.LocationChanged, Me.SizeChanged
+        Dim adjustedBounds As Rectangle = Screen.FromHandle(Me.Handle).WorkingArea
+        adjustedBounds.Location -= Screen.FromHandle(Me.Handle).Bounds.Location
+        If Not Me.MaximizedBounds = adjustedBounds Then
+            Me.MaximizedBounds = adjustedBounds
+        End If
     End Sub
 End Class

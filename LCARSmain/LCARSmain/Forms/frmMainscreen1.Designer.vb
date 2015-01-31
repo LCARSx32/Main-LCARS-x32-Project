@@ -20,8 +20,8 @@ Partial Class frmMainscreen1
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
-        Dim LcarScolor1 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor2 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor3 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor4 As LCARS.LCARScolor = New LCARS.LCARScolor
         Me.pnlMainContainer = New System.Windows.Forms.Panel
         Me.myAlertListButton = New LCARS.Controls.ArrowButton
         Me.myClock = New System.Windows.Forms.Label
@@ -213,7 +213,7 @@ Partial Class frmMainscreen1
         Me.gridUserButtons.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.gridUserButtons.Beeping = False
-        Me.gridUserButtons.ColorsAvailable = LcarScolor1
+        Me.gridUserButtons.ColorsAvailable = LcarScolor3
         Me.gridUserButtons.ControlAddingDirection = LCARS.Controls.ButtonGrid.ControlDirection.Horizontal
         Me.gridUserButtons.ControlPadding = 5
         Me.gridUserButtons.ControlSize = New System.Drawing.Size(100, 25)
@@ -1807,7 +1807,7 @@ Partial Class frmMainscreen1
         Me.pnlPrograms.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.pnlPrograms.Beeping = False
-        Me.pnlPrograms.ColorsAvailable = LcarScolor2
+        Me.pnlPrograms.ColorsAvailable = LcarScolor4
         Me.pnlPrograms.Location = New System.Drawing.Point(114, 41)
         Me.pnlPrograms.Name = "pnlPrograms"
         Me.pnlPrograms.Size = New System.Drawing.Size(187, 473)

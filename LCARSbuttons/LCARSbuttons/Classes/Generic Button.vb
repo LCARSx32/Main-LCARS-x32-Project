@@ -27,6 +27,7 @@ Public Class LCARSbuttonClass
 
         'This call is required by the Windows Form Designer.
         InitializeComponent()
+        MyBase.DoubleBuffered = True
         Sound.Load()
         'Add any initialization after the InitializeComponent() call
     End Sub
@@ -56,17 +57,6 @@ Public Class LCARSbuttonClass
     ' <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.SuspendLayout()
-        '
-        'lblText
-        ' 
-        'Me.lblText.Text = "LCARS"
-        'Me.lblText.AutoSize = False
-        'Me.lblText.Font = New Font("LCARS", textHeight, FontStyle.Regular, GraphicsUnit.Point)
-        'Me.lblText.Anchor = 15
-        'Me.lblText.Location = New Point(0, 0)
-        'Me.lblText.BackColor = Drawing.Color.Transparent
-        'Me.lblText.ForeColor = Drawing.Color.Black
-        'Me.lblText.AutoEllipsis = True
         '
         'StandardButton
         '
@@ -215,7 +205,7 @@ Public Class LCARSbuttonClass
         End Get
         Set(ByVal value As System.Drawing.Font)
             _font = value
-            DrawAllButtons()
+            Me.Invalidate()
         End Set
     End Property
 
@@ -249,7 +239,7 @@ Public Class LCARSbuttonClass
         End Get
         Set(ByVal value As ContentAlignment)
             _textAlign = value
-            DrawAllButtons()
+            Me.Invalidate()
         End Set
     End Property
 
@@ -293,7 +283,7 @@ Public Class LCARSbuttonClass
         End Get
         Set(ByVal value As Boolean)
             _autoEllipsis = value
-            DrawAllButtons()
+            Me.Invalidate()
         End Set
     End Property
 
@@ -442,47 +432,31 @@ Public Class LCARSbuttonClass
             Return myText
         End Get
         Set(ByVal value As String)
-            Dim redraw As Boolean
             If value Is Nothing Then
                 value = New String("")
             End If
             If forceCapital Then
-                redraw = Not (myText = value.ToUpper)
                 myText = value.ToUpper
             Else
-                redraw = Not (myText = value)
                 myText = value
             End If
             tmpStr = myText
             If textHeight = -1 Then
                 ButtonTextHeight = -1
             End If
-            If redraw Then DrawAllButtons()
+            Me.Invalidate()
         End Set
     End Property
     ''' <summary>
     ''' Sets the visibility of the text
     ''' </summary>
-    <Browsable(False), EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), Obsolete("This property is deprecated; text drawing is now handled by DrawButton")> _
-            Public Overridable Property lblTextVisible() As Boolean
+    Protected Property lblTextVisible() As Boolean
         Get
             Return _textVisible
         End Get
         Set(ByVal value As Boolean)
             _textVisible = value
-        End Set
-    End Property
-
-    ''' <summary>
-    ''' Sets anchor for label used to display text
-    ''' </summary>
-    <Browsable(False), EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)> _
-        Public Overridable Property lblTextAnchor() As AnchorStyles
-        Get
-            Return AnchorStyles.None
-        End Get
-        Set(ByVal value As AnchorStyles)
-
+            Me.Invalidate()
         End Set
     End Property
 
@@ -496,6 +470,7 @@ Public Class LCARSbuttonClass
         End Get
         Set(ByVal value As Point)
             _textLocation = value
+            Me.Invalidate()
         End Set
     End Property
 
@@ -510,6 +485,7 @@ Public Class LCARSbuttonClass
         End Get
         Set(ByVal value As Size)
             _textSize = value
+            Me.Invalidate()
         End Set
     End Property
 
@@ -546,7 +522,7 @@ Public Class LCARSbuttonClass
             Else
                 _font = New Font("LCARS", textHeight, FontStyle.Regular, GraphicsUnit.Point)
             End If
-            DrawAllButtons()
+            Me.Invalidate()
         End Set
     End Property
 
@@ -564,14 +540,7 @@ Public Class LCARSbuttonClass
         Set(ByVal value As Boolean)
             isLit = value
             litBuffer = isLit
-
-            If isLit Then
-                Me.BackgroundImage = NormalButton
-                Me.Refresh()
-            Else
-                Me.BackgroundImage = UnLitButton
-                Me.Refresh()
-            End If
+            Me.Invalidate()
         End Set
     End Property
 
@@ -725,13 +694,13 @@ Public Class LCARSbuttonClass
             End If
 
             tmpStr = myText
-            DrawAllButtons()
+            Me.Invalidate()
         End If
     End Sub
 
     Private Sub tmrTextScroll_Tick(ByVal sender As Object, ByVal e As EventArgs) Handles tmrTextScroll.Tick
         tmpStr = tmpStr.Substring(1) & tmpStr.Substring(0, 1)
-        DrawAllButtons()
+        Me.Invalidate()
 
     End Sub
 
@@ -749,12 +718,10 @@ Public Class LCARSbuttonClass
 
             If isFlashing Then
                 isFlashing = False
-                Me.BackgroundImage = NormalButton
             Else
                 isFlashing = True
-                Me.BackgroundImage = UnLitButton
             End If
-
+            Me.Invalidate()
             Windows.Forms.Application.DoEvents()
             Threading.Thread.Sleep(flashingInterval)
         Loop
@@ -776,6 +743,11 @@ Public Class LCARSbuttonClass
     Public Sub DrawAllButtons()
         If noDraw = False Then
             If Not (Me.Width = 0 Or Me.Height = 0) Then
+                If Not NormalButton Is Nothing Then
+                    'UnlitButton does not require null check
+                    NormalButton.Dispose()
+                    UnLitButton.Dispose()
+                End If
                 'Draw and show the standard "normal" button.
                 '----------------------------------------------------------------------
                 NormalButton = DrawButton()
@@ -785,13 +757,12 @@ Public Class LCARSbuttonClass
                 '-----------------------------------------------------------------------
                 UnLitButton = drawUnlit(NormalButton)
 
-                Lit = isLit
+                Me.Invalidate()
             End If
         End If
     End Sub
 
     Protected Overridable Sub GenericButton_load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.ParentChanged
-        CheckForIllegalCrossThreadCalls = False
         Me.lblTextSize = Me.Size
     End Sub
 
@@ -852,12 +823,14 @@ Public Class LCARSbuttonClass
     End Sub
 
     Protected Overrides Sub OnPaint(ByVal e As System.Windows.Forms.PaintEventArgs)
-        'If isLit Then
-        '    e.Graphics.DrawImage(NormalButton, 0, 0)
-        'Else
-        '    e.Graphics.DrawImage(UnLitButton, 0, 0)
-        'End If
-        'MyBase.OnPaint(e)
+        If isLit Xor isFlashing Then
+            e.Graphics.DrawImage(NormalButton, 0, 0)
+        Else
+            e.Graphics.DrawImage(UnLitButton, 0, 0)
+        End If
+        If lblTextVisible Then
+            DrawText(e.Graphics)
+        End If
     End Sub
 
     Private Sub ColorsUpdated(ByVal sender As Object, ByVal e As System.EventArgs) Handles _ColorsAvailable.ColorsUpdated
@@ -896,7 +869,6 @@ Public Class LCARSbuttonClass
         'Draw text:
         Me.lblTextLoc = New Point(0, 0)
         Me.lblTextSize = Me.Size
-        DrawText(g)
         g.Dispose()
         Return mybitmap
     End Function
@@ -908,44 +880,46 @@ Public Class LCARSbuttonClass
     ''' <remarks>This sub will handle all auto-ellipsis functionality and alignment.
     ''' </remarks>
     Protected Sub DrawText(ByVal g As Graphics)
-        Dim area As Rectangle = New Rectangle(_textLocation, _textSize)
-        Dim format As New StringFormat()
-        format.FormatFlags = StringFormatFlags.NoWrap
-        If tmrTextScroll.Enabled Or Not _autoEllipsis Then
-            If _ellipsisMode = EllipsisModes.Character Then
-                format.Trimming = StringTrimming.Character
+        If _textVisible Then
+            Dim area As Rectangle = New Rectangle(_textLocation, _textSize)
+            Dim format As New StringFormat()
+            format.FormatFlags = StringFormatFlags.NoWrap
+            If tmrTextScroll.Enabled Or Not _autoEllipsis Then
+                If _ellipsisMode = EllipsisModes.Character Then
+                    format.Trimming = StringTrimming.Character
+                Else
+                    format.Trimming = StringTrimming.Word
+                End If
             Else
-                format.Trimming = StringTrimming.Word
+                If _ellipsisMode = EllipsisModes.Character Then
+                    format.Trimming = StringTrimming.EllipsisCharacter
+                Else
+                    format.Trimming = StringTrimming.EllipsisWord
+                End If
             End If
-        Else
-            If _ellipsisMode = EllipsisModes.Character Then
-                format.Trimming = StringTrimming.EllipsisCharacter
-            Else
-                format.Trimming = StringTrimming.EllipsisWord
-            End If
-        End If
-        If tmrTextScroll.Enabled Then
-            format.Alignment = StringAlignment.Near
-        Else
-            If _textAlign = ContentAlignment.BottomCenter Or _textAlign = ContentAlignment.MiddleCenter Or _textAlign = ContentAlignment.TopCenter Then
-                format.Alignment = StringAlignment.Center
-            ElseIf _textAlign = ContentAlignment.BottomRight Or _textAlign = ContentAlignment.MiddleRight Or _textAlign = ContentAlignment.TopRight Then
-                format.Alignment = StringAlignment.Far
-            ElseIf _textAlign = ContentAlignment.BottomLeft Or _textAlign = ContentAlignment.MiddleLeft Or _textAlign = ContentAlignment.TopLeft Then
+            If tmrTextScroll.Enabled Then
                 format.Alignment = StringAlignment.Near
+            Else
+                If _textAlign = ContentAlignment.BottomCenter Or _textAlign = ContentAlignment.MiddleCenter Or _textAlign = ContentAlignment.TopCenter Then
+                    format.Alignment = StringAlignment.Center
+                ElseIf _textAlign = ContentAlignment.BottomRight Or _textAlign = ContentAlignment.MiddleRight Or _textAlign = ContentAlignment.TopRight Then
+                    format.Alignment = StringAlignment.Far
+                ElseIf _textAlign = ContentAlignment.BottomLeft Or _textAlign = ContentAlignment.MiddleLeft Or _textAlign = ContentAlignment.TopLeft Then
+                    format.Alignment = StringAlignment.Near
+                End If
             End If
-        End If
-        If _textAlign = ContentAlignment.TopCenter Or _textAlign = ContentAlignment.TopLeft Or _textAlign = ContentAlignment.TopRight Then
-            format.LineAlignment = StringAlignment.Near
-        ElseIf _textAlign = ContentAlignment.MiddleCenter Or _textAlign = ContentAlignment.MiddleLeft Or _textAlign = ContentAlignment.MiddleRight Then
-            format.LineAlignment = StringAlignment.Center
-        ElseIf _textAlign = ContentAlignment.BottomCenter Or _textAlign = ContentAlignment.BottomLeft Or _textAlign = ContentAlignment.BottomRight Then
-            format.LineAlignment = StringAlignment.Far
-        End If
-        If _ForceCaps Then
-            g.DrawString(tmpStr.ToUpper(), _font, Brushes.Black, area, format)
-        Else
-            g.DrawString(tmpStr, _font, Brushes.Black, area, format)
+            If _textAlign = ContentAlignment.TopCenter Or _textAlign = ContentAlignment.TopLeft Or _textAlign = ContentAlignment.TopRight Then
+                format.LineAlignment = StringAlignment.Near
+            ElseIf _textAlign = ContentAlignment.MiddleCenter Or _textAlign = ContentAlignment.MiddleLeft Or _textAlign = ContentAlignment.MiddleRight Then
+                format.LineAlignment = StringAlignment.Center
+            ElseIf _textAlign = ContentAlignment.BottomCenter Or _textAlign = ContentAlignment.BottomLeft Or _textAlign = ContentAlignment.BottomRight Then
+                format.LineAlignment = StringAlignment.Far
+            End If
+            If _ForceCaps Then
+                g.DrawString(tmpStr.ToUpper(), _font, Brushes.Black, area, format)
+            Else
+                g.DrawString(tmpStr, _font, Brushes.Black, area, format)
+            End If
         End If
     End Sub
 

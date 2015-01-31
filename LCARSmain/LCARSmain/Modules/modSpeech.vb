@@ -133,11 +133,9 @@ Module modSpeech
 
         'Load up the speech recognition
         Try
-            Try
+            If Not Listener Is Nothing Then
                 RemoveHandler Listener.Recognition, AddressOf OnReco
-            Catch ex As Exception
-                'First start, so no problem.
-            End Try
+            End If
             Listener = Nothing
             vGrammar = Nothing
             SpeechEngine = Nothing
@@ -243,27 +241,27 @@ Module modSpeech
             Dim myE As New System.EventArgs
             Select Case command.ToLower
                 Case "menu"
-                    curBusiness.myStartMenu.doClick(sender, myE)
+                    curBusiness(0).myStartMenu.doClick(sender, myE)
                 Case "my computer"
-                    curBusiness.myCompButton_Click(sender, myE)
+                    curBusiness(0).myCompButton_Click(sender, myE)
                 Case "settings"
-                    curBusiness.mySettingsButton_Click(sender, myE)
+                    curBusiness(0).mySettingsButton_Click(sender, myE)
                 Case "engineering"
-                    curBusiness.myEngineeringButton_Click(sender, myE)
+                    curBusiness(0).myEngineeringButton_Click(sender, myE)
                 Case "mode select"
-                    curBusiness.myModeSelectButton_Click(sender, myE)
+                    curBusiness(0).myModeSelectButton_Click(sender, myE)
                 Case "my documents"
-                    curBusiness.myDocuments.doClick(sender, myE)
+                    curBusiness(0).myDocuments.doClick(sender, myE)
                 Case "my pictures"
-                    curBusiness.myPictures.doClick(sender, myE)
+                    curBusiness(0).myPictures.doClick(sender, myE)
                 Case "my music"
                     Process.Start(Application.StartupPath & "\LCARSexplorer.exe", System.Environment.GetFolderPath(Environment.SpecialFolder.MyMusic))
                 Case "my videos"
-                    curBusiness.myVideos.doClick(sender, myE)
+                    curBusiness(0).myVideos.doClick(sender, myE)
                 Case "deactivate"
                     Process.Start(Application.StartupPath & "\LCARSshutdown.exe", "/" & myDesktop.Handle.ToString & "/c")
                 Case "self destruct"
-                    curBusiness.myDestruct.doClick(sender, myE)
+                    curBusiness(0).myDestruct.doClick(sender, myE)
                 Case "log off"
                     ConfirmSound.Play()
                     Confirm = "log off"
@@ -304,7 +302,7 @@ Module modSpeech
                     Catch ex As Exception
                     End Try
                 Case "keyboard"
-                    curBusiness.myOSK.doClick(sender, myE)
+                    curBusiness(0).myOSK.doClick(sender, myE)
                 Case "task manager"
                     Try
                         Process.Start("taskmgr")
@@ -330,7 +328,7 @@ Module modSpeech
                     End Select
                     Confirm = ""
                 Case "help"
-                    curBusiness.myHelp.doClick(sender, myE)
+                    curBusiness(0).myHelp.doClick(sender, myE)
                 Case "authorization"
                     ExecuteCommand(Authorization)
                 Case "show console"
@@ -338,7 +336,7 @@ Module modSpeech
                 Case "hide console"
                     console.Hide()
                 Case "web browser"
-                    curBusiness.myWebBrowser.doClick(sender, myE)
+                    curBusiness(0).myWebBrowser.doClick(sender, myE)
                 Case "crash test"
                     'Causes an unhandled exception.
                     If GetSetting("LCARS x32", "Application", "DebugSwitch", "False") Then

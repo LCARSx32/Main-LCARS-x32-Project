@@ -469,6 +469,7 @@ Partial Class frmAutoDestruct
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmAutoDestruct"
         Me.Text = "Auto Destruct"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

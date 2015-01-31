@@ -181,7 +181,6 @@ Namespace Controls
             'draw the main button area
             g.FillRectangle(myBrush, curLeft, 0, (Me.Width - curLeft) - (Me.Height + (Me.Height \ 10)), Me.Height)
             Me.lblTextLoc = New Point(curLeft, 0)
-            Me.lblTextAnchor = AnchorStyles.None
             Me.lblTextSize = New Point((Me.Width - curLeft) - (Me.Height \ 2), Me.Height)
             curLeft += (Me.Width - curLeft) - (Me.Height + (Me.Height \ 10))
 
@@ -192,8 +191,6 @@ Namespace Controls
 
             'draw the curved end
             g.FillEllipse(myBrush, curLeft, 0, Me.Height, Me.Height)
-            'draw the button text
-            DrawText(g)
             Return mybitmap
 
         End Function

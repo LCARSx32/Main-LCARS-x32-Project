@@ -9,6 +9,30 @@
     ' NetworkAvailabilityChanged: Raised when the network connection is connected or disconnected.
     Partial Friend Class MyApplication
         Dim hasfailed As Boolean = False
+        Private isSettings As Boolean = False
+
+        Private Sub MyApplication_Startup(ByVal sender As Object, ByVal e As Microsoft.VisualBasic.ApplicationServices.StartupEventArgs) Handles Me.Startup
+            If Command().ToLower().Contains("--settings") Then
+                'Load settings
+                If Process.GetProcessesByName("LCARSmain").Length = 1 Then
+                    MainForm = frmSettings
+                    isSettings = True
+                Else
+                    'Send message current instance to load settings.
+                    InterMsgID = frmStartup.RegisterWindowMessageA("LCARS_X32_MSG")
+                    SendMessage(HWND_BROADCAST, InterMsgID, 0, 2)
+                    End
+                End If
+            Else
+                'Run as shell
+                If Process.GetProcessesByName("LCARSmain").Length > 1 Then
+                    'Send message to current instance to switch to shell mode
+                    InterMsgID = frmStartup.RegisterWindowMessageA("LCARS_X32_MSG")
+                    SendMessage(HWND_BROADCAST, InterMsgID, 0, 3)
+                    End
+                End If
+            End If
+        End Sub
         Private Sub MyApplication_UnhandledException(ByVal sender As Object, ByVal e As Microsoft.VisualBasic.ApplicationServices.UnhandledExceptionEventArgs) Handles Me.UnhandledException
             If Not hasfailed Then
                 hasfailed = True
@@ -41,6 +65,19 @@
                 End
             End If
         End Sub
+
+        Public Sub SwitchToShellFromSettings()
+            If isSettings Then
+                Application.MainForm = frmStartup
+                MainForm.Show()
+            End If
+        End Sub
+
+        Public ReadOnly Property IsSettingsMode() As Boolean
+            Get
+                Return isSettings
+            End Get
+        End Property
     End Class
 
 End Namespace

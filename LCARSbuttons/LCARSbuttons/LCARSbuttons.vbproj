@@ -163,6 +163,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="NamespaceDocs.vb" />
+    <Compile Include="x32\modSettings.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Class1.resx">

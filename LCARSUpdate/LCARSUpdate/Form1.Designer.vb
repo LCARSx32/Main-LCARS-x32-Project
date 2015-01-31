@@ -179,6 +179,7 @@ Partial Class frmUpdate
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmUpdate"
         Me.Text = "LCARS Update"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

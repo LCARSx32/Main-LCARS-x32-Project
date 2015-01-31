@@ -62,15 +62,6 @@ Namespace Controls
         End Property
 #End Region
 
-#Region " Subs "
-
-
-        Protected Overrides Sub GenericButton_load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.ParentChanged
-            CheckForIllegalCrossThreadCalls = False
-        End Sub
-
-#End Region
-
 #Region " Structures "
 
         Public Enum LCARSbuttonStyles
@@ -173,7 +164,6 @@ Namespace Controls
                         Me.lblTextSize = New Size(Me.Width, Me.Height)
                 End Select
             End If
-            DrawText(g)
             g.Dispose()
             Return mybitmap
         End Function

@@ -32,6 +32,7 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,6 +43,7 @@
     <DocumentationFile>LCARSmain.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -75,6 +77,7 @@
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="Classes\cWrapExitWindows.vb" />
+    <Compile Include="Classes\LCScreenImage.vb" />
     <Compile Include="Forms\frmAlerts.Designer.vb">
       <DependentUpon>frmAlerts.vb</DependentUpon>
     </Compile>
@@ -121,6 +124,12 @@
     <Compile Include="Forms\frmRunProgram.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\frmSettings.designer.vb">
+      <DependentUpon>frmSettings.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmSettings.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\frmSpeechConsole.Designer.vb">
       <DependentUpon>frmSpeechConsole.vb</DependentUpon>
     </Compile>
@@ -160,7 +169,6 @@
     <Compile Include="Modules\modAnimate.vb" />
     <Compile Include="Modules\modBusiness.vb" />
     <Compile Include="Modules\modCommon.vb" />
-    <Compile Include="Modules\modSettings.vb" />
     <Compile Include="Modules\modSpeech.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -212,6 +220,10 @@
     <EmbeddedResource Include="Forms\frmRunProgram.resx">
       <SubType>Designer</SubType>
       <DependentUpon>frmRunProgram.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmSettings.resx">
+      <DependentUpon>frmSettings.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmSpeechConsole.resx">
       <DependentUpon>frmSpeechConsole.vb</DependentUpon>
@@ -275,11 +287,15 @@
   <ItemGroup>
     <None Include="bin\Debug\red_alert.wav" />
     <Content Include="img\Federation.ico" />
+    <None Include="My Project\app.manifest" />
     <None Include="Resources\010.wav" />
     <Content Include="img\folder.png" />
     <Content Include="img\x32.ico" />
     <None Include="Resources\box.jpg" />
     <None Include="Resources\095.wav" />
+    <Content Include="About.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\computer.wav" />
     <None Include="Resources\Images\frmmainscreen4.jpg" />
     <None Include="Resources\Images\frmmainscreen3.jpg" />
@@ -317,8 +333,8 @@
       <Project>{01C0B575-1C11-40E5-9C57-6A2E58A8A3A8}</Project>
       <Name>LCARSpic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\LCARSsettings\LCARSsettings\LCARSsettings.vbproj">
-      <Project>{9FC894F9-1347-40D7-8388-727AA0A93CE4}</Project>
+    <ProjectReference Include="..\..\LCARSsettings\LCARSsettings.vbproj">
+      <Project>{748D87C0-0C66-47E7-BCB7-B0D4096EDF9F}</Project>
       <Name>LCARSsettings</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\LCARSshutdown\LCARSshutdown\LCARSshutdown.vbproj">
@@ -380,7 +396,7 @@
     <ItemGroup>
       <ManualSourceFiles Include="..\..\LCARSx32Manual\LCARSx32 Manual\LCARS x32 Manual\**\*.*" />
     </ItemGroup>
-	<RemoveDir Directories="$(OutputPath)\LCARS x32 Manual" />
+    <RemoveDir Directories="$(OutputPath)\LCARS x32 Manual" />
     <Copy DestinationFiles="@(ManualSourceFiles->'$(OutputPath)\LCARS x32 Manual\%(RecursiveDir)%(Filename)%(Extension)')" SourceFiles="@(ManualSourceFiles)" SkipUnchangedFiles="true" />
     <ItemGroup>
       <FileWrites Include="@(ManualSourceFiles->'$(OutputPath)\LCARS x32 Manual\%(RecursiveDir)%(Filename)%(Extension)')" />

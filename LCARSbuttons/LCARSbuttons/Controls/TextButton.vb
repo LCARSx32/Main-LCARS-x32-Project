@@ -249,24 +249,6 @@ Namespace Controls
 
                     End If
 
-
-                    ''Draw the left pill shape
-                    'g.FillEllipse(mybrush, 0, 0, Me.Size.Height, Me.Size.Height)
-                    ''draw the uncurved portion of the pill shape
-                    'g.FillRectangle(mybrush, (Me.Height \ 2) + 1, 0, Me.Height \ 2, Me.Height)
-
-                    ''Draw the filler bar between the left pill shape and the text
-                    'g.FillRectangle(mybrush, (Me.Height + (Me.Height \ 10) + 1), 0, (Me.Width - (textSize.Width + (Me.Height * 2))) + (Me.Height \ 5), Me.Height)
-
-                    ''Draw the text
-                    'Dim textBrush As System.Drawing.SolidBrush = New System.Drawing.SolidBrush(getColor(LCARScolorStyles.Orange))
-                    'g.DrawString(Me.ButtonText.ToUpper, myfont, textBrush, (Me.Width - (textSize.Width + Me.Height)) + (Me.Height / 5), -(Me.Height / 4.7))
-
-                    ''Draw the right pill shape
-                    ''draw the stub
-                    'g.FillRectangle(mybrush, Me.Width - Me.Height, 0, Me.Height \ 2, Me.Height)
-                    ''draw the curved portion
-                    'g.FillEllipse(mybrush, Me.Size.Width - Me.Size.Height, 0, Me.Size.Height, Me.Size.Height)
                 End If
                 Return mybitmap
             Else

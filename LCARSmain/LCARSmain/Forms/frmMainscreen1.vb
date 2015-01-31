@@ -157,25 +157,12 @@ Public Class frmMainscreen1
     Public modBusiness As New modBusiness
 #Region " AutoHide "
 
-    Public autohide As IAutohide.AutoHideModes = IAutohide.AutoHideModes.Disabled
-    Dim hideCount As Integer = 0
-
-    Private Function FindRoot(ByVal hWnd As Int32) As Int32
-        Do
-            Dim parent_hwnd As Int32 = GetParent(hWnd)
-            If parent_hwnd = 0 Then Return hWnd
-            hWnd = parent_hwnd
-        Loop
-    End Function
-
     Private Sub UpdateRegion()
         Dim myRegion As Region = New Region(New RectangleF(0, 0, Me.Width, Me.Height))
         Try
             Dim mainRect As New Rectangle
-            Dim myLoc As Point = pnlMainBar.PointToScreen(pnlMain.Location)
-
-            mainRect.X = myLoc.X
-            mainRect.Y = myLoc.Y
+            mainRect.X = pnlMainBar.Left + pnlMain.Left + pnlMainContainer.Left
+            mainRect.Y = pnlMainBar.Top + pnlMain.Top + pnlMainContainer.Top
             mainRect.Width = pnlMain.Width
             mainRect.Height = pnlMain.Height
 
@@ -185,65 +172,9 @@ Public Class frmMainscreen1
         End Try
     End Sub
 
-    Public Sub SetAutoHide(ByVal value As IAutohide.AutoHideModes) Implements IAutohide.SetAutoHide
-
-        autohide = value
-        If autohide = IAutohide.AutoHideModes.Disabled Then
-            tmrAutoHide.Enabled = False
-            hideCount = 0
-            pnlMainBar.Top = 130
-            pnlMainBar.Height = Screen.AllScreens(modBusiness.ScreenIndex).Bounds.Height - 130
-            pnlMainBar_Resize(New Object, New System.EventArgs)
-            Me.Visible = True
-        Else
-            autohide = IAutohide.AutoHideModes.Visible
-            tmrAutoHide.Enabled = True
-        End If
-    End Sub
-
-    Private Sub tmrAutoHide_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrAutoHide.Tick
-        If Not autohide = IAutohide.AutoHideModes.Disabled Then
-            Dim myPoint As POINTAPI
-            myPoint.X = MousePosition.X
-            myPoint.Y = MousePosition.Y
-
-            Dim rootHwnd As IntPtr = FindRoot(WindowFromPoint(myPoint))
-
-            If rootHwnd = Me.Handle Or _
-             myPoint.Y < 1 Or myPoint.X < 1 Or _
-             modBusiness.progShowing = True Or modBusiness.userButtonsShowing = True Then
-
-                hideCount = 0
-                ' pnlMainBar.Height = Me.Height
-
-                If Not autohide = IAutohide.AutoHideModes.Visible Or Me.Visible = False Then
-                    pnlMainBar.Top = 130
-                    pnlMainBar.Height = Screen.AllScreens(modBusiness.ScreenIndex).Bounds.Height - 130
-                    pnlMainBar_Resize(sender, e)
-
-
-                    Me.Visible = True
-                    autohide = IAutohide.AutoHideModes.Visible
-                End If
-
-            End If
-
-
-            If hideCount <= 30 Then
-                hideCount += 1
-            Else
-                autohide = IAutohide.AutoHideModes.Hidden
-                pnlMainBar.Bounds = Screen.AllScreens(modBusiness.ScreenIndex).Bounds
-                pnlMain.Bounds = pnlMainBar.Bounds
-                UpdateRegion()
-                Me.Visible = False
-                ' pnlMainBar.Height = Screen.AllScreens(modBusiness.ScreenIndex).Bounds.Height + 70
-            End If
-        Else
-            tmrAutoHide.Enabled = False
-        End If
-
-    End Sub
+    Public Function getAutohideEdges() As IAutohide.AutohideEdges Implements IAutohide.getAutohideEdges
+        Return IAutohide.AutohideEdges.Top Or IAutohide.AutohideEdges.Left
+    End Function
 
 #End Region
 
@@ -2900,6 +2831,11 @@ Public Class frmMainscreen1
         If pnlStart.Visible Then myStartMenu.doClick(New Object, New EventArgs)
     End Sub
 
+    Public Shared ReadOnly Property ScreenImage() As Image
+        Get
+            Return My.Resources.frmmainscreen1
+        End Get
+    End Property
     'Private Sub myAlertListButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles myAlertListButton.Click
     '    If frmAlerts.Visible Then
     '        frmAlerts.Hide()

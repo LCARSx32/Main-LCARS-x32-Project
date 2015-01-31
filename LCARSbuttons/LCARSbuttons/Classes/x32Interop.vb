@@ -32,6 +32,7 @@ Public Class x32Interop
     ''' This event will not be raised immediately after the current instance has subscribed to LCARS
     ''' messages. The window that needs to resize will need to do so on its own on startup.
     ''' </remarks>
+    <Obsolete("Replace by setting maximized bounds to match working area.", True)> _
     Public Event WorkingAreaChanged(ByVal NewArea As System.Drawing.Rectangle)
     ''' <summary>
     ''' Raised when an alert is initiated.
@@ -91,11 +92,15 @@ Public Class x32Interop
 
         ElseIf m.Msg = WM_COPYDATA And m.WParam = x32Handle And Not x32Handle = IntPtr.Zero Then
             m.Result = 1
-            Dim myData As New COPYDATASTRUCT
-            myData = System.Runtime.InteropServices.Marshal.PtrToStructure(m.LParam, GetType(COPYDATASTRUCT))
-            Dim myRect As New System.Drawing.Rectangle
-            myRect = System.Runtime.InteropServices.Marshal.PtrToStructure(myData.lpData, GetType(System.Drawing.Rectangle))
-            RaiseEvent WorkingAreaChanged(myRect)
+
+            'Obsolete: applications are expected to keep their own size.
+
+            'Dim myData As New COPYDATASTRUCT
+            'myData = System.Runtime.InteropServices.Marshal.PtrToStructure(m.LParam, GetType(COPYDATASTRUCT))
+            'Dim myRect As New System.Drawing.Rectangle
+            'myRect = System.Runtime.InteropServices.Marshal.PtrToStructure(myData.lpData, GetType(System.Drawing.Rectangle))
+            'receiver.Bounds = myRect
+            'RaiseEvent WorkingAreaChanged(myRect)
         End If
     End Sub
 

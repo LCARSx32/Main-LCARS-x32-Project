@@ -533,6 +533,7 @@ Partial Class frmEngineering
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmEngineering"
         Me.Text = "Main Engineering"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.pnlWMIdata.ResumeLayout(False)
         Me.pnlWMIdata.PerformLayout()
         Me.ResumeLayout(False)

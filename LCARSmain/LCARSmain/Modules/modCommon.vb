@@ -4,12 +4,12 @@ Imports System.Runtime.InteropServices
 Module modCommon
 
     Public LinkedWindows As New List(Of IntPtr)
-    Public StartingWorkingArea As Rectangle
+    Public StartingWorkingArea As New List(Of Rectangle)
     Public TaskBarState As Integer
     Public cancelAlert As Boolean = True
     Public shutDownOptions As New cWrapExitWindows
     Public myDesktop As frmStartup
-    Public curBusiness As modBusiness
+    Public curBusiness As New List(Of modBusiness)
     Public SysListView As IntPtr
     Public hTrayIcons As IntPtr
     Public hTrayParent As IntPtr
@@ -19,12 +19,12 @@ Module modCommon
     Public alertColor As Color
     Public alertSound As String
     Dim inAlert As Boolean = False
-    Dim CurTopWindow As Integer
     Dim alertThread As Threading.Thread
     Public closing As Boolean = False
     Public myAlertForm As New frmAlerts()
     Public shellMode As Boolean = False
     Public alertSoundMode As Microsoft.VisualBasic.AudioPlayMode = AudioPlayMode.WaitToComplete
+    Public displayOffset As Point
 
 #Region " API Calls "
 
@@ -71,7 +71,7 @@ Module modCommon
 
     Public Declare Function GetWindowPlacement Lib "user32" (ByVal hwnd As Integer, ByRef lpwndpl As WINDOWPLACEMENT) As Integer
 
-
+    Public Declare Function GetWindowRect Lib "user32" (ByVal hwnd As IntPtr, ByRef rectangle As RECT) As Integer
 
 #End Region
 
@@ -336,26 +336,60 @@ Public Enum SetWindowPosFlags As UInteger
 
 #End Region
 
-    Public Sub setBusiness(ByRef business As modBusiness)
-        curBusiness = business
+    Public Sub setBusiness(ByRef business As modBusiness, ByVal ScreenIndex As Integer)
+        curBusiness(ScreenIndex) = business
     End Sub
 
-    Public Sub SetWallpaper(ByVal wall As Image)
-        myDesktop.pnlDesktop.BackgroundImage = wall
+    Public Sub SetWallpaper(ByVal wall As Image, ByVal ScreenIndex As Integer)
+        myDesktop.curDesktop(ScreenIndex).BackgroundImage = wall
     End Sub
 
-    Public Sub setWallpaperSizeMode(ByVal sizemode As ImageLayout)
-        myDesktop.pnlDesktop.BackgroundImageLayout = sizemode
+    Public Sub setWallpaperSizeMode(ByVal sizemode As ImageLayout, ByVal ScreenIndex As Integer)
+        myDesktop.curDesktop(ScreenIndex).BackgroundImageLayout = sizemode
     End Sub
 
-
-
-    Public Sub SetAutoHide(ByVal hide As Integer)
-        CType(curBusiness.myForm, IAutohide).SetAutoHide(hide)
+    Public Sub SetAutoHide(ByVal hide As IAutohide.AutoHideModes, ByVal ScreenIndex As Integer)
+        curBusiness(ScreenIndex).SetAutoHide(hide)
     End Sub
 
     Public Sub SetDesktop(ByVal desktop As Form)
         myDesktop = desktop
+    End Sub
+
+    Public Sub RefreshColors()
+        For Each myBusiness As modBusiness In curBusiness
+            LCARS.UpdateColors(myBusiness.myForm)
+        Next
+        For Each mywindow As IntPtr In LinkedWindows
+            SendMessage(mywindow, InterMsgID, 0, 2)
+        Next
+    End Sub
+
+    Public Sub SetBeeping(ByVal value As Boolean)
+        For Each myBusiness As modBusiness In curBusiness
+            LCARS.SetBeeping(myBusiness.myForm, value)
+        Next
+        For Each mywindow As IntPtr In LinkedWindows
+            SendMessage(mywindow, InterMsgID, 0, 3)
+        Next
+    End Sub
+
+    Public Sub RefreshVoiceCommands(ByVal active As Boolean)
+        If active = False Then
+            'turn off voice commands
+            Try
+                Listener.Recognizer.State = SpeechLib.SpeechRecognizerState.SRSInactive
+            Catch ex As Exception
+            End Try
+        Else
+            Try
+                beginVoiceRecognition()
+            Catch ex As Exception
+            End Try
+        End If
+        For Each myBusiness As modBusiness In curBusiness
+            myBusiness.mySpeech.Lit = active
+        Next
     End Sub
 
     Public Sub GeneralAlert(ByVal type As Integer)
@@ -368,7 +402,11 @@ Public Enum SetWindowPosFlags As UInteger
         Dim startIndex As Integer = alertstring.IndexOf("|")
         alertColor = ColorTranslator.FromHtml(alertstring.Substring(startIndex + 1, 7))
         alertSound = alertstring.Substring(startIndex + 9)
-        Dim alertables As Collection = GetAlertPanels(curBusiness.myForm)
+        'TODO: Set by screen index
+        Dim alertables(curBusiness.Count - 1) As Collection
+        For i As Integer = 0 To alertables.Length - 1
+            alertables(i) = GetAlertPanels(curBusiness(i).myForm)
+        Next
         alertThread = New Threading.Thread(AddressOf MainAlert)
         cancelAlert = False
         alertThread.Start(alertables)
@@ -409,77 +447,57 @@ Public Enum SetWindowPosFlags As UInteger
         Return Alertables
     End Function
 
-    Private Sub MainAlert(ByVal alertables As Collection)
+    Private Sub MainAlert(ByVal alertables() As Collection)
         Dim LCARSbutton As New LCARS.LCARSbuttonClass
         Dim LCARStype As Type = LCARSbutton.GetType
-        Dim intloop As Integer
         Dim buffer As Integer
         alertSoundMode = GetSetting("LCARS x32", "Application", "AlertSoundMode", AudioPlayMode.WaitToComplete)
         inAlert = True
-        Dim highestTag As Integer = 0
-
-        For Each myControl As Control In alertables
-            If Not myControl.Tag Is Nothing And myControl.Tag <> "" And Integer.TryParse(myControl.Tag, buffer) = True Then
-                If buffer > highestTag Then
-                    highestTag = buffer
+        Dim highestTag(alertables.Length - 1) As Integer
+        For i As Integer = 0 To alertables.Length - 1 'For each screen
+            For Each myControl As Control In alertables(i)
+                If Not myControl.Tag Is Nothing And myControl.Tag <> "" And Integer.TryParse(myControl.Tag, buffer) = True Then
+                    If buffer > highestTag(i) Then
+                        highestTag(i) = buffer
+                    End If
                 End If
-            End If
+            Next
         Next
         Dim mySoundPath As String = alertSound
+        Dim soundThread As Threading.Thread
+        Dim screenThreads(alertables.Length - 1) As Threading.Thread
         'do the alert until cancelAlert is set to true:
         Do Until cancelAlert = True
-            Dim soundThread As New Threading.Thread(AddressOf AlertSoundSub)
+            'Start the sound off
             If Not (mySoundPath = "") Then
+                soundThread = New Threading.Thread(AddressOf AlertSoundSub)
                 soundThread.Start(mySoundPath)
             End If
-
-            For intloop = 0 To highestTag
-                For Each myBaseControl As Control In alertables
-
-                    If cancelAlert = True Then
-                        Exit Do
-                    End If
-
-                    For Each myButton As Control In myBaseControl.Controls
-
-                        If cancelAlert = True Then
-                            Exit Do
-                        End If
-                        Dim myLCARSButton As LCARS.LCARSbuttonClass = TryCast(myButton, LCARS.LCARSbuttonClass)
-                        If Not myLCARSButton Is Nothing Then
-                            With myLCARSButton
-                                If .CustomAlertColor <> alertColor Then
-                                    .CustomAlertColor = alertColor
-                                End If
-                                If myButton.Tag = intloop Then
-                                    .RedAlert = LCARS.LCARSalert.White
-                                    Application.DoEvents()
-                                Else
-                                    If .RedAlert <> LCARS.LCARSalert.Custom Then
-                                        .RedAlert = LCARS.LCARSalert.Custom
-                                        Application.DoEvents()
-                                    End If
-                                End If
-                            End With
-                        End If
-
-                        Application.DoEvents()
-                    Next
-                Next
-                Threading.Thread.Sleep(50)
+            'Start the flashing on each screen
+            For i As Integer = 0 To alertables.Length - 1
+                screenThreads(i) = New Threading.Thread(AddressOf AlertScreenSub)
+                Dim myparams As New AlertScreenSubParameters()
+                myparams.alertables = alertables(i)
+                myparams.highestTag = highestTag(i)
+                screenThreads(i).Start(myparams)
             Next
+            'Wait for flash to end
+            For Each mythread As Threading.Thread In screenThreads
+                mythread.Join()
+            Next
+            'Wait for sound to end
             If Not mySoundPath = "" Then
                 soundThread.Join()
             End If
         Loop
 
-        For Each myBaseControl As Control In alertables
-            For Each mybutton As Control In myBaseControl.Controls
-                If mybutton.GetType.IsSubclassOf(LCARStype) Then
-                    With CType(mybutton, LCARS.LCARSbuttonClass)
-                        .RedAlert = LCARS.LCARSalert.Normal
-                    End With
-                End If
+        For i As Integer = 0 To alertables.Length - 1 'For each screen
+            For Each myBaseControl As Control In alertables(i)
+                For Each mybutton As Control In myBaseControl.Controls
+                    If mybutton.GetType.IsSubclassOf(LCARStype) Then
+                        resetAlert(CType(mybutton, LCARS.LCARSbuttonClass))
+                    End If
+                Next
             Next
         Next
         inAlert = False
@@ -488,11 +506,75 @@ Public Enum SetWindowPosFlags As UInteger
         Next
     End Sub
 
+    Private Delegate Sub processButtonDelegate(ByVal index As Integer, ByVal Button As LCARS.LCARSbuttonClass)
+
+    Private Sub processButton(ByVal index As Integer, ByVal button As LCARS.LCARSbuttonClass)
+        If (button.InvokeRequired) Then
+            button.Invoke(New processButtonDelegate(AddressOf processButton), index, button)
+        Else
+            With button
+                If .CustomAlertColor <> alertColor Then
+                    .CustomAlertColor = alertColor
+                End If
+                If .Tag = index Then
+                    .RedAlert = LCARS.LCARSalert.White
+                    Application.DoEvents()
+                Else
+                    If .RedAlert <> LCARS.LCARSalert.Custom Then
+                        .RedAlert = LCARS.LCARSalert.Custom
+                        Application.DoEvents()
+                    End If
+                End If
+            End With
+        End If
+    End Sub
+
+    Private Delegate Sub resetAlertDelegate(ByVal button As LCARS.LCARSbuttonClass)
+
+    Private Sub resetAlert(ByVal button As LCARS.LCARSbuttonClass)
+        If button.InvokeRequired Then
+            button.Invoke(New resetAlertDelegate(AddressOf resetAlert), button)
+        Else
+            button.RedAlert = LCARS.LCARSalert.Normal
+        End If
+    End Sub
+
     Public Sub AlertSoundSub(ByVal soundPath As String)
         Try
             My.Computer.Audio.Play(soundPath, alertSoundMode)
         Catch ex As Exception
         End Try
+    End Sub
+
+    Public Structure AlertScreenSubParameters
+        Dim alertables As Collection
+        Dim highestTag As Integer
+    End Structure
+
+    Public Sub AlertScreenSub(ByVal params As AlertScreenSubParameters)
+        For intloop As Integer = 0 To params.highestTag
+            For Each myBaseControl As Control In params.alertables
+
+                If cancelAlert = True Then
+                    Exit Sub
+                End If
+
+                For Each myButton As Control In myBaseControl.Controls
+
+                    If cancelAlert = True Then
+                        Exit Sub
+                    End If
+                    Dim myLCARSButton As LCARS.LCARSbuttonClass = TryCast(myButton, LCARS.LCARSbuttonClass)
+                    If Not myLCARSButton Is Nothing Then
+                        processButton(intloop, myLCARSButton)
+                    End If
+
+                    Application.DoEvents()
+                Next
+            Next
+            Threading.Thread.Sleep(50)
+        Next
+
     End Sub
 
     Public Sub GetTaskbarSettings()
@@ -544,7 +626,6 @@ Public Enum SetWindowPosFlags As UInteger
 
     Public Sub SetTopWindow(ByVal hWnd As IntPtr)
         SetForegroundWindow(hWnd)
-        CurTopWindow = hWnd
     End Sub
 
     Public Function getWindowState(ByVal hwnd As IntPtr) As WindowStates
@@ -552,10 +633,6 @@ Public Enum SetWindowPosFlags As UInteger
         myPlacement.Length = Len(myPlacement)
         GetWindowPlacement(hwnd.ToInt32, myPlacement)
         Return myPlacement.ShowCmd
-    End Function
-
-    Public Function GetTopWindow() As Integer
-        Return CurTopWindow
     End Function
 
     Public Sub resizeWorkingArea(ByVal x As Integer, ByVal y As Integer, ByVal width As Integer, ByVal height As Integer)
@@ -612,16 +689,19 @@ Public Enum SetWindowPosFlags As UInteger
         End If
         ' End If
 
-
-        curBusiness.mainTimer.Enabled = False
-        If Not curBusiness.myForm Is Nothing Then
-            curBusiness.myForm.Dispose()
-        End If
-        If Not StartingWorkingArea = New Rectangle(0, 0, 0, 0) Then
-            With StartingWorkingArea
-                resizeWorkingArea(.X, .Y, .Width, .Height)
-            End With
-        End If
+        For Each myBusiness As modBusiness In curBusiness
+            myBusiness.mainTimer.Enabled = False
+            If Not myBusiness.myForm Is Nothing Then
+                myBusiness.myForm.Dispose()
+            End If
+        Next
+        For Each myArea As Rectangle In StartingWorkingArea
+            If Not myArea = New Rectangle(0, 0, 0, 0) Then
+                With myArea
+                    resizeWorkingArea(.X, .Y, .Width, .Height)
+                End With
+            End If
+        Next
 
         Dim hwndProgMan As IntPtr = FindWindow("ProgMan", Nothing)
         Dim hwndSHELLDLL_DefView As IntPtr = FindWindowEx(hwndProgMan, IntPtr.Zero, "SHELLDLL_DefView", IntPtr.Zero)
@@ -654,4 +734,20 @@ Public Enum SetWindowPosFlags As UInteger
 
     End Sub
 
+    Public Function getMainScreenTypes() As List(Of Type)
+        Dim typeList As New List(Of Type)
+        typeList.Add(GetType(frmMainscreen1))
+        typeList.Add(GetType(frmMainscreen2))
+        typeList.Add(GetType(frmMainscreen3))
+        typeList.Add(GetType(frmMainscreen4))
+
+        'Further code to find custom main screens
+        Return typeList
+    End Function
+
+    Public Sub updateDesktopBounds(ByVal ScreenIndex As Integer)
+        myDesktop.curDesktop(ScreenIndex).Bounds = _
+            New Rectangle(Screen.AllScreens(ScreenIndex).WorkingArea.Location - displayOffset, _
+                          Screen.AllScreens(ScreenIndex).WorkingArea.Size)
+    End Sub
 End Module
