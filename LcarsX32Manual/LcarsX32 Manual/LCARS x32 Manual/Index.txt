@@ -2,9 +2,10 @@ History and Ongoing Development|History.htm
 Quick Reference|Quick Reference.htm
 Installation|Installation.htm
 Settings|Settings.htm
-Start Menu|Start Menu.htm
+Main Screens|Main Screens.htm
 File Browser|File Browser.htm
-Personal Programs|Personal Programs.htm
+Alerts|Alerts.htm
+Voice Commands|Voice Commands.htm
 On-Screen Keyboard|OSK.htm
 Engineering|Engineering.htm
 Web Browser|Web Browser.htm
