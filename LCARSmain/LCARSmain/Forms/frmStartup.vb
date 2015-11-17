@@ -260,7 +260,11 @@ Public Class frmStartup
         SaveDesktopIcons()
 
         If GetSetting("LCARS X32", "Application", "Updates", "FALSE") Then
-            Process.Start(Application.StartupPath & "\LCARSUpdate.exe", "-s")
+            Try
+                Process.Start(Application.StartupPath & "\LCARSUpdate.exe", "-s")
+            Catch ex As Exception
+                MsgBox("Unable to check for updates" & vbNewLine & vbNewLine & ex.ToString())
+            End Try
         End If
 
         If shellMode Then
