@@ -108,7 +108,6 @@ Public Class LCARSbuttonClass
     Protected textHeight As Integer = 14
     Dim doBeep As Boolean = False
     Dim flashing As Boolean = False
-    Dim litBuffer As Boolean
     Dim flasher As Threading.Thread = New Threading.Thread(AddressOf flashThread)
     Dim flashingInterval As Integer = 500
     Dim isFlashing As Boolean
@@ -328,7 +327,6 @@ Public Class LCARSbuttonClass
                     flasher.Start()
                 Else
                     flasher.Abort()
-                    Lit = litBuffer
                 End If
             End If
 
@@ -542,7 +540,6 @@ Public Class LCARSbuttonClass
         End Get
         Set(ByVal value As Boolean)
             isLit = value
-            litBuffer = isLit
             Me.Invalidate()
         End Set
     End Property
