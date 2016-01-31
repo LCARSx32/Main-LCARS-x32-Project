@@ -38,7 +38,10 @@ Public Class LCARSbuttonClass
     ''' <param name="disposing">Boolean indicating whether to dispose of internal components</param>
     ''' <remarks>Overriden to clean up the component list</remarks>
     Protected Overloads Overrides Sub Dispose(ByVal disposing As Boolean)
-        flashing = False 'Needed to end the flashing thread and allow button to be disposed at all
+        'Needed to end the flashing thread and allow button to be disposed at all
+        If flashing Then
+            flasher.Abort()
+        End If
         If disposing Then
             If Not (components Is Nothing) Then
                 components.Dispose()
@@ -325,7 +328,6 @@ Public Class LCARSbuttonClass
                     flasher.Start()
                 Else
                     flasher.Abort()
-                    isFlashing = False
                     Lit = litBuffer
                 End If
             End If
@@ -715,17 +717,17 @@ Public Class LCARSbuttonClass
     End Sub
 
     Private Sub flashThread()
-        Do Until flashing = False
-
-            If isFlashing Then
-                isFlashing = False
-            Else
-                isFlashing = True
-            End If
+        Try
+            While flashing
+                isFlashing = Not isFlashing
+                Me.Invalidate()
+                Windows.Forms.Application.DoEvents()
+                Threading.Thread.Sleep(flashingInterval)
+            End While
+        Catch t As Threading.ThreadAbortException
+            isFlashing = False
             Me.Invalidate()
-            Windows.Forms.Application.DoEvents()
-            Threading.Thread.Sleep(flashingInterval)
-        Loop
+        End Try
     End Sub
 
     Private Sub SoundThread()
