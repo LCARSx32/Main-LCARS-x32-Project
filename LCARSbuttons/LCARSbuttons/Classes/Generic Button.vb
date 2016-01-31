@@ -325,6 +325,7 @@ Public Class LCARSbuttonClass
                     flasher.Start()
                 Else
                     flasher.Abort()
+                    isFlashing = False
                     Lit = litBuffer
                 End If
             End If
