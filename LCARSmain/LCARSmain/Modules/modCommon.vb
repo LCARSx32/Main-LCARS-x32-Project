@@ -156,7 +156,7 @@ Module modCommon
     Public Declare Function GetWindowLong Lib "user32" Alias "GetWindowLongA" (ByVal hwnd As Integer, ByVal nIndex As Integer) As Integer
     Public Declare Auto Function SetWindowLong Lib "User32.Dll" (ByVal hWnd As IntPtr, ByVal nIndex As Integer, ByVal dwNewLong As Integer) As Integer
     Declare Function GetWindowText Lib "user32" Alias "GetWindowTextA" (ByVal hwnd As Integer, ByVal lpString As String, ByVal cch As Integer) As Integer
-    Declare Function IsWindowVisible Lib "user32" (ByVal hwnd As Integer) As Integer
+    Declare Function IsWindowVisible Lib "user32" (ByVal hwnd As IntPtr) As Boolean
     '
     ' Constants used with APIs
     '
