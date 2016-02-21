@@ -575,7 +575,7 @@ public Class modBusiness
         Dim found As Boolean = False
         Dim intloop As Integer
         Dim battInfo As PowerStatus = SystemInformation.PowerStatus
-        Static battLevel As Single = 1
+        Static battLevel As Short = 10
 
         'Check for and hide startbar, ect. Code from Alan - Causing problems with message boxes
         If GetSetting("LCARS X32", "Application", "HideExplorer", "FALSE") = "TRUE" Then
@@ -634,170 +634,25 @@ public Class modBusiness
             myBattery.Controls("lblPowerSource").Text = "PRIMARY"
         End If
 
-        Dim newBattLevel As Single
+        Dim newBattLevel As Short = Math.Ceiling(battInfo.BatteryLifePercent * 10)
 
-        Select Case battInfo.BatteryLifePercent
-            Case 0 To 0.1
-                newBattLevel = 0
-            Case 0.1 To 0.1
-                newBattLevel = 0.1
-            Case 0.11 To 0.2
-                newBattLevel = 0.2
-            Case 0.21 To 0.3
-                newBattLevel = 0.3
-            Case 0.31 To 0.4
-                newBattLevel = 0.4
-            Case 0.41 To 0.5
-                newBattLevel = 0.5
-            Case 0.51 To 0.6
-                newBattLevel = 0.6
-            Case 0.61 To 0.7
-                newBattLevel = 0.7
-            Case 0.71 To 0.8
-                newBattLevel = 0.8
-            Case 0.81 To 0.9
-                newBattLevel = 0.9
-            Case 0.91 To 1
-                newBattLevel = 1
-        End Select
         If newBattLevel <> battLevel Then
             battLevel = newBattLevel
+            Dim bars() As Control = { _
+            myBattery.Controls("fbBatt1"), _
+            myBattery.Controls("fbBatt2"), _
+            myBattery.Controls("fbBatt3"), _
+            myBattery.Controls("fbBatt4"), _
+            myBattery.Controls("fbBatt5"), _
+            myBattery.Controls("fbBatt6"), _
+            myBattery.Controls("fbBatt7"), _
+            myBattery.Controls("fbBatt8"), _
+            myBattery.Controls("fbBatt9"), _
+            myBattery.Controls("fbBatt10")}
 
-            Dim b1 As Control = myBattery.Controls("fbBatt1")
-            Dim b2 As Control = myBattery.Controls("fbBatt2")
-            Dim b3 As Control = myBattery.Controls("fbBatt3")
-            Dim b4 As Control = myBattery.Controls("fbBatt4")
-            Dim b5 As Control = myBattery.Controls("fbBatt5")
-            Dim b6 As Control = myBattery.Controls("fbBatt6")
-            Dim b7 As Control = myBattery.Controls("fbBatt7")
-            Dim b8 As Control = myBattery.Controls("fbBatt8")
-            Dim b9 As Control = myBattery.Controls("fbBatt9")
-            Dim b10 As Control = myBattery.Controls("fbBatt10")
-
-            Select Case battLevel
-                Case 1
-                    b1.Visible = True
-                    b2.Visible = True
-                    b3.Visible = True
-                    b4.Visible = True
-                    b5.Visible = True
-                    b6.Visible = True
-                    b7.Visible = True
-                    b8.Visible = True
-                    b9.Visible = True
-                    b10.Visible = True
-                Case 0.9
-                    b1.Visible = True
-                    b2.Visible = True
-                    b3.Visible = True
-                    b4.Visible = True
-                    b5.Visible = True
-                    b6.Visible = True
-                    b7.Visible = True
-                    b8.Visible = True
-                    b9.Visible = True
-                    b10.Visible = False
-                Case 0.8
-                    b1.Visible = True
-                    b2.Visible = True
-                    b3.Visible = True
-                    b4.Visible = True
-                    b5.Visible = True
-                    b6.Visible = True
-                    b7.Visible = True
-                    b8.Visible = True
-                    b9.Visible = False
-                    b10.Visible = False
-                Case 0.7
-                    b1.Visible = True
-                    b2.Visible = True
-                    b3.Visible = True
-                    b4.Visible = True
-                    b5.Visible = True
-                    b6.Visible = True
-                    b7.Visible = True
-                    b8.Visible = False
-                    b9.Visible = False
-                    b10.Visible = False
-                Case 0.6
-                    b1.Visible = True
-                    b2.Visible = True
-                    b3.Visible = True
-                    b4.Visible = True
-                    b5.Visible = True
-                    b6.Visible = True
-                    b7.Visible = False
-                    b8.Visible = False
-                    b9.Visible = False
-                    b10.Visible = False
-                Case 0.5
-                    b1.Visible = True
-                    b2.Visible = True
-                    b3.Visible = True
-                    b4.Visible = True
-                    b5.Visible = True
-                    b6.Visible = False
-                    b7.Visible = False
-                    b8.Visible = False
-                    b9.Visible = False
-                    b10.Visible = False
-                Case 0.4
-                    b1.Visible = True
-                    b2.Visible = True
-                    b3.Visible = True
-                    b4.Visible = True
-                    b5.Visible = False
-                    b6.Visible = False
-                    b7.Visible = False
-                    b8.Visible = False
-                    b9.Visible = False
-                    b10.Visible = False
-                Case 0.3
-                    b1.Visible = True
-                    b2.Visible = True
-                    b3.Visible = True
-                    b4.Visible = False
-                    b5.Visible = False
-                    b6.Visible = False
-                    b7.Visible = False
-                    b8.Visible = False
-                    b9.Visible = False
-                    b10.Visible = False
-                Case 0.2
-                    b1.Visible = True
-                    b2.Visible = True
-                    b3.Visible = False
-                    b4.Visible = False
-                    b5.Visible = False
-                    b6.Visible = False
-                    b7.Visible = False
-                    b8.Visible = False
-                    b9.Visible = False
-                    b10.Visible = False
-                Case 0.1
-                    b1.Visible = True
-                    b2.Visible = True
-                    b3.Visible = False
-                    b4.Visible = False
-                    b5.Visible = False
-                    b6.Visible = False
-                    b7.Visible = False
-                    b8.Visible = False
-                    b9.Visible = False
-                    b10.Visible = False
-                Case 0
-                    b1.Visible = False
-                    b2.Visible = False
-                    b3.Visible = False
-                    b4.Visible = False
-                    b5.Visible = False
-                    b6.Visible = False
-                    b7.Visible = False
-                    b8.Visible = False
-                    b9.Visible = False
-                    b10.Visible = False
-                    GeneralAlert(1)
-            End Select
+            For i As Integer = 0 To bars.Length - 1
+                bars(i).Visible = i < battLevel
+            Next
         End If
 
 
