@@ -650,6 +650,7 @@ Public Enum SetWindowPosFlags As UInteger
 
 
         Dim i As Integer = SystemParametersInfo(SPI_SETWORKAREA, Marshal.SizeOf(myArea), ptr, SPIF_UPDATEINIFILE)
+        Marshal.FreeHGlobal(ptr)
         'If frmAlerts.Visible Then
         frmAlerts.Bounds = New Rectangle(x, y, width, height)
         'End If
