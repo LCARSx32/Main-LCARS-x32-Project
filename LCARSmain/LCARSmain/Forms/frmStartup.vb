@@ -326,7 +326,7 @@ Public Class frmStartup
         End If
         pnlBack.Bounds = myBounds
         For i As Integer = 0 To Screen.AllScreens.Length - 1
-            updateDesktopBounds(i)
+            updateDesktopBounds(i, Screen.AllScreens(i).WorkingArea)
         Next
         pnlBack.BringToFront()
         For Each myBack As Panel In curDesktop

@@ -745,9 +745,9 @@ Public Enum SetWindowPosFlags As UInteger
         Return typeList
     End Function
 
-    Public Sub updateDesktopBounds(ByVal ScreenIndex As Integer)
+    Public Sub updateDesktopBounds(ByVal ScreenIndex As Integer, ByVal newBounds As Rectangle)
         myDesktop.curDesktop(ScreenIndex).Bounds = _
-            New Rectangle(Screen.AllScreens(ScreenIndex).WorkingArea.Location - displayOffset, _
-                          Screen.AllScreens(ScreenIndex).WorkingArea.Size)
+            New Rectangle(newBounds.Location - displayOffset, _
+                          newBounds.Size)
     End Sub
 End Module

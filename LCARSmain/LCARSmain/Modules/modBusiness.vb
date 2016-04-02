@@ -688,7 +688,7 @@ public Class modBusiness
         End If
 
         If Not myDesktop.curDesktop(ScreenIndex).Size = adjustedBounds.Size Then
-            updateDesktopBounds(ScreenIndex)
+            updateDesktopBounds(ScreenIndex, adjustedBounds)
         End If
 
         'Deal with resizing the tray icon panel if necessary
