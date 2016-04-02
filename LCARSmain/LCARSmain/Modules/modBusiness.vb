@@ -71,6 +71,7 @@ public Class modBusiness
     Public myRun As LCARS.LCARSbuttonClass
     Public myAlertListButton As LCARS.LCARSbuttonClass
     Public myProgramPagesDisplay As LCARS.LCARSbuttonClass
+    Dim bars() As Control
 
     Public adjustedBounds As Rectangle
     Public MyPrograms As Collection = New Collection
@@ -168,10 +169,7 @@ public Class modBusiness
             End If
             End If
 
-
-
-
-            fEnumWindowsCallBack = True
+        Return True
     End Function
 
     Public Sub SetWallpaper(ByVal wall As Image)
@@ -467,6 +465,17 @@ public Class modBusiness
         myRun = myForm.Controls.Find("myRun", True)(0)
         myAlertListButton = myForm.Controls.Find("myAlertListButton", True)(0)
         myProgramPagesDisplay = myForm.Controls.Find("fbProgramPages", True)(0)
+        bars = New Control(9) { _
+            myBattery.Controls("fbBatt1"), _
+            myBattery.Controls("fbBatt2"), _
+            myBattery.Controls("fbBatt3"), _
+            myBattery.Controls("fbBatt4"), _
+            myBattery.Controls("fbBatt5"), _
+            myBattery.Controls("fbBatt6"), _
+            myBattery.Controls("fbBatt7"), _
+            myBattery.Controls("fbBatt8"), _
+            myBattery.Controls("fbBatt9"), _
+            myBattery.Controls("fbBatt10")}
 
         If Listener Is Nothing OrElse Listener.State <> SpeechLib.SpeechRecoContextState.SRCS_Enabled Then
             mySpeech.Lit = False
@@ -638,18 +647,6 @@ public Class modBusiness
 
         If newBattLevel <> battLevel Then
             battLevel = newBattLevel
-            Dim bars() As Control = { _
-            myBattery.Controls("fbBatt1"), _
-            myBattery.Controls("fbBatt2"), _
-            myBattery.Controls("fbBatt3"), _
-            myBattery.Controls("fbBatt4"), _
-            myBattery.Controls("fbBatt5"), _
-            myBattery.Controls("fbBatt6"), _
-            myBattery.Controls("fbBatt7"), _
-            myBattery.Controls("fbBatt8"), _
-            myBattery.Controls("fbBatt9"), _
-            myBattery.Controls("fbBatt10")}
-
             For i As Integer = 0 To bars.Length - 1
                 bars(i).Visible = i < battLevel
             Next
