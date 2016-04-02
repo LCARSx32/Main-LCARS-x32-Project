@@ -489,5 +489,6 @@ Public Class frmStartup
         Marshal.StructureToPtr(myMetrics, myPtr, True)
         'Set minimized windows to actually hide
         SystemParametersInfo(SPI_SETMINIMIZEDMETRICS, 0, myPtr, 0)
+        Marshal.FreeCoTaskMem(myPtr)
     End Sub
 End Class

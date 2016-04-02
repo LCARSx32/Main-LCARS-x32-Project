@@ -682,6 +682,7 @@ public Class modBusiness
                         Dim res As Integer = SendMessage(targetHandle, WM_COPYDATA, myDesktop.Handle, MyCopyData)
                     End If
                 Next
+                Marshal.FreeCoTaskMem(MyCopyData)
             End If
             resizeWorkingArea(adjustedBounds.X, adjustedBounds.Y, adjustedBounds.Width, adjustedBounds.Height)
             'myDesktop.curDesktop(ScreenIndex).Bounds = Screen.AllScreens(ScreenIndex).WorkingArea
