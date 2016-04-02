@@ -600,26 +600,6 @@ Public Class frmKeyboard
 
     End Sub
 
-
-
-
-    Public Sub resizeWorkingArea(ByVal x As Integer, ByVal y As Integer, ByVal width As Integer, ByVal height As Integer)
-        Dim myArea As New RECT
-        myArea.Left_Renamed = x
-        myArea.Top_Renamed = y
-        myArea.Right_Renamed = x + width
-        myArea.Bottom_Renamed = y + height
-
-        Dim ptr As IntPtr = IntPtr.Zero
-
-        ptr = Marshal.AllocHGlobal(Marshal.SizeOf(myArea))
-
-        Marshal.StructureToPtr(myArea, ptr, False)
-
-
-        Dim i As Integer = SystemParametersInfo(SPI_SETWORKAREA, Marshal.SizeOf(myArea), ptr, SPIF_change)
-    End Sub
-
     Private Sub pnlKeyboard_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs)
 
     End Sub
