@@ -1458,6 +1458,10 @@ Retry:
 
     End Sub
 
+    Public Sub resetWorkingArea()
+        oldArea = New Rectangle(1, 1, 1, 1)
+    End Sub
+
     '    Private Sub myFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
     '        Dim index As Integer = CType(sender, LCARS.LCARSbuttonClass).Data
     '        Dim myItem As programList.FileStartItem

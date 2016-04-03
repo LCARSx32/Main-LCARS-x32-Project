@@ -665,6 +665,7 @@ Public Enum SetWindowPosFlags As UInteger
     End Sub
 
     Public Sub CloseLCARS()
+        RemoveHandler Microsoft.Win32.SystemEvents.DisplaySettingsChanged, AddressOf frmStartup.System_DisplayChanged
         SetParent(hTrayIcons, myIconSaver.Handle)
 
         Dim TaskbarSettings As APPBARDATA
