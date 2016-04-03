@@ -257,6 +257,7 @@ Public Class frmStartup
             myForm.Show()
             myForm.BringToFront()
         Next
+        AddHandler Microsoft.Win32.SystemEvents.DisplaySettingsChanged, AddressOf System_DisplayChanged
         SaveDesktopIcons()
 
         If GetSetting("LCARS X32", "Application", "Updates", "FALSE") Then
@@ -490,5 +491,17 @@ Public Class frmStartup
         'Set minimized windows to actually hide
         SystemParametersInfo(SPI_SETMINIMIZEDMETRICS, 0, myPtr, 0)
         Marshal.FreeCoTaskMem(myPtr)
+    End Sub
+
+    Private Sub System_DisplayChanged(ByVal sender As Object, ByVal e As System.EventArgs)
+        'TODO: Handle changes to number of displays
+        If Screen.AllScreens.Length <> curBusiness.Count Then
+            ' Update the screens. Reinitialize completely?
+            Debug.Print("Number of displays changed!")
+        Else
+            For Each b As modBusiness In curBusiness
+                b.myForm.Bounds = Screen.AllScreens(b.ScreenIndex).Bounds
+            Next
+        End If
     End Sub
 End Class

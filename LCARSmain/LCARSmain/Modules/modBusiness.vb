@@ -420,8 +420,6 @@ public Class modBusiness
         ReDim myWindows(-1)
         myForm = curForm
 
-        AddHandler Microsoft.Win32.SystemEvents.DisplaySettingsChanged, AddressOf System_DisplayChanged
-
         'Set the form's extended style to "WS_EX_TOOLWINDOW" which allows it
         'to stay fullscreen instead of being resized by the working area.
         Dim currentStyle As Integer = GetWindowLong(myForm.Handle, -20)
@@ -570,14 +568,6 @@ public Class modBusiness
             MsgBox("error" & vbNewLine & ex.ToString())
             FileClose(1)
         End Try
-
-    End Sub
-
-    Private Sub System_DisplayChanged(ByVal sender As Object, ByVal e As System.EventArgs)
-        myForm.Bounds = Screen.AllScreens(ScreenIndex).Bounds
-        'TODO: Move to frmStartup
-        'TODO: Handle changes to number of displays
-        myDesktop.pnlBack.Bounds = Screen.AllScreens(ScreenIndex).Bounds
 
     End Sub
 
