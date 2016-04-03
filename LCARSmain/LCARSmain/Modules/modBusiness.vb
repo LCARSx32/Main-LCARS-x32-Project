@@ -683,6 +683,7 @@ public Class modBusiness
                     End If
                 Next
                 Marshal.FreeCoTaskMem(MyCopyData)
+                Marshal.FreeCoTaskMem(myPtr)
             End If
             resizeWorkingArea(adjustedBounds.X, adjustedBounds.Y, adjustedBounds.Width, adjustedBounds.Height)
         End If
