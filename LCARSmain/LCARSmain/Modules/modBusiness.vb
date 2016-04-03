@@ -73,7 +73,6 @@ public Class modBusiness
     Public myProgramPagesDisplay As LCARS.LCARSbuttonClass
     Dim bars() As Control
 
-    Public adjustedBounds As Rectangle
     Public MyPrograms As Collection = New Collection
     Public myUserButtonCollection As New List(Of UserButtonInfo)
     Public mainTimer As New Timer
@@ -657,12 +656,14 @@ public Class modBusiness
 
         ReDim WindowList(-1)
 
-        adjustedBounds = New Rectangle(myMainBar.PointToScreen(myMainPanel.Location).X, myMainBar.PointToScreen(myMainPanel.Location).Y, myMainPanel.Width, myMainPanel.Height)
+        Dim adjustedBounds As Rectangle
         If autohide = IAutohide.AutoHideModes.Hidden Then
             adjustedBounds = Screen.FromHandle(myForm.Handle).Bounds
+        Else
+            adjustedBounds = New Rectangle(myMainBar.PointToScreen(myMainPanel.Location).X, myMainBar.PointToScreen(myMainPanel.Location).Y, myMainPanel.Width, myMainPanel.Height)
         End If
         If Not adjustedBounds = Screen.AllScreens(ScreenIndex).WorkingArea Then
-            'The working area has changed, alert the linked windows (if there are any).
+            'The working area needs to change, alert the linked windows (if there are any).
             If LinkedWindows.Count > 0 Then
                 Dim myRectData As New COPYDATASTRUCT
                 myRectData.dwData = 100
@@ -677,15 +678,13 @@ public Class modBusiness
                 Marshal.StructureToPtr(myRectData, MyCopyData, False)
                 'Do not use SendDataToLinkedWindows; it uses PostMessage, not SendMessage
                 For Each targetHandle As IntPtr In LinkedWindows
-                    'Compare working areas because no equality operator for screens
-                    If Screen.FromHandle(targetHandle).WorkingArea = Screen.FromHandle(myForm.Handle).WorkingArea Then
+                    If Screen.ReferenceEquals(Screen.FromHandle(targetHandle), Screen.FromHandle(myForm.Handle)) Then
                         Dim res As Integer = SendMessage(targetHandle, WM_COPYDATA, myDesktop.Handle, MyCopyData)
                     End If
                 Next
                 Marshal.FreeCoTaskMem(MyCopyData)
             End If
             resizeWorkingArea(adjustedBounds.X, adjustedBounds.Y, adjustedBounds.Width, adjustedBounds.Height)
-            'myDesktop.curDesktop(ScreenIndex).Bounds = Screen.AllScreens(ScreenIndex).WorkingArea
         End If
 
         If Not myDesktop.curDesktop(ScreenIndex).Size = adjustedBounds.Size Then
