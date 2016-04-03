@@ -115,6 +115,8 @@ public Class modBusiness
     'Autohide
     Dim autohide As IAutohide.AutoHideModes
     Dim hideCount As Integer = 0
+
+    Private oldArea As Rectangle
 #End Region
 
 #End Region
@@ -536,7 +538,7 @@ public Class modBusiness
             myShowTrayButton_Click(New Object, New EventArgs)
         End If
 
-
+        oldArea = Screen.AllScreens(ScreenIndex).WorkingArea
     End Sub
 
     Public Sub loadLanguage()
@@ -662,7 +664,7 @@ public Class modBusiness
         Else
             adjustedBounds = New Rectangle(myMainBar.PointToScreen(myMainPanel.Location).X, myMainBar.PointToScreen(myMainPanel.Location).Y, myMainPanel.Width, myMainPanel.Height)
         End If
-        If Not adjustedBounds = Screen.AllScreens(ScreenIndex).WorkingArea Then
+        If Not adjustedBounds = oldArea Then
             'The working area needs to change, alert the linked windows (if there are any).
             If LinkedWindows.Count > 0 Then
                 Dim myRectData As New COPYDATASTRUCT
@@ -686,6 +688,7 @@ public Class modBusiness
                 Marshal.FreeCoTaskMem(myPtr)
             End If
             resizeWorkingArea(adjustedBounds.X, adjustedBounds.Y, adjustedBounds.Width, adjustedBounds.Height)
+            oldArea = adjustedBounds
         End If
 
         If Not myDesktop.curDesktop(ScreenIndex).Size = adjustedBounds.Size Then
