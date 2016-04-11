@@ -1,7 +1,12 @@
-﻿Imports System.Drawing
+﻿Option Strict On
+
+Imports System.Drawing
+Imports System.ComponentModel
+Imports System.Windows.Forms.Design
+Imports System.Windows.Forms.Design.Behavior
 
 Namespace Controls
-    <System.ComponentModel.DefaultEvent("Click")> _
+    <System.ComponentModel.DefaultEvent("Click"), Designer(GetType(LCARS.ElbowDesigner))> _
     Public Class Elbow
         Inherits LCARS.LCARSbuttonClass
 
@@ -188,3 +193,41 @@ Namespace Controls
 
     End Class
 End Namespace
+
+#Region " Elbow Designer "
+Public Class ElbowDesigner
+    Inherits GenericButtonDesigner
+    Public Overrides ReadOnly Property SnapLines() As System.Collections.IList
+        Get
+            Dim s As System.Collections.IList = MyBase.SnapLines
+            Dim p As LCARS.Controls.Elbow = CType(Control, LCARS.Controls.Elbow)
+            If p Is Nothing Then
+                Return s
+            End If
+            Select Case p.ElbowStyle
+                Case Controls.Elbow.LCARSelbowStyles.LowerLeft
+                    s.Add(New SnapLine(SnapLineType.Top, p.Height - p.ButtonHeight, SnapLinePriority.Always))
+                    s.Add(New SnapLine(SnapLineType.Right, p.Width - p.ButtonWidth, SnapLinePriority.Always))
+                    s.Add(New SnapLine(SnapLineType.Horizontal, p.Height - p.ButtonHeight - p.Margin.Top, "Margin.Top", SnapLinePriority.Always))
+                    s.Add(New SnapLine(SnapLineType.Vertical, p.Width - p.ButtonWidth + p.Margin.Right, "Margin.Right", SnapLinePriority.Always))
+                Case Controls.Elbow.LCARSelbowStyles.LowerRight
+                    s.Add(New SnapLine(SnapLineType.Top, p.Height - p.ButtonHeight, SnapLinePriority.Always))
+                    s.Add(New SnapLine(SnapLineType.Left, p.ButtonWidth, SnapLinePriority.Always))
+                    s.Add(New SnapLine(SnapLineType.Horizontal, p.Height - p.ButtonHeight - p.Margin.Top, "Margin.Top", SnapLinePriority.Always))
+                    s.Add(New SnapLine(SnapLineType.Vertical, p.ButtonWidth - p.Margin.Left, "Margin.Left", SnapLinePriority.Always))
+                Case Controls.Elbow.LCARSelbowStyles.UpperLeft
+                    s.Add(New SnapLine(SnapLineType.Bottom, p.ButtonHeight, SnapLinePriority.Always))
+                    s.Add(New SnapLine(SnapLineType.Right, p.ButtonWidth, SnapLinePriority.Always))
+                    s.Add(New SnapLine(SnapLineType.Horizontal, p.ButtonHeight + p.Margin.Bottom, "Margin.Bottom", SnapLinePriority.Always))
+                    s.Add(New SnapLine(SnapLineType.Vertical, p.ButtonWidth + p.Margin.Right, "Margin.Right", SnapLinePriority.Always))
+                Case Controls.Elbow.LCARSelbowStyles.UpperRight
+                    s.Add(New SnapLine(SnapLineType.Bottom, p.ButtonHeight, SnapLinePriority.Always))
+                    s.Add(New SnapLine(SnapLineType.Left, p.Width - p.ButtonWidth, SnapLinePriority.Always))
+                    s.Add(New SnapLine(SnapLineType.Horizontal, p.ButtonHeight + p.Margin.Bottom, "Margin.Bottom", SnapLinePriority.Always))
+                    s.Add(New SnapLine(SnapLineType.Vertical, p.Width - p.ButtonWidth - p.Margin.Right, "Margin.Left", SnapLinePriority.Always))
+            End Select
+            Return s
+        End Get
+    End Property
+End Class
+#End Region
