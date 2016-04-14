@@ -762,10 +762,6 @@ Public Class LCARSbuttonClass
         End If
     End Sub
 
-    Protected Overridable Sub GenericButton_load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.ParentChanged
-        Me.lblTextSize = Me.Size
-    End Sub
-
     Private Sub Button_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Resize
         If textHeight = -1 Then
             ButtonTextHeight = -1 'resize the text
@@ -868,7 +864,7 @@ Public Class LCARSbuttonClass
         g.FillEllipse(myBrush, Me.Size.Width - Me.Size.Height, 0, Me.Size.Height, Me.Size.Height)
         'Draw text:
         Me.lblTextLoc = New Point(0, 0)
-        Me.lblTextSize = Me.Size
+        Me.lblTextSize = New Point(Me.Width - Me.Height, Me.Height)
         g.Dispose()
         Return mybitmap
     End Function

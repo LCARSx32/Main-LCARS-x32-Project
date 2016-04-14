@@ -94,27 +94,15 @@ Namespace Controls
 
             Select Case _ButtonType
                 Case LCARSbuttonStyles.PillRight
-
                     g.FillRectangle(myBrush, 0, 0, Me.Size.Width - (Me.Size.Height \ 2), Me.Size.Height)
                     g.FillEllipse(myBrush, Me.Size.Width - Me.Size.Height, 0, Me.Size.Height, Me.Size.Height)
-
-
-                    Me.lblTextSize = New Point(Me.Width - (Me.Height \ 2), Me.Height)
-
+                    Me.lblTextLoc = New Point(0, 0)
                 Case LCARSbuttonStyles.PillLeft
-
-                    Dim width As Integer
-                    width = Me.Width - (Me.Height \ 2)
-
-                    g.FillRectangle(myBrush, Me.Width - width, 0, width, Me.Size.Height)
+                    g.FillRectangle(myBrush, Me.Size.Height \ 2, 0, Me.Size.Width - (Me.Size.Height \ 2), Me.Size.Height)
                     g.FillEllipse(myBrush, 0, 0, Me.Size.Height, Me.Size.Height)
-
-
-                    Me.lblTextSize = New Point(width, Me.Height)
-                    Me.lblTextLoc = New Point(Me.Width - width, Me.lblTextLoc.Y)
-
-
+                    Me.lblTextLoc = New Point(Me.Height \ 2, 0)
             End Select
+            Me.lblTextSize = New Size(Me.Size.Width - (Me.Size.Height \ 2), Me.Size.Height)
             g.Dispose()
             Return mybitmap
         End Function
