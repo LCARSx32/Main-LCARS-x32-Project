@@ -450,6 +450,13 @@ Namespace Controls
 
                 'Create the verb to add a tab
                 myVerbs.Add(New DesignerVerb("&Add Tab", AddressOf AddTab))
+
+                'Create the verb to move a tab down
+                myVerbs.Add(New DesignerVerb("Move Tab &Down", AddressOf MoveTabDown))
+
+                'Create the verb to move a tab up
+                myVerbs.Add(New DesignerVerb("Move Tab &Up", AddressOf MoveTabUp))
+
                 Return myVerbs
             End Get
         End Property
@@ -484,6 +491,44 @@ Namespace Controls
             myChangeService.OnComponentChanged(myControl, Nothing, Nothing, Nothing)
             'Finish the transaction so it knows when the "undo" should stop.
             myTransaction.Commit()
+        End Sub
+
+        Private Sub MoveTabDown(ByVal sender As Object, ByVal e As EventArgs)
+            Dim current As Integer = myControl.TabPages.indexOf(myControl.SelectedTab)
+            If myControl.TabPages.Count > 1 And current < myControl.TabPages.Count - 1 Then
+                ' Setup transaction
+                Dim myHost As IDesignerHost = DirectCast(GetService(GetType(IDesignerHost)), IDesignerHost)
+                Dim myTransaction As DesignerTransaction
+                Dim myChangeService As IComponentChangeService = DirectCast(GetService(GetType(IComponentChangeService)), IComponentChangeService)
+                myTransaction = myHost.CreateTransaction("Move Tab Down")
+                myChangeService.OnComponentChanging(myControl, Nothing)
+
+                'Move tab
+                myControl.TabPages.MoveDown(myControl.SelectedTab)
+
+                ' Complete transaction
+                myChangeService.OnComponentChanged(myControl, Nothing, Nothing, Nothing)
+                myTransaction.Commit()
+            End If
+        End Sub
+
+        Private Sub MoveTabUp(ByVal sender As Object, ByVal e As EventArgs)
+            Dim current As Integer = myControl.TabPages.indexOf(myControl.SelectedTab)
+            If myControl.TabPages.Count > 1 And current > 0 Then
+                ' Setup transaction
+                Dim myHost As IDesignerHost = DirectCast(GetService(GetType(IDesignerHost)), IDesignerHost)
+                Dim myTransaction As DesignerTransaction
+                Dim myChangeService As IComponentChangeService = DirectCast(GetService(GetType(IComponentChangeService)), IComponentChangeService)
+                myTransaction = myHost.CreateTransaction("Move Tab Up")
+                myChangeService.OnComponentChanging(myControl, Nothing)
+
+                'Move tab
+                myControl.TabPages.MoveUp(myControl.SelectedTab)
+
+                ' Complete transaction
+                myChangeService.OnComponentChanged(myControl, Nothing, Nothing, Nothing)
+                myTransaction.Commit()
+            End If
         End Sub
 
         Protected Overrides Function GetHitTest(ByVal point As System.Drawing.Point) As Boolean
@@ -562,6 +607,24 @@ Namespace Controls
             'Removes the given tab from the collection.  I know... duh. But comments are necessary evils.
             List.Remove(Tab)
             Tab = Nothing
+            Parent.TabPagesChanged()
+        End Sub
+
+        Public Sub MoveDown(ByVal tab As x32TabPage)
+            Dim index As Integer = List.IndexOf(tab)
+            If index < Count - 1 Then
+                List(index) = List(index + 1)
+                List(index + 1) = tab
+            End If
+            Parent.TabPagesChanged()
+        End Sub
+
+        Public Sub MoveUp(ByVal tab As x32TabPage)
+            Dim index As Integer = List.IndexOf(tab)
+            If index > 0 Then
+                List(index) = List(index - 1)
+                List(index - 1) = tab
+            End If
             Parent.TabPagesChanged()
         End Sub
     End Class
