@@ -199,6 +199,10 @@ Public Class frmStartup
         AddHandler Microsoft.Win32.SystemEvents.DisplaySettingsChanged, AddressOf System_DisplayChanged
         SaveDesktopIcons()
 
+        For Each myBusiness As modBusiness In curBusiness
+            myBusiness.myForm.BringToFront()
+        Next
+
         If GetSetting("LCARS X32", "Application", "Updates", "FALSE") Then
             Try
                 Process.Start(Application.StartupPath & "\LCARSUpdate.exe", "-s")
@@ -241,6 +245,9 @@ Public Class frmStartup
         For i As Integer = 0 To Screen.AllScreens.Length - 1
             updateDesktopBounds(i, Screen.AllScreens(i).WorkingArea)
         Next
+        Dim currentStyle As Integer = GetWindowLong(pnlBack.Handle, -20)
+        currentStyle = currentStyle Or WS_EX_NOACTIVATE Or WS_EX_TOOLWINDOW
+        SetWindowLong(pnlBack.Handle, -20, currentStyle)
         pnlBack.BringToFront()
         For Each myBack As Panel In curDesktop
             myBack.BringToFront()
@@ -369,7 +376,9 @@ Public Class frmStartup
                 'Process.Start(myProgram)
                 Shell(myProgram)
             Catch ex As Exception
-                MsgBox(myProgram & vbNewLine & vbNewLine & ex.ToString())
+                If GetSetting("LCARS x32", "Application", "DebugSwitch", "False") Then
+                    MsgBox(myProgram & vbNewLine & vbNewLine & ex.ToString())
+                End If
             End Try
         Next
     End Sub
