@@ -245,12 +245,12 @@ Public Class frmStartup
         For i As Integer = 0 To Screen.AllScreens.Length - 1
             updateDesktopBounds(i, Screen.AllScreens(i).WorkingArea)
         Next
-        Dim currentStyle As Integer = GetWindowLong(pnlBack.Handle, -20)
+        Dim currentStyle As Integer = GetWindowLongPtr(pnlBack.Handle, -20)
 
         'Make desktop non-selectable and not in the alt-tab menu
         currentStyle = currentStyle Or WS_EX_NOACTIVATE Or WS_EX_TOOLWINDOW
         SetWindowLongPtr(pnlBack.Handle, -20, currentStyle)
-        currentStyle = GetWindowLong(Me.Handle, -20)
+        currentStyle = GetWindowLongPtr(Me.Handle, -20)
         currentStyle = currentStyle Or WS_EX_NOACTIVATE Or WS_EX_TOOLWINDOW
         SetWindowLongPtr(Me.Handle, -20, currentStyle)
 
@@ -272,7 +272,7 @@ Public Class frmStartup
         hTrayParent = FindWindowEx(hTrayNotify, IntPtr.Zero, "SysPager", IntPtr.Zero)
         hTrayIcons = FindWindowEx(hTrayParent, IntPtr.Zero, "ToolbarWindow32", IntPtr.Zero)
 
-        Dim myStyle As Integer = GetWindowLong(hTrayIcons, GWL_STYLE)
+        Dim myStyle As Integer = GetWindowLongPtr(hTrayIcons, GWL_STYLE)
         myStyle = myStyle And Not TBSTYLE_TRANSPARENT
         If (myStyle And TBSTYLE_TRANSPARENT) Then
             MsgBox("Transparent!")

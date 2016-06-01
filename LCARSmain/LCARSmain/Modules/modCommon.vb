@@ -153,7 +153,7 @@ Module modCommon
 
     Declare Function GetParent Lib "user32" (ByVal hwnd As Integer) As Integer
     Declare Function GetWindow Lib "user32" (ByVal hwnd As Integer, ByVal wCmd As Integer) As Integer
-    Public Declare Function GetWindowLong Lib "user32" Alias "GetWindowLongA" (ByVal hwnd As Integer, ByVal nIndex As Integer) As Integer
+    Public Declare Function GetWindowLongPtr Lib "user32" Alias "GetWindowLongA" (ByVal hwnd As IntPtr, ByVal nIndex As Integer) As IntPtr
     Public Declare Auto Function SetWindowLongPtr Lib "User32.Dll" (ByVal hWnd As IntPtr, ByVal nIndex As Integer, ByVal dwNewLong As IntPtr) As Integer
     Declare Function GetWindowText Lib "user32" Alias "GetWindowTextA" (ByVal hwnd As Integer, ByVal lpString As String, ByVal cch As Integer) As Integer
     Declare Function IsWindowVisible Lib "user32" (ByVal hwnd As IntPtr) As Boolean
@@ -723,7 +723,7 @@ Public Enum SetWindowPosFlags As UInteger
         End If
 
         SetParent(SysListView, hwndSHELLDLL_DefView)
-        Dim myStyle As Integer = GetWindowLong(hTrayIcons, GWL_STYLE)
+        Dim myStyle As Integer = GetWindowLongPtr(hTrayIcons, GWL_STYLE)
         myStyle = myStyle Or TBSTYLE_TRANSPARENT
 
         SetWindowLongPtr(hTrayIcons, GWL_STYLE, myStyle)

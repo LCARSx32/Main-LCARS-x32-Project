@@ -131,7 +131,7 @@ public Class modBusiness
             If GetParent(hwnd) = 0 Then
 
                 bNoOwner = (GetWindow(hwnd, GW_OWNER) = 0)
-                lExStyle = GetWindowLong(hwnd, GWL_EXSTYLE)
+                lExStyle = GetWindowLongPtr(hwnd, GWL_EXSTYLE)
 
                 'If (((lExStyle And WS_EX_TOOLWINDOW) = 0) Or (lExStyle And WS_EX_APPWINDOW)) Or _
                 '(((lExStyle And WS_EX_TOOLWINDOW) = 0) And ((lExStyle And WS_EX_APPWINDOW) = 0) And bNoOwner = True) Then
@@ -422,7 +422,7 @@ public Class modBusiness
 
         'Set the form's extended style to "WS_EX_TOOLWINDOW" which allows it
         'to stay fullscreen instead of being resized by the working area.
-        Dim currentStyle As Integer = GetWindowLong(myForm.Handle, -20)
+        Dim currentStyle As Integer = GetWindowLongPtr(myForm.Handle, -20)
         currentStyle = currentStyle Or (&H80)
         SetWindowLongPtr(myForm.Handle, -20, currentStyle)
 
