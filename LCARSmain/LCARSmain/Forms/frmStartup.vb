@@ -246,8 +246,14 @@ Public Class frmStartup
             updateDesktopBounds(i, Screen.AllScreens(i).WorkingArea)
         Next
         Dim currentStyle As Integer = GetWindowLong(pnlBack.Handle, -20)
+
+        'Make desktop non-selectable and not in the alt-tab menu
         currentStyle = currentStyle Or WS_EX_NOACTIVATE Or WS_EX_TOOLWINDOW
         SetWindowLong(pnlBack.Handle, -20, currentStyle)
+        currentStyle = GetWindowLong(Me.Handle, -20)
+        currentStyle = currentStyle Or WS_EX_NOACTIVATE Or WS_EX_TOOLWINDOW
+        SetWindowLong(Me.Handle, -20, currentStyle)
+
         pnlBack.BringToFront()
         For Each myBack As Panel In curDesktop
             myBack.BringToFront()
