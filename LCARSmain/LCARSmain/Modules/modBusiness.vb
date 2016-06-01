@@ -424,7 +424,7 @@ public Class modBusiness
         'to stay fullscreen instead of being resized by the working area.
         Dim currentStyle As Integer = GetWindowLong(myForm.Handle, -20)
         currentStyle = currentStyle Or (&H80)
-        SetWindowLong(myForm.Handle, -20, currentStyle)
+        SetWindowLongPtr(myForm.Handle, -20, currentStyle)
 
         'Set the various panels and buttons that are controlled by this module.
         'These panels and buttons behave exactly the same on each mainscreen.

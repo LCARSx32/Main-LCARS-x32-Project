@@ -249,10 +249,10 @@ Public Class frmStartup
 
         'Make desktop non-selectable and not in the alt-tab menu
         currentStyle = currentStyle Or WS_EX_NOACTIVATE Or WS_EX_TOOLWINDOW
-        SetWindowLong(pnlBack.Handle, -20, currentStyle)
+        SetWindowLongPtr(pnlBack.Handle, -20, currentStyle)
         currentStyle = GetWindowLong(Me.Handle, -20)
         currentStyle = currentStyle Or WS_EX_NOACTIVATE Or WS_EX_TOOLWINDOW
-        SetWindowLong(Me.Handle, -20, currentStyle)
+        SetWindowLongPtr(Me.Handle, -20, currentStyle)
 
         pnlBack.BringToFront()
         For Each myBack As Panel In curDesktop
@@ -277,7 +277,7 @@ Public Class frmStartup
         If (myStyle And TBSTYLE_TRANSPARENT) Then
             MsgBox("Transparent!")
         End If
-        SetWindowLong(hTrayIcons, GWL_STYLE, myStyle)
+        SetWindowLongPtr(hTrayIcons, GWL_STYLE, myStyle)
 
         SetParent(hTrayIcons, myIconSaver.Handle)
     End Sub
