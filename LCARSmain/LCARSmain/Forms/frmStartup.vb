@@ -130,11 +130,10 @@ Public Class frmStartup
                     'Alerts updated
                     frmAlerts.loadAlerts()
             End Select
+        Else
+            'it wasn't a message we need to handle, so let VB take back over.
+            MyBase.WndProc(m)
         End If
-
-        'it wasn't a message we need to handle, so let VB take back over.
-        MyBase.WndProc(m)
-
     End Sub
 
     Private Sub frmStartup_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
