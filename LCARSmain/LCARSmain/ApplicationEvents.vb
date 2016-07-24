@@ -1,4 +1,6 @@
-﻿Namespace My
+﻿<Assembly: System.Security.Permissions.PermissionSet(Security.Permissions.SecurityAction.RequestMinimum, name:="FullTrust")> 
+
+Namespace My
 
     ' The following events are available for MyApplication:
     ' 

@@ -187,6 +187,8 @@
     </Compile>
     <Compile Include="Modules\MSIparser.vb" />
     <Compile Include="Modules\programList.vb" />
+    <Compile Include="ShellIntegration\KnownFolderPaths.vb" />
+    <Compile Include="ShellIntegration\StartupPrograms.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Forms\frmAlerts.resx">

@@ -209,11 +209,8 @@ Public Class frmStartup
                 MsgBox("Unable to check for updates" & vbNewLine & vbNewLine & ex.ToString())
             End Try
         End If
-
-        If shellMode Then
-            Dim startupThread As New Threading.Thread(AddressOf StartupPrograms)
-            startupThread.Start()
-        End If
+        Dim startupThread As New Threading.Thread(AddressOf StartupPrograms.StartAll)
+        startupThread.Start()
     End Sub
 
     Private Sub SaveDesktopIcons()
@@ -304,89 +301,6 @@ Public Class frmStartup
             Return True
         End If
     End Function
-
-    Private Sub StartupPrograms()
-        Dim progList As New List(Of String)
-        'Get everything stored in the registry
-        Dim test() As RegistryKey = {Microsoft.Win32.Registry.LocalMachine.OpenSubKey("Software\Microsoft\Windows\CurrentVersion\Run", False), _
-                             Registry.LocalMachine.OpenSubKey("Software\Microsoft\Windows\CurrentVersion\RunOnce", False), _
-                             Registry.LocalMachine.OpenSubKey("Software\Microsoft\Windows\CurrentVersion\RunServices", False), _
-                             Registry.LocalMachine.OpenSubKey("Software\Microsoft\Windows\CurrentVersion\RunServicesOnce", False), _
-                             Registry.CurrentUser.OpenSubKey("Software\Microsoft\Windows\CurrentVersion\Run", False), _
-                             Registry.CurrentUser.OpenSubKey("Software\Microsoft\Windows\CurrentVersion\RunOnce", False), _
-                             Registry.LocalMachine.OpenSubKey("System\CurrentControlSet\Services", False)}
-        For i As Integer = 0 To test.Length - 1
-            Try
-                If Not test(i) Is Nothing Then
-                    Dim names() As String = test(i).GetValueNames()
-                    For Each value As String In names
-                        If value <> "" Then
-                            progList.Add(test(i).GetValue(value))
-                        End If
-                    Next
-                    test(i).Close()
-                End If
-            Catch ex As NullReferenceException
-                Debug.Print("Failed")
-            End Try
-        Next
-
-        'Get all start menu "Startup" folder programs
-        Dim OSinfo As String = getOS()
-        Dim GlobalStartPath As String = ""
-        Dim UserStartPath As String = ""
-
-        Select Case OSinfo
-            Case "Win98"
-                GlobalStartPath = System.Environment.GetFolderPath(Environment.SpecialFolder.Startup)
-                UserStartPath = ""
-            Case "WinNT3.51"
-                GlobalStartPath = System.Environment.GetFolderPath(Environment.SpecialFolder.Startup)
-                UserStartPath = ""
-            Case "WinNT4.0"
-                GlobalStartPath = System.Environment.GetFolderPath(Environment.SpecialFolder.Startup)
-                UserStartPath = ""
-            Case "Modern"
-                Dim myReg As Microsoft.Win32.RegistryKey = Microsoft.Win32.Registry.CurrentUser
-                myReg = myReg.OpenSubKey("Software\Microsoft\Windows\CurrentVersion\explorer\Shell Folders\", False)
-                UserStartPath = myReg.GetValue("Startup")
-                myReg = Microsoft.Win32.Registry.LocalMachine
-                myReg = myReg.OpenSubKey("Software\Microsoft\Windows\CurrentVersion\explorer\Shell Folders\", False)
-                GlobalStartPath = myReg.GetValue("Common Startup")
-        End Select
-        If Not GlobalStartPath = "" Then
-            For Each myFile As String In System.IO.Directory.GetFiles(GlobalStartPath)
-                If Not IO.Path.GetFileName(myFile).ToLower() = "desktop.ini" Then
-                    progList.Add(myFile)
-                End If
-            Next
-        End If
-        If Not UserStartPath = "" Then
-            For Each myFile As String In System.IO.Directory.GetFiles(UserStartPath)
-                If Not IO.Path.GetFileName(myFile).ToLower() = "desktop.ini" Then
-                    progList.Add(myFile)
-                End If
-            Next
-        End If
-        'If not enclosed in quotes, do so
-        For Each myProgram As String In progList
-            If Not myProgram.Substring(0, 1) = """" Then
-                myProgram = """" & myProgram & """"
-            End If
-        Next
-
-        'Start all programs retrieved
-        For Each myProgram As String In progList
-            Try
-                'Process.Start(myProgram)
-                Shell(myProgram)
-            Catch ex As Exception
-                If GetSetting("LCARS x32", "Application", "DebugSwitch", "False") Then
-                    MsgBox(myProgram & vbNewLine & vbNewLine & ex.ToString())
-                End If
-            End Try
-        Next
-    End Sub
 
     Private Sub CheckComponents()
         'Checks that critical files have not been deleted. Only files required for running and shutting down
