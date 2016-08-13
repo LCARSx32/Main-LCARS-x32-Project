@@ -29,7 +29,9 @@ Module modSpeech
 
     Public Sub beginVoiceRecognition()
         ComputerSound = New System.Media.SoundPlayer(My.Resources.computer) 'These lines are here to avoid audio interference
+        ComputerSound.LoadAsync()
         ConfirmSound = New System.Media.SoundPlayer(My.Resources.Please_confirm)
+        ConfirmSound.LoadAsync()
 
         'Get the list of aliases and custom commands
 
@@ -183,11 +185,9 @@ Module modSpeech
             vGrammar.CmdSetRuleIdState(2, SpeechRuleState.SGDSActive)
             listenCommands = True
             muteAlert = True
-            Dim computerSoundThread As New System.Threading.Thread(AddressOf ComputerSound.Play)
-            computerSoundThread.Start()
+            ComputerSound.Play()
         Else
             If listenCommands = True Then
-                'parseVcommand(words)
                 'Get command's alias (if existant) and send it to the command interpreter
                 ExecuteCommand(command)
                 If Not continuousCommands Then listenCommands = False 'Handles Continuous Commands function, though regulated by command interpreter.
