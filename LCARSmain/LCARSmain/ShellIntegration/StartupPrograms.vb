@@ -298,38 +298,34 @@ Public Class StartupPrograms
     End Sub
 
     Private Shared Sub ProcessFolder(ByVal folder As IO.DirectoryInfo)
-        For Each f As IO.FileInfo In folder.GetFiles()
-            If Not f.Name.ToLower() = "desktop.ini" Then
-                Process.Start(f.FullName)
-            End If
-        Next
+        Try
+            For Each f As IO.FileInfo In folder.GetFiles()
+                If Not f.Name.ToLower() = "desktop.ini" Then
+                    Try
+                        Process.Start(f.FullName)
+                    Catch ex As Exception
+                        Debug.Print("Exception loading startup file {0}", f.FullName)
+                    End Try
+                End If
+            Next
+        Catch ex As IO.DirectoryNotFoundException
+            ' Directory doesn't exist
+        End Try
     End Sub
 
     Private Shared Sub StartUserStartup(ByVal force As Boolean)
         If SystemInformation.BootMode = BootMode.Normal Then
             Dim path As String = KnownFolderPaths.GetFolderPath(KnownFolderPaths.SpecialFolders.Startup)
-            Try
-                Dim i As New System.IO.DirectoryInfo(path)
-                ProcessFolder(i)
-            Catch ex As Exception
-                Debug.Print("Exception while loading user startup folder:")
-                Debug.Print(ex.ToString())
-                Debug.Print(ex.StackTrace)
-            End Try
+            Dim info As New System.IO.DirectoryInfo(path)
+            ProcessFolder(info)
         End If
     End Sub
 
     Private Shared Sub StartMachineStartup(ByVal force As Boolean)
         If SystemInformation.BootMode = BootMode.Normal Then
             Dim path As String = KnownFolderPaths.GetFolderPath(KnownFolderPaths.SpecialFolders.Common_Startup)
-            Try
-                Dim i As New System.IO.DirectoryInfo(path)
-                ProcessFolder(i)
-            Catch ex As Exception
-                Debug.Print("Exception while loading common startup folder:")
-                Debug.Print(ex.ToString())
-                Debug.Print(ex.StackTrace)
-            End Try
+            Dim info As New System.IO.DirectoryInfo(path)
+            ProcessFolder(info)
         End If
     End Sub
 
