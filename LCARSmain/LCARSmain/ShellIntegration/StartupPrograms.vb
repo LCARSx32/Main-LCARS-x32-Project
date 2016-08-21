@@ -189,7 +189,7 @@ Public Class StartupPrograms
 
     'Note: This function is imported by ORDINAL, not by name.
     <System.Runtime.InteropServices.DllImport("shell32", EntryPoint:="#723")> _
-    Private Shared Function SHCreateSessionKey(ByVal samDesired As Long, <Runtime.InteropServices.Out()> ByRef phKey As Int32) As Integer
+    Private Shared Function SHCreateSessionKey(ByVal samDesired As Int32, <Runtime.InteropServices.Out()> ByRef phKey As Int32) As Integer
     End Function
     Private Declare Function RegCloseKey Lib "advapi32" (ByVal phKey As Int32) As Integer
     Private Declare Auto Function RegCreateKeyEx Lib "advapi32" (ByVal hKey As Int32, _
@@ -386,16 +386,16 @@ Public Class StartupPrograms
     End Function
 
 #Region " REGSAM definitions "
-    Private Const STANDARD_RIGHTS_ALL As Long = &H1F0000
-    Private Const SYNCHRONIZE As Long = &H100000
-    Private Const KEY_QUERY_VALUE As Long = &H1
-    Private Const KEY_SET_VALUE As Long = &H1
-    Private Const KEY_CREATE_SUB_KEY As Long = &H1
-    Private Const KEY_ENUMERATE_SUB_KEYS As Long = &H1
-    Private Const KEY_NOTIFY As Long = &H1
-    Private Const KEY_CREATE_LINK As Long = &H1
+    Private Const STANDARD_RIGHTS_ALL As Int32 = &H1F0000
+    Private Const SYNCHRONIZE As Int32 = &H100000
+    Private Const KEY_QUERY_VALUE As Int32 = &H1
+    Private Const KEY_SET_VALUE As Int32 = &H1
+    Private Const KEY_CREATE_SUB_KEY As Int32 = &H1
+    Private Const KEY_ENUMERATE_SUB_KEYS As Int32 = &H1
+    Private Const KEY_NOTIFY As Int32 = &H1
+    Private Const KEY_CREATE_LINK As Int32 = &H1
 
-    Private Const KEY_ALL_ACCESS As Long = _
+    Private Const KEY_ALL_ACCESS As Int32 = _
     (STANDARD_RIGHTS_ALL Or _
     KEY_QUERY_VALUE Or _
     KEY_SET_VALUE Or _
