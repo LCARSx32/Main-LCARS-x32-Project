@@ -153,8 +153,25 @@ Module modCommon
 
     Declare Function GetParent Lib "user32" (ByVal hwnd As Integer) As Integer
     Declare Function GetWindow Lib "user32" (ByVal hwnd As Integer, ByVal wCmd As Integer) As Integer
-    Public Declare Function GetWindowLongPtr Lib "user32" Alias "GetWindowLongA" (ByVal hwnd As IntPtr, ByVal nIndex As Integer) As IntPtr
-    Public Declare Auto Function SetWindowLongPtr Lib "User32.Dll" (ByVal hWnd As IntPtr, ByVal nIndex As Integer, ByVal dwNewLong As IntPtr) As Integer
+    Private Declare Function GetWindowLongPtr Lib "user32" Alias "GetWindowLongPtrA" (ByVal hwnd As IntPtr, ByVal nIndex As Integer) As IntPtr
+    Private Declare Function GetWindowLong Lib "user32" Alias "GetWindowLongA" (ByVal hwnd As IntPtr, ByVal nIndex As Integer) As Integer
+    Public Function GetWindowLong_Safe(ByVal hwnd As IntPtr, ByVal nIndex As Integer) As Integer
+        If IntPtr.Size = 4 Then
+            Return GetWindowLong(hwnd, nIndex)
+        Else
+            Return GetWindowLongPtr(hwnd, nIndex)
+        End If
+    End Function
+    Private Declare Auto Function SetWindowLongPtr Lib "User32.Dll" Alias "SetWindowLongPtrA" (ByVal hWnd As IntPtr, ByVal nIndex As Integer, ByVal dwNewLong As IntPtr) As Integer
+    Private Declare Auto Function SetWindowLong Lib "User32.Dll" Alias "SetWindowLongA" (ByVal hWnd As IntPtr, ByVal nIndex As Integer, ByVal dwNewLong As IntPtr) As Integer
+    Public Function SetWindowLong_Safe(ByVal hwnd As IntPtr, ByVal nIndex As Integer, ByVal dwNewLong As Integer) As Integer
+        If IntPtr.Size = 4 Then
+            Return SetWindowLong(hwnd, nIndex, dwNewLong)
+        Else
+            Return SetWindowLongPtr(hwnd, nIndex, dwNewLong)
+        End If
+    End Function
+
     Declare Function GetWindowText Lib "user32" Alias "GetWindowTextA" (ByVal hwnd As Integer, ByVal lpString As String, ByVal cch As Integer) As Integer
     Declare Function IsWindowVisible Lib "user32" (ByVal hwnd As IntPtr) As Boolean
     '
