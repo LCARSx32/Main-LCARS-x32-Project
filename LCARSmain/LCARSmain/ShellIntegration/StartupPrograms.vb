@@ -187,26 +187,46 @@ Public Class StartupPrograms
         REST_USEDESKTOPINICACHE
     End Enum
 
+    'Note: This function is imported by ORDINAL, not by name.
+    <System.Runtime.InteropServices.DllImport("shell32", EntryPoint:="#723")> _
+    Private Shared Function SHCreateSessionKey(ByVal samDesired As Long, <Runtime.InteropServices.Out()> ByRef phKey As Int32) As Integer
+    End Function
+    Private Declare Function RegCloseKey Lib "advapi32" (ByVal phKey As Int32) As Integer
+    Private Declare Auto Function RegCreateKeyEx Lib "advapi32" (ByVal hKey As Int32, _
+                                                            ByVal lpSubKey As String, _
+                                                            ByVal reserved As Int32, _
+                                                            ByVal lpClass As String, _
+                                                            ByVal dwOptions As Int32, _
+                                                            ByVal samDesired As Int32, _
+                                                            ByVal lpSecurityAttributes As Integer, _
+                                                            <Runtime.InteropServices.Out()> ByRef phkResult As Int32, _
+                                                            <Runtime.InteropServices.Out()> ByRef lpdwDisposition As Int32) _
+                                                            As Integer
 #End Region
 
     Public Shared Sub StartAll()
-        Dim runKeysRun As Boolean = checkCompletion(RunRecordString)
-        If Not runKeysRun Then
-            'Local machine runonce is run by Setup
-            StartMachineRun(False)
-            StartUserRun(False)
-        End If
 
-        If Not checkCompletion(StartupRecordString) Then
-            StartMachineStartup(False)
-            StartUserStartup(False)
-            WriteCompletion(StartupRecordString)
-        End If
+        Try
+            Dim runKeysRun As Boolean = checkCompletion(RunRecordString)
+            If Not runKeysRun Then
+                'Local machine runonce is run by Setup
+                StartMachineRun(False)
+                StartUserRun(False)
+            End If
 
-        If Not runKeysRun Then
-            StartUserRunOnce(False)
-            WriteCompletion(RunRecordString)
-        End If
+            If Not checkCompletion(StartupRecordString) Then
+                StartMachineStartup(False)
+                StartUserStartup(False)
+                WriteCompletion(StartupRecordString)
+            End If
+
+            If Not runKeysRun Then
+                StartUserRunOnce(False)
+                WriteCompletion(RunRecordString)
+            End If
+        Catch ex As Exception
+            MsgBox(ex.ToString())
+        End Try
     End Sub
 
     Private Shared Sub processKey(ByVal key As RegistryKey, Optional ByVal delete As Boolean = False)
@@ -330,12 +350,21 @@ Public Class StartupPrograms
     End Sub
 
     Private Shared Sub WriteCompletion(ByVal name As String)
-        'Note: This performs the same function as SHCreateSessionKey, but is easier to use.
-        Dim sessionID As Integer = getSessionID()
-        Dim myKey As RegistryKey = Registry.CurrentUser.CreateSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\SessionInfo\" & sessionID, RegistryKeyPermissionCheck.ReadWriteSubTree)
-        Dim mychild As RegistryKey = myKey.CreateSubKey(name, RegistryKeyPermissionCheck.Default)
-        mychild.Close()
-        myKey.Close()
+        Dim phKey As Int32
+        Dim res As Integer
+        res = SHCreateSessionKey(KEY_ALL_ACCESS, phKey)
+        If res = 0 Then
+            Dim childKey As Int32
+            res = RegCreateKeyEx(phKey, name, 0, Nothing, REG_OPTION_VOLITILE, KEY_ALL_ACCESS, Nothing, childKey, Nothing)
+            If res = 0 Then
+                RegCloseKey(childKey)
+            Else
+                MsgBox("Unable to create subkey " & name)
+            End If
+            RegCloseKey(phKey)
+        Else
+            MsgBox("Unable to create session key")
+        End If
     End Sub
 
     Private Shared Function checkCompletion(ByVal name As String) As Boolean
@@ -355,4 +384,27 @@ Public Class StartupPrograms
     Private Shared Function getSessionID() As Integer
         Return Process.GetCurrentProcess().SessionId
     End Function
+
+#Region " REGSAM definitions "
+    Private Const STANDARD_RIGHTS_ALL As Long = &H1F0000
+    Private Const SYNCHRONIZE As Long = &H100000
+    Private Const KEY_QUERY_VALUE As Long = &H1
+    Private Const KEY_SET_VALUE As Long = &H1
+    Private Const KEY_CREATE_SUB_KEY As Long = &H1
+    Private Const KEY_ENUMERATE_SUB_KEYS As Long = &H1
+    Private Const KEY_NOTIFY As Long = &H1
+    Private Const KEY_CREATE_LINK As Long = &H1
+
+    Private Const KEY_ALL_ACCESS As Long = _
+    (STANDARD_RIGHTS_ALL Or _
+    KEY_QUERY_VALUE Or _
+    KEY_SET_VALUE Or _
+    KEY_CREATE_SUB_KEY Or _
+    KEY_ENUMERATE_SUB_KEYS Or _
+    KEY_NOTIFY Or _
+    KEY_CREATE_LINK) And _
+    Not SYNCHRONIZE
+
+    Private Const REG_OPTION_VOLITILE As Int32 = 1
+#End Region
 End Class
