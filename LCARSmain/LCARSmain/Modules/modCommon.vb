@@ -740,10 +740,10 @@ Public Enum SetWindowPosFlags As UInteger
         End If
 
         SetParent(SysListView, hwndSHELLDLL_DefView)
-        Dim myStyle As Integer = GetWindowLongPtr(hTrayIcons, GWL_STYLE)
+        Dim myStyle As Integer = GetWindowLong_Safe(hTrayIcons, GWL_STYLE)
         myStyle = myStyle Or TBSTYLE_TRANSPARENT
 
-        SetWindowLongPtr(hTrayIcons, GWL_STYLE, myStyle)
+        SetWindowLong_Safe(hTrayIcons, GWL_STYLE, myStyle)
 
         SetParent(hTrayIcons, hTrayParent)
 
