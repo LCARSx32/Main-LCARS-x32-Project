@@ -32,8 +32,6 @@
                 SaveSetting("LCARS X32", "Application", "PanelCloseInterval", GetSetting("LCARS X32", "Application", "PanelCloseInterval", "50"))
                 SaveSetting("LCARS X32", "Application", "PanelOpenInterval", GetSetting("LCARS X32", "Application", "PanelOpenInterval", "100"))
                 SaveSetting("LCARS X32", "Application", "SpeechOn", GetSetting("LCARS X32", "Application", "SpeechOn", "True"))
-                SaveSetting("LCARS X32", "Application", "Wallpaper", GetSetting("LCARS X32", "Application", "Wallpaper", "FederationLogo"))
-                SaveSetting("LCARS X32", "Application", "WallpaperSizeMode", GetSetting("LCARS X32", "Application", "WallpaperSizeMode", "2"))
                 SaveSetting("LCARS X32", "Application", "Stardate", GetSetting("LCARS X32", "Application", "Stardate", "TRUE"))
                 SaveSetting("LCARS X32", "Application", "LangFile", GetSetting("LCARS X32", "Application", "LangFile", "Standard.lng"))
                 SaveSetting("LCARS X32", "Application", "ButtonSound", GetSetting("LCARS X32", "Application", "ButtonSound", InstallPath & "\207.wav"))
@@ -42,16 +40,14 @@
                 SaveSetting("LCARS X32", "Application", "HideExplorer", GetSetting("LCARS X32", "Application", "HideExplorer", "FALSE"))
                 SaveSetting("LCARS X32", "Application", "Updates", GetSetting("LCARS X32", "Application", "Updates", "TRUE"))
                 SaveSetting("LCARS X32", "Colors", "ColorMap", GetSetting("LCARS X32", "Colors", "ColorMap", "#3366CC,#99CCFF,#CC99CC,#FFCC00,#FFFF99,#CC6666,#FFFFFF,#FF0000,#FFCC66,Orange,#99CCFF"))
-                SaveSetting("LCARS X32", "Load", "AutoHide", GetSetting("LCARS X32", "Load", "AutoHide", "0"))
-                SaveSetting("LCARS X32", "Load", "GUI Form", GetSetting("LCARS X32", "Load", "GUI Form", "1"))
-                SaveSetting("LCARSUpdate", "Config", "CustomURL", GetSetting("LCARSUpdate", "Config", "CustomURL", "Custom URL"))
                 SaveSetting("LCARS X32", "Application", "InstallPath", InstallPath)
             End If
             'Reset only update section. Included in "All"
             If mode = SettingInitializationOptions.All Or mode = SettingInitializationOptions.Update Then
-                SaveSetting("LCARSUpdate", "Config", "ReleaseURL", "https://googledrive.com/host/0B4oWzmqN8Sa7QzU5S192OXhsaXM/ReleaseVersion.txt,http://www.lcarsx32.com/lcars/x32/ReleaseVersion.txt")
-                SaveSetting("LCARSUpdate", "Config", "ExperimentalURL", "https://googledrive.com/host/0B4oWzmqN8Sa7TDJtUnZrcFlfNjg/ExperimentalVersion.txt,http://www.lcarsx32.com/lcars/x32/ExperimentalVersion.txt")
+                SaveSetting("LCARSUpdate", "Config", "ReleaseURL", "http://www.lcarsx32.com/lcars/x32/ReleaseVersion.txt")
+                SaveSetting("LCARSUpdate", "Config", "ExperimentalURL", "http://www.lcarsx32.com/lcars/x32/ExperimentalVersion.txt")
                 SaveSetting("LCARSUpdate", "Config", "UpdatePath", GetSetting("LCARSUpdate", "Config", "UpdatePath", "Experimental"))
+                SaveSetting("LCARSUpdate", "Config", "CustomURL", GetSetting("LCARSUpdate", "Config", "CustomURL", "Custom URL"))
             End If
             'Reset only alert section. Included in "All"
             If mode = SettingInitializationOptions.Alerts Or mode = SettingInitializationOptions.All Or mode = SettingInitializationOptions.RestoreToDefaults Then
@@ -85,8 +81,6 @@
                 SaveSetting("LCARS X32", "Application", "PanelCloseInterval", "50")
                 SaveSetting("LCARS X32", "Application", "PanelOpenInterval", "100")
                 SaveSetting("LCARS X32", "Application", "SpeechOn", "True")
-                SaveSetting("LCARS X32", "Application", "Wallpaper", "FederationLogo")
-                SaveSetting("LCARS X32", "Application", "WallpaperSizeMode", "2")
                 SaveSetting("LCARS X32", "Application", "Stardate", "TRUE")
                 SaveSetting("LCARS X32", "Application", "LangFile", "Standard.lng")
                 SaveSetting("LCARS X32", "Application", "ButtonSound", InstallPath & "\207.wav")
@@ -95,12 +89,10 @@
                 SaveSetting("LCARS X32", "Application", "HideExplorer", "FALSE")
                 SaveSetting("LCARS X32", "Application", "Updates", "TRUE")
                 SaveSetting("LCARS X32", "Colors", "ColorMap", "#3366CC,#99CCFF,#CC99CC,#FFCC00,#FFFF99,#CC6666,#FFFFFF,#FF0000,#FFCC66,Orange,#99CCFF")
-                SaveSetting("LCARS X32", "Load", "AutoHide", "0")
-                SaveSetting("LCARS X32", "Load", "GUI Form", "1")
                 SaveSetting("LCARSUpdate", "Config", "CustomURL", "Custom URL")
                 SaveSetting("LCARS X32", "Application", "InstallPath", InstallPath)
-                SaveSetting("LCARSUpdate", "Config", "ReleaseURL", "https://googledrive.com/host/0B4oWzmqN8Sa7QzU5S192OXhsaXM/ReleaseVersion.txt,http://www.lcarsx32.com/lcars/x32/ReleaseVersion.txt")
-                SaveSetting("LCARSUpdate", "Config", "ExperimentalURL", "https://googledrive.com/host/0B4oWzmqN8Sa7TDJtUnZrcFlfNjg/ExperimentalVersion.txt,http://www.lcarsx32.com/lcars/x32/ExperimentalVersion.txt")
+                SaveSetting("LCARSUpdate", "Config", "ReleaseURL", "http://www.lcarsx32.com/lcars/x32/ReleaseVersion.txt")
+                SaveSetting("LCARSUpdate", "Config", "ExperimentalURL", "http://www.lcarsx32.com/lcars/x32/ExperimentalVersion.txt")
                 SaveSetting("LCARSUpdate", "Config", "UpdatePath", "Experimental")
             End If
         End Sub
