@@ -44,6 +44,12 @@
             End If
             'Reset only update section. Included in "All"
             If mode = SettingInitializationOptions.All Or mode = SettingInitializationOptions.Update Then
+                If GetSetting("LCARSUpdate", "Config", "CustomURL", "Custom URL") = "https://googledrive.com/host/0B4oWzmqN8Sa7TDJtUnZrcFlfNjg/BetaVersion.txt" And _
+                GetSetting("LCARSUpdate", "Config", "UpdatePath", "experimental") = "custom" Then
+                    ' Restore to experimental
+                    SaveSetting("LCARSUpdate", "Config", "CustomURL", "Custom URL")
+                    SaveSetting("LCARSUpdate", "Config", "UpdatePath", "experimental")
+                End If
                 SaveSetting("LCARSUpdate", "Config", "ReleaseURL", "http://www.lcarsx32.com/lcars/x32/ReleaseVersion.txt")
                 SaveSetting("LCARSUpdate", "Config", "ExperimentalURL", "http://www.lcarsx32.com/lcars/x32/ExperimentalVersion.txt")
                 SaveSetting("LCARSUpdate", "Config", "UpdatePath", GetSetting("LCARSUpdate", "Config", "UpdatePath", "Experimental"))

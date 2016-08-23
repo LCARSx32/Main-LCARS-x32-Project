@@ -227,9 +227,9 @@ Public Class frmSettings
             fbChannelDot.Top = hpRelease.Top
         Else
             fbChannelDot.Top = hpCustom.Top
-            txtCustom.Text = GetSetting("LCARSUpdate", "Config", "CustomURL", "Custom URL")
             txtCustom.Visible = True
         End If
+        txtCustom.Text = GetSetting("LCARSUpdate", "Config", "CustomURL", "Custom URL")
         AddHandler txtCustom.TextChanged, AddressOf txtCustom_TextChanged
 
 
