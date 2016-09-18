@@ -71,8 +71,8 @@ public Class modBusiness
     Public myRun As LCARS.LCARSbuttonClass
     Public myAlertListButton As LCARS.LCARSbuttonClass
     Public myProgramPagesDisplay As LCARS.LCARSbuttonClass
+    Dim bars() As Control
 
-    Public adjustedBounds As Rectangle
     Public MyPrograms As Collection = New Collection
     Public myUserButtonCollection As New List(Of UserButtonInfo)
     Public mainTimer As New Timer
@@ -115,6 +115,8 @@ public Class modBusiness
     'Autohide
     Dim autohide As IAutohide.AutoHideModes
     Dim hideCount As Integer = 0
+
+    Private oldArea As Rectangle
 #End Region
 
 #End Region
@@ -129,7 +131,7 @@ public Class modBusiness
             If GetParent(hwnd) = 0 Then
 
                 bNoOwner = (GetWindow(hwnd, GW_OWNER) = 0)
-                lExStyle = GetWindowLong(hwnd, GWL_EXSTYLE)
+                lExStyle = GetWindowLong_Safe(hwnd, GWL_EXSTYLE)
 
                 'If (((lExStyle And WS_EX_TOOLWINDOW) = 0) Or (lExStyle And WS_EX_APPWINDOW)) Or _
                 '(((lExStyle And WS_EX_TOOLWINDOW) = 0) And ((lExStyle And WS_EX_APPWINDOW) = 0) And bNoOwner = True) Then
@@ -168,10 +170,7 @@ public Class modBusiness
             End If
             End If
 
-
-
-
-            fEnumWindowsCallBack = True
+        Return True
     End Function
 
     Public Sub SetWallpaper(ByVal wall As Image)
@@ -421,13 +420,11 @@ public Class modBusiness
         ReDim myWindows(-1)
         myForm = curForm
 
-        AddHandler Microsoft.Win32.SystemEvents.DisplaySettingsChanged, AddressOf System_DisplayChanged
-
         'Set the form's extended style to "WS_EX_TOOLWINDOW" which allows it
         'to stay fullscreen instead of being resized by the working area.
-        Dim currentStyle As Integer = GetWindowLong(myForm.Handle, -20)
+        Dim currentStyle As Integer = GetWindowLong_Safe(myForm.Handle, -20)
         currentStyle = currentStyle Or (&H80)
-        SetWindowLong(myForm.Handle, -20, currentStyle)
+        SetWindowLong_Safe(myForm.Handle, -20, currentStyle)
 
         'Set the various panels and buttons that are controlled by this module.
         'These panels and buttons behave exactly the same on each mainscreen.
@@ -467,6 +464,17 @@ public Class modBusiness
         myRun = myForm.Controls.Find("myRun", True)(0)
         myAlertListButton = myForm.Controls.Find("myAlertListButton", True)(0)
         myProgramPagesDisplay = myForm.Controls.Find("fbProgramPages", True)(0)
+        bars = New Control(9) { _
+            myBattery.Controls("fbBatt1"), _
+            myBattery.Controls("fbBatt2"), _
+            myBattery.Controls("fbBatt3"), _
+            myBattery.Controls("fbBatt4"), _
+            myBattery.Controls("fbBatt5"), _
+            myBattery.Controls("fbBatt6"), _
+            myBattery.Controls("fbBatt7"), _
+            myBattery.Controls("fbBatt8"), _
+            myBattery.Controls("fbBatt9"), _
+            myBattery.Controls("fbBatt10")}
 
         If Listener Is Nothing OrElse Listener.State <> SpeechLib.SpeechRecoContextState.SRCS_Enabled Then
             mySpeech.Lit = False
@@ -528,7 +536,7 @@ public Class modBusiness
             myShowTrayButton_Click(New Object, New EventArgs)
         End If
 
-
+        oldArea = Screen.AllScreens(ScreenIndex).WorkingArea
     End Sub
 
     Public Sub loadLanguage()
@@ -563,19 +571,11 @@ public Class modBusiness
 
     End Sub
 
-    Private Sub System_DisplayChanged(ByVal sender As Object, ByVal e As System.EventArgs)
-        myForm.Bounds = Screen.AllScreens(ScreenIndex).Bounds
-        'TODO: Move to frmStartup
-        'TODO: Handle changes to number of displays
-        myDesktop.pnlBack.Bounds = Screen.AllScreens(ScreenIndex).Bounds
-
-    End Sub
-
     Private Sub mainTimer_Tick(ByVal sender As Object, ByVal e As System.EventArgs)
         Dim found As Boolean = False
         Dim intloop As Integer
         Dim battInfo As PowerStatus = SystemInformation.PowerStatus
-        Static battLevel As Single = 1
+        Static battLevel As Short = 10
 
         'Check for and hide startbar, ect. Code from Alan - Causing problems with message boxes
         If GetSetting("LCARS X32", "Application", "HideExplorer", "FALSE") = "TRUE" Then
@@ -634,170 +634,13 @@ public Class modBusiness
             myBattery.Controls("lblPowerSource").Text = "PRIMARY"
         End If
 
-        Dim newBattLevel As Single
+        Dim newBattLevel As Short = Math.Ceiling(battInfo.BatteryLifePercent * 10)
 
-        Select Case battInfo.BatteryLifePercent
-            Case 0 To 0.1
-                newBattLevel = 0
-            Case 0.1 To 0.1
-                newBattLevel = 0.1
-            Case 0.11 To 0.2
-                newBattLevel = 0.2
-            Case 0.21 To 0.3
-                newBattLevel = 0.3
-            Case 0.31 To 0.4
-                newBattLevel = 0.4
-            Case 0.41 To 0.5
-                newBattLevel = 0.5
-            Case 0.51 To 0.6
-                newBattLevel = 0.6
-            Case 0.61 To 0.7
-                newBattLevel = 0.7
-            Case 0.71 To 0.8
-                newBattLevel = 0.8
-            Case 0.81 To 0.9
-                newBattLevel = 0.9
-            Case 0.91 To 1
-                newBattLevel = 1
-        End Select
         If newBattLevel <> battLevel Then
             battLevel = newBattLevel
-
-            Dim b1 As Control = myBattery.Controls("fbBatt1")
-            Dim b2 As Control = myBattery.Controls("fbBatt2")
-            Dim b3 As Control = myBattery.Controls("fbBatt3")
-            Dim b4 As Control = myBattery.Controls("fbBatt4")
-            Dim b5 As Control = myBattery.Controls("fbBatt5")
-            Dim b6 As Control = myBattery.Controls("fbBatt6")
-            Dim b7 As Control = myBattery.Controls("fbBatt7")
-            Dim b8 As Control = myBattery.Controls("fbBatt8")
-            Dim b9 As Control = myBattery.Controls("fbBatt9")
-            Dim b10 As Control = myBattery.Controls("fbBatt10")
-
-            Select Case battLevel
-                Case 1
-                    b1.Visible = True
-                    b2.Visible = True
-                    b3.Visible = True
-                    b4.Visible = True
-                    b5.Visible = True
-                    b6.Visible = True
-                    b7.Visible = True
-                    b8.Visible = True
-                    b9.Visible = True
-                    b10.Visible = True
-                Case 0.9
-                    b1.Visible = True
-                    b2.Visible = True
-                    b3.Visible = True
-                    b4.Visible = True
-                    b5.Visible = True
-                    b6.Visible = True
-                    b7.Visible = True
-                    b8.Visible = True
-                    b9.Visible = True
-                    b10.Visible = False
-                Case 0.8
-                    b1.Visible = True
-                    b2.Visible = True
-                    b3.Visible = True
-                    b4.Visible = True
-                    b5.Visible = True
-                    b6.Visible = True
-                    b7.Visible = True
-                    b8.Visible = True
-                    b9.Visible = False
-                    b10.Visible = False
-                Case 0.7
-                    b1.Visible = True
-                    b2.Visible = True
-                    b3.Visible = True
-                    b4.Visible = True
-                    b5.Visible = True
-                    b6.Visible = True
-                    b7.Visible = True
-                    b8.Visible = False
-                    b9.Visible = False
-                    b10.Visible = False
-                Case 0.6
-                    b1.Visible = True
-                    b2.Visible = True
-                    b3.Visible = True
-                    b4.Visible = True
-                    b5.Visible = True
-                    b6.Visible = True
-                    b7.Visible = False
-                    b8.Visible = False
-                    b9.Visible = False
-                    b10.Visible = False
-                Case 0.5
-                    b1.Visible = True
-                    b2.Visible = True
-                    b3.Visible = True
-                    b4.Visible = True
-                    b5.Visible = True
-                    b6.Visible = False
-                    b7.Visible = False
-                    b8.Visible = False
-                    b9.Visible = False
-                    b10.Visible = False
-                Case 0.4
-                    b1.Visible = True
-                    b2.Visible = True
-                    b3.Visible = True
-                    b4.Visible = True
-                    b5.Visible = False
-                    b6.Visible = False
-                    b7.Visible = False
-                    b8.Visible = False
-                    b9.Visible = False
-                    b10.Visible = False
-                Case 0.3
-                    b1.Visible = True
-                    b2.Visible = True
-                    b3.Visible = True
-                    b4.Visible = False
-                    b5.Visible = False
-                    b6.Visible = False
-                    b7.Visible = False
-                    b8.Visible = False
-                    b9.Visible = False
-                    b10.Visible = False
-                Case 0.2
-                    b1.Visible = True
-                    b2.Visible = True
-                    b3.Visible = False
-                    b4.Visible = False
-                    b5.Visible = False
-                    b6.Visible = False
-                    b7.Visible = False
-                    b8.Visible = False
-                    b9.Visible = False
-                    b10.Visible = False
-                Case 0.1
-                    b1.Visible = True
-                    b2.Visible = True
-                    b3.Visible = False
-                    b4.Visible = False
-                    b5.Visible = False
-                    b6.Visible = False
-                    b7.Visible = False
-                    b8.Visible = False
-                    b9.Visible = False
-                    b10.Visible = False
-                Case 0
-                    b1.Visible = False
-                    b2.Visible = False
-                    b3.Visible = False
-                    b4.Visible = False
-                    b5.Visible = False
-                    b6.Visible = False
-                    b7.Visible = False
-                    b8.Visible = False
-                    b9.Visible = False
-                    b10.Visible = False
-                    GeneralAlert(1)
-            End Select
+            For i As Integer = 0 To bars.Length - 1
+                bars(i).Visible = i < battLevel
+            Next
         End If
 
 
@@ -805,12 +648,14 @@ public Class modBusiness
 
         ReDim WindowList(-1)
 
-        adjustedBounds = New Rectangle(myMainBar.PointToScreen(myMainPanel.Location).X, myMainBar.PointToScreen(myMainPanel.Location).Y, myMainPanel.Width, myMainPanel.Height)
+        Dim adjustedBounds As Rectangle
         If autohide = IAutohide.AutoHideModes.Hidden Then
             adjustedBounds = Screen.FromHandle(myForm.Handle).Bounds
+        Else
+            adjustedBounds = New Rectangle(myMainBar.PointToScreen(myMainPanel.Location).X, myMainBar.PointToScreen(myMainPanel.Location).Y, myMainPanel.Width, myMainPanel.Height)
         End If
-        If Not adjustedBounds = Screen.AllScreens(ScreenIndex).WorkingArea Then
-            'The working area has changed, alert the linked windows (if there are any).
+        If Not adjustedBounds = oldArea Then
+            'The working area needs to change, alert the linked windows (if there are any).
             If LinkedWindows.Count > 0 Then
                 Dim myRectData As New COPYDATASTRUCT
                 myRectData.dwData = 100
@@ -825,18 +670,19 @@ public Class modBusiness
                 Marshal.StructureToPtr(myRectData, MyCopyData, False)
                 'Do not use SendDataToLinkedWindows; it uses PostMessage, not SendMessage
                 For Each targetHandle As IntPtr In LinkedWindows
-                    'Compare working areas because no equality operator for screens
-                    If Screen.FromHandle(targetHandle).WorkingArea = Screen.FromHandle(myForm.Handle).WorkingArea Then
+                    If Screen.ReferenceEquals(Screen.FromHandle(targetHandle), Screen.FromHandle(myForm.Handle)) Then
                         Dim res As Integer = SendMessage(targetHandle, WM_COPYDATA, myDesktop.Handle, MyCopyData)
                     End If
                 Next
+                Marshal.FreeCoTaskMem(MyCopyData)
+                Marshal.FreeCoTaskMem(myPtr)
             End If
             resizeWorkingArea(adjustedBounds.X, adjustedBounds.Y, adjustedBounds.Width, adjustedBounds.Height)
-            'myDesktop.curDesktop(ScreenIndex).Bounds = Screen.AllScreens(ScreenIndex).WorkingArea
+            oldArea = adjustedBounds
         End If
 
         If Not myDesktop.curDesktop(ScreenIndex).Size = adjustedBounds.Size Then
-            updateDesktopBounds(ScreenIndex)
+            updateDesktopBounds(ScreenIndex, adjustedBounds)
         End If
 
         'Deal with resizing the tray icon panel if necessary
@@ -1610,6 +1456,10 @@ Retry:
             tmrAutohide.Enabled = False
         End If
 
+    End Sub
+
+    Public Sub resetWorkingArea()
+        oldArea = New Rectangle(1, 1, 1, 1)
     End Sub
 
     '    Private Sub myFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)

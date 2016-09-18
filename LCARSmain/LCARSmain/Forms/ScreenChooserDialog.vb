@@ -52,7 +52,7 @@ Public Class ScreenChooserDialog
         Next
         interop = New LCARS.x32Interop()
         interop.Init()
-        Me.Bounds = Screen.AllScreens(_screenIndex).WorkingArea
+        Me.Bounds = Screen.AllScreens(_screenIndex).Bounds
     End Sub
 
     Private Sub myScreen_Click(ByVal sender As Object, ByVal e As EventArgs)

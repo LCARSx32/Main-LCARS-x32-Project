@@ -99,7 +99,7 @@ Namespace Controls
 
 #Region " Subs "
 
-        Protected Overrides Sub GenericButton_load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.ParentChanged
+        Protected Sub GenericButton_load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.ParentChanged
             CheckForIllegalCrossThreadCalls = False
         End Sub
 

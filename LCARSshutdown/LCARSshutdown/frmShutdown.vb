@@ -98,6 +98,7 @@ Public Class frmShutdown
         System.Runtime.InteropServices.Marshal.StructureToPtr(myData, MyCopyData, False)
 
         Dim res As Integer = SendMessage(x32Handle, WM_COPYDATA, Me.Handle, MyCopyData)
+        System.Runtime.InteropServices.Marshal.FreeCoTaskMem(MyCopyData)
     End Sub
 
 

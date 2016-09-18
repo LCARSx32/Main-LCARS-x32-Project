@@ -153,10 +153,27 @@ Module modCommon
 
     Declare Function GetParent Lib "user32" (ByVal hwnd As Integer) As Integer
     Declare Function GetWindow Lib "user32" (ByVal hwnd As Integer, ByVal wCmd As Integer) As Integer
-    Public Declare Function GetWindowLong Lib "user32" Alias "GetWindowLongA" (ByVal hwnd As Integer, ByVal nIndex As Integer) As Integer
-    Public Declare Auto Function SetWindowLong Lib "User32.Dll" (ByVal hWnd As IntPtr, ByVal nIndex As Integer, ByVal dwNewLong As Integer) As Integer
+    Private Declare Function GetWindowLongPtr Lib "user32" Alias "GetWindowLongPtrA" (ByVal hwnd As IntPtr, ByVal nIndex As Integer) As IntPtr
+    Private Declare Function GetWindowLong Lib "user32" Alias "GetWindowLongA" (ByVal hwnd As IntPtr, ByVal nIndex As Integer) As Integer
+    Public Function GetWindowLong_Safe(ByVal hwnd As IntPtr, ByVal nIndex As Integer) As Integer
+        If IntPtr.Size = 4 Then
+            Return GetWindowLong(hwnd, nIndex)
+        Else
+            Return GetWindowLongPtr(hwnd, nIndex)
+        End If
+    End Function
+    Private Declare Auto Function SetWindowLongPtr Lib "User32.Dll" Alias "SetWindowLongPtrA" (ByVal hWnd As IntPtr, ByVal nIndex As Integer, ByVal dwNewLong As IntPtr) As Integer
+    Private Declare Auto Function SetWindowLong Lib "User32.Dll" Alias "SetWindowLongA" (ByVal hWnd As IntPtr, ByVal nIndex As Integer, ByVal dwNewLong As IntPtr) As Integer
+    Public Function SetWindowLong_Safe(ByVal hwnd As IntPtr, ByVal nIndex As Integer, ByVal dwNewLong As Integer) As Integer
+        If IntPtr.Size = 4 Then
+            Return SetWindowLong(hwnd, nIndex, dwNewLong)
+        Else
+            Return SetWindowLongPtr(hwnd, nIndex, dwNewLong)
+        End If
+    End Function
+
     Declare Function GetWindowText Lib "user32" Alias "GetWindowTextA" (ByVal hwnd As Integer, ByVal lpString As String, ByVal cch As Integer) As Integer
-    Declare Function IsWindowVisible Lib "user32" (ByVal hwnd As Integer) As Integer
+    Declare Function IsWindowVisible Lib "user32" (ByVal hwnd As IntPtr) As Boolean
     '
     ' Constants used with APIs
     '
@@ -650,6 +667,7 @@ Public Enum SetWindowPosFlags As UInteger
 
 
         Dim i As Integer = SystemParametersInfo(SPI_SETWORKAREA, Marshal.SizeOf(myArea), ptr, SPIF_UPDATEINIFILE)
+        Marshal.FreeHGlobal(ptr)
         'If frmAlerts.Visible Then
         frmAlerts.Bounds = New Rectangle(x, y, width, height)
         'End If
@@ -664,6 +682,7 @@ Public Enum SetWindowPosFlags As UInteger
     End Sub
 
     Public Sub CloseLCARS()
+        RemoveHandler Microsoft.Win32.SystemEvents.DisplaySettingsChanged, AddressOf frmStartup.System_DisplayChanged
         SetParent(hTrayIcons, myIconSaver.Handle)
 
         Dim TaskbarSettings As APPBARDATA
@@ -721,10 +740,10 @@ Public Enum SetWindowPosFlags As UInteger
         End If
 
         SetParent(SysListView, hwndSHELLDLL_DefView)
-        Dim myStyle As Integer = GetWindowLong(hTrayIcons, GWL_STYLE)
+        Dim myStyle As Integer = GetWindowLong_Safe(hTrayIcons, GWL_STYLE)
         myStyle = myStyle Or TBSTYLE_TRANSPARENT
 
-        SetWindowLong(hTrayIcons, GWL_STYLE, myStyle)
+        SetWindowLong_Safe(hTrayIcons, GWL_STYLE, myStyle)
 
         SetParent(hTrayIcons, hTrayParent)
 
@@ -745,9 +764,9 @@ Public Enum SetWindowPosFlags As UInteger
         Return typeList
     End Function
 
-    Public Sub updateDesktopBounds(ByVal ScreenIndex As Integer)
+    Public Sub updateDesktopBounds(ByVal ScreenIndex As Integer, ByVal newBounds As Rectangle)
         myDesktop.curDesktop(ScreenIndex).Bounds = _
-            New Rectangle(Screen.AllScreens(ScreenIndex).WorkingArea.Location - displayOffset, _
-                          Screen.AllScreens(ScreenIndex).WorkingArea.Size)
+            New Rectangle(newBounds.Location - displayOffset, _
+                          newBounds.Size)
     End Sub
 End Module

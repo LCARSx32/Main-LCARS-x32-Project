@@ -103,6 +103,7 @@ Public Module Alerts
         System.Runtime.InteropServices.Marshal.StructureToPtr(myData, MyCopyData, True)
 
         SendMessage(New IntPtr(CInt(GetSetting("LCARS x32", "Application", "MainWindowHandle", "0"))), WM_COPYDATA, hwnd, MyCopyData)
+        System.Runtime.InteropServices.Marshal.FreeCoTaskMem(MyCopyData)
     End Sub
 
     ''' <summary>
@@ -131,7 +132,7 @@ Public Module Alerts
         System.Runtime.InteropServices.Marshal.StructureToPtr(myData, MyCopyData, True)
 
         SendMessage(New IntPtr(CInt(GetSetting("LCARS x32", "Application", "MainWindowHandle", "0"))), WM_COPYDATA, hwnd, MyCopyData)
-
+        System.Runtime.InteropServices.Marshal.FreeCoTaskMem(MyCopyData)
     End Sub
 
     ''' <summary>
@@ -199,6 +200,7 @@ Public Module Alerts
         System.Runtime.InteropServices.Marshal.StructureToPtr(myData, MyCopyData, True)
 
         SendMessage(New IntPtr(CInt(GetSetting("LCARS x32", "Application", "MainWindowHandle", "0"))), WM_COPYDATA, hwnd, MyCopyData)
+        System.Runtime.InteropServices.Marshal.FreeCoTaskMem(MyCopyData)
     End Sub
 
     ''' <summary>

@@ -60,7 +60,7 @@ Partial Class frmSettings
         Me.tbTitle = New LCARS.Controls.TextButton
         Me.sbExitMyComp = New LCARS.Controls.StandardButton
         Me.ltcSettings = New LCARS.Controls.x32TabControl
-        Me.tabScreenSpecific = CType(New LCARS.Controls.x32TabPage, LCARS.Controls.x32TabPage)
+        Me.tabScreenSpecific = New LCARS.Controls.x32TabPage
         Me.pnlScreenSpecific = New System.Windows.Forms.Panel
         Me.FlatButton1 = New LCARS.Controls.FlatButton
         Me.pnlLanguage = New System.Windows.Forms.Panel
@@ -90,7 +90,12 @@ Partial Class frmSettings
         Me.fbWallpaper = New LCARS.Controls.FlatButton
         Me.lblClickScreen = New System.Windows.Forms.Label
         Me.pnlScreens = New System.Windows.Forms.Panel
-        Me.LcarsTabPage2 = CType(New LCARS.Controls.x32TabPage, LCARS.Controls.x32TabPage)
+        Me.LcarsTabPage1 = New LCARS.Controls.x32TabPage
+        Me.fbChangeSound = New LCARS.Controls.FlatButton
+        Me.cbBeeping = New LCARS.Controls.ComplexButton
+        Me.txtSoundPath = New System.Windows.Forms.Label
+        Me.Label1 = New System.Windows.Forms.Label
+        Me.LcarsTabPage2 = New LCARS.Controls.x32TabPage
         Me.cbDates = New LCARS.Controls.ComplexButton
         Me.Label3 = New System.Windows.Forms.Label
         Me.sbUseScheme = New LCARS.Controls.StandardButton
@@ -106,17 +111,12 @@ Partial Class frmSettings
         Me.FlatButton11 = New LCARS.Controls.FlatButton
         Me.StandardButton1 = New LCARS.Controls.StandardButton
         Me.Elbow5 = New LCARS.Controls.Elbow
-        Me.LcarsTabPage1 = CType(New LCARS.Controls.x32TabPage, LCARS.Controls.x32TabPage)
-        Me.fbChangeSound = New LCARS.Controls.FlatButton
-        Me.cbBeeping = New LCARS.Controls.ComplexButton
-        Me.txtSoundPath = New System.Windows.Forms.Label
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.LcarsTabPage3 = CType(New LCARS.Controls.x32TabPage, LCARS.Controls.x32TabPage)
+        Me.LcarsTabPage3 = New LCARS.Controls.x32TabPage
         Me.hpbLCARS = New LCARS.Controls.HalfPillButton
         Me.hpbExplorer = New LCARS.Controls.HalfPillButton
         Me.Label6 = New System.Windows.Forms.Label
         Me.fbShellSelect = New LCARS.Controls.FlatButton
-        Me.LcarsTabPage5 = CType(New LCARS.Controls.x32TabPage, LCARS.Controls.x32TabPage)
+        Me.LcarsTabPage5 = New LCARS.Controls.x32TabPage
         Me.sbExternal = New LCARS.Controls.StandardButton
         Me.sbInternal = New LCARS.Controls.StandardButton
         Me.fbSaveChanges = New LCARS.Controls.FlatButton
@@ -141,7 +141,7 @@ Partial Class frmSettings
         Me.lblIntCommandName = New System.Windows.Forms.Label
         Me.lblAlias = New System.Windows.Forms.Label
         Me.lblDescription = New System.Windows.Forms.Label
-        Me.tabAlerts = CType(New LCARS.Controls.x32TabPage, LCARS.Controls.x32TabPage)
+        Me.tabAlerts = New LCARS.Controls.x32TabPage
         Me.hpAlertFiller = New LCARS.Controls.HalfPillButton
         Me.lblAlertSound = New System.Windows.Forms.Label
         Me.lblID = New System.Windows.Forms.Label
@@ -151,7 +151,7 @@ Partial Class frmSettings
         Me.fbAlertColor = New LCARS.Controls.FlatButton
         Me.fbBrowseSound = New LCARS.Controls.FlatButton
         Me.lstAlerts = New System.Windows.Forms.ListBox
-        Me.tabUpdate = CType(New LCARS.Controls.x32TabPage, LCARS.Controls.x32TabPage)
+        Me.tabUpdate = New LCARS.Controls.x32TabPage
         Me.fbChannelDot = New LCARS.Controls.FlatButton
         Me.txtCustom = New System.Windows.Forms.TextBox
         Me.hpCustom = New LCARS.Controls.HalfPillButton
@@ -161,13 +161,13 @@ Partial Class frmSettings
         Me.cpxAutoUpdates = New LCARS.Controls.ComplexButton
         Me.Label19 = New System.Windows.Forms.Label
         Me.lblVersion = New System.Windows.Forms.Label
-        Me.tabExperimental = CType(New LCARS.Controls.x32TabPage, LCARS.Controls.x32TabPage)
+        Me.tabExperimental = New LCARS.Controls.x32TabPage
         Me.cbDebug = New LCARS.Controls.ComplexButton
         Me.cpxHideExplorer = New LCARS.Controls.ComplexButton
         Me.Label20 = New System.Windows.Forms.Label
         Me.Label15 = New System.Windows.Forms.Label
         Me.lblWarning = New System.Windows.Forms.Label
-        Me.tabAbout = CType(New LCARS.Controls.x32TabPage, LCARS.Controls.x32TabPage)
+        Me.tabAbout = New LCARS.Controls.x32TabPage
         Me.lblAbout = New System.Windows.Forms.Label
         Me.TabPage6.SuspendLayout()
         Me.TabPage7.SuspendLayout()
@@ -193,9 +193,9 @@ Partial Class frmSettings
         Me.pnlWallpaper.SuspendLayout()
         CType(Me.picWallpaper, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.LcarsTabPage1.SuspendLayout()
         Me.LcarsTabPage2.SuspendLayout()
         Me.pnlPreview.SuspendLayout()
-        Me.LcarsTabPage1.SuspendLayout()
         Me.LcarsTabPage3.SuspendLayout()
         Me.LcarsTabPage5.SuspendLayout()
         Me.pnlExternal.SuspendLayout()
@@ -872,7 +872,7 @@ Partial Class frmSettings
         Me.tbTitle.Location = New System.Drawing.Point(3, 4)
         Me.tbTitle.Name = "tbTitle"
         Me.tbTitle.RedAlert = LCARS.LCARSalert.Normal
-        Me.tbTitle.Size = New System.Drawing.Size(756, 31)
+        Me.tbTitle.Size = New System.Drawing.Size(756, 32)
         Me.tbTitle.TabIndex = 61
         Me.tbTitle.Text = "SETTINGS"
         '
@@ -906,10 +906,10 @@ Partial Class frmSettings
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ltcSettings.BackColor = System.Drawing.Color.Black
-        Me.ltcSettings.Controls.Add(Me.tabScreenSpecific)
-        Me.ltcSettings.Controls.Add(Me.LcarsTabPage1)
-        Me.ltcSettings.Controls.Add(Me.LcarsTabPage2)
         Me.ltcSettings.Controls.Add(Me.LcarsTabPage3)
+        Me.ltcSettings.Controls.Add(Me.tabScreenSpecific)
+        Me.ltcSettings.Controls.Add(Me.LcarsTabPage2)
+        Me.ltcSettings.Controls.Add(Me.LcarsTabPage1)
         Me.ltcSettings.Controls.Add(Me.LcarsTabPage5)
         Me.ltcSettings.Controls.Add(Me.tabAlerts)
         Me.ltcSettings.Controls.Add(Me.tabUpdate)
@@ -917,18 +917,18 @@ Partial Class frmSettings
         Me.ltcSettings.Controls.Add(Me.tabAbout)
         Me.ltcSettings.Location = New System.Drawing.Point(12, 41)
         Me.ltcSettings.Name = "ltcSettings"
-        Me.ltcSettings.SelectedTab = Me.tabScreenSpecific
+        Me.ltcSettings.SelectedTab = Me.LcarsTabPage3
         Me.ltcSettings.Size = New System.Drawing.Size(776, 547)
         Me.ltcSettings.TabIndex = 60
         Me.ltcSettings.TabPages.Add(Me.LcarsTabPage1)
         Me.ltcSettings.TabPages.Add(Me.LcarsTabPage2)
+        Me.ltcSettings.TabPages.Add(Me.tabScreenSpecific)
         Me.ltcSettings.TabPages.Add(Me.LcarsTabPage3)
         Me.ltcSettings.TabPages.Add(Me.LcarsTabPage5)
         Me.ltcSettings.TabPages.Add(Me.tabAlerts)
         Me.ltcSettings.TabPages.Add(Me.tabUpdate)
         Me.ltcSettings.TabPages.Add(Me.tabExperimental)
         Me.ltcSettings.TabPages.Add(Me.tabAbout)
-        Me.ltcSettings.TabPages.Add(Me.tabScreenSpecific)
         Me.ltcSettings.Text = "LcarStabControl1"
         '
         'tabScreenSpecific
@@ -1060,7 +1060,7 @@ Partial Class frmSettings
         Me.Label13.ForeColor = System.Drawing.Color.Orange
         Me.Label13.Location = New System.Drawing.Point(8, 1)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(127, 37)
+        Me.Label13.Size = New System.Drawing.Size(129, 37)
         Me.Label13.TabIndex = 33
         Me.Label13.Text = "Language Files"
         '
@@ -1385,7 +1385,7 @@ Partial Class frmSettings
         Me.lblClickScreen.Font = New System.Drawing.Font("LCARS", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblClickScreen.Location = New System.Drawing.Point(0, 481)
         Me.lblClickScreen.Name = "lblClickScreen"
-        Me.lblClickScreen.Size = New System.Drawing.Size(217, 28)
+        Me.lblClickScreen.Size = New System.Drawing.Size(218, 28)
         Me.lblClickScreen.TabIndex = 2
         Me.lblClickScreen.Text = "Click a screen to adjust its settings."
         '
@@ -1398,6 +1398,95 @@ Partial Class frmSettings
         Me.pnlScreens.Name = "pnlScreens"
         Me.pnlScreens.Size = New System.Drawing.Size(657, 471)
         Me.pnlScreens.TabIndex = 1
+        '
+        'LcarsTabPage1
+        '
+        Me.LcarsTabPage1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.LcarsTabPage1.BackColor = System.Drawing.Color.Black
+        Me.LcarsTabPage1.Color = LCARS.LCARScolorStyles.MiscFunction
+        Me.LcarsTabPage1.Controls.Add(Me.fbChangeSound)
+        Me.LcarsTabPage1.Controls.Add(Me.cbBeeping)
+        Me.LcarsTabPage1.Controls.Add(Me.txtSoundPath)
+        Me.LcarsTabPage1.Controls.Add(Me.Label1)
+        Me.LcarsTabPage1.Location = New System.Drawing.Point(0, 26)
+        Me.LcarsTabPage1.Name = "LcarsTabPage1"
+        Me.LcarsTabPage1.Size = New System.Drawing.Size(666, 521)
+        Me.LcarsTabPage1.TabIndex = 3
+        Me.LcarsTabPage1.Text = "SOUNDS"
+        '
+        'fbChangeSound
+        '
+        Me.fbChangeSound.Beeping = False
+        Me.fbChangeSound.ButtonText = "CHANGE"
+        Me.fbChangeSound.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.fbChangeSound.ButtonTextHeight = 14
+        Me.fbChangeSound.Clickable = True
+        Me.fbChangeSound.Color = LCARS.LCARScolorStyles.MiscFunction
+        Me.fbChangeSound.CustomAlertColor = System.Drawing.Color.Empty
+        Me.fbChangeSound.Data = Nothing
+        Me.fbChangeSound.Data2 = Nothing
+        Me.fbChangeSound.FlashInterval = 500
+        Me.fbChangeSound.holdDraw = False
+        Me.fbChangeSound.Lit = True
+        Me.fbChangeSound.Location = New System.Drawing.Point(6, 119)
+        Me.fbChangeSound.Name = "fbChangeSound"
+        Me.fbChangeSound.RedAlert = LCARS.LCARSalert.Normal
+        Me.fbChangeSound.Size = New System.Drawing.Size(64, 31)
+        Me.fbChangeSound.TabIndex = 3
+        Me.fbChangeSound.Text = "CHANGE"
+        '
+        'cbBeeping
+        '
+        Me.cbBeeping.AutoEllipsis = False
+        Me.cbBeeping.Beeping = False
+        Me.cbBeeping.ButtonText = "BUTTON BEEPING"
+        Me.cbBeeping.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.cbBeeping.ButtonTextHeight = 14
+        Me.cbBeeping.Clickable = True
+        Me.cbBeeping.Color = LCARS.LCARScolorStyles.MiscFunction
+        Me.cbBeeping.CustomAlertColor = System.Drawing.Color.Empty
+        Me.cbBeeping.Data = Nothing
+        Me.cbBeeping.Data2 = Nothing
+        Me.cbBeeping.FlashInterval = 500
+        Me.cbBeeping.holdDraw = False
+        Me.cbBeeping.Lit = False
+        Me.cbBeeping.Location = New System.Drawing.Point(8, 76)
+        Me.cbBeeping.Name = "cbBeeping"
+        Me.cbBeeping.RedAlert = LCARS.LCARSalert.Normal
+        Me.cbBeeping.SideBlockColor = LCARS.LCARScolorStyles.Orange
+        Me.cbBeeping.SideText = "OFF"
+        Me.cbBeeping.SideTextColor = LCARS.LCARScolorStyles.Orange
+        Me.cbBeeping.SideTextWidth = -1
+        Me.cbBeeping.Size = New System.Drawing.Size(197, 30)
+        Me.cbBeeping.TabIndex = 1
+        Me.cbBeeping.Text = "BUTTON BEEPING"
+        '
+        'txtSoundPath
+        '
+        Me.txtSoundPath.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtSoundPath.AutoSize = True
+        Me.txtSoundPath.Font = New System.Drawing.Font("LCARS", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtSoundPath.ForeColor = System.Drawing.Color.Orange
+        Me.txtSoundPath.Location = New System.Drawing.Point(76, 120)
+        Me.txtSoundPath.Name = "txtSoundPath"
+        Me.txtSoundPath.Size = New System.Drawing.Size(115, 28)
+        Me.txtSoundPath.TabIndex = 0
+        Me.txtSoundPath.Text = "Button Sound Path"
+        '
+        'Label1
+        '
+        Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label1.Font = New System.Drawing.Font("LCARS", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.Orange
+        Me.Label1.Location = New System.Drawing.Point(3, 41)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(761, 39)
+        Me.Label1.TabIndex = 0
+        Me.Label1.Text = "Sound Settings"
         '
         'LcarsTabPage2
         '
@@ -1733,95 +1822,6 @@ Partial Class frmSettings
         Me.Elbow5.TabIndex = 1
         Me.Elbow5.Text = "STATIC"
         '
-        'LcarsTabPage1
-        '
-        Me.LcarsTabPage1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LcarsTabPage1.BackColor = System.Drawing.Color.Black
-        Me.LcarsTabPage1.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.LcarsTabPage1.Controls.Add(Me.fbChangeSound)
-        Me.LcarsTabPage1.Controls.Add(Me.cbBeeping)
-        Me.LcarsTabPage1.Controls.Add(Me.txtSoundPath)
-        Me.LcarsTabPage1.Controls.Add(Me.Label1)
-        Me.LcarsTabPage1.Location = New System.Drawing.Point(0, 26)
-        Me.LcarsTabPage1.Name = "LcarsTabPage1"
-        Me.LcarsTabPage1.Size = New System.Drawing.Size(666, 521)
-        Me.LcarsTabPage1.TabIndex = 3
-        Me.LcarsTabPage1.Text = "SOUNDS"
-        '
-        'fbChangeSound
-        '
-        Me.fbChangeSound.Beeping = False
-        Me.fbChangeSound.ButtonText = "CHANGE"
-        Me.fbChangeSound.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.fbChangeSound.ButtonTextHeight = 14
-        Me.fbChangeSound.Clickable = True
-        Me.fbChangeSound.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.fbChangeSound.CustomAlertColor = System.Drawing.Color.Empty
-        Me.fbChangeSound.Data = Nothing
-        Me.fbChangeSound.Data2 = Nothing
-        Me.fbChangeSound.FlashInterval = 500
-        Me.fbChangeSound.holdDraw = False
-        Me.fbChangeSound.Lit = True
-        Me.fbChangeSound.Location = New System.Drawing.Point(6, 119)
-        Me.fbChangeSound.Name = "fbChangeSound"
-        Me.fbChangeSound.RedAlert = LCARS.LCARSalert.Normal
-        Me.fbChangeSound.Size = New System.Drawing.Size(64, 31)
-        Me.fbChangeSound.TabIndex = 3
-        Me.fbChangeSound.Text = "CHANGE"
-        '
-        'cbBeeping
-        '
-        Me.cbBeeping.AutoEllipsis = False
-        Me.cbBeeping.Beeping = False
-        Me.cbBeeping.ButtonText = "BUTTON BEEPING"
-        Me.cbBeeping.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.cbBeeping.ButtonTextHeight = 14
-        Me.cbBeeping.Clickable = True
-        Me.cbBeeping.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.cbBeeping.CustomAlertColor = System.Drawing.Color.Empty
-        Me.cbBeeping.Data = Nothing
-        Me.cbBeeping.Data2 = Nothing
-        Me.cbBeeping.FlashInterval = 500
-        Me.cbBeeping.holdDraw = False
-        Me.cbBeeping.Lit = False
-        Me.cbBeeping.Location = New System.Drawing.Point(8, 76)
-        Me.cbBeeping.Name = "cbBeeping"
-        Me.cbBeeping.RedAlert = LCARS.LCARSalert.Normal
-        Me.cbBeeping.SideBlockColor = LCARS.LCARScolorStyles.Orange
-        Me.cbBeeping.SideText = "OFF"
-        Me.cbBeeping.SideTextColor = LCARS.LCARScolorStyles.Orange
-        Me.cbBeeping.SideTextWidth = -1
-        Me.cbBeeping.Size = New System.Drawing.Size(197, 30)
-        Me.cbBeeping.TabIndex = 1
-        Me.cbBeeping.Text = "BUTTON BEEPING"
-        '
-        'txtSoundPath
-        '
-        Me.txtSoundPath.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtSoundPath.AutoSize = True
-        Me.txtSoundPath.Font = New System.Drawing.Font("LCARS", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtSoundPath.ForeColor = System.Drawing.Color.Orange
-        Me.txtSoundPath.Location = New System.Drawing.Point(76, 120)
-        Me.txtSoundPath.Name = "txtSoundPath"
-        Me.txtSoundPath.Size = New System.Drawing.Size(115, 28)
-        Me.txtSoundPath.TabIndex = 0
-        Me.txtSoundPath.Text = "Button Sound Path"
-        '
-        'Label1
-        '
-        Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label1.Font = New System.Drawing.Font("LCARS", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.Color.Orange
-        Me.Label1.Location = New System.Drawing.Point(3, 41)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(761, 39)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Sound Settings"
-        '
         'LcarsTabPage3
         '
         Me.LcarsTabPage3.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -1855,7 +1855,7 @@ Partial Class frmSettings
         Me.hpbLCARS.FlashInterval = 500
         Me.hpbLCARS.holdDraw = False
         Me.hpbLCARS.Lit = True
-        Me.hpbLCARS.Location = New System.Drawing.Point(345, 77)
+        Me.hpbLCARS.Location = New System.Drawing.Point(36, 36)
         Me.hpbLCARS.Name = "hpbLCARS"
         Me.hpbLCARS.RedAlert = LCARS.LCARSalert.Normal
         Me.hpbLCARS.Size = New System.Drawing.Size(138, 30)
@@ -1878,7 +1878,7 @@ Partial Class frmSettings
         Me.hpbExplorer.FlashInterval = 500
         Me.hpbExplorer.holdDraw = False
         Me.hpbExplorer.Lit = True
-        Me.hpbExplorer.Location = New System.Drawing.Point(345, 113)
+        Me.hpbExplorer.Location = New System.Drawing.Point(36, 72)
         Me.hpbExplorer.Name = "hpbExplorer"
         Me.hpbExplorer.RedAlert = LCARS.LCARSalert.Normal
         Me.hpbExplorer.Size = New System.Drawing.Size(138, 30)
@@ -1889,7 +1889,7 @@ Partial Class frmSettings
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("LCARS", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(322, 44)
+        Me.Label6.Location = New System.Drawing.Point(13, 3)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(74, 24)
         Me.Label6.TabIndex = 38
@@ -1910,7 +1910,7 @@ Partial Class frmSettings
         Me.fbShellSelect.FlashInterval = 500
         Me.fbShellSelect.holdDraw = False
         Me.fbShellSelect.Lit = True
-        Me.fbShellSelect.Location = New System.Drawing.Point(309, 113)
+        Me.fbShellSelect.Location = New System.Drawing.Point(0, 72)
         Me.fbShellSelect.Name = "fbShellSelect"
         Me.fbShellSelect.RedAlert = LCARS.LCARSalert.Normal
         Me.fbShellSelect.Size = New System.Drawing.Size(30, 30)
@@ -2027,7 +2027,7 @@ Partial Class frmSettings
         Me.Label16.ForeColor = System.Drawing.Color.Orange
         Me.Label16.Location = New System.Drawing.Point(234, 41)
         Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(103, 28)
+        Me.Label16.Size = New System.Drawing.Size(104, 28)
         Me.Label16.TabIndex = 4
         Me.Label16.Text = "Language Code:"
         '
@@ -2194,7 +2194,7 @@ Partial Class frmSettings
         Me.Label17.ForeColor = System.Drawing.Color.Orange
         Me.Label17.Location = New System.Drawing.Point(3, 2)
         Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(104, 28)
+        Me.Label17.Size = New System.Drawing.Size(105, 28)
         Me.Label17.TabIndex = 4
         Me.Label17.Text = "Command Name"
         '
@@ -2702,7 +2702,7 @@ Partial Class frmSettings
         Me.Label19.ForeColor = System.Drawing.Color.Orange
         Me.Label19.Location = New System.Drawing.Point(252, 24)
         Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(100, 28)
+        Me.Label19.Size = New System.Drawing.Size(101, 28)
         Me.Label19.TabIndex = 5
         Me.Label19.Text = "Update Channel"
         '
@@ -2811,7 +2811,7 @@ Partial Class frmSettings
         Me.Label15.ForeColor = System.Drawing.Color.Orange
         Me.Label15.Location = New System.Drawing.Point(12, 153)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(505, 84)
+        Me.Label15.Size = New System.Drawing.Size(503, 84)
         Me.Label15.TabIndex = 6
         Me.Label15.Text = resources.GetString("Label15.Text")
         '
@@ -2853,7 +2853,7 @@ Partial Class frmSettings
         Me.lblAbout.Name = "lblAbout"
         Me.lblAbout.Size = New System.Drawing.Size(648, 506)
         Me.lblAbout.TabIndex = 0
-        Me.lblAbout.Text = "Label16"
+        Me.lblAbout.Text = "About Message"
         '
         'frmSettings
         '
@@ -2900,10 +2900,10 @@ Partial Class frmSettings
         Me.pnlWallpaper.PerformLayout()
         CType(Me.picWallpaper, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.LcarsTabPage2.ResumeLayout(False)
-        Me.pnlPreview.ResumeLayout(False)
         Me.LcarsTabPage1.ResumeLayout(False)
         Me.LcarsTabPage1.PerformLayout()
+        Me.LcarsTabPage2.ResumeLayout(False)
+        Me.pnlPreview.ResumeLayout(False)
         Me.LcarsTabPage3.ResumeLayout(False)
         Me.LcarsTabPage3.PerformLayout()
         Me.LcarsTabPage5.ResumeLayout(False)

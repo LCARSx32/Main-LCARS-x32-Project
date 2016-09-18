@@ -201,7 +201,7 @@ Namespace Controls
                         textSize = New FontData
                         textSize.Height = Me.Height
                     End If
-
+                    lblTextVisible = False
                     mybitmap = New Bitmap(Me.Size.Width, textSize.Height)
                     g = Graphics.FromImage(mybitmap)
 

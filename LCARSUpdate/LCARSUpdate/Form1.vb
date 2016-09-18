@@ -58,9 +58,9 @@ Public Class frmUpdate
         End If
         'Determine what update path we're on, and what the server is
         If GetSetting("LCARSUpdate", "Config", "UpdatePath", "release") = "release" Then
-            path = GetSetting("LCARSUpdate", "Config", "ReleaseURL", "https://www.cx.com/0/filedata/getSharedFile/SNU2d6zrEeGnthICOA-R7w/QITqrazrEeGnthIFOA-R7w?download=true").Split(",")
+            path = GetSetting("LCARSUpdate", "Config", "ReleaseURL", "http://www.lcarsx32.com/lcars/x32/ReleaseVersion.txt").Split(",")
         ElseIf GetSetting("LCARSUpdate", "Config", "UpdatePath", "release") = "experimental" Then
-            path = GetSetting("LCARSUpdate", "Config", "ExperimentalURL", "https://www.cx.com/0/filedata/getSharedFile/SNU2d6zrEeGnthICOA-R7w/QITqrazrEeGnthIFOA-R7w?download=true").Split(",")
+            path = GetSetting("LCARSUpdate", "Config", "ExperimentalURL", "http://www.lcarsx32.com/lcars/x32/ExperimentalVersion.txt").Split(",")
         Else
             path = GetSetting("LCARSUpdate", "Config", "CustomURL").Split(",")
         End If

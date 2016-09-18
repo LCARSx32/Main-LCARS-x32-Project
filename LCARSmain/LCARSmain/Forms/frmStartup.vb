@@ -130,11 +130,10 @@ Public Class frmStartup
                     'Alerts updated
                     frmAlerts.loadAlerts()
             End Select
+        Else
+            'it wasn't a message we need to handle, so let VB take back over.
+            MyBase.WndProc(m)
         End If
-
-        'it wasn't a message we need to handle, so let VB take back over.
-        MyBase.WndProc(m)
-
     End Sub
 
     Private Sub frmStartup_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -165,19 +164,6 @@ Public Class frmStartup
             beginVoiceRecognition()
         End If
 
-        'If Screen.AllScreens.Length > 0 Then
-        '    Dim myChooser As New screenChooserDialog
-        '    myChooser.showdialog()
-        '    screenindex = myChooser.ScreenIndex
-
-        'Else
-        '    For i As Integer = 0 To Screen.AllScreens.GetUpperBound(0)
-        '        If Screen.AllScreens(i) Is Screen.PrimaryScreen Then
-        '            screenindex = i 'use the primary screen
-        '            Exit For
-        '        End If
-        '    Next
-        'End If
         MoveTrayIcons()
         HideMinimizedWindows()
         Me.FormBorderStyle = Windows.Forms.FormBorderStyle.None
@@ -205,59 +191,16 @@ Public Class frmStartup
 
         For i As Integer = 0 To Screen.AllScreens.Length - 1
             'Create desktop panel
-            Dim myDesktop As New Panel()
-            myDesktop.BackColor = Color.Black
-            Me.Controls.Add(myDesktop)
-            curDesktop.Add(myDesktop)
-            'Set wallpaper
-            Dim wallpaper As String
-            Dim sizeMode As Integer
-
-            sizeMode = modSettings.WallpaperSizeMode(i)
-            Select Case sizeMode
-                Case 0
-                    setWallpaperSizeMode(ImageLayout.Zoom, i)
-                Case 1
-                    setWallpaperSizeMode(ImageLayout.Stretch, i)
-                Case 2
-                    setWallpaperSizeMode(ImageLayout.Center, i)
-                Case 3
-                    setWallpaperSizeMode(ImageLayout.Tile, i)
-                Case Else
-                    Exit Sub
-            End Select
-
-            wallpaper = modSettings.Wallpaper(i)
-            If wallpaper = "FederationLogo" Then
-                SetWallpaper(My.Resources.federationLogo, i)
-            Else
-                If System.IO.File.Exists(wallpaper) Then
-                    SetWallpaper(Image.FromFile(wallpaper), i)
-                Else
-                    SetWallpaper(My.Resources.federationLogo, i)
-                    LCARS.UI.MsgBox("Unable to find user-defined wallpaper. Reverting to default.", MsgBoxStyle.OkOnly, "Error:")
-                End If
-            End If
+            CreateDesktop(i)
             'Set forms
-            Dim chosenForm As String
-            chosenForm = modSettings.MainScreen(i)
-            curBusiness.Add(Nothing)
-            Select Case chosenForm.ToLower
-                Case "1"
-                    myForm = New frmMainscreen1(i)
-                Case "2"
-                    myForm = New frmMainscreen2(i)
-                Case "3"
-                    myForm = New frmMainscreen3(i)
-                Case "4"
-                    myForm = New frmMainscreen4(i)
-                Case Else
-                    myForm = New frmFirstRun
-            End Select
-            myForm.Show()
-            myForm.BringToFront()
+            loadForm(i)
         Next
+        AddHandler Microsoft.Win32.SystemEvents.DisplaySettingsChanged, AddressOf System_DisplayChanged
         SaveDesktopIcons()
+
+        For Each myBusiness As modBusiness In curBusiness
+            myBusiness.myForm.BringToFront()
+        Next
 
         If GetSetting("LCARS X32", "Application", "Updates", "FALSE") Then
             Try
@@ -266,11 +209,8 @@ Public Class frmStartup
                 MsgBox("Unable to check for updates" & vbNewLine & vbNewLine & ex.ToString())
             End Try
         End If
-
-        If shellMode Then
-            Dim startupThread As New Threading.Thread(AddressOf StartupPrograms)
-            startupThread.Start()
-        End If
+        Dim startupThread As New Threading.Thread(AddressOf StartupPrograms.StartAll)
+        startupThread.Start()
     End Sub
 
     Private Sub SaveDesktopIcons()
@@ -295,39 +235,21 @@ Public Class frmStartup
         End If
         SysListView = FindWindowEx(hwndSHELLDLL_DefView, IntPtr.Zero, "SysListView32", IntPtr.Zero)
         SetParent(pnlBack.Handle, hwndProgMan)
-        For Each myback As Panel In curDesktop
-            SetParent(myback.Handle, pnlBack.Handle)
-        Next
-        Dim leftLoc As Integer = Integer.MaxValue
-        Dim topLoc As Integer = Integer.MaxValue
-        Dim right As Integer = Integer.MinValue
-        Dim bottom As Integer = Integer.MinValue
 
-        For Each myScreen As Screen In Screen.AllScreens
-            If myScreen.Bounds.Left < leftLoc Then
-                leftLoc = myScreen.Bounds.Left
-            End If
-            If myScreen.Bounds.Top < topLoc Then
-                topLoc = myScreen.Bounds.Top
-            End If
-            If myScreen.Bounds.Right > right Then
-                right = myScreen.Bounds.Right
-            End If
-            If myScreen.Bounds.Bottom > bottom Then
-                bottom = myScreen.Bounds.Bottom
-            End If
-        Next
-        displayOffset = New Point(leftLoc, topLoc)
-        Dim myBounds As Rectangle
-        If shellMode Then
-            myBounds = New Rectangle(leftLoc, topLoc, right - leftLoc, bottom - topLoc)
-        Else
-            myBounds = New Rectangle(0, 0, right - leftLoc, bottom - topLoc)
-        End If
-        pnlBack.Bounds = myBounds
+        setBackBounds()
+
         For i As Integer = 0 To Screen.AllScreens.Length - 1
-            updateDesktopBounds(i)
+            updateDesktopBounds(i, Screen.AllScreens(i).WorkingArea)
         Next
+        Dim currentStyle As Integer = GetWindowLong_Safe(pnlBack.Handle, -20)
+
+        'Make desktop non-selectable and not in the alt-tab menu
+        currentStyle = currentStyle Or WS_EX_NOACTIVATE Or WS_EX_TOOLWINDOW
+        SetWindowLong_Safe(pnlBack.Handle, -20, currentStyle)
+        currentStyle = GetWindowLong_Safe(Me.Handle, -20)
+        currentStyle = currentStyle Or WS_EX_NOACTIVATE Or WS_EX_TOOLWINDOW
+        SetWindowLong_Safe(Me.Handle, -20, currentStyle)
+
         pnlBack.BringToFront()
         For Each myBack As Panel In curDesktop
             myBack.BringToFront()
@@ -346,12 +268,12 @@ Public Class frmStartup
         hTrayParent = FindWindowEx(hTrayNotify, IntPtr.Zero, "SysPager", IntPtr.Zero)
         hTrayIcons = FindWindowEx(hTrayParent, IntPtr.Zero, "ToolbarWindow32", IntPtr.Zero)
 
-        Dim myStyle As Integer = GetWindowLong(hTrayIcons, GWL_STYLE)
+        Dim myStyle As Integer = GetWindowLong_Safe(hTrayIcons, GWL_STYLE)
         myStyle = myStyle And Not TBSTYLE_TRANSPARENT
         If (myStyle And TBSTYLE_TRANSPARENT) Then
             MsgBox("Transparent!")
         End If
-        SetWindowLong(hTrayIcons, GWL_STYLE, myStyle)
+        SetWindowLong_Safe(hTrayIcons, GWL_STYLE, myStyle)
 
         SetParent(hTrayIcons, myIconSaver.Handle)
     End Sub
@@ -379,87 +301,6 @@ Public Class frmStartup
             Return True
         End If
     End Function
-
-    Private Sub StartupPrograms()
-        Dim progList As New List(Of String)
-        'Get everything stored in the registry
-        Dim test() As RegistryKey = {Microsoft.Win32.Registry.LocalMachine.OpenSubKey("Software\Microsoft\Windows\CurrentVersion\Run", False), _
-                             Registry.LocalMachine.OpenSubKey("Software\Microsoft\Windows\CurrentVersion\RunOnce", False), _
-                             Registry.LocalMachine.OpenSubKey("Software\Microsoft\Windows\CurrentVersion\RunServices", False), _
-                             Registry.LocalMachine.OpenSubKey("Software\Microsoft\Windows\CurrentVersion\RunServicesOnce", False), _
-                             Registry.CurrentUser.OpenSubKey("Software\Microsoft\Windows\CurrentVersion\Run", False), _
-                             Registry.CurrentUser.OpenSubKey("Software\Microsoft\Windows\CurrentVersion\RunOnce", False), _
-                             Registry.LocalMachine.OpenSubKey("System\CurrentControlSet\Services", False)}
-        For i As Integer = 0 To test.Length - 1
-            Try
-                If Not test(i) Is Nothing Then
-                    Dim names() As String = test(i).GetValueNames()
-                    For Each value As String In names
-                        If value <> "" Then
-                            progList.Add(test(i).GetValue(value))
-                        End If
-                    Next
-                    test(i).Close()
-                End If
-            Catch ex As NullReferenceException
-                Debug.Print("Failed")
-            End Try
-        Next
-
-        'Get all start menu "Startup" folder programs
-        Dim OSinfo As String = getOS()
-        Dim GlobalStartPath As String = ""
-        Dim UserStartPath As String = ""
-
-        Select Case OSinfo
-            Case "Win98"
-                GlobalStartPath = System.Environment.GetFolderPath(Environment.SpecialFolder.Startup)
-                UserStartPath = ""
-            Case "WinNT3.51"
-                GlobalStartPath = System.Environment.GetFolderPath(Environment.SpecialFolder.Startup)
-                UserStartPath = ""
-            Case "WinNT4.0"
-                GlobalStartPath = System.Environment.GetFolderPath(Environment.SpecialFolder.Startup)
-                UserStartPath = ""
-            Case "Modern"
-                Dim myReg As Microsoft.Win32.RegistryKey = Microsoft.Win32.Registry.CurrentUser
-                myReg = myReg.OpenSubKey("Software\Microsoft\Windows\CurrentVersion\explorer\Shell Folders\", False)
-                UserStartPath = myReg.GetValue("Startup")
-                myReg = Microsoft.Win32.Registry.LocalMachine
-                myReg = myReg.OpenSubKey("Software\Microsoft\Windows\CurrentVersion\explorer\Shell Folders\", False)
-                GlobalStartPath = myReg.GetValue("Common Startup")
-        End Select
-        If Not GlobalStartPath = "" Then
-            For Each myFile As String In System.IO.Directory.GetFiles(GlobalStartPath)
-                If Not IO.Path.GetFileName(myFile).ToLower() = "desktop.ini" Then
-                    progList.Add(myFile)
-                End If
-            Next
-        End If
-        If Not UserStartPath = "" Then
-            For Each myFile As String In System.IO.Directory.GetFiles(UserStartPath)
-                If Not IO.Path.GetFileName(myFile).ToLower() = "desktop.ini" Then
-                    progList.Add(myFile)
-                End If
-            Next
-        End If
-        'If not enclosed in quotes, do so
-        For Each myProgram As String In progList
-            If Not myProgram.Substring(0, 1) = """" Then
-                myProgram = """" & myProgram & """"
-            End If
-        Next
-
-        'Start all programs retrieved
-        For Each myProgram As String In progList
-            Try
-                'Process.Start(myProgram)
-                Shell(myProgram)
-            Catch ex As Exception
-                MsgBox(myProgram & vbNewLine & vbNewLine & ex.ToString())
-            End Try
-        Next
-    End Sub
 
     Private Sub CheckComponents()
         'Checks that critical files have not been deleted. Only files required for running and shutting down
@@ -489,5 +330,127 @@ Public Class frmStartup
         Marshal.StructureToPtr(myMetrics, myPtr, True)
         'Set minimized windows to actually hide
         SystemParametersInfo(SPI_SETMINIMIZEDMETRICS, 0, myPtr, 0)
+        Marshal.FreeCoTaskMem(myPtr)
+    End Sub
+
+    Public Sub System_DisplayChanged(ByVal sender As Object, ByVal e As System.EventArgs)
+        setBackBounds()
+        If Screen.AllScreens.Length <> curBusiness.Count Then
+            'Update the screens.
+            Debug.Print("Number of displays changed!")
+            If Screen.AllScreens.Length > curBusiness.Count Then
+                'Assume new screen(s) are added at end
+                'Add desktop, working area, empty modBusiness, and form
+                For i As Integer = curBusiness.Count To Screen.AllScreens.Length - 1
+                    CreateDesktop(i)
+                    StartingWorkingArea.Add(Screen.AllScreens(i).Bounds)
+                    loadForm(i)
+                Next
+            Else
+                'Assume removed screen(s) are at end - Might not be accurate, 
+                '    but will be correct in most common case
+                'Remove desktop, working area, form, and modBusiness
+                'Loop runs backwards to avoid indexing changes
+                For i As Integer = curBusiness.Count - 1 To Screen.AllScreens.Length Step -1
+                    curBusiness(i).mainTimer.Stop()
+                    curBusiness(i).tmrAutohide.Stop()
+                    curBusiness(i).myForm.Dispose()
+                    curBusiness.RemoveAt(i)
+                    Me.Controls.Remove(curDesktop(i))
+                    curDesktop.RemoveAt(i)
+                    StartingWorkingArea.RemoveAt(i)
+                Next
+            End If
+        End If
+        For Each b As modBusiness In curBusiness
+            b.myForm.Bounds = Screen.AllScreens(b.ScreenIndex).Bounds
+            b.resetWorkingArea()
+        Next
+    End Sub
+
+    Private Sub CreateDesktop(ByVal i As Integer)
+        Dim myDesktop As New Panel()
+        myDesktop.BackColor = Color.Black
+        pnlBack.Controls.Add(myDesktop)
+        curDesktop.Add(myDesktop)
+        'Set wallpaper
+        Dim wallpaper As String
+        Dim sizeMode As Integer
+
+        sizeMode = modSettings.WallpaperSizeMode(i)
+        Select Case sizeMode
+            Case 0
+                setWallpaperSizeMode(ImageLayout.Zoom, i)
+            Case 1
+                setWallpaperSizeMode(ImageLayout.Stretch, i)
+            Case 2
+                setWallpaperSizeMode(ImageLayout.Center, i)
+            Case 3
+                setWallpaperSizeMode(ImageLayout.Tile, i)
+            Case Else
+                Exit Sub
+        End Select
+
+        wallpaper = modSettings.Wallpaper(i)
+        If wallpaper = "FederationLogo" Then
+            SetWallpaper(My.Resources.federationLogo, i)
+        Else
+            If System.IO.File.Exists(wallpaper) Then
+                SetWallpaper(Image.FromFile(wallpaper), i)
+            Else
+                SetWallpaper(My.Resources.federationLogo, i)
+                LCARS.UI.MsgBox("Unable to find user-defined wallpaper. Reverting to default.", MsgBoxStyle.OkOnly, "Error:")
+            End If
+        End If
+    End Sub
+
+    Private Sub loadForm(ByVal i As Integer)
+        Dim chosenForm As String
+        chosenForm = modSettings.MainScreen(i)
+        curBusiness.Add(Nothing)
+        Select Case chosenForm.ToLower
+            Case "1"
+                myForm = New frmMainscreen1(i)
+            Case "2"
+                myForm = New frmMainscreen2(i)
+            Case "3"
+                myForm = New frmMainscreen3(i)
+            Case "4"
+                myForm = New frmMainscreen4(i)
+            Case Else
+                myForm = New frmFirstRun
+        End Select
+        myForm.Show()
+        myForm.BringToFront()
+    End Sub
+
+    Private Sub setBackBounds()
+        Dim leftLoc As Integer = Integer.MaxValue
+        Dim topLoc As Integer = Integer.MaxValue
+        Dim right As Integer = Integer.MinValue
+        Dim bottom As Integer = Integer.MinValue
+
+        For Each myScreen As Screen In Screen.AllScreens
+            If myScreen.Bounds.Left < leftLoc Then
+                leftLoc = myScreen.Bounds.Left
+            End If
+            If myScreen.Bounds.Top < topLoc Then
+                topLoc = myScreen.Bounds.Top
+            End If
+            If myScreen.Bounds.Right > right Then
+                right = myScreen.Bounds.Right
+            End If
+            If myScreen.Bounds.Bottom > bottom Then
+                bottom = myScreen.Bounds.Bottom
+            End If
+        Next
+        displayOffset = New Point(leftLoc, topLoc)
+        Dim myBounds As Rectangle
+        If shellMode Then
+            myBounds = New Rectangle(leftLoc, topLoc, right - leftLoc, bottom - topLoc)
+        Else
+            myBounds = New Rectangle(0, 0, right - leftLoc, bottom - topLoc)
+        End If
+        pnlBack.Bounds = myBounds
     End Sub
 End Class
