@@ -665,8 +665,11 @@ Public Enum SetWindowPosFlags As UInteger
 
         Marshal.StructureToPtr(myArea, ptr, False)
 
-
-        Dim i As Integer = SystemParametersInfo(SPI_SETWORKAREA, Marshal.SizeOf(myArea), ptr, SPIF_UPDATEINIFILE)
+        If shellMode Then
+            Dim i As Integer = SystemParametersInfo(SPI_SETWORKAREA, Marshal.SizeOf(myArea), ptr, SPIF_change)
+        Else
+            Dim i As Integer = SystemParametersInfo(SPI_SETWORKAREA, Marshal.SizeOf(myArea), ptr, SPIF_UPDATEINIFILE)
+        End If
         Marshal.FreeHGlobal(ptr)
         'If frmAlerts.Visible Then
         frmAlerts.Bounds = New Rectangle(x, y, width, height)
