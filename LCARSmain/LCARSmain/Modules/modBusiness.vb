@@ -521,7 +521,7 @@ public Class modBusiness
         loadLanguage()
 
 
-        Dim DoBeeping As Boolean = Boolean.Parse(GetSetting("LCARS x32", "Application", "ButtonBeep", "False"))
+        Dim DoBeeping As Boolean = Boolean.Parse(GetSetting("LCARS x32", "Application", "ButtonBeep", "True"))
 
         LCARS.SetBeeping(myForm, DoBeeping)
 
