@@ -293,6 +293,11 @@ Public Class StartupPrograms
             processKey(myKey)
             myKey.Close()
         End If
+        myKey = Registry.CurrentUser.OpenSubKey("Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Run", False)
+        If myKey IsNot Nothing Then
+            processKey(myKey)
+            myKey.Close()
+        End If
     End Sub
 
     Private Shared Sub StartUserRunOnce(ByVal force As Boolean)
@@ -304,6 +309,11 @@ Public Class StartupPrograms
             processKey(myKey, True)
             myKey.Close()
         End If
+        myKey = Registry.CurrentUser.OpenSubKey("Software\Wow6432Node\Microsoft\Windows\CurrentVersion\RunOnce", True)
+        If myKey IsNot Nothing Then
+            processKey(myKey, True)
+            myKey.Close()
+        End If
     End Sub
 
     Private Shared Sub StartMachineRun(ByVal force As Boolean)
@@ -311,6 +321,11 @@ Public Class StartupPrograms
             Return
         End If
         Dim myKey As RegistryKey = Registry.LocalMachine.OpenSubKey("Software\Microsoft\Windows\CurrentVersion\Run", False)
+        If myKey IsNot Nothing Then
+            processKey(myKey)
+            myKey.Close()
+        End If
+        myKey = Registry.LocalMachine.OpenSubKey("Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Run", False)
         If myKey IsNot Nothing Then
             processKey(myKey)
             myKey.Close()
