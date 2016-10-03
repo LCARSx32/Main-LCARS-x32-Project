@@ -136,7 +136,8 @@ public Class modBusiness
                 'If (((lExStyle And WS_EX_TOOLWINDOW) = 0) Or (lExStyle And WS_EX_APPWINDOW)) Or _
                 '(((lExStyle And WS_EX_TOOLWINDOW) = 0) And ((lExStyle And WS_EX_APPWINDOW) = 0) And bNoOwner = True) Then
                 'This if statement is from code found at http://msdntracker.blogspot.com/2008/03/list-currently-opened-windows-with.html
-                If (((lExStyle And WS_EX_TOOLWINDOW) = 0) And bNoOwner) Or ((lExStyle And WS_EX_APPWINDOW) And Not bNoOwner) Then
+                If ((((lExStyle And WS_EX_TOOLWINDOW) = 0) And bNoOwner) Or ((lExStyle And WS_EX_APPWINDOW) And Not bNoOwner)) _
+                            And ((lExStyle And WS_EX_NOREDIRECTIONBITMAP) = 0) Then
                     Dim screen1, screen2 As String
                     screen1 = Screen.FromHandle(hwnd).DeviceName
                     screen1 = screen1.Substring(0, InStr(screen1, ControlChars.NullChar))
