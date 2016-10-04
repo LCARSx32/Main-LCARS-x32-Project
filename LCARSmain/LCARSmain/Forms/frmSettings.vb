@@ -571,6 +571,10 @@ Public Class frmSettings
         End If
     End Sub
 
+#Region " Voice Command Settings "
+
+    Dim editedCommand As Integer = -1
+
     Private Sub fbSaveChanges_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbSaveChanges.Click
         SaveSetting("LCARS X32", "Application", "SpeechCode", txtLanguageCode.Text)
         'Remove all old values
@@ -701,6 +705,18 @@ Public Class frmSettings
     Private Sub sbAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbAdd.Click
         lblError.Text = ""
         pnlAdd.Visible = True
+        txtCommandName.Clear()
+        txtCommandPath.Clear()
+    End Sub
+
+    Private Sub sbEdit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbEdit.Click
+        If lstExternalCommands.SelectedIndex <> -1 Then
+            editedCommand = lstExternalCommands.SelectedIndex
+            txtCommandName.Text = customList(lstExternalCommands.SelectedIndex).CommandName
+            txtCommandPath.Text = customList(lstExternalCommands.SelectedIndex).Command
+            lblError.Text = ""
+            pnlAdd.Visible = True
+        End If
     End Sub
 
     Private Sub sbCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbCancel.Click
@@ -709,19 +725,26 @@ Public Class frmSettings
 
     Private Sub sbOK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbOK.Click
         Dim myCheck As Boolean = True
-        For Each myelement As CustomEntry In customList
-            If myelement.CommandName = txtCommandName.Text Then
-                myCheck = False
-                lblError.Text = "Command already in use. Choose another name."
-            End If
-        Next
+        If editedCommand = -1 Then
+            For Each myelement As CustomEntry In customList
+                If myelement.CommandName = txtCommandName.Text Then
+                    myCheck = False
+                    lblError.Text = "Command already in use. Choose another name."
+                End If
+            Next
+        End If
         If myCheck Then
             lblError.Text = ""
             Dim myCommand As New CustomEntry
             myCommand.CommandName = txtCommandName.Text.ToLower()
             myCommand.Command = txtCommandPath.Text
-            customList.Add(myCommand)
-            lstExternalCommands.Items.Add(myCommand.CommandName.ToLower() & ": " & myCommand.Command)
+            If editedCommand = -1 Then
+                customList.Add(myCommand)
+                lstExternalCommands.Items.Add(myCommand.CommandName.ToLower() & ": " & myCommand.Command)
+            Else
+                customList(editedCommand) = myCommand
+                lstExternalCommands.Items(editedCommand) = myCommand.CommandName.ToLower() & ": " & myCommand.Command
+            End If
             pnlAdd.Visible = False
         End If
     End Sub
@@ -732,6 +755,8 @@ Public Class frmSettings
             lstExternalCommands.Items.RemoveAt(lstExternalCommands.SelectedIndex)
         End If
     End Sub
+
+#End Region
 
     Private Sub cpxAutoUpdates_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cpxAutoUpdates.Click
         cpxAutoUpdates.Lit = Not cpxAutoUpdates.Lit
