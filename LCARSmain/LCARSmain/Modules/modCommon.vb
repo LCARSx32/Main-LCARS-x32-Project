@@ -352,6 +352,18 @@ Public Enum SetWindowPosFlags As UInteger
 
 #End Region
 
+#Region " Monitor Power "
+    Public Const SC_MONITORPOWER As Integer = &HF170
+    Public Enum MonitorPowerStates As Integer
+        PowerOn = -1
+        Standby = 1
+        PowerOff = 2
+    End Enum
+
+    Public Const MOUSEEVENTF_MOVE As Int32 = &H1
+    Public Declare Sub mouse_event Lib "user32" (ByVal dwFlags As Int32, ByVal dx As Int32, ByVal dy As Int32, ByVal dwData As Int32, ByVal dwExtraInfo As UIntPtr)
+#End Region
+
 #End Region
 
     Public Sub setBusiness(ByRef business As modBusiness, ByVal ScreenIndex As Integer)

@@ -115,6 +115,8 @@ Module modSpeech
                 .WriteLine("      <P>" & getCommandAlias("show console") & "</P>")
                 .WriteLine("      <P>" & getCommandAlias("hide console") & "</P>")
                 .WriteLine("      <P>" & getCommandAlias("web browser") & "</P>")
+                .WriteLine("      <P>" & getCommandAlias("display off") & "</P>")
+                .WriteLine("      <P>" & getCommandAlias("display on") & "</P>")
                 If GetSetting("LCARS x32", "Application", "DebugSwitch", "False") Then
                     .WriteLine("      <P>crash test</P>")
                 End If
@@ -344,6 +346,12 @@ Module modSpeech
                     End If
                 Case "tea earl grey hot"
                     My.Computer.Audio.Play(My.Resources._095, AudioPlayMode.Background)
+                Case "display off"
+                    PostMessage(frmStartup.Handle, WM_SYSCOMMAND, SC_MONITORPOWER, MonitorPowerStates.PowerOff)
+                Case "display on"
+                    'Note: The line below is commented out because it will not work on Windows 10
+                    'PostMessage(frmStartup.Handle, WM_SYSCOMMAND, SC_MONITORPOWER, MonitorPowerStates.PowerOn)
+                    mouse_event(MOUSEEVENTF_MOVE, 0, 1, 0, UIntPtr.Zero)
                 Case Else 'Searches for .exe files for custom commands
                     Dim inputString As String = getCustomCommand(command.ToLower())
                     Try
@@ -436,6 +444,8 @@ Module modSpeech
             .Add(getCommandAlias("show console").ToUpper() & ": Shows the speech console")
             .Add(getCommandAlias("hide console").ToUpper() & ": Hides the speech console")
             .Add(getCommandAlias("web browser").ToUpper() & ": Starts the LCARS web browser")
+            .Add(getCommandAlias("display off").ToUpper() & ": Turns off the display")
+            .Add(getCommandAlias("display on").ToUpper() & ": Turns on the display")
             For Each myitem As CustomEntry In CustomList
                 .Add(myitem.CommandName.ToUpper() & ": " & myitem.Command)
             Next

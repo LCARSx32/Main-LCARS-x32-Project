@@ -190,7 +190,7 @@ Public Class frmSettings
                                          "stardate", "run program", "date", "time", "keyboard", _
                                          "task manager", "continuous commands", "yellow alert", _
                                          "confirmed", "help", "authorization", "show console", _
-                                         "hide console", "web browser"}
+                                         "hide console", "web browser", "display on", "display off"}
         ReDim aliasList(myCommandList.Length - 1)
         For i As Integer = 0 To myCommandList.Length - 1
             aliasList(i).Command = myCommandList(i)
