@@ -233,14 +233,6 @@ Public Class frmSettings
         AddHandler txtCustom.TextChanged, AddressOf txtCustom_TextChanged
 
 
-        'Hide Explorer
-        cpxHideExplorer.Lit = GetSetting("LCARS X32", "Application", "HideExplorer", "FALSE")
-        If cpxHideExplorer.Lit Then
-            cpxHideExplorer.SideText = "ON"
-        Else
-            cpxHideExplorer.SideText = "OFF"
-        End If
-
         'Add tabs to listbox
         Dim tabs() As Integer = {30, 100, 30}
         Dim pinned As GCHandle = GCHandle.Alloc(tabs, GCHandleType.Pinned)
@@ -754,17 +746,6 @@ Public Class frmSettings
 
     Private Sub sbCheck_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbCheck.Click
         Process.Start(Application.StartupPath & "\LCARSUpdate.exe")
-    End Sub
-
-    Private Sub cpxHideExplorer_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cpxHideExplorer.Click
-        cpxHideExplorer.Lit = Not cpxHideExplorer.Lit
-        If cpxHideExplorer.Lit Then
-            cpxHideExplorer.SideText = "ON"
-            SaveSetting("LCARS X32", "Application", "HideExplorer", "TRUE")
-        Else
-            cpxHideExplorer.SideText = "OFF"
-            SaveSetting("LCARS X32", "Application", "HideExplorer", "FALSE")
-        End If
     End Sub
 
     Private Sub hpRelease_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles hpRelease.Click

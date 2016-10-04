@@ -163,9 +163,7 @@ Partial Class frmSettings
         Me.lblVersion = New System.Windows.Forms.Label
         Me.tabExperimental = New LCARS.Controls.x32TabPage
         Me.cbDebug = New LCARS.Controls.ComplexButton
-        Me.cpxHideExplorer = New LCARS.Controls.ComplexButton
         Me.Label20 = New System.Windows.Forms.Label
-        Me.Label15 = New System.Windows.Forms.Label
         Me.lblWarning = New System.Windows.Forms.Label
         Me.tabAbout = New LCARS.Controls.x32TabPage
         Me.lblAbout = New System.Windows.Forms.Label
@@ -2727,9 +2725,7 @@ Partial Class frmSettings
         Me.tabExperimental.BackColor = System.Drawing.Color.Black
         Me.tabExperimental.Color = LCARS.LCARScolorStyles.MiscFunction
         Me.tabExperimental.Controls.Add(Me.cbDebug)
-        Me.tabExperimental.Controls.Add(Me.cpxHideExplorer)
         Me.tabExperimental.Controls.Add(Me.Label20)
-        Me.tabExperimental.Controls.Add(Me.Label15)
         Me.tabExperimental.Controls.Add(Me.lblWarning)
         Me.tabExperimental.Location = New System.Drawing.Point(0, 26)
         Me.tabExperimental.Name = "tabExperimental"
@@ -2751,7 +2747,7 @@ Partial Class frmSettings
         Me.cbDebug.FlashInterval = 500
         Me.cbDebug.holdDraw = False
         Me.cbDebug.Lit = False
-        Me.cbDebug.Location = New System.Drawing.Point(17, 254)
+        Me.cbDebug.Location = New System.Drawing.Point(17, 90)
         Me.cbDebug.Name = "cbDebug"
         Me.cbDebug.RedAlert = LCARS.LCARSalert.Normal
         Me.cbDebug.SideBlockColor = LCARS.LCARScolorStyles.Orange
@@ -2762,31 +2758,6 @@ Partial Class frmSettings
         Me.cbDebug.TabIndex = 8
         Me.cbDebug.Text = "DEBUG SWITCH"
         '
-        'cpxHideExplorer
-        '
-        Me.cpxHideExplorer.Beeping = False
-        Me.cpxHideExplorer.ButtonText = "CONSTANTLY HIDE EXPLORER"
-        Me.cpxHideExplorer.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.cpxHideExplorer.ButtonTextHeight = 14
-        Me.cpxHideExplorer.Clickable = True
-        Me.cpxHideExplorer.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.cpxHideExplorer.CustomAlertColor = System.Drawing.Color.Empty
-        Me.cpxHideExplorer.Data = Nothing
-        Me.cpxHideExplorer.Data2 = Nothing
-        Me.cpxHideExplorer.FlashInterval = 500
-        Me.cpxHideExplorer.holdDraw = False
-        Me.cpxHideExplorer.Lit = False
-        Me.cpxHideExplorer.Location = New System.Drawing.Point(17, 111)
-        Me.cpxHideExplorer.Name = "cpxHideExplorer"
-        Me.cpxHideExplorer.RedAlert = LCARS.LCARSalert.Normal
-        Me.cpxHideExplorer.SideBlockColor = LCARS.LCARScolorStyles.Orange
-        Me.cpxHideExplorer.SideText = "OFF"
-        Me.cpxHideExplorer.SideTextColor = LCARS.LCARScolorStyles.Orange
-        Me.cpxHideExplorer.SideTextWidth = -1
-        Me.cpxHideExplorer.Size = New System.Drawing.Size(230, 32)
-        Me.cpxHideExplorer.TabIndex = 7
-        Me.cpxHideExplorer.Text = "CONSTANTLY HIDE EXPLORER"
-        '
         'Label20
         '
         Me.Label20.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
@@ -2794,26 +2765,13 @@ Partial Class frmSettings
         Me.Label20.AutoSize = True
         Me.Label20.Font = New System.Drawing.Font("LCARS", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label20.ForeColor = System.Drawing.Color.Orange
-        Me.Label20.Location = New System.Drawing.Point(12, 293)
+        Me.Label20.Location = New System.Drawing.Point(12, 129)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(465, 84)
         Me.Label20.TabIndex = 6
         Me.Label20.Text = "Will enable several features helpful for debugging purposes, but potentially" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "dan" & _
             "gerous to have on at all times. Read the manual before enabling, or unless" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "told" & _
             " to enable for debugging purposes."
-        '
-        'Label15
-        '
-        Me.Label15.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label15.AutoSize = True
-        Me.Label15.Font = New System.Drawing.Font("LCARS", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.ForeColor = System.Drawing.Color.Orange
-        Me.Label15.Location = New System.Drawing.Point(12, 153)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(503, 84)
-        Me.Label15.TabIndex = 6
-        Me.Label15.Text = resources.GetString("Label15.Text")
         '
         'lblWarning
         '
@@ -3022,8 +2980,6 @@ Partial Class frmSettings
     Friend WithEvents sbCheck As LCARS.Controls.StandardButton
     Friend WithEvents tabExperimental As LCARS.Controls.x32TabPage
     Friend WithEvents lblWarning As System.Windows.Forms.Label
-    Friend WithEvents cpxHideExplorer As LCARS.Controls.ComplexButton
-    Friend WithEvents Label15 As System.Windows.Forms.Label
     Friend WithEvents Label19 As System.Windows.Forms.Label
     Friend WithEvents hpExperimental As LCARS.Controls.HalfPillButton
     Friend WithEvents hpRelease As LCARS.Controls.HalfPillButton

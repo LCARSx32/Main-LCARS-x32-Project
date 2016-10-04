@@ -578,17 +578,6 @@ public Class modBusiness
         Dim battInfo As PowerStatus = SystemInformation.PowerStatus
         Static battLevel As Short = 10
 
-        'Check for and hide startbar, ect. Code from Alan - Causing problems with message boxes
-        If GetSetting("LCARS X32", "Application", "HideExplorer", "FALSE") = "TRUE" Then
-            Try
-
-                Dim intReturn As Integer = FindWindow("Shell_traywnd", "")
-                SetWindowPos(intReturn, 0, 0, 0, 0, 0, SetWindowPosFlags.HideWindow)
-
-            Catch ex As Exception
-            End Try
-        End If
-
 
         'Set the clock
         '-------------------------
