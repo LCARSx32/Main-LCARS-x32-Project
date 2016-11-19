@@ -406,7 +406,6 @@ public Class modBusiness
         If frmAlerts.Visible Then
             frmAlerts.Hide()
         Else
-            frmAlerts.Bounds = Me.oldArea
             frmAlerts.Show()
         End If
     End Sub

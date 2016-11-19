@@ -1,4 +1,6 @@
 ﻿Public Class frmAlerts
+    Inherits LCARS.LCARSForm
+
     Friend Sub loadAlerts()
         Dim alerts As List(Of String) = LCARS.Alerts.GetAllAlertNames()
         myGrid.Clear()

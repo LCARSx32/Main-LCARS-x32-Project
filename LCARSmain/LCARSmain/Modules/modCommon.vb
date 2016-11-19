@@ -704,9 +704,6 @@ Public Enum SetWindowPosFlags As UInteger
             Dim i As Integer = SystemParametersInfo(SPI_SETWORKAREA, Marshal.SizeOf(myArea), ptr, SPIF_UPDATEINIFILE)
         End If
         Marshal.FreeHGlobal(ptr)
-        'If frmAlerts.Visible Then
-        frmAlerts.Bounds = New Rectangle(x, y, width, height)
-        'End If
     End Sub
 
     Public Sub SendDataToLinkedWindows(ByVal messageType As IntPtr, ByVal message As IntPtr)

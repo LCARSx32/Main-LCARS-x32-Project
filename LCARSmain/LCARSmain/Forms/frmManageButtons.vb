@@ -1,4 +1,5 @@
 Public Class frmManageButtons
+    Inherits LCARS.LCARSForm
 
     Dim isUBedit As Boolean = False
     Dim myBusiness As modBusiness
@@ -16,24 +17,6 @@ Public Class frmManageButtons
 
             If Not Me.Bounds = myRect Then
                 Me.Bounds = myRect
-            End If
-        ElseIf m.Msg = &H24 Then
-            'WM_MINMAXINFO
-            Dim mmi As MINMAXINFO = System.Runtime.InteropServices.Marshal.PtrToStructure(m.LParam, GetType(MINMAXINFO))
-            Dim monitor As Integer = MonitorFromWindow(Me.Handle, MONITOR_DEFAULTTONEAREST)
-            If monitor <> 0 Then
-                Dim minfo As MONITORINFO
-                minfo.cbSize = System.Runtime.InteropServices.Marshal.SizeOf(minfo)
-                If GetMonitorInfo(monitor, minfo) <> 0 Then
-                    mmi.ptMaxPosition.X = minfo.rcWork.Left_Renamed
-                    mmi.ptMaxPosition.Y = minfo.rcWork.Top_Renamed
-                    mmi.ptMaxSize.X = minfo.rcWork.Right_Renamed - minfo.rcWork.Left_Renamed
-                    mmi.ptMaxSize.Y = minfo.rcWork.Bottom_Renamed - minfo.rcWork.Top_Renamed
-                    System.Runtime.InteropServices.Marshal.StructureToPtr(mmi, m.LParam, True)
-                    m.Result = 1
-                Else
-                    Debug.Print("Monitorinfo failed")
-                End If
             End If
         Else
             MyBase.WndProc(m)
