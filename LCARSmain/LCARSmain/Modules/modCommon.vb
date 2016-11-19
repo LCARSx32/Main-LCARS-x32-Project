@@ -73,6 +73,26 @@ Module modCommon
 
     Public Declare Function GetWindowRect Lib "user32" (ByVal hwnd As IntPtr, ByRef rectangle As RECT) As Integer
 
+    Public Structure MINMAXINFO
+        Dim ptReserved As POINTAPI
+        Dim ptMaxSize As POINTAPI
+        Dim ptMaxPosition As POINTAPI
+        Dim ptMinTrackSize As POINTAPI
+        Dim ptMaxTrackSize As POINTAPI
+    End Structure
+
+    Public Structure MONITORINFO
+        Dim cbSize As Int32
+        Dim rcMonitor As RECT
+        Dim rcWork As RECT
+        Dim dwFlags As Int32
+    End Structure
+
+    Public Const MONITOR_DEFAULTTONEAREST As Int32 = &H2
+
+    Public Declare Function MonitorFromWindow Lib "user32" (ByVal hwnd As Int32, ByVal dwFlags As Int32) As Int32
+
+    Public Declare Auto Function GetMonitorInfo Lib "user32" (ByVal hMonitor As Int32, ByRef lpmi As MONITORINFO) As Integer
 #End Region
 
 #Region " Working Area "

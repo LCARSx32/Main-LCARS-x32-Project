@@ -402,7 +402,9 @@ Partial Class frmManageButtons
         Me.Controls.Add(Me.Label3)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmManageButtons"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Text = "PERSONAL BUTTON MANAGER"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.pnlAddUB.ResumeLayout(False)
         Me.pnlAddUB.PerformLayout()
         Me.pnlUBSettings.ResumeLayout(False)

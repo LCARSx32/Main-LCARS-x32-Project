@@ -1453,6 +1453,12 @@ Retry:
         oldArea = New Rectangle(1, 1, 1, 1)
     End Sub
 
+    Public ReadOnly Property WorkingArea() As Rectangle
+        Get
+            Return oldArea
+        End Get
+    End Property
+
     '    Private Sub myFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
     '        Dim index As Integer = CType(sender, LCARS.LCARSbuttonClass).Data
     '        Dim myItem As programList.FileStartItem
