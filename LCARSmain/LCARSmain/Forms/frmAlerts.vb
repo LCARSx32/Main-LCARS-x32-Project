@@ -17,7 +17,6 @@
 
     Private Sub frmAlerts_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         loadAlerts()
-        Me.Bounds = Screen.PrimaryScreen.WorkingArea
     End Sub
 
     Private Sub myAlert_Click(ByVal sender As Object, ByVal e As System.EventArgs)

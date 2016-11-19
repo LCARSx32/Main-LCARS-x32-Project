@@ -132,6 +132,7 @@ Partial Class frmAlerts
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Margin = New System.Windows.Forms.Padding(3, 6, 3, 6)
         Me.Name = "frmAlerts"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Text = "Alerts"
         Me.ResumeLayout(False)
 
