@@ -9,24 +9,9 @@ Imports LCARS.UI
 'Improve context menu
 
 Public Class frmMyComp
+    Inherits LCARS.LCARSForm
+
 #Region " API "
-
-#Region " Window Resizing "
-    Dim WithEvents interop As New LCARS.x32Interop
-
-    Private Sub interop_BeepingChanged(ByVal Beeping As Boolean) Handles interop.BeepingChanged
-        LCARS.SetBeeping(Me, Beeping)
-    End Sub
-
-    Private Sub interop_ColorsChanged() Handles interop.ColorsChanged
-        LCARS.UpdateColors(Me)
-    End Sub
-
-    Private Sub interop_LCARSx32Closing() Handles interop.LCARSx32Closing
-        Application.Exit()
-    End Sub
-
-#End Region
     Public Declare Auto Function SendMessage Lib "user32.dll" (ByVal hWnd As IntPtr, ByVal msg As Integer, ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
 
     Private Declare Auto Function SetClipboardViewer Lib "user32" (ByVal hWndNewViewer As IntPtr) As IntPtr
@@ -99,7 +84,6 @@ Public Class frmMyComp
 
 
     Private Sub frmMyComp_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        interop.Init()
         If Command() <> "" Then
             If Directory.Exists(Command) Then
                 curPath = Command()
@@ -135,7 +119,7 @@ Public Class frmMyComp
 
         For Each myDrive As DriveInfo In myDrives
             Dim myButton As New LCARS.LightweightControls.LCComplexButton 'LCARS.Controls.ComplexButton
-            myButton.holdDraw = True
+            myButton.HoldDraw = True
 
             If myDrive.IsReady Then
                 myButton.Color = LCARS.LCARScolorStyles.NavigationFunction
@@ -162,7 +146,7 @@ Public Class frmMyComp
 
             myButton.Data = myDrive.Name
             myButton.Beeping = beeping
-            myButton.holdDraw = False
+            myButton.HoldDraw = False
 
             gridMyComp.Add(myButton)
         Next
@@ -954,7 +938,7 @@ Public Class frmMyComp
 
     Private Sub sbNewFolder_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbNewFolder.Click
         Dim strName As String 'New Folder button added by Tim 5/26/11
-        strName = InputBox("Enter the name of the new folder", "New Folder")
+        strName = inputbox("Enter the name of the new folder", "New Folder")
         If (curPath.EndsWith("\")) Then
             strName = curPath + strName
         Else
@@ -1139,14 +1123,6 @@ Public Class frmMyComp
         My.Settings.shortcutNames.Add(tbTitle.Text)
         My.Settings.Save()
         loadShortcuts()
-    End Sub
-
-    Private Sub frmMyComp_LocationChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.LocationChanged, Me.Resize
-        Dim adjustedBounds As Rectangle = Screen.FromHandle(Me.Handle).WorkingArea
-        adjustedBounds.Location -= Screen.FromHandle(Me.Handle).Bounds.Location
-        If Not Me.MaximizedBounds = adjustedBounds Then
-            Me.MaximizedBounds = adjustedBounds
-        End If
     End Sub
 
     'Changes page on mouse scroll

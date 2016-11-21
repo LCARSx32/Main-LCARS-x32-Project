@@ -1,6 +1,5 @@
 Public Class ScreenChooserDialog
     Private screenType As Type = Nothing
-    Private WithEvents interop As LCARS.x32Interop
     Private _screenIndex As Integer
 
     Public Sub New(ByVal screenIndex As Integer)
@@ -50,8 +49,6 @@ Public Class ScreenChooserDialog
             End Try
             gridScreens.Add(myScreen)
         Next
-        interop = New LCARS.x32Interop()
-        interop.Init()
         Me.Bounds = Screen.AllScreens(_screenIndex).Bounds
     End Sub
 

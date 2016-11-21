@@ -1,21 +1,5 @@
 Public Class frmPic
-
-#Region " Window Resizing "
-    Dim WithEvents interop As New LCARS.x32Interop
-
-    Private Sub interop_BeepingChanged(ByVal Beeping As Boolean) Handles interop.BeepingChanged
-        LCARS.SetBeeping(Me, Beeping)
-    End Sub
-
-    Private Sub interop_ColorsChanged() Handles interop.ColorsChanged
-        LCARS.UpdateColors(Me)
-    End Sub
-
-    Private Sub interop_LCARSx32Closing() Handles interop.LCARSx32Closing
-        Application.Exit()
-    End Sub
-
-#End Region
+    Inherits LCARS.LCARSForm
 
     'a collection to hold the paths to our pictures
 
@@ -25,9 +9,6 @@ Public Class frmPic
     Dim index As Integer
 
     Private Sub frmPic_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        interop.Init()
-        Me.Bounds = Screen.PrimaryScreen.WorkingArea
-
         'sets initial picture box status to empty & prevents icon from displaying in pic box
         picturebox1.InitialImage = Nothing
 
@@ -351,14 +332,5 @@ Public Class frmPic
         picturebox1.Location = New Point(picboxlocx, picboxlocy)
 
 
-    End Sub
-
-
-    Private Sub frmPic_LocationChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.LocationChanged, Me.SizeChanged
-        Dim adjustedBounds As Rectangle = Screen.FromHandle(Me.Handle).WorkingArea
-        adjustedBounds.Location -= Screen.FromHandle(Me.Handle).Bounds.Location
-        If Not Me.MaximizedBounds = adjustedBounds Then
-            Me.MaximizedBounds = adjustedBounds
-        End If
     End Sub
 End Class

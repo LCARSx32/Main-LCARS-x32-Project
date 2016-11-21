@@ -6,6 +6,7 @@
 ''' for the object that created it. These LCARS-specific messages are then passed on to standard
 ''' events for processing.
 ''' </remarks>
+<Obsolete("Derive forms from the LCARSForm class for better functionality")> _
 Public Class x32Interop
 
 #Region " API "

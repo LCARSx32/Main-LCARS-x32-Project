@@ -1,22 +1,7 @@
 Imports LCARS.UI
 
 Public Class frmAutoDestruct
-#Region " Window Resizing "
-    Dim WithEvents interop As New LCARS.x32Interop
-
-    Private Sub interop_BeepingChanged(ByVal Beeping As Boolean) Handles interop.BeepingChanged
-        LCARS.SetBeeping(Me, Beeping)
-    End Sub
-
-    Private Sub interop_ColorsChanged() Handles interop.ColorsChanged
-        LCARS.UpdateColors(Me)
-    End Sub
-
-    Private Sub interop_LCARSx32Closing() Handles interop.LCARSx32Closing
-        Application.Exit()
-    End Sub
-
-#End Region
+    Inherits LCARS.LCARSForm
 
     Dim endTime As DateTime
     Dim ShutdownOption As String
@@ -115,7 +100,6 @@ Public Class frmAutoDestruct
     End Sub
 
     Private Sub frmAutoDestruct_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        interop.Init()
         ShutdownOption = GetSetting("LCARS x32", "Application", "AutoDestructOption", "alarm")
         alertList = LCARS.GetAllAlertNames()
         For Each myName As String In alertList
@@ -213,13 +197,5 @@ Public Class frmAutoDestruct
 
     Private Sub txtExternal_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         SaveSetting("LCARS x32", "Application", "AutoDestructCommand", txtExternal.Text)
-    End Sub
-
-    Private Sub frmAutoDestruct_LocationChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.LocationChanged, Me.SizeChanged
-        Dim adjustedBounds As Rectangle = Screen.FromHandle(Me.Handle).WorkingArea
-        adjustedBounds.Location -= Screen.FromHandle(Me.Handle).Bounds.Location
-        If Not Me.MaximizedBounds = adjustedBounds Then
-            Me.MaximizedBounds = adjustedBounds
-        End If
     End Sub
 End Class

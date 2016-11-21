@@ -9,19 +9,6 @@ Public Class frmManageButtons
         myBusiness = Business
         Me.Bounds = Business.WorkingArea
     End Sub
-    Protected Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
-        If m.Msg = InterMsgID Then
-            Dim myRect As New Rectangle
-
-            myRect = System.Runtime.InteropServices.Marshal.PtrToStructure(m.WParam, GetType(Rectangle))
-
-            If Not Me.Bounds = myRect Then
-                Me.Bounds = myRect
-            End If
-        Else
-            MyBase.WndProc(m)
-        End If
-    End Sub
 
     Private Sub sbUBbrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbUBbrowse.Click
 

@@ -1,6 +1,7 @@
 ﻿Public Class LCARSForm
     Inherits System.Windows.Forms.Form
 
+#Region " Windows API "
     Private Structure POINTAPI
         Dim X As Integer
         Dim Y As Integer
@@ -32,12 +33,48 @@
 
     Private Declare Auto Function GetMonitorInfo Lib "user32" (ByVal hMonitor As Int32, ByRef lpmi As MONITORINFO) As Integer
 
+    Private Declare Function RegisterWindowMessageA Lib "user32.dll" (ByVal lpString As String) As Integer
+
     Private Const MONITOR_DEFAULTTONEAREST As Int32 = &H2
 
     Private Const WM_MINMAXINFO As Integer = &H24
+#End Region
+
+    Private X32_MSG As Integer
+
+#Region " Events "
+    ''' <summary>
+    ''' Raised when an alert is initiated.
+    ''' </summary>
+    ''' <param name="AlertID">ID of the alert initiated</param>
+    Public Event AlertInitiated(ByVal AlertID As Integer)
+    ''' <summary>
+    ''' Raised when the current alert has ended
+    ''' </summary>
+    ''' <remarks>
+    ''' If an alert ends because another alert has replaced it, this event will not be raised, only a
+    ''' new <see cref="AlertInitiated">AlertInitiated</see> event
+    ''' </remarks>
+    Public Event AlertEnded()
+#End Region
 
     Protected Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
-        If m.Msg = WM_MINMAXINFO Then
+        If m.Msg = X32_MSG Then
+            m.Result = 1
+            Select Case m.LParam
+                Case 2
+                    OnColorsChange()
+                Case 3
+                    OnBeepingUpdate(GetSetting("LCARS x32", "Application", "ButtonBeep", "TRUE"))
+                Case 11
+                    OnAlertInitiated(m.WParam)
+                Case 7
+                    OnAlertEnded()
+                Case 13
+                    OnLCARSClosing()
+            End Select
+
+        ElseIf m.Msg = WM_MINMAXINFO Then
             Dim mmi As MINMAXINFO = System.Runtime.InteropServices.Marshal.PtrToStructure(m.LParam, GetType(MINMAXINFO))
             Dim monitor As Integer = MonitorFromWindow(Me.Handle, MONITOR_DEFAULTTONEAREST)
             If monitor <> 0 Then
@@ -60,7 +97,27 @@
     End Sub
 
     Protected Overrides Sub OnLoad(ByVal e As System.EventArgs)
-        Me.WindowState = Windows.Forms.FormWindowState.Maximized
+        X32_MSG = RegisterWindowMessageA("LCARS_X32_MSG")
         MyBase.OnLoad(e)
+    End Sub
+
+    Protected Overridable Sub OnColorsChange()
+        LCARS.UpdateColors(Me)
+    End Sub
+
+    Protected Overridable Sub OnBeepingUpdate(ByVal beep As Boolean)
+        LCARS.SetBeeping(Me, beep)
+    End Sub
+
+    Protected Overridable Sub OnAlertInitiated(ByVal alertID As Integer)
+        RaiseEvent AlertInitiated(alertID)
+    End Sub
+
+    Protected Overridable Sub OnAlertEnded()
+        RaiseEvent AlertEnded()
+    End Sub
+
+    Protected Overridable Sub OnLCARSClosing()
+        Me.Close()
     End Sub
 End Class

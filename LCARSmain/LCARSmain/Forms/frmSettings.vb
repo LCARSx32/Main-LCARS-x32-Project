@@ -3,23 +3,7 @@ Imports System.Runtime.InteropServices
 Imports LCARS.x32.modSettings
 
 Public Class frmSettings
-
-#Region " Window Resizing "
-    Dim WithEvents interop As New LCARS.x32Interop
-
-    Private Sub interop_BeepingChanged(ByVal Beeping As Boolean) Handles interop.BeepingChanged
-        LCARS.SetBeeping(Me, Beeping)
-    End Sub
-
-    Private Sub interop_ColorsChanged() Handles interop.ColorsChanged
-        LCARS.UpdateColors(Me)
-    End Sub
-
-    Private Sub interop_LCARSx32Closing() Handles interop.LCARSx32Closing
-        Application.Exit()
-    End Sub
-
-#End Region
+    Inherits LCARS.LCARSForm
 
 #Region " Mode changing "
     Protected Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
@@ -74,7 +58,6 @@ Public Class frmSettings
     End Structure
 
     Private Sub frmSettings_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        interop.Init()
         If My.Application.IsSettingsMode Then
             tbTitle.Color = LCARS.LCARScolorStyles.FunctionOffline
             tbTitle.Text = "Settings: System Offline"
@@ -316,7 +299,7 @@ Public Class frmSettings
         End If
     End Sub
 
- 
+
 
     Private Sub picMain1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles picMain1.Click
         picSelect.Location = New Point(picMain1.Left - 19, picMain1.Top - 15)
@@ -373,7 +356,7 @@ Public Class frmSettings
         End If
     End Sub
 
-  
+
 
     Private Sub lstSizeMode_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lstSizeMode.SelectedIndexChanged
         Select Case lstSizeMode.SelectedIndex
@@ -904,15 +887,6 @@ Public Class frmSettings
             End If
         End If
 
-    End Sub
-
-    Private Sub frmSettings_LocationChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.LocationChanged, Me.SizeChanged
-        Dim adjustedBounds As Rectangle = Screen.FromHandle(Me.Handle).WorkingArea
-        adjustedBounds.Location -= Screen.FromHandle(Me.Handle).Bounds.Location
-        Me.WindowState = FormWindowState.Maximized
-        If Not Me.MaximizedBounds = adjustedBounds Then
-            Me.MaximizedBounds = adjustedBounds
-        End If
     End Sub
 
     Private Sub myScreen_Click(ByVal sender As Object, ByVal e As System.EventArgs)

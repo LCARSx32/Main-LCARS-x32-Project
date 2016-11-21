@@ -1,20 +1,5 @@
 ﻿Public Class form1
-#Region " Window Resizing "
-    Dim WithEvents interop As New LCARS.x32Interop
-
-    Private Sub interop_BeepingChanged(ByVal Beeping As Boolean) Handles interop.BeepingChanged
-        LCARS.SetBeeping(Me, Beeping)
-    End Sub
-
-    Private Sub interop_ColorsChanged() Handles interop.ColorsChanged
-        LCARS.UpdateColors(Me)
-    End Sub
-
-    Private Sub interop_LCARSx32Closing() Handles interop.LCARSx32Closing
-        Application.Exit()
-    End Sub
-
-#End Region
+    Inherits LCARS.LCARSForm
 
     Dim int1 As Integer = 0
     Private Enum exec
@@ -69,8 +54,6 @@
     End Sub
 
     Private Sub FrmMain_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        interop.Init()
-        Me.Bounds = Screen.PrimaryScreen.WorkingArea
 
         'For zoom function
         FlatButton15.Visible = False
@@ -557,13 +540,5 @@
             FlatButton18.Color = LCARS.LCARScolorStyles.FunctionUnavailable
         End If
 
-    End Sub
-
-    Private Sub form1_LocationChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.LocationChanged, Me.SizeChanged
-        Dim adjustedBounds As Rectangle = Screen.FromHandle(Me.Handle).WorkingArea
-        adjustedBounds.Location -= Screen.FromHandle(Me.Handle).Bounds.Location
-        If Not Me.MaximizedBounds = adjustedBounds Then
-            Me.MaximizedBounds = adjustedBounds
-        End If
     End Sub
 End Class

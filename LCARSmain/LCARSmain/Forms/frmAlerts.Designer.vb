@@ -49,7 +49,7 @@ Partial Class frmAlerts
         Me.tbTitle.Location = New System.Drawing.Point(13, 13)
         Me.tbTitle.Name = "tbTitle"
         Me.tbTitle.RedAlert = LCARS.LCARSalert.Normal
-        Me.tbTitle.Size = New System.Drawing.Size(519, 22)
+        Me.tbTitle.Size = New System.Drawing.Size(519, 24)
         Me.tbTitle.TabIndex = 1
         Me.tbTitle.Text = "ALERTS"
         '
@@ -73,7 +73,7 @@ Partial Class frmAlerts
         Me.tbBottom.Location = New System.Drawing.Point(12, 406)
         Me.tbBottom.Name = "tbBottom"
         Me.tbBottom.RedAlert = LCARS.LCARSalert.Normal
-        Me.tbBottom.Size = New System.Drawing.Size(520, 22)
+        Me.tbBottom.Size = New System.Drawing.Size(520, 24)
         Me.tbBottom.TabIndex = 2
         '
         'myGrid
@@ -134,6 +134,7 @@ Partial Class frmAlerts
         Me.Name = "frmAlerts"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Text = "Alerts"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.ResumeLayout(False)
 
     End Sub

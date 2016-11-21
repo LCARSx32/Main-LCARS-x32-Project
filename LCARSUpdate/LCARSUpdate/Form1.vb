@@ -1,22 +1,10 @@
 ﻿Imports LCARS.UI
 Public Class frmUpdate
+    Inherits LCARS.LCARSForm
 
-#Region " Window Resizing "
-    Dim WithEvents interop As New LCARS.x32Interop
-
-    Private Sub interop_BeepingChanged(ByVal Beeping As Boolean) Handles interop.BeepingChanged
-        LCARS.SetBeeping(Me, Beeping)
+    Protected Overrides Sub OnLCARSClosing()
+        ' Do nothing. Overrides close on LCARS close.
     End Sub
-
-    Private Sub interop_ColorsChanged() Handles interop.ColorsChanged
-        LCARS.UpdateColors(Me)
-    End Sub
-
-    Private Sub interop_LCARSx32Closing() Handles interop.LCARSx32Closing
-        Application.Exit()
-    End Sub
-
-#End Region
 
     'Files to have on server:
     '  version.txt: Contains version information for every file in LCARS. 
@@ -50,9 +38,6 @@ Public Class frmUpdate
     End Structure
 
     Private Sub frmUpdate_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        If Not interop.Init() Then
-            tmrResize.Enabled = True
-        End If
         If GetSetting("LCARS x32", "Application", "DebugSwitch", "FALSE") Then
             rtbServer.Visible = True
         End If
@@ -271,19 +256,5 @@ Public Class frmUpdate
         For Each myDownload As Download In pnlDownloadList.Controls
             myDownload.Refresh()
         Next
-    End Sub
-
-    Private Sub tmrResize_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrResize.Tick
-        If Not Me.Bounds = Screen.PrimaryScreen.WorkingArea Then
-            Me.Bounds = Screen.PrimaryScreen.WorkingArea
-        End If
-    End Sub
-
-    Private Sub frmUpdate_LocationChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.LocationChanged, Me.SizeChanged
-        Dim adjustedBounds As Rectangle = Screen.FromHandle(Me.Handle).WorkingArea
-        adjustedBounds.Location -= Screen.FromHandle(Me.Handle).Bounds.Location
-        If Not Me.MaximizedBounds = adjustedBounds Then
-            Me.MaximizedBounds = adjustedBounds
-        End If
     End Sub
 End Class

@@ -410,18 +410,16 @@ Public Enum SetWindowPosFlags As UInteger
         For Each myBusiness As modBusiness In curBusiness
             LCARS.UpdateColors(myBusiness.myForm)
         Next
-        For Each mywindow As IntPtr In LinkedWindows
-            SendMessage(mywindow, InterMsgID, 0, 2)
-        Next
+
+        PostMessage(HWND_BROADCAST, InterMsgID, 0, 2)
     End Sub
 
     Public Sub SetBeeping(ByVal value As Boolean)
         For Each myBusiness As modBusiness In curBusiness
             LCARS.SetBeeping(myBusiness.myForm, value)
         Next
-        For Each mywindow As IntPtr In LinkedWindows
-            SendMessage(mywindow, InterMsgID, 0, 3)
-        Next
+
+        PostMessage(HWND_BROADCAST, InterMsgID, 0, 3)
     End Sub
 
     Public Sub RefreshVoiceCommands(ByVal active As Boolean)
@@ -460,9 +458,8 @@ Public Enum SetWindowPosFlags As UInteger
         alertThread = New Threading.Thread(AddressOf MainAlert)
         cancelAlert = False
         alertThread.Start(alertables)
-        For Each mywindow As IntPtr In LinkedWindows
-            SendMessage(mywindow, InterMsgID, type, 11)
-        Next
+
+        PostMessage(HWND_BROADCAST, InterMsgID, type, 11)
     End Sub
 
     Private Function GetAlertPanels(ByVal baseControl As Control) As Collection
@@ -551,9 +548,7 @@ Public Enum SetWindowPosFlags As UInteger
             Next
         Next
         inAlert = False
-        For Each mywindow As IntPtr In LinkedWindows
-            SendMessage(mywindow, InterMsgID, 0, 7)
-        Next
+        PostMessage(HWND_BROADCAST, InterMsgID, 0, 7)
     End Sub
 
     Private Delegate Sub processButtonDelegate(ByVal index As Integer, ByVal Button As LCARS.LCARSbuttonClass)
@@ -706,29 +701,14 @@ Public Enum SetWindowPosFlags As UInteger
         Marshal.FreeHGlobal(ptr)
     End Sub
 
-    Public Sub SendDataToLinkedWindows(ByVal messageType As IntPtr, ByVal message As IntPtr)
-        If LinkedWindows.Count > 0 Then
-            For Each targetHandle As IntPtr In LinkedWindows
-                Dim res As Integer = PostMessage(targetHandle, messageType, myDesktop.Handle, message)
-            Next
-        End If
-    End Sub
-
     Public Sub CloseLCARS()
         RemoveHandler Microsoft.Win32.SystemEvents.DisplaySettingsChanged, AddressOf frmStartup.System_DisplayChanged
         SetParent(hTrayIcons, myIconSaver.Handle)
 
         Dim TaskbarSettings As APPBARDATA
 
-        SendDataToLinkedWindows(InterMsgID, 13)
-        'If LinkedWindows.GetUpperBound(0) > -1 Then
-        '    For Each targetHandle As Integer In LinkedWindows
-        '        Dim res As Integer = PostMessage(targetHandle, InterMsgID, myDesktop.Handle, 13)
-        '    Next
-        'End If
+        PostMessage(HWND_BROADCAST, InterMsgID, myDesktop.Handle, 13)
 
-
-        '  If myForm.Location = New Point(0, 0) Then
         If Process.GetProcessesByName("explorer").Length > 0 Then
             ShowTaskBar(True)
             TaskbarSettings.cbSize = Len(TaskbarSettings)
@@ -739,7 +719,6 @@ Public Enum SetWindowPosFlags As UInteger
             SHAppBarMessage(ABM_SETSTATE, TaskbarSettings) 'put the taskbar's "AutoHide" setting back to what it was
 
         End If
-        ' End If
 
         For Each myBusiness As modBusiness In curBusiness
             myBusiness.mainTimer.Enabled = False

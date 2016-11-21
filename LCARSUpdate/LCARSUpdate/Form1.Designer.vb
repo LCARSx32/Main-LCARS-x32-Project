@@ -1,6 +1,6 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class frmUpdate
-    Inherits System.Windows.Forms.Form
+    Inherits LCARS.LCARSForm
 
     'Form overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()> _
@@ -22,7 +22,6 @@ Partial Class frmUpdate
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
         Me.sbCancel = New LCARS.Controls.StandardButton
         Me.tbTitle = New LCARS.Controls.TextButton
         Me.lblMessage = New System.Windows.Forms.Label
@@ -30,7 +29,6 @@ Partial Class frmUpdate
         Me.sbNext = New LCARS.Controls.StandardButton
         Me.pnlDownloadList = New System.Windows.Forms.Panel
         Me.rtbServer = New System.Windows.Forms.RichTextBox
-        Me.tmrResize = New System.Windows.Forms.Timer(Me.components)
         Me.SuspendLayout()
         '
         'sbCancel
@@ -76,7 +74,7 @@ Partial Class frmUpdate
         Me.tbTitle.Location = New System.Drawing.Point(13, 13)
         Me.tbTitle.Name = "tbTitle"
         Me.tbTitle.RedAlert = LCARS.LCARSalert.Normal
-        Me.tbTitle.Size = New System.Drawing.Size(631, 22)
+        Me.tbTitle.Size = New System.Drawing.Size(631, 24)
         Me.tbTitle.TabIndex = 1
         Me.tbTitle.Text = "LCARS UPDATE"
         '
@@ -158,10 +156,6 @@ Partial Class frmUpdate
         Me.rtbServer.Text = ""
         Me.rtbServer.Visible = False
         '
-        'tmrResize
-        '
-        Me.tmrResize.Enabled = True
-        '
         'frmUpdate
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -191,6 +185,5 @@ Partial Class frmUpdate
     Friend WithEvents sbNext As LCARS.Controls.StandardButton
     Friend WithEvents pnlDownloadList As System.Windows.Forms.Panel
     Friend WithEvents rtbServer As System.Windows.Forms.RichTextBox
-    Friend WithEvents tmrResize As System.Windows.Forms.Timer
 
 End Class

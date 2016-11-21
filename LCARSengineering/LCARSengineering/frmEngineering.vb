@@ -1,20 +1,5 @@
 Public Class frmEngineering
-#Region " Window Resizing "
-    Dim WithEvents interop As New LCARS.x32Interop
-
-    Private Sub interop_BeepingChanged(ByVal Beeping As Boolean) Handles interop.BeepingChanged
-        LCARS.SetBeeping(Me, Beeping)
-    End Sub
-
-    Private Sub interop_ColorsChanged() Handles interop.ColorsChanged
-        LCARS.UpdateColors(Me)
-    End Sub
-
-    Private Sub interop_LCARSx32Closing() Handles interop.LCARSx32Closing
-        Application.Exit()
-    End Sub
-
-#End Region
+    Inherits LCARS.LCARSForm
 
     Dim pData As Object
     Dim myWMI As Object
@@ -26,7 +11,7 @@ Public Class frmEngineering
         'PrintLine(1, "Got CPU data.")
 
 
-        liproc.Value = val
+        liProc.Value = val
         'PrintLine(1, "Set CPU meter.")
 
         Dim myMem As Memory.MEMORYSTATUS = pData.memory.getmemory
@@ -138,9 +123,6 @@ Public Class frmEngineering
     End Sub
 
     Private Sub frmEngineering_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        interop.Init()
-        Me.Bounds = Screen.PrimaryScreen.WorkingArea
-
         If System.Environment.OSVersion.Platform = PlatformID.Win32Windows Then
             pData = New Win98Data
             If pData.init = False Then
@@ -191,14 +173,6 @@ Public Class frmEngineering
 
     Private Sub label18_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles label18.Click
 
-    End Sub
-
-    Private Sub frmEngineering_LocationChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.LocationChanged, Me.SizeChanged
-        Dim adjustedBounds As Rectangle = Screen.FromHandle(Me.Handle).WorkingArea
-        adjustedBounds.Location -= Screen.FromHandle(Me.Handle).Bounds.Location
-        If Not Me.MaximizedBounds = adjustedBounds Then
-            Me.MaximizedBounds = adjustedBounds
-        End If
     End Sub
 End Class
 

@@ -1,20 +1,6 @@
 ﻿Option Explicit On
 Public Class Hlpfrm
-#Region " Window Resizing "
-    Dim WithEvents interop As New LCARS.x32Interop
-
-    Private Sub interop_BeepingChanged(ByVal Beeping As Boolean) Handles interop.BeepingChanged
-        LCARS.SetBeeping(Me, Beeping)
-    End Sub
-
-    Private Sub interop_ColorsChanged() Handles interop.ColorsChanged
-        LCARS.UpdateColors(Me)
-    End Sub
-
-    Private Sub interop_LCARSx32Closing() Handles interop.LCARSx32Closing
-        Application.Exit()
-    End Sub
-#End Region
+    Inherits LCARS.LCARSForm
 
     Dim x32hlpx As Integer
     Dim x32hlpy As Integer
@@ -159,26 +145,6 @@ Public Class Hlpfrm
         If e.Button = Windows.Forms.MouseButtons.Left Then
             Me.Width = x32hlpx + (Windows.Forms.Cursor.Position.X - cursorx)
         End If
-    End Sub
-
-    Public Sub SetBeeping(ByVal Enabled As Boolean, ByVal searchContainer As Control)
-
-        For Each myControl As Control In searchContainer.Controls
-            If myControl.GetType.IsSubclassOf(GetType(LCARS.LCARSbuttonClass)) Then
-                Try
-                    CType(myControl, LCARS.LCARSbuttonClass).Beeping = Enabled
-                Catch ex As Exception
-                End Try
-            ElseIf myControl.GetType.IsSubclassOf(GetType(LCARS.Controls.WindowlessContainer)) Then
-                For i As Integer = 0 To CType(myControl, LCARS.Controls.WindowlessContainer).Count - 1
-                    CType(CType(myControl, LCARS.Controls.WindowlessContainer).Items(i), LCARS.LightweightControls.LCFlatButton).Beeping = Enabled
-                Next
-            Else
-                If myControl.Controls.Count > 0 Then
-                    SetBeeping(Enabled, myControl)
-                End If
-            End If
-        Next
     End Sub
 
     Private Sub ChapterString_Click(ByVal sender As Object, ByVal e As System.EventArgs)
