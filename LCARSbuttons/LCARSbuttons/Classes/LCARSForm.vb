@@ -1,4 +1,20 @@
-﻿Public Class LCARSForm
+﻿''' <summary>
+''' A base Form class to handle common LCARS functions
+''' </summary>
+''' <remarks>
+''' Any form that inherits from this class will have default handlers for LCARS events, and be bound
+''' to the working area when maximized. This eliminates the previous requirement that LCARS apps 
+''' register their main window with LCARS to get position and size updates.
+''' 
+''' Supported events:
+'''  - Alerts initiated/ended
+'''  - Colors changed
+'''  - Beeping updated
+'''  - LCARS closing
+''' 
+''' Default handlers are supplied for color changing, beep updating, and LCARS closing.
+''' </remarks>
+Public Class LCARSForm
     Inherits System.Windows.Forms.Form
 
 #Region " Windows API "
@@ -57,7 +73,14 @@
     ''' </remarks>
     Public Event AlertEnded()
 #End Region
-
+    ''' <summary>
+    ''' Handles LCARS messages and maximized bounds
+    ''' </summary>
+    ''' <param name="m">Window message</param>
+    ''' <remarks>
+    ''' Any messages of type WM_MINMAXINFO or LCARS_X32_MSG will be handled, and not passed to the
+    ''' default handler.
+    ''' </remarks>
     Protected Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
         If m.Msg = X32_MSG Then
             m.Result = 1
@@ -96,27 +119,45 @@
         End If
     End Sub
 
+    'Register LCARS_X32_MSG
     Protected Overrides Sub OnLoad(ByVal e As System.EventArgs)
         X32_MSG = RegisterWindowMessageA("LCARS_X32_MSG")
         MyBase.OnLoad(e)
     End Sub
 
+    ''' <summary>
+    ''' Called when LCARS updates the color scheme
+    ''' </summary>
     Protected Overridable Sub OnColorsChange()
         LCARS.UpdateColors(Me)
     End Sub
 
+    ''' <summary>
+    ''' Called when beeping setting is updated
+    ''' </summary>
+    ''' <param name="beep">New beeping setting</param>
     Protected Overridable Sub OnBeepingUpdate(ByVal beep As Boolean)
         LCARS.SetBeeping(Me, beep)
     End Sub
 
+    ''' <summary>
+    ''' Called when an alert is initiated.
+    ''' </summary>
+    ''' <param name="alertID">ID of current alert</param>
     Protected Overridable Sub OnAlertInitiated(ByVal alertID As Integer)
         RaiseEvent AlertInitiated(alertID)
     End Sub
 
+    ''' <summary>
+    ''' Called when all alerts have ended
+    ''' </summary>
     Protected Overridable Sub OnAlertEnded()
         RaiseEvent AlertEnded()
     End Sub
 
+    ''' <summary>
+    ''' Called when LCARS is closing. By default, will close this window.
+    ''' </summary>
     Protected Overridable Sub OnLCARSClosing()
         Me.Close()
     End Sub
