@@ -599,16 +599,9 @@ public Class modBusiness
         Else
             newText = LCARS.Stardate.getStardate(Now)
         End If
-        If myClock.GetType Is GetType(Label) Then
-            If Not newText = myClock.text Then
-                myClock.text = newText
-            End If
 
-        Else
-
-            If Not newText = myClock.ButtonText Then
-                myClock.ButtonText = newText
-            End If
+        If Not newText = myClock.text Then
+            myClock.text = newText
         End If
 
         '-------------------------
