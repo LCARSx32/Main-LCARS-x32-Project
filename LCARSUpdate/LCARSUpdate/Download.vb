@@ -40,7 +40,7 @@ Friend Class Download
     End Sub
     Public Sub DownloadSub()
         Dim request As System.Net.WebRequest
-        Dim response As System.Net.WebResponse
+        Dim response As System.Net.WebResponse = Nothing
         Dim responseStream As System.IO.Stream
         Dim length As Integer = 1024
         Dim byteArray(length) As Byte

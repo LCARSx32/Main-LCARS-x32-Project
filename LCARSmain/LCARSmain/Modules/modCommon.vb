@@ -511,7 +511,7 @@ Public Enum SetWindowPosFlags As UInteger
             Next
         Next
         Dim mySoundPath As String = alertSound
-        Dim soundThread As Threading.Thread
+        Dim soundThread As Threading.Thread = Nothing
         Dim screenThreads(alertables.Length - 1) As Threading.Thread
         'do the alert until cancelAlert is set to true:
         Do Until cancelAlert = True
