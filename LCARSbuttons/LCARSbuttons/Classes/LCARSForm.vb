@@ -1,4 +1,6 @@
-﻿''' <summary>
+﻿Imports System.Runtime.InteropServices
+
+''' <summary>
 ''' A base Form class to handle common LCARS functions
 ''' </summary>
 ''' <remarks>
@@ -18,18 +20,21 @@ Public Class LCARSForm
     Inherits System.Windows.Forms.Form
 
 #Region " Windows API "
+    <StructLayout(LayoutKind.Sequential)> _
     Private Structure POINTAPI
         Dim X As Integer
         Dim Y As Integer
     End Structure
 
+    <StructLayout(LayoutKind.Sequential)> _
     Private Structure RECT
-        Dim Left_Renamed As Integer
-        Dim Top_Renamed As Integer
-        Dim Right_Renamed As Integer
-        Dim Bottom_Renamed As Integer
+        Dim Left As Integer
+        Dim Top As Integer
+        Dim Right As Integer
+        Dim Bottom As Integer
     End Structure
 
+    <StructLayout(LayoutKind.Sequential)> _
     Private Structure MINMAXINFO
         Dim ptReserved As POINTAPI
         Dim ptMaxSize As POINTAPI
@@ -38,6 +43,7 @@ Public Class LCARSForm
         Dim ptMaxTrackSize As POINTAPI
     End Structure
 
+    <StructLayout(LayoutKind.Sequential)> _
     Private Structure MONITORINFO
         Dim cbSize As Int32
         Dim rcMonitor As RECT
@@ -47,11 +53,14 @@ Public Class LCARSForm
 
     Private Declare Function MonitorFromWindow Lib "user32" (ByVal hwnd As Int32, ByVal dwFlags As Int32) As Int32
 
+    Private Declare Function MonitorFromPoint Lib "user32" (ByVal pt As POINTAPI, ByVal dwFlags As Int32) As Int32
+
     Private Declare Auto Function GetMonitorInfo Lib "user32" (ByVal hMonitor As Int32, ByRef lpmi As MONITORINFO) As Integer
 
     Private Declare Function RegisterWindowMessageA Lib "user32.dll" (ByVal lpString As String) As Integer
 
     Private Const MONITOR_DEFAULTTONEAREST As Int32 = &H2
+    Private Const MONITOR_DEFAULTTOPRIMARY As Int32 = &H1
 
     Private Const WM_MINMAXINFO As Integer = &H24
 #End Region
@@ -98,25 +107,36 @@ Public Class LCARSForm
             End Select
 
         ElseIf m.Msg = WM_MINMAXINFO Then
-            Dim mmi As MINMAXINFO = System.Runtime.InteropServices.Marshal.PtrToStructure(m.LParam, GetType(MINMAXINFO))
+            Dim mmi As MINMAXINFO = Marshal.PtrToStructure(m.LParam, GetType(MINMAXINFO))
             Dim monitor As Integer = MonitorFromWindow(Me.Handle, MONITOR_DEFAULTTONEAREST)
-            If monitor <> 0 Then
-                Dim minfo As MONITORINFO
-                minfo.cbSize = System.Runtime.InteropServices.Marshal.SizeOf(minfo)
-                If GetMonitorInfo(monitor, minfo) <> 0 Then
-                    mmi.ptMaxPosition.X = minfo.rcWork.Left_Renamed
-                    mmi.ptMaxPosition.Y = minfo.rcWork.Top_Renamed
-                    mmi.ptMaxSize.X = minfo.rcWork.Right_Renamed - minfo.rcWork.Left_Renamed
-                    mmi.ptMaxSize.Y = minfo.rcWork.Bottom_Renamed - minfo.rcWork.Top_Renamed
-                    System.Runtime.InteropServices.Marshal.StructureToPtr(mmi, m.LParam, True)
+            Dim pt0 As POINTAPI = New POINTAPI With {.X = 0, .Y = 0}
+            Dim primary As Integer = MonitorFromPoint(pt0, MONITOR_DEFAULTTOPRIMARY)
+            If monitor <> 0 And primary <> 0 Then
+                Dim minfo, pminfo As MONITORINFO
+                minfo.cbSize = Marshal.SizeOf(minfo)
+                pminfo.cbSize = Marshal.SizeOf(pminfo)
+                If GetMonitorInfo(monitor, minfo) <> 0 And GetMonitorInfo(primary, pminfo) Then
+                    ' This looks wrong, but Windows assumes the coordinates are for the primary
+                    ' monitor, and then adjusts them. We need to undo the adjustments so that
+                    ' the result is what we actually want.
+
+                    ' First, we account for the position change between the primary and actual monitors
+                    mmi.ptMaxPosition.X = minfo.rcWork.Left - minfo.rcMonitor.Left
+                    mmi.ptMaxPosition.Y = minfo.rcWork.Top - minfo.rcMonitor.Top
+
+                    ' For some reason setting the max track size bypasses the size adjustment.
+                    mmi.ptMaxTrackSize.X = minfo.rcWork.Right - minfo.rcWork.Left
+                    mmi.ptMaxTrackSize.Y = minfo.rcWork.Bottom - minfo.rcWork.Top
+
+                    Marshal.StructureToPtr(mmi, m.LParam, True)
                     m.Result = 1
                     Return
                 End If
             End If
             m.Result = 0
-        Else
-            MyBase.WndProc(m)
-        End If
+            Else
+                MyBase.WndProc(m)
+            End If
     End Sub
 
     'Register LCARS_X32_MSG
