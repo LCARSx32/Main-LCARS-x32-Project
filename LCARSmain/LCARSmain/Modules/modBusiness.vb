@@ -138,13 +138,10 @@ public Class modBusiness
                 'This if statement is from code found at http://msdntracker.blogspot.com/2008/03/list-currently-opened-windows-with.html
                 If ((((lExStyle And WS_EX_TOOLWINDOW) = 0) And bNoOwner) Or ((lExStyle And WS_EX_APPWINDOW) And Not bNoOwner)) _
                             And ((lExStyle And WS_EX_NOREDIRECTIONBITMAP) = 0) Then
-                    Dim screen1, screen2 As String
-                    screen1 = Screen.FromHandle(hwnd).DeviceName
-                    screen1 = screen1.Substring(0, InStr(screen1, ControlChars.NullChar))
-
-                    screen2 = Screen.FromHandle(myForm.Handle).DeviceName
-                    screen2 = screen2.Substring(0, InStr(screen2, ControlChars.NullChar))
-
+                    Dim screen1, screen2 As Integer
+                    screen1 = MonitorFromWindow(hwnd, MONITOR_DEFAULTTONEAREST)
+                    screen2 = MonitorFromWindow(myForm.Handle, MONITOR_DEFAULTTONEAREST)
+                    'Check to see if it's actually on this screen
                     If screen1 = screen2 Then
                         '
                         ' Get the window's caption.
