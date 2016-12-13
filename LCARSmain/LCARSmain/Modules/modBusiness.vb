@@ -162,11 +162,9 @@ public Class modBusiness
                     End If
                 End If
 
-                sWindowText = Space(256)
-                lReturn = GetWindowText(hwnd, sWindowText, Len(sWindowText))
 
             End If
-            End If
+        End If
 
         Return True
     End Function
@@ -195,10 +193,6 @@ public Class modBusiness
         Dim mySettings As New frmSettings()
         MoveToScreen(Screen.FromHandle(myForm.Handle), mySettings.Handle)
         mySettings.Show()
-        'Dim myProcess As New Process()
-        'myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSsettings.exe"
-        'myProcess.StartInfo.Arguments = "/" & myDesktop.Handle.ToString()
-        'launchProcessOnScreen(myProcess)
     End Sub
 
     Public Sub myEngineeringButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
@@ -234,11 +228,9 @@ public Class modBusiness
         myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSshutdown.exe"
         myProcess.StartInfo.Arguments = "/" & myDesktop.Handle.ToString()
         launchProcessOnScreen(myProcess)
-        'Process.Start(Application.StartupPath & "\LCARSshutdown.exe", "/" & myDesktop.Handle.ToString)
     End Sub
 
     Public Sub myAlertButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        'Me.WindowState = FormWindowState.Minimized
         If cancelAlert Then
             GeneralAlert(0)
         Else
@@ -247,7 +239,6 @@ public Class modBusiness
     End Sub
 
     Public Sub myYellowAlertButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        'Me.WindowState = FormWindowState.Minimized
         If cancelAlert Then
             GeneralAlert(1)
         Else
@@ -259,21 +250,18 @@ public Class modBusiness
         Dim myProcess As New Process()
         myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSdestruct.exe"
         launchProcessOnScreen(myProcess)
-        'Process.Start(Application.StartupPath & "\LCARSdestruct.exe")
     End Sub
 
     Public Sub myPhoto_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         Dim myProcess As New Process()
         myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSpic.exe"
         launchProcessOnScreen(myProcess)
-        'Process.Start(Application.StartupPath & "\LCARSpic.exe")
     End Sub
 
     Public Sub myWebBrowser_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         Dim myProcess As New Process()
         myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSWebBrowser.exe"
         launchProcessOnScreen(myProcess)
-        'Process.Start(Application.StartupPath & "\LCARSWebBrowser.exe")
     End Sub
 
     Public Sub myButtonManager_Click(ByVal sender As Object, ByVal e As System.EventArgs)
@@ -303,8 +291,6 @@ public Class modBusiness
         myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSexplorer.exe"
         myProcess.StartInfo.Arguments = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
         launchProcessOnScreen(myProcess)
-        'Process.Start(Application.StartupPath & "\LCARSexplorer.exe", System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments))
-        ' myStartMenu.doClick(sender, e)
     End Sub
 
     Public Sub myPictures_Click(ByVal sender As Object, ByVal e As System.EventArgs)
@@ -312,14 +298,12 @@ public Class modBusiness
         myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSexplorer.exe"
         myProcess.StartInfo.Arguments = System.Environment.GetFolderPath(Environment.SpecialFolder.MyPictures)
         launchProcessOnScreen(myProcess)
-        'Process.Start(Application.StartupPath & "\LCARSexplorer.exe", System.Environment.GetFolderPath(Environment.SpecialFolder.MyPictures))
     End Sub
     Public Sub myVideos_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         Dim myProcess As New Process()
         myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSexplorer.exe"
         myProcess.StartInfo.Arguments = GetMyVideosPath()
         launchProcessOnScreen(myProcess)
-        'Process.Start(Application.StartupPath & "\LCARSexplorer.exe", GetMyVideosPath())
     End Sub
 
     Public Sub myMusic_Click(ByVal sender As Object, ByVal e As System.EventArgs)
@@ -327,7 +311,6 @@ public Class modBusiness
         myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSexplorer.exe"
         myProcess.StartInfo.Arguments = System.Environment.GetFolderPath(Environment.SpecialFolder.MyMusic)
         launchProcessOnScreen(myProcess)
-        'Process.Start(Application.StartupPath & "\LCARSexplorer.exe", System.Environment.GetFolderPath(Environment.SpecialFolder.MyMusic))
     End Sub
 
     Public Sub myShowTrayButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
@@ -390,7 +373,6 @@ public Class modBusiness
         myProcess.StartInfo.FileName = Application.StartupPath & "\Lcarsx32 Manual.exe"
         myProcess.StartInfo.Arguments = Application.StartupPath & "\LCARS x32 Manual"
         launchProcessOnScreen(myProcess)
-        'Process.Start(Application.StartupPath & "\Lcarsx32 Manual.exe", Application.StartupPath & "\LCARS x32 Manual")
     End Sub
 
     Public Sub myRun_Click(ByVal sender As Object, ByVal e As System.EventArgs)
@@ -488,7 +470,6 @@ public Class modBusiness
         AddHandler myModeSelect.Click, AddressOf myModeSelectButton_Click
         AddHandler myDeactivate.Click, AddressOf myDeactivateButton_Click
         AddHandler myAlert.Click, AddressOf myAlertButton_Click
-        'AddHandler myYellowAlert.Click, AddressOf myYellowAlertButton_Click
         AddHandler myDestruct.Click, AddressOf myDestructButton_Click
         AddHandler myPhoto.Click, AddressOf myPhoto_Click
         AddHandler myWebBrowser.Click, AddressOf myWebBrowser_Click
@@ -510,7 +491,6 @@ public Class modBusiness
 
         MyPrograms.Clear()
         MyPrograms = GetAllPrograms
-        'myProgGrid.ControlSize = New Size(myProgGrid.Width, 25)
         loadProgList()
 
 
@@ -789,25 +769,11 @@ public Class modBusiness
                             If myButton.Lit Then
                                 myButton.Lit = False
                             End If
-                            'If myButton.RedAlert <> LCARS.LCARSalert.Normal Then
-                            'myButton.RedAlert = LCARS.LCARSalert.Normal
-                            'End If
                         Else
                             If myButton.Lit = False Then
                                 myButton.Lit = True
                             End If
                         End If
-                        'If myButton.Data = GetTopWindow() Then
-                        'If myButton.Color <> LCARS.LCARScolorStyles.FunctionOffline Then
-                        'If myButton.RedAlert <> LCARS.LCARSalert.White Then
-                        'myButton.RedAlert = LCARS.LCARSalert.White
-                        'End If
-                        'End If
-                        'Else
-                        'If myButton.RedAlert <> LCARS.LCARSalert.Normal Then
-                        'myButton.RedAlert = LCARS.LCARSalert.Normal
-                        'End If
-                        'End If
 
                         If Not (myButton.ButtonText = curWindow.MainWindowText.ToUpper Or myButton.ButtonText = "X") Then
                             myButton.ButtonText = curWindow.MainWindowText
@@ -940,7 +906,6 @@ public Class modBusiness
                     myUserButtonInfo.Location = mybutton.Data
 
                     UserButtonsPanel.Add(mybutton)
-                    'UserButtonsListBox.Items.Add(mybutton.ButtonText)
 
                     AddUserButton(myUserButtonInfo, True)
                 Next
@@ -965,8 +930,6 @@ public Class modBusiness
     End Sub
 
     Public Sub EditUserButton(ByVal button As UserButtonInfo, ByVal index As Integer)
-        'myUserButtonCollection.remove(index)
-        'myUserButtonCollection.add(button, index)
         myUserButtonCollection(index) = button
         SaveUserButtons()
         loadUserButtons()
@@ -1001,10 +964,6 @@ public Class modBusiness
         Next
     End Sub
 
-    Private Sub UserButtonsPanel_SizeChanged(ByVal sender As Object, ByVal e As System.EventArgs)
-
-    End Sub
-
     Private Sub ProgramsPanel_Resize(ByVal sender As Object, ByVal e As System.EventArgs)
         If myForm.WindowState <> FormWindowState.Minimized Then
             Dim myPage As Integer
@@ -1015,96 +974,9 @@ public Class modBusiness
         End If
     End Sub
 
-    'Private Sub loadProgList() '(Optional ByVal index As Integer = 1)
-    '    Dim intloop As Integer
-    '    'Dim itemCount As Integer = 0
-    '    '  Dim visibility As Boolean = True
-    '    Dim myDir As Collection
-
-    '    'Dim pageMax As Integer
-    '    'curProgIndex = index
-
-    '    myDir = MyPrograms
-    '    'ProgPageSize = ProgramsPanel.Height \ 30
-
-    '    For intloop = 0 To ProgDir.GetUpperBound(0)
-    '        myDir = myDir(ProgDir(intloop)).subItems
-    '    Next
-
-    '    ' visibility = ProgramsPanel.Visible
-
-    '    'If ProgramsPanel.Visible = True Then
-    '    '    ProgramsPanel.Visible = False
-    '    'End If
-
-    '    'ProgramsPanel.Controls.Clear()
-    '    '  ProgramsPanel.Visible = visibility
-
-    '    'pageCount = Int(myDir.Count / ProgPageSize)
-
-    '    'If myDir.Count Mod ProgPageSize > 0 Then
-    '    '    pageCount += 1
-    '    'End If
-
-    '    'curProgPage = (index \ ProgPageSize) + 1
-
-    '    'RaiseEvent programsPageDataChanged("PAGES " & curProgPage & " of " & pageCount)
-
-
-    '    'pageMax = ProgPageSize + (index - 1)
-
-    '    'If pageMax > myDir.Count Then
-    '    '    pageMax = myDir.Count
-    '    'End If
-
-    '    For intloop = 1 To myDir.Count
-    '        If myDir(intloop).GetType Is GetType(DirectoryStartItem) Then
-    '            With CType(myDir(intloop), DirectoryStartItem)
-    '                Dim myButton As New LCARS.LightweightControls.LCComplexButton 'LCARS.Controls.ComplexButton
-    '                'myButton.Width = ProgramsPanel.Width
-    '                'myButton.Height = 25
-    '                'myButton.Left = 0
-    '                myButton.Color = LCARS.LCARScolorStyles.NavigationFunction
-    '                myButton.Text = .Name
-    '                myButton.SideText = .subItems.Count
-    '                myButton.TextHeight = 14
-    '                myButton.TextAlign = ContentAlignment.BottomRight
-    '                myButton.Data = intloop
-    '                'myButton.Top = itemCount * 30
-    '                'myButton.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-    '                '                 Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-    '                'myButton.Data = intloop
-    '                myButton.Beeping = False
-    '                'myButton.Tag = ((pageMax - index) - (intloop - index)).ToString
-    '                myProgGrid.Add(myButton)
-    '                AddHandler myButton.Click, AddressOf myDir_click
-    '                'itemCount += 1
-    '            End With
-    '        Else
-    '            With CType(myDir(intloop), FileStartItem)
-    '                Dim myButton As New LCARS.LightweightControls.LCComplexButton 'LCARS.Controls.StandardButton
-    '                'myButton.Width = ProgramsPanel.Width
-    '                'myButton.Height = 25
-    '                'myButton.Left = 0
-    '                myButton.Color = LCARS.LCARScolorStyles.MiscFunction
-    '                myButton.Text = Path.GetFileNameWithoutExtension(.Name)
-    '                myButton.Data = .Link.Executable
-    '                'myButton.Top = itemCount * 30
-    '                myButton.Beeping = False
-    '                'myButton.Tag = ((pageMax - index) - (intloop - index)).ToString
-    '                myProgGrid.Add(myButton)
-    '                AddHandler myButton.Click, AddressOf myfile_click
-    '                'itemCount += 1
-    '            End With
-    '        End If
-    '    Next
-    '    'ProgramsPanel.Tag = (pageMax - index).ToString
-
-    'End Sub
     Private Sub loadProgList(Optional ByVal index As Integer = 1)
         Dim intloop As Integer
         Dim itemCount As Integer = 0
-        '  Dim visibility As Boolean = True
         Dim myDir As Collection
 
         Dim pageMax As Integer
@@ -1116,7 +988,6 @@ public Class modBusiness
             myDir = myDir(ProgDir(intloop)).subItems
         Next
         ProgramsPanel.Clear()
-        '  ProgramsPanel.Visible = visibility
 
         pageCount = Int(myDir.Count / ProgPageSize)
 
@@ -1149,8 +1020,6 @@ public Class modBusiness
                     myButton.TextAlign = ContentAlignment.BottomRight
                     myButton.Data = intloop
                     myButton.Top = itemCount * 30
-                    'myButton.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    '                 Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                     myButton.Beeping = False
                     myButton.Data2 = ((pageMax - index) - (intloop - index)).ToString
                     ProgramsPanel.Add(myButton)
@@ -1448,104 +1317,4 @@ Retry:
         End Get
     End Property
 
-    '    Private Sub myFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-    '        Dim index As Integer = CType(sender, LCARS.LCARSbuttonClass).Data
-    '        Dim myItem As programList.FileStartItem
-    '        Dim myAppPanel As New lcarsAppPanel.lcarsAppPanel
-    '        Dim setParentResult As Integer
-    '        Dim myProcess() As Process
-    '        Dim myParser As New MSIparser
-    '        Dim result As String
-
-
-    '        ' 'Dim myShortcut As IWshRuntimeLibrary.IWshShortcut
-    '        ' 'Dim myShell As New IWshRuntimeLibrary.WshShell
-    '        myAppPanel.Anchor = 15
-    '        myAppPanel.Location = New Point(0, 0)
-
-    '        ' fbStart_Click(sender, e)
-
-    '        myItem = CType(curItem(index), programList.FileStartItem)
-
-    '        Dim shell As New IWshRuntimeLibrary.IWshShell_Class
-    '        Dim myShortcut As IWshRuntimeLibrary.IWshShortcut
-
-
-    '        result = myParser.ParseShortcut(myItem.Link.Executable)
-
-    '        If result Is Nothing Then
-    '            myShortcut = shell.CreateShortcut(myItem.Link.Executable)
-    '            result = myShortcut.TargetPath
-    '        End If
-
-    '        Dim myStartInfo As ProcessStartInfo = New ProcessStartInfo(result)
-    '        myStartInfo.WindowStyle = ProcessWindowStyle.Normal
-    '        Process.Start(myStartInfo)
-
-    '        ''Do Until myProcess.MainWindowTitle <> ""
-    '        ''    Application.DoEvents()
-    '        ''Loop
-    '        myProcess = Process.GetProcessesByName(System.IO.Path.GetFileNameWithoutExtension(result))
-
-    'tryAgain:
-    '        Do Until myProcess.GetUpperBound(0) > -1
-    '            myProcess = Process.GetProcessesByName(System.IO.Path.GetFileNameWithoutExtension(result))
-    '            Application.DoEvents()
-    '        Loop
-
-    '        If myProcess(0).MainWindowHandle.ToInt32 = 0 Then
-    '            ReDim myProcess(-1)
-    '            GoTo tryAgain
-    '        End If
-
-    '        Dim myHandle As Integer = myProcess(0).MainWindowHandle.ToInt32
-
-    '        Do Until setParentResult > 0
-    '            ''  ShowWindow(myProcess(0).MainWindowHandle, SW_MINIMIZE)
-    '            Dim currentStyle As Integer = GetWindowLong(myProcess(0).MainWindowHandle, GWL_STYLE)
-    '            currentStyle = currentStyle And Not (WS_DLGFRAME)
-    '            Application.DoEvents()
-    '            SetWindowLong(myProcess(0).MainWindowHandle, GWL_STYLE, currentStyle)
-    '            Application.DoEvents()
-    '            setParentResult = SetParent(myProcess(0).MainWindowHandle, myAppPanel.AppWindowHandle).ToInt32
-    '            Application.DoEvents()
-    '            If setParentResult = 0 Then
-    '                Dim err As Integer
-    '                err = Marshal.GetLastWin32Error
-    '            End If
-    '            Application.DoEvents()
-    '        Loop
-    '        Application.DoEvents()
-    '        ShowWindow(myProcess(0).MainWindowHandle, SW_MAXIMIZE)
-
-    '        With myAppPanel
-    '            .ApplicationTitle = myProcess(0).MainWindowTitle.ToUpper
-    '            .WindowHandle = myProcess(0).MainWindowHandle.ToInt32
-    '            .ApplicationID = myProcess(0).Id
-    '            pnlMainBox.Controls.Add(myAppPanel)
-    '            .Size = pnlMainBox.Size
-    '            pnlMainBox.Visible = True
-    '            .BringToFront()
-    '        End With
-
-    '        pnlAppOptions.Visible = True
-    '        pnlAppOptions.BringToFront()
-
-
-
-
-    '        subList.Clear()
-    '        ''elbProgsTop.Clickable = False
-    '        ''elbProgsTop.Lit = False
-    '        ''elbProgsBottom.Clickable = False
-    '        ''elbProgsBottom.Lit = False
-
-
-    '        ''curItem = myItems
-
-    '        ''FlatButton30.ButtonText = curItem.Count
-    '        ''scrollIndex = 1
-    '        ''AnimatePanel(pnlPrograms, True)
-
-    '    End Sub
 End Class
