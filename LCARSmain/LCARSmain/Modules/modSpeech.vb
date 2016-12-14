@@ -17,6 +17,8 @@ Module modSpeech
     Dim AliasList As New Collection
     Dim CustomList As New Collection
     Friend console As New frmSpeechConsole
+    Dim timeoutTimer As New System.Timers.Timer With {.AutoReset = False}
+
     Public Structure AliasEntry
         Dim Command As String
         Dim CommandAlias As String
@@ -32,6 +34,8 @@ Module modSpeech
         ComputerSound.LoadAsync()
         ConfirmSound = New System.Media.SoundPlayer(My.Resources.Please_confirm)
         ConfirmSound.LoadAsync()
+
+        AddHandler timeoutTimer.Elapsed, AddressOf onCommandTimeout
 
         'Get the list of aliases and custom commands
 
@@ -188,8 +192,13 @@ Module modSpeech
             listenCommands = True
             muteAlert = True
             ComputerSound.Play()
+            If LCARS.x32.modSettings.CommandTimeoutEnabled And Not continuousCommands Then
+                timeoutTimer.Interval = LCARS.x32.modSettings.CommandTimeout * 1000 'Convert sec to ms
+                timeoutTimer.Start()
+            End If
         Else
             If listenCommands = True Then
+                timeoutTimer.Stop()
                 'Get command's alias (if existant) and send it to the command interpreter
                 ExecuteCommand(command)
                 If Not continuousCommands Then listenCommands = False 'Handles Continuous Commands function, though regulated by command interpreter.
@@ -199,6 +208,18 @@ Module modSpeech
         End If
 
     End Sub
+
+    Private Sub onCommandTimeout(ByVal source As Object, ByVal e As System.Timers.ElapsedEventArgs)
+        If myDesktop.InvokeRequired Then
+            myDesktop.Invoke(New System.Timers.ElapsedEventHandler(AddressOf onCommandTimeout), source, e)
+        Else
+            If Not continuousCommands And listenCommands And LCARS.x32.modSettings.CommandTimeoutEnabled Then
+                listenCommands = False
+                console.lstHistory.Items.Add("Command timed out (No command given)".ToUpper())
+            End If
+        End If
+    End Sub
+
     Public Function getCommandAlias(ByVal commandAlias As String) As String
         Dim returnCommand As String = commandAlias
         For Each myentry As AliasEntry In AliasList

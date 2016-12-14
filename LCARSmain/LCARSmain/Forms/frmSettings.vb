@@ -132,6 +132,15 @@ Public Class frmSettings
             cbVoice.SideText = "OFF"
         End If
 
+        cpxVoiceTimeout.Lit = LCARS.x32.modSettings.CommandTimeoutEnabled
+        If cpxVoiceTimeout.Lit Then
+            cpxVoiceTimeout.SideText = "ON"
+        Else
+            cpxVoiceTimeout.Lit = "OFF"
+        End If
+
+        txtCommandTimeout.Text = LCARS.x32.modSettings.CommandTimeout.ToString()
+
         cbDates.Lit = GetSetting("LCARS x32", "Application", "Stardate", "FALSE")
         If cbDates.Lit Then
             cbDates.SideText = "ON"
@@ -560,6 +569,22 @@ Public Class frmSettings
 
     Private Sub fbSaveChanges_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbSaveChanges.Click
         SaveSetting("LCARS X32", "Application", "SpeechCode", txtLanguageCode.Text)
+        'Save timeout value
+        Dim val As Double
+        If Double.TryParse(txtCommandTimeout.Text, val) Then
+            If val > 0 Then
+                LCARS.x32.modSettings.CommandTimeout = val
+                txtCommandTimeout.Text = val.ToString()
+                'I don't think we need to change the current timeout, because it will be
+                'canceled when it runs out or if another command is given.
+            Else
+                MsgBox("Timeout value must be greater than zero.")
+                txtCommandTimeout.Text = LCARS.x32.modSettings.CommandTimeout.ToString()
+            End If
+        Else
+            MsgBox("Non-numeric value entered for timeout.")
+            txtCommandTimeout.Text = LCARS.x32.modSettings.CommandTimeout.ToString()
+        End If
         'Remove all old values
         Try
             DeleteSetting("LCARS x32", "CustomVoiceCommands")
@@ -737,6 +762,17 @@ Public Class frmSettings
             customList.RemoveAt(lstExternalCommands.SelectedIndex)
             lstExternalCommands.Items.RemoveAt(lstExternalCommands.SelectedIndex)
         End If
+    End Sub
+
+    Private Sub cpxVoiceTimeout_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cpxVoiceTimeout.Click
+        cpxVoiceTimeout.Lit = Not cpxVoiceTimeout.Lit
+        If cpxVoiceTimeout.Lit Then
+            cpxVoiceTimeout.SideText = "ON"
+        Else
+            cpxVoiceTimeout.SideText = "OFF"
+        End If
+        LCARS.x32.modSettings.CommandTimeoutEnabled = cpxVoiceTimeout.Lit
+        'No need to manually cancel the current timeout; it checks automatically.
     End Sub
 
 #End Region

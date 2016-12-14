@@ -165,5 +165,24 @@
                 SaveSetting("LCARS x32", "Application", "InstallPath", value)
             End Set
         End Property
+
+        Public Shared Property CommandTimeout() As Double
+            Get
+                Return CDbl(GetSetting("LCARS x32", "Application", "CommandTimeout", "5.0"))
+            End Get
+            Set(ByVal value As Double)
+                If value < 0 Then value = 1
+                SaveSetting("LCARS x32", "Application", "CommandTimeout", value.ToString())
+            End Set
+        End Property
+
+        Public Shared Property CommandTimeoutEnabled() As Boolean
+            Get
+                Return CBool(GetSetting("LCARS x32", "Application", "CommandTimeoutEnabled", "TRUE"))
+            End Get
+            Set(ByVal value As Boolean)
+                SaveSetting("LCARS x32", "Application", "CommandTimeoutEnabled", value)
+            End Set
+        End Property
     End Class
 End Namespace
