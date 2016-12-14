@@ -38,7 +38,7 @@ Namespace LightweightControls
         Protected _flashOn As Boolean = False
         Protected WithEvents _tmrFlash As New Timers.Timer(1000)
         Protected _beeping As Boolean = True
-        Protected sound As System.Media.SoundPlayer
+        Protected Shared sound As New System.Media.SoundPlayer(My.Resources._207)
         Protected _clickable As Boolean = True
         Protected _autoEllipsis As Boolean = True
         Protected _ellipsisMode As EllipsisModes = EllipsisModes.Character
@@ -260,17 +260,18 @@ Namespace LightweightControls
 
         Private Sub Beep(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Click
             If _beeping Then
-                Dim t As New Threading.Thread(AddressOf BeepThread)
-                t.Start()
+                playSound()
             End If
         End Sub
 
-        Private Sub BeepThread()
+        Private Sub playSound()
             Dim soundPath As String = GetSetting("LCARS X32", "Application", "ButtonSound", "")
-            If System.IO.File.Exists(soundPath) Then
-                sound = New System.Media.SoundPlayer(soundPath)
-            Else
-                sound = New System.Media.SoundPlayer(My.Resources._207)
+            If sound Is Nothing Or sound.SoundLocation <> soundPath Then
+                If System.IO.File.Exists(soundPath) Then
+                    sound = New System.Media.SoundPlayer(soundPath)
+                Else
+                    sound = New System.Media.SoundPlayer(My.Resources._207)
+                End If
             End If
             sound.Play()
         End Sub

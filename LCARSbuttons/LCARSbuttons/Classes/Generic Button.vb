@@ -98,10 +98,9 @@ Public Class LCARSbuttonClass
     Dim isLit As Boolean = True
     Dim NormalButton As Bitmap
     Dim UnLitButton As Bitmap
-    Dim playSound As Threading.Thread = New Threading.Thread(AddressOf SoundThread)
     Protected inRedAlert As LCARS.LCARSalert = LCARSalert.Normal
     Dim RA As Boolean = False
-    Dim Sound As New System.Media.SoundPlayer(My.Resources._207)
+    Private Shared Sound As New System.Media.SoundPlayer(My.Resources._207)
     Dim buttonData As Object
     Dim buttonData2 As Object
     Dim noDraw As Boolean = False
@@ -727,12 +726,14 @@ Public Class LCARSbuttonClass
         End Try
     End Sub
 
-    Private Sub SoundThread()
-        Dim soundPath As String = GetSetting("LCARS X32", "Application", "ButtonSound", Application.StartupPath & "\207.wav")
-        If System.IO.File.Exists(soundPath) Then
-            Sound = New System.Media.SoundPlayer(soundPath)
-        Else
-            Sound = New System.Media.SoundPlayer(My.Resources._207)
+    Private Sub playSound()
+        Dim soundPath As String = GetSetting("LCARS X32", "Application", "ButtonSound", "")
+        If Sound Is Nothing Or Sound.SoundLocation <> soundPath Then
+            If System.IO.File.Exists(soundPath) Then
+                Sound = New System.Media.SoundPlayer(soundPath)
+            Else
+                Sound = New System.Media.SoundPlayer(My.Resources._207)
+            End If
         End If
         Sound.Play()
     End Sub
@@ -808,8 +809,7 @@ Public Class LCARSbuttonClass
 
     Private Sub buttonDown()
         If doBeep Then
-            playSound = New Threading.Thread(AddressOf SoundThread)
-            playSound.Start()
+            playSound()
         End If
     End Sub
     Private Sub GenericButton_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Click
