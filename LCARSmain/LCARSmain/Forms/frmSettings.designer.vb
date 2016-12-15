@@ -60,7 +60,7 @@ Partial Class frmSettings
         Me.tbTitle = New LCARS.Controls.TextButton
         Me.sbExitMyComp = New LCARS.Controls.StandardButton
         Me.ltcSettings = New LCARS.Controls.x32TabControl
-        Me.LcarsTabPage5 = CType(New LCARS.Controls.x32TabPage, LCARS.Controls.x32TabPage)
+        Me.LcarsTabPage5 = New LCARS.Controls.x32TabPage
         Me.cpxVoiceTimeout = New LCARS.Controls.ComplexButton
         Me.sbExternal = New LCARS.Controls.StandardButton
         Me.sbInternal = New LCARS.Controls.StandardButton
@@ -89,12 +89,12 @@ Partial Class frmSettings
         Me.lblIntCommandName = New System.Windows.Forms.Label
         Me.lblAlias = New System.Windows.Forms.Label
         Me.lblDescription = New System.Windows.Forms.Label
-        Me.LcarsTabPage1 = CType(New LCARS.Controls.x32TabPage, LCARS.Controls.x32TabPage)
+        Me.LcarsTabPage1 = New LCARS.Controls.x32TabPage
         Me.fbChangeSound = New LCARS.Controls.FlatButton
         Me.cbBeeping = New LCARS.Controls.ComplexButton
         Me.txtSoundPath = New System.Windows.Forms.Label
         Me.Label1 = New System.Windows.Forms.Label
-        Me.LcarsTabPage2 = CType(New LCARS.Controls.x32TabPage, LCARS.Controls.x32TabPage)
+        Me.LcarsTabPage2 = New LCARS.Controls.x32TabPage
         Me.cbDates = New LCARS.Controls.ComplexButton
         Me.Label3 = New System.Windows.Forms.Label
         Me.sbUseScheme = New LCARS.Controls.StandardButton
@@ -110,7 +110,7 @@ Partial Class frmSettings
         Me.FlatButton11 = New LCARS.Controls.FlatButton
         Me.StandardButton1 = New LCARS.Controls.StandardButton
         Me.Elbow5 = New LCARS.Controls.Elbow
-        Me.tabScreenSpecific = CType(New LCARS.Controls.x32TabPage, LCARS.Controls.x32TabPage)
+        Me.tabScreenSpecific = New LCARS.Controls.x32TabPage
         Me.pnlScreenSpecific = New System.Windows.Forms.Panel
         Me.FlatButton1 = New LCARS.Controls.FlatButton
         Me.pnlLanguage = New System.Windows.Forms.Panel
@@ -140,12 +140,12 @@ Partial Class frmSettings
         Me.fbWallpaper = New LCARS.Controls.FlatButton
         Me.lblClickScreen = New System.Windows.Forms.Label
         Me.pnlScreens = New System.Windows.Forms.Panel
-        Me.LcarsTabPage3 = CType(New LCARS.Controls.x32TabPage, LCARS.Controls.x32TabPage)
+        Me.LcarsTabPage3 = New LCARS.Controls.x32TabPage
         Me.hpbLCARS = New LCARS.Controls.HalfPillButton
         Me.hpbExplorer = New LCARS.Controls.HalfPillButton
         Me.Label6 = New System.Windows.Forms.Label
         Me.fbShellSelect = New LCARS.Controls.FlatButton
-        Me.tabAlerts = CType(New LCARS.Controls.x32TabPage, LCARS.Controls.x32TabPage)
+        Me.tabAlerts = New LCARS.Controls.x32TabPage
         Me.hpAlertFiller = New LCARS.Controls.HalfPillButton
         Me.lblAlertSound = New System.Windows.Forms.Label
         Me.lblID = New System.Windows.Forms.Label
@@ -155,7 +155,7 @@ Partial Class frmSettings
         Me.fbAlertColor = New LCARS.Controls.FlatButton
         Me.fbBrowseSound = New LCARS.Controls.FlatButton
         Me.lstAlerts = New System.Windows.Forms.ListBox
-        Me.tabUpdate = CType(New LCARS.Controls.x32TabPage, LCARS.Controls.x32TabPage)
+        Me.tabUpdate = New LCARS.Controls.x32TabPage
         Me.fbChannelDot = New LCARS.Controls.FlatButton
         Me.txtCustom = New System.Windows.Forms.TextBox
         Me.hpCustom = New LCARS.Controls.HalfPillButton
@@ -165,11 +165,11 @@ Partial Class frmSettings
         Me.cpxAutoUpdates = New LCARS.Controls.ComplexButton
         Me.Label19 = New System.Windows.Forms.Label
         Me.lblVersion = New System.Windows.Forms.Label
-        Me.tabExperimental = CType(New LCARS.Controls.x32TabPage, LCARS.Controls.x32TabPage)
+        Me.tabExperimental = New LCARS.Controls.x32TabPage
         Me.cbDebug = New LCARS.Controls.ComplexButton
         Me.Label20 = New System.Windows.Forms.Label
         Me.lblWarning = New System.Windows.Forms.Label
-        Me.tabAbout = CType(New LCARS.Controls.x32TabPage, LCARS.Controls.x32TabPage)
+        Me.tabAbout = New LCARS.Controls.x32TabPage
         Me.lblAbout = New System.Windows.Forms.Label
         Me.TabPage6.SuspendLayout()
         Me.TabPage7.SuspendLayout()
@@ -908,18 +908,18 @@ Partial Class frmSettings
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ltcSettings.BackColor = System.Drawing.Color.Black
-        Me.ltcSettings.Controls.Add(Me.LcarsTabPage5)
         Me.ltcSettings.Controls.Add(Me.LcarsTabPage1)
-        Me.ltcSettings.Controls.Add(Me.LcarsTabPage2)
-        Me.ltcSettings.Controls.Add(Me.tabScreenSpecific)
-        Me.ltcSettings.Controls.Add(Me.LcarsTabPage3)
-        Me.ltcSettings.Controls.Add(Me.tabAlerts)
-        Me.ltcSettings.Controls.Add(Me.tabUpdate)
-        Me.ltcSettings.Controls.Add(Me.tabExperimental)
         Me.ltcSettings.Controls.Add(Me.tabAbout)
+        Me.ltcSettings.Controls.Add(Me.tabExperimental)
+        Me.ltcSettings.Controls.Add(Me.tabUpdate)
+        Me.ltcSettings.Controls.Add(Me.tabAlerts)
+        Me.ltcSettings.Controls.Add(Me.LcarsTabPage5)
+        Me.ltcSettings.Controls.Add(Me.LcarsTabPage3)
+        Me.ltcSettings.Controls.Add(Me.tabScreenSpecific)
+        Me.ltcSettings.Controls.Add(Me.LcarsTabPage2)
         Me.ltcSettings.Location = New System.Drawing.Point(12, 41)
         Me.ltcSettings.Name = "ltcSettings"
-        Me.ltcSettings.SelectedTab = Me.LcarsTabPage5
+        Me.ltcSettings.SelectedTab = Me.LcarsTabPage1
         Me.ltcSettings.Size = New System.Drawing.Size(776, 547)
         Me.ltcSettings.TabIndex = 60
         Me.ltcSettings.TabPages.Add(Me.LcarsTabPage1)
@@ -1511,15 +1511,14 @@ Partial Class frmSettings
         '
         'Label1
         '
-        Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label1.Font = New System.Drawing.Font("LCARS", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("LCARS", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.Orange
-        Me.Label1.Location = New System.Drawing.Point(3, 41)
+        Me.Label1.Location = New System.Drawing.Point(3, 29)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(761, 39)
+        Me.Label1.Size = New System.Drawing.Size(135, 33)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Sound Settings"
+        Me.Label1.Text = "BUTTON BEEPING"
         '
         'LcarsTabPage2
         '

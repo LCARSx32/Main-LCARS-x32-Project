@@ -10,10 +10,8 @@ Module modSpeech
     Dim listenCommands As Boolean = False
     Dim vox As SpVoice
     Dim continuousCommands As Boolean = False
-    Dim ComputerSound As System.Media.SoundPlayer
     Dim Confirm As String
     Dim Authorization As String = ""
-    Dim ConfirmSound As System.Media.SoundPlayer
     Dim AliasList As New Collection
     Dim CustomList As New Collection
     Friend console As New frmSpeechConsole
@@ -30,11 +28,6 @@ Module modSpeech
     End Structure
 
     Public Sub beginVoiceRecognition()
-        ComputerSound = New System.Media.SoundPlayer(My.Resources.computer) 'These lines are here to avoid audio interference
-        ComputerSound.LoadAsync()
-        ConfirmSound = New System.Media.SoundPlayer(My.Resources.Please_confirm)
-        ConfirmSound.LoadAsync()
-
         AddHandler timeoutTimer.Elapsed, AddressOf onCommandTimeout
 
         'Get the list of aliases and custom commands
@@ -191,7 +184,7 @@ Module modSpeech
             vGrammar.CmdSetRuleIdState(2, SpeechRuleState.SGDSActive)
             listenCommands = True
             muteAlert = True
-            ComputerSound.Play()
+            LCARSSound.ListeningSound.Play()
             If LCARS.x32.modSettings.CommandTimeoutEnabled And Not continuousCommands Then
                 timeoutTimer.Interval = LCARS.x32.modSettings.CommandTimeout * 1000 'Convert sec to ms
                 timeoutTimer.Start()
@@ -286,14 +279,14 @@ Module modSpeech
                 Case "self destruct"
                     curBusiness(0).myDestruct.doClick(sender, myE)
                 Case "log off"
-                    ConfirmSound.Play()
+                    LCARSSound.ConfirmSound.Play()
                     Confirm = "log off"
                 Case "red alert"
                     GeneralAlert(0)
                 Case "cancel alert"
                     cancelAlert = True
                 Case "shut down"
-                    ConfirmSound.Play()
+                    LCARSSound.ConfirmSound.Play()
                     Confirm = "shut down"
                 Case "end program"
                     Try
