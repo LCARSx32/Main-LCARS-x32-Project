@@ -157,4 +157,7 @@
   <data name="red_alert" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\red_alert.wav;System.IO.MemoryStream, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="computerbeep_43" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\computerbeep_43.wav;System.IO.MemoryStream, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

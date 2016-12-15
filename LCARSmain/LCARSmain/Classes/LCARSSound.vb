@@ -10,6 +10,7 @@ Public Class LCARSSound
     Private Shared _resourceDict As Dictionary(Of String, System.IO.UnmanagedMemoryStream) = Nothing
     Public Shared ListeningSound As New LCARSSound("Listening for command", "ERESOURCE:computer.wav")
     Public Shared ConfirmSound As New LCARSSound("Confirm command", "ERESOURCE:Please_confirm.wav")
+    Public Shared TimeoutSound As New LCARSSound("Command timed out", "ERESOURCE:computerbeep_43.wav")
 
     Public Sub New(ByVal name As String, ByVal dpath As String)
         _name = name
@@ -17,7 +18,8 @@ Public Class LCARSSound
         enabled = path.StartsWith("E")
         path = path.Substring(1)
         If Not load(path) Then
-            load(dpath)
+            path = dpath.Substring(1)
+            If Not load(path) Then Debug.Print("Failed to load " & path)
         End If
         player.LoadAsync()
     End Sub
@@ -48,6 +50,7 @@ Public Class LCARSSound
                 _resourceDict.Add("Please_confirm.wav", My.Resources.Please_confirm)
                 _resourceDict.Add("ack.wav", My.Resources.ack)
                 _resourceDict.Add("095.wav", My.Resources._095)
+                _resourceDict.Add("computerbeep_43.wav", My.Resources.computerbeep_43)
             End If
             Return _resourceDict
         End Get

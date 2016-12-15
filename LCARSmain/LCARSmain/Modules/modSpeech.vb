@@ -208,6 +208,7 @@ Module modSpeech
         Else
             If Not continuousCommands And listenCommands And LCARS.x32.modSettings.CommandTimeoutEnabled Then
                 listenCommands = False
+                LCARSSound.TimeoutSound.Play()
                 console.lstHistory.Items.Add("Command timed out (No command given)".ToUpper())
             End If
         End If
