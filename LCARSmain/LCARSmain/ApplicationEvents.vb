@@ -27,11 +27,33 @@ Namespace My
                 End If
             Else
                 'Run as shell
-                If Process.GetProcessesByName("LCARSmain").Length > 1 Then
-                    'Send message to current instance to switch to shell mode
+                Dim x32Processes() As Process = Process.GetProcessesByName("LCARSmain")
+                If x32Processes.Length > 1 Then
                     InterMsgID = frmStartup.RegisterWindowMessageA("LCARS_X32_MSG")
-                    SendMessage(HWND_BROADCAST, InterMsgID, 0, 3)
-                    End
+                    If Debugger.IsAttached Then
+                        Dim other As Process = Nothing
+                        For Each p As Process In x32Processes
+                            If p.Id <> Process.GetCurrentProcess().Id Then
+                                other = p
+                                Exit For
+                            End If
+                        Next
+                        If other Is Nothing Then
+                            MsgBox("Unable to find other process")
+                        End If
+                        Dim handle As IntPtr = New IntPtr(CInt(GetSetting("LCARS x32", "Application", "MainWindowHandle", "0")))
+                        While Not other.HasExited And handle <> IntPtr.Zero
+                            Try
+                                SendMessage(handle, WM_EXPLORER_CLOSE, IntPtr.Zero, IntPtr.Zero)
+                            Catch ex As Exception
+                                MsgBox(ex.ToString & vbNewLine & ex.StackTrace, Title:="Error taking control")
+                            End Try
+                            Threading.Thread.Sleep(1000)
+                        End While
+                    Else
+                        'Send message to current instance to switch to shell mode
+                        SendMessage(HWND_BROADCAST, InterMsgID, 0, 3)
+                    End If
                 End If
             End If
         End Sub

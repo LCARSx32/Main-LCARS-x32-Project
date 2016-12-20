@@ -130,6 +130,8 @@ Public Class frmStartup
                     'Alerts updated
                     frmAlerts.loadAlerts()
             End Select
+        ElseIf m.Msg = WM_EXPLORER_CLOSE Then
+            CloseLCARS()
         Else
             'it wasn't a message we need to handle, so let VB take back over.
             MyBase.WndProc(m)

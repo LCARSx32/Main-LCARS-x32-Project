@@ -161,6 +161,7 @@ Module modCommon
     Public Declare Auto Function SendMessage Lib "user32.dll" (ByVal hWnd As IntPtr, ByVal msg As Integer, ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
     Public InterMsgID As Integer
     Public Const HWND_BROADCAST As Integer = &HFFFF
+    Public Const WM_EXPLORER_CLOSE As Integer = &H5B4
 
 #End Region
 
