@@ -2,24 +2,57 @@
 
 Public Class LCARSSound
     Private _name As String
-    Private enabled As Boolean
-    Private path As String
-    Private dpath As String
+    Private _enabled As Boolean
+    Private _path As String
+    Private _dpath As String
     Private player As System.Media.SoundPlayer
 
-    Private Shared _resourceDict As Dictionary(Of String, System.IO.UnmanagedMemoryStream) = Nothing
+#Region " Sound Definitions "
+    ' This section defines the sounds as they are actually used in code. The shared variables
+    ' immediately following this comment are the sounds.
+    ' 
+    ' To add a new sound:
+    '   * Create the sound as a Public Shared LCARSSound below, with a name and default path/resource
+    '   * Add the sound to the array sounds() to allow its settings to be changed
+    '   * If adding a new resource, add the resource in the property ResourceDict
+
     Public Shared ListeningSound As New LCARSSound("Listening for command", "ERESOURCE:computer.wav")
     Public Shared ConfirmSound As New LCARSSound("Confirm command", "ERESOURCE:Please_confirm.wav")
     Public Shared TimeoutSound As New LCARSSound("Command timed out", "ERESOURCE:computerbeep_43.wav")
 
+    Public Shared sounds() As LCARSSound = {ListeningSound, ConfirmSound, TimeoutSound}
+
+    Private Shared _resourceDict As Dictionary(Of String, System.IO.UnmanagedMemoryStream) = Nothing
+
+    Public Shared ReadOnly Property ResourceDict() As Dictionary(Of String, System.IO.UnmanagedMemoryStream)
+        Get
+            If _resourceDict Is Nothing Then
+                _resourceDict = New Dictionary(Of String, System.IO.UnmanagedMemoryStream)
+                _resourceDict.Add("computer.wav", My.Resources.computer)
+                _resourceDict.Add("Please_confirm.wav", My.Resources.Please_confirm)
+                _resourceDict.Add("ack.wav", My.Resources.ack)
+                _resourceDict.Add("095.wav", My.Resources._095)
+                _resourceDict.Add("computerbeep_43.wav", My.Resources.computerbeep_43)
+            End If
+            Return _resourceDict
+        End Get
+    End Property
+
+#End Region
+
     Public Sub New(ByVal name As String, ByVal dpath As String)
         _name = name
-        path = GetSetting("LCARS x32", "Sounds", name, dpath)
-        enabled = path.StartsWith("E")
-        path = path.Substring(1)
-        If Not load(path) Then
-            path = dpath.Substring(1)
-            If Not load(path) Then Debug.Print("Failed to load " & path)
+        _dpath = dpath
+        Reload()
+    End Sub
+
+    Public Sub Reload()
+        _path = GetSetting("LCARS x32", "Sounds", _name, _dpath)
+        _enabled = _path.StartsWith("E")
+        _path = _path.Substring(1)
+        If Not load(_path) Then
+            _path = _dpath.Substring(1)
+            If Not load(_path) Then Debug.Print("Failed to load " & _path)
         End If
         player.LoadAsync()
     End Sub
@@ -42,27 +75,46 @@ Public Class LCARSSound
         Return False
     End Function
 
-    Public Shared ReadOnly Property ResourceDict() As Dictionary(Of String, System.IO.UnmanagedMemoryStream)
-        Get
-            If _resourceDict Is Nothing Then
-                _resourceDict = New Dictionary(Of String, System.IO.UnmanagedMemoryStream)
-                _resourceDict.Add("computer.wav", My.Resources.computer)
-                _resourceDict.Add("Please_confirm.wav", My.Resources.Please_confirm)
-                _resourceDict.Add("ack.wav", My.Resources.ack)
-                _resourceDict.Add("095.wav", My.Resources._095)
-                _resourceDict.Add("computerbeep_43.wav", My.Resources.computerbeep_43)
-            End If
-            Return _resourceDict
-        End Get
-    End Property
+    Private Sub save()
+        'Note: While we're using "D" for disabled, any char will do, as long as it's not "E"
+        SaveSetting("LCARS x32", "Sounds", _name, CStr(If(_enabled, "E", "D")) & _path)
+    End Sub
 
     Public Sub Play()
-        If enabled Then player.Play()
+        If _enabled Then player.Play()
     End Sub
 
     Public ReadOnly Property Name() As String
         Get
             Return _name
         End Get
+    End Property
+
+    Public Property Path() As String
+        Get
+            Return _path
+        End Get
+
+        Set(ByVal value As String)
+            _path = value
+            If Not load(_path) Then
+                _path = _dpath.Substring(1)
+                Throw New IO.FileNotFoundException("Unable to load file", value)
+            End If
+            player.LoadAsync()
+            save()
+        End Set
+    End Property
+
+    Public Property Enabled() As Boolean
+        Get
+            Return _enabled
+        End Get
+
+        Set(ByVal value As Boolean)
+            _enabled = value
+            ' Don't need to reload.
+            save()
+        End Set
     End Property
 End Class
