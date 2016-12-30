@@ -35,6 +35,5 @@ Partial Class Form1
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents LcarsCalender1 As LCARS.Controls.LCARSCalender
 
 End Class
