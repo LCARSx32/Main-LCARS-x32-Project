@@ -214,11 +214,13 @@ Module modSpeech
         End If
     End Sub
 
+    'TODO: Replace these three functions with a dictionary or two
     Public Function getCommandAlias(ByVal commandAlias As String) As String
         Dim returnCommand As String = commandAlias
         For Each myentry As AliasEntry In AliasList
             If myentry.Command.ToLower() = commandAlias.ToLower() Then
                 returnCommand = myentry.CommandAlias.ToLower()
+                Exit For
             End If
         Next
         Return returnCommand
@@ -227,8 +229,9 @@ Module modSpeech
     Public Function getCommandName(ByVal commandAlias As String) As String
         Dim returnCommand As String = commandAlias
         For Each myentry As AliasEntry In AliasList
-            If myentry.CommandAlias = commandAlias Then
+            If String.Compare(myentry.CommandAlias, commandAlias, True) = 0 Then
                 returnCommand = myentry.Command.ToLower()
+                Exit For
             End If
         Next
         Return returnCommand
