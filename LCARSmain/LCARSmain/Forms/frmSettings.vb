@@ -69,12 +69,7 @@ Public Class frmSettings
         Dim beeping As Boolean = Boolean.Parse(GetSetting("LCARS x32", "Application", "ButtonBeep", "False"))
         Dim shellPath As String = ""
 
-        cbBeeping.Lit = beeping
-        If cbBeeping.Lit Then
-            cbBeeping.SideText = "ON"
-        Else
-            cbBeeping.SideText = "OFF"
-        End If
+        lstSounds.DataSource = LCARSSound.sounds
 
         If System.Environment.OSVersion.Platform = PlatformID.Win32NT Then
             '2000 - Current
@@ -325,23 +320,6 @@ Public Class frmSettings
         MainScreen(screenIndex) = 3
     End Sub
 
-
-    Private Sub cbBeeping_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbBeeping.Click
-
-        cbBeeping.Lit = Not cbBeeping.Lit
-
-        If cbBeeping.Lit Then
-            cbBeeping.SideText = "ON"
-        Else
-            cbBeeping.SideText = "OFF"
-        End If
-
-        SaveSetting("LCARS x32", "Application", "ButtonBeep", cbBeeping.Lit)
-
-
-        SetBeeping(cbBeeping.Lit)
-    End Sub
-
     Private Sub sbExitMyComp_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbExitMyComp.Click
         Me.Close()
     End Sub
@@ -549,17 +527,6 @@ Public Class frmSettings
         If lstLanguages.SelectedIndex > -1 Then
             LanguageFileName(screenIndex) = lstLanguages.SelectedItem & ".lng"
             curBusiness(screenIndex).loadLanguage()
-        End If
-    End Sub
-
-    Private Sub fbChangeSound_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbChangeSound.Click
-        Dim myFileSelect As New LCARSexplorer.frmFileSelect(Application.StartupPath, ".wav,", "Select a sound file")
-        myFileSelect.ShowDialog()
-        If myFileSelect.Result = Windows.Forms.DialogResult.OK Then
-            If System.IO.File.Exists(myFileSelect.ReturnPath) Then
-                SaveSetting("LCARS X32", "Application", "ButtonSound", myFileSelect.ReturnPath)
-                txtSoundPath.Text = "Button sound path: " & myFileSelect.ReturnPath
-            End If
         End If
     End Sub
 
@@ -995,5 +962,70 @@ Public Class frmSettings
         fbWallpaper.RedAlert = LCARS.LCARSalert.Normal
         fbMainScreen.RedAlert = LCARS.LCARSalert.Normal
         fbLanguage.RedAlert = LCARS.LCARSalert.White
+    End Sub
+
+    Dim soundEditing As Boolean = False
+    Dim soundLoading As Boolean = False
+
+    Private Sub lstSounds_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lstSounds.SelectedIndexChanged
+        If soundEditing Then Return
+        soundLoading = True
+        Dim s As LCARSSound = CType(lstSounds.SelectedItem, LCARSSound)
+        sbSoundEnabled.Lit = s.Enabled
+        lstSoundResources.BeginUpdate()
+        lstSoundResources.Items.Clear()
+        If s.CanUseResource Then
+            For Each key As String In LCARSSound.ResourceDict.Keys
+                lstSoundResources.Items.Add(key)
+            Next
+        Else
+            lstSoundResources.Items.Add("DEFAULT")
+        End If
+        lstSoundResources.Items.Add("OTHER FILE")
+        Dim path As String = s.Path
+        If path.StartsWith("RESOURCE:") Then
+            txtSoundPath.Visible = False
+            fbChangeSound.Visible = False
+            Dim f As String = path.Substring(9)
+            lstSoundResources.SelectedItem = f
+        Else
+            txtSoundPath.Visible = True
+            fbChangeSound.Visible = True
+            txtSoundPath.Text = path
+            If path = "DEFAULT" Then
+                lstSoundResources.SelectedIndex = 0
+            Else
+                lstSoundResources.SelectedIndex = lstSoundResources.Items.Count - 1
+            End If
+        End If
+        lstSoundResources.EndUpdate()
+        soundLoading = False
+    End Sub
+
+    Private Sub sbSoundEnabled_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbSoundEnabled.Click
+        soundEditing = True
+        sbSoundEnabled.Lit = Not sbSoundEnabled.Lit
+        CType(lstSounds.SelectedItem, LCARSSound).Enabled = sbSoundEnabled.Lit
+        lstSounds.RefreshItem(lstSounds.SelectedIndex)
+        soundEditing = False
+    End Sub
+
+    Private Sub fbChangeSound_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbChangeSound.Click
+        Dim myFileSelect As New LCARSexplorer.frmFileSelect(Application.StartupPath, ".wav,", "Select a sound file")
+        myFileSelect.ShowDialog()
+        If myFileSelect.Result = Windows.Forms.DialogResult.OK Then
+            If System.IO.File.Exists(myFileSelect.ReturnPath) Then
+                txtSoundPath.Text = "Button sound path: " & myFileSelect.ReturnPath
+            Else
+                MsgBox("Invalid file selected")
+            End If
+        End If
+    End Sub
+
+    Private Sub lstSoundResources_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lstSoundResources.SelectedIndexChanged
+        If soundLoading Then Return
+        If lstSoundResources.SelectedIndex = lstSoundResources.Items.Count - 1 Then
+            fbChangeSound_Click(sender, e)
+        End If
     End Sub
 End Class

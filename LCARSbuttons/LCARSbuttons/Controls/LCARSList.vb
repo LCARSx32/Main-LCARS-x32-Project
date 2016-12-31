@@ -114,5 +114,9 @@ Namespace Controls
                 Me.Invalidate()
             End Set
         End Property
+
+        Public Shadows Sub RefreshItem(ByVal index As Integer)
+            MyBase.RefreshItem(index)
+        End Sub
     End Class
 End Namespace
