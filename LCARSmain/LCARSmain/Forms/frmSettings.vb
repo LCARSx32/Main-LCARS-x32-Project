@@ -989,13 +989,15 @@ Public Class frmSettings
             Dim f As String = path.Substring(9)
             lstSoundResources.SelectedItem = f
         Else
-            txtSoundPath.Visible = True
-            fbChangeSound.Visible = True
-            txtSoundPath.Text = path
             If path = "DEFAULT" Then
+                txtSoundPath.Visible = False
+                fbChangeSound.Visible = False
                 lstSoundResources.SelectedIndex = 0
             Else
                 lstSoundResources.SelectedIndex = lstSoundResources.Items.Count - 1
+                txtSoundPath.Visible = True
+                fbChangeSound.Visible = True
+                txtSoundPath.Text = path
             End If
         End If
         lstSoundResources.EndUpdate()
@@ -1013,19 +1015,48 @@ Public Class frmSettings
     Private Sub fbChangeSound_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbChangeSound.Click
         Dim myFileSelect As New LCARSexplorer.frmFileSelect(Application.StartupPath, ".wav,", "Select a sound file")
         myFileSelect.ShowDialog()
+        soundEditing = True
         If myFileSelect.Result = Windows.Forms.DialogResult.OK Then
             If System.IO.File.Exists(myFileSelect.ReturnPath) Then
-                txtSoundPath.Text = "Button sound path: " & myFileSelect.ReturnPath
+                Try
+                    CType(lstSounds.SelectedItem, LCARSSound).Path = myFileSelect.ReturnPath
+                Catch ex As IO.FileNotFoundException
+                    MsgBox("Invalid item selected!")
+                End Try
+                lstSounds.RefreshItem(lstSounds.SelectedIndex)
             Else
                 MsgBox("Invalid file selected")
             End If
         End If
+        soundEditing = False
+        lstSounds_SelectedIndexChanged(sender, e)
     End Sub
 
     Private Sub lstSoundResources_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lstSoundResources.SelectedIndexChanged
         If soundLoading Then Return
+        soundEditing = True
+        Dim path As String
         If lstSoundResources.SelectedIndex = lstSoundResources.Items.Count - 1 Then
+            txtSoundPath.Text = ""
+            txtSoundPath.Visible = True
+            fbChangeSound.Visible = True
             fbChangeSound_Click(sender, e)
+            Return 'fbChangeSound_Click handles everything else
+        ElseIf lstSoundResources.SelectedItem = "DEFAULT" Then
+            txtSoundPath.Visible = False
+            fbChangeSound.Visible = False
+            path = ""
+        Else
+            txtSoundPath.Visible = False
+            fbChangeSound.Visible = False
+            path = "RESOURCE:" & lstSoundResources.SelectedItem
         End If
+        Try
+            CType(lstSounds.SelectedItem, LCARSSound).Path = path
+        Catch ex As IO.FileNotFoundException
+            MsgBox("Invalid item selected!")
+        End Try
+        lstSounds.RefreshItem(lstSounds.SelectedIndex)
+        soundEditing = False
     End Sub
 End Class
