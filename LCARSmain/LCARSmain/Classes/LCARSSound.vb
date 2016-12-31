@@ -19,8 +19,9 @@ Public Class LCARSSound
     Public Shared ListeningSound As New LCARSSound("Listening for command", "ERESOURCE:computer.wav")
     Public Shared ConfirmSound As New LCARSSound("Confirm command", "ERESOURCE:Please_confirm.wav")
     Public Shared TimeoutSound As New LCARSSound("Command timed out", "ERESOURCE:computerbeep_43.wav")
+    Private Shared ButtonSound As New btnBeep()
 
-    Public Shared sounds() As LCARSSound = {ListeningSound, ConfirmSound, TimeoutSound}
+    Public Shared sounds() As LCARSSound = {ButtonSound, ListeningSound, ConfirmSound, TimeoutSound}
 
     Private Shared _resourceDict As Dictionary(Of String, System.IO.UnmanagedMemoryStream) = Nothing
 
@@ -46,7 +47,7 @@ Public Class LCARSSound
         Reload()
     End Sub
 
-    Public Sub Reload()
+    Public Overridable Sub Reload()
         _path = GetSetting("LCARS x32", "Sounds", _name, _dpath)
         _enabled = _path.StartsWith("E")
         _path = _path.Substring(1)
@@ -75,7 +76,7 @@ Public Class LCARSSound
         Return False
     End Function
 
-    Private Sub save()
+    Protected Overridable Sub save()
         'Note: While we're using "D" for disabled, any char will do, as long as it's not "E"
         SaveSetting("LCARS x32", "Sounds", _name, CStr(If(_enabled, "E", "D")) & _path)
     End Sub
@@ -90,7 +91,7 @@ Public Class LCARSSound
         End Get
     End Property
 
-    Public Property Path() As String
+    Public Overridable Property Path() As String
         Get
             Return _path
         End Get
@@ -106,7 +107,7 @@ Public Class LCARSSound
         End Set
     End Property
 
-    Public Property Enabled() As Boolean
+    Public Overridable Property Enabled() As Boolean
         Get
             Return _enabled
         End Get
@@ -117,4 +118,78 @@ Public Class LCARSSound
             save()
         End Set
     End Property
+
+    Public Overrides Function ToString() As String
+        Dim b As New System.Text.StringBuilder
+        b.Append(_name)
+        b.Append(vbTab)
+        If _enabled Then
+            b.Append("Enabled")
+        Else
+            b.Append("Disabled")
+        End If
+        b.Append(vbTab)
+        b.Append(Path)
+        Return b.ToString()
+    End Function
+
+    Public Overridable ReadOnly Property CanUseResource() As Boolean
+        Get
+            Return True
+        End Get
+    End Property
+
+    ''' <summary>
+    ''' Shim class to handle button beep being stored differently
+    ''' </summary>
+    Private Class btnBeep
+        Inherits LCARSSound
+
+        Public Sub New()
+            MyBase.New("Button beep", "")
+        End Sub
+
+        Public Overrides Sub Reload()
+            _path = GetSetting("LCARS X32", "Application", "ButtonSound", "")
+            _enabled = CBool(GetSetting("LCARS x32", "Application", "ButtonBeep", "True"))
+        End Sub
+
+        Protected Overrides Sub save()
+            SaveSetting("LCARS X32", "Application", "ButtonSound", _path)
+            SaveSetting("LCARS x32", "Application", "ButtonBeep", _enabled)
+        End Sub
+
+        Public Overrides Property Path() As String
+            Get
+                If _path = "" Then
+                    Return "DEFAULT"
+                Else
+                    Return _path
+                End If
+            End Get
+            Set(ByVal value As String)
+                If value.StartsWith("RESOURCE:") Then
+                    _path = "DEFAULT"
+                End If
+                _path = value
+                save()
+            End Set
+        End Property
+
+        Public Overrides ReadOnly Property CanUseResource() As Boolean
+            Get
+                Return False
+            End Get
+        End Property
+
+        Public Overrides Property Enabled() As Boolean
+            Get
+                Return MyBase.Enabled
+            End Get
+            Set(ByVal value As Boolean)
+                MyBase.Enabled = value
+                SetBeeping(value)
+            End Set
+        End Property
+    End Class
 End Class
