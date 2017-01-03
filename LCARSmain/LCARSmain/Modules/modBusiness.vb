@@ -489,6 +489,8 @@ public Class modBusiness
         AddHandler myAlertListButton.Click, AddressOf myAlertListButton_Click
         ReDim ProgDir(-1)
 
+        setDoubleBuffered(myClock)
+
         MyPrograms.Clear()
         MyPrograms = GetAllPrograms
         loadProgList()

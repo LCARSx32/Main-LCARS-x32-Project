@@ -782,4 +782,12 @@ Public Enum SetWindowPosFlags As UInteger
             New Rectangle(newBounds.Location - displayOffset, _
                           newBounds.Size)
     End Sub
+
+    Public Sub setDoubleBuffered(ByVal c As Control)
+        Dim prop As Reflection.PropertyInfo = _
+        GetType(Control).GetProperty("DoubleBuffered", _
+                                     Reflection.BindingFlags.NonPublic Or _
+                                     Reflection.BindingFlags.Instance)
+        prop.SetValue(c, True, Nothing)
+    End Sub
 End Module
