@@ -37,12 +37,9 @@ Public Class frmMainscreen4
 
     Private Sub frmMainscreen3_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Me.Bounds = Screen.AllScreens(myBusiness.ScreenIndex).Bounds
-        '  Me.WindowState = FormWindowState.Maximized
         Me.Show()
 
         Application.DoEvents()
-        'AddHandler modBusiness.programsPageDataChanged, AddressOf programDataChanged
-
 
         myBusiness.mainTimer.Enabled = True
         isInit = True
@@ -62,14 +59,14 @@ Public Class frmMainscreen4
 
                 MainWidth = pnlMainBar.Width
 
-                mainHeight = Screen.AllScreens(myBusiness.ScreenIndex).Bounds.Height - (myStartMenu.Bottom + 12)
+                mainHeight = Screen.AllScreens(myBusiness.ScreenIndex).Bounds.Height - (myStartMenu.Bottom + 6)
                 mainLeft = 0
                 mainTop = myStartMenu.Bottom + 6
 
-                If myBusiness.progShowing And myBusiness.userButtonsShowing = False Then
+                If myBusiness.progShowing And Not myBusiness.userButtonsShowing Then
                     MainWidth = pnlMainBar.Width - (pnlProgs.Right + 6)
                     mainLeft = pnlProgs.Right + 6
-                ElseIf myBusiness.userButtonsShowing And myBusiness.progShowing = False Then
+                ElseIf myBusiness.userButtonsShowing And Not myBusiness.progShowing Then
                     MainWidth = gridUserButtons.Left - 6
                     mainLeft = 0
                 ElseIf myBusiness.userButtonsShowing And myBusiness.progShowing Then
@@ -95,19 +92,7 @@ Public Class frmMainscreen4
 
                 pnlMainBar.Visible = True
 
-                Dim myRegion As Region = New Region(New RectangleF(0, 0, Me.Width, Me.Height))
-                Try
-                    Dim mainRect As New Rectangle
-                    mainRect.X = pnlMainBar.Left + pnlMain.Left
-                    mainRect.Y = pnlMainBar.Top + pnlMain.Top
-                    mainRect.Width = pnlMain.Width
-                    mainRect.Height = pnlMain.Height
-
-                    myRegion.Exclude(mainRect)
-                    Me.Region = myRegion
-                Catch
-                End Try
-
+                UpdateRegion()
             End If
 
         End If
