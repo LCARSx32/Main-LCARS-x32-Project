@@ -86,14 +86,12 @@ Public Class frmMainscreen2
         If abExpand.ArrowDirection = LCARS.LCARSarrowDirection.Up Then
             pnlTopPanel.Visible = False
 
-            fbTL.Visible = True
             sbTL.Visible = True
-            fbTL.BringToFront()
-            myBusiness.myClock = fbTL
+            myBusiness.myClock = sbTL
 
 
-            pnlApps.Top = 5
-            pnlTray.Top = 5
+            pnlApps.Top = 0
+            pnlTray.Top = 0
 
             pnlMainBar.Top = pnlApps.Top + pnlApps.Height + 6
             pnlMainBar.Height = Me.ClientRectangle.Height - pnlMainBar.Top
@@ -107,7 +105,6 @@ Public Class frmMainscreen2
             pnlApps.Width = pnlTray.Left - pnlApps.Left
 
         Else
-            fbTL.Visible = False
             sbTL.Visible = False
             myBusiness.myClock = Me.myClock
 
@@ -137,7 +134,7 @@ Public Class frmMainscreen2
             If myBusiness.progShowing Then
                 myRect.X = pnlProgs.Right + 6
             Else
-                myRect.X = 6
+                myRect.X = 0
             End If
 
             If myBusiness.userButtonsShowing Then
