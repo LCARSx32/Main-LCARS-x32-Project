@@ -42,8 +42,7 @@ Public Class frmMainscreen1
 
 
         isInit = True
-        pnlMainBar.Top = 130
-        pnlMainBar.Height = Screen.AllScreens(myBusiness.ScreenIndex).Bounds.Height - 130
+
         pnlMainBar_Resize(New Object, New System.EventArgs)
         myBusiness.mainTimer.Enabled = True
     End Sub
@@ -53,8 +52,8 @@ Public Class frmMainscreen1
             fbBlock.Visible = False
             elbStart.Visible = True
             Application.DoEvents()
-            pnlMainContainer.Width = Me.Width - 309
-            pnlMainContainer.Left = 309
+            pnlMainContainer.Width = Me.Width - pnlStart.Width
+            pnlMainContainer.Left = pnlStart.Width
             pnlStart.BringToFront()
         Else
             elbStart.Visible = False
@@ -93,8 +92,8 @@ Public Class frmMainscreen1
             ArrowButton1.ArrowDirection = LCARS.LCARSarrowDirection.Down
             myBusiness.myClock = fbClock
         Else
-            pnlMainBar.Top = 130
-            pnlMainBar.Height = Me.Height - 130
+            pnlMainBar.Top = Elbow2.Bottom + 6
+            pnlMainBar.Height = Me.Height - Elbow2.Bottom - 6
             myClock.Visible = True
             ArrowButton1.ArrowDirection = LCARS.LCARSarrowDirection.Up
             myBusiness.myClock = myClock
@@ -130,13 +129,13 @@ Public Class frmMainscreen1
         If isInit = True Then
             Dim myRect As New Rectangle
 
-            myRect.Location = New Point(119, 40)
-            myRect.Size = New Size(pnlMainBar.Width - 127, pnlMainBar.Height - 48)
+            myRect.Location = New Point(fbStartFill.Width + 6, FlatButton11.Bottom + 6)
+            myRect.Size = New Size(pnlMainBar.Width - fbStartFill.Width - 6, pnlMainBar.Height - myRect.Top)
 
             If myBusiness.userButtonsShowing Then
-                myRect.Width = (gridUserButtons.Left - pnlMain.Left) - 10
+                myRect.Width -= gridUserButtons.Width + 6
             Else
-                myRect.Width = (pnlMainContainer.Width - pnlMain.Left - 10)
+                myRect.Width = (pnlMainContainer.Width - pnlMain.Left)
             End If
 
             pnlMain.Bounds = myRect
