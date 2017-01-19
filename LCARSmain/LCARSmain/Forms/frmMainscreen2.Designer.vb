@@ -102,7 +102,6 @@ Partial Class frmMainscreen2
         Me.Elbow7 = New LCARS.Controls.Elbow
         Me.Elbow1 = New LCARS.Controls.Elbow
         Me.FlatButton3 = New LCARS.Controls.FlatButton
-        Me.tmrGame = New System.Windows.Forms.Timer(Me.components)
         Me.pnlTray = New System.Windows.Forms.Panel
         Me.HideTrayButton = New LCARS.Controls.ArrowButton
         Me.ShowTrayButton = New LCARS.Controls.HalfPillButton
@@ -1193,9 +1192,6 @@ Partial Class frmMainscreen2
         Me.Elbow2.TabIndex = 17
         Me.Elbow2.Tag = "2"
         '
-        'tmrAutoHide
-        '
-        '
         'pnlTopPanel
         '
         Me.pnlTopPanel.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
@@ -1861,10 +1857,6 @@ Partial Class frmMainscreen2
         Me.FlatButton3.TabIndex = 45
         Me.FlatButton3.Tag = "5"
         '
-        'tmrGame
-        '
-        Me.tmrGame.Interval = 10
-        '
         'pnlTray
         '
         Me.pnlTray.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -2034,7 +2026,6 @@ Partial Class frmMainscreen2
     Friend WithEvents gridUserButtons As LCARS.Controls.ButtonGrid
     Friend WithEvents tmrAutoHide As System.Windows.Forms.Timer
     Friend WithEvents pnlTopPanel As System.Windows.Forms.Panel
-    Friend WithEvents tmrGame As System.Windows.Forms.Timer
     Friend WithEvents fbProgBack As LCARS.Controls.FlatButton
     Friend WithEvents fbProgramPages As LCARS.Controls.FlatButton
     Friend WithEvents abProgsNext As LCARS.Controls.ArrowButton

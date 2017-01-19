@@ -120,7 +120,4 @@
   <metadata name="tmrAutoHide.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>19, 16</value>
   </metadata>
-  <metadata name="tmrGame.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>116, 20</value>
-  </metadata>
 </root>
