@@ -1167,12 +1167,12 @@ Retry:
     Public Sub launchProcessOnScreen(ByVal myProcess As Process)
         myProcess.Start()
         Dim myID As Integer = myProcess.Id
-
+        Dim startTime As Date = Now
         Do Until myProcess.MainWindowHandle <> 0
-            If Now.Subtract(myProcess.StartTime) > New TimeSpan(0, 0, 15) Then
+            If Now.Subtract(startTime) > New TimeSpan(0, 0, 15) Then
                 Exit Do
             Else
-                myProcess = Process.GetProcessById(myID)
+                myProcess.Refresh()
                 Application.DoEvents()
             End If
         Loop
