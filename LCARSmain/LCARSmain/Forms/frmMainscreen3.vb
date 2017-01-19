@@ -21,7 +21,6 @@ Public Class frmMainscreen3
 
     Private Sub frmMainscreen3_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Me.Bounds = Screen.AllScreens(modBusiness.ScreenIndex).Bounds
-        '  Me.WindowState = FormWindowState.Maximized
         Me.Show()
 
         Application.DoEvents()
@@ -56,17 +55,9 @@ Public Class frmMainscreen3
                     mainLeft = pnlProgs.Right + 6
                 End If
 
-                'If ProgShowing Then
-                '    MainWidth -= pnlProgs.Right + 7 'pnlUserButtons.Right - (pnlProgs.Right + 10)
-                '    mainLeft = pnlProgs.Right + 10
-                'End If
-
-                'If UserButtonsShowing Then
-                '    MainWidth -= pnlUserButtons.Width + 10
-                'End If
-
-                pnlMain.Top = 32
-                pnlMain.Height = Me.Height - 64
+                'We can use pnlProgs because it's anchored.
+                pnlMain.Top = pnlProgs.Top
+                pnlMain.Height = pnlProgs.Height
                 pnlMain.Width = MainWidth
                 pnlMain.Left = mainLeft
 
@@ -149,7 +140,7 @@ Public Class frmMainscreen3
         End If
     End Sub
 
-    Private Sub StandardButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles StandardButton1.Click
+    Private Sub StandardButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         myStartMenu.doClick(sender, e)
     End Sub
 

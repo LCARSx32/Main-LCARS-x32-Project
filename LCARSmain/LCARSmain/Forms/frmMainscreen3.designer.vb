@@ -23,10 +23,18 @@ Partial Class frmMainscreen3
         Dim LcarScolor1 As LCARS.LCARScolor = New LCARS.LCARScolor
         Dim LcarScolor2 As LCARS.LCARScolor = New LCARS.LCARScolor
         Me.pnlMainBar = New System.Windows.Forms.Panel
-        Me.Panel2 = New System.Windows.Forms.Panel
+        Me.pnlMain = New System.Windows.Forms.Panel
+        Me.pnlApps = New System.Windows.Forms.Panel
+        Me.pnlTray = New System.Windows.Forms.Panel
+        Me.pnlProgs = New System.Windows.Forms.Panel
+        Me.pnlBatt = New System.Windows.Forms.Panel
+        Me.lblBatt = New System.Windows.Forms.Label
+        Me.lblPowerSource = New System.Windows.Forms.Label
+        Me.tmrAutoHide = New System.Windows.Forms.Timer(Me.components)
+        Me.HalfPillButton2 = New LCARS.Controls.HalfPillButton
+        Me.HalfPillButton1 = New LCARS.Controls.HalfPillButton
         Me.myClock = New LCARS.Controls.FlatButton
         Me.myStartMenu = New LCARS.Controls.FlatButton
-        Me.pnlMain = New System.Windows.Forms.Panel
         Me.FlatButton5 = New LCARS.Controls.FlatButton
         Me.StandardButton4 = New LCARS.Controls.StandardButton
         Me.myHelp = New LCARS.Controls.FlatButton
@@ -34,18 +42,12 @@ Partial Class frmMainscreen3
         Me.FlatButton4 = New LCARS.Controls.FlatButton
         Me.mySpeech = New LCARS.Controls.FlatButton
         Me.myUserButtons = New LCARS.Controls.FlatButton
-        Me.pnlApps = New System.Windows.Forms.Panel
-        Me.Panel1 = New System.Windows.Forms.Panel
-        Me.pnlTray = New System.Windows.Forms.Panel
         Me.HideTrayButton = New LCARS.Controls.ArrowButton
         Me.showTrayButton = New LCARS.Controls.FlatButton
-        Me.StandardButton2 = New LCARS.Controls.StandardButton
         Me.myButtonManager = New LCARS.Controls.FlatButton
-        Me.pnlProgs = New System.Windows.Forms.Panel
         Me.myAlertListButton = New LCARS.Controls.ArrowButton
         Me.FlatButton2 = New LCARS.Controls.FlatButton
         Me.FlatButton6 = New LCARS.Controls.FlatButton
-        Me.pnlBatt = New System.Windows.Forms.Panel
         Me.fbBatt8 = New LCARS.Controls.FlatButton
         Me.fbBatt10 = New LCARS.Controls.FlatButton
         Me.fbBatt9 = New LCARS.Controls.FlatButton
@@ -63,8 +65,6 @@ Partial Class frmMainscreen3
         Me.Elbow8 = New LCARS.Controls.Elbow
         Me.Elbow9 = New LCARS.Controls.Elbow
         Me.Elbow7 = New LCARS.Controls.Elbow
-        Me.lblBatt = New System.Windows.Forms.Label
-        Me.lblPowerSource = New System.Windows.Forms.Label
         Me.myMusic = New LCARS.Controls.FlatButton
         Me.myVideos = New LCARS.Controls.FlatButton
         Me.myPictures = New LCARS.Controls.FlatButton
@@ -88,9 +88,7 @@ Partial Class frmMainscreen3
         Me.myProgsBack = New LCARS.Controls.ArrowButton
         Me.Elbow1 = New LCARS.Controls.Elbow
         Me.gridUserButtons = New LCARS.Controls.ButtonGrid
-        Me.StandardButton1 = New LCARS.Controls.StandardButton
         Me.StandardButton3 = New LCARS.Controls.StandardButton
-        Me.tmrAutoHide = New System.Windows.Forms.Timer(Me.components)
         Me.pnlMainBar.SuspendLayout()
         Me.pnlTray.SuspendLayout()
         Me.pnlProgs.SuspendLayout()
@@ -102,7 +100,8 @@ Partial Class frmMainscreen3
         Me.pnlMainBar.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pnlMainBar.Controls.Add(Me.Panel2)
+        Me.pnlMainBar.Controls.Add(Me.HalfPillButton2)
+        Me.pnlMainBar.Controls.Add(Me.HalfPillButton1)
         Me.pnlMainBar.Controls.Add(Me.myClock)
         Me.pnlMainBar.Controls.Add(Me.myStartMenu)
         Me.pnlMainBar.Controls.Add(Me.pnlMain)
@@ -114,13 +113,10 @@ Partial Class frmMainscreen3
         Me.pnlMainBar.Controls.Add(Me.mySpeech)
         Me.pnlMainBar.Controls.Add(Me.myUserButtons)
         Me.pnlMainBar.Controls.Add(Me.pnlApps)
-        Me.pnlMainBar.Controls.Add(Me.Panel1)
         Me.pnlMainBar.Controls.Add(Me.pnlTray)
-        Me.pnlMainBar.Controls.Add(Me.StandardButton2)
         Me.pnlMainBar.Controls.Add(Me.myButtonManager)
         Me.pnlMainBar.Controls.Add(Me.pnlProgs)
         Me.pnlMainBar.Controls.Add(Me.gridUserButtons)
-        Me.pnlMainBar.Controls.Add(Me.StandardButton1)
         Me.pnlMainBar.Controls.Add(Me.StandardButton3)
         Me.pnlMainBar.Location = New System.Drawing.Point(0, 0)
         Me.pnlMainBar.Name = "pnlMainBar"
@@ -128,251 +124,25 @@ Partial Class frmMainscreen3
         Me.pnlMainBar.TabIndex = 0
         Me.pnlMainBar.Tag = "2"
         '
-        'Panel2
-        '
-        Me.Panel2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel2.Location = New System.Drawing.Point(705, 737)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(6, 65)
-        Me.Panel2.TabIndex = 81
-        '
-        'myClock
-        '
-        Me.myClock.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.myClock.AutoEllipsis = False
-        Me.myClock.Beeping = False
-        Me.myClock.ButtonText = "LOADING CLOCK"
-        Me.myClock.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
-        Me.myClock.ButtonTextHeight = -1
-        Me.myClock.Clickable = False
-        Me.myClock.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
-        Me.myClock.CustomAlertColor = System.Drawing.Color.Empty
-        Me.myClock.Data = Nothing
-        Me.myClock.Data2 = Nothing
-        Me.myClock.FlashInterval = 500
-        Me.myClock.holdDraw = False
-        Me.myClock.Lit = True
-        Me.myClock.Location = New System.Drawing.Point(618, 3)
-        Me.myClock.Name = "myClock"
-        Me.myClock.RedAlert = LCARS.LCARSalert.Normal
-        Me.myClock.Size = New System.Drawing.Size(170, 23)
-        Me.myClock.TabIndex = 69
-        Me.myClock.Tag = "1"
-        Me.myClock.Text = "LOADING CLOCK"
-        '
-        'myStartMenu
-        '
-        Me.myStartMenu.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.myStartMenu.AutoEllipsis = False
-        Me.myStartMenu.Beeping = False
-        Me.myStartMenu.ButtonText = "PROGRAMS"
-        Me.myStartMenu.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
-        Me.myStartMenu.ButtonTextHeight = 14
-        Me.myStartMenu.Clickable = True
-        Me.myStartMenu.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.myStartMenu.CustomAlertColor = System.Drawing.Color.Empty
-        Me.myStartMenu.Data = Nothing
-        Me.myStartMenu.Data2 = Nothing
-        Me.myStartMenu.FlashInterval = 500
-        Me.myStartMenu.holdDraw = False
-        Me.myStartMenu.Lit = True
-        Me.myStartMenu.Location = New System.Drawing.Point(38, 734)
-        Me.myStartMenu.Name = "myStartMenu"
-        Me.myStartMenu.RedAlert = LCARS.LCARSalert.Normal
-        Me.myStartMenu.Size = New System.Drawing.Size(115, 25)
-        Me.myStartMenu.TabIndex = 69
-        Me.myStartMenu.Tag = "0"
-        Me.myStartMenu.Text = "PROGRAMS"
-        '
         'pnlMain
         '
         Me.pnlMain.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom), System.Windows.Forms.AnchorStyles)
         Me.pnlMain.BackColor = System.Drawing.Color.Black
         Me.pnlMain.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.pnlMain.Location = New System.Drawing.Point(376, 32)
+        Me.pnlMain.Location = New System.Drawing.Point(367, 29)
         Me.pnlMain.Name = "pnlMain"
-        Me.pnlMain.Size = New System.Drawing.Size(199, 696)
+        Me.pnlMain.Size = New System.Drawing.Size(213, 704)
         Me.pnlMain.TabIndex = 75
-        '
-        'FlatButton5
-        '
-        Me.FlatButton5.AutoEllipsis = False
-        Me.FlatButton5.Beeping = True
-        Me.FlatButton5.ButtonText = "LCARS"
-        Me.FlatButton5.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.FlatButton5.ButtonTextHeight = 14
-        Me.FlatButton5.Clickable = False
-        Me.FlatButton5.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
-        Me.FlatButton5.CustomAlertColor = System.Drawing.Color.Empty
-        Me.FlatButton5.Data = Nothing
-        Me.FlatButton5.Data2 = Nothing
-        Me.FlatButton5.FlashInterval = 500
-        Me.FlatButton5.holdDraw = False
-        Me.FlatButton5.Lit = True
-        Me.FlatButton5.Location = New System.Drawing.Point(32, 3)
-        Me.FlatButton5.Name = "FlatButton5"
-        Me.FlatButton5.RedAlert = LCARS.LCARSalert.Normal
-        Me.FlatButton5.Size = New System.Drawing.Size(247, 23)
-        Me.FlatButton5.TabIndex = 87
-        Me.FlatButton5.Text = "LCARS"
-        '
-        'StandardButton4
-        '
-        Me.StandardButton4.AutoEllipsis = False
-        Me.StandardButton4.Beeping = True
-        Me.StandardButton4.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
-        Me.StandardButton4.ButtonText = ""
-        Me.StandardButton4.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.StandardButton4.ButtonTextHeight = 14
-        Me.StandardButton4.Clickable = False
-        Me.StandardButton4.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
-        Me.StandardButton4.CustomAlertColor = System.Drawing.Color.Empty
-        Me.StandardButton4.Data = Nothing
-        Me.StandardButton4.Data2 = Nothing
-        Me.StandardButton4.FlashInterval = 500
-        Me.StandardButton4.holdDraw = False
-        Me.StandardButton4.Lit = True
-        Me.StandardButton4.Location = New System.Drawing.Point(5, 3)
-        Me.StandardButton4.Name = "StandardButton4"
-        Me.StandardButton4.RedAlert = LCARS.LCARSalert.Normal
-        Me.StandardButton4.Size = New System.Drawing.Size(84, 23)
-        Me.StandardButton4.TabIndex = 86
-        Me.StandardButton4.Tag = "0"
-        '
-        'myHelp
-        '
-        Me.myHelp.AutoEllipsis = False
-        Me.myHelp.Beeping = False
-        Me.myHelp.ButtonText = "HELP"
-        Me.myHelp.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.myHelp.ButtonTextHeight = 14
-        Me.myHelp.Clickable = True
-        Me.myHelp.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.myHelp.CustomAlertColor = System.Drawing.Color.Empty
-        Me.myHelp.Data = Nothing
-        Me.myHelp.Data2 = Nothing
-        Me.myHelp.FlashInterval = 500
-        Me.myHelp.holdDraw = False
-        Me.myHelp.Lit = True
-        Me.myHelp.Location = New System.Drawing.Point(411, 3)
-        Me.myHelp.Name = "myHelp"
-        Me.myHelp.RedAlert = LCARS.LCARSalert.Normal
-        Me.myHelp.Size = New System.Drawing.Size(60, 23)
-        Me.myHelp.TabIndex = 83
-        Me.myHelp.Tag = "1"
-        Me.myHelp.Text = "HELP"
-        '
-        'myOSK
-        '
-        Me.myOSK.AutoEllipsis = False
-        Me.myOSK.Beeping = False
-        Me.myOSK.ButtonText = "OSK"
-        Me.myOSK.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.myOSK.ButtonTextHeight = 14
-        Me.myOSK.Clickable = True
-        Me.myOSK.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.myOSK.CustomAlertColor = System.Drawing.Color.Empty
-        Me.myOSK.Data = Nothing
-        Me.myOSK.Data2 = Nothing
-        Me.myOSK.FlashInterval = 500
-        Me.myOSK.holdDraw = False
-        Me.myOSK.Lit = True
-        Me.myOSK.Location = New System.Drawing.Point(345, 3)
-        Me.myOSK.Name = "myOSK"
-        Me.myOSK.RedAlert = LCARS.LCARSalert.Normal
-        Me.myOSK.Size = New System.Drawing.Size(60, 23)
-        Me.myOSK.TabIndex = 83
-        Me.myOSK.Tag = "1"
-        Me.myOSK.Text = "OSK"
-        '
-        'FlatButton4
-        '
-        Me.FlatButton4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.FlatButton4.AutoEllipsis = False
-        Me.FlatButton4.Beeping = True
-        Me.FlatButton4.ButtonText = "LCARS"
-        Me.FlatButton4.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.FlatButton4.ButtonTextHeight = 14
-        Me.FlatButton4.Clickable = False
-        Me.FlatButton4.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
-        Me.FlatButton4.CustomAlertColor = System.Drawing.Color.Empty
-        Me.FlatButton4.Data = Nothing
-        Me.FlatButton4.Data2 = Nothing
-        Me.FlatButton4.FlashInterval = 500
-        Me.FlatButton4.holdDraw = False
-        Me.FlatButton4.Lit = True
-        Me.FlatButton4.Location = New System.Drawing.Point(477, 3)
-        Me.FlatButton4.Name = "FlatButton4"
-        Me.FlatButton4.RedAlert = LCARS.LCARSalert.Normal
-        Me.FlatButton4.Size = New System.Drawing.Size(143, 23)
-        Me.FlatButton4.TabIndex = 81
-        Me.FlatButton4.Text = "LCARS"
-        '
-        'mySpeech
-        '
-        Me.mySpeech.AutoEllipsis = False
-        Me.mySpeech.Beeping = False
-        Me.mySpeech.ButtonText = "SPEECH"
-        Me.mySpeech.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.mySpeech.ButtonTextHeight = 14
-        Me.mySpeech.Clickable = True
-        Me.mySpeech.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.mySpeech.CustomAlertColor = System.Drawing.Color.Empty
-        Me.mySpeech.Data = Nothing
-        Me.mySpeech.Data2 = Nothing
-        Me.mySpeech.FlashInterval = 500
-        Me.mySpeech.holdDraw = False
-        Me.mySpeech.Lit = False
-        Me.mySpeech.Location = New System.Drawing.Point(285, 3)
-        Me.mySpeech.Name = "mySpeech"
-        Me.mySpeech.RedAlert = LCARS.LCARSalert.Normal
-        Me.mySpeech.Size = New System.Drawing.Size(54, 23)
-        Me.mySpeech.TabIndex = 84
-        Me.mySpeech.Tag = "1"
-        Me.mySpeech.Text = "SPEECH"
-        '
-        'myUserButtons
-        '
-        Me.myUserButtons.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.myUserButtons.AutoEllipsis = False
-        Me.myUserButtons.Beeping = False
-        Me.myUserButtons.ButtonText = "PERSONAL"
-        Me.myUserButtons.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
-        Me.myUserButtons.ButtonTextHeight = 14
-        Me.myUserButtons.Clickable = True
-        Me.myUserButtons.Color = LCARS.LCARScolorStyles.NavigationFunction
-        Me.myUserButtons.CustomAlertColor = System.Drawing.Color.Empty
-        Me.myUserButtons.Data = Nothing
-        Me.myUserButtons.Data2 = Nothing
-        Me.myUserButtons.FlashInterval = 500
-        Me.myUserButtons.holdDraw = False
-        Me.myUserButtons.Lit = True
-        Me.myUserButtons.Location = New System.Drawing.Point(581, 737)
-        Me.myUserButtons.Name = "myUserButtons"
-        Me.myUserButtons.RedAlert = LCARS.LCARSalert.Normal
-        Me.myUserButtons.Size = New System.Drawing.Size(124, 23)
-        Me.myUserButtons.TabIndex = 68
-        Me.myUserButtons.Tag = "1"
-        Me.myUserButtons.Text = "PERSONAL"
         '
         'pnlApps
         '
         Me.pnlApps.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlApps.BackColor = System.Drawing.Color.Black
-        Me.pnlApps.Location = New System.Drawing.Point(159, 734)
+        Me.pnlApps.Location = New System.Drawing.Point(156, 739)
         Me.pnlApps.Name = "pnlApps"
-        Me.pnlApps.Size = New System.Drawing.Size(290, 25)
+        Me.pnlApps.Size = New System.Drawing.Size(293, 25)
         Me.pnlApps.TabIndex = 77
-        '
-        'Panel1
-        '
-        Me.Panel1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Panel1.Location = New System.Drawing.Point(32, 734)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(6, 65)
-        Me.Panel1.TabIndex = 80
         '
         'pnlTray
         '
@@ -380,105 +150,10 @@ Partial Class frmMainscreen3
         Me.pnlTray.BackColor = System.Drawing.Color.Black
         Me.pnlTray.Controls.Add(Me.HideTrayButton)
         Me.pnlTray.Controls.Add(Me.showTrayButton)
-        Me.pnlTray.Location = New System.Drawing.Point(455, 736)
+        Me.pnlTray.Location = New System.Drawing.Point(455, 739)
         Me.pnlTray.Name = "pnlTray"
-        Me.pnlTray.Size = New System.Drawing.Size(120, 28)
+        Me.pnlTray.Size = New System.Drawing.Size(120, 25)
         Me.pnlTray.TabIndex = 79
-        '
-        'HideTrayButton
-        '
-        Me.HideTrayButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.HideTrayButton.ArrowDirection = LCARS.LCARSarrowDirection.Right
-        Me.HideTrayButton.AutoEllipsis = Nothing
-        Me.HideTrayButton.Beeping = True
-        Me.HideTrayButton.ButtonText = ""
-        Me.HideTrayButton.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.HideTrayButton.ButtonTextHeight = 14
-        Me.HideTrayButton.Clickable = True
-        Me.HideTrayButton.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.HideTrayButton.CustomAlertColor = System.Drawing.Color.Empty
-        Me.HideTrayButton.Data = Nothing
-        Me.HideTrayButton.Data2 = Nothing
-        Me.HideTrayButton.FlashInterval = 500
-        Me.HideTrayButton.holdDraw = False
-        Me.HideTrayButton.Lit = True
-        Me.HideTrayButton.Location = New System.Drawing.Point(95, 0)
-        Me.HideTrayButton.Name = "HideTrayButton"
-        Me.HideTrayButton.RedAlert = LCARS.LCARSalert.Normal
-        Me.HideTrayButton.Size = New System.Drawing.Size(25, 23)
-        Me.HideTrayButton.TabIndex = 1
-        Me.HideTrayButton.Visible = False
-        '
-        'showTrayButton
-        '
-        Me.showTrayButton.AutoEllipsis = False
-        Me.showTrayButton.Beeping = True
-        Me.showTrayButton.ButtonText = "SHOW TRAY ICONS"
-        Me.showTrayButton.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
-        Me.showTrayButton.ButtonTextHeight = 14
-        Me.showTrayButton.Clickable = True
-        Me.showTrayButton.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.showTrayButton.CustomAlertColor = System.Drawing.Color.Empty
-        Me.showTrayButton.Data = Nothing
-        Me.showTrayButton.Data2 = Nothing
-        Me.showTrayButton.FlashInterval = 500
-        Me.showTrayButton.holdDraw = False
-        Me.showTrayButton.Lit = True
-        Me.showTrayButton.Location = New System.Drawing.Point(0, 0)
-        Me.showTrayButton.Name = "showTrayButton"
-        Me.showTrayButton.RedAlert = LCARS.LCARSalert.Normal
-        Me.showTrayButton.Size = New System.Drawing.Size(120, 23)
-        Me.showTrayButton.TabIndex = 2
-        Me.showTrayButton.Text = "SHOW TRAY ICONS"
-        '
-        'StandardButton2
-        '
-        Me.StandardButton2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.StandardButton2.AutoEllipsis = False
-        Me.StandardButton2.Beeping = True
-        Me.StandardButton2.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
-        Me.StandardButton2.ButtonText = ""
-        Me.StandardButton2.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.StandardButton2.ButtonTextHeight = 14
-        Me.StandardButton2.Clickable = False
-        Me.StandardButton2.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
-        Me.StandardButton2.CustomAlertColor = System.Drawing.Color.Empty
-        Me.StandardButton2.Data = Nothing
-        Me.StandardButton2.Data2 = Nothing
-        Me.StandardButton2.FlashInterval = 500
-        Me.StandardButton2.holdDraw = False
-        Me.StandardButton2.Lit = True
-        Me.StandardButton2.Location = New System.Drawing.Point(665, 737)
-        Me.StandardButton2.Name = "StandardButton2"
-        Me.StandardButton2.RedAlert = LCARS.LCARSalert.Normal
-        Me.StandardButton2.Size = New System.Drawing.Size(130, 23)
-        Me.StandardButton2.TabIndex = 81
-        Me.StandardButton2.Tag = "0"
-        '
-        'myButtonManager
-        '
-        Me.myButtonManager.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.myButtonManager.AutoEllipsis = False
-        Me.myButtonManager.Beeping = False
-        Me.myButtonManager.ButtonText = "MANAGE YOUR PROGRAMS"
-        Me.myButtonManager.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.myButtonManager.ButtonTextHeight = 14
-        Me.myButtonManager.Clickable = True
-        Me.myButtonManager.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.myButtonManager.CustomAlertColor = System.Drawing.Color.Empty
-        Me.myButtonManager.Data = Nothing
-        Me.myButtonManager.Data2 = Nothing
-        Me.myButtonManager.FlashInterval = 500
-        Me.myButtonManager.holdDraw = False
-        Me.myButtonManager.Lit = True
-        Me.myButtonManager.Location = New System.Drawing.Point(581, 711)
-        Me.myButtonManager.Name = "myButtonManager"
-        Me.myButtonManager.RedAlert = LCARS.LCARSalert.Normal
-        Me.myButtonManager.Size = New System.Drawing.Size(214, 20)
-        Me.myButtonManager.TabIndex = 70
-        Me.myButtonManager.Tag = "5"
-        Me.myButtonManager.Text = "MANAGE YOUR PROGRAMS"
-        Me.myButtonManager.Visible = False
         '
         'pnlProgs
         '
@@ -510,12 +185,389 @@ Partial Class frmMainscreen3
         Me.pnlProgs.Controls.Add(Me.myProgsNext)
         Me.pnlProgs.Controls.Add(Me.myProgsBack)
         Me.pnlProgs.Controls.Add(Me.Elbow1)
-        Me.pnlProgs.Location = New System.Drawing.Point(6, 32)
+        Me.pnlProgs.Location = New System.Drawing.Point(0, 29)
         Me.pnlProgs.Name = "pnlProgs"
-        Me.pnlProgs.Size = New System.Drawing.Size(364, 696)
+        Me.pnlProgs.Size = New System.Drawing.Size(364, 704)
         Me.pnlProgs.TabIndex = 73
         Me.pnlProgs.Tag = "9"
         Me.pnlProgs.Visible = False
+        '
+        'pnlBatt
+        '
+        Me.pnlBatt.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pnlBatt.Controls.Add(Me.fbBatt8)
+        Me.pnlBatt.Controls.Add(Me.fbBatt10)
+        Me.pnlBatt.Controls.Add(Me.fbBatt9)
+        Me.pnlBatt.Controls.Add(Me.fbBatt7)
+        Me.pnlBatt.Controls.Add(Me.fbBatt6)
+        Me.pnlBatt.Controls.Add(Me.fbBattTop)
+        Me.pnlBatt.Controls.Add(Me.fbBatt3)
+        Me.pnlBatt.Controls.Add(Me.fbBatt5)
+        Me.pnlBatt.Controls.Add(Me.fbBatt4)
+        Me.pnlBatt.Controls.Add(Me.fbBatt2)
+        Me.pnlBatt.Controls.Add(Me.fbBatt1)
+        Me.pnlBatt.Controls.Add(Me.FlatButton19)
+        Me.pnlBatt.Controls.Add(Me.Elbow6)
+        Me.pnlBatt.Controls.Add(Me.FlatButton15)
+        Me.pnlBatt.Controls.Add(Me.Elbow8)
+        Me.pnlBatt.Controls.Add(Me.Elbow9)
+        Me.pnlBatt.Controls.Add(Me.Elbow7)
+        Me.pnlBatt.Controls.Add(Me.lblBatt)
+        Me.pnlBatt.Controls.Add(Me.lblPowerSource)
+        Me.pnlBatt.Location = New System.Drawing.Point(257, 104)
+        Me.pnlBatt.Name = "pnlBatt"
+        Me.pnlBatt.Size = New System.Drawing.Size(87, 80)
+        Me.pnlBatt.TabIndex = 77
+        Me.pnlBatt.Tag = ""
+        '
+        'lblBatt
+        '
+        Me.lblBatt.AutoSize = True
+        Me.lblBatt.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblBatt.ForeColor = System.Drawing.Color.Orange
+        Me.lblBatt.Location = New System.Drawing.Point(51, 57)
+        Me.lblBatt.Name = "lblBatt"
+        Me.lblBatt.Size = New System.Drawing.Size(38, 21)
+        Me.lblBatt.TabIndex = 35
+        Me.lblBatt.Tag = "3"
+        Me.lblBatt.Text = "100%"
+        '
+        'lblPowerSource
+        '
+        Me.lblPowerSource.AutoSize = True
+        Me.lblPowerSource.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPowerSource.ForeColor = System.Drawing.Color.Orange
+        Me.lblPowerSource.Location = New System.Drawing.Point(0, 57)
+        Me.lblPowerSource.Name = "lblPowerSource"
+        Me.lblPowerSource.Size = New System.Drawing.Size(57, 21)
+        Me.lblPowerSource.TabIndex = 36
+        Me.lblPowerSource.Tag = "3"
+        Me.lblPowerSource.Text = "AUXILIARY"
+        '
+        'HalfPillButton2
+        '
+        Me.HalfPillButton2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.HalfPillButton2.Beeping = False
+        Me.HalfPillButton2.ButtonStyle = LCARS.Controls.HalfPillButton.LCARSbuttonStyles.PillLeft
+        Me.HalfPillButton2.ButtonText = ""
+        Me.HalfPillButton2.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.HalfPillButton2.ButtonTextHeight = 14
+        Me.HalfPillButton2.Clickable = False
+        Me.HalfPillButton2.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
+        Me.HalfPillButton2.CustomAlertColor = System.Drawing.Color.Empty
+        Me.HalfPillButton2.Data = Nothing
+        Me.HalfPillButton2.Data2 = Nothing
+        Me.HalfPillButton2.FlashInterval = 500
+        Me.HalfPillButton2.holdDraw = False
+        Me.HalfPillButton2.Lit = True
+        Me.HalfPillButton2.Location = New System.Drawing.Point(0, 739)
+        Me.HalfPillButton2.Name = "HalfPillButton2"
+        Me.HalfPillButton2.RedAlert = LCARS.LCARSalert.Normal
+        Me.HalfPillButton2.Size = New System.Drawing.Size(29, 25)
+        Me.HalfPillButton2.TabIndex = 88
+        '
+        'HalfPillButton1
+        '
+        Me.HalfPillButton1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.HalfPillButton1.Beeping = False
+        Me.HalfPillButton1.ButtonStyle = LCARS.Controls.HalfPillButton.LCARSbuttonStyles.PillRight
+        Me.HalfPillButton1.ButtonText = ""
+        Me.HalfPillButton1.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.HalfPillButton1.ButtonTextHeight = 14
+        Me.HalfPillButton1.Clickable = False
+        Me.HalfPillButton1.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
+        Me.HalfPillButton1.CustomAlertColor = System.Drawing.Color.Empty
+        Me.HalfPillButton1.Data = Nothing
+        Me.HalfPillButton1.Data2 = Nothing
+        Me.HalfPillButton1.FlashInterval = 500
+        Me.HalfPillButton1.holdDraw = False
+        Me.HalfPillButton1.Lit = True
+        Me.HalfPillButton1.Location = New System.Drawing.Point(711, 739)
+        Me.HalfPillButton1.Name = "HalfPillButton1"
+        Me.HalfPillButton1.RedAlert = LCARS.LCARSalert.Normal
+        Me.HalfPillButton1.Size = New System.Drawing.Size(89, 25)
+        Me.HalfPillButton1.TabIndex = 88
+        '
+        'myClock
+        '
+        Me.myClock.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.myClock.AutoEllipsis = False
+        Me.myClock.Beeping = False
+        Me.myClock.ButtonText = "LOADING CLOCK"
+        Me.myClock.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
+        Me.myClock.ButtonTextHeight = -1
+        Me.myClock.Clickable = False
+        Me.myClock.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
+        Me.myClock.CustomAlertColor = System.Drawing.Color.Empty
+        Me.myClock.Data = Nothing
+        Me.myClock.Data2 = Nothing
+        Me.myClock.FlashInterval = 500
+        Me.myClock.holdDraw = False
+        Me.myClock.Lit = True
+        Me.myClock.Location = New System.Drawing.Point(618, 0)
+        Me.myClock.Name = "myClock"
+        Me.myClock.RedAlert = LCARS.LCARSalert.Normal
+        Me.myClock.Size = New System.Drawing.Size(170, 23)
+        Me.myClock.TabIndex = 69
+        Me.myClock.Tag = "1"
+        Me.myClock.Text = "LOADING CLOCK"
+        '
+        'myStartMenu
+        '
+        Me.myStartMenu.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.myStartMenu.AutoEllipsis = False
+        Me.myStartMenu.Beeping = False
+        Me.myStartMenu.ButtonText = "PROGRAMS"
+        Me.myStartMenu.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
+        Me.myStartMenu.ButtonTextHeight = 14
+        Me.myStartMenu.Clickable = True
+        Me.myStartMenu.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.myStartMenu.CustomAlertColor = System.Drawing.Color.Empty
+        Me.myStartMenu.Data = Nothing
+        Me.myStartMenu.Data2 = Nothing
+        Me.myStartMenu.FlashInterval = 500
+        Me.myStartMenu.holdDraw = False
+        Me.myStartMenu.Lit = True
+        Me.myStartMenu.Location = New System.Drawing.Point(35, 739)
+        Me.myStartMenu.Name = "myStartMenu"
+        Me.myStartMenu.RedAlert = LCARS.LCARSalert.Normal
+        Me.myStartMenu.Size = New System.Drawing.Size(115, 25)
+        Me.myStartMenu.TabIndex = 69
+        Me.myStartMenu.Tag = "0"
+        Me.myStartMenu.Text = "PROGRAMS"
+        '
+        'FlatButton5
+        '
+        Me.FlatButton5.AutoEllipsis = False
+        Me.FlatButton5.Beeping = True
+        Me.FlatButton5.ButtonText = "LCARS"
+        Me.FlatButton5.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.FlatButton5.ButtonTextHeight = 14
+        Me.FlatButton5.Clickable = False
+        Me.FlatButton5.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
+        Me.FlatButton5.CustomAlertColor = System.Drawing.Color.Empty
+        Me.FlatButton5.Data = Nothing
+        Me.FlatButton5.Data2 = Nothing
+        Me.FlatButton5.FlashInterval = 500
+        Me.FlatButton5.holdDraw = False
+        Me.FlatButton5.Lit = True
+        Me.FlatButton5.Location = New System.Drawing.Point(28, 0)
+        Me.FlatButton5.Name = "FlatButton5"
+        Me.FlatButton5.RedAlert = LCARS.LCARSalert.Normal
+        Me.FlatButton5.Size = New System.Drawing.Size(247, 23)
+        Me.FlatButton5.TabIndex = 87
+        Me.FlatButton5.Text = "LCARS"
+        '
+        'StandardButton4
+        '
+        Me.StandardButton4.AutoEllipsis = False
+        Me.StandardButton4.Beeping = True
+        Me.StandardButton4.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
+        Me.StandardButton4.ButtonText = ""
+        Me.StandardButton4.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.StandardButton4.ButtonTextHeight = 14
+        Me.StandardButton4.Clickable = False
+        Me.StandardButton4.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
+        Me.StandardButton4.CustomAlertColor = System.Drawing.Color.Empty
+        Me.StandardButton4.Data = Nothing
+        Me.StandardButton4.Data2 = Nothing
+        Me.StandardButton4.FlashInterval = 500
+        Me.StandardButton4.holdDraw = False
+        Me.StandardButton4.Lit = True
+        Me.StandardButton4.Location = New System.Drawing.Point(1, 0)
+        Me.StandardButton4.Name = "StandardButton4"
+        Me.StandardButton4.RedAlert = LCARS.LCARSalert.Normal
+        Me.StandardButton4.Size = New System.Drawing.Size(84, 23)
+        Me.StandardButton4.TabIndex = 86
+        Me.StandardButton4.Tag = "0"
+        '
+        'myHelp
+        '
+        Me.myHelp.AutoEllipsis = False
+        Me.myHelp.Beeping = False
+        Me.myHelp.ButtonText = "HELP"
+        Me.myHelp.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.myHelp.ButtonTextHeight = 14
+        Me.myHelp.Clickable = True
+        Me.myHelp.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.myHelp.CustomAlertColor = System.Drawing.Color.Empty
+        Me.myHelp.Data = Nothing
+        Me.myHelp.Data2 = Nothing
+        Me.myHelp.FlashInterval = 500
+        Me.myHelp.holdDraw = False
+        Me.myHelp.Lit = True
+        Me.myHelp.Location = New System.Drawing.Point(407, 0)
+        Me.myHelp.Name = "myHelp"
+        Me.myHelp.RedAlert = LCARS.LCARSalert.Normal
+        Me.myHelp.Size = New System.Drawing.Size(60, 23)
+        Me.myHelp.TabIndex = 83
+        Me.myHelp.Tag = "1"
+        Me.myHelp.Text = "HELP"
+        '
+        'myOSK
+        '
+        Me.myOSK.AutoEllipsis = False
+        Me.myOSK.Beeping = False
+        Me.myOSK.ButtonText = "OSK"
+        Me.myOSK.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.myOSK.ButtonTextHeight = 14
+        Me.myOSK.Clickable = True
+        Me.myOSK.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.myOSK.CustomAlertColor = System.Drawing.Color.Empty
+        Me.myOSK.Data = Nothing
+        Me.myOSK.Data2 = Nothing
+        Me.myOSK.FlashInterval = 500
+        Me.myOSK.holdDraw = False
+        Me.myOSK.Lit = True
+        Me.myOSK.Location = New System.Drawing.Point(341, 0)
+        Me.myOSK.Name = "myOSK"
+        Me.myOSK.RedAlert = LCARS.LCARSalert.Normal
+        Me.myOSK.Size = New System.Drawing.Size(60, 23)
+        Me.myOSK.TabIndex = 83
+        Me.myOSK.Tag = "1"
+        Me.myOSK.Text = "OSK"
+        '
+        'FlatButton4
+        '
+        Me.FlatButton4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.FlatButton4.AutoEllipsis = False
+        Me.FlatButton4.Beeping = True
+        Me.FlatButton4.ButtonText = "LCARS"
+        Me.FlatButton4.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.FlatButton4.ButtonTextHeight = 14
+        Me.FlatButton4.Clickable = False
+        Me.FlatButton4.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
+        Me.FlatButton4.CustomAlertColor = System.Drawing.Color.Empty
+        Me.FlatButton4.Data = Nothing
+        Me.FlatButton4.Data2 = Nothing
+        Me.FlatButton4.FlashInterval = 500
+        Me.FlatButton4.holdDraw = False
+        Me.FlatButton4.Lit = True
+        Me.FlatButton4.Location = New System.Drawing.Point(473, 0)
+        Me.FlatButton4.Name = "FlatButton4"
+        Me.FlatButton4.RedAlert = LCARS.LCARSalert.Normal
+        Me.FlatButton4.Size = New System.Drawing.Size(147, 23)
+        Me.FlatButton4.TabIndex = 81
+        Me.FlatButton4.Text = "LCARS"
+        '
+        'mySpeech
+        '
+        Me.mySpeech.AutoEllipsis = False
+        Me.mySpeech.Beeping = False
+        Me.mySpeech.ButtonText = "SPEECH"
+        Me.mySpeech.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.mySpeech.ButtonTextHeight = 14
+        Me.mySpeech.Clickable = True
+        Me.mySpeech.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.mySpeech.CustomAlertColor = System.Drawing.Color.Empty
+        Me.mySpeech.Data = Nothing
+        Me.mySpeech.Data2 = Nothing
+        Me.mySpeech.FlashInterval = 500
+        Me.mySpeech.holdDraw = False
+        Me.mySpeech.Lit = False
+        Me.mySpeech.Location = New System.Drawing.Point(281, 0)
+        Me.mySpeech.Name = "mySpeech"
+        Me.mySpeech.RedAlert = LCARS.LCARSalert.Normal
+        Me.mySpeech.Size = New System.Drawing.Size(54, 23)
+        Me.mySpeech.TabIndex = 84
+        Me.mySpeech.Tag = "1"
+        Me.mySpeech.Text = "SPEECH"
+        '
+        'myUserButtons
+        '
+        Me.myUserButtons.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.myUserButtons.AutoEllipsis = False
+        Me.myUserButtons.Beeping = False
+        Me.myUserButtons.ButtonText = "PERSONAL"
+        Me.myUserButtons.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
+        Me.myUserButtons.ButtonTextHeight = 14
+        Me.myUserButtons.Clickable = True
+        Me.myUserButtons.Color = LCARS.LCARScolorStyles.NavigationFunction
+        Me.myUserButtons.CustomAlertColor = System.Drawing.Color.Empty
+        Me.myUserButtons.Data = Nothing
+        Me.myUserButtons.Data2 = Nothing
+        Me.myUserButtons.FlashInterval = 500
+        Me.myUserButtons.holdDraw = False
+        Me.myUserButtons.Lit = True
+        Me.myUserButtons.Location = New System.Drawing.Point(581, 739)
+        Me.myUserButtons.Name = "myUserButtons"
+        Me.myUserButtons.RedAlert = LCARS.LCARSalert.Normal
+        Me.myUserButtons.Size = New System.Drawing.Size(124, 25)
+        Me.myUserButtons.TabIndex = 68
+        Me.myUserButtons.Tag = "1"
+        Me.myUserButtons.Text = "PERSONAL"
+        '
+        'HideTrayButton
+        '
+        Me.HideTrayButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.HideTrayButton.ArrowDirection = LCARS.LCARSarrowDirection.Right
+        Me.HideTrayButton.AutoEllipsis = Nothing
+        Me.HideTrayButton.Beeping = True
+        Me.HideTrayButton.ButtonText = ""
+        Me.HideTrayButton.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.HideTrayButton.ButtonTextHeight = 14
+        Me.HideTrayButton.Clickable = True
+        Me.HideTrayButton.Color = LCARS.LCARScolorStyles.MiscFunction
+        Me.HideTrayButton.CustomAlertColor = System.Drawing.Color.Empty
+        Me.HideTrayButton.Data = Nothing
+        Me.HideTrayButton.Data2 = Nothing
+        Me.HideTrayButton.FlashInterval = 500
+        Me.HideTrayButton.holdDraw = False
+        Me.HideTrayButton.Lit = True
+        Me.HideTrayButton.Location = New System.Drawing.Point(95, 0)
+        Me.HideTrayButton.Name = "HideTrayButton"
+        Me.HideTrayButton.RedAlert = LCARS.LCARSalert.Normal
+        Me.HideTrayButton.Size = New System.Drawing.Size(25, 25)
+        Me.HideTrayButton.TabIndex = 1
+        Me.HideTrayButton.Visible = False
+        '
+        'showTrayButton
+        '
+        Me.showTrayButton.AutoEllipsis = False
+        Me.showTrayButton.Beeping = True
+        Me.showTrayButton.ButtonText = "SHOW TRAY ICONS"
+        Me.showTrayButton.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
+        Me.showTrayButton.ButtonTextHeight = 14
+        Me.showTrayButton.Clickable = True
+        Me.showTrayButton.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.showTrayButton.CustomAlertColor = System.Drawing.Color.Empty
+        Me.showTrayButton.Data = Nothing
+        Me.showTrayButton.Data2 = Nothing
+        Me.showTrayButton.FlashInterval = 500
+        Me.showTrayButton.holdDraw = False
+        Me.showTrayButton.Lit = True
+        Me.showTrayButton.Location = New System.Drawing.Point(0, 0)
+        Me.showTrayButton.Name = "showTrayButton"
+        Me.showTrayButton.RedAlert = LCARS.LCARSalert.Normal
+        Me.showTrayButton.Size = New System.Drawing.Size(120, 25)
+        Me.showTrayButton.TabIndex = 2
+        Me.showTrayButton.Text = "SHOW TRAY ICONS"
+        '
+        'myButtonManager
+        '
+        Me.myButtonManager.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.myButtonManager.AutoEllipsis = False
+        Me.myButtonManager.Beeping = False
+        Me.myButtonManager.ButtonText = "MANAGE YOUR PROGRAMS"
+        Me.myButtonManager.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.myButtonManager.ButtonTextHeight = 14
+        Me.myButtonManager.Clickable = True
+        Me.myButtonManager.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.myButtonManager.CustomAlertColor = System.Drawing.Color.Empty
+        Me.myButtonManager.Data = Nothing
+        Me.myButtonManager.Data2 = Nothing
+        Me.myButtonManager.FlashInterval = 500
+        Me.myButtonManager.holdDraw = False
+        Me.myButtonManager.Lit = True
+        Me.myButtonManager.Location = New System.Drawing.Point(586, 713)
+        Me.myButtonManager.Name = "myButtonManager"
+        Me.myButtonManager.RedAlert = LCARS.LCARSalert.Normal
+        Me.myButtonManager.Size = New System.Drawing.Size(214, 20)
+        Me.myButtonManager.TabIndex = 70
+        Me.myButtonManager.Tag = "5"
+        Me.myButtonManager.Text = "MANAGE YOUR PROGRAMS"
+        Me.myButtonManager.Visible = False
         '
         'myAlertListButton
         '
@@ -534,7 +586,7 @@ Partial Class frmMainscreen3
         Me.myAlertListButton.FlashInterval = 500
         Me.myAlertListButton.holdDraw = False
         Me.myAlertListButton.Lit = True
-        Me.myAlertListButton.Location = New System.Drawing.Point(335, 560)
+        Me.myAlertListButton.Location = New System.Drawing.Point(335, 568)
         Me.myAlertListButton.Name = "myAlertListButton"
         Me.myAlertListButton.RedAlert = LCARS.LCARSalert.Normal
         Me.myAlertListButton.Size = New System.Drawing.Size(26, 25)
@@ -560,7 +612,7 @@ Partial Class frmMainscreen3
         Me.FlatButton2.Location = New System.Drawing.Point(237, 31)
         Me.FlatButton2.Name = "FlatButton2"
         Me.FlatButton2.RedAlert = LCARS.LCARSalert.Normal
-        Me.FlatButton2.Size = New System.Drawing.Size(124, 59)
+        Me.FlatButton2.Size = New System.Drawing.Size(124, 67)
         Me.FlatButton2.TabIndex = 73
         Me.FlatButton2.Tag = "5"
         Me.FlatButton2.Text = "LCARS"
@@ -581,40 +633,12 @@ Partial Class frmMainscreen3
         Me.FlatButton6.FlashInterval = 500
         Me.FlatButton6.holdDraw = False
         Me.FlatButton6.Lit = True
-        Me.FlatButton6.Location = New System.Drawing.Point(237, 337)
+        Me.FlatButton6.Location = New System.Drawing.Point(237, 345)
         Me.FlatButton6.Name = "FlatButton6"
         Me.FlatButton6.RedAlert = LCARS.LCARSalert.Normal
         Me.FlatButton6.Size = New System.Drawing.Size(124, 12)
         Me.FlatButton6.TabIndex = 78
         Me.FlatButton6.Tag = "5"
-        '
-        'pnlBatt
-        '
-        Me.pnlBatt.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pnlBatt.Controls.Add(Me.fbBatt8)
-        Me.pnlBatt.Controls.Add(Me.fbBatt10)
-        Me.pnlBatt.Controls.Add(Me.fbBatt9)
-        Me.pnlBatt.Controls.Add(Me.fbBatt7)
-        Me.pnlBatt.Controls.Add(Me.fbBatt6)
-        Me.pnlBatt.Controls.Add(Me.fbBattTop)
-        Me.pnlBatt.Controls.Add(Me.fbBatt3)
-        Me.pnlBatt.Controls.Add(Me.fbBatt5)
-        Me.pnlBatt.Controls.Add(Me.fbBatt4)
-        Me.pnlBatt.Controls.Add(Me.fbBatt2)
-        Me.pnlBatt.Controls.Add(Me.fbBatt1)
-        Me.pnlBatt.Controls.Add(Me.FlatButton19)
-        Me.pnlBatt.Controls.Add(Me.Elbow6)
-        Me.pnlBatt.Controls.Add(Me.FlatButton15)
-        Me.pnlBatt.Controls.Add(Me.Elbow8)
-        Me.pnlBatt.Controls.Add(Me.Elbow9)
-        Me.pnlBatt.Controls.Add(Me.Elbow7)
-        Me.pnlBatt.Controls.Add(Me.lblBatt)
-        Me.pnlBatt.Controls.Add(Me.lblPowerSource)
-        Me.pnlBatt.Location = New System.Drawing.Point(257, 96)
-        Me.pnlBatt.Name = "pnlBatt"
-        Me.pnlBatt.Size = New System.Drawing.Size(87, 80)
-        Me.pnlBatt.TabIndex = 77
-        Me.pnlBatt.Tag = ""
         '
         'fbBatt8
         '
@@ -1006,30 +1030,6 @@ Partial Class frmMainscreen3
         Me.Elbow7.TabIndex = 64
         Me.Elbow7.Tag = "0"
         '
-        'lblBatt
-        '
-        Me.lblBatt.AutoSize = True
-        Me.lblBatt.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblBatt.ForeColor = System.Drawing.Color.Orange
-        Me.lblBatt.Location = New System.Drawing.Point(51, 57)
-        Me.lblBatt.Name = "lblBatt"
-        Me.lblBatt.Size = New System.Drawing.Size(38, 21)
-        Me.lblBatt.TabIndex = 35
-        Me.lblBatt.Tag = "3"
-        Me.lblBatt.Text = "100%"
-        '
-        'lblPowerSource
-        '
-        Me.lblPowerSource.AutoSize = True
-        Me.lblPowerSource.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPowerSource.ForeColor = System.Drawing.Color.Orange
-        Me.lblPowerSource.Location = New System.Drawing.Point(0, 57)
-        Me.lblPowerSource.Name = "lblPowerSource"
-        Me.lblPowerSource.Size = New System.Drawing.Size(57, 21)
-        Me.lblPowerSource.TabIndex = 36
-        Me.lblPowerSource.Tag = "3"
-        Me.lblPowerSource.Text = "AUXILIARY"
-        '
         'myMusic
         '
         Me.myMusic.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -1046,7 +1046,7 @@ Partial Class frmMainscreen3
         Me.myMusic.FlashInterval = 500
         Me.myMusic.holdDraw = False
         Me.myMusic.Lit = True
-        Me.myMusic.Location = New System.Drawing.Point(237, 275)
+        Me.myMusic.Location = New System.Drawing.Point(237, 283)
         Me.myMusic.Name = "myMusic"
         Me.myMusic.RedAlert = LCARS.LCARSalert.Normal
         Me.myMusic.Size = New System.Drawing.Size(124, 25)
@@ -1070,7 +1070,7 @@ Partial Class frmMainscreen3
         Me.myVideos.FlashInterval = 500
         Me.myVideos.holdDraw = False
         Me.myVideos.Lit = True
-        Me.myVideos.Location = New System.Drawing.Point(237, 306)
+        Me.myVideos.Location = New System.Drawing.Point(237, 314)
         Me.myVideos.Name = "myVideos"
         Me.myVideos.RedAlert = LCARS.LCARSalert.Normal
         Me.myVideos.Size = New System.Drawing.Size(124, 25)
@@ -1094,7 +1094,7 @@ Partial Class frmMainscreen3
         Me.myPictures.FlashInterval = 500
         Me.myPictures.holdDraw = False
         Me.myPictures.Lit = True
-        Me.myPictures.Location = New System.Drawing.Point(237, 244)
+        Me.myPictures.Location = New System.Drawing.Point(237, 252)
         Me.myPictures.Name = "myPictures"
         Me.myPictures.RedAlert = LCARS.LCARSalert.Normal
         Me.myPictures.Size = New System.Drawing.Size(124, 25)
@@ -1118,7 +1118,7 @@ Partial Class frmMainscreen3
         Me.myDocuments.FlashInterval = 500
         Me.myDocuments.holdDraw = False
         Me.myDocuments.Lit = True
-        Me.myDocuments.Location = New System.Drawing.Point(237, 213)
+        Me.myDocuments.Location = New System.Drawing.Point(237, 221)
         Me.myDocuments.Name = "myDocuments"
         Me.myDocuments.RedAlert = LCARS.LCARSalert.Normal
         Me.myDocuments.Size = New System.Drawing.Size(124, 25)
@@ -1142,7 +1142,7 @@ Partial Class frmMainscreen3
         Me.myRun.FlashInterval = 500
         Me.myRun.holdDraw = False
         Me.myRun.Lit = True
-        Me.myRun.Location = New System.Drawing.Point(237, 478)
+        Me.myRun.Location = New System.Drawing.Point(237, 486)
         Me.myRun.Name = "myRun"
         Me.myRun.RedAlert = LCARS.LCARSalert.Normal
         Me.myRun.Size = New System.Drawing.Size(124, 25)
@@ -1166,7 +1166,7 @@ Partial Class frmMainscreen3
         Me.fbWebBrowser.FlashInterval = 500
         Me.fbWebBrowser.holdDraw = False
         Me.fbWebBrowser.Lit = True
-        Me.fbWebBrowser.Location = New System.Drawing.Point(237, 448)
+        Me.fbWebBrowser.Location = New System.Drawing.Point(237, 456)
         Me.fbWebBrowser.Name = "fbWebBrowser"
         Me.fbWebBrowser.RedAlert = LCARS.LCARSalert.Normal
         Me.fbWebBrowser.Size = New System.Drawing.Size(124, 25)
@@ -1190,7 +1190,7 @@ Partial Class frmMainscreen3
         Me.myPhoto.FlashInterval = 500
         Me.myPhoto.holdDraw = False
         Me.myPhoto.Lit = True
-        Me.myPhoto.Location = New System.Drawing.Point(237, 417)
+        Me.myPhoto.Location = New System.Drawing.Point(237, 425)
         Me.myPhoto.Name = "myPhoto"
         Me.myPhoto.RedAlert = LCARS.LCARSalert.Normal
         Me.myPhoto.Size = New System.Drawing.Size(124, 25)
@@ -1207,7 +1207,7 @@ Partial Class frmMainscreen3
         Me.pnlPrograms.ColorsAvailable = LcarScolor1
         Me.pnlPrograms.Location = New System.Drawing.Point(0, 20)
         Me.pnlPrograms.Name = "pnlPrograms"
-        Me.pnlPrograms.Size = New System.Drawing.Size(231, 612)
+        Me.pnlPrograms.Size = New System.Drawing.Size(231, 620)
         Me.pnlPrograms.TabIndex = 23
         '
         'Elbow2
@@ -1230,7 +1230,7 @@ Partial Class frmMainscreen3
         Me.Elbow2.FlashInterval = 500
         Me.Elbow2.holdDraw = False
         Me.Elbow2.Lit = True
-        Me.Elbow2.Location = New System.Drawing.Point(237, 674)
+        Me.Elbow2.Location = New System.Drawing.Point(237, 682)
         Me.Elbow2.Name = "Elbow2"
         Me.Elbow2.RedAlert = LCARS.LCARSalert.Normal
         Me.Elbow2.Size = New System.Drawing.Size(124, 20)
@@ -1253,7 +1253,7 @@ Partial Class frmMainscreen3
         Me.FlatButton1.FlashInterval = 500
         Me.FlatButton1.holdDraw = False
         Me.FlatButton1.Lit = True
-        Me.FlatButton1.Location = New System.Drawing.Point(237, 509)
+        Me.FlatButton1.Location = New System.Drawing.Point(237, 517)
         Me.FlatButton1.Name = "FlatButton1"
         Me.FlatButton1.RedAlert = LCARS.LCARSalert.Normal
         Me.FlatButton1.Size = New System.Drawing.Size(124, 14)
@@ -1276,7 +1276,7 @@ Partial Class frmMainscreen3
         Me.myAlert.FlashInterval = 500
         Me.myAlert.holdDraw = False
         Me.myAlert.Lit = True
-        Me.myAlert.Location = New System.Drawing.Point(237, 560)
+        Me.myAlert.Location = New System.Drawing.Point(237, 568)
         Me.myAlert.Name = "myAlert"
         Me.myAlert.RedAlert = LCARS.LCARSalert.Normal
         Me.myAlert.Size = New System.Drawing.Size(92, 25)
@@ -1300,7 +1300,7 @@ Partial Class frmMainscreen3
         Me.myEngineering.FlashInterval = 500
         Me.myEngineering.holdDraw = False
         Me.myEngineering.Lit = True
-        Me.myEngineering.Location = New System.Drawing.Point(237, 386)
+        Me.myEngineering.Location = New System.Drawing.Point(237, 394)
         Me.myEngineering.Name = "myEngineering"
         Me.myEngineering.RedAlert = LCARS.LCARSalert.Normal
         Me.myEngineering.Size = New System.Drawing.Size(124, 25)
@@ -1324,7 +1324,7 @@ Partial Class frmMainscreen3
         Me.mySettings.FlashInterval = 500
         Me.mySettings.holdDraw = False
         Me.mySettings.Lit = True
-        Me.mySettings.Location = New System.Drawing.Point(237, 355)
+        Me.mySettings.Location = New System.Drawing.Point(237, 363)
         Me.mySettings.Name = "mySettings"
         Me.mySettings.RedAlert = LCARS.LCARSalert.Normal
         Me.mySettings.Size = New System.Drawing.Size(124, 25)
@@ -1348,7 +1348,7 @@ Partial Class frmMainscreen3
         Me.MyComp.FlashInterval = 500
         Me.MyComp.holdDraw = False
         Me.MyComp.Lit = True
-        Me.MyComp.Location = New System.Drawing.Point(237, 182)
+        Me.MyComp.Location = New System.Drawing.Point(237, 190)
         Me.MyComp.Name = "MyComp"
         Me.MyComp.RedAlert = LCARS.LCARSalert.Normal
         Me.MyComp.Size = New System.Drawing.Size(124, 25)
@@ -1372,7 +1372,7 @@ Partial Class frmMainscreen3
         Me.myModeSelect.FlashInterval = 500
         Me.myModeSelect.holdDraw = False
         Me.myModeSelect.Lit = True
-        Me.myModeSelect.Location = New System.Drawing.Point(237, 529)
+        Me.myModeSelect.Location = New System.Drawing.Point(237, 537)
         Me.myModeSelect.Name = "myModeSelect"
         Me.myModeSelect.RedAlert = LCARS.LCARSalert.Normal
         Me.myModeSelect.Size = New System.Drawing.Size(124, 25)
@@ -1396,7 +1396,7 @@ Partial Class frmMainscreen3
         Me.myDeactivate.FlashInterval = 500
         Me.myDeactivate.holdDraw = False
         Me.myDeactivate.Lit = True
-        Me.myDeactivate.Location = New System.Drawing.Point(237, 622)
+        Me.myDeactivate.Location = New System.Drawing.Point(237, 630)
         Me.myDeactivate.Name = "myDeactivate"
         Me.myDeactivate.RedAlert = LCARS.LCARSalert.Normal
         Me.myDeactivate.Size = New System.Drawing.Size(124, 46)
@@ -1420,7 +1420,7 @@ Partial Class frmMainscreen3
         Me.myDestruct.FlashInterval = 500
         Me.myDestruct.holdDraw = False
         Me.myDestruct.Lit = True
-        Me.myDestruct.Location = New System.Drawing.Point(237, 591)
+        Me.myDestruct.Location = New System.Drawing.Point(237, 599)
         Me.myDestruct.Name = "myDestruct"
         Me.myDestruct.RedAlert = LCARS.LCARSalert.Normal
         Me.myDestruct.Size = New System.Drawing.Size(124, 25)
@@ -1445,7 +1445,7 @@ Partial Class frmMainscreen3
         Me.myProgBack.FlashInterval = 500
         Me.myProgBack.holdDraw = False
         Me.myProgBack.Lit = True
-        Me.myProgBack.Location = New System.Drawing.Point(-1, 638)
+        Me.myProgBack.Location = New System.Drawing.Point(-1, 646)
         Me.myProgBack.Name = "myProgBack"
         Me.myProgBack.RedAlert = LCARS.LCARSalert.Normal
         Me.myProgBack.Size = New System.Drawing.Size(232, 30)
@@ -1470,7 +1470,7 @@ Partial Class frmMainscreen3
         Me.fbProgramPages.FlashInterval = 500
         Me.fbProgramPages.holdDraw = False
         Me.fbProgramPages.Lit = True
-        Me.fbProgramPages.Location = New System.Drawing.Point(26, 674)
+        Me.fbProgramPages.Location = New System.Drawing.Point(26, 682)
         Me.fbProgramPages.Name = "fbProgramPages"
         Me.fbProgramPages.RedAlert = LCARS.LCARSalert.Normal
         Me.fbProgramPages.Size = New System.Drawing.Size(179, 20)
@@ -1495,7 +1495,7 @@ Partial Class frmMainscreen3
         Me.myProgsNext.FlashInterval = 500
         Me.myProgsNext.holdDraw = False
         Me.myProgsNext.Lit = True
-        Me.myProgsNext.Location = New System.Drawing.Point(211, 674)
+        Me.myProgsNext.Location = New System.Drawing.Point(211, 682)
         Me.myProgsNext.Name = "myProgsNext"
         Me.myProgsNext.RedAlert = LCARS.LCARSalert.Normal
         Me.myProgsNext.Size = New System.Drawing.Size(20, 20)
@@ -1519,7 +1519,7 @@ Partial Class frmMainscreen3
         Me.myProgsBack.FlashInterval = 500
         Me.myProgsBack.holdDraw = False
         Me.myProgsBack.Lit = True
-        Me.myProgsBack.Location = New System.Drawing.Point(0, 674)
+        Me.myProgsBack.Location = New System.Drawing.Point(0, 682)
         Me.myProgsBack.Name = "myProgsBack"
         Me.myProgsBack.RedAlert = LCARS.LCARSalert.Normal
         Me.myProgsBack.Size = New System.Drawing.Size(20, 20)
@@ -1565,36 +1565,12 @@ Partial Class frmMainscreen3
         Me.gridUserButtons.ControlPadding = 5
         Me.gridUserButtons.ControlSize = New System.Drawing.Size(100, 25)
         Me.gridUserButtons.CurrentPage = 1
-        Me.gridUserButtons.Location = New System.Drawing.Point(581, 32)
+        Me.gridUserButtons.Location = New System.Drawing.Point(586, 29)
         Me.gridUserButtons.MinimumSize = New System.Drawing.Size(105, 30)
         Me.gridUserButtons.Name = "gridUserButtons"
-        Me.gridUserButtons.Size = New System.Drawing.Size(214, 673)
+        Me.gridUserButtons.Size = New System.Drawing.Size(214, 678)
         Me.gridUserButtons.TabIndex = 71
         Me.gridUserButtons.Visible = False
-        '
-        'StandardButton1
-        '
-        Me.StandardButton1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.StandardButton1.AutoEllipsis = False
-        Me.StandardButton1.Beeping = True
-        Me.StandardButton1.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
-        Me.StandardButton1.ButtonText = ""
-        Me.StandardButton1.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.StandardButton1.ButtonTextHeight = 14
-        Me.StandardButton1.Clickable = False
-        Me.StandardButton1.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
-        Me.StandardButton1.CustomAlertColor = System.Drawing.Color.Empty
-        Me.StandardButton1.Data = Nothing
-        Me.StandardButton1.Data2 = Nothing
-        Me.StandardButton1.FlashInterval = 500
-        Me.StandardButton1.holdDraw = False
-        Me.StandardButton1.Lit = True
-        Me.StandardButton1.Location = New System.Drawing.Point(6, 734)
-        Me.StandardButton1.Name = "StandardButton1"
-        Me.StandardButton1.RedAlert = LCARS.LCARSalert.Normal
-        Me.StandardButton1.Size = New System.Drawing.Size(84, 25)
-        Me.StandardButton1.TabIndex = 0
-        Me.StandardButton1.Tag = "0"
         '
         'StandardButton3
         '
@@ -1613,15 +1589,12 @@ Partial Class frmMainscreen3
         Me.StandardButton3.FlashInterval = 500
         Me.StandardButton3.holdDraw = False
         Me.StandardButton3.Lit = True
-        Me.StandardButton3.Location = New System.Drawing.Point(716, 3)
+        Me.StandardButton3.Location = New System.Drawing.Point(716, 0)
         Me.StandardButton3.Name = "StandardButton3"
         Me.StandardButton3.RedAlert = LCARS.LCARSalert.Normal
         Me.StandardButton3.Size = New System.Drawing.Size(84, 23)
         Me.StandardButton3.TabIndex = 85
         Me.StandardButton3.Tag = "0"
-        '
-        'tmrAutoHide
-        '
         '
         'frmMainscreen3
         '
@@ -1665,7 +1638,6 @@ Partial Class frmMainscreen3
     Friend WithEvents Elbow1 As LCARS.Controls.Elbow
     Friend WithEvents FlatButton1 As LCARS.Controls.FlatButton
     Friend WithEvents Elbow2 As LCARS.Controls.Elbow
-    Friend WithEvents StandardButton1 As LCARS.Controls.StandardButton
     Friend WithEvents myPhoto As LCARS.Controls.FlatButton
     Friend WithEvents tmrAutoHide As System.Windows.Forms.Timer
     Friend WithEvents myDocuments As LCARS.Controls.FlatButton
@@ -1679,7 +1651,6 @@ Partial Class frmMainscreen3
     Friend WithEvents myOSK As LCARS.Controls.FlatButton
     Friend WithEvents mySpeech As LCARS.Controls.FlatButton
     Friend WithEvents myClock As LCARS.Controls.FlatButton
-    Friend WithEvents StandardButton2 As LCARS.Controls.StandardButton
     Friend WithEvents showTrayButton As LCARS.Controls.FlatButton
     Friend WithEvents FlatButton5 As LCARS.Controls.FlatButton
     Friend WithEvents StandardButton4 As LCARS.Controls.StandardButton
@@ -1700,8 +1671,6 @@ Partial Class frmMainscreen3
     Friend WithEvents Elbow8 As LCARS.Controls.Elbow
     Friend WithEvents Elbow9 As LCARS.Controls.Elbow
     Friend WithEvents Elbow7 As LCARS.Controls.Elbow
-    Friend WithEvents Panel1 As System.Windows.Forms.Panel
-    Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents StandardButton3 As LCARS.Controls.StandardButton
     Friend WithEvents FlatButton2 As LCARS.Controls.FlatButton
     Friend WithEvents FlatButton6 As LCARS.Controls.FlatButton
@@ -1711,4 +1680,6 @@ Partial Class frmMainscreen3
     Friend WithEvents myRun As LCARS.Controls.FlatButton
     Friend WithEvents myMusic As LCARS.Controls.FlatButton
     Friend WithEvents myAlertListButton As LCARS.Controls.ArrowButton
+    Friend WithEvents HalfPillButton2 As LCARS.Controls.HalfPillButton
+    Friend WithEvents HalfPillButton1 As LCARS.Controls.HalfPillButton
 End Class
