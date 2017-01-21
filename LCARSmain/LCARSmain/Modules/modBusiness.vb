@@ -487,6 +487,7 @@ public Class modBusiness
         AddHandler myForm.FormClosing, AddressOf myForm_Closing
         AddHandler myRun.Click, AddressOf myRun_Click
         AddHandler myAlertListButton.Click, AddressOf myAlertListButton_Click
+        AddHandler myForm.MouseWheel, AddressOf myform_MouseScroll
         ReDim ProgDir(-1)
 
         setDoubleBuffered(myClock)
@@ -1318,5 +1319,14 @@ Retry:
             Return oldArea
         End Get
     End Property
+
+    Public Sub myform_MouseScroll(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)
+        If Not ProgramsPanel.Visible Then Return
+        If e.Delta > 0 Then
+            previousProgPage()
+        Else
+            nextProgPage()
+        End If
+    End Sub
 
 End Class
