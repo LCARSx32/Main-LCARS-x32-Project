@@ -19,9 +19,8 @@ Partial Class frmMainscreen1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
-        Dim LcarScolor3 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor4 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor1 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor2 As LCARS.LCARScolor = New LCARS.LCARScolor
         Me.pnlMainContainer = New System.Windows.Forms.Panel
         Me.myAlertListButton = New LCARS.Controls.ArrowButton
         Me.myClock = New System.Windows.Forms.Label
@@ -87,6 +86,7 @@ Partial Class frmMainscreen1
         Me.ShowTrayButton = New LCARS.Controls.HalfPillButton
         Me.FlatButton1 = New LCARS.Controls.FlatButton
         Me.pnlStart = New System.Windows.Forms.Panel
+        Me.elbStart2 = New LCARS.Controls.Elbow
         Me.fbDesktop = New LCARS.Controls.FlatButton
         Me.fbProgBack = New LCARS.Controls.FlatButton
         Me.fbProgramPages = New LCARS.Controls.FlatButton
@@ -107,8 +107,6 @@ Partial Class frmMainscreen1
         Me.fbWebBrowser = New LCARS.Controls.FlatButton
         Me.myVideos = New LCARS.Controls.FlatButton
         Me.myMusic = New LCARS.Controls.FlatButton
-        Me.tmrAutoHide = New System.Windows.Forms.Timer(Me.components)
-        Me.elbStart2 = New LCARS.Controls.Elbow
         Me.pnlMainContainer.SuspendLayout()
         Me.pnlMainBar.SuspendLayout()
         Me.pnlBatt.SuspendLayout()
@@ -213,7 +211,7 @@ Partial Class frmMainscreen1
         Me.gridUserButtons.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.gridUserButtons.Beeping = False
-        Me.gridUserButtons.ColorsAvailable = LcarScolor3
+        Me.gridUserButtons.ColorsAvailable = LcarScolor1
         Me.gridUserButtons.ControlAddingDirection = LCARS.Controls.ButtonGrid.ControlDirection.Horizontal
         Me.gridUserButtons.ControlPadding = 5
         Me.gridUserButtons.ControlSize = New System.Drawing.Size(100, 25)
@@ -1587,6 +1585,33 @@ Partial Class frmMainscreen1
         Me.pnlStart.Tag = "10"
         Me.pnlStart.Visible = False
         '
+        'elbStart2
+        '
+        Me.elbStart2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.elbStart2.AutoEllipsis = False
+        Me.elbStart2.Beeping = False
+        Me.elbStart2.ButtonHeight = 5
+        Me.elbStart2.ButtonText = ""
+        Me.elbStart2.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.elbStart2.ButtonTextHeight = 5
+        Me.elbStart2.ButtonWidth = 100
+        Me.elbStart2.Clickable = False
+        Me.elbStart2.Color = LCARS.LCARScolorStyles.StaticTan
+        Me.elbStart2.CustomAlertColor = System.Drawing.Color.Empty
+        Me.elbStart2.Data = Nothing
+        Me.elbStart2.Data2 = Nothing
+        Me.elbStart2.ElbowRatio = New System.Drawing.Point(1, 1)
+        Me.elbStart2.ElbowStyle = LCARS.Controls.Elbow.LCARSelbowStyles.LowerRight
+        Me.elbStart2.FlashInterval = 0
+        Me.elbStart2.holdDraw = False
+        Me.elbStart2.Lit = True
+        Me.elbStart2.Location = New System.Drawing.Point(297, 554)
+        Me.elbStart2.Name = "elbStart2"
+        Me.elbStart2.RedAlert = LCARS.LCARSalert.Normal
+        Me.elbStart2.Size = New System.Drawing.Size(113, 46)
+        Me.elbStart2.TabIndex = 44
+        Me.elbStart2.Tag = "0"
+        '
         'fbDesktop
         '
         Me.fbDesktop.AutoEllipsis = False
@@ -1784,7 +1809,7 @@ Partial Class frmMainscreen1
         Me.pnlPrograms.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.pnlPrograms.Beeping = False
-        Me.pnlPrograms.ColorsAvailable = LcarScolor4
+        Me.pnlPrograms.ColorsAvailable = LcarScolor2
         Me.pnlPrograms.Location = New System.Drawing.Point(105, 38)
         Me.pnlPrograms.Name = "pnlPrograms"
         Me.pnlPrograms.Size = New System.Drawing.Size(187, 483)
@@ -2052,33 +2077,6 @@ Partial Class frmMainscreen1
         Me.myMusic.Tag = "5"
         Me.myMusic.Text = "MY MUSIC"
         '
-        'elbStart2
-        '
-        Me.elbStart2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.elbStart2.AutoEllipsis = False
-        Me.elbStart2.Beeping = False
-        Me.elbStart2.ButtonHeight = 5
-        Me.elbStart2.ButtonText = ""
-        Me.elbStart2.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.elbStart2.ButtonTextHeight = 5
-        Me.elbStart2.ButtonWidth = 100
-        Me.elbStart2.Clickable = False
-        Me.elbStart2.Color = LCARS.LCARScolorStyles.StaticTan
-        Me.elbStart2.CustomAlertColor = System.Drawing.Color.Empty
-        Me.elbStart2.Data = Nothing
-        Me.elbStart2.Data2 = Nothing
-        Me.elbStart2.ElbowRatio = New System.Drawing.Point(1, 1)
-        Me.elbStart2.ElbowStyle = LCARS.Controls.Elbow.LCARSelbowStyles.LowerRight
-        Me.elbStart2.FlashInterval = 0
-        Me.elbStart2.holdDraw = False
-        Me.elbStart2.Lit = True
-        Me.elbStart2.Location = New System.Drawing.Point(297, 554)
-        Me.elbStart2.Name = "elbStart2"
-        Me.elbStart2.RedAlert = LCARS.LCARSalert.Normal
-        Me.elbStart2.Size = New System.Drawing.Size(113, 46)
-        Me.elbStart2.TabIndex = 44
-        Me.elbStart2.Tag = "0"
-        '
         'frmMainscreen1
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -2125,7 +2123,6 @@ Partial Class frmMainscreen1
     Friend WithEvents lblPowerSource As System.Windows.Forms.Label
     Friend WithEvents lblBatt As System.Windows.Forms.Label
     Friend WithEvents pnlTray As System.Windows.Forms.Panel
-    Friend WithEvents tmrAutoHide As System.Windows.Forms.Timer
     Friend WithEvents myClock As System.Windows.Forms.Label
     Friend WithEvents Elbow1 As LCARS.Controls.Elbow
     Friend WithEvents Elbow2 As LCARS.Controls.Elbow

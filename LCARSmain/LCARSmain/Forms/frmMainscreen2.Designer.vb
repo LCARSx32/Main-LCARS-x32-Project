@@ -19,9 +19,8 @@ Partial Class frmMainscreen2
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
-        Dim LcarScolor11 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor12 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor1 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor2 As LCARS.LCARScolor = New LCARS.LCARScolor
         Me.pnlProgs = New System.Windows.Forms.Panel
         Me.fbWebBrowser = New LCARS.Controls.FlatButton
         Me.myEngineering = New LCARS.Controls.FlatButton
@@ -39,8 +38,9 @@ Partial Class frmMainscreen2
         Me.abProgsNext = New LCARS.Controls.ArrowButton
         Me.abProgsBack = New LCARS.Controls.ArrowButton
         Me.pnlMainTop = New System.Windows.Forms.Panel
-        Me.mySpeech = New LCARS.Controls.FlatButton
+        Me.FlatButton2 = New LCARS.Controls.FlatButton
         Me.myHelp = New LCARS.Controls.FlatButton
+        Me.mySpeech = New LCARS.Controls.FlatButton
         Me.myOSK = New LCARS.Controls.FlatButton
         Me.fbMainBar = New LCARS.Controls.FlatButton
         Me.pnlApps = New System.Windows.Forms.Panel
@@ -57,11 +57,11 @@ Partial Class frmMainscreen2
         Me.FlatButton1 = New LCARS.Controls.FlatButton
         Me.StandardButton3 = New LCARS.Controls.StandardButton
         Me.pnlMainBar = New System.Windows.Forms.Panel
+        Me.gridUserButtons = New LCARS.Controls.ButtonGrid
         Me.fbUBRight = New LCARS.Controls.FlatButton
         Me.abExpand = New LCARS.Controls.ArrowButton
         Me.myUserButtons = New LCARS.Controls.FlatButton
         Me.fbUBEndcap = New LCARS.Controls.FlatButton
-        Me.gridUserButtons = New LCARS.Controls.ButtonGrid
         Me.myStartMenu = New LCARS.Controls.FlatButton
         Me.myButtonManager = New LCARS.Controls.FlatButton
         Me.fbBarRight = New LCARS.Controls.FlatButton
@@ -70,7 +70,6 @@ Partial Class frmMainscreen2
         Me.fbProgLower = New LCARS.Controls.FlatButton
         Me.pnlMain = New System.Windows.Forms.Panel
         Me.Elbow2 = New LCARS.Controls.Elbow
-        Me.tmrAutoHide = New System.Windows.Forms.Timer(Me.components)
         Me.pnlTopPanel = New System.Windows.Forms.Panel
         Me.pnlUserButtonsElbow = New System.Windows.Forms.Panel
         Me.pnlBatt = New System.Windows.Forms.Panel
@@ -105,7 +104,6 @@ Partial Class frmMainscreen2
         Me.HideTrayButton = New LCARS.Controls.ArrowButton
         Me.ShowTrayButton = New LCARS.Controls.HalfPillButton
         Me.sbTL = New LCARS.Controls.StandardButton
-        Me.FlatButton2 = New LCARS.Controls.FlatButton
         Me.pnlProgs.SuspendLayout()
         Me.pnlMainTop.SuspendLayout()
         Me.pnlMainElbow.SuspendLayout()
@@ -375,7 +373,7 @@ Partial Class frmMainscreen2
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlPrograms.Beeping = False
-        Me.pnlPrograms.ColorsAvailable = LcarScolor11
+        Me.pnlPrograms.ColorsAvailable = LcarScolor1
         Me.pnlPrograms.Location = New System.Drawing.Point(0, 173)
         Me.pnlPrograms.Name = "pnlPrograms"
         Me.pnlPrograms.Size = New System.Drawing.Size(260, 230)
@@ -494,28 +492,25 @@ Partial Class frmMainscreen2
         Me.pnlMainTop.TabIndex = 49
         Me.pnlMainTop.Tag = "11"
         '
-        'mySpeech
+        'FlatButton2
         '
-        Me.mySpeech.AutoEllipsis = False
-        Me.mySpeech.Beeping = False
-        Me.mySpeech.ButtonText = "SPEECH"
-        Me.mySpeech.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.mySpeech.ButtonTextHeight = 14
-        Me.mySpeech.Clickable = True
-        Me.mySpeech.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.mySpeech.CustomAlertColor = System.Drawing.Color.Empty
-        Me.mySpeech.Data = Nothing
-        Me.mySpeech.Data2 = Nothing
-        Me.mySpeech.FlashInterval = 500
-        Me.mySpeech.holdDraw = False
-        Me.mySpeech.Lit = False
-        Me.mySpeech.Location = New System.Drawing.Point(174, 0)
-        Me.mySpeech.Name = "mySpeech"
-        Me.mySpeech.RedAlert = LCARS.LCARSalert.Normal
-        Me.mySpeech.Size = New System.Drawing.Size(72, 19)
-        Me.mySpeech.TabIndex = 53
-        Me.mySpeech.Tag = "6"
-        Me.mySpeech.Text = "SPEECH"
+        Me.FlatButton2.Beeping = False
+        Me.FlatButton2.ButtonText = ""
+        Me.FlatButton2.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.FlatButton2.ButtonTextHeight = 14
+        Me.FlatButton2.Clickable = False
+        Me.FlatButton2.Color = LCARS.LCARScolorStyles.StaticTan
+        Me.FlatButton2.CustomAlertColor = System.Drawing.Color.Empty
+        Me.FlatButton2.Data = Nothing
+        Me.FlatButton2.Data2 = Nothing
+        Me.FlatButton2.FlashInterval = 500
+        Me.FlatButton2.holdDraw = False
+        Me.FlatButton2.Lit = True
+        Me.FlatButton2.Location = New System.Drawing.Point(1, 0)
+        Me.FlatButton2.Name = "FlatButton2"
+        Me.FlatButton2.RedAlert = LCARS.LCARSalert.Normal
+        Me.FlatButton2.Size = New System.Drawing.Size(33, 19)
+        Me.FlatButton2.TabIndex = 54
         '
         'myHelp
         '
@@ -539,6 +534,29 @@ Partial Class frmMainscreen2
         Me.myHelp.TabIndex = 52
         Me.myHelp.Tag = "6"
         Me.myHelp.Text = "HELP"
+        '
+        'mySpeech
+        '
+        Me.mySpeech.AutoEllipsis = False
+        Me.mySpeech.Beeping = False
+        Me.mySpeech.ButtonText = "SPEECH"
+        Me.mySpeech.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.mySpeech.ButtonTextHeight = 14
+        Me.mySpeech.Clickable = True
+        Me.mySpeech.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.mySpeech.CustomAlertColor = System.Drawing.Color.Empty
+        Me.mySpeech.Data = Nothing
+        Me.mySpeech.Data2 = Nothing
+        Me.mySpeech.FlashInterval = 500
+        Me.mySpeech.holdDraw = False
+        Me.mySpeech.Lit = False
+        Me.mySpeech.Location = New System.Drawing.Point(174, 0)
+        Me.mySpeech.Name = "mySpeech"
+        Me.mySpeech.RedAlert = LCARS.LCARSalert.Normal
+        Me.mySpeech.Size = New System.Drawing.Size(72, 19)
+        Me.mySpeech.TabIndex = 53
+        Me.mySpeech.Tag = "6"
+        Me.mySpeech.Text = "SPEECH"
         '
         'myOSK
         '
@@ -891,6 +909,23 @@ Partial Class frmMainscreen2
         Me.pnlMainBar.TabIndex = 51
         Me.pnlMainBar.Tag = "12"
         '
+        'gridUserButtons
+        '
+        Me.gridUserButtons.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.gridUserButtons.Beeping = False
+        Me.gridUserButtons.ColorsAvailable = LcarScolor2
+        Me.gridUserButtons.ControlAddingDirection = LCARS.Controls.ButtonGrid.ControlDirection.Horizontal
+        Me.gridUserButtons.ControlPadding = 5
+        Me.gridUserButtons.ControlSize = New System.Drawing.Size(90, 25)
+        Me.gridUserButtons.CurrentPage = 1
+        Me.gridUserButtons.Location = New System.Drawing.Point(793, 51)
+        Me.gridUserButtons.MinimumSize = New System.Drawing.Size(95, 30)
+        Me.gridUserButtons.Name = "gridUserButtons"
+        Me.gridUserButtons.Size = New System.Drawing.Size(200, 429)
+        Me.gridUserButtons.TabIndex = 37
+        Me.gridUserButtons.Visible = False
+        '
         'fbUBRight
         '
         Me.fbUBRight.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -985,23 +1020,6 @@ Partial Class frmMainscreen2
         Me.fbUBEndcap.TabIndex = 31
         Me.fbUBEndcap.Tag = "5"
         Me.fbUBEndcap.Visible = False
-        '
-        'gridUserButtons
-        '
-        Me.gridUserButtons.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.gridUserButtons.Beeping = False
-        Me.gridUserButtons.ColorsAvailable = LcarScolor12
-        Me.gridUserButtons.ControlAddingDirection = LCARS.Controls.ButtonGrid.ControlDirection.Horizontal
-        Me.gridUserButtons.ControlPadding = 5
-        Me.gridUserButtons.ControlSize = New System.Drawing.Size(90, 25)
-        Me.gridUserButtons.CurrentPage = 1
-        Me.gridUserButtons.Location = New System.Drawing.Point(793, 51)
-        Me.gridUserButtons.MinimumSize = New System.Drawing.Size(95, 30)
-        Me.gridUserButtons.Name = "gridUserButtons"
-        Me.gridUserButtons.Size = New System.Drawing.Size(200, 429)
-        Me.gridUserButtons.TabIndex = 37
-        Me.gridUserButtons.Visible = False
         '
         'myStartMenu
         '
@@ -1932,26 +1950,6 @@ Partial Class frmMainscreen2
         Me.sbTL.Text = "12:00 PM"
         Me.sbTL.Visible = False
         '
-        'FlatButton2
-        '
-        Me.FlatButton2.Beeping = False
-        Me.FlatButton2.ButtonText = ""
-        Me.FlatButton2.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.FlatButton2.ButtonTextHeight = 14
-        Me.FlatButton2.Clickable = False
-        Me.FlatButton2.Color = LCARS.LCARScolorStyles.StaticTan
-        Me.FlatButton2.CustomAlertColor = System.Drawing.Color.Empty
-        Me.FlatButton2.Data = Nothing
-        Me.FlatButton2.Data2 = Nothing
-        Me.FlatButton2.FlashInterval = 500
-        Me.FlatButton2.holdDraw = False
-        Me.FlatButton2.Lit = True
-        Me.FlatButton2.Location = New System.Drawing.Point(1, 0)
-        Me.FlatButton2.Name = "FlatButton2"
-        Me.FlatButton2.RedAlert = LCARS.LCARSalert.Normal
-        Me.FlatButton2.Size = New System.Drawing.Size(33, 19)
-        Me.FlatButton2.TabIndex = 54
-        '
         'frmMainscreen2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2009,7 +2007,6 @@ Partial Class frmMainscreen2
     Friend WithEvents pnlMainBar As System.Windows.Forms.Panel
     Friend WithEvents pnlMain As System.Windows.Forms.Panel
     Friend WithEvents gridUserButtons As LCARS.Controls.ButtonGrid
-    Friend WithEvents tmrAutoHide As System.Windows.Forms.Timer
     Friend WithEvents pnlTopPanel As System.Windows.Forms.Panel
     Friend WithEvents fbProgBack As LCARS.Controls.FlatButton
     Friend WithEvents fbProgramPages As LCARS.Controls.FlatButton

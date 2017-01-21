@@ -19,7 +19,6 @@ Partial Class frmMainscreen4
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
         Dim LcarScolor1 As LCARS.LCARScolor = New LCARS.LCARScolor
         Dim LcarScolor2 As LCARS.LCARScolor = New LCARS.LCARScolor
         Me.pnlMainBar = New System.Windows.Forms.Panel
@@ -78,7 +77,6 @@ Partial Class frmMainscreen4
         Me.myMusic = New LCARS.Controls.FlatButton
         Me.MyComp = New LCARS.Controls.FlatButton
         Me.gridUserButtons = New LCARS.Controls.ButtonGrid
-        Me.tmrAutoHide = New System.Windows.Forms.Timer(Me.components)
         Me.pnlMainBar.SuspendLayout()
         Me.pnlBatt.SuspendLayout()
         Me.pnlTray.SuspendLayout()
@@ -1329,10 +1327,6 @@ Partial Class frmMainscreen4
         Me.gridUserButtons.TabIndex = 71
         Me.gridUserButtons.Visible = False
         '
-        'tmrAutoHide
-        '
-        Me.tmrAutoHide.Enabled = True
-        '
         'frmMainscreen4
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1373,7 +1367,6 @@ Partial Class frmMainscreen4
     Friend WithEvents MyComp As LCARS.Controls.FlatButton
     Friend WithEvents mySettings As LCARS.Controls.FlatButton
     Friend WithEvents myPhoto As LCARS.Controls.FlatButton
-    Friend WithEvents tmrAutoHide As System.Windows.Forms.Timer
     Friend WithEvents myDocuments As LCARS.Controls.FlatButton
     Friend WithEvents myPictures As LCARS.Controls.FlatButton
     Friend WithEvents pnlTray As System.Windows.Forms.Panel

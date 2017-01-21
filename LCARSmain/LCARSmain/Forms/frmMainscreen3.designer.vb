@@ -19,22 +19,14 @@ Partial Class frmMainscreen3
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
         Dim LcarScolor1 As LCARS.LCARScolor = New LCARS.LCARScolor
         Dim LcarScolor2 As LCARS.LCARScolor = New LCARS.LCARScolor
         Me.pnlMainBar = New System.Windows.Forms.Panel
-        Me.pnlMain = New System.Windows.Forms.Panel
-        Me.pnlApps = New System.Windows.Forms.Panel
-        Me.pnlTray = New System.Windows.Forms.Panel
-        Me.pnlProgs = New System.Windows.Forms.Panel
-        Me.pnlBatt = New System.Windows.Forms.Panel
-        Me.lblBatt = New System.Windows.Forms.Label
-        Me.lblPowerSource = New System.Windows.Forms.Label
-        Me.tmrAutoHide = New System.Windows.Forms.Timer(Me.components)
         Me.HalfPillButton2 = New LCARS.Controls.HalfPillButton
         Me.HalfPillButton1 = New LCARS.Controls.HalfPillButton
         Me.myClock = New LCARS.Controls.FlatButton
         Me.myStartMenu = New LCARS.Controls.FlatButton
+        Me.pnlMain = New System.Windows.Forms.Panel
         Me.FlatButton5 = New LCARS.Controls.FlatButton
         Me.StandardButton4 = New LCARS.Controls.StandardButton
         Me.myHelp = New LCARS.Controls.FlatButton
@@ -42,12 +34,16 @@ Partial Class frmMainscreen3
         Me.FlatButton4 = New LCARS.Controls.FlatButton
         Me.mySpeech = New LCARS.Controls.FlatButton
         Me.myUserButtons = New LCARS.Controls.FlatButton
+        Me.pnlApps = New System.Windows.Forms.Panel
+        Me.pnlTray = New System.Windows.Forms.Panel
         Me.HideTrayButton = New LCARS.Controls.ArrowButton
         Me.showTrayButton = New LCARS.Controls.FlatButton
         Me.myButtonManager = New LCARS.Controls.FlatButton
+        Me.pnlProgs = New System.Windows.Forms.Panel
         Me.myAlertListButton = New LCARS.Controls.ArrowButton
         Me.FlatButton2 = New LCARS.Controls.FlatButton
         Me.FlatButton6 = New LCARS.Controls.FlatButton
+        Me.pnlBatt = New System.Windows.Forms.Panel
         Me.fbBatt8 = New LCARS.Controls.FlatButton
         Me.fbBatt10 = New LCARS.Controls.FlatButton
         Me.fbBatt9 = New LCARS.Controls.FlatButton
@@ -65,6 +61,8 @@ Partial Class frmMainscreen3
         Me.Elbow8 = New LCARS.Controls.Elbow
         Me.Elbow9 = New LCARS.Controls.Elbow
         Me.Elbow7 = New LCARS.Controls.Elbow
+        Me.lblBatt = New System.Windows.Forms.Label
+        Me.lblPowerSource = New System.Windows.Forms.Label
         Me.myMusic = New LCARS.Controls.FlatButton
         Me.myVideos = New LCARS.Controls.FlatButton
         Me.myPictures = New LCARS.Controls.FlatButton
@@ -123,126 +121,6 @@ Partial Class frmMainscreen3
         Me.pnlMainBar.Size = New System.Drawing.Size(800, 764)
         Me.pnlMainBar.TabIndex = 0
         Me.pnlMainBar.Tag = "2"
-        '
-        'pnlMain
-        '
-        Me.pnlMain.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom), System.Windows.Forms.AnchorStyles)
-        Me.pnlMain.BackColor = System.Drawing.Color.Black
-        Me.pnlMain.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.pnlMain.Location = New System.Drawing.Point(367, 29)
-        Me.pnlMain.Name = "pnlMain"
-        Me.pnlMain.Size = New System.Drawing.Size(213, 704)
-        Me.pnlMain.TabIndex = 75
-        '
-        'pnlApps
-        '
-        Me.pnlApps.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pnlApps.BackColor = System.Drawing.Color.Black
-        Me.pnlApps.Location = New System.Drawing.Point(156, 739)
-        Me.pnlApps.Name = "pnlApps"
-        Me.pnlApps.Size = New System.Drawing.Size(293, 25)
-        Me.pnlApps.TabIndex = 77
-        '
-        'pnlTray
-        '
-        Me.pnlTray.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pnlTray.BackColor = System.Drawing.Color.Black
-        Me.pnlTray.Controls.Add(Me.HideTrayButton)
-        Me.pnlTray.Controls.Add(Me.showTrayButton)
-        Me.pnlTray.Location = New System.Drawing.Point(455, 739)
-        Me.pnlTray.Name = "pnlTray"
-        Me.pnlTray.Size = New System.Drawing.Size(120, 25)
-        Me.pnlTray.TabIndex = 79
-        '
-        'pnlProgs
-        '
-        Me.pnlProgs.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.pnlProgs.Controls.Add(Me.myAlertListButton)
-        Me.pnlProgs.Controls.Add(Me.FlatButton2)
-        Me.pnlProgs.Controls.Add(Me.FlatButton6)
-        Me.pnlProgs.Controls.Add(Me.pnlBatt)
-        Me.pnlProgs.Controls.Add(Me.myMusic)
-        Me.pnlProgs.Controls.Add(Me.myVideos)
-        Me.pnlProgs.Controls.Add(Me.myPictures)
-        Me.pnlProgs.Controls.Add(Me.myDocuments)
-        Me.pnlProgs.Controls.Add(Me.myRun)
-        Me.pnlProgs.Controls.Add(Me.fbWebBrowser)
-        Me.pnlProgs.Controls.Add(Me.myPhoto)
-        Me.pnlProgs.Controls.Add(Me.pnlPrograms)
-        Me.pnlProgs.Controls.Add(Me.Elbow2)
-        Me.pnlProgs.Controls.Add(Me.FlatButton1)
-        Me.pnlProgs.Controls.Add(Me.myAlert)
-        Me.pnlProgs.Controls.Add(Me.myEngineering)
-        Me.pnlProgs.Controls.Add(Me.mySettings)
-        Me.pnlProgs.Controls.Add(Me.MyComp)
-        Me.pnlProgs.Controls.Add(Me.myModeSelect)
-        Me.pnlProgs.Controls.Add(Me.myDeactivate)
-        Me.pnlProgs.Controls.Add(Me.myDestruct)
-        Me.pnlProgs.Controls.Add(Me.myProgBack)
-        Me.pnlProgs.Controls.Add(Me.fbProgramPages)
-        Me.pnlProgs.Controls.Add(Me.myProgsNext)
-        Me.pnlProgs.Controls.Add(Me.myProgsBack)
-        Me.pnlProgs.Controls.Add(Me.Elbow1)
-        Me.pnlProgs.Location = New System.Drawing.Point(0, 29)
-        Me.pnlProgs.Name = "pnlProgs"
-        Me.pnlProgs.Size = New System.Drawing.Size(364, 704)
-        Me.pnlProgs.TabIndex = 73
-        Me.pnlProgs.Tag = "9"
-        Me.pnlProgs.Visible = False
-        '
-        'pnlBatt
-        '
-        Me.pnlBatt.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pnlBatt.Controls.Add(Me.fbBatt8)
-        Me.pnlBatt.Controls.Add(Me.fbBatt10)
-        Me.pnlBatt.Controls.Add(Me.fbBatt9)
-        Me.pnlBatt.Controls.Add(Me.fbBatt7)
-        Me.pnlBatt.Controls.Add(Me.fbBatt6)
-        Me.pnlBatt.Controls.Add(Me.fbBattTop)
-        Me.pnlBatt.Controls.Add(Me.fbBatt3)
-        Me.pnlBatt.Controls.Add(Me.fbBatt5)
-        Me.pnlBatt.Controls.Add(Me.fbBatt4)
-        Me.pnlBatt.Controls.Add(Me.fbBatt2)
-        Me.pnlBatt.Controls.Add(Me.fbBatt1)
-        Me.pnlBatt.Controls.Add(Me.FlatButton19)
-        Me.pnlBatt.Controls.Add(Me.Elbow6)
-        Me.pnlBatt.Controls.Add(Me.FlatButton15)
-        Me.pnlBatt.Controls.Add(Me.Elbow8)
-        Me.pnlBatt.Controls.Add(Me.Elbow9)
-        Me.pnlBatt.Controls.Add(Me.Elbow7)
-        Me.pnlBatt.Controls.Add(Me.lblBatt)
-        Me.pnlBatt.Controls.Add(Me.lblPowerSource)
-        Me.pnlBatt.Location = New System.Drawing.Point(257, 104)
-        Me.pnlBatt.Name = "pnlBatt"
-        Me.pnlBatt.Size = New System.Drawing.Size(87, 80)
-        Me.pnlBatt.TabIndex = 77
-        Me.pnlBatt.Tag = ""
-        '
-        'lblBatt
-        '
-        Me.lblBatt.AutoSize = True
-        Me.lblBatt.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblBatt.ForeColor = System.Drawing.Color.Orange
-        Me.lblBatt.Location = New System.Drawing.Point(51, 57)
-        Me.lblBatt.Name = "lblBatt"
-        Me.lblBatt.Size = New System.Drawing.Size(38, 21)
-        Me.lblBatt.TabIndex = 35
-        Me.lblBatt.Tag = "3"
-        Me.lblBatt.Text = "100%"
-        '
-        'lblPowerSource
-        '
-        Me.lblPowerSource.AutoSize = True
-        Me.lblPowerSource.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPowerSource.ForeColor = System.Drawing.Color.Orange
-        Me.lblPowerSource.Location = New System.Drawing.Point(0, 57)
-        Me.lblPowerSource.Name = "lblPowerSource"
-        Me.lblPowerSource.Size = New System.Drawing.Size(57, 21)
-        Me.lblPowerSource.TabIndex = 36
-        Me.lblPowerSource.Tag = "3"
-        Me.lblPowerSource.Text = "AUXILIARY"
         '
         'HalfPillButton2
         '
@@ -335,6 +213,16 @@ Partial Class frmMainscreen3
         Me.myStartMenu.TabIndex = 69
         Me.myStartMenu.Tag = "0"
         Me.myStartMenu.Text = "PROGRAMS"
+        '
+        'pnlMain
+        '
+        Me.pnlMain.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom), System.Windows.Forms.AnchorStyles)
+        Me.pnlMain.BackColor = System.Drawing.Color.Black
+        Me.pnlMain.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.pnlMain.Location = New System.Drawing.Point(367, 29)
+        Me.pnlMain.Name = "pnlMain"
+        Me.pnlMain.Size = New System.Drawing.Size(213, 704)
+        Me.pnlMain.TabIndex = 75
         '
         'FlatButton5
         '
@@ -498,6 +386,27 @@ Partial Class frmMainscreen3
         Me.myUserButtons.Tag = "1"
         Me.myUserButtons.Text = "PERSONAL"
         '
+        'pnlApps
+        '
+        Me.pnlApps.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pnlApps.BackColor = System.Drawing.Color.Black
+        Me.pnlApps.Location = New System.Drawing.Point(156, 739)
+        Me.pnlApps.Name = "pnlApps"
+        Me.pnlApps.Size = New System.Drawing.Size(293, 25)
+        Me.pnlApps.TabIndex = 77
+        '
+        'pnlTray
+        '
+        Me.pnlTray.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pnlTray.BackColor = System.Drawing.Color.Black
+        Me.pnlTray.Controls.Add(Me.HideTrayButton)
+        Me.pnlTray.Controls.Add(Me.showTrayButton)
+        Me.pnlTray.Location = New System.Drawing.Point(455, 739)
+        Me.pnlTray.Name = "pnlTray"
+        Me.pnlTray.Size = New System.Drawing.Size(120, 25)
+        Me.pnlTray.TabIndex = 79
+        '
         'HideTrayButton
         '
         Me.HideTrayButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -569,6 +478,43 @@ Partial Class frmMainscreen3
         Me.myButtonManager.Text = "MANAGE YOUR PROGRAMS"
         Me.myButtonManager.Visible = False
         '
+        'pnlProgs
+        '
+        Me.pnlProgs.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.pnlProgs.Controls.Add(Me.myAlertListButton)
+        Me.pnlProgs.Controls.Add(Me.FlatButton2)
+        Me.pnlProgs.Controls.Add(Me.FlatButton6)
+        Me.pnlProgs.Controls.Add(Me.pnlBatt)
+        Me.pnlProgs.Controls.Add(Me.myMusic)
+        Me.pnlProgs.Controls.Add(Me.myVideos)
+        Me.pnlProgs.Controls.Add(Me.myPictures)
+        Me.pnlProgs.Controls.Add(Me.myDocuments)
+        Me.pnlProgs.Controls.Add(Me.myRun)
+        Me.pnlProgs.Controls.Add(Me.fbWebBrowser)
+        Me.pnlProgs.Controls.Add(Me.myPhoto)
+        Me.pnlProgs.Controls.Add(Me.pnlPrograms)
+        Me.pnlProgs.Controls.Add(Me.Elbow2)
+        Me.pnlProgs.Controls.Add(Me.FlatButton1)
+        Me.pnlProgs.Controls.Add(Me.myAlert)
+        Me.pnlProgs.Controls.Add(Me.myEngineering)
+        Me.pnlProgs.Controls.Add(Me.mySettings)
+        Me.pnlProgs.Controls.Add(Me.MyComp)
+        Me.pnlProgs.Controls.Add(Me.myModeSelect)
+        Me.pnlProgs.Controls.Add(Me.myDeactivate)
+        Me.pnlProgs.Controls.Add(Me.myDestruct)
+        Me.pnlProgs.Controls.Add(Me.myProgBack)
+        Me.pnlProgs.Controls.Add(Me.fbProgramPages)
+        Me.pnlProgs.Controls.Add(Me.myProgsNext)
+        Me.pnlProgs.Controls.Add(Me.myProgsBack)
+        Me.pnlProgs.Controls.Add(Me.Elbow1)
+        Me.pnlProgs.Location = New System.Drawing.Point(0, 29)
+        Me.pnlProgs.Name = "pnlProgs"
+        Me.pnlProgs.Size = New System.Drawing.Size(364, 704)
+        Me.pnlProgs.TabIndex = 73
+        Me.pnlProgs.Tag = "9"
+        Me.pnlProgs.Visible = False
+        '
         'myAlertListButton
         '
         Me.myAlertListButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
@@ -639,6 +585,34 @@ Partial Class frmMainscreen3
         Me.FlatButton6.Size = New System.Drawing.Size(124, 12)
         Me.FlatButton6.TabIndex = 78
         Me.FlatButton6.Tag = "5"
+        '
+        'pnlBatt
+        '
+        Me.pnlBatt.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pnlBatt.Controls.Add(Me.fbBatt8)
+        Me.pnlBatt.Controls.Add(Me.fbBatt10)
+        Me.pnlBatt.Controls.Add(Me.fbBatt9)
+        Me.pnlBatt.Controls.Add(Me.fbBatt7)
+        Me.pnlBatt.Controls.Add(Me.fbBatt6)
+        Me.pnlBatt.Controls.Add(Me.fbBattTop)
+        Me.pnlBatt.Controls.Add(Me.fbBatt3)
+        Me.pnlBatt.Controls.Add(Me.fbBatt5)
+        Me.pnlBatt.Controls.Add(Me.fbBatt4)
+        Me.pnlBatt.Controls.Add(Me.fbBatt2)
+        Me.pnlBatt.Controls.Add(Me.fbBatt1)
+        Me.pnlBatt.Controls.Add(Me.FlatButton19)
+        Me.pnlBatt.Controls.Add(Me.Elbow6)
+        Me.pnlBatt.Controls.Add(Me.FlatButton15)
+        Me.pnlBatt.Controls.Add(Me.Elbow8)
+        Me.pnlBatt.Controls.Add(Me.Elbow9)
+        Me.pnlBatt.Controls.Add(Me.Elbow7)
+        Me.pnlBatt.Controls.Add(Me.lblBatt)
+        Me.pnlBatt.Controls.Add(Me.lblPowerSource)
+        Me.pnlBatt.Location = New System.Drawing.Point(257, 104)
+        Me.pnlBatt.Name = "pnlBatt"
+        Me.pnlBatt.Size = New System.Drawing.Size(87, 80)
+        Me.pnlBatt.TabIndex = 77
+        Me.pnlBatt.Tag = ""
         '
         'fbBatt8
         '
@@ -1029,6 +1003,30 @@ Partial Class frmMainscreen3
         Me.Elbow7.Size = New System.Drawing.Size(13, 16)
         Me.Elbow7.TabIndex = 64
         Me.Elbow7.Tag = "0"
+        '
+        'lblBatt
+        '
+        Me.lblBatt.AutoSize = True
+        Me.lblBatt.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblBatt.ForeColor = System.Drawing.Color.Orange
+        Me.lblBatt.Location = New System.Drawing.Point(51, 57)
+        Me.lblBatt.Name = "lblBatt"
+        Me.lblBatt.Size = New System.Drawing.Size(38, 21)
+        Me.lblBatt.TabIndex = 35
+        Me.lblBatt.Tag = "3"
+        Me.lblBatt.Text = "100%"
+        '
+        'lblPowerSource
+        '
+        Me.lblPowerSource.AutoSize = True
+        Me.lblPowerSource.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPowerSource.ForeColor = System.Drawing.Color.Orange
+        Me.lblPowerSource.Location = New System.Drawing.Point(0, 57)
+        Me.lblPowerSource.Name = "lblPowerSource"
+        Me.lblPowerSource.Size = New System.Drawing.Size(57, 21)
+        Me.lblPowerSource.TabIndex = 36
+        Me.lblPowerSource.Tag = "3"
+        Me.lblPowerSource.Text = "AUXILIARY"
         '
         'myMusic
         '
@@ -1639,7 +1637,6 @@ Partial Class frmMainscreen3
     Friend WithEvents FlatButton1 As LCARS.Controls.FlatButton
     Friend WithEvents Elbow2 As LCARS.Controls.Elbow
     Friend WithEvents myPhoto As LCARS.Controls.FlatButton
-    Friend WithEvents tmrAutoHide As System.Windows.Forms.Timer
     Friend WithEvents myDocuments As LCARS.Controls.FlatButton
     Friend WithEvents myPictures As LCARS.Controls.FlatButton
     Friend WithEvents pnlBatt As System.Windows.Forms.Panel
