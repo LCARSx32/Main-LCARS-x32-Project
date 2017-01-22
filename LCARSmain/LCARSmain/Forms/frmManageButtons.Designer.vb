@@ -33,7 +33,7 @@ Partial Class frmManageButtons
         Me.sbUp = New LCARS.Controls.StandardButton
         Me.sbDown = New LCARS.Controls.StandardButton
         Me.sbEditUB = New LCARS.Controls.StandardButton
-        Me.lstUserButtons = New System.Windows.Forms.ListBox
+        Me.lstUserButtons = New LCARS.Controls.LCARSList
         Me.Label3 = New System.Windows.Forms.Label
         Me.sbExitMyComp = New LCARS.Controls.StandardButton
         Me.sbTitle = New LCARS.Controls.StandardButton
@@ -318,16 +318,18 @@ Partial Class frmManageButtons
         Me.lstUserButtons.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lstUserButtons.BackColor = System.Drawing.Color.White
+        Me.lstUserButtons.BackColor = System.Drawing.Color.Black
         Me.lstUserButtons.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.lstUserButtons.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.lstUserButtons.Font = New System.Drawing.Font("LCARS", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lstUserButtons.ForeColor = System.Drawing.Color.Black
+        Me.lstUserButtons.ForeColor = System.Drawing.Color.Orange
         Me.lstUserButtons.FormattingEnabled = True
         Me.lstUserButtons.ItemHeight = 28
         Me.lstUserButtons.Location = New System.Drawing.Point(0, 3)
         Me.lstUserButtons.Name = "lstUserButtons"
         Me.lstUserButtons.Size = New System.Drawing.Size(616, 168)
         Me.lstUserButtons.TabIndex = 0
+        Me.lstUserButtons.TabStops = New Single(-1) {}
         '
         'Label3
         '
@@ -374,7 +376,7 @@ Partial Class frmManageButtons
         Me.sbTitle.ButtonText = "PERSONAL BUTTONS MANAGER"
         Me.sbTitle.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.sbTitle.ButtonTextHeight = 20
-        Me.sbTitle.Clickable = True
+        Me.sbTitle.Clickable = False
         Me.sbTitle.Color = LCARS.LCARScolorStyles.MiscFunction
         Me.sbTitle.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbTitle.Data = Nothing
@@ -423,7 +425,7 @@ Partial Class frmManageButtons
     Friend WithEvents pnlUBSettings As System.Windows.Forms.Panel
     Friend WithEvents sbRemoveUB As LCARS.Controls.StandardButton
     Friend WithEvents sbEditUB As LCARS.Controls.StandardButton
-    Friend WithEvents lstUserButtons As System.Windows.Forms.ListBox
+    Friend WithEvents lstUserButtons As LCARS.Controls.LCARSList
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents sbExitMyComp As LCARS.Controls.StandardButton
     Friend WithEvents sbTitle As LCARS.Controls.StandardButton
