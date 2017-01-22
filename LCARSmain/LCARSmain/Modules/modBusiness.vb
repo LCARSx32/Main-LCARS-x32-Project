@@ -524,7 +524,7 @@ public Class modBusiness
         Try
             Dim strinput As String = ""
             Dim split() As String
-            Dim filename As String = GetSetting("LCARS X32", "Application", "LangFile", "Standard.lng")
+            Dim filename As String = modSettings.LanguageFileName(ScreenIndex)
 
             FileOpen(1, Application.StartupPath() & "\lang\" & filename, OpenMode.Input)
             Input(1, strinput)
