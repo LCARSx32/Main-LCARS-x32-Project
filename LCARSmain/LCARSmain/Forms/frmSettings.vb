@@ -220,12 +220,7 @@ Public Class frmSettings
         AddHandler txtCustom.TextChanged, AddressOf txtCustom_TextChanged
 
 
-        'Add tabs to listbox
-        Dim tabs() As Integer = {30, 100, 30}
-        Dim pinned As GCHandle = GCHandle.Alloc(tabs, GCHandleType.Pinned)
-        SendMessage(lstAlerts.Handle, &H192, New IntPtr(tabs.Length), pinned.AddrOfPinnedObject)
-        pinned.Free()
-        lstAlerts.Refresh()
+        'Alerts
         lblAlertName.Text = ""
         lblID.Text = ""
         loadAlerts()
