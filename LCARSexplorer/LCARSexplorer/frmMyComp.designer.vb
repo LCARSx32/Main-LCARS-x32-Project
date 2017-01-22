@@ -20,7 +20,7 @@ Partial Class frmMyComp
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
-        Dim LcarScolor1 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor2 As LCARS.LCARScolor = New LCARS.LCARScolor
         Me.pnlProperties = New System.Windows.Forms.Panel
         Me.pnlMultiple = New System.Windows.Forms.Panel
         Me.lblMultipleOut = New System.Windows.Forms.Label
@@ -105,6 +105,8 @@ Partial Class frmMyComp
         Me.elbActionsTop = New LCARS.Controls.Elbow
         Me.elbActionsBottom = New LCARS.Controls.Elbow
         Me.gridMyComp = New LCARS.Controls.ButtonGrid
+        Me.lblDriveTypeLabel = New LCARS.Controls.LCARSLabel
+        Me.lblDriveType = New LCARS.Controls.LCARSLabel
         Me.pnlProperties.SuspendLayout()
         Me.pnlMultiple.SuspendLayout()
         Me.pnlFolder.SuspendLayout()
@@ -121,9 +123,9 @@ Partial Class frmMyComp
         Me.pnlProperties.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pnlProperties.Controls.Add(Me.pnlDrive)
         Me.pnlProperties.Controls.Add(Me.pnlMultiple)
         Me.pnlProperties.Controls.Add(Me.pnlFolder)
-        Me.pnlProperties.Controls.Add(Me.pnlDrive)
         Me.pnlProperties.Controls.Add(Me.pnlFile)
         Me.pnlProperties.Controls.Add(Me.lblPropTitle)
         Me.pnlProperties.Controls.Add(Me.sbCloseProperties)
@@ -261,6 +263,8 @@ Partial Class frmMyComp
         Me.pnlDrive.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pnlDrive.Controls.Add(Me.lblDriveType)
+        Me.pnlDrive.Controls.Add(Me.lblDriveTypeLabel)
         Me.pnlDrive.Controls.Add(Me.liDrive)
         Me.pnlDrive.Controls.Add(Me.lblUsed)
         Me.pnlDrive.Controls.Add(Me.lblFreeLabel)
@@ -681,7 +685,7 @@ Partial Class frmMyComp
         Me.lblFileName.AutoSize = True
         Me.lblFileName.Location = New System.Drawing.Point(42, 211)
         Me.lblFileName.Name = "lblFileName"
-        Me.lblFileName.Size = New System.Drawing.Size(118, 24)
+        Me.lblFileName.Size = New System.Drawing.Size(117, 24)
         Me.lblFileName.TabIndex = 53
         Me.lblFileName.Text = "File/Directory Name:"
         '
@@ -1328,7 +1332,7 @@ Partial Class frmMyComp
         Me.tbTitle.Location = New System.Drawing.Point(6, 4)
         Me.tbTitle.Name = "tbTitle"
         Me.tbTitle.RedAlert = LCARS.LCARSalert.Normal
-        Me.tbTitle.Size = New System.Drawing.Size(595, 31)
+        Me.tbTitle.Size = New System.Drawing.Size(595, 32)
         Me.tbTitle.TabIndex = 92
         Me.tbTitle.Text = "MY COMPUTER"
         '
@@ -1502,7 +1506,7 @@ Partial Class frmMyComp
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.gridMyComp.Beeping = False
-        Me.gridMyComp.ColorsAvailable = LcarScolor1
+        Me.gridMyComp.ColorsAvailable = LcarScolor2
         Me.gridMyComp.ControlAddingDirection = LCARS.Controls.ButtonGrid.ControlDirection.Vertical
         Me.gridMyComp.ControlPadding = 5
         Me.gridMyComp.ControlSize = New System.Drawing.Size(150, 30)
@@ -1514,12 +1518,35 @@ Partial Class frmMyComp
         Me.gridMyComp.TabIndex = 97
         Me.gridMyComp.Text = "ButtonGrid1"
         '
+        'lblDriveTypeLabel
+        '
+        Me.lblDriveTypeLabel.AutoSize = True
+        Me.lblDriveTypeLabel.Color = LCARS.LCARScolorStyles.Orange
+        Me.lblDriveTypeLabel.Location = New System.Drawing.Point(9, 160)
+        Me.lblDriveTypeLabel.Name = "lblDriveTypeLabel"
+        Me.lblDriveTypeLabel.Size = New System.Drawing.Size(58, 21)
+        Me.lblDriveTypeLabel.TabIndex = 92
+        Me.lblDriveTypeLabel.Text = "Drive type:"
+        Me.lblDriveTypeLabel.TextHeight = 14
+        '
+        'lblDriveType
+        '
+        Me.lblDriveType.AutoSize = True
+        Me.lblDriveType.Color = LCARS.LCARScolorStyles.Orange
+        Me.lblDriveType.Location = New System.Drawing.Point(75, 160)
+        Me.lblDriveType.Name = "lblDriveType"
+        Me.lblDriveType.Size = New System.Drawing.Size(57, 21)
+        Me.lblDriveType.TabIndex = 92
+        Me.lblDriveType.Text = "Removable"
+        Me.lblDriveType.TextHeight = 14
+        '
         'frmMyComp
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Black
         Me.ClientSize = New System.Drawing.Size(640, 562)
+        Me.Controls.Add(Me.pnlProperties)
         Me.Controls.Add(Me.gridMyComp)
         Me.Controls.Add(Me.pnlSystemDefined)
         Me.Controls.Add(Me.pnlEdit)
@@ -1537,7 +1564,6 @@ Partial Class frmMyComp
         Me.Controls.Add(Me.pnlOptionalComponents)
         Me.Controls.Add(Me.pnlVisible)
         Me.Controls.Add(Me.pnlRename)
-        Me.Controls.Add(Me.pnlProperties)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.KeyPreview = True
         Me.Name = "frmMyComp"
@@ -1644,5 +1670,7 @@ Partial Class frmMyComp
     Friend WithEvents sbEnterPath As LCARS.Controls.StandardButton
     Friend WithEvents sbSaveCurrent As LCARS.Controls.StandardButton
     Friend WithEvents gridMyComp As LCARS.Controls.ButtonGrid
+    Friend WithEvents lblDriveTypeLabel As LCARS.Controls.LCARSLabel
+    Friend WithEvents lblDriveType As LCARS.Controls.LCARSLabel
 
 End Class

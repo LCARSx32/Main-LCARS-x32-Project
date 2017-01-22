@@ -537,6 +537,7 @@ Public Class frmMyComp
                     'it's a drive
                     Dim myInfo As DriveInfo = New DriveInfo(selectedButtons(1).data.Substring(0, 1))
 
+                    lblDriveType.Text = myInfo.DriveType.ToString()
                     If myInfo.IsReady = True Then
                         Dim AvailablePercent As String
                         Dim Used As Long
