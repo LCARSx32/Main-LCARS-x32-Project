@@ -126,6 +126,18 @@ Namespace Controls
             Next
             oldMouseMovePoint = localPoint
         End Sub
+
+        Private Sub Me_MouseLeave(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.MouseLeave
+            For i As Integer = myList.Count - 1 To 0 Step -1
+                If Not myList(i).HoldDraw Then
+                    If myList(i).Bounds.Contains(oldMouseMovePoint) Then
+                        myList(i).doEvent(LightweightControls.ILightweightControl.LightweightEvents.MouseLeave)
+                    End If
+                End If
+            Next
+            oldMouseMovePoint = Nothing
+        End Sub
+
         'Passes DoubleClick events to the child controls
         Private Sub Me_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.DoubleClick
             Dim localPoint As Point = PointToClient(Cursor.Position)
