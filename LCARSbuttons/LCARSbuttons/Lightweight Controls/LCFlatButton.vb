@@ -400,6 +400,8 @@ Namespace LightweightControls
                 _holdDraw = value
                 If Not HoldDraw Then
                     Redraw()
+                Else
+                    myBitmap = Nothing
                 End If
             End Set
         End Property
