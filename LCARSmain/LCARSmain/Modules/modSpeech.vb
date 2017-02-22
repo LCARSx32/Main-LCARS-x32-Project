@@ -15,7 +15,7 @@ Module modSpeech
     Dim AliasList As New Collection
     Dim CustomList As New Collection
     Friend console As New frmSpeechConsole
-    Dim timeoutTimer As New System.Timers.Timer With {.AutoReset = False}
+    Dim WithEvents timeoutTimer As New System.Timers.Timer With {.AutoReset = False}
 
     Public Structure AliasEntry
         Dim Command As String
@@ -28,8 +28,6 @@ Module modSpeech
     End Structure
 
     Public Sub beginVoiceRecognition()
-        AddHandler timeoutTimer.Elapsed, AddressOf onCommandTimeout
-
         'Get the list of aliases and custom commands
 
         'Aliases
@@ -202,7 +200,7 @@ Module modSpeech
 
     End Sub
 
-    Private Sub onCommandTimeout(ByVal source As Object, ByVal e As System.Timers.ElapsedEventArgs)
+    Private Sub onCommandTimeout(ByVal source As Object, ByVal e As System.Timers.ElapsedEventArgs) Handles timeoutTimer.Elapsed
         If myDesktop.InvokeRequired Then
             myDesktop.Invoke(New System.Timers.ElapsedEventHandler(AddressOf onCommandTimeout), source, e)
         Else
