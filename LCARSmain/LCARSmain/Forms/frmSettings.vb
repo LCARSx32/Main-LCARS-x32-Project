@@ -950,7 +950,7 @@ Public Class frmSettings
         fbMainScreen.RedAlert = LCARS.LCARSalert.Normal
         fbLanguage.RedAlert = LCARS.LCARSalert.White
     End Sub
-
+#Region " Sounds "
     Dim soundEditing As Boolean = False
     Dim soundLoading As Boolean = False
 
@@ -1046,4 +1046,23 @@ Public Class frmSettings
         lstSounds.RefreshItem(lstSounds.SelectedIndex)
         soundEditing = False
     End Sub
+
+    Private Sub sbSoundTest_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbSoundTest.Click
+        If CType(lstSounds.SelectedItem, LCARSSound).CanUseResource Then
+            CType(lstSounds.SelectedItem, LCARSSound).Test()
+        Else
+            ' button beep already playing
+        End If
+    End Sub
+
+    Private Sub sbSoundTest_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles sbSoundTest.MouseDown
+        'Use the actual button beep to play a button beep, otherwise disable it to prevent
+        ' interference with the sound being tested.
+        If CType(lstSounds.SelectedItem, LCARSSound).CanUseResource Then
+            sbSoundTest.Beeping = False
+        Else
+            sbSoundTest.Beeping = True
+        End If
+    End Sub
+#End Region
 End Class

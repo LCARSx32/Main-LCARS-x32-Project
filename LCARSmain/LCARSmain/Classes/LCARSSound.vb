@@ -85,6 +85,10 @@ Public Class LCARSSound
         If _enabled Then player.Play()
     End Sub
 
+    Public Overridable Sub Test()
+        player.Play()
+    End Sub
+
     Public ReadOnly Property Name() As String
         Get
             Return _name
