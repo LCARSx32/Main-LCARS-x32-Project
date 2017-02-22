@@ -392,15 +392,21 @@ Public Enum SetWindowPosFlags As UInteger
     End Sub
 
     Public Sub SetWallpaper(ByVal wall As Image, ByVal ScreenIndex As Integer)
-        myDesktop.curDesktop(ScreenIndex).BackgroundImage = wall
+        If Not My.Application.IsSettingsMode Then
+            myDesktop.curDesktop(ScreenIndex).BackgroundImage = wall
+        End If
     End Sub
 
     Public Sub setWallpaperSizeMode(ByVal sizemode As ImageLayout, ByVal ScreenIndex As Integer)
-        myDesktop.curDesktop(ScreenIndex).BackgroundImageLayout = sizemode
+        If Not My.Application.IsSettingsMode Then
+            myDesktop.curDesktop(ScreenIndex).BackgroundImageLayout = sizemode
+        End If
     End Sub
 
     Public Sub SetAutoHide(ByVal hide As IAutohide.AutoHideModes, ByVal ScreenIndex As Integer)
-        curBusiness(ScreenIndex).SetAutoHide(hide)
+        If Not My.Application.IsSettingsMode Then
+            curBusiness(ScreenIndex).SetAutoHide(hide)
+        End If
     End Sub
 
     Public Sub SetDesktop(ByVal desktop As Form)
@@ -424,17 +430,14 @@ Public Enum SetWindowPosFlags As UInteger
     End Sub
 
     Public Sub RefreshVoiceCommands(ByVal active As Boolean)
+        If My.Application.IsSettingsMode Then Return
         If active = False Then
             'turn off voice commands
-            Try
+            If Listener IsNot Nothing Then
                 Listener.Recognizer.State = SpeechLib.SpeechRecognizerState.SRSInactive
-            Catch ex As Exception
-            End Try
+            End If
         Else
-            Try
-                beginVoiceRecognition()
-            Catch ex As Exception
-            End Try
+            beginVoiceRecognition()
         End If
         For Each myBusiness As modBusiness In curBusiness
             myBusiness.mySpeech.Lit = active

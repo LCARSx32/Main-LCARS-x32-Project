@@ -20,11 +20,6 @@ Public Class frmSettings
         End If
     End Sub
 
-    ''' <summary>
-    ''' Active instance of x32 is running
-    ''' </summary>
-    Dim isActive As Boolean = True
-
 #End Region
 
     Dim myColors(-1) As String
@@ -61,9 +56,6 @@ Public Class frmSettings
         If My.Application.IsSettingsMode Then
             tbTitle.Color = LCARS.LCARScolorStyles.FunctionOffline
             tbTitle.Text = "Settings: System Offline"
-            isActive = False
-        Else
-            isActive = True
         End If
 
         Dim beeping As Boolean = Boolean.Parse(GetSetting("LCARS x32", "Application", "ButtonBeep", "False"))

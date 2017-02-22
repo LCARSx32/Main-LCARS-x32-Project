@@ -13,7 +13,7 @@ Public Class frmSpeechConsole
             End With
         Next
         If curBusiness(0).mySpeech.Lit Then
-            If Listener Is Nothing Then Listener = New SpeechLib.SpInProcRecoContextClass
+            If Listener Is Nothing Then beginVoiceRecognition()
             Listener.State = SpeechLib.SpeechRecoContextState.SRCS_Enabled
             fbOnOff.Lit = True
             fbOnOff.Text = "Recognition on"
