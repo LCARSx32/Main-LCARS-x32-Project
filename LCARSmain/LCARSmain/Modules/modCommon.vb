@@ -426,15 +426,11 @@ Public Enum SetWindowPosFlags As UInteger
     Public Sub RefreshVoiceCommands(ByVal active As Boolean)
         If active = False Then
             'turn off voice commands
-            Try
+            If Listener IsNot Nothing Then
                 Listener.Recognizer.State = SpeechLib.SpeechRecognizerState.SRSInactive
-            Catch ex As Exception
-            End Try
+            End If
         Else
-            Try
-                beginVoiceRecognition()
-            Catch ex As Exception
-            End Try
+            beginVoiceRecognition()
         End If
         For Each myBusiness As modBusiness In curBusiness
             myBusiness.mySpeech.Lit = active
