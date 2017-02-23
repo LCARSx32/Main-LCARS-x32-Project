@@ -362,9 +362,14 @@ public Class modBusiness
 
     Public Sub mySpeech_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         If console.Visible Then
-            console.Hide()
+            If MonitorFromWindow(myForm.Handle, MONITOR_DEFAULTTONEAREST) = MonitorFromWindow(console.Handle, MONITOR_DEFAULTTONEAREST) Then
+                console.Hide()
+            Else
+                MoveToScreen(Screen.FromHandle(myForm.Handle), console.Handle)
+            End If
         Else
             modSpeech.ShowConsole()
+            MoveToScreen(Screen.FromHandle(myForm.Handle), console.Handle)
         End If
     End Sub
 
