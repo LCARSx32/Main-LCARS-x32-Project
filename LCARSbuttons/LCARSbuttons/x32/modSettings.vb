@@ -61,11 +61,7 @@ Namespace x32
                 'interesting effects ... but usually result in crashes
                 If mode = SettingInitializationOptions.RestoreToDefaults Then
                     'Will wipe any custom alerts!
-                    Try
-                        DeleteSetting("LCARS x32", "Alerts")
-                    Catch ex As Exception
-                        'Alert settings not extant.
-                    End Try
+                    TryDeleteSetting("LCARS x32", "Alerts")
                     SaveSetting("LCARS x32", "Alerts", "0", "Red|#FF0000|" & InstallPath & "\red_alert.wav")
                     SaveSetting("LCARS x32", "Alerts", "1", "Yellow|#FFFF00|")
                 Else

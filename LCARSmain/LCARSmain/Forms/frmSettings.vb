@@ -540,16 +540,8 @@ Public Class frmSettings
             txtCommandTimeout.Text = LCARS.x32.modSettings.CommandTimeout.ToString()
         End If
         'Remove all old values
-        Try
-            DeleteSetting("LCARS x32", "CustomVoiceCommands")
-        Catch ex As Exception
-            'Nothing of importance, there just weren't any custom commands
-        End Try
-        Try
-            DeleteSetting("LCARS x32", "VoiceCommandAlias")
-        Catch ex As Exception
-            'Nothing of importance, there just weren't any aliases
-        End Try
+        LCARS.TryDeleteSetting("LCARS x32", "CustomVoiceCommands")
+        LCARS.TryDeleteSetting("LCARS x32", "VoiceCommandAlias")
         'Write new values
         For Each mycommand As AliasEntry In aliasList
             If mycommand.CommandAlias <> "" Then
@@ -789,10 +781,7 @@ Public Class frmSettings
     End Sub
 
     Private Sub SaveAlerts()
-        Try
-            DeleteSetting("LCARS x32", "Alerts")
-        Catch ex As Exception
-        End Try
+        LCARS.TryDeleteSetting("LCARS x32", "Alerts")
         For i As Integer = 0 To alertList.Count - 1
             Dim myAlert As AlertEntry = alertList(i)
             SaveSetting("LCARS x32", "Alerts", alertList(i).id, myAlert.Name & "|" & myAlert.Color & "|" & myAlert.Sound)
