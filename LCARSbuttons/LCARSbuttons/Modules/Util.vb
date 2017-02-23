@@ -70,4 +70,17 @@ Public Module Util
             UpdateColors(myControl)
         Next
     End Sub
+
+    ''' <summary>
+    ''' Equivalent to DeleteSetting, but will not throw ArgumentException
+    ''' </summary>
+    ''' <returns>True if setting existed to be deleted</returns>
+    Public Function TryDeleteSetting(ByVal AppName As String, Optional ByVal Section As String = Nothing, Optional ByVal Key As String = Nothing)
+        Try
+            DeleteSetting(AppName, Section, Key)
+            Return True
+        Catch ex As ArgumentException
+            Return False
+        End Try
+    End Function
 End Module

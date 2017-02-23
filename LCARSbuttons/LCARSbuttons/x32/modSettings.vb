@@ -1,7 +1,8 @@
-﻿Namespace x32
+﻿Imports System.IO
+
+
+Namespace x32
     Public NotInheritable Class modSettings
-        'To-Do:
-        'Add some sort of handler for version numbers.
 
         Private Sub New()
             'Private constructor to prevent initialization
@@ -26,6 +27,7 @@
             If InstallPath = "" Then
                 Throw New Exception("Install path not initialized. Unable to initialize remaining settings.")
             End If
+            upgradeSettings()
             If mode = SettingInitializationOptions.All Then
                 SaveSetting("LCARS X32", "Application", "AutoDestructOption", GetSetting("LCARS X32", "Application", "AutoDestructOption", "Alarm"))
                 SaveSetting("LCARS X32", "Application", "ButtonBeep", GetSetting("LCARS X32", "Application", "ButtonBeep", "TRUE"))
@@ -33,7 +35,6 @@
                 SaveSetting("LCARS X32", "Application", "PanelOpenInterval", GetSetting("LCARS X32", "Application", "PanelOpenInterval", "100"))
                 SaveSetting("LCARS X32", "Application", "SpeechOn", GetSetting("LCARS X32", "Application", "SpeechOn", "True"))
                 SaveSetting("LCARS X32", "Application", "Stardate", GetSetting("LCARS X32", "Application", "Stardate", "TRUE"))
-                SaveSetting("LCARS X32", "Application", "LangFile", GetSetting("LCARS X32", "Application", "LangFile", "Standard.lng"))
                 SaveSetting("LCARS X32", "Application", "ButtonSound", GetSetting("LCARS X32", "Application", "ButtonSound", InstallPath & "\207.wav"))
                 SaveSetting("LCARS X32", "Application", "SpeechCode", GetSetting("LCARS X32", "Application", "SpeechCode", "409"))
                 SaveSetting("LCARS X32", "Application", "RedAlertSound", GetSetting("LCARS X32", "Application", "RedAlertSound", InstallPath & "\red_alert.wav"))
@@ -76,18 +77,13 @@
             'Restore everything to defaults.
             'Will wipe ALL settings, including Personal Programs, custom commands, command aliases, and custom alerts
             If mode = SettingInitializationOptions.RestoreToDefaults Then
-                Try
-                    DeleteSetting("LCARS x32")
-                Catch ex As Exception
-                    'Settings didn't exist
-                End Try
+                TryDeleteSetting("LCARS x32")
                 SaveSetting("LCARS X32", "Application", "AutoDestructOption", "Alarm")
                 SaveSetting("LCARS X32", "Application", "ButtonBeep", "TRUE")
                 SaveSetting("LCARS X32", "Application", "PanelCloseInterval", "50")
                 SaveSetting("LCARS X32", "Application", "PanelOpenInterval", "100")
                 SaveSetting("LCARS X32", "Application", "SpeechOn", "True")
                 SaveSetting("LCARS X32", "Application", "Stardate", "TRUE")
-                SaveSetting("LCARS X32", "Application", "LangFile", "Standard.lng")
                 SaveSetting("LCARS X32", "Application", "ButtonSound", InstallPath & "\207.wav")
                 SaveSetting("LCARS X32", "Application", "SpeechCode", "409")
                 SaveSetting("LCARS X32", "Application", "RedAlertSound", InstallPath & "\red_alert.wav")
@@ -99,6 +95,47 @@
                 SaveSetting("LCARSUpdate", "Config", "ExperimentalURL", "http://www.lcarsx32.com/lcars/x32/ExperimentalVersion.txt")
                 SaveSetting("LCARSUpdate", "Config", "UpdatePath", "Experimental")
             End If
+        End Sub
+
+        Private Shared Sub upgradeSettings()
+            Dim ver As Version = SettingsVersion
+            If ver.Major = 0 Then
+                If ver.Minor = 7 Then
+                    If ver.Build = 1 Then
+                        'This is the first version that settings are actually tracked, so we can't
+                        ' assume everything is there.
+
+                        'Delete old screenshots
+                        Dim ssDir As String = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\LCARS x32\Images"
+                        If Directory.Exists(ssDir) Then
+                            Debug.Print("Found screenshot directory")
+                            Dim oldFiles() As String = {"frmmainscreen1.jpg", _
+                                                     "frmmainscreen2.jpg", _
+                                                     "frmmainscreen3.jpg", _
+                                                     "frmmainscreen4.jpg"}
+                            For Each f As String In oldFiles
+                                Dim filePath As String = ssDir & "\" & f
+                                If File.Exists(filePath) Then
+                                    Debug.Print("Found " & f)
+                                    Try
+                                        File.Delete(filePath)
+                                    Catch ex As Exception
+                                        Debug.Print("Unable to delete screenshot")
+                                    End Try
+                                End If
+                            Next
+                        End If
+                        'Delete old settings
+                        TryDeleteSetting("LCARS x32", "Load")
+                        TryDeleteSetting("LCARS x32", "Application", "HideExplorer")
+                        TryDeleteSetting("LCARS x32", "Application", "LangFile")
+                        TryDeleteSetting("LCARS x32", "Application", "ShowTrayIcons")
+                        TryDeleteSetting("LCARS x32", "Application", "Wallpaper")
+                        TryDeleteSetting("LCARS x32", "Application", "WallpaperSizeMode")
+                    End If
+                End If
+            End If
+            SettingsVersion = New Version(0, 7, 2)
         End Sub
 
         Public Shared Property Wallpaper(ByVal screenIndex As Integer) As String
@@ -180,6 +217,33 @@
             End Get
             Set(ByVal value As Boolean)
                 SaveSetting("LCARS x32", "Application", "CommandTimeoutEnabled", value)
+            End Set
+        End Property
+
+        Private Shared Property SettingsVersion() As Version
+            Get
+                Dim v As String = GetSetting("LCARS x32", "Application", "SettingsVersion", "0.7.1")
+                Dim chunks As String() = v.Split(".")
+                Dim ret As Version = Nothing
+                If chunks.Length = 3 Then
+                    Try
+                        Dim major As Integer = Integer.Parse(chunks(0))
+                        Dim minor As Integer = Integer.Parse(chunks(1))
+                        Dim build As Integer = Integer.Parse(chunks(2))
+                        ret = New Version(major, minor, build)
+                    Catch ex As Exception
+                        'Invalid format, will restore to default
+                    End Try
+                End If
+                If ret Is Nothing Then
+                    SaveSetting("LCARS x32", "Application", "SettingsVersion", "0.7.1")
+                    ret = New Version(0, 7, 1)
+                End If
+                Return ret
+            End Get
+            Set(ByVal value As Version)
+                SaveSetting("LCARS x32", "Application", "SettingsVersion", _
+                            String.Format("{0}.{1}.{2}", value.Major, value.Minor, value.Build))
             End Set
         End Property
     End Class
