@@ -407,17 +407,15 @@ Public Class frmStartup
     End Sub
 
     Private Sub loadForm(ByVal i As Integer)
-        Dim chosenForm As String
-        chosenForm = modSettings.MainScreen(i)
         curBusiness.Add(Nothing)
-        Select Case chosenForm.ToLower
-            Case "1"
+        Select Case modSettings.MainScreen(i)
+            Case 1
                 myForm = New frmMainscreen1(i)
-            Case "2"
+            Case 2
                 myForm = New frmMainscreen2(i)
-            Case "3"
+            Case 3
                 myForm = New frmMainscreen3(i)
-            Case "4"
+            Case 4
                 myForm = New frmMainscreen4(i)
             Case Else
                 myForm = New frmFirstRun
