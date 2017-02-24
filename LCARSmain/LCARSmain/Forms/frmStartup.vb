@@ -14,8 +14,6 @@ Public Class frmStartup
 
     'Holds the current Main Screen
     Dim myForm As New Form
-    'The index of the current active screen (multi-monitor support)
-    Dim screenindex As Integer = 0
     'Desktop panels
     Public curDesktop As New List(Of Panel)
 
@@ -257,7 +255,7 @@ Public Class frmStartup
             myBack.BringToFront()
         Next
 
-        myIconSaver.Bounds = Screen.AllScreens(screenindex).Bounds
+        myIconSaver.Bounds = Screen.PrimaryScreen.Bounds
 
 
         SetParent(SysListView, myIconSaver.Handle)
