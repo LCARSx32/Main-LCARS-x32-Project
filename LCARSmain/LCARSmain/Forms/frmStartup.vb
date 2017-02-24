@@ -270,9 +270,6 @@ Public Class frmStartup
 
         Dim myStyle As Integer = GetWindowLong_Safe(hTrayIcons, GWL_STYLE)
         myStyle = myStyle And Not TBSTYLE_TRANSPARENT
-        If (myStyle And TBSTYLE_TRANSPARENT) Then
-            MsgBox("Transparent!")
-        End If
         SetWindowLong_Safe(hTrayIcons, GWL_STYLE, myStyle)
 
         SetParent(hTrayIcons, myIconSaver.Handle)
