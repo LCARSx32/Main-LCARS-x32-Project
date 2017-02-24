@@ -22,15 +22,7 @@ Partial Class frmStartup
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.pnlBack = New System.Windows.Forms.Panel
         Me.SuspendLayout()
-        '
-        'pnlBack
-        '
-        Me.pnlBack.Location = New System.Drawing.Point(12, 12)
-        Me.pnlBack.Name = "pnlBack"
-        Me.pnlBack.Size = New System.Drawing.Size(114, 135)
-        Me.pnlBack.TabIndex = 4
         '
         'frmStartup
         '
@@ -39,7 +31,6 @@ Partial Class frmStartup
         Me.BackColor = System.Drawing.Color.Black
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.ClientSize = New System.Drawing.Size(297, 159)
-        Me.Controls.Add(Me.pnlBack)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmStartup"
         Me.ShowInTaskbar = False
@@ -47,5 +38,4 @@ Partial Class frmStartup
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents pnlBack As System.Windows.Forms.Panel
 End Class

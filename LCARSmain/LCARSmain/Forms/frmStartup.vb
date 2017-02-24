@@ -136,6 +136,13 @@ Public Class frmStartup
         End If
     End Sub
 
+    Private Sub frmStartup_Activated(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Activated
+        'TODO: Remove this sub when using SetShellWindow
+        For Each b As modBusiness In curBusiness
+            b.myForm.Activate()
+        Next
+    End Sub
+
     Private Sub frmStartup_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         CheckComponents()
         If Command().Contains("-u") Then
@@ -166,9 +173,6 @@ Public Class frmStartup
 
         MoveTrayIcons()
         HideMinimizedWindows()
-        Me.FormBorderStyle = Windows.Forms.FormBorderStyle.None
-        Me.Size = New Point(0, 0)
-        Me.Visible = False
 
         Dim result As Boolean = SetShellReadyEvent("msgina: ShellReadyEvent")
         If result = False Then
@@ -234,23 +238,20 @@ Public Class frmStartup
             hwndSHELLDLL_DefView = IntPtr.Zero
         End If
         SysListView = FindWindowEx(hwndSHELLDLL_DefView, IntPtr.Zero, "SysListView32", IntPtr.Zero)
-        SetParent(pnlBack.Handle, hwndProgMan)
+        SetParent(Me.Handle, hwndProgMan)
 
         setBackBounds()
 
         For i As Integer = 0 To Screen.AllScreens.Length - 1
             updateDesktopBounds(i, Screen.AllScreens(i).WorkingArea)
         Next
-        Dim currentStyle As Integer = GetWindowLong_Safe(pnlBack.Handle, -20)
+        Dim currentStyle As Integer = GetWindowLong_Safe(Me.Handle, -20)
 
         'Make desktop non-selectable and not in the alt-tab menu
         currentStyle = currentStyle Or WS_EX_NOACTIVATE Or WS_EX_TOOLWINDOW
-        SetWindowLong_Safe(pnlBack.Handle, -20, currentStyle)
-        currentStyle = GetWindowLong_Safe(Me.Handle, -20)
-        currentStyle = currentStyle Or WS_EX_NOACTIVATE Or WS_EX_TOOLWINDOW
         SetWindowLong_Safe(Me.Handle, -20, currentStyle)
 
-        pnlBack.BringToFront()
+        Me.BringToFront()
         For Each myBack As Panel In curDesktop
             myBack.BringToFront()
         Next
@@ -368,7 +369,7 @@ Public Class frmStartup
     Private Sub CreateDesktop(ByVal i As Integer)
         Dim myDesktop As New Panel()
         myDesktop.BackColor = Color.Black
-        pnlBack.Controls.Add(myDesktop)
+        Me.Controls.Add(myDesktop)
         curDesktop.Add(myDesktop)
         'Set wallpaper
         Dim wallpaper As String
@@ -446,6 +447,6 @@ Public Class frmStartup
         Else
             myBounds = New Rectangle(0, 0, right - leftLoc, bottom - topLoc)
         End If
-        pnlBack.Bounds = myBounds
+        Me.Bounds = myBounds
     End Sub
 End Class
