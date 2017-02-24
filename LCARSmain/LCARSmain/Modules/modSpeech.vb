@@ -466,6 +466,13 @@ Module modSpeech
                 .Add(myitem.CommandName.ToUpper() & ": " & myitem.Command)
             Next
         End With
+        If curBusiness(0).mySpeech.Lit Then
+            console.fbOnOff.Lit = True
+            console.fbOnOff.Text = "Recognition on"
+        Else
+            console.fbOnOff.Lit = False
+            console.fbOnOff.Text = "Recognition off"
+        End If
         console.Show()
         console.BringToFront()
         console.Activate()
