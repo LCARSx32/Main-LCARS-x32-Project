@@ -4,7 +4,7 @@ Public Class Form1
     Const MAX_PATH As Integer = 260
     Private Sub btnOK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOK.Click
         If rbLCARS.Checked = True Then
-            SetShell(Application.StartupPath & "\LCARSmain.exe -s")
+            SetShell(Application.StartupPath & "\LCARSmain.exe")
             MsgBox("Shell set successfully to LCARS x32.")
             Me.Close()
         Else

@@ -156,9 +156,7 @@ Public Class frmStartup
             modSettings.InstallPath = Application.StartupPath
         End If
         modSettings.InitializeSettings()
-        If Command().Contains("-s") Then
-            shellMode = True
-        End If
+        If GetShellWindow() = IntPtr.Zero Then shellMode = True
         If Not Command().Contains("-L") Then
             If System.IO.File.Exists(Application.StartupPath & "\LCARSLogin.exe") Then
                 Process.Start(Application.StartupPath & "\LCARSLogin.exe")

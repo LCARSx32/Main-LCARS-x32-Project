@@ -385,6 +385,50 @@ Public Enum SetWindowPosFlags As UInteger
     Public Declare Sub mouse_event Lib "user32" (ByVal dwFlags As Int32, ByVal dx As Int32, ByVal dy As Int32, ByVal dwData As Int32, ByVal dwExtraInfo As UIntPtr)
 #End Region
 
+#Region " Shell Window "
+    ''' <summary>
+    ''' Sets the shell window
+    ''' </summary>
+    ''' <param name="hwnd">Window handle of shell window</param>
+    ''' <returns>True on success</returns>
+    ''' <remarks>
+    ''' - SetShellWindow will only succeed if there is not already a registered shell window
+    ''' - On a successful call, the shell window will be moved to the bottom of the z-order and 
+    ''' stay there. The window remains selectable.
+    ''' - The shell window can only be reset by destroying the current window. Calling this function
+    ''' with zero or Nothing will not help.
+    ''' - Shell windows must not have WS_EX_TOPMOST set. If this bit is set, SetShellWindow will fail.
+    ''' If you try to set this bit after a successful call to SetShellWindow, the bit will be ignored.
+    ''' - If you try to move the window to the foreground with SetWindowPos and HWND_TOPMOST, the call
+    ''' will succeed, but it will not change anything.
+    ''' 
+    ''' Above points are from the Wine developer's mailing list:
+    ''' https://www.winehq.org/pipermail/wine-devel/2003-October/021368.html
+    ''' </remarks>
+    Public Declare Auto Function SetShellWindow Lib "User32" (ByVal hwnd As IntPtr) As Boolean
+
+    ''' <summary>
+    ''' Sets the shell and listview windows
+    ''' </summary>
+    ''' <param name="hwndShell">Handle of shell window</param>
+    ''' <param name="hwndListView">Handle of listview window</param>
+    ''' <returns>True on success</returns>
+    ''' <remarks>
+    ''' Not used; see http://www.spinics.net/lists/wine/msg11444.html for assumed workings.
+    ''' </remarks>
+    Public Declare Auto Function SetShellWindowEx Lib "User32" (ByVal hwndShell As IntPtr, ByVal hwndListView As IntPtr) As Boolean
+
+    ''' <summary>
+    ''' Gets the current shell window
+    ''' </summary>
+    ''' <returns>Window handle of current shell window</returns>
+    ''' <remarks>
+    ''' If there is no current registered shell window, then the function will return zero.
+    ''' </remarks>
+    Public Declare Auto Function GetShellWindow Lib "User32" () As IntPtr
+
+#End Region
+
 #End Region
 
     Public Sub setBusiness(ByRef business As modBusiness, ByVal ScreenIndex As Integer)

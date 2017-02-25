@@ -103,7 +103,7 @@ Public Class frmSettings
             fbShellSelect.Top = hpbExplorer.Top
             hpbExplorer.Color = LCARS.LCARScolorStyles.PrimaryFunction
             hpbLCARS.Color = LCARS.LCARScolorStyles.SystemFunction
-        ElseIf shellPath.ToLower = "lcarsmain.exe -s" Or shellPath.ToLower = "lcarsm~1.exe" Then
+        ElseIf shellPath.ToLower.StartsWith("lcarsmain.exe") Or shellPath.ToLower = "lcarsm~1.exe" Then
             fbShellSelect.Top = hpbLCARS.Top
             hpbLCARS.Color = LCARS.LCARScolorStyles.PrimaryFunction
             hpbExplorer.Color = LCARS.LCARScolorStyles.SystemFunction
