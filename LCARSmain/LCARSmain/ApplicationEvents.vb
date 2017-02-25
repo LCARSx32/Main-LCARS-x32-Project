@@ -21,7 +21,7 @@ Namespace My
                     isSettings = True
                 Else
                     'Send message current instance to load settings.
-                    InterMsgID = frmStartup.RegisterWindowMessageA("LCARS_X32_MSG")
+                    InterMsgID = frmStartup.RegisterWindowMessage("LCARS_X32_MSG")
                     SendMessage(HWND_BROADCAST, InterMsgID, 0, 2)
                     End
                 End If
@@ -29,7 +29,7 @@ Namespace My
                 'Run as shell
                 Dim x32Processes() As Process = Process.GetProcessesByName("LCARSmain")
                 If x32Processes.Length > 1 Then
-                    InterMsgID = frmStartup.RegisterWindowMessageA("LCARS_X32_MSG")
+                    InterMsgID = frmStartup.RegisterWindowMessage("LCARS_X32_MSG")
                     If Debugger.IsAttached Then
                         Dim other As Process = Nothing
                         For Each p As Process In x32Processes
