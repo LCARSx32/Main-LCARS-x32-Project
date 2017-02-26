@@ -12,8 +12,6 @@ Public Class frmStartup
     'and applications.
     Declare Auto Function RegisterWindowMessage Lib "user32.dll" (ByVal lpString As String) As Integer
 
-    'Holds the current Main Screen
-    Dim myForm As New Form
     'Desktop panels
     Public curDesktop As New List(Of Panel)
 
@@ -395,6 +393,7 @@ Public Class frmStartup
 
     Private Sub loadForm(ByVal i As Integer)
         curBusiness.Add(Nothing)
+        Dim myForm As New Form
         Select Case modSettings.MainScreen(i)
             Case 1
                 myForm = New frmMainscreen1(i)
