@@ -88,10 +88,10 @@ Partial Class frmMainscreen1
         Me.pnlStart = New System.Windows.Forms.Panel
         Me.elbStart2 = New LCARS.Controls.Elbow
         Me.fbDesktop = New LCARS.Controls.FlatButton
-        Me.fbProgBack = New LCARS.Controls.FlatButton
+        Me.myProgsUp = New LCARS.Controls.FlatButton
         Me.fbProgramPages = New LCARS.Controls.FlatButton
-        Me.abProgsNext = New LCARS.Controls.ArrowButton
-        Me.abProgsBack = New LCARS.Controls.ArrowButton
+        Me.myProgsNext = New LCARS.Controls.ArrowButton
+        Me.myProgsBack = New LCARS.Controls.ArrowButton
         Me.myDocuments = New LCARS.Controls.FlatButton
         Me.HalfPillButton1 = New LCARS.Controls.HalfPillButton
         Me.FlatButton30 = New LCARS.Controls.FlatButton
@@ -1559,10 +1559,10 @@ Partial Class frmMainscreen1
                     Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.pnlStart.Controls.Add(Me.elbStart2)
         Me.pnlStart.Controls.Add(Me.fbDesktop)
-        Me.pnlStart.Controls.Add(Me.fbProgBack)
+        Me.pnlStart.Controls.Add(Me.myProgsUp)
         Me.pnlStart.Controls.Add(Me.fbProgramPages)
-        Me.pnlStart.Controls.Add(Me.abProgsNext)
-        Me.pnlStart.Controls.Add(Me.abProgsBack)
+        Me.pnlStart.Controls.Add(Me.myProgsNext)
+        Me.pnlStart.Controls.Add(Me.myProgsBack)
         Me.pnlStart.Controls.Add(Me.myDocuments)
         Me.pnlStart.Controls.Add(Me.HalfPillButton1)
         Me.pnlStart.Controls.Add(Me.FlatButton30)
@@ -1635,30 +1635,30 @@ Partial Class frmMainscreen1
         Me.fbDesktop.Tag = "5"
         Me.fbDesktop.Text = "DESKTOP FILES"
         '
-        'fbProgBack
+        'myProgsUp
         '
-        Me.fbProgBack.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.myProgsUp.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.fbProgBack.AutoEllipsis = False
-        Me.fbProgBack.Beeping = False
-        Me.fbProgBack.ButtonText = "UP A DIRECTORY"
-        Me.fbProgBack.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.fbProgBack.ButtonTextHeight = 14
-        Me.fbProgBack.Clickable = True
-        Me.fbProgBack.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.fbProgBack.CustomAlertColor = System.Drawing.Color.Empty
-        Me.fbProgBack.Data = Nothing
-        Me.fbProgBack.Data2 = Nothing
-        Me.fbProgBack.FlashInterval = 500
-        Me.fbProgBack.holdDraw = False
-        Me.fbProgBack.Lit = True
-        Me.fbProgBack.Location = New System.Drawing.Point(106, 527)
-        Me.fbProgBack.Name = "fbProgBack"
-        Me.fbProgBack.RedAlert = LCARS.LCARSalert.Normal
-        Me.fbProgBack.Size = New System.Drawing.Size(187, 20)
-        Me.fbProgBack.TabIndex = 50
-        Me.fbProgBack.Tag = "2"
-        Me.fbProgBack.Text = "UP A DIRECTORY"
+        Me.myProgsUp.AutoEllipsis = False
+        Me.myProgsUp.Beeping = False
+        Me.myProgsUp.ButtonText = "UP A DIRECTORY"
+        Me.myProgsUp.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.myProgsUp.ButtonTextHeight = 14
+        Me.myProgsUp.Clickable = True
+        Me.myProgsUp.Color = LCARS.LCARScolorStyles.MiscFunction
+        Me.myProgsUp.CustomAlertColor = System.Drawing.Color.Empty
+        Me.myProgsUp.Data = Nothing
+        Me.myProgsUp.Data2 = Nothing
+        Me.myProgsUp.FlashInterval = 500
+        Me.myProgsUp.holdDraw = False
+        Me.myProgsUp.Lit = True
+        Me.myProgsUp.Location = New System.Drawing.Point(106, 527)
+        Me.myProgsUp.Name = "myProgsUp"
+        Me.myProgsUp.RedAlert = LCARS.LCARSalert.Normal
+        Me.myProgsUp.Size = New System.Drawing.Size(187, 20)
+        Me.myProgsUp.TabIndex = 50
+        Me.myProgsUp.Tag = "2"
+        Me.myProgsUp.Text = "UP A DIRECTORY"
         '
         'fbProgramPages
         '
@@ -1685,53 +1685,53 @@ Partial Class frmMainscreen1
         Me.fbProgramPages.Tag = "1"
         Me.fbProgramPages.Text = "PAGES 1 OF 15"
         '
-        'abProgsNext
+        'myProgsNext
         '
-        Me.abProgsNext.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.abProgsNext.ArrowDirection = LCARS.LCARSarrowDirection.Right
-        Me.abProgsNext.AutoEllipsis = Nothing
-        Me.abProgsNext.Beeping = False
-        Me.abProgsNext.ButtonText = ""
-        Me.abProgsNext.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.abProgsNext.ButtonTextHeight = 14
-        Me.abProgsNext.Clickable = True
-        Me.abProgsNext.Color = LCARS.LCARScolorStyles.NavigationFunction
-        Me.abProgsNext.CustomAlertColor = System.Drawing.Color.Empty
-        Me.abProgsNext.Data = Nothing
-        Me.abProgsNext.Data2 = Nothing
-        Me.abProgsNext.FlashInterval = 500
-        Me.abProgsNext.holdDraw = False
-        Me.abProgsNext.Lit = True
-        Me.abProgsNext.Location = New System.Drawing.Point(272, 554)
-        Me.abProgsNext.Name = "abProgsNext"
-        Me.abProgsNext.RedAlert = LCARS.LCARSalert.Normal
-        Me.abProgsNext.Size = New System.Drawing.Size(20, 20)
-        Me.abProgsNext.TabIndex = 48
-        Me.abProgsNext.Tag = "1"
+        Me.myProgsNext.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.myProgsNext.ArrowDirection = LCARS.LCARSarrowDirection.Right
+        Me.myProgsNext.AutoEllipsis = Nothing
+        Me.myProgsNext.Beeping = False
+        Me.myProgsNext.ButtonText = ""
+        Me.myProgsNext.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.myProgsNext.ButtonTextHeight = 14
+        Me.myProgsNext.Clickable = True
+        Me.myProgsNext.Color = LCARS.LCARScolorStyles.NavigationFunction
+        Me.myProgsNext.CustomAlertColor = System.Drawing.Color.Empty
+        Me.myProgsNext.Data = Nothing
+        Me.myProgsNext.Data2 = Nothing
+        Me.myProgsNext.FlashInterval = 500
+        Me.myProgsNext.holdDraw = False
+        Me.myProgsNext.Lit = True
+        Me.myProgsNext.Location = New System.Drawing.Point(272, 554)
+        Me.myProgsNext.Name = "myProgsNext"
+        Me.myProgsNext.RedAlert = LCARS.LCARSalert.Normal
+        Me.myProgsNext.Size = New System.Drawing.Size(20, 20)
+        Me.myProgsNext.TabIndex = 48
+        Me.myProgsNext.Tag = "1"
         '
-        'abProgsBack
+        'myProgsBack
         '
-        Me.abProgsBack.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.abProgsBack.ArrowDirection = LCARS.LCARSarrowDirection.Left
-        Me.abProgsBack.AutoEllipsis = Nothing
-        Me.abProgsBack.Beeping = False
-        Me.abProgsBack.ButtonText = ""
-        Me.abProgsBack.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.abProgsBack.ButtonTextHeight = 14
-        Me.abProgsBack.Clickable = True
-        Me.abProgsBack.Color = LCARS.LCARScolorStyles.NavigationFunction
-        Me.abProgsBack.CustomAlertColor = System.Drawing.Color.Empty
-        Me.abProgsBack.Data = Nothing
-        Me.abProgsBack.Data2 = Nothing
-        Me.abProgsBack.FlashInterval = 500
-        Me.abProgsBack.holdDraw = False
-        Me.abProgsBack.Lit = True
-        Me.abProgsBack.Location = New System.Drawing.Point(105, 554)
-        Me.abProgsBack.Name = "abProgsBack"
-        Me.abProgsBack.RedAlert = LCARS.LCARSalert.Normal
-        Me.abProgsBack.Size = New System.Drawing.Size(20, 20)
-        Me.abProgsBack.TabIndex = 49
-        Me.abProgsBack.Tag = "1"
+        Me.myProgsBack.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.myProgsBack.ArrowDirection = LCARS.LCARSarrowDirection.Left
+        Me.myProgsBack.AutoEllipsis = Nothing
+        Me.myProgsBack.Beeping = False
+        Me.myProgsBack.ButtonText = ""
+        Me.myProgsBack.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.myProgsBack.ButtonTextHeight = 14
+        Me.myProgsBack.Clickable = True
+        Me.myProgsBack.Color = LCARS.LCARScolorStyles.NavigationFunction
+        Me.myProgsBack.CustomAlertColor = System.Drawing.Color.Empty
+        Me.myProgsBack.Data = Nothing
+        Me.myProgsBack.Data2 = Nothing
+        Me.myProgsBack.FlashInterval = 500
+        Me.myProgsBack.holdDraw = False
+        Me.myProgsBack.Lit = True
+        Me.myProgsBack.Location = New System.Drawing.Point(105, 554)
+        Me.myProgsBack.Name = "myProgsBack"
+        Me.myProgsBack.RedAlert = LCARS.LCARSalert.Normal
+        Me.myProgsBack.Size = New System.Drawing.Size(20, 20)
+        Me.myProgsBack.TabIndex = 49
+        Me.myProgsBack.Tag = "1"
         '
         'myDocuments
         '
@@ -2082,8 +2082,8 @@ Partial Class frmMainscreen1
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.BackColor = System.Drawing.Color.Black
         Me.ClientSize = New System.Drawing.Size(800, 600)
-        Me.Controls.Add(Me.pnlMainContainer)
         Me.Controls.Add(Me.pnlStart)
+        Me.Controls.Add(Me.pnlMainContainer)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ForeColor = System.Drawing.Color.Orange
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
@@ -2113,9 +2113,9 @@ Partial Class frmMainscreen1
     Friend WithEvents pnlMainBar As System.Windows.Forms.Panel
     Friend WithEvents pnlMain As System.Windows.Forms.Panel
     Friend WithEvents myComp As LCARS.Controls.FlatButton
-    Friend WithEvents fbProgBack As LCARS.Controls.FlatButton
-    Friend WithEvents abProgsNext As LCARS.Controls.ArrowButton
-    Friend WithEvents abProgsBack As LCARS.Controls.ArrowButton
+    Friend WithEvents myProgsUp As LCARS.Controls.FlatButton
+    Friend WithEvents myProgsNext As LCARS.Controls.ArrowButton
+    Friend WithEvents myProgsBack As LCARS.Controls.ArrowButton
     Friend WithEvents mySettings As LCARS.Controls.FlatButton
     Friend WithEvents myEngineering As LCARS.Controls.FlatButton
     Friend WithEvents fbDesktop As LCARS.Controls.FlatButton

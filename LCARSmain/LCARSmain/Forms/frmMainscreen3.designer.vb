@@ -80,7 +80,7 @@ Partial Class frmMainscreen3
         Me.myModeSelect = New LCARS.Controls.FlatButton
         Me.myDeactivate = New LCARS.Controls.FlatButton
         Me.myDestruct = New LCARS.Controls.FlatButton
-        Me.myProgBack = New LCARS.Controls.FlatButton
+        Me.myProgsUp = New LCARS.Controls.FlatButton
         Me.fbProgramPages = New LCARS.Controls.FlatButton
         Me.myProgsNext = New LCARS.Controls.ArrowButton
         Me.myProgsBack = New LCARS.Controls.ArrowButton
@@ -503,7 +503,7 @@ Partial Class frmMainscreen3
         Me.pnlProgs.Controls.Add(Me.myModeSelect)
         Me.pnlProgs.Controls.Add(Me.myDeactivate)
         Me.pnlProgs.Controls.Add(Me.myDestruct)
-        Me.pnlProgs.Controls.Add(Me.myProgBack)
+        Me.pnlProgs.Controls.Add(Me.myProgsUp)
         Me.pnlProgs.Controls.Add(Me.fbProgramPages)
         Me.pnlProgs.Controls.Add(Me.myProgsNext)
         Me.pnlProgs.Controls.Add(Me.myProgsBack)
@@ -1426,30 +1426,30 @@ Partial Class frmMainscreen3
         Me.myDestruct.Tag = "2"
         Me.myDestruct.Text = "AUTO DESTRUCT"
         '
-        'myProgBack
+        'myProgsUp
         '
-        Me.myProgBack.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.myProgsUp.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.myProgBack.AutoEllipsis = False
-        Me.myProgBack.Beeping = False
-        Me.myProgBack.ButtonText = "BACK"
-        Me.myProgBack.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.myProgBack.ButtonTextHeight = 14
-        Me.myProgBack.Clickable = True
-        Me.myProgBack.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.myProgBack.CustomAlertColor = System.Drawing.Color.Empty
-        Me.myProgBack.Data = Nothing
-        Me.myProgBack.Data2 = Nothing
-        Me.myProgBack.FlashInterval = 500
-        Me.myProgBack.holdDraw = False
-        Me.myProgBack.Lit = True
-        Me.myProgBack.Location = New System.Drawing.Point(-1, 646)
-        Me.myProgBack.Name = "myProgBack"
-        Me.myProgBack.RedAlert = LCARS.LCARSalert.Normal
-        Me.myProgBack.Size = New System.Drawing.Size(232, 30)
-        Me.myProgBack.TabIndex = 46
-        Me.myProgBack.Tag = "0"
-        Me.myProgBack.Text = "BACK"
+        Me.myProgsUp.AutoEllipsis = False
+        Me.myProgsUp.Beeping = False
+        Me.myProgsUp.ButtonText = "BACK"
+        Me.myProgsUp.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.myProgsUp.ButtonTextHeight = 14
+        Me.myProgsUp.Clickable = True
+        Me.myProgsUp.Color = LCARS.LCARScolorStyles.MiscFunction
+        Me.myProgsUp.CustomAlertColor = System.Drawing.Color.Empty
+        Me.myProgsUp.Data = Nothing
+        Me.myProgsUp.Data2 = Nothing
+        Me.myProgsUp.FlashInterval = 500
+        Me.myProgsUp.holdDraw = False
+        Me.myProgsUp.Lit = True
+        Me.myProgsUp.Location = New System.Drawing.Point(-1, 646)
+        Me.myProgsUp.Name = "myProgsUp"
+        Me.myProgsUp.RedAlert = LCARS.LCARSalert.Normal
+        Me.myProgsUp.Size = New System.Drawing.Size(232, 30)
+        Me.myProgsUp.TabIndex = 46
+        Me.myProgsUp.Tag = "0"
+        Me.myProgsUp.Text = "BACK"
         '
         'fbProgramPages
         '
@@ -1627,7 +1627,7 @@ Partial Class frmMainscreen3
     Friend WithEvents myDeactivate As LCARS.Controls.FlatButton
     Friend WithEvents pnlPrograms As LCARS.Controls.WindowlessContainer
     Friend WithEvents myDestruct As LCARS.Controls.FlatButton
-    Friend WithEvents myProgBack As LCARS.Controls.FlatButton
+    Friend WithEvents myProgsUp As LCARS.Controls.FlatButton
     Friend WithEvents fbProgramPages As LCARS.Controls.FlatButton
     Friend WithEvents myProgsNext As LCARS.Controls.ArrowButton
     Friend WithEvents myProgsBack As LCARS.Controls.ArrowButton

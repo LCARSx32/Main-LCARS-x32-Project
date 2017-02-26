@@ -123,10 +123,6 @@ Public Class frmMainscreen2
         End If
     End Sub
 
-    Private Sub fbProgBack_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbProgBack.Click
-        myBusiness.ProgBack()
-    End Sub
-
     Private Sub pnlMainBar_SizeChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles pnlMainBar.SizeChanged
         If isInit = True Then
             Dim myRect As New Rectangle
@@ -152,14 +148,6 @@ Public Class frmMainscreen2
 
             UpdateRegion()
         End If
-    End Sub
-
-    Private Sub abProgsNext_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles abProgsNext.Click
-        myBusiness.nextProgPage()
-    End Sub
-
-    Private Sub abProgsBack_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles abProgsBack.Click
-        myBusiness.previousProgPage()
     End Sub
 
     Private Sub pnlMainElbow_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles pnlMainElbow.Resize

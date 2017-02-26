@@ -105,35 +105,6 @@ Public Class frmMainscreen3
         myStartMenu.doClick(sender, e)
     End Sub
 
-
-    Private Sub myProgsBack_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles myProgsBack.Click
-        modBusiness.previousProgPage()
-
-    End Sub
-
-    Private Sub myProgsNext_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles myProgsNext.Click
-        modBusiness.nextProgPage()
-
-    End Sub
-
-    Private Sub myProgBack_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles myProgBack.Click
-        modBusiness.ProgBack()
-
-    End Sub
-
-    'Private Sub pnlApps_ControlAdded(ByVal sender As Object, ByVal e As System.Windows.Forms.ControlEventArgs) Handles pnlApps.ControlAdded
-    '    UpdateWidth()
-    'End Sub
-
-    'Private Sub pnlApps_ControlRemoved(ByVal sender As Object, ByVal e As System.Windows.Forms.ControlEventArgs) Handles pnlApps.ControlRemoved
-    '    UpdateWidth()
-    'End Sub
-
-    'Private Sub UpdateWidth()
-    '    pnlApps.Width = (((pnlApps.Controls.Count - 2) / 2) * 134) + 60
-    'End Sub
-
-
     Private Sub myPhoto_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles myPhoto.Click, fbWebBrowser.Click, myRun.Click
         If myStartMenu.Visible Then
             myStartMenu.doClick(sender, e)

@@ -72,6 +72,9 @@ public Class modBusiness
     Public myAlertListButton As LCARS.LCARSbuttonClass
     Public myProgramPagesDisplay As LCARS.LCARSbuttonClass
     Dim bars() As Control
+    Public myProgsUp As LCARS.LCARSbuttonClass
+    Public myProgsBack As LCARS.LCARSbuttonClass
+    Public myProgsNext As LCARS.LCARSbuttonClass
 
     Public MyPrograms As Collection = New Collection
     Public myUserButtonCollection As New List(Of UserButtonInfo)
@@ -460,6 +463,9 @@ public Class modBusiness
             myBattery.Controls("fbBatt8"), _
             myBattery.Controls("fbBatt9"), _
             myBattery.Controls("fbBatt10")}
+        myProgsUp = myForm.Controls.Find("myProgsUp", True)(0)
+        myProgsBack = myForm.Controls.Find("myProgsBack", True)(0)
+        myProgsNext = myForm.Controls.Find("myProgsNext", True)(0)
 
         If Listener Is Nothing OrElse Listener.State <> SpeechLib.SpeechRecoContextState.SRCS_Enabled Then
             mySpeech.Lit = False
@@ -493,6 +499,9 @@ public Class modBusiness
         AddHandler myRun.Click, AddressOf myRun_Click
         AddHandler myAlertListButton.Click, AddressOf myAlertListButton_Click
         AddHandler myForm.MouseWheel, AddressOf myform_MouseScroll
+        AddHandler myProgsUp.Click, AddressOf ProgBack
+        AddHandler myProgsBack.Click, AddressOf previousProgPage
+        AddHandler myProgsNext.Click, AddressOf nextProgPage
         ReDim ProgDir(-1)
 
         setDoubleBuffered(myClock)

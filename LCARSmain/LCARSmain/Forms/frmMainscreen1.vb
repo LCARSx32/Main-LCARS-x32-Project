@@ -67,19 +67,6 @@ Public Class frmMainscreen1
 
     End Sub
 
-
-    Private Sub fbProgBack_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbProgBack.Click
-        myBusiness.ProgBack()
-    End Sub
-
-    Private Sub abProgsNext_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles abProgsNext.Click
-        myBusiness.nextProgPage()
-    End Sub
-
-    Private Sub abProgsBack_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles abProgsBack.Click
-        myBusiness.previousProgPage()
-    End Sub
-
     Private Sub pnlMainContainer_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles pnlMainContainer.Resize
         pnlMainBar_Resize(sender, e)
     End Sub

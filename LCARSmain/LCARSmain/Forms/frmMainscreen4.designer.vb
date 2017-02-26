@@ -19,8 +19,8 @@ Partial Class frmMainscreen4
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim LcarScolor1 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor2 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor3 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor4 As LCARS.LCARScolor = New LCARS.LCARScolor
         Me.pnlMainBar = New System.Windows.Forms.Panel
         Me.myAlertListButton = New LCARS.Controls.ArrowButton
         Me.pnlBatt = New System.Windows.Forms.Panel
@@ -72,7 +72,7 @@ Partial Class frmMainscreen4
         Me.myProgsNext = New LCARS.Controls.ArrowButton
         Me.fbProgramPages = New LCARS.Controls.FlatButton
         Me.pnlPrograms = New LCARS.Controls.WindowlessContainer
-        Me.myProgBack = New LCARS.Controls.FlatButton
+        Me.myProgsUp = New LCARS.Controls.FlatButton
         Me.myProgsBack = New LCARS.Controls.ArrowButton
         Me.myMusic = New LCARS.Controls.FlatButton
         Me.MyComp = New LCARS.Controls.FlatButton
@@ -1145,9 +1145,9 @@ Partial Class frmMainscreen4
         Me.pnlProgs.Controls.Add(Me.myProgsNext)
         Me.pnlProgs.Controls.Add(Me.fbProgramPages)
         Me.pnlProgs.Controls.Add(Me.pnlPrograms)
-        Me.pnlProgs.Controls.Add(Me.myProgBack)
+        Me.pnlProgs.Controls.Add(Me.myProgsUp)
         Me.pnlProgs.Controls.Add(Me.myProgsBack)
-        Me.pnlProgs.Location = New System.Drawing.Point(1, 157)
+        Me.pnlProgs.Location = New System.Drawing.Point(0, 157)
         Me.pnlProgs.Name = "pnlProgs"
         Me.pnlProgs.Size = New System.Drawing.Size(238, 443)
         Me.pnlProgs.TabIndex = 73
@@ -1209,36 +1209,36 @@ Partial Class frmMainscreen4
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlPrograms.Beeping = False
-        Me.pnlPrograms.ColorsAvailable = LcarScolor1
+        Me.pnlPrograms.ColorsAvailable = LcarScolor3
         Me.pnlPrograms.Location = New System.Drawing.Point(0, 0)
         Me.pnlPrograms.Name = "pnlPrograms"
         Me.pnlPrograms.Size = New System.Drawing.Size(238, 354)
         Me.pnlPrograms.TabIndex = 23
         '
-        'myProgBack
+        'myProgsUp
         '
-        Me.myProgBack.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.myProgsUp.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.myProgBack.AutoEllipsis = False
-        Me.myProgBack.Beeping = False
-        Me.myProgBack.ButtonText = "BACK"
-        Me.myProgBack.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.myProgBack.ButtonTextHeight = 14
-        Me.myProgBack.Clickable = True
-        Me.myProgBack.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.myProgBack.CustomAlertColor = System.Drawing.Color.Empty
-        Me.myProgBack.Data = Nothing
-        Me.myProgBack.Data2 = Nothing
-        Me.myProgBack.FlashInterval = 500
-        Me.myProgBack.holdDraw = False
-        Me.myProgBack.Lit = True
-        Me.myProgBack.Location = New System.Drawing.Point(0, 360)
-        Me.myProgBack.Name = "myProgBack"
-        Me.myProgBack.RedAlert = LCARS.LCARSalert.Normal
-        Me.myProgBack.Size = New System.Drawing.Size(238, 40)
-        Me.myProgBack.TabIndex = 46
-        Me.myProgBack.Tag = "0"
-        Me.myProgBack.Text = "BACK"
+        Me.myProgsUp.AutoEllipsis = False
+        Me.myProgsUp.Beeping = False
+        Me.myProgsUp.ButtonText = "BACK"
+        Me.myProgsUp.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.myProgsUp.ButtonTextHeight = 14
+        Me.myProgsUp.Clickable = True
+        Me.myProgsUp.Color = LCARS.LCARScolorStyles.MiscFunction
+        Me.myProgsUp.CustomAlertColor = System.Drawing.Color.Empty
+        Me.myProgsUp.Data = Nothing
+        Me.myProgsUp.Data2 = Nothing
+        Me.myProgsUp.FlashInterval = 500
+        Me.myProgsUp.holdDraw = False
+        Me.myProgsUp.Lit = True
+        Me.myProgsUp.Location = New System.Drawing.Point(0, 360)
+        Me.myProgsUp.Name = "myProgsUp"
+        Me.myProgsUp.RedAlert = LCARS.LCARSalert.Normal
+        Me.myProgsUp.Size = New System.Drawing.Size(238, 40)
+        Me.myProgsUp.TabIndex = 46
+        Me.myProgsUp.Tag = "0"
+        Me.myProgsUp.Text = "BACK"
         '
         'myProgsBack
         '
@@ -1315,7 +1315,7 @@ Partial Class frmMainscreen4
         Me.gridUserButtons.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.gridUserButtons.Beeping = False
-        Me.gridUserButtons.ColorsAvailable = LcarScolor2
+        Me.gridUserButtons.ColorsAvailable = LcarScolor4
         Me.gridUserButtons.ControlAddingDirection = LCARS.Controls.ButtonGrid.ControlDirection.Horizontal
         Me.gridUserButtons.ControlPadding = 5
         Me.gridUserButtons.ControlSize = New System.Drawing.Size(100, 25)
@@ -1360,7 +1360,7 @@ Partial Class frmMainscreen4
     Friend WithEvents myDeactivate As LCARS.Controls.FlatButton
     Friend WithEvents pnlPrograms As LCARS.Controls.WindowlessContainer
     Friend WithEvents myDestruct As LCARS.Controls.FlatButton
-    Friend WithEvents myProgBack As LCARS.Controls.FlatButton
+    Friend WithEvents myProgsUp As LCARS.Controls.FlatButton
     Friend WithEvents fbProgramPages As LCARS.Controls.FlatButton
     Friend WithEvents myProgsNext As LCARS.Controls.ArrowButton
     Friend WithEvents myProgsBack As LCARS.Controls.ArrowButton

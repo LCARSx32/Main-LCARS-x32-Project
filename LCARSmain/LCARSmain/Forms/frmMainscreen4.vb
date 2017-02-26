@@ -113,21 +113,6 @@ Public Class frmMainscreen4
         pnlMainBar_SizeChanged(sender, e)
     End Sub
 
-    Private Sub myProgsBack_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles myProgsBack.Click
-        myBusiness.previousProgPage()
-
-    End Sub
-
-    Private Sub myProgsNext_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles myProgsNext.Click
-        myBusiness.nextProgPage()
-
-    End Sub
-
-    Private Sub myProgBack_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles myProgBack.Click
-        myBusiness.ProgBack()
-
-    End Sub
-
     Public Shared ReadOnly Property ScreenImage() As Image
         Get
             Return My.Resources.frmmainscreen4
