@@ -100,6 +100,24 @@ Namespace x32
                     If ver.Build = 1 Then
                         'This is the first version that settings are actually tracked, so we can't
                         ' assume everything is there.
+                        Dim oldButtonsFile As String = InstallPath & "\UserButtons.ini"
+                        If File.Exists(oldButtonsFile) Then
+                            Dim strinput As String = ""
+                            Dim intCount As Integer = 0
+                            FileOpen(1, oldButtonsFile, OpenMode.Input, OpenAccess.Read)
+                            Do Until EOF(1)
+                                Input(1, strinput)
+
+                                If strinput <> "" Then
+                                    Dim buttonName As String = strinput
+                                    Input(1, strinput)
+                                    SaveSetting("LCARS x32", "UserButtons", intCount.ToString("D2") & buttonName, strinput)
+                                    intCount += 1
+                                End If
+                            Loop
+                            FileClose(1)
+                            Kill(oldButtonsFile)
+                        End If
 
                         'Delete old screenshots
                         Dim ssDir As String = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\LCARS x32\Images"

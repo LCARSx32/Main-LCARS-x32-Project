@@ -865,23 +865,6 @@ public Class modBusiness
     Public Sub loadUserButtons()
 
         If Not UserButtonsPanel Is Nothing Then
-            If File.Exists(Application.StartupPath & "\UserButtons.ini") Then
-                Dim strinput As String = ""
-                Dim intCount As Integer = 0
-                FileOpen(1, Application.StartupPath & "\UserButtons.ini", OpenMode.Input, OpenAccess.Read)
-                Do Until EOF(1)
-                    Input(1, strinput)
-
-                    If strinput <> "" Then
-                        Dim buttonName As String = strinput
-                        Input(1, strinput)
-                        SaveSetting("LCARS x32", "UserButtons", intCount.ToString("D2") & buttonName, strinput)
-                        intCount += 1
-                    End If
-                Loop
-                FileClose(1)
-                Kill(Application.StartupPath & "\UserButtons.ini")
-            End If
             Dim buttonTop As Integer = 0
             Dim myReg As Microsoft.Win32.RegistryKey = Microsoft.Win32.Registry.CurrentUser
 
