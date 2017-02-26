@@ -11,6 +11,7 @@ Module modCommon
     Public myDesktop As frmStartup
     Public curBusiness As New List(Of modBusiness)
     Public SysListView As IntPtr
+    Public SysListViewParent As IntPtr
     Public hTrayIcons As IntPtr
     Public hTrayParent As IntPtr
     Public myIconSaver As New frmIconSaver
@@ -750,67 +751,60 @@ Public Enum SetWindowPosFlags As UInteger
     End Sub
 
     Public Sub CloseLCARS()
+        ''''''''''''''''''''''''''''''''''''''''''''''''''
+        '''' Unhook global event handlers and similar ''''
+        ''''''''''''''''''''''''''''''''''''''''''''''''''
         RemoveHandler Microsoft.Win32.SystemEvents.DisplaySettingsChanged, AddressOf frmStartup.System_DisplayChanged
         SetParent(hTrayIcons, myIconSaver.Handle)
 
-        Dim TaskbarSettings As APPBARDATA
-
+        '''''''''''''''''''''''''''''''
+        '''' Close LCARS interface ''''
+        '''''''''''''''''''''''''''''''
         PostMessage(HWND_BROADCAST, InterMsgID, myDesktop.Handle, 13)
-
-        If Process.GetProcessesByName("explorer").Length > 0 Then
-            ShowTaskBar(True)
-            TaskbarSettings.cbSize = Len(TaskbarSettings)
-            SHAppBarMessage(ABM_GETSTATE, TaskbarSettings)
-
-            TaskbarSettings.lParam = TaskBarState
-
-            SHAppBarMessage(ABM_SETSTATE, TaskbarSettings) 'put the taskbar's "AutoHide" setting back to what it was
-
-        End If
-
         For Each myBusiness As modBusiness In curBusiness
             myBusiness.mainTimer.Enabled = False
             If Not myBusiness.myForm Is Nothing Then
                 myBusiness.myForm.Dispose()
             End If
         Next
-        For Each myArea As Rectangle In StartingWorkingArea
-            If Not myArea = New Rectangle(0, 0, 0, 0) Then
-                With myArea
-                    resizeWorkingArea(.X, .Y, .Width, .Height)
-                End With
-            End If
-        Next
 
-        Dim hwndProgMan As IntPtr = FindWindow("ProgMan", Nothing)
-        Dim hwndSHELLDLL_DefView As IntPtr = FindWindowEx(hwndProgMan, IntPtr.Zero, "SHELLDLL_DefView", IntPtr.Zero)
-        If hwndSHELLDLL_DefView = IntPtr.Zero Then
-            Dim count As Integer = 0
-            Dim parent As IntPtr = GetParent(hwndProgMan)
-            Do
-                If count > 14 Then
-                    Exit Do
+        ''''''''''''''''''''''''''''''''''''''''
+        '''' Restore Windows Explorer State ''''
+        ''''''''''''''''''''''''''''''''''''''''
+
+        If Not shellMode Then
+            'Restore taskbar state
+            Dim TaskbarSettings As APPBARDATA
+            TaskbarSettings.cbSize = Len(TaskbarSettings)
+            SHAppBarMessage(ABM_GETSTATE, TaskbarSettings)
+            TaskbarSettings.lParam = TaskBarState
+            SHAppBarMessage(ABM_SETSTATE, TaskbarSettings) 'put the taskbar's "AutoHide" setting back to what it was
+            ShowTaskBar(True)
+
+            'Restore working areas
+            For Each myArea As Rectangle In StartingWorkingArea
+                If Not myArea = New Rectangle(0, 0, 0, 0) Then
+                    With myArea
+                        resizeWorkingArea(.X, .Y, .Width, .Height)
+                    End With
                 End If
-                hwndProgMan = FindWindowEx(parent, hwndProgMan, "WorkerW", IntPtr.Zero)
-                'Debug.Print("WorkerW handle: " & Hex(hwndProgMan.ToInt32()))
-                hwndSHELLDLL_DefView = FindWindowEx(hwndProgMan, IntPtr.Zero, "SHELLDLL_DefView", IntPtr.Zero)
-                'Debug.Print("ShellDLL DefView handle: " & Hex(hwndSHELLDLL_DefView.ToInt32()))
-                count += 1
-            Loop While hwndSHELLDLL_DefView = IntPtr.Zero
+            Next
+
+            'Restore desktop icons
+            SetParent(SysListView, SysListViewParent) 'hwndSHELLDLL_DefView)
+
+            'Restore tray icon style
+            Dim myStyle As Integer = GetWindowLong_Safe(hTrayIcons, GWL_STYLE)
+            myStyle = myStyle Or TBSTYLE_TRANSPARENT
+            SetWindowLong_Safe(hTrayIcons, GWL_STYLE, myStyle)
+            'Restore tray icon location
+            SetParent(hTrayIcons, hTrayParent)
         End If
 
-        SetParent(SysListView, hwndSHELLDLL_DefView)
-        Dim myStyle As Integer = GetWindowLong_Safe(hTrayIcons, GWL_STYLE)
-        myStyle = myStyle Or TBSTYLE_TRANSPARENT
-
-        SetWindowLong_Safe(hTrayIcons, GWL_STYLE, myStyle)
-
-        SetParent(hTrayIcons, hTrayParent)
-
-
+        ''''''''''''''''''''''''
+        '''' Final shutdown ''''
+        ''''''''''''''''''''''''
         myDesktop.Close()
-        End
-
     End Sub
 
     Public Function getMainScreenTypes() As List(Of Type)

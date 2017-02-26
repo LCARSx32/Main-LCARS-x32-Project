@@ -136,14 +136,10 @@ Public Class frmStartup
         End If
     End Sub
 
-    Private Sub frmStartup_Activated(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Activated
-        'TODO: Remove this sub when using SetShellWindow
-        For Each b As modBusiness In curBusiness
-            b.myForm.Activate()
-        Next
-    End Sub
-
     Private Sub frmStartup_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        '''''''''''''''''''''''''''''''''''''''
+        '''' Critical LCARS initialization ''''
+        '''''''''''''''''''''''''''''''''''''''
         CheckComponents()
         If Command().Contains("-u") Then
             Try
@@ -156,54 +152,71 @@ Public Class frmStartup
             modSettings.InstallPath = Application.StartupPath
         End If
         modSettings.InitializeSettings()
-        If GetShellWindow() = IntPtr.Zero Then shellMode = True
         If Not Command().Contains("-L") Then
             If System.IO.File.Exists(Application.StartupPath & "\LCARSLogin.exe") Then
                 Process.Start(Application.StartupPath & "\LCARSLogin.exe")
                 End
             End If
         End If
+        shellMode = (GetShellWindow() = IntPtr.Zero)
+        SetDesktop(Me)
 
+        ''''''''''''''''''''''''''''''
+        '''' Shell initialization ''''
+        ''''''''''''''''''''''''''''''
+
+        HideMinimizedWindows()
+
+        If shellMode Then
+            Debug.Print("Shellmode!")
+            'This supposedly does something. Not entirely sure what, so we'll leave it disabled.
+            'SendMessage(GetDesktopWindow(), &H400, 0, 0)
+            If Not SetShellWindow(Me.Handle) Then
+                Debug.Print("Failed to set shell window! Current window: {0}", GetShellWindow())
+            End If
+            If Not SetShellReadyEvent("msgina: ShellReadyEvent") Then
+                SetShellReadyEvent("ShellDesktopSwitchEvent")
+            End If
+        Else
+            'Carefully work around Windows Explorer
+            GetTaskbarSettings()
+            SaveDesktopIcons()
+            MoveTrayIcons()
+            ShowTaskBar(False)
+            For Each myScreen As Screen In Screen.AllScreens
+                StartingWorkingArea.Add(myScreen.WorkingArea)
+            Next
+        End If
+
+
+        '''''''''''''''''''''''''''''''''''''
+        '''' Finish LCARS initialization ''''
+        '''''''''''''''''''''''''''''''''''''
+        ' LCARS message setup
+        SaveSetting("LCARS x32", "Application", "MainWindowHandle", Me.Handle.ToString)
+        InterMsgID = RegisterWindowMessage("LCARS_X32_MSG")
+        PostMessage(HWND_BROADCAST, InterMsgID, myDesktop.Handle, 0)
+
+        'Make desktop non-selectable and not in the alt-tab menu or taskbar
+        Dim currentStyle As Integer = GetWindowLong_Safe(Me.Handle, -20)
+        currentStyle = currentStyle Or WS_EX_TOOLWINDOW Or WS_EX_NOACTIVATE
+        SetWindowLong_Safe(Me.Handle, -20, currentStyle)
+        setBackBounds()
+
+        For i As Integer = 0 To Screen.AllScreens.Length - 1
+            CreateDesktop(i)
+            loadForm(i)
+            updateDesktopBounds(i, Screen.AllScreens(i).WorkingArea)
+        Next
+        AddHandler Microsoft.Win32.SystemEvents.DisplaySettingsChanged, AddressOf System_DisplayChanged
 
         If GetSetting("LCARS X32", "Application", "SpeechOn", "TRUE") Then
             beginVoiceRecognition()
         End If
 
-        MoveTrayIcons()
-        HideMinimizedWindows()
-
-        Dim result As Boolean = SetShellReadyEvent("msgina: ShellReadyEvent")
-        If result = False Then
-            SetShellReadyEvent("ShellDesktopSwitchEvent")
-        End If
-        For Each myScreen As Screen In Screen.AllScreens
-            StartingWorkingArea.Add(myScreen.WorkingArea)
-        Next
-        GetTaskbarSettings()
-
-        ShowTaskBar(False)
-
-
-        SetDesktop(Me)
-        SaveSetting("LCARS x32", "Application", "MainWindowHandle", Me.Handle.ToString)
-
-        InterMsgID = RegisterWindowMessageA("LCARS_X32_MSG")
-
-        PostMessage(HWND_BROADCAST, InterMsgID, myDesktop.Handle, 0)
-
-        For i As Integer = 0 To Screen.AllScreens.Length - 1
-            'Create desktop panel
-            CreateDesktop(i)
-            'Set forms
-            loadForm(i)
-        Next
-        AddHandler Microsoft.Win32.SystemEvents.DisplaySettingsChanged, AddressOf System_DisplayChanged
-        SaveDesktopIcons()
-
-        For Each myBusiness As modBusiness In curBusiness
-            myBusiness.myForm.BringToFront()
-        Next
-
+        '''''''''''''''''''''''''''''''''''''''''''''''''''''
+        '''' Run auto-start programs (Including updates) ''''
+        '''''''''''''''''''''''''''''''''''''''''''''''''''''
         If GetSetting("LCARS X32", "Application", "Updates", "FALSE") Then
             Try
                 Process.Start(Application.StartupPath & "\LCARSUpdate.exe", "-s")
@@ -231,32 +244,12 @@ Public Class frmStartup
                 count += 1
             Loop While hwndSHELLDLL_DefView = IntPtr.Zero And count < 20
         End If
-        If shellMode Then
-            hwndProgMan = IntPtr.Zero
-            hwndSHELLDLL_DefView = IntPtr.Zero
-        End If
+
+        SysListViewParent = hwndSHELLDLL_DefView
         SysListView = FindWindowEx(hwndSHELLDLL_DefView, IntPtr.Zero, "SysListView32", IntPtr.Zero)
         SetParent(Me.Handle, hwndProgMan)
 
-        setBackBounds()
-
-        For i As Integer = 0 To Screen.AllScreens.Length - 1
-            updateDesktopBounds(i, Screen.AllScreens(i).WorkingArea)
-        Next
-        Dim currentStyle As Integer = GetWindowLong_Safe(Me.Handle, -20)
-
-        'Make desktop non-selectable and not in the alt-tab menu
-        currentStyle = currentStyle Or WS_EX_NOACTIVATE Or WS_EX_TOOLWINDOW
-        SetWindowLong_Safe(Me.Handle, -20, currentStyle)
-
-        Me.BringToFront()
-        For Each myBack As Panel In curDesktop
-            myBack.BringToFront()
-        Next
-
         myIconSaver.Bounds = Screen.PrimaryScreen.Bounds
-
-
         SetParent(SysListView, myIconSaver.Handle)
     End Sub
 

@@ -33,7 +33,6 @@ Partial Class frmStartup
         Me.ClientSize = New System.Drawing.Size(297, 159)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmStartup"
-        Me.ShowInTaskbar = False
         Me.Text = "Startup"
         Me.ResumeLayout(False)
 
