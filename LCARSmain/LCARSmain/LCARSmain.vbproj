@@ -190,6 +190,7 @@
     <Compile Include="Modules\programList.vb" />
     <Compile Include="ShellIntegration\GlobalAtom.vb" />
     <Compile Include="ShellIntegration\KnownFolderPaths.vb" />
+    <Compile Include="ShellIntegration\modDDE.vb" />
     <Compile Include="ShellIntegration\StartupPrograms.vb" />
   </ItemGroup>
   <ItemGroup>
