@@ -55,7 +55,18 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "LCARSLock", "..\LCARSLock\L
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "LCARSsettings", "..\LCARSsettings\LCARSsettings.vbproj", "{748D87C0-0C66-47E7-BCB7-B0D4096EDF9F}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "LCARSmainTests.vb", "LCARSmainTests.vb\LCARSmainTests.vb.vbproj", "{9FB43C39-D199-415E-922A-DD7C00464978}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{97050F87-6A2B-4BB0-B53D-0DA2D03E6655}"
+	ProjectSection(SolutionItems) = preProject
+		LCARSmain.vsmdi = LCARSmain.vsmdi
+		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+	EndProjectSection
+EndProject
 Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = LCARSmain.vsmdi
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -125,6 +136,10 @@ Global
 		{748D87C0-0C66-47E7-BCB7-B0D4096EDF9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{748D87C0-0C66-47E7-BCB7-B0D4096EDF9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{748D87C0-0C66-47E7-BCB7-B0D4096EDF9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FB43C39-D199-415E-922A-DD7C00464978}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FB43C39-D199-415E-922A-DD7C00464978}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FB43C39-D199-415E-922A-DD7C00464978}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FB43C39-D199-415E-922A-DD7C00464978}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
