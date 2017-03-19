@@ -56,6 +56,7 @@ Namespace Controls
         Private _max As Integer = 100
         Private _value As Integer = 50
         Private _mouseDown As Boolean = False
+        Private _mouseOffset As Integer = 0
         Private _padding As Integer = 5
         Private _buttonHeight As Integer = 30
         Private _color As LCARScolorStyles = LCARScolorStyles.MiscFunction
@@ -104,7 +105,10 @@ Namespace Controls
 
         Protected Overrides Sub OnMouseDown(ByVal e As System.Windows.Forms.MouseEventArgs)
             MyBase.OnMouseDown(e)
-            If e.Button = Windows.Forms.MouseButtons.Left And buttonBounds.Contains(PointToClient(MousePosition)) Then
+            Dim btnBounds As Rectangle = buttonBounds
+            Dim mLoc As Point = PointToClient(MousePosition)
+            If e.Button = Windows.Forms.MouseButtons.Left And btnBounds.Contains(mLoc) Then
+                _mouseOffset = mLoc.Y - btnBounds.Top - btnBounds.Height \ 2
                 _mouseDown = True
                 Me.InvalidateBar()
             End If
@@ -121,10 +125,9 @@ Namespace Controls
         Protected Overrides Sub OnMouseMove(ByVal e As System.Windows.Forms.MouseEventArgs)
             MyBase.OnMouseMove(e)
             If e.Button = Windows.Forms.MouseButtons.Left And _mouseDown Then
-                'TODO: Record old position to avoid jumping
                 'TODO: Move to sub to support event pattern
                 Dim h As Integer = Me.Height - Me.Width \ 2 - 2 * _padding - _buttonHeight
-                Dim y As Integer = PointToClient(MousePosition).Y - _padding - Me.Width \ 4 - _buttonHeight \ 2
+                Dim y As Integer = PointToClient(MousePosition).Y - _padding - Me.Width \ 4 - _buttonHeight \ 2 - _mouseOffset
                 Dim newValue As Integer = CInt(Math.Round(y * (_min - _max) / h + _max))
                 'Clip to range
                 If _min < _max Then
@@ -140,19 +143,25 @@ Namespace Controls
                         newValue = _max
                     End If
                 End If
-                'If _value <> newValue Or True Then
                 _value = newValue
                 Me.InvalidateBar()
-                'End If
             End If
         End Sub
 
+        ''' <summary>
+        ''' Bounds of the button from current value or mouse position.
+        ''' </summary>
+        ''' <returns>Client-area coordinate rectangle</returns>
+        ''' <remarks>
+        ''' If the mouse is down, the rectangle will always be centered on it, minus the original mouse
+        ''' offset. Otherwise, the rectangle will be centered on the current value.
+        ''' </remarks>
         Protected ReadOnly Property buttonBounds() As Rectangle
             Get
                 Dim h As Integer = Me.Height - Me.Width \ 2 - 2 * _padding - _buttonHeight
                 Dim y As Double
                 If _mouseDown Then
-                    y = PointToClient(MousePosition).Y - _buttonHeight / 2 - Me.Width / 4 - _padding
+                    y = PointToClient(MousePosition).Y - _buttonHeight / 2 - Me.Width / 4 - _padding - _mouseOffset
                     If y < 0 Then
                         y = 0
                     ElseIf y > h Then
@@ -165,6 +174,12 @@ Namespace Controls
             End Get
         End Property
 
+        ''' <summary>
+        ''' Invalidate only the bar section of the control.
+        ''' </summary>
+        ''' <remarks>
+        ''' This saves drawing time by keeping the ellipses we already drew.
+        ''' </remarks>
         Protected Sub InvalidateBar()
             Me.Invalidate(New Rectangle(0, Me.Width \ 4, Me.Width, Me.Height - Me.Width \ 2))
         End Sub
