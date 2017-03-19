@@ -111,6 +111,9 @@
     <Compile Include="Controls\LCARSList.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\Slider.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\LevelIndicator.vb">
       <SubType>Component</SubType>
     </Compile>
