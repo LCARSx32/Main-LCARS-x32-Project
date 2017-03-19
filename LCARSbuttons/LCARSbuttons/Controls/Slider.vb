@@ -50,7 +50,7 @@ Namespace Controls
         End Property
 #End Region
 
-        'TODO: Properties for min, max, value, padding, buttonheight
+        'TODO: Properties for padding, buttonheight
         'TODO: Make text configurable
         Private _min As Integer = 0
         Private _max As Integer = 100
@@ -63,6 +63,7 @@ Namespace Controls
         Private _color2 As LCARScolorStyles = LCARScolorStyles.PrimaryFunction
         Private _lit As Boolean = True
 
+#Region " Properties "
         <DefaultValue(LCARScolorStyles.MiscFunction)> _
         Public Property MainColor() As LCARScolorStyles
             Get
@@ -87,6 +88,7 @@ Namespace Controls
             End Set
         End Property
 
+        <DefaultValue(True)> _
         Public Property Lit() As Boolean
             Get
                 Return _lit
@@ -97,6 +99,46 @@ Namespace Controls
                 Me.Invalidate()
             End Set
         End Property
+
+        <DefaultValue(0)> _
+        Public Property Min() As Integer
+            Get
+                Return _min
+            End Get
+            Set(ByVal value As Integer)
+                If _min = value Then Return
+                _min = value
+                _value = clipValue(_value)
+                Me.InvalidateBar()
+            End Set
+        End Property
+
+        <DefaultValue(100)> _
+        Public Property Max() As Integer
+            Get
+                Return _max
+            End Get
+            Set(ByVal value As Integer)
+                If _max = value Then Return
+                _max = value
+                _value = clipValue(_value)
+                Me.InvalidateBar()
+            End Set
+        End Property
+
+        <DefaultValue(50)> _
+        Public Property Value() As Integer
+            Get
+                Return _value
+            End Get
+            Set(ByVal value As Integer)
+                If _value = value Then Return
+                _value = clipValue(value)
+                Me.InvalidateBar()
+                OnValueChanged(New EventArgs())
+            End Set
+        End Property
+#End Region
 
         Public Sub New()
             MyBase.New()
@@ -125,27 +167,15 @@ Namespace Controls
         Protected Overrides Sub OnMouseMove(ByVal e As System.Windows.Forms.MouseEventArgs)
             MyBase.OnMouseMove(e)
             If e.Button = Windows.Forms.MouseButtons.Left And _mouseDown Then
-                'TODO: Move to sub to support event pattern
                 Dim h As Integer = Me.Height - Me.Width \ 2 - 2 * _padding - _buttonHeight
                 Dim y As Integer = PointToClient(MousePosition).Y - _padding - Me.Width \ 4 - _buttonHeight \ 2 - _mouseOffset
                 Dim newValue As Integer = CInt(Math.Round(y * (_min - _max) / h + _max))
-                'Clip to range
-                If _min < _max Then
-                    If newValue < _min Then
-                        newValue = _min
-                    ElseIf newValue > _max Then
-                        newValue = _max
-                    End If
-                Else
-                    If newValue > _min Then
-                        newValue = _min
-                    ElseIf newValue < _max Then
-                        newValue = _max
-                    End If
-                End If
-                _value = newValue
-                Me.InvalidateBar()
+                Value = newValue 'Handles the rest of the update
             End If
+        End Sub
+
+        Protected Overridable Sub OnValueChanged(ByVal e As EventArgs)
+            'TODO: Raise event
         End Sub
 
         ''' <summary>
@@ -183,6 +213,23 @@ Namespace Controls
         Protected Sub InvalidateBar()
             Me.Invalidate(New Rectangle(0, Me.Width \ 4, Me.Width, Me.Height - Me.Width \ 2))
         End Sub
+
+        Protected Function clipValue(ByVal newValue As Integer) As Integer
+            If _min < _max Then
+                If newValue < _min Then
+                    newValue = _min
+                ElseIf newValue > _max Then
+                    newValue = _max
+                End If
+            Else
+                If newValue > _min Then
+                    newValue = _min
+                ElseIf newValue < _max Then
+                    newValue = _max
+                End If
+            End If
+            Return newValue
+        End Function
 
         Protected Overrides Sub OnPaint(ByVal e As System.Windows.Forms.PaintEventArgs)
             Dim g As Graphics = Nothing
