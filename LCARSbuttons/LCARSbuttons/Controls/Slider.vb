@@ -183,7 +183,7 @@ Namespace Controls
 
         Protected Overrides Sub OnMouseUp(ByVal e As System.Windows.Forms.MouseEventArgs)
             MyBase.OnMouseUp(e)
-            If e.Button = Windows.Forms.MouseButtons.Left And buttonBounds.Contains(PointToClient(MousePosition)) Then
+            If e.Button = Windows.Forms.MouseButtons.Left And _mouseDown Then
                 _mouseDown = False
                 Me.InvalidateBar()
             End If
@@ -191,11 +191,23 @@ Namespace Controls
 
         Protected Overrides Sub OnMouseMove(ByVal e As System.Windows.Forms.MouseEventArgs)
             MyBase.OnMouseMove(e)
-            If e.Button = Windows.Forms.MouseButtons.Left And _mouseDown Then
-                Dim h As Integer = Me.Height - Me.Width \ 2 - 2 * _padding - _buttonHeight
-                Dim y As Integer = PointToClient(MousePosition).Y - _padding - Me.Width \ 4 - _buttonHeight \ 2 - _mouseOffset
-                Dim newValue As Integer = CInt(Math.Round(y * (_min - _max) / h + _max))
-                Value = newValue 'Handles the rest of the update
+            'Check if mouse is actually within the control's bounds.
+            If Me.Size.Width > e.Location.X And Me.Size.Height > e.Location.Y And _
+                        e.Location.Y >= 0 And e.Location.X >= 0 Then
+                If e.Button = Windows.Forms.MouseButtons.Left And _mouseDown Then
+                    Dim h As Integer = Me.Height - Me.Width \ 2 - 2 * _padding - _buttonHeight
+                    Dim y As Integer = PointToClient(MousePosition).Y - _padding - Me.Width \ 4 - _buttonHeight \ 2 - _mouseOffset
+                    Dim newValue As Integer = CInt(Math.Round(y * (_min - _max) / h + _max))
+                    Value = newValue 'Handles the rest of the update
+                End If
+            End If
+        End Sub
+
+        Protected Overrides Sub OnMouseLeave(ByVal e As System.EventArgs)
+            MyBase.OnMouseLeave(e)
+            If _mouseDown Then
+                _mouseDown = False
+                Me.InvalidateBar()
             End If
         End Sub
 
