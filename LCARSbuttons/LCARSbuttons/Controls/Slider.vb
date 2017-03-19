@@ -4,6 +4,7 @@ Imports System.Drawing
 Imports System.ComponentModel
 
 Namespace Controls
+    <DefaultEvent("ValueChanged")> _
     Public Class Slider
         Inherits System.Windows.Forms.Control
         Implements IColorable, IAlertable
@@ -50,8 +51,9 @@ Namespace Controls
         End Property
 #End Region
 
-        'TODO: Properties for padding, buttonheight
+        'TODO: Properties for padding
         'TODO: Make text configurable
+        'TODO: Set up minimum size
         Private _min As Integer = 0
         Private _max As Integer = 100
         Private _value As Integer = 50
@@ -62,6 +64,9 @@ Namespace Controls
         Private _color As LCARScolorStyles = LCARScolorStyles.MiscFunction
         Private _color2 As LCARScolorStyles = LCARScolorStyles.PrimaryFunction
         Private _lit As Boolean = True
+
+        'Events
+        Public Event ValueChanged As EventHandler
 
 #Region " Properties "
         <DefaultValue(LCARScolorStyles.MiscFunction)> _
@@ -138,6 +143,26 @@ Namespace Controls
                 OnValueChanged(New EventArgs())
             End Set
         End Property
+
+        <DefaultValue(30)> _
+        Public Property ButtonHeight() As Integer
+            Get
+                Return _buttonHeight
+            End Get
+            Set(ByVal value As Integer)
+                If value = _buttonHeight Then Return
+                'Can't be too small
+                If value < Me.Width \ 4 Then
+                    value = Me.Width \ 4
+                End If
+                'Or larger than half the bar
+                If value > (Me.Height - Me.Width \ 2 - _padding * 2) \ 2 Then
+                    value = (Me.Height - Me.Width \ 2 - _padding * 2) \ 2
+                End If
+                _buttonHeight = value
+                Me.InvalidateBar()
+            End Set
+        End Property
 #End Region
 
         Public Sub New()
@@ -175,7 +200,7 @@ Namespace Controls
         End Sub
 
         Protected Overridable Sub OnValueChanged(ByVal e As EventArgs)
-            'TODO: Raise event
+            RaiseEvent ValueChanged(Me, e)
         End Sub
 
         ''' <summary>
@@ -214,6 +239,13 @@ Namespace Controls
             Me.Invalidate(New Rectangle(0, Me.Width \ 4, Me.Width, Me.Height - Me.Width \ 2))
         End Sub
 
+        ''' <summary>
+        ''' Clip the given value to lie within the range of [min, max].
+        ''' </summary>
+        ''' <remarks>
+        ''' Min does not have to be less than Max. The value will be clipped to lie between Min and
+        ''' Max, inclusive.
+        ''' </remarks>
         Protected Function clipValue(ByVal newValue As Integer) As Integer
             If _min < _max Then
                 If newValue < _min Then
