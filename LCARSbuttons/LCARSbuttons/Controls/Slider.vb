@@ -316,7 +316,7 @@ Namespace Controls
                     c = Color.Red
             End Select
             If Not _lit Then
-                c = Color.FromArgb(128, c)
+                c = Color.FromArgb(255, c.R \ 2, c.G \ 2, c.B \ 2)
             End If
             Dim btnRect As Rectangle = buttonBounds
             If _redAlert = LCARSalert.Normal Then
