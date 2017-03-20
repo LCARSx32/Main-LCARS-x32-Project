@@ -137,10 +137,15 @@ Namespace Controls
                 Return _value
             End Get
             Set(ByVal value As Integer)
-                If _value = value Then Return
-                _value = clipValue(value)
-                Me.InvalidateBar()
-                OnValueChanged(New EventArgs())
+                If _value = value Then
+                    If _mouseDown Then
+                        Me.InvalidateBar()
+                    End If
+                Else
+                    _value = clipValue(value)
+                    Me.InvalidateBar()
+                    OnValueChanged(New EventArgs())
+                End If
             End Set
         End Property
 
@@ -211,6 +216,14 @@ Namespace Controls
             End If
         End Sub
 
+        ''' <summary>
+        ''' Raises the ValueChanged event
+        ''' </summary>
+        ''' <param name="e">An EventArgs that contains the event data</param>
+        ''' <remarks>
+        ''' Derived classes should override this sub instead of handling the event. This avoids the
+        ''' use of a delegate that would be required by the event.
+        ''' </remarks>
         Protected Overridable Sub OnValueChanged(ByVal e As EventArgs)
             RaiseEvent ValueChanged(Me, e)
         End Sub
