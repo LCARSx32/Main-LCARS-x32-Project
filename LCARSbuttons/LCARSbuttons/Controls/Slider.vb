@@ -25,6 +25,10 @@ Namespace Controls
             End Set
         End Property
 
+        Private Sub OnColorsUpdate() Handles _colors.ColorsUpdated
+            Me.Invalidate()
+        End Sub
+
         Public Property CustomAlertColor() As System.Drawing.Color Implements IAlertable.CustomAlertColor
             Get
                 Return _customAlertColor
