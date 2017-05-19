@@ -234,6 +234,15 @@ Namespace x32
             End Set
         End Property
 
+        Public Shared Property DDEEnabled() As Boolean
+            Get
+                Return CBool(GetSetting("LCARS x32", "Application", "DDEEnabled", "FALSE"))
+            End Get
+            Set(ByVal value As Boolean)
+                SaveSetting("LCARS x32", "Application", "DDEEnabled", value)
+            End Set
+        End Property
+
         Private Shared Property SettingsVersion() As Version
             Get
                 Dim v As String = GetSetting("LCARS x32", "Application", "SettingsVersion", "0.7.1")
