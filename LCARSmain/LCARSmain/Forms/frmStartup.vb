@@ -180,7 +180,9 @@ Public Class frmStartup
             If Not SetShellReadyEvent("msgina: ShellReadyEvent") Then
                 SetShellReadyEvent("ShellDesktopSwitchEvent")
             End If
-            initDDE()
+            If LCARS.x32.modSettings.DDEEnabled Then
+                initDDE()
+            End If
         Else
             'Carefully work around Windows Explorer
             GetTaskbarSettings()

@@ -761,7 +761,7 @@ Public Enum SetWindowPosFlags As UInteger
         ''''''''''''''''''''''''''''''''''''''''''''''''''
         RemoveHandler Microsoft.Win32.SystemEvents.DisplaySettingsChanged, AddressOf frmStartup.System_DisplayChanged
         SetParent(hTrayIcons, myIconSaver.Handle)
-        If shellMode Then
+        If shellMode And LCARS.x32.modSettings.DDEEnabled Then
             deinitDDE()
         End If
 

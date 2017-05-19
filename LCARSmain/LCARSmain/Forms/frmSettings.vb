@@ -223,6 +223,11 @@ Public Class frmSettings
             cbDebug.SideText = "ON"
         End If
 
+        cpxDDE.Lit = LCARS.x32.modSettings.DDEEnabled
+        If cpxDDE.Lit Then
+            cpxDDE.SideText = "OFF"
+        End If
+
         'Load Colors
         myFiles = System.IO.Directory.GetFiles(Application.StartupPath & "\colors", "*.lxcp")
         lstColors.Items.Clear()
@@ -1054,4 +1059,18 @@ Public Class frmSettings
         End If
     End Sub
 #End Region
+
+    Private Sub cpxDDE_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cpxDDE.Click
+        cpxDDE.Lit = Not cpxDDE.Lit
+        LCARS.x32.modSettings.DDEEnabled = cpxDDE.Lit
+        cpxDDE.SideText = If(cpxDDE.Lit, "ON", "OFF")
+        'TODO: Start/shutdown DDE?
+        If shellMode Then
+            If cpxDDE.Lit Then
+                initDDE()
+            Else
+                deinitDDE()
+            End If
+        End If
+    End Sub
 End Class
