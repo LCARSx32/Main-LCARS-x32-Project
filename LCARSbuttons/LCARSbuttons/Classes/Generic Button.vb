@@ -112,7 +112,6 @@ Public Class LCARSbuttonClass
     Dim isFlashing As Boolean
     Dim canClick As Boolean = True
     Dim oAlign As System.Drawing.ContentAlignment
-    Dim scaleHight As Double = 14
     Dim WithEvents tmrTextScroll As New Timer
     Protected myText As String = "LCARS"
     Protected forceCapital As Boolean = True
