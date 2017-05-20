@@ -31,7 +31,6 @@ Namespace x32
             End If
             upgradeSettings()
             If mode = SettingInitializationOptions.All Then
-                SaveSetting("LCARS X32", "Application", "AutoDestructOption", GetSetting("LCARS X32", "Application", "AutoDestructOption", "Alarm"))
                 SaveSetting("LCARS X32", "Application", "ButtonBeep", GetSetting("LCARS X32", "Application", "ButtonBeep", "TRUE"))
                 SaveSetting("LCARS X32", "Application", "PanelCloseInterval", GetSetting("LCARS X32", "Application", "PanelCloseInterval", "50"))
                 SaveSetting("LCARS X32", "Application", "PanelOpenInterval", GetSetting("LCARS X32", "Application", "PanelOpenInterval", "100"))
@@ -76,7 +75,6 @@ Namespace x32
             'Will wipe ALL settings, including Personal Programs, custom commands, command aliases, and custom alerts
             If mode = SettingInitializationOptions.RestoreToDefaults Then
                 TryDeleteSetting("LCARS x32")
-                SaveSetting("LCARS X32", "Application", "AutoDestructOption", "Alarm")
                 SaveSetting("LCARS X32", "Application", "ButtonBeep", "TRUE")
                 SaveSetting("LCARS X32", "Application", "PanelCloseInterval", "50")
                 SaveSetting("LCARS X32", "Application", "PanelOpenInterval", "100")
@@ -242,6 +240,33 @@ Namespace x32
             End Get
             Set(ByVal value As Boolean)
                 SaveSetting("LCARS x32", "Application", "DDEEnabled", CStr(value))
+            End Set
+        End Property
+
+        Public Enum AutoDestructOptions
+            alarm = 1
+            shutdown = 2
+            logoff = 3
+            external = 4
+        End Enum
+        Public Shared Property AutoDestructOption() As AutoDestructOptions
+            'TODO: Store as integers instead? Will need to be added to settings upgrade.
+            Get
+                Dim str As String = GetSetting("LCARS x32", "Application", "AutoDestructOption", "alarm")
+                Dim val As AutoDestructOptions
+                Try
+                    val = CType([Enum].Parse(GetType(AutoDestructOptions), str, True), AutoDestructOptions)
+                Catch ex As ArgumentException
+                    val = AutoDestructOptions.alarm
+                End Try
+                Return val
+            End Get
+            Set(ByVal value As AutoDestructOptions)
+                Dim name As String = [Enum].GetName(GetType(AutoDestructOptions), value)
+                If name Is Nothing Then
+                    name = [Enum].GetName(GetType(AutoDestructOptions), AutoDestructOptions.alarm)
+                End If
+                SaveSetting("LCARS x32", "Application", "AutoDestructOption", name)
             End Set
         End Property
 

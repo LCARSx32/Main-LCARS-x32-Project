@@ -1,10 +1,11 @@
 Imports LCARS.UI
+Imports LCARS.x32.modSettings
 
 Public Class frmAutoDestruct
     Inherits LCARS.LCARSForm
 
     Dim endTime As DateTime
-    Dim ShutdownOption As String
+    Dim ShutdownOption As AutoDestructOptions
     Dim shutdownOptions As New cWrapExitWindows
     Dim alertList As List(Of String)
     Private Sub sbCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbCancel.Click
@@ -27,7 +28,7 @@ Public Class frmAutoDestruct
         If txtMilliseconds.Text = "" Then
             txtMilliseconds.Text = "000"
         End If
-        If txtExternal.Text = "" And ShutdownOption.ToLower() = "external" Then
+        If txtExternal.Text = "" And ShutdownOption = AutoDestructOptions.external Then
             MsgBox("No external command has been provided.")
             Exit Sub
         End If
@@ -65,19 +66,19 @@ Public Class frmAutoDestruct
             sbStart.ButtonText = "START"
             txtMilliseconds.Text = "00"
             tmrCountdown.Enabled = False
-            Select Case ShutdownOption.ToLower
-                Case "shutdown"
+            Select Case ShutdownOption
+                Case AutoDestructOptions.shutdown
                     shutdownOptions.ExitWindows(cWrapExitWindows.Action.Shutdown)
-                Case "logoff"
+                Case AutoDestructOptions.logoff
                     shutdownOptions.ExitWindows(cWrapExitWindows.Action.LogOff)
-                Case "alarm"
+                Case AutoDestructOptions.alarm
                     Try
                         LCARS.Alerts.ActivateAlert(alertList(cbAlertType.SelectedIndex), Me.Handle)
                     Catch ex As Exception
                         LCARS.Alerts.ActivateAlert(0, Me.Handle)
                         MsgBox("Alert was not found")
                     End Try
-                Case "external"
+                Case AutoDestructOptions.external
                     Try
                         Shell(txtExternal.Text, AppWinStyle.NormalFocus, False)
                     Catch ex As Exception
@@ -89,8 +90,8 @@ Public Class frmAutoDestruct
 
     Private Sub hpShutDown_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles hpShutDown.Click
         fbSelected.Top = hpShutDown.Top
-        ShutdownOption = "ShutDown"
-        SaveSetting("LCARS x32", "Application", "AutoDestructOption", ShutdownOption)
+        ShutdownOption = AutoDestructOptions.shutdown
+        LCARS.x32.modSettings.AutoDestructOption = ShutdownOption
         hpShutDown.Color = LCARS.LCARScolorStyles.PrimaryFunction
         hpLogOff.Color = LCARS.LCARScolorStyles.SystemFunction
         hpAlarm.Color = LCARS.LCARScolorStyles.SystemFunction
@@ -100,32 +101,30 @@ Public Class frmAutoDestruct
     End Sub
 
     Private Sub frmAutoDestruct_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        ShutdownOption = GetSetting("LCARS x32", "Application", "AutoDestructOption", "alarm")
+        ShutdownOption = LCARS.x32.modSettings.AutoDestructOption
         alertList = LCARS.GetAllAlertNames()
         For Each myName As String In alertList
             cbAlertType.Items.Add(myName & " Alert")
         Next
         cbAlertType.SelectedIndex = 0
-        Select Case ShutdownOption.ToLower
-            Case "shutdown"
+        Select Case ShutdownOption
+            Case AutoDestructOptions.shutdown
                 hpShutDown_Click(sender, e)
-            Case "logoff"
+            Case AutoDestructOptions.logoff
                 hpLogOff_Click(sender, e)
-            Case "alarm"
+            Case AutoDestructOptions.alarm
                 hpAlarm_Click(sender, e)
-            Case "external"
+            Case AutoDestructOptions.external
                 hpExternal_Click(sender, e)
         End Select
         txtExternal.Text = GetSetting("LCARS x32", "Application", "AutoDestructCommand", "")
         AddHandler txtExternal.TextChanged, AddressOf txtExternal_TextChanged
-        Me.Bounds = Screen.PrimaryScreen.WorkingArea
-        Application.DoEvents()
         LCARS.Util.SetBeeping(Me, GetSetting("LCARS x32", "Application", "ButtonBeep", "TRUE"))
     End Sub
     Private Sub hpLogOff_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles hpLogOff.Click
         fbSelected.Top = hpLogOff.Top
-        ShutdownOption = "LogOff"
-        SaveSetting("LCARS x32", "Application", "AutoDestructOption", ShutdownOption)
+        ShutdownOption = AutoDestructOptions.logoff
+        LCARS.x32.modSettings.AutoDestructOption = ShutdownOption
         hpShutDown.Color = LCARS.LCARScolorStyles.SystemFunction
         hpLogOff.Color = LCARS.LCARScolorStyles.PrimaryFunction
         hpAlarm.Color = LCARS.LCARScolorStyles.SystemFunction
@@ -136,8 +135,8 @@ Public Class frmAutoDestruct
 
     Private Sub hpAlarm_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles hpAlarm.Click
         fbSelected.Top = hpAlarm.Top
-        ShutdownOption = "Alarm"
-        SaveSetting("LCARS x32", "Application", "AutoDestructOption", ShutdownOption)
+        ShutdownOption = AutoDestructOptions.alarm
+        LCARS.x32.modSettings.AutoDestructOption = ShutdownOption
         hpShutDown.Color = LCARS.LCARScolorStyles.SystemFunction
         hpLogOff.Color = LCARS.LCARScolorStyles.SystemFunction
         hpAlarm.Color = LCARS.LCARScolorStyles.PrimaryFunction
@@ -185,8 +184,8 @@ Public Class frmAutoDestruct
 
     Private Sub hpExternal_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles hpExternal.Click
         fbSelected.Top = hpExternal.Top
-        ShutdownOption = "External"
-        SaveSetting("LCARS x32", "Application", "AutoDestructOption", ShutdownOption)
+        ShutdownOption = AutoDestructOptions.external
+        LCARS.x32.modSettings.AutoDestructOption = ShutdownOption
         hpShutDown.Color = LCARS.LCARScolorStyles.SystemFunction
         hpLogOff.Color = LCARS.LCARScolorStyles.SystemFunction
         hpAlarm.Color = LCARS.LCARScolorStyles.SystemFunction
