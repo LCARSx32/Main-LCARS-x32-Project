@@ -430,6 +430,11 @@ Public Enum SetWindowPosFlags As UInteger
 
 #End Region
 
+#Region " Shell DDE "
+    Public Const WM_DDE_FIRST As Integer = &H3E0
+    Public Const WM_DDE_LAST As Integer = WM_DDE_FIRST + 8
+
+#End Region
 #End Region
 
     Public Sub setBusiness(ByRef business As modBusiness, ByVal ScreenIndex As Integer)
@@ -756,6 +761,9 @@ Public Enum SetWindowPosFlags As UInteger
         ''''''''''''''''''''''''''''''''''''''''''''''''''
         RemoveHandler Microsoft.Win32.SystemEvents.DisplaySettingsChanged, AddressOf frmStartup.System_DisplayChanged
         SetParent(hTrayIcons, myIconSaver.Handle)
+        If shellMode And LCARS.x32.modSettings.DDEEnabled Then
+            deinitDDE()
+        End If
 
         '''''''''''''''''''''''''''''''
         '''' Close LCARS interface ''''

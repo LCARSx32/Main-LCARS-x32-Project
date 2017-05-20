@@ -61,6 +61,7 @@ Partial Class frmSettings
         Me.sbExitMyComp = New LCARS.Controls.StandardButton
         Me.ltcSettings = New LCARS.Controls.x32TabControl
         Me.LcarsTabPage1 = New LCARS.Controls.x32TabPage
+        Me.sbSoundTest = New LCARS.Controls.StandardButton
         Me.lstSoundResources = New LCARS.Controls.LCARSList
         Me.lblSoundResource = New LCARS.Controls.LCARSLabel
         Me.sbSoundEnabled = New LCARS.Controls.StandardButton
@@ -68,6 +69,8 @@ Partial Class frmSettings
         Me.lstSounds = New LCARS.Controls.LCARSList
         Me.fbChangeSound = New LCARS.Controls.FlatButton
         Me.txtSoundPath = New System.Windows.Forms.Label
+        Me.tabAbout = New LCARS.Controls.x32TabPage
+        Me.lblAbout = New System.Windows.Forms.Label
         Me.LcarsTabPage2 = New LCARS.Controls.x32TabPage
         Me.cbDates = New LCARS.Controls.ComplexButton
         Me.Label3 = New System.Windows.Forms.Label
@@ -170,11 +173,10 @@ Partial Class frmSettings
         Me.lblVersion = New System.Windows.Forms.Label
         Me.tabExperimental = New LCARS.Controls.x32TabPage
         Me.cbDebug = New LCARS.Controls.ComplexButton
-        Me.Label20 = New System.Windows.Forms.Label
+        Me.lblDebugSwitch = New System.Windows.Forms.Label
         Me.lblWarning = New System.Windows.Forms.Label
-        Me.tabAbout = New LCARS.Controls.x32TabPage
-        Me.lblAbout = New System.Windows.Forms.Label
-        Me.sbSoundTest = New LCARS.Controls.StandardButton
+        Me.cpxDDE = New LCARS.Controls.ComplexButton
+        Me.lblDDESwitch = New System.Windows.Forms.Label
         Me.TabPage6.SuspendLayout()
         Me.TabPage7.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -188,6 +190,7 @@ Partial Class frmSettings
         CType(Me.PictureBox7, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ltcSettings.SuspendLayout()
         Me.LcarsTabPage1.SuspendLayout()
+        Me.tabAbout.SuspendLayout()
         Me.LcarsTabPage2.SuspendLayout()
         Me.pnlPreview.SuspendLayout()
         Me.tabScreenSpecific.SuspendLayout()
@@ -210,7 +213,6 @@ Partial Class frmSettings
         Me.tabAlerts.SuspendLayout()
         Me.tabUpdate.SuspendLayout()
         Me.tabExperimental.SuspendLayout()
-        Me.tabAbout.SuspendLayout()
         Me.SuspendLayout()
         '
         'TabPage6
@@ -912,18 +914,18 @@ Partial Class frmSettings
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ltcSettings.BackColor = System.Drawing.Color.Black
+        Me.ltcSettings.Controls.Add(Me.tabExperimental)
         Me.ltcSettings.Controls.Add(Me.LcarsTabPage1)
-        Me.ltcSettings.Controls.Add(Me.tabAbout)
         Me.ltcSettings.Controls.Add(Me.LcarsTabPage2)
         Me.ltcSettings.Controls.Add(Me.tabScreenSpecific)
         Me.ltcSettings.Controls.Add(Me.LcarsTabPage3)
         Me.ltcSettings.Controls.Add(Me.LcarsTabPage5)
         Me.ltcSettings.Controls.Add(Me.tabAlerts)
         Me.ltcSettings.Controls.Add(Me.tabUpdate)
-        Me.ltcSettings.Controls.Add(Me.tabExperimental)
+        Me.ltcSettings.Controls.Add(Me.tabAbout)
         Me.ltcSettings.Location = New System.Drawing.Point(12, 41)
         Me.ltcSettings.Name = "ltcSettings"
-        Me.ltcSettings.SelectedTab = Me.LcarsTabPage1
+        Me.ltcSettings.SelectedTab = Me.tabExperimental
         Me.ltcSettings.Size = New System.Drawing.Size(776, 547)
         Me.ltcSettings.TabIndex = 60
         Me.ltcSettings.TabPages.Add(Me.LcarsTabPage1)
@@ -957,6 +959,29 @@ Partial Class frmSettings
         Me.LcarsTabPage1.Size = New System.Drawing.Size(666, 521)
         Me.LcarsTabPage1.TabIndex = 3
         Me.LcarsTabPage1.Text = "SOUNDS"
+        '
+        'sbSoundTest
+        '
+        Me.sbSoundTest.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.sbSoundTest.Beeping = False
+        Me.sbSoundTest.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
+        Me.sbSoundTest.ButtonText = "TEST SOUND"
+        Me.sbSoundTest.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.sbSoundTest.ButtonTextHeight = 14
+        Me.sbSoundTest.Clickable = True
+        Me.sbSoundTest.Color = LCARS.LCARScolorStyles.PrimaryFunction
+        Me.sbSoundTest.CustomAlertColor = System.Drawing.Color.Empty
+        Me.sbSoundTest.Data = Nothing
+        Me.sbSoundTest.Data2 = Nothing
+        Me.sbSoundTest.FlashInterval = 500
+        Me.sbSoundTest.holdDraw = False
+        Me.sbSoundTest.Lit = True
+        Me.sbSoundTest.Location = New System.Drawing.Point(211, 269)
+        Me.sbSoundTest.Name = "sbSoundTest"
+        Me.sbSoundTest.RedAlert = LCARS.LCARSalert.Normal
+        Me.sbSoundTest.Size = New System.Drawing.Size(94, 28)
+        Me.sbSoundTest.TabIndex = 9
+        Me.sbSoundTest.Text = "TEST SOUND"
         '
         'lstSoundResources
         '
@@ -1070,6 +1095,32 @@ Partial Class frmSettings
         Me.txtSoundPath.Size = New System.Drawing.Size(115, 28)
         Me.txtSoundPath.TabIndex = 0
         Me.txtSoundPath.Text = "Button Sound Path"
+        '
+        'tabAbout
+        '
+        Me.tabAbout.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tabAbout.BackColor = System.Drawing.Color.Black
+        Me.tabAbout.Color = LCARS.LCARScolorStyles.MiscFunction
+        Me.tabAbout.Controls.Add(Me.lblAbout)
+        Me.tabAbout.Location = New System.Drawing.Point(0, 26)
+        Me.tabAbout.Name = "tabAbout"
+        Me.tabAbout.Size = New System.Drawing.Size(666, 521)
+        Me.tabAbout.TabIndex = 10
+        Me.tabAbout.Text = "ABOUT"
+        '
+        'lblAbout
+        '
+        Me.lblAbout.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblAbout.Font = New System.Drawing.Font("LCARS", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblAbout.Location = New System.Drawing.Point(0, 15)
+        Me.lblAbout.Name = "lblAbout"
+        Me.lblAbout.Size = New System.Drawing.Size(648, 506)
+        Me.lblAbout.TabIndex = 0
+        Me.lblAbout.Text = "About Message"
         '
         'LcarsTabPage2
         '
@@ -2864,8 +2915,10 @@ Partial Class frmSettings
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.tabExperimental.BackColor = System.Drawing.Color.Black
         Me.tabExperimental.Color = LCARS.LCARScolorStyles.MiscFunction
+        Me.tabExperimental.Controls.Add(Me.cpxDDE)
         Me.tabExperimental.Controls.Add(Me.cbDebug)
-        Me.tabExperimental.Controls.Add(Me.Label20)
+        Me.tabExperimental.Controls.Add(Me.lblDDESwitch)
+        Me.tabExperimental.Controls.Add(Me.lblDebugSwitch)
         Me.tabExperimental.Controls.Add(Me.lblWarning)
         Me.tabExperimental.Location = New System.Drawing.Point(0, 26)
         Me.tabExperimental.Name = "tabExperimental"
@@ -2898,18 +2951,18 @@ Partial Class frmSettings
         Me.cbDebug.TabIndex = 8
         Me.cbDebug.Text = "DEBUG SWITCH"
         '
-        'Label20
+        'lblDebugSwitch
         '
-        Me.Label20.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.lblDebugSwitch.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label20.AutoSize = True
-        Me.Label20.Font = New System.Drawing.Font("LCARS", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label20.ForeColor = System.Drawing.Color.Orange
-        Me.Label20.Location = New System.Drawing.Point(12, 129)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(465, 84)
-        Me.Label20.TabIndex = 6
-        Me.Label20.Text = "Will enable several features helpful for debugging purposes, but potentially" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "dan" & _
+        Me.lblDebugSwitch.AutoSize = True
+        Me.lblDebugSwitch.Font = New System.Drawing.Font("LCARS", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDebugSwitch.ForeColor = System.Drawing.Color.Orange
+        Me.lblDebugSwitch.Location = New System.Drawing.Point(40, 129)
+        Me.lblDebugSwitch.Name = "lblDebugSwitch"
+        Me.lblDebugSwitch.Size = New System.Drawing.Size(465, 84)
+        Me.lblDebugSwitch.TabIndex = 6
+        Me.lblDebugSwitch.Text = "Will enable several features helpful for debugging purposes, but potentially" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "dan" & _
             "gerous to have on at all times. Read the manual before enabling, or unless" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "told" & _
             " to enable for debugging purposes."
         '
@@ -2927,54 +2980,44 @@ Partial Class frmSettings
         Me.lblWarning.Text = "Warning: Features enabled on this page may not work," & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "or may work with unintended" & _
             " results. Do not use them" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "unless absolutely neccesary."
         '
-        'tabAbout
+        'cpxDDE
         '
-        Me.tabAbout.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.cpxDDE.Beeping = False
+        Me.cpxDDE.ButtonText = "DYNAMIC DATA EXCHANGE"
+        Me.cpxDDE.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.cpxDDE.ButtonTextHeight = 14
+        Me.cpxDDE.Clickable = True
+        Me.cpxDDE.Color = LCARS.LCARScolorStyles.MiscFunction
+        Me.cpxDDE.CustomAlertColor = System.Drawing.Color.Empty
+        Me.cpxDDE.Data = Nothing
+        Me.cpxDDE.Data2 = Nothing
+        Me.cpxDDE.FlashInterval = 500
+        Me.cpxDDE.holdDraw = False
+        Me.cpxDDE.Lit = False
+        Me.cpxDDE.Location = New System.Drawing.Point(17, 216)
+        Me.cpxDDE.Name = "cpxDDE"
+        Me.cpxDDE.RedAlert = LCARS.LCARSalert.Normal
+        Me.cpxDDE.SideBlockColor = LCARS.LCARScolorStyles.Orange
+        Me.cpxDDE.SideText = "OFF"
+        Me.cpxDDE.SideTextColor = LCARS.LCARScolorStyles.Orange
+        Me.cpxDDE.SideTextWidth = -1
+        Me.cpxDDE.Size = New System.Drawing.Size(232, 32)
+        Me.cpxDDE.TabIndex = 9
+        Me.cpxDDE.Text = "DYNAMIC DATA EXCHANGE"
+        '
+        'lblDDESwitch
+        '
+        Me.lblDDESwitch.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tabAbout.BackColor = System.Drawing.Color.Black
-        Me.tabAbout.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.tabAbout.Controls.Add(Me.lblAbout)
-        Me.tabAbout.Location = New System.Drawing.Point(0, 26)
-        Me.tabAbout.Name = "tabAbout"
-        Me.tabAbout.Size = New System.Drawing.Size(666, 521)
-        Me.tabAbout.TabIndex = 10
-        Me.tabAbout.Text = "ABOUT"
-        '
-        'lblAbout
-        '
-        Me.lblAbout.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lblAbout.Font = New System.Drawing.Font("LCARS", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblAbout.Location = New System.Drawing.Point(0, 15)
-        Me.lblAbout.Name = "lblAbout"
-        Me.lblAbout.Size = New System.Drawing.Size(648, 506)
-        Me.lblAbout.TabIndex = 0
-        Me.lblAbout.Text = "About Message"
-        '
-        'sbSoundTest
-        '
-        Me.sbSoundTest.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.sbSoundTest.Beeping = False
-        Me.sbSoundTest.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
-        Me.sbSoundTest.ButtonText = "TEST SOUND"
-        Me.sbSoundTest.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.sbSoundTest.ButtonTextHeight = 14
-        Me.sbSoundTest.Clickable = True
-        Me.sbSoundTest.Color = LCARS.LCARScolorStyles.PrimaryFunction
-        Me.sbSoundTest.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbSoundTest.Data = Nothing
-        Me.sbSoundTest.Data2 = Nothing
-        Me.sbSoundTest.FlashInterval = 500
-        Me.sbSoundTest.holdDraw = False
-        Me.sbSoundTest.Lit = True
-        Me.sbSoundTest.Location = New System.Drawing.Point(211, 269)
-        Me.sbSoundTest.Name = "sbSoundTest"
-        Me.sbSoundTest.RedAlert = LCARS.LCARSalert.Normal
-        Me.sbSoundTest.Size = New System.Drawing.Size(94, 28)
-        Me.sbSoundTest.TabIndex = 9
-        Me.sbSoundTest.Text = "TEST SOUND"
+        Me.lblDDESwitch.AutoSize = True
+        Me.lblDDESwitch.Font = New System.Drawing.Font("LCARS", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDDESwitch.ForeColor = System.Drawing.Color.Orange
+        Me.lblDDESwitch.Location = New System.Drawing.Point(31, 254)
+        Me.lblDDESwitch.Name = "lblDDESwitch"
+        Me.lblDDESwitch.Size = New System.Drawing.Size(512, 56)
+        Me.lblDDESwitch.TabIndex = 6
+        Me.lblDDESwitch.Text = "Only functions in Shell mode. Should enable shell DDE services at a minimally fun" & _
+            "ctional" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "level."
         '
         'frmSettings
         '
@@ -3007,6 +3050,7 @@ Partial Class frmSettings
         Me.ltcSettings.PerformLayout()
         Me.LcarsTabPage1.ResumeLayout(False)
         Me.LcarsTabPage1.PerformLayout()
+        Me.tabAbout.ResumeLayout(False)
         Me.LcarsTabPage2.ResumeLayout(False)
         Me.pnlPreview.ResumeLayout(False)
         Me.tabScreenSpecific.ResumeLayout(False)
@@ -3040,7 +3084,6 @@ Partial Class frmSettings
         Me.tabUpdate.PerformLayout()
         Me.tabExperimental.ResumeLayout(False)
         Me.tabExperimental.PerformLayout()
-        Me.tabAbout.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -3158,7 +3201,7 @@ Partial Class frmSettings
     Friend WithEvents hpAlertFiller As LCARS.Controls.HalfPillButton
     Friend WithEvents lblID As System.Windows.Forms.Label
     Friend WithEvents cbDebug As LCARS.Controls.ComplexButton
-    Friend WithEvents Label20 As System.Windows.Forms.Label
+    Friend WithEvents lblDebugSwitch As System.Windows.Forms.Label
     Friend WithEvents tabScreenSpecific As LCARS.Controls.x32TabPage
     Friend WithEvents pnlScreens As System.Windows.Forms.Panel
     Friend WithEvents lblClickScreen As System.Windows.Forms.Label
@@ -3199,4 +3242,6 @@ Partial Class frmSettings
     Friend WithEvents lblSoundName As LCARS.Controls.LCARSLabel
     Friend WithEvents lstSoundResources As LCARS.Controls.LCARSList
     Friend WithEvents sbSoundTest As LCARS.Controls.StandardButton
+    Friend WithEvents cpxDDE As LCARS.Controls.ComplexButton
+    Friend WithEvents lblDDESwitch As System.Windows.Forms.Label
 End Class

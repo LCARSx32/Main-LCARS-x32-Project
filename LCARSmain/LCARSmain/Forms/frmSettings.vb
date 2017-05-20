@@ -223,6 +223,11 @@ Public Class frmSettings
             cbDebug.SideText = "ON"
         End If
 
+        cpxDDE.Lit = LCARS.x32.modSettings.DDEEnabled
+        If cpxDDE.Lit Then
+            cpxDDE.SideText = "OFF"
+        End If
+
         'Load Colors
         myFiles = System.IO.Directory.GetFiles(Application.StartupPath & "\colors", "*.lxcp")
         lstColors.Items.Clear()
@@ -658,6 +663,7 @@ Public Class frmSettings
 
     Private Sub sbAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbAdd.Click
         lblError.Text = ""
+        editedCommand = -1
         pnlAdd.Visible = True
         txtCommandName.Clear()
         txtCommandPath.Clear()
@@ -678,16 +684,22 @@ Public Class frmSettings
     End Sub
 
     Private Sub sbOK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbOK.Click
-        Dim myCheck As Boolean = True
-        If editedCommand = -1 Then
+        Dim valid As Boolean = True
+        If txtCommandName.Text.Trim() = "" Then
+            lblError.Text = "Unique, non-empty command name required."
+            valid = False
+        ElseIf txtCommandPath.Text.Trim = "" Then
+            lblError.Text = "Non-empty command path required."
+            valid = False
+        ElseIf editedCommand = -1 Then
             For Each myelement As CustomEntry In customList
                 If myelement.CommandName = txtCommandName.Text Then
-                    myCheck = False
+                    valid = False
                     lblError.Text = "Command already in use. Choose another name."
                 End If
             Next
         End If
-        If myCheck Then
+        If valid Then
             lblError.Text = ""
             Dim myCommand As New CustomEntry
             myCommand.CommandName = txtCommandName.Text.ToLower()
@@ -1054,4 +1066,18 @@ Public Class frmSettings
         End If
     End Sub
 #End Region
+
+    Private Sub cpxDDE_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cpxDDE.Click
+        cpxDDE.Lit = Not cpxDDE.Lit
+        LCARS.x32.modSettings.DDEEnabled = cpxDDE.Lit
+        cpxDDE.SideText = If(cpxDDE.Lit, "ON", "OFF")
+        'TODO: Start/shutdown DDE?
+        If shellMode Then
+            If cpxDDE.Lit Then
+                initDDE()
+            Else
+                deinitDDE()
+            End If
+        End If
+    End Sub
 End Class

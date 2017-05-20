@@ -128,6 +128,11 @@ Public Class frmStartup
             End Select
         ElseIf m.Msg = WM_EXPLORER_CLOSE Then
             CloseLCARS()
+        ElseIf m.Msg <= WM_DDE_LAST And m.Msg >= WM_DDE_FIRST Then
+            ' Handle Dynamic Data Exchange messages.
+            ' This is mostly ensuring that LCARS Explorer opens when another program wants to 
+            ' open a folder.
+            handleDDE(m)
         Else
             'it wasn't a message we need to handle, so let VB take back over.
             MyBase.WndProc(m)
@@ -174,6 +179,9 @@ Public Class frmStartup
             End If
             If Not SetShellReadyEvent("msgina: ShellReadyEvent") Then
                 SetShellReadyEvent("ShellDesktopSwitchEvent")
+            End If
+            If LCARS.x32.modSettings.DDEEnabled Then
+                initDDE()
             End If
         Else
             'Carefully work around Windows Explorer

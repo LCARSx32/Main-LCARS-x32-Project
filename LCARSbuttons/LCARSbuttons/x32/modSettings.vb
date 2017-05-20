@@ -1,4 +1,6 @@
-﻿Imports System.IO
+﻿Option Strict On
+
+Imports System.IO
 
 
 Namespace x32
@@ -29,7 +31,6 @@ Namespace x32
             End If
             upgradeSettings()
             If mode = SettingInitializationOptions.All Then
-                SaveSetting("LCARS X32", "Application", "AutoDestructOption", GetSetting("LCARS X32", "Application", "AutoDestructOption", "Alarm"))
                 SaveSetting("LCARS X32", "Application", "ButtonBeep", GetSetting("LCARS X32", "Application", "ButtonBeep", "TRUE"))
                 SaveSetting("LCARS X32", "Application", "PanelCloseInterval", GetSetting("LCARS X32", "Application", "PanelCloseInterval", "50"))
                 SaveSetting("LCARS X32", "Application", "PanelOpenInterval", GetSetting("LCARS X32", "Application", "PanelOpenInterval", "100"))
@@ -74,7 +75,6 @@ Namespace x32
             'Will wipe ALL settings, including Personal Programs, custom commands, command aliases, and custom alerts
             If mode = SettingInitializationOptions.RestoreToDefaults Then
                 TryDeleteSetting("LCARS x32")
-                SaveSetting("LCARS X32", "Application", "AutoDestructOption", "Alarm")
                 SaveSetting("LCARS X32", "Application", "ButtonBeep", "TRUE")
                 SaveSetting("LCARS X32", "Application", "PanelCloseInterval", "50")
                 SaveSetting("LCARS X32", "Application", "PanelOpenInterval", "100")
@@ -163,37 +163,37 @@ Namespace x32
 
         Public Shared Property WallpaperSizeMode(ByVal screenIndex As Integer) As Integer
             Get
-                Return GetSetting("LCARS x32", "Screen" & screenIndex, "WallpaperSizeMode", "2")
+                Return CInt(GetSetting("LCARS x32", "Screen" & screenIndex, "WallpaperSizeMode", "2"))
             End Get
             Set(ByVal value As Integer)
-                SaveSetting("LCARS x32", "Screen" & screenIndex, "WallpaperSizeMode", value)
+                SaveSetting("LCARS x32", "Screen" & screenIndex, "WallpaperSizeMode", CStr(value))
             End Set
         End Property
 
         Public Shared Property MainScreen(ByVal screenIndex As Integer) As Integer
             Get
-                Return GetSetting("LCARS x32", "Screen" & screenIndex, "GUI form", "1")
+                Return CInt(GetSetting("LCARS x32", "Screen" & screenIndex, "GUI form", "1"))
             End Get
             Set(ByVal value As Integer)
-                SaveSetting("LCARS x32", "Screen" & screenIndex, "GUI form", value)
+                SaveSetting("LCARS x32", "Screen" & screenIndex, "GUI form", CStr(value))
             End Set
         End Property
 
         Public Shared Property AutoHide(ByVal screenIndex As Integer) As Boolean
             Get
-                Return GetSetting("LCARS x32", "Screen" & screenIndex, "Autohide", "0")
+                Return CBool(GetSetting("LCARS x32", "Screen" & screenIndex, "Autohide", "0"))
             End Get
             Set(ByVal value As Boolean)
-                SaveSetting("LCARS x32", "Screen" & screenIndex, "Autohide", value)
+                SaveSetting("LCARS x32", "Screen" & screenIndex, "Autohide", CStr(value))
             End Set
         End Property
 
         Public Shared Property ShowTrayIcons(ByVal screenIndex As Integer) As Boolean
             Get
-                Return GetSetting("LCARS x32", "Screen" & screenIndex, "ShowTrayIcons", "FALSE")
+                Return CBool(GetSetting("LCARS x32", "Screen" & screenIndex, "ShowTrayIcons", "FALSE"))
             End Get
             Set(ByVal value As Boolean)
-                SaveSetting("LCARS x32", "Screen" & screenIndex, "ShowTrayIcons", value)
+                SaveSetting("LCARS x32", "Screen" & screenIndex, "ShowTrayIcons", CStr(value))
             End Set
         End Property
 
@@ -230,14 +230,50 @@ Namespace x32
                 Return CBool(GetSetting("LCARS x32", "Application", "CommandTimeoutEnabled", "TRUE"))
             End Get
             Set(ByVal value As Boolean)
-                SaveSetting("LCARS x32", "Application", "CommandTimeoutEnabled", value)
+                SaveSetting("LCARS x32", "Application", "CommandTimeoutEnabled", CStr(value))
+            End Set
+        End Property
+
+        Public Shared Property DDEEnabled() As Boolean
+            Get
+                Return CBool(GetSetting("LCARS x32", "Application", "DDEEnabled", "FALSE"))
+            End Get
+            Set(ByVal value As Boolean)
+                SaveSetting("LCARS x32", "Application", "DDEEnabled", CStr(value))
+            End Set
+        End Property
+
+        Public Enum AutoDestructOptions
+            alarm = 1
+            shutdown = 2
+            logoff = 3
+            external = 4
+        End Enum
+        Public Shared Property AutoDestructOption() As AutoDestructOptions
+            'TODO: Store as integers instead? Will need to be added to settings upgrade.
+            Get
+                Dim str As String = GetSetting("LCARS x32", "Application", "AutoDestructOption", "alarm")
+                Dim val As AutoDestructOptions
+                Try
+                    val = CType([Enum].Parse(GetType(AutoDestructOptions), str, True), AutoDestructOptions)
+                Catch ex As ArgumentException
+                    val = AutoDestructOptions.alarm
+                End Try
+                Return val
+            End Get
+            Set(ByVal value As AutoDestructOptions)
+                Dim name As String = [Enum].GetName(GetType(AutoDestructOptions), value)
+                If name Is Nothing Then
+                    name = [Enum].GetName(GetType(AutoDestructOptions), AutoDestructOptions.alarm)
+                End If
+                SaveSetting("LCARS x32", "Application", "AutoDestructOption", name)
             End Set
         End Property
 
         Private Shared Property SettingsVersion() As Version
             Get
                 Dim v As String = GetSetting("LCARS x32", "Application", "SettingsVersion", "0.7.1")
-                Dim chunks As String() = v.Split(".")
+                Dim chunks As String() = v.Split("."c)
                 Dim ret As Version = Nothing
                 If chunks.Length = 3 Then
                     Try
