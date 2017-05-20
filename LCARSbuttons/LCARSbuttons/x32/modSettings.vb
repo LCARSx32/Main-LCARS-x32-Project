@@ -1,4 +1,6 @@
-﻿Imports System.IO
+﻿Option Strict On
+
+Imports System.IO
 
 
 Namespace x32
@@ -163,37 +165,37 @@ Namespace x32
 
         Public Shared Property WallpaperSizeMode(ByVal screenIndex As Integer) As Integer
             Get
-                Return GetSetting("LCARS x32", "Screen" & screenIndex, "WallpaperSizeMode", "2")
+                Return CInt(GetSetting("LCARS x32", "Screen" & screenIndex, "WallpaperSizeMode", "2"))
             End Get
             Set(ByVal value As Integer)
-                SaveSetting("LCARS x32", "Screen" & screenIndex, "WallpaperSizeMode", value)
+                SaveSetting("LCARS x32", "Screen" & screenIndex, "WallpaperSizeMode", CStr(value))
             End Set
         End Property
 
         Public Shared Property MainScreen(ByVal screenIndex As Integer) As Integer
             Get
-                Return GetSetting("LCARS x32", "Screen" & screenIndex, "GUI form", "1")
+                Return CInt(GetSetting("LCARS x32", "Screen" & screenIndex, "GUI form", "1"))
             End Get
             Set(ByVal value As Integer)
-                SaveSetting("LCARS x32", "Screen" & screenIndex, "GUI form", value)
+                SaveSetting("LCARS x32", "Screen" & screenIndex, "GUI form", CStr(value))
             End Set
         End Property
 
         Public Shared Property AutoHide(ByVal screenIndex As Integer) As Boolean
             Get
-                Return GetSetting("LCARS x32", "Screen" & screenIndex, "Autohide", "0")
+                Return CBool(GetSetting("LCARS x32", "Screen" & screenIndex, "Autohide", "0"))
             End Get
             Set(ByVal value As Boolean)
-                SaveSetting("LCARS x32", "Screen" & screenIndex, "Autohide", value)
+                SaveSetting("LCARS x32", "Screen" & screenIndex, "Autohide", CStr(value))
             End Set
         End Property
 
         Public Shared Property ShowTrayIcons(ByVal screenIndex As Integer) As Boolean
             Get
-                Return GetSetting("LCARS x32", "Screen" & screenIndex, "ShowTrayIcons", "FALSE")
+                Return CBool(GetSetting("LCARS x32", "Screen" & screenIndex, "ShowTrayIcons", "FALSE"))
             End Get
             Set(ByVal value As Boolean)
-                SaveSetting("LCARS x32", "Screen" & screenIndex, "ShowTrayIcons", value)
+                SaveSetting("LCARS x32", "Screen" & screenIndex, "ShowTrayIcons", CStr(value))
             End Set
         End Property
 
@@ -230,7 +232,7 @@ Namespace x32
                 Return CBool(GetSetting("LCARS x32", "Application", "CommandTimeoutEnabled", "TRUE"))
             End Get
             Set(ByVal value As Boolean)
-                SaveSetting("LCARS x32", "Application", "CommandTimeoutEnabled", value)
+                SaveSetting("LCARS x32", "Application", "CommandTimeoutEnabled", CStr(value))
             End Set
         End Property
 
@@ -239,14 +241,14 @@ Namespace x32
                 Return CBool(GetSetting("LCARS x32", "Application", "DDEEnabled", "FALSE"))
             End Get
             Set(ByVal value As Boolean)
-                SaveSetting("LCARS x32", "Application", "DDEEnabled", value)
+                SaveSetting("LCARS x32", "Application", "DDEEnabled", CStr(value))
             End Set
         End Property
 
         Private Shared Property SettingsVersion() As Version
             Get
                 Dim v As String = GetSetting("LCARS x32", "Application", "SettingsVersion", "0.7.1")
-                Dim chunks As String() = v.Split(".")
+                Dim chunks As String() = v.Split("."c)
                 Dim ret As Version = Nothing
                 If chunks.Length = 3 Then
                     Try
