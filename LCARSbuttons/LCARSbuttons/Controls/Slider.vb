@@ -232,6 +232,12 @@ Namespace Controls
             RaiseEvent ValueChanged(Me, e)
         End Sub
 
+        Protected Overrides Sub ScaleControl(ByVal factor As System.Drawing.SizeF, ByVal specified As System.Windows.Forms.BoundsSpecified)
+            _buttonHeight = CInt(factor.Height * _buttonHeight)
+            _padding = CInt(factor.Height * _padding)
+            MyBase.ScaleControl(factor, specified)
+        End Sub
+
         ''' <summary>
         ''' Bounds of the button from current value or mouse position.
         ''' </summary>
