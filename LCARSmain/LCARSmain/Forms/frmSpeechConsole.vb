@@ -46,4 +46,8 @@ Public Class frmSpeechConsole
         End If
     End Sub
 
+    Private Sub frmSpeechConsole_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
+        Me.Hide()
+        e.Cancel = True
+    End Sub
 End Class
