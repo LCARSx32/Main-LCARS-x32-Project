@@ -467,11 +467,7 @@ public Class modBusiness
         myProgsBack = myForm.Controls.Find("myProgsBack", True)(0)
         myProgsNext = myForm.Controls.Find("myProgsNext", True)(0)
 
-        If Listener Is Nothing OrElse Listener.State <> SpeechLib.SpeechRecoContextState.SRCS_Enabled Then
-            mySpeech.Lit = False
-        Else
-            mySpeech.Lit = True
-        End If
+        mySpeech.Lit = modSpeech.SpeechEnabled
         'event handlers:
         AddHandler ProgramsPanel.Resize, AddressOf ProgramsPanel_Resize
         AddHandler myStartMenu.Click, AddressOf myStartMenu_Click

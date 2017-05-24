@@ -7,21 +7,7 @@ Public Class frmSpeechConsole
     End Sub
 
     Private Sub fbOnOff_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbOnOff.Click
-        For Each myBusiness As modBusiness In curBusiness
-            With myBusiness
-                .mySpeech.Lit = Not .mySpeech.Lit
-            End With
-        Next
-        If curBusiness(0).mySpeech.Lit Then
-            If Listener Is Nothing Then beginVoiceRecognition()
-            Listener.State = SpeechLib.SpeechRecoContextState.SRCS_Enabled
-            fbOnOff.Lit = True
-            fbOnOff.Text = "Recognition on"
-        Else
-            Listener.State = SpeechLib.SpeechRecoContextState.SRCS_Disabled
-            fbOnOff.Lit = False
-            fbOnOff.Text = "Recognition off"
-        End If
+        modSpeech.SpeechEnabled = Not modSpeech.SpeechEnabled
     End Sub
 
     Private Sub txtEntry_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtEntry.KeyDown
@@ -49,5 +35,31 @@ Public Class frmSpeechConsole
     Private Sub frmSpeechConsole_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
         Me.Hide()
         e.Cancel = True
+    End Sub
+
+    Public Sub AddCommand(ByVal command As VoiceCmd)
+        Me.lstCommands.Items.Add(command)
+    End Sub
+
+    Public Sub ClearCommands()
+        Me.lstCommands.Items.Clear()
+    End Sub
+
+    Public Sub WriteLine(ByVal line As String)
+        Me.lstHistory.Items.Add(line)
+    End Sub
+
+    Private Sub frmSpeechConsole_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        AddHandler modSpeech.SpeechEnableChanged, AddressOf Speech_enableChanged
+    End Sub
+
+    Private Sub Speech_enableChanged(ByVal sender As Object, ByVal e As System.EventArgs)
+        If modSpeech.SpeechEnabled Then
+            console.fbOnOff.Lit = True
+            console.fbOnOff.Text = "Recognition on"
+        Else
+            console.fbOnOff.Lit = False
+            console.fbOnOff.Text = "Recognition off"
+        End If
     End Sub
 End Class

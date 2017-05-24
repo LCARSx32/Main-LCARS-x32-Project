@@ -387,7 +387,7 @@ Public Class frmSettings
         Else
             cbVoice.SideText = "OFF"
         End If
-        RefreshVoiceCommands(cbVoice.Lit)
+        modSpeech.SpeechEnabled = cbVoice.Lit
     End Sub
 
     Private Sub picMain4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles picMain4.Click
@@ -556,7 +556,9 @@ Public Class frmSettings
         For Each mycommand As CustomEntry In customList
             SaveSetting("LCARS X32", "CustomVoiceCommands", mycommand.CommandName, mycommand.Command)
         Next
-        RefreshVoiceCommands(cbVoice.Lit)
+        If Not My.Application.IsSettingsMode Then
+            modSpeech.RefreshSpeech()
+        End If
     End Sub
 
     Private Sub sbInternal_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbInternal.Click

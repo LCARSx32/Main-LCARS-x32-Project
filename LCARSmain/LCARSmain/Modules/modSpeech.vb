@@ -2,18 +2,18 @@ Imports SpeechLib
 Imports LCARS.UI
 
 Module modSpeech
-    Dim SpeechEngine As SpInprocRecognizer
-    Public Listener As SpInProcRecoContext    'The Main Recognition Object Used throughout the whole program. -- Shared Object: More Info on this later.
-    Dim grammar As ISpeechRecoGrammar                       'The Grammar Object so the program knows what is going on. -- Instanced Object: More Info on this later.
-    Dim vox As SpVoice
-    Dim continuousCommands As Boolean = False
-    Dim Confirm As VoiceCmd = Nothing
-    Dim Authorization As VoiceCmd = Nothing
-    Dim RulesHandlers As New Dictionary(Of String, VoiceCmd)
+    Private SpeechEngine As SpInprocRecognizer
+    Private Listener As SpInProcRecoContext    'The Main Recognition Object Used throughout the whole program. -- Shared Object: More Info on this later.
+    Private grammar As ISpeechRecoGrammar                       'The Grammar Object so the program knows what is going on. -- Instanced Object: More Info on this later.
+    Private vox As SpVoice
+    Private continuousCommands As Boolean = False
+    Private Confirm As VoiceCmd = Nothing
+    Private Authorization As VoiceCmd = Nothing
+    Friend RulesHandlers As New Dictionary(Of String, VoiceCmd)
     Friend console As New frmSpeechConsole
-    Dim WithEvents timeoutTimer As New System.Timers.Timer With {.AutoReset = False}
+    Private WithEvents timeoutTimer As New System.Timers.Timer With {.AutoReset = False}
 
-    Public Sub beginVoiceRecognition()
+    Private Sub beginVoiceRecognition()
         'Clear data structures
         RulesHandlers.Clear()
         'Initialize internal commands
@@ -32,6 +32,12 @@ Module modSpeech
             Next
         End If
 
+        'Add commands to console
+        console.ClearCommands()
+        'TODO: Add "computer" + description
+        For Each myItem As VoiceCmd In RulesHandlers.Values
+            console.AddCommand(myItem)
+        Next
 
         'Load up the speech recognition
         Try
@@ -58,7 +64,8 @@ Module modSpeech
             Dim hStateMain2 As IntPtr
             builder.CreateNewState(hStateMain, hStateMain2)
             'Add word transition for init command ("Computer")
-            builder.AddWordTransition(hStateMain, hStateMain2, "Computer,", " ", SPGRAMMARWORDTYPE.SPWT_LEXICAL, 1, Nothing)
+            Dim initText As String = GetSetting("LCARS x32", "VoiceCommandAlias", "computer", "computer")
+            builder.AddWordTransition(hStateMain, hStateMain2, initText, " ", SPGRAMMARWORDTYPE.SPWT_LEXICAL, 1, Nothing)
             'Command rule
             Dim commandListPtr As IntPtr
             builder.GetRule("Command", 0, SpeechRuleAttributes.SRATopLevel, True, commandListPtr)
@@ -97,15 +104,19 @@ Module modSpeech
             myerrorfile.WriteLine(ex.ToString)
             myerrorfile.Close()
         End Try
+        needsReload = False
     End Sub
     Public Sub SimulateRecognition(ByVal input As String)
-        If Not input.StartsWith("computer, ") Then
-            input = "computer, " & input
+        If Not SpeechEnabled Then
+            console.WriteLine("Speech recognition not enabled. Unable to parse input.")
+            Return
         End If
+        grammar.CmdSetRuleState("Command", SpeechRuleState.SGDSActive)
         Listener.Recognizer.EmulateRecognition(input)
+        grammar.CmdSetRuleState("Command", SpeechRuleState.SGDSInactive)
     End Sub
     Private Sub OnReco(ByVal StreamNumber As Integer, ByVal StreamPosition As Object, ByVal RecognitionType As SpeechRecognitionType, ByVal Result As ISpeechRecoResult)
-        console.lstHistory.Items.Add(Result.PhraseInfo.GetText().ToUpper())
+        console.WriteLine(Result.PhraseInfo.GetText().ToUpper())
         Dim rule = Result.PhraseInfo.Rule.Name
         If rule = "Main" Then
             grammar.CmdSetRuleState("Command", SpeechRuleState.SGDSActive)
@@ -133,8 +144,10 @@ Module modSpeech
         Try
             command = RulesHandlers.Item(name)
         Catch ex As KeyNotFoundException
-            console.lstHistory.Items.Add("Unable to determine rule: " & name)
+            console.WriteLine("Unable to determine rule: " & name)
         End Try
+        'TODO: Handle commands that require authorization
+        'TODO: Clear confirm/authorization if not responded to
         If command.RequiresConfirm Then
             LCARSSound.ConfirmSound.Play()
             Confirm = command
@@ -152,32 +165,54 @@ Module modSpeech
         Else
             If Not continuousCommands And LCARS.x32.modSettings.CommandTimeoutEnabled Then
                 LCARSSound.TimeoutSound.Play()
-                console.lstHistory.Items.Add("Command timed out (No command given)".ToUpper())
+                console.WriteLine("Command timed out (No command given)".ToUpper())
+                grammar.CmdSetRuleState("Command", SpeechRuleState.SGDSInactive)
             End If
         End If
     End Sub
 
-
     Friend Sub ShowConsole()
-        'TODO: Move console initialization to beginVoiceRecognition()
-
-        console.lstCommands.Items.Clear()
-        With console.lstCommands.Items
-            'TODO: Add "computer" + description
-            For Each myItem As VoiceCmd In RulesHandlers.Values
-                .Add(myItem)
-            Next
-        End With
-        If curBusiness(0).mySpeech.Lit Then
-            console.fbOnOff.Lit = True
-            console.fbOnOff.Text = "Recognition on"
-        Else
-            console.fbOnOff.Lit = False
-            console.fbOnOff.Text = "Recognition off"
-        End If
         console.Show()
         console.BringToFront()
         console.Activate()
+    End Sub
+
+    Public Event SpeechEnableChanged As EventHandler
+    Private needsReload As Boolean = False
+
+    Public Property SpeechEnabled()
+        Get
+            If SpeechEngine Is Nothing Then
+                Return False
+            End If
+            Return Listener.State = SpeechRecoContextState.SRCS_Enabled
+        End Get
+        Set(ByVal value)
+            If value Then
+                If SpeechEngine Is Nothing Or needsReload Then
+                    beginVoiceRecognition()
+                Else
+                    Listener.State = SpeechRecoContextState.SRCS_Enabled
+                End If
+            Else
+                If SpeechEngine IsNot Nothing Then
+                    Listener.State = SpeechRecoContextState.SRCS_Disabled
+                End If
+            End If
+            'TODO: Use event handler here too if possible
+            For Each myBusiness As modBusiness In curBusiness
+                myBusiness.mySpeech.Lit = SpeechEnabled
+            Next
+            RaiseEvent SpeechEnableChanged(Nothing, Nothing)
+        End Set
+    End Property
+
+    Public Sub RefreshSpeech()
+        If Not SpeechEnabled Then
+            needsReload = True
+        Else
+            beginVoiceRecognition()
+        End If
     End Sub
 
 #Region " Internal Command Subs "

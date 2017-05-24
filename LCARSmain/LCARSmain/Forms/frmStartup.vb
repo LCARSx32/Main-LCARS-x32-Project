@@ -104,8 +104,7 @@ Public Class frmStartup
                     m.Result = 1
 
                     'Turn on/off Voice commands.
-                    Dim result As Integer = Marshal.PtrToStructure(myData.lpData, GetType(Integer))
-                    RefreshVoiceCommands(result)
+                    modSpeech.SpeechEnabled = (myData.lpData <> IntPtr.Zero)
                 Case 9
                     'Turn on/off AutoHide
 
@@ -216,9 +215,7 @@ Public Class frmStartup
         Next
         AddHandler Microsoft.Win32.SystemEvents.DisplaySettingsChanged, AddressOf System_DisplayChanged
 
-        If GetSetting("LCARS X32", "Application", "SpeechOn", "TRUE") Then
-            beginVoiceRecognition()
-        End If
+        modSpeech.SpeechEnabled = GetSetting("LCARS X32", "Application", "SpeechOn", "TRUE")
 
         '''''''''''''''''''''''''''''''''''''''''''''''''''''
         '''' Run auto-start programs (Including updates) ''''

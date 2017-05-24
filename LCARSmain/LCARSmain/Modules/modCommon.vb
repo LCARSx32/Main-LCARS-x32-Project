@@ -479,21 +479,6 @@ Public Enum SetWindowPosFlags As UInteger
         PostMessage(HWND_BROADCAST, InterMsgID, 0, 3)
     End Sub
 
-    Public Sub RefreshVoiceCommands(ByVal active As Boolean)
-        If My.Application.IsSettingsMode Then Return
-        If active = False Then
-            'turn off voice commands
-            If Listener IsNot Nothing Then
-                Listener.Recognizer.State = SpeechLib.SpeechRecognizerState.SRSInactive
-            End If
-        Else
-            beginVoiceRecognition()
-        End If
-        For Each myBusiness As modBusiness In curBusiness
-            myBusiness.mySpeech.Lit = active
-        Next
-    End Sub
-
     Public Sub GeneralAlert(ByVal type As Integer)
         If inAlert Then
             'Code for canceling, then starting new alert
