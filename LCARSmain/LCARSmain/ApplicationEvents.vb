@@ -79,7 +79,7 @@ Namespace My
                 End Try
                 Try
                     e.ExitApplication = False
-                    modSpeech.ExecuteCommand("deactivate")
+                    doDeactivate(Nothing)
                 Catch ex As Exception
                     LCARS.UI.MsgBox("LCARS x32 could not close successfully. Please restart your computer.", MsgBoxStyle.Critical, "Critical Error")
                     End

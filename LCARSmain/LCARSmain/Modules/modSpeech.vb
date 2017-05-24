@@ -4,131 +4,34 @@ Imports LCARS.UI
 Module modSpeech
     Dim SpeechEngine As SpInprocRecognizer
     Public Listener As SpInProcRecoContext    'The Main Recognition Object Used throughout the whole program. -- Shared Object: More Info on this later.
-    Dim vGrammar As ISpeechRecoGrammar                       'The Grammar Object so the program knows what is going on. -- Instanced Object: More Info on this later.
-    Dim HypoCount As Integer
-    Dim vCommands As New Collection
-    Dim listenCommands As Boolean = False
+    Dim grammar As ISpeechRecoGrammar                       'The Grammar Object so the program knows what is going on. -- Instanced Object: More Info on this later.
     Dim vox As SpVoice
     Dim continuousCommands As Boolean = False
-    Dim Confirm As String
-    Dim Authorization As String = ""
-    Dim AliasList As New Collection
-    Dim CustomList As New Collection
+    Dim Confirm As VoiceCmd = Nothing
+    Dim Authorization As VoiceCmd = Nothing
+    Dim RulesHandlers As New Dictionary(Of String, VoiceCmd)
     Friend console As New frmSpeechConsole
     Dim WithEvents timeoutTimer As New System.Timers.Timer With {.AutoReset = False}
 
-    Public Structure AliasEntry
-        Dim Command As String
-        Dim CommandAlias As String
-    End Structure
-
-    Public Structure CustomEntry
-        Dim Command As String
-        Dim CommandName As String
-    End Structure
-
     Public Sub beginVoiceRecognition()
-        'Get the list of aliases and custom commands
-
-        'Aliases
-        AliasList.Clear()
-
+        'Clear data structures
+        RulesHandlers.Clear()
+        'Initialize internal commands
+        For Each intCmd As InternalVoiceCmd In InternalVoiceCommands
+            RulesHandlers.Add(intCmd.Name, intCmd)
+        Next
+        'Load external commands
         Dim myReg As Microsoft.Win32.RegistryKey = Microsoft.Win32.Registry.CurrentUser
-        myReg = myReg.OpenSubKey("Software\VB and VBA Program Settings\LCARS x32\VoiceCommandAlias", False)
-        If Not myReg Is Nothing Then
-            For intloop As Integer = 0 To myReg.ValueCount - 1
-                Dim myAlias As New AliasEntry
-                myAlias.Command = myReg.GetValueNames(intloop)
-                myAlias.CommandAlias = myReg.GetValue(myAlias.Command)
-                AliasList.Add(myAlias)
-            Next
-        End If
-        'Custom Commands
-        'No aliases for these, as they can just be renamed
-        CustomList.Clear()
-        myReg = Microsoft.Win32.Registry.CurrentUser
         myReg = myReg.OpenSubKey("Software\VB and VBA Program Settings\LCARS x32\CustomVoiceCommands", False)
         If Not myReg Is Nothing Then
-            For intloop As Integer = 0 To myReg.ValueCount - 1
-                Dim myCommand As New CustomEntry
-                myCommand.CommandName = myReg.GetValueNames(intloop)
-                myCommand.Command = myReg.GetValue(myCommand.CommandName)
-                CustomList.Add(myCommand)
+            For Each extCmd As String In myReg.GetValueNames()
+                Dim command As String = myReg.GetValue(extCmd)
+                'TODO: Change settings so that a description can be stored
+                Dim myCommand As New ExternalVoiceCmd(extCmd, "External", extCmd, False)
+                RulesHandlers.Add(myCommand.Name, myCommand)
             Next
         End If
 
-
-        'Rewrite commands.xml
-        Try
-            Dim myCode As String = GetSetting("LCARS x32", "Application", "SpeechCode", "409")
-            Dim mywriter As New System.IO.StreamWriter(My.Computer.FileSystem.SpecialDirectories.Temp & "/commands.xml")
-            With mywriter
-                'Stuff that's in the file regardless
-                .WriteLine("<GRAMMAR LANGID=""" & myCode & """>")
-                .WriteLine("  <!-- ""Constant"" definitions -->")
-                .WriteLine("  <DEFINE>")
-                .WriteLine("    <ID NAME=""Initiator"" VAL=""1""/>")
-                .WriteLine("    <ID NAME=""MainCommands"" VAL=""2""/>")
-                .WriteLine("  </DEFINE>")
-                .WriteLine("  <!-- Rule definitions -->")
-                .WriteLine("  <RULE NAME=""Init"" ID=""Initiator"" TOPLEVEL=""ACTIVE"">")
-                .WriteLine("    <L>")
-                .WriteLine("      <P>" & getCommandAlias("computer") & "</P>") 'Allows different modes of address ("Hey, Pea-Brain")
-                .WriteLine("    </L>")
-                .WriteLine("  </RULE>")
-                .WriteLine("  <RULE NAME=""Commands"" ID=""MainCommands"" TOPLEVEL=""ACTIVE"">")
-                .WriteLine("    <L>")
-                'Code to arrange all names
-                .WriteLine("      <P>" & getCommandAlias("menu") & "</P>")
-                .WriteLine("      <P>" & getCommandAlias("my computer") & "</P>")
-                .WriteLine("      <P>" & getCommandAlias("settings") & "</P>")
-                .WriteLine("      <P>" & getCommandAlias("engineering") & "</P>")
-                .WriteLine("      <P>" & getCommandAlias("mode select") & "</P>")
-                .WriteLine("      <P>" & getCommandAlias("my documents") & "</P>")
-                .WriteLine("      <P>" & getCommandAlias("my pictures") & "</P>")
-                .WriteLine("      <P>" & getCommandAlias("my music") & "</P>")
-                .WriteLine("      <P>" & getCommandAlias("my videos") & "</P>")
-                .WriteLine("      <P>" & getCommandAlias("deactivate") & "</P>")
-                .WriteLine("      <P>" & getCommandAlias("self destruct") & "</P>")
-                .WriteLine("      <P>" & getCommandAlias("log off") & "</P>")
-                .WriteLine("      <P>" & getCommandAlias("red alert") & "</P>")
-                .WriteLine("      <P>" & getCommandAlias("cancel alert") & "</P>")
-                .WriteLine("      <P>" & getCommandAlias("shut down") & "</P>")
-                .WriteLine("      <P>" & getCommandAlias("end program") & "</P>")
-                .WriteLine("      <P>" & getCommandAlias("cancel") & "</P>")
-                .WriteLine("      <P>" & getCommandAlias("stardate") & "</P>")
-                .WriteLine("      <P>" & getCommandAlias("run program") & "</P>")
-                .WriteLine("      <P>" & getCommandAlias("date") & "</P>")
-                .WriteLine("      <P>" & getCommandAlias("time") & "</P>")
-                .WriteLine("      <P>" & getCommandAlias("keyboard") & "</P>")
-                .WriteLine("      <P>" & getCommandAlias("task manager") & "</P>")
-                .WriteLine("      <P>" & getCommandAlias("continuous commands") & "</P>")
-                .WriteLine("      <P>" & getCommandAlias("yellow alert") & "</P>")
-                .WriteLine("      <P>" & getCommandAlias("confirmed") & "</P>")
-                .WriteLine("      <P>" & getCommandAlias("help") & "</P>")
-                .WriteLine("      <P>" & getCommandAlias("authorization") & "</P>")
-                .WriteLine("      <P>" & getCommandAlias("show console") & "</P>")
-                .WriteLine("      <P>" & getCommandAlias("hide console") & "</P>")
-                .WriteLine("      <P>" & getCommandAlias("web browser") & "</P>")
-                .WriteLine("      <P>" & getCommandAlias("display off") & "</P>")
-                .WriteLine("      <P>" & getCommandAlias("display on") & "</P>")
-                If GetSetting("LCARS x32", "Application", "DebugSwitch", "False") Then
-                    .WriteLine("      <P>crash test</P>")
-                End If
-                .WriteLine("      <P>tea earl grey hot</P>")
-                'Code to add Custom Commands
-                For Each myCommand As CustomEntry In CustomList
-                    .WriteLine("      <P>" & myCommand.CommandName & "</P>")
-                Next
-                'More stuff that's always the same
-                .WriteLine("    </L>")
-                .WriteLine("  </RULE>")
-                .WriteLine("</GRAMMAR>")
-            End With
-            mywriter.Close()
-        Catch ex As Exception
-            MsgBox("Error rewriting commands.xml" & vbNewLine & ex.ToString())
-        End Try
 
         'Load up the speech recognition
         Try
@@ -136,19 +39,46 @@ Module modSpeech
                 RemoveHandler Listener.Recognition, AddressOf OnReco
             End If
             Listener = Nothing
-            vGrammar = Nothing
+            grammar = Nothing
             SpeechEngine = Nothing
-            SpeechEngine = New SpInprocRecognizer
+            SpeechEngine = New SpInprocRecognizer()
 
-            Listener = SpeechEngine.CreateRecoContext     'Create a new Reco Context Class
-            Dim myInputs As ISpeechObjectTokens = Listener.Recognizer.GetAudioInputs
+            Listener = SpeechEngine.CreateRecoContext()     'Create a new Reco Context Class
+            Dim myInputs As ISpeechObjectTokens = Listener.Recognizer.GetAudioInputs()
             Listener.Recognizer.AudioInput = myInputs.Item(0) 'use the default audio input device
-            vGrammar = Listener.CreateGrammar(1)              'Setup the Grammar
-            vGrammar.DictationLoad()                       'Load the Grammar
-            vGrammar.CmdLoadFromFile(My.Computer.FileSystem.SpecialDirectories.Temp & "\commands.xml", SpeechLoadOption.SLOStatic)
-            vGrammar.DictationSetState(SpeechRuleState.SGDSInactive)
-            vGrammar.State = SpeechGrammarState.SGSEnabled
-            vGrammar.CmdSetRuleIdState(1, SpeechRuleState.SGDSActive)
+            grammar = Listener.CreateGrammar(1)              'Setup the Grammar
+            grammar.DictationLoad()                       'Load dictation
+            grammar.DictationSetState(SpeechRuleState.SGDSInactive) 'Set dictation inactive
+            grammar.State = SpeechGrammarState.SGSEnabled
+            Dim builder As ISpGrammarBuilder = grammar 'Somehow this works
+            'Set up main rules
+            Dim hStateMain As IntPtr
+            builder.GetRule("Main", 0, SpeechLib.SpeechRuleAttributes.SRATopLevel, True, hStateMain)
+            'Interim state
+            Dim hStateMain2 As IntPtr
+            builder.CreateNewState(hStateMain, hStateMain2)
+            'Add word transition for init command ("Computer")
+            builder.AddWordTransition(hStateMain, hStateMain2, "Computer,", " ", SPGRAMMARWORDTYPE.SPWT_LEXICAL, 1, Nothing)
+            'Command rule
+            Dim commandListPtr As IntPtr
+            builder.GetRule("Command", 0, SpeechRuleAttributes.SRATopLevel, True, commandListPtr)
+            builder.AddRuleTransition(hStateMain2, Nothing, commandListPtr, 1, Nothing)
+            'Epsilon transition
+            'Required to have a full path to Nothing
+            builder.AddWordTransition(commandListPtr, Nothing, Nothing, Nothing, SPGRAMMARWORDTYPE.SPWT_LEXICAL, 1, Nothing)
+
+            For Each myRule As VoiceCmd In RulesHandlers.Values
+                Dim hStateRule As IntPtr
+                builder.GetRule(myRule.Name, 0, SpeechRuleAttributes.SRATopLevel, True, hStateRule)
+                myRule.BuildRule(builder, hStateRule)
+                builder.AddRuleTransition(commandListPtr, Nothing, hStateRule, 1, Nothing)
+            Next
+
+            builder.Commit(0) ' Commit changes
+            'Set rules to their initial states
+            grammar.CmdSetRuleState("Main", SpeechRuleState.SGDSActive)
+            grammar.CmdSetRuleState("Command", SpeechRuleState.SGDSInactive)
+            grammar.CmdSetRuleState("Confirm", SpeechRuleState.SGDSInactive)
             AddHandler Listener.Recognition, AddressOf OnReco
             vox = New SpVoice
         Catch ex As Runtime.InteropServices.COMException
@@ -169,301 +99,73 @@ Module modSpeech
         End Try
     End Sub
     Public Sub SimulateRecognition(ByVal input As String)
-        console.lstHistory.Items.Add(input.ToUpper())
-        ExecuteCommand(getCommandName(input).ToLower())
+        If Not input.StartsWith("computer, ") Then
+            input = "computer, " & input
+        End If
+        Listener.Recognizer.EmulateRecognition(input)
     End Sub
     Private Sub OnReco(ByVal StreamNumber As Integer, ByVal StreamPosition As Object, ByVal RecognitionType As SpeechRecognitionType, ByVal Result As ISpeechRecoResult)
-        Dim recoResult As String = Result.PhraseInfo.GetText 'Create a new string, and assign the recognized text to it.
-        With console.lstHistory
-            .Items.Add(recoResult.ToUpper())
-        End With
-        Dim command As String = getCommandName(recoResult.ToLower()).ToLower() 'Find the internal name for the command, if existant
-        If command = "computer" Then
-            vGrammar.CmdSetRuleIdState(2, SpeechRuleState.SGDSActive)
-            listenCommands = True
-            muteAlert = True
-            LCARSSound.ListeningSound.Play()
-            If LCARS.x32.modSettings.CommandTimeoutEnabled And Not continuousCommands Then
-                timeoutTimer.Interval = LCARS.x32.modSettings.CommandTimeout * 1000 'Convert sec to ms
-                timeoutTimer.Start()
+        console.lstHistory.Items.Add(Result.PhraseInfo.GetText().ToUpper())
+        Dim rule = Result.PhraseInfo.Rule.Name
+        If rule = "Main" Then
+            grammar.CmdSetRuleState("Command", SpeechRuleState.SGDSActive)
+            If Result.PhraseInfo.Rule.Children.Item(0).Children Is Nothing Then
+                muteAlert = True
+                LCARSSound.ListeningSound.Play()
+                If LCARS.x32.modSettings.CommandTimeoutEnabled And Not continuousCommands Then
+                    timeoutTimer.Interval = LCARS.x32.modSettings.CommandTimeout * 1000 'Convert sec to ms
+                    timeoutTimer.Start()
+                End If
+            Else
+                Dim commandName As String = Result.PhraseInfo.Rule.Children.Item(0).Children.Item(0).Name
+                executeCommand(commandName, Result)
             End If
         Else
-            If listenCommands = True Then
-                timeoutTimer.Stop()
-                'Get command's alias (if existant) and send it to the command interpreter
-                ExecuteCommand(command)
-                If Not continuousCommands Then listenCommands = False 'Handles Continuous Commands function, though regulated by command interpreter.
-            End If
+            timeoutTimer.Stop()
+            Dim commandName As String = Result.PhraseInfo.Rule.Children.Item(0).Name
+            executeCommand(commandName, Result)
             muteAlert = False
-
         End If
+    End Sub
 
+    Private Sub executeCommand(ByVal name As String, ByRef result As ISpeechRecoResult)
+        Dim command As VoiceCmd = Nothing
+        Try
+            command = RulesHandlers.Item(name)
+        Catch ex As KeyNotFoundException
+            console.lstHistory.Items.Add("Unable to determine rule: " & name)
+        End Try
+        If command.RequiresConfirm Then
+            LCARSSound.ConfirmSound.Play()
+            Confirm = command
+        Else
+            command.Execute(result)
+        End If
+        If Not continuousCommands Then
+            grammar.CmdSetRuleState("Command", SpeechRuleState.SGDSInactive)
+        End If
     End Sub
 
     Private Sub onCommandTimeout(ByVal source As Object, ByVal e As System.Timers.ElapsedEventArgs) Handles timeoutTimer.Elapsed
         If myDesktop.InvokeRequired Then
             myDesktop.Invoke(New System.Timers.ElapsedEventHandler(AddressOf onCommandTimeout), source, e)
         Else
-            If Not continuousCommands And listenCommands And LCARS.x32.modSettings.CommandTimeoutEnabled Then
-                listenCommands = False
+            If Not continuousCommands And LCARS.x32.modSettings.CommandTimeoutEnabled Then
                 LCARSSound.TimeoutSound.Play()
                 console.lstHistory.Items.Add("Command timed out (No command given)".ToUpper())
             End If
         End If
     End Sub
 
-    'TODO: Replace these three functions with a dictionary or two
-    Public Function getCommandAlias(ByVal commandAlias As String) As String
-        Dim returnCommand As String = commandAlias
-        For Each myentry As AliasEntry In AliasList
-            If myentry.Command.ToLower() = commandAlias.ToLower() Then
-                returnCommand = myentry.CommandAlias.ToLower()
-                Exit For
-            End If
-        Next
-        Return returnCommand
-    End Function
-
-    Public Function getCommandName(ByVal commandAlias As String) As String
-        Dim returnCommand As String = commandAlias
-        For Each myentry As AliasEntry In AliasList
-            If String.Compare(myentry.CommandAlias, commandAlias, True) = 0 Then
-                returnCommand = myentry.Command.ToLower()
-                Exit For
-            End If
-        Next
-        Return returnCommand
-    End Function
-
-    Public Function getCustomCommand(ByVal commandName As String) As String
-        Dim returnPath As String = ""
-        For Each myEntry As CustomEntry In CustomList
-            If myEntry.CommandName.ToLower() = commandName.ToLower() Then
-                returnPath = myEntry.Command
-            End If
-        Next
-        Return returnPath
-    End Function
-
-    Public Sub ExecuteCommand(ByVal command As String)
-        'Executes all commands that do not affect the speech recognizer.
-        'Here is where you add the code for the functionality of the command.
-        'Be sure to add it to the "commands.xml" generator as well.
-        'Also handles commands from text interface.
-
-        If GetSetting("LCARS x32", "Authorization", command, "FALSE") And Authorization <> "" Then
-            vox.Speak("Command authorization required")
-            Authorization = command
-        Else
-            Dim sender As New Object
-            Dim myE As New System.EventArgs
-            Select Case command.ToLower
-                Case "menu"
-                    curBusiness(0).myStartMenu.doClick(sender, myE)
-                Case "my computer"
-                    curBusiness(0).myCompButton_Click(sender, myE)
-                Case "settings"
-                    curBusiness(0).mySettingsButton_Click(sender, myE)
-                Case "engineering"
-                    curBusiness(0).myEngineeringButton_Click(sender, myE)
-                Case "mode select"
-                    curBusiness(0).myModeSelectButton_Click(sender, myE)
-                Case "my documents"
-                    curBusiness(0).myDocuments.doClick(sender, myE)
-                Case "my pictures"
-                    curBusiness(0).myPictures.doClick(sender, myE)
-                Case "my music"
-                    Process.Start(Application.StartupPath & "\LCARSexplorer.exe", System.Environment.GetFolderPath(Environment.SpecialFolder.MyMusic))
-                Case "my videos"
-                    curBusiness(0).myVideos.doClick(sender, myE)
-                Case "deactivate"
-                    Process.Start(Application.StartupPath & "\LCARSshutdown.exe", "/" & myDesktop.Handle.ToString & "/c")
-                Case "self destruct"
-                    curBusiness(0).myDestruct.doClick(sender, myE)
-                Case "log off"
-                    LCARSSound.ConfirmSound.Play()
-                    Confirm = "log off"
-                Case "red alert"
-                    GeneralAlert(0)
-                Case "cancel alert"
-                    cancelAlert = True
-                Case "shut down"
-                    LCARSSound.ConfirmSound.Play()
-                    Confirm = "shut down"
-                Case "end program"
-                    Try
-                        Dim hWndApp As IntPtr = GetForegroundWindow()
-                        If Not hWndApp = Convert.ToInt64(GetSetting("LCARS x32", "Application", "MainWindowHandle")) Then
-                            modCommon.CloseWindow(hWndApp)
-                        End If
-                    Catch ex As Exception
-                        MsgBox(ex.ToString())
-                    End Try
-                Case "cancel"
-                    continuousCommands = False
-                Case "stardate"
-                    Try
-                        vox.Speak(LCARS.Stardate.getStardate(Now).ToString("F1"))
-                    Catch ex As Exception
-                    End Try
-                Case "run program"
-                    Dim myRun As New frmRunProgram
-                    myRun.ShowDialog()
-                Case "date"
-                    Try
-                        vox.Speak(Now.ToLongDateString())
-                    Catch ex As Exception
-                    End Try
-                Case "time"
-                    Try
-                        vox.Speak(Now.ToLongTimeString())
-                    Catch ex As Exception
-                    End Try
-                Case "keyboard"
-                    curBusiness(0).myOSK.doClick(sender, myE)
-                Case "task manager"
-                    Try
-                        Process.Start("taskmgr")
-                    Catch ex As Exception
-                    End Try
-                    'Process.Start(Application.StartupPath & "\LCARSTaskManager.exe")
-                Case "continuous commands"
-                    continuousCommands = True
-                    Try
-                        vox.Speak("Continuous commands enabled.")
-                    Catch ex As Exception
-                    End Try
-                Case "yellow alert"
-                    GeneralAlert(1)
-                Case "confirmed"
-                    Select Case Confirm
-                        Case "shut down"
-                            shutDownOptions.ExitWindows(cWrapExitWindows.Action.Shutdown)
-                        Case "log off"
-                            shutDownOptions.ExitWindows(cWrapExitWindows.Action.LogOff)
-                        Case Else
-                            MsgBox("Invalid in current context")
-                    End Select
-                    Confirm = ""
-                Case "help"
-                    curBusiness(0).myHelp.doClick(sender, myE)
-                Case "authorization"
-                    ExecuteCommand(Authorization)
-                Case "show console"
-                    ShowConsole()
-                Case "hide console"
-                    console.Hide()
-                Case "web browser"
-                    curBusiness(0).myWebBrowser.doClick(sender, myE)
-                Case "crash test"
-                    'Causes an unhandled exception.
-                    If GetSetting("LCARS x32", "Application", "DebugSwitch", "False") Then
-                        Throw New Exception()
-                    End If
-                Case "tea earl grey hot"
-                    My.Computer.Audio.Play(My.Resources._095, AudioPlayMode.Background)
-                Case "display off"
-                    PostMessage(frmStartup.Handle, WM_SYSCOMMAND, SC_MONITORPOWER, MonitorPowerStates.PowerOff)
-                Case "display on"
-                    'Note: The line below is commented out because it will not work on Windows 10
-                    'PostMessage(frmStartup.Handle, WM_SYSCOMMAND, SC_MONITORPOWER, MonitorPowerStates.PowerOn)
-                    mouse_event(MOUSEEVENTF_MOVE, 0, 1, 0, UIntPtr.Zero)
-                Case Else 'Searches for .exe files for custom commands
-                    Dim inputString As String = getCustomCommand(command.ToLower())
-                    Try
-                        If IO.File.Exists(inputString) Then
-                            'The command string is an absolute path.
-                            Dim myprocess As New Process
-                            myprocess.StartInfo.FileName = inputString
-                            myprocess.StartInfo.WorkingDirectory = IO.Path.GetDirectoryName(inputString)
-                            myprocess.Start()
-                        Else
-                            'It isn't, so jump to the catch
-                            Throw New Exception
-                        End If
-                    Catch ex As Exception
-                        'The command will be interpreted as an absolute path, followed by arguments
-                        Try
-                            Dim myProcess As New Process()
-                            If (inputString.Substring(0, 1) = """") Then
-                                Dim splitIndex As Integer = inputString.Substring(1).IndexOf("""") + 2
-                                myProcess.StartInfo.FileName = inputString.Substring(0, splitIndex)
-                                myProcess.StartInfo.Arguments = inputString.Substring(splitIndex + 1)
-                                myProcess.StartInfo.WorkingDirectory = IO.Path.GetDirectoryName(myProcess.StartInfo.FileName)
-                            Else
-                                myProcess.StartInfo.FileName = inputString.Split(" ")(0)
-                                myProcess.StartInfo.Arguments = inputString.Substring(myProcess.StartInfo.FileName.Length + 1)
-                                myProcess.StartInfo.WorkingDirectory = IO.Path.GetDirectoryName(myProcess.StartInfo.FileName)
-                            End If
-                            myProcess.Start()
-                        Catch ex1 As Exception
-                            'Throw it to shell and see what happens.
-                            Try
-                                Dim myID As Integer
-                                myID = Shell(inputString, AppWinStyle.NormalFocus)
-                                Dim myprocess As Process = Process.GetProcessById(myID)
-                            Catch ex2 As Exception
-                                'Throw it to Process.Start and hope for the best
-                                Try
-                                    Dim myProcess As Process = Process.Start(inputString)
-                                Catch ex3 As Exception
-                                    MsgBox("Error: " & vbNewLine & vbNewLine & ex3.Message)
-                                End Try
-                            End Try
-                        End Try
-
-                    End Try
-            End Select
-        End If
-    End Sub
 
     Friend Sub ShowConsole()
-        'Dim commandList() As String = {"menu", "my computer", "settings", "engineering", _
-        '                       "mode select", "my documents", "my pictures", _
-        '                       "my music", "my videos", "deactivate", "self destruct", _
-        '                       "log off", "red alert", "cancel alert", "shut down", _
-        '                       "end program", "cancel", "stardate", "run program", _
-        '                       "date", "time", "keyboard", "task manager", "continuous commands", _
-        '                       "yellow alert", "confirmed", "help", "authorization", "show console", _
-        '                       "hide console"}
+        'TODO: Move console initialization to beginVoiceRecognition()
+
         console.lstCommands.Items.Clear()
         With console.lstCommands.Items
-            .Add(getCommandAlias("computer").ToUpper() & ": Command initializer. Must be spoken to use any other command.")
-            .Add(getCommandAlias("menu").ToUpper() & ": Shows the Start Menu.")
-            .Add(getCommandAlias("my computer").ToUpper() & ": Opens LCARS file browser.")
-            .Add(getCommandAlias("settings".ToUpper()) & ": Opens settings.")
-            .Add(getCommandAlias("engineering").ToUpper() & ": Opens system information program.")
-            .Add(getCommandAlias("mode select").ToUpper() & ": Shows screen chooser dialog.")
-            .Add(getCommandAlias("my documents").ToUpper() & ": Opens LCARS file browser to show the ""My Documents"" folder.")
-            .Add(getCommandAlias("my pictures").ToUpper() & ": Opens LCARS file browser to show the ""My Pictures"" folder.")
-            .Add(getCommandAlias("my music").ToUpper() & ": Opens LCARS file browser to show the ""My Music"" folder.")
-            .Add(getCommandAlias("my videos").ToUpper() & ": Opens LCARS file browser to show the ""My Videos"" folder.")
-            .Add(getCommandAlias("deactivate").ToUpper() & ": Closes LCARS.")
-            .Add(getCommandAlias("self destruct").ToUpper() & ": Opens self destruct program.")
-            .Add(getCommandAlias("log off").ToUpper() & ": Logs off computer. Requires confirmation")
-            .Add(getCommandAlias("red alert".ToUpper()) & ": Initiates a red alert.")
-            .Add(getCommandAlias("cancel alert").ToUpper() & ": Cancels a red or yellow alert.")
-            .Add(getCommandAlias("shut down").ToUpper() & ": Shuts down computer. Requires confirmation.")
-            .Add(getCommandAlias("end program").ToUpper() & ": Closes current program.")
-            .Add(getCommandAlias("cancel").ToUpper() & ": Ends continuous commands.")
-            .Add(getCommandAlias("stardate").ToUpper() & ": Gives the current stardate.")
-            .Add(getCommandAlias("run program").ToUpper() & ": Brings up ""run program"" dialog.")
-            .Add(getCommandAlias("date").ToUpper() & ": Gives the current date.")
-            .Add(getCommandAlias("time").ToUpper() & ": Gives the current time.")
-            .Add(getCommandAlias("keyboard").ToUpper() & ": Shows the On Screen Keyboard.")
-            .Add(getCommandAlias("task manager").ToUpper() & ": Opens incomplete LCARS task manager.")
-            .Add(getCommandAlias("continuous commands").ToUpper() & ": Removes need to say ""computer"" before every command.")
-            .Add(getCommandAlias("yellow alert").ToUpper() & ": Initiates a yellow alert.")
-            .Add(getCommandAlias("confirmed").ToUpper() & ": Used to confirm a voice command.")
-            .Add(getCommandAlias("help").ToUpper() & ": Opens ""Help"" program.")
-            .Add(getCommandAlias("authorization").ToUpper() & ": Confirms commands that have been set to require command authorization.")
-            .Add(getCommandAlias("show console").ToUpper() & ": Shows the speech console")
-            .Add(getCommandAlias("hide console").ToUpper() & ": Hides the speech console")
-            .Add(getCommandAlias("web browser").ToUpper() & ": Starts the LCARS web browser")
-            .Add(getCommandAlias("display off").ToUpper() & ": Turns off the display")
-            .Add(getCommandAlias("display on").ToUpper() & ": Turns on the display")
-            For Each myitem As CustomEntry In CustomList
-                .Add(myitem.CommandName.ToUpper() & ": " & myitem.Command)
+            'TODO: Add "computer" + description
+            For Each myItem As VoiceCmd In RulesHandlers.Values
+                .Add(myItem)
             Next
         End With
         If curBusiness(0).mySpeech.Lit Then
@@ -477,4 +179,188 @@ Module modSpeech
         console.BringToFront()
         console.Activate()
     End Sub
+
+#Region " Internal Command Subs "
+    Private Sub doMenu(ByVal result As ISpeechRecoResult)
+        curBusiness(0).myStartMenu.doClick(Nothing, Nothing)
+    End Sub
+    Private Sub doComputer(ByVal result As ISpeechRecoResult)
+        curBusiness(0).myCompButton_Click(Nothing, Nothing)
+    End Sub
+    Private Sub doSettings(ByVal result As ISpeechRecoResult)
+        curBusiness(0).mySettingsButton_Click(Nothing, Nothing)
+    End Sub
+    Private Sub doEngineering(ByVal result As ISpeechRecoResult)
+        curBusiness(0).myEngineeringButton_Click(Nothing, Nothing)
+    End Sub
+    Private Sub doModeSelect(ByVal result As ISpeechRecoResult)
+        curBusiness(0).myModeSelectButton_Click(Nothing, Nothing)
+    End Sub
+    Private Sub doDocuments(ByVal result As ISpeechRecoResult)
+        curBusiness(0).myDocuments.doClick(Nothing, Nothing)
+    End Sub
+    Private Sub doPictures(ByVal result As ISpeechRecoResult)
+        curBusiness(0).myPictures.doClick(Nothing, Nothing)
+    End Sub
+    Private Sub doMusic(ByVal result As ISpeechRecoResult)
+        Process.Start(Application.StartupPath & "\LCARSexplorer.exe", System.Environment.GetFolderPath(Environment.SpecialFolder.MyMusic))
+    End Sub
+    Private Sub doVideos(ByVal result As ISpeechRecoResult)
+        curBusiness(0).myVideos.doClick(Nothing, Nothing)
+    End Sub
+    'This is public because it is used in ApplicationEvents
+    Public Sub doDeactivate(ByVal result As ISpeechRecoResult)
+        Process.Start(Application.StartupPath & "\LCARSshutdown.exe", "/" & myDesktop.Handle.ToString & "/c")
+    End Sub
+    Private Sub doSelfDestruct(ByVal result As ISpeechRecoResult)
+        curBusiness(0).myDestruct.doClick(Nothing, Nothing)
+    End Sub
+    Private Sub doLogOff(ByVal result As ISpeechRecoResult)
+        shutDownOptions.ExitWindows(cWrapExitWindows.Action.LogOff)
+    End Sub
+    Private Sub doRedAlert(ByVal result As ISpeechRecoResult)
+        GeneralAlert(0)
+    End Sub
+    Private Sub doCancelAlert(ByVal result As ISpeechRecoResult)
+        cancelAlert = True
+    End Sub
+    Private Sub doShutdown(ByVal result As ISpeechRecoResult)
+        shutDownOptions.ExitWindows(cWrapExitWindows.Action.Shutdown)
+    End Sub
+    Private Sub doEndProgram(ByVal result As ISpeechRecoResult)
+        Try
+            Dim hWndApp As IntPtr = GetForegroundWindow()
+            If Not hWndApp = Convert.ToInt64(GetSetting("LCARS x32", "Application", "MainWindowHandle")) Then
+                modCommon.CloseWindow(hWndApp)
+            End If
+        Catch ex As Exception
+            MsgBox(ex.ToString())
+        End Try
+    End Sub
+    Private Sub doCancel(ByVal result As ISpeechRecoResult)
+        continuousCommands = False
+        Authorization = Nothing
+        Confirm = Nothing
+    End Sub
+    Private Sub doStardate(ByVal result As ISpeechRecoResult)
+        Try
+            vox.Speak(LCARS.Stardate.getStardate(Now).ToString("F1"))
+        Catch ex As Exception
+        End Try
+    End Sub
+    Private Sub doRunProgram(ByVal result As ISpeechRecoResult)
+        Dim myRun As New frmRunProgram
+        myRun.ShowDialog()
+    End Sub
+    Private Sub doDate(ByVal result As ISpeechRecoResult)
+        Try
+            vox.Speak(Now.ToLongDateString())
+        Catch ex As Exception
+        End Try
+    End Sub
+    Private Sub doTime(ByVal result As ISpeechRecoResult)
+        Try
+            vox.Speak(Now.ToLongTimeString())
+        Catch ex As Exception
+        End Try
+    End Sub
+    Private Sub doKeyboard(ByVal result As ISpeechRecoResult)
+        curBusiness(0).myOSK.doClick(Nothing, Nothing)
+    End Sub
+    Private Sub doTaskManager(ByVal result As ISpeechRecoResult)
+        Try
+            Process.Start("taskmgr")
+        Catch ex As Exception
+        End Try
+        'Process.Start(Application.StartupPath & "\LCARSTaskManager.exe")
+    End Sub
+    Private Sub doContinuousCommands(ByVal result As ISpeechRecoResult)
+        continuousCommands = True
+        Try
+            vox.Speak("Continuous commands enabled.")
+        Catch ex As Exception
+        End Try
+    End Sub
+    Private Sub doYellowAlert(ByVal result As ISpeechRecoResult)
+        GeneralAlert(1)
+    End Sub
+    Private Sub doConfirm(ByVal result As ISpeechRecoResult)
+        If Confirm IsNot Nothing Then
+            Confirm.Execute(result)
+            Confirm = Nothing
+        End If
+    End Sub
+    Private Sub doHelp(ByVal result As ISpeechRecoResult)
+        curBusiness(0).myHelp.doClick(Nothing, Nothing)
+    End Sub
+    Private Sub doAuthorization(ByVal result As ISpeechRecoResult)
+        If Authorization IsNot Nothing Then
+            Authorization.Execute(result)
+            Authorization = Nothing
+        End If
+    End Sub
+    Private Sub doShowConsole(ByVal result As ISpeechRecoResult)
+        ShowConsole()
+    End Sub
+    Private Sub doHideConsole(ByVal result As ISpeechRecoResult)
+        console.Hide()
+    End Sub
+    Private Sub doWebBrowser(ByVal result As ISpeechRecoResult)
+        curBusiness(0).myWebBrowser.doClick(Nothing, Nothing)
+    End Sub
+    Private Sub doCrash(ByVal result As ISpeechRecoResult)
+        'Causes an unhandled exception.
+        If GetSetting("LCARS x32", "Application", "DebugSwitch", "False") Then
+            Throw New Exception()
+        End If
+    End Sub
+    Private Sub doDisplayOff(ByVal result As ISpeechRecoResult)
+        PostMessage(frmStartup.Handle, WM_SYSCOMMAND, SC_MONITORPOWER, MonitorPowerStates.PowerOff)
+    End Sub
+    Private Sub doDisplayOn(ByVal result As ISpeechRecoResult)
+        'Note: The line below is commented out because it will not work on Windows 10
+        'PostMessage(frmStartup.Handle, WM_SYSCOMMAND, SC_MONITORPOWER, MonitorPowerStates.PowerOn)
+        mouse_event(MOUSEEVENTF_MOVE, 0, 1, 0, UIntPtr.Zero)
+    End Sub
+
+#End Region
+
+#Region " Internal Command Definitions "
+    Public InternalVoiceCommands() As InternalVoiceCmd = { _
+  New InternalVoiceCmd("menu", "Shows the Start Menu.", New VoiceCmdSub(AddressOf doMenu), False), _
+  New InternalVoiceCmd("my computer", "Opens LCARS file browser.", New VoiceCmdSub(AddressOf doComputer), False), _
+  New InternalVoiceCmd("settings", "Opens settings.", New VoiceCmdSub(AddressOf doSettings), False), _
+  New InternalVoiceCmd("engineering", "Opens system information program.", New VoiceCmdSub(AddressOf doEngineering), False), _
+  New InternalVoiceCmd("mode select", "Shows screen chooser dialog.", New VoiceCmdSub(AddressOf doModeSelect), False), _
+  New InternalVoiceCmd("my documents", "Opens LCARS file browser to show the ""My Documents"" folder.", New VoiceCmdSub(AddressOf doDocuments), False), _
+  New InternalVoiceCmd("my pictures", "Opens LCARS file browser to show the ""My Pictures"" folder.", New VoiceCmdSub(AddressOf doPictures), False), _
+  New InternalVoiceCmd("my music", "Opens LCARS file browser to show the ""My Music"" folder.", New VoiceCmdSub(AddressOf doMusic), False), _
+  New InternalVoiceCmd("my videos", "Opens LCARS file browser to show the ""My Videos"" folder.", New VoiceCmdSub(AddressOf doVideos), False), _
+  New InternalVoiceCmd("deactivate", "Closes LCARS.", New VoiceCmdSub(AddressOf doDeactivate), False), _
+  New InternalVoiceCmd("self destruct", "Opens self destruct program.", New VoiceCmdSub(AddressOf doSelfDestruct), False), _
+  New InternalVoiceCmd("log off", "Logs off computer.", New VoiceCmdSub(AddressOf doLogOff), True), _
+  New InternalVoiceCmd("red alert", "Initiates a red alert.", New VoiceCmdSub(AddressOf doRedAlert), False), _
+  New InternalVoiceCmd("cancel alert", "Cancels a red or yellow alert.", New VoiceCmdSub(AddressOf doCancelAlert), False), _
+  New InternalVoiceCmd("shut down", "Shuts down computer.", New VoiceCmdSub(AddressOf doShutdown), True), _
+  New InternalVoiceCmd("end program", "Closes current program.", New VoiceCmdSub(AddressOf doEndProgram), False), _
+  New InternalVoiceCmd("cancel", "Ends continuous commands or cancels a command that requires confirmation.", New VoiceCmdSub(AddressOf doCancel), False), _
+  New InternalVoiceCmd("stardate", "Gives the current stardate.", New VoiceCmdSub(AddressOf doStardate), False), _
+  New InternalVoiceCmd("run program", "Brings up ""run program"" dialog.", New VoiceCmdSub(AddressOf doRunProgram), False), _
+  New InternalVoiceCmd("date", "Gives the current date.", New VoiceCmdSub(AddressOf doDate), False), _
+  New InternalVoiceCmd("time", "Gives the current time.", New VoiceCmdSub(AddressOf doTime), False), _
+  New InternalVoiceCmd("keyboard", "Shows the On Screen Keyboard.", New VoiceCmdSub(AddressOf doKeyboard), False), _
+  New InternalVoiceCmd("task manager", "Opens incomplete LCARS task manager.", New VoiceCmdSub(AddressOf doTaskManager), False), _
+  New InternalVoiceCmd("continuous commands", "Removes need to say ""computer"" before every command.", New VoiceCmdSub(AddressOf doContinuousCommands), False), _
+  New InternalVoiceCmd("yellow alert", "Initiates a yellow alert.", New VoiceCmdSub(AddressOf doYellowAlert), False), _
+  New InternalVoiceCmd("confirmed", "Used to confirm a voice command.", New VoiceCmdSub(AddressOf doConfirm), False), _
+  New InternalVoiceCmd("help", "Opens ""Help"" program.", New VoiceCmdSub(AddressOf doHelp), False), _
+  New InternalVoiceCmd("authorization", "Confirms commands that have been set to require command authorization.", New VoiceCmdSub(AddressOf doAuthorization), False), _
+  New InternalVoiceCmd("show console", "Shows the speech console", New VoiceCmdSub(AddressOf doShowConsole), False), _
+  New InternalVoiceCmd("hide console", "Hides the speech console", New VoiceCmdSub(AddressOf doHideConsole), False), _
+  New InternalVoiceCmd("web browser", "Starts the LCARS web browser", New VoiceCmdSub(AddressOf doWebBrowser), False), _
+  New InternalVoiceCmd("display off", "Turns off the display", New VoiceCmdSub(AddressOf doDisplayOff), False), _
+  New InternalVoiceCmd("display on", "Turns on the display", New VoiceCmdSub(AddressOf doDisplayOn), False) _
+    }
+
+#End Region
 End Module
