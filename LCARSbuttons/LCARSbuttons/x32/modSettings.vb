@@ -146,9 +146,22 @@ Namespace x32
                         TryDeleteSetting("LCARS x32", "Application", "ShowTrayIcons")
                         TryDeleteSetting("LCARS x32", "Application", "Wallpaper")
                         TryDeleteSetting("LCARS x32", "Application", "WallpaperSizeMode")
+                        GoTo Label072
+                    ElseIf ver.Build = 2 Then
+Label072:
+                        Dim f As String = My.Computer.FileSystem.SpecialDirectories.Temp & "/commands.xml"
+                        If File.Exists(f) Then
+                            Debug.Print("Found commands.xml")
+                            Try
+                                File.Delete(f)
+                            Catch ex As Exception
+                                Debug.Print("Unable to delete commands.xml")
+                            End Try
+                        End If
                     End If
                 End If
             End If
+            'TODO: Bump version when finished adding things
             SettingsVersion = New Version(0, 7, 2)
         End Sub
 
@@ -250,7 +263,7 @@ Namespace x32
             external = 4
         End Enum
         Public Shared Property AutoDestructOption() As AutoDestructOptions
-            'TODO: Store as integers instead? Will need to be added to settings upgrade.
+            'TODO: Store as integers instead? Would need to be added to settings upgrade.
             Get
                 Dim str As String = GetSetting("LCARS x32", "Application", "AutoDestructOption", "alarm")
                 Dim val As AutoDestructOptions
