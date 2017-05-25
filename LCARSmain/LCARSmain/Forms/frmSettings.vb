@@ -31,10 +31,14 @@ Public Class frmSettings
     Dim alertList As New List(Of AlertEntry)
     Dim screenIndex As Integer = 0
 
-    Public Structure AliasEntry
-        Dim Command As String
-        Dim CommandAlias As String
-    End Structure
+    Private Class AliasEntry
+        Public Command As String
+        Public CommandAlias As String
+        Public Description As String
+        Public Overrides Function ToString() As String
+            Return Command & ": " & CommandAlias
+        End Function
+    End Class
 
     Public Structure CustomEntry
         Dim Command As String
@@ -161,20 +165,19 @@ Public Class frmSettings
         txtLanguageCode.Text = GetSetting("LCARS X32", "Application", "SpeechCode", "409")
         'Command Aliases
         Dim myAlias As New AliasEntry
-        Dim myCommandList() As String = {"computer", "menu", "my computer", "settings", _
-                                         "engineering", "mode select", "my documents", _
-                                         "my pictures", "my music", "my videos", "deactivate", _
-                                         "self destruct", "log off", "red alert", _
-                                         "cancel alert", "shut down", "end program", "cancel", _
-                                         "stardate", "run program", "date", "time", "keyboard", _
-                                         "task manager", "continuous commands", "yellow alert", _
-                                         "confirmed", "help", "authorization", "show console", _
-                                         "hide console", "web browser", "display on", "display off"}
-        ReDim aliasList(myCommandList.Length - 1)
-        For i As Integer = 0 To myCommandList.Length - 1
-            aliasList(i).Command = myCommandList(i)
-            aliasList(i).CommandAlias = GetSetting("LCARS X32", "VoiceCommandAlias", aliasList(i).Command, "")
-            lstInternalCommands.Items.Add(aliasList(i).Command & ": " & aliasList(i).CommandAlias)
+
+        ReDim aliasList(modSpeech.InternalVoiceCommands.Length)
+        aliasList(0) = New AliasEntry()
+        aliasList(0).Command = "computer"
+        aliasList(0).CommandAlias = GetSetting("LCARS x32", "VoiceCommandAlias", "computer", "")
+        aliasList(0).Description = "Command initializer. Must be spoken to use any other command."
+        lstInternalCommands.Items.Add(aliasList(0))
+        For i As Integer = 0 To modSpeech.InternalVoiceCommands.Length - 1
+            aliasList(i + 1) = New AliasEntry()
+            aliasList(i + 1).Command = modSpeech.InternalVoiceCommands(i).Name
+            aliasList(i + 1).CommandAlias = GetSetting("LCARS X32", "VoiceCommandAlias", aliasList(i + 1).Command, "")
+            aliasList(i + 1).Description = modSpeech.InternalVoiceCommands(i).Description
+            lstInternalCommands.Items.Add(aliasList(i + 1))
         Next
         'Custom Commands
         Dim myVoiceReg As Microsoft.Win32.RegistryKey = Microsoft.Win32.Registry.CurrentUser
@@ -377,19 +380,6 @@ Public Class frmSettings
 
     End Sub
 
-    Private Sub cbVoice_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbVoice.Click
-        cbVoice.Lit = Not cbVoice.Lit
-
-        SaveSetting("LCARS x32", "Application", "SpeechOn", cbVoice.Lit)
-
-        If cbVoice.Lit Then
-            cbVoice.SideText = "ON"
-        Else
-            cbVoice.SideText = "OFF"
-        End If
-        modSpeech.SpeechEnabled = cbVoice.Lit
-    End Sub
-
     Private Sub picMain4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles picMain4.Click
         picSelect.Location = New Point(picMain4.Left - 19, picMain4.Top - 15)
         MainScreen(screenIndex) = 4
@@ -494,7 +484,6 @@ Public Class frmSettings
     End Sub
 
     Private Sub lstLanguages_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lstLanguages.SelectedIndexChanged
-        'Dim myfile As System.IO.StreamReader ' = system.IO.File.OpenText(application.StartupPath & lstlanguages.GetItemText(
         Try
             If lstLanguages.SelectedIndex > -1 Then
                 Dim strinput As String = ""
@@ -523,6 +512,19 @@ Public Class frmSettings
     End Sub
 
 #Region " Voice Command Settings "
+
+    Private Sub cbVoice_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbVoice.Click
+        cbVoice.Lit = Not cbVoice.Lit
+
+        SaveSetting("LCARS x32", "Application", "SpeechOn", cbVoice.Lit)
+
+        If cbVoice.Lit Then
+            cbVoice.SideText = "ON"
+        Else
+            cbVoice.SideText = "OFF"
+        End If
+        modSpeech.SpeechEnabled = cbVoice.Lit
+    End Sub
 
     Dim editedCommand As Integer = -1
 
@@ -578,89 +580,22 @@ Public Class frmSettings
         pnlInternal.Visible = False
         lstInternalCommands.Visible = False
     End Sub
-
+    Dim editingAlias As Boolean = False
     Private Sub lstInternalCommands_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lstInternalCommands.SelectedIndexChanged
+        If editingAlias Then Return
+        If lstInternalCommands.SelectedIndex = -1 Then Return
         lblIntCommandName.Text = "Command Name: " & aliasList(lstInternalCommands.SelectedIndex).Command
         txtAlias.Text = aliasList(lstInternalCommands.SelectedIndex).CommandAlias
-        Select Case aliasList(lstInternalCommands.SelectedIndex).Command
-            Case "computer"
-                lblDescription.Text = "Description: Command initializer. Must be spoken to use any other command."
-            Case "menu"
-                lblDescription.Text = "Description: Shows the Start Menu."
-            Case "my computer"
-                lblDescription.Text = "Description: Opens LCARS file browser."
-            Case "settings"
-                lblDescription.Text = "Description: Opens settings."
-            Case "engineering"
-                lblDescription.Text = "Description: Opens system information program."
-            Case "mode select"
-                lblDescription.Text = "Description: Shows screen chooser dialog."
-            Case "my documents"
-                lblDescription.Text = "Description: Opens LCARS file browser to show the ""My Documents"" folder."
-            Case "my pictures"
-                lblDescription.Text = "Description: Opens LCARS file browser to show the ""My Pictures"" folder."
-            Case "my music"
-                lblDescription.Text = "Description: Opens LCARS file browser to show the ""My Music"" folder."
-            Case "my videos"
-                lblDescription.Text = "Description: Opens LCARS file browser to show the ""My Videos"" folder."
-            Case "deactivate"
-                lblDescription.Text = "Description: Closes LCARS."
-            Case "self destruct"
-                lblDescription.Text = "Description: Opens self destruct program."
-            Case "log off"
-                lblDescription.Text = "Description: Logs off computer. Requires confirmation"
-            Case "red alert"
-                lblDescription.Text = "Description: Initiates a red alert."
-            Case "cancel alert"
-                lblDescription.Text = "Description: Cancels a red or yellow alert."
-            Case "shut down"
-                lblDescription.Text = "Description: Shuts down computer. Requires confirmation."
-            Case "end program"
-                lblDescription.Text = "Description: Closes current program."
-            Case "cancel"
-                lblDescription.Text = "Description: Ends continuous commands."
-            Case "stardate"
-                lblDescription.Text = "Description: Gives the current stardate."
-            Case "run program"
-                lblDescription.Text = "Description: Brings up ""run program"" dialog."
-            Case "date"
-                lblDescription.Text = "Description: Gives the current date."
-            Case "time"
-                lblDescription.Text = "Description: Gives the current time."
-            Case "keyboard"
-                lblDescription.Text = "Description: Shows the On Screen Keyboard."
-            Case "task manager"
-                lblDescription.Text = "Description: Opens incomplete LCARS task manager."
-            Case "continuous commands"
-                lblDescription.Text = "Description: Removes need to say ""computer"" before every command."
-            Case "yellow alert"
-                lblDescription.Text = "Description: Initiates a yellow alert."
-            Case "confirmed"
-                lblDescription.Text = "Description: Used to confirm a voice command."
-            Case "help"
-                lblDescription.Text = "Description: Opens ""Help"" program."
-            Case "authorization"
-                lblDescription.Text = "Description: Confirms commands that have been set to require command authorization."
-            Case "show console"
-                lblDescription.Text = "Description: Shows the speech console."
-            Case "hide console"
-                lblDescription.Text = "Description: Hides the speech console."
-            Case "web browser"
-                lblDescription.Text = "Description: Starts the LCARS web browser."
-        End Select
+        lblDescription.Text = "Description: " & aliasList(lstInternalCommands.SelectedIndex).Description
     End Sub
 
     Private Sub txtAlias_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAlias.TextChanged
+        editingAlias = True
         Dim myposition As Integer = lstInternalCommands.SelectedIndex
-        Dim newAlias As New AliasEntry
+        Dim newAlias As AliasEntry = lstInternalCommands.SelectedItem
         newAlias.CommandAlias = txtAlias.Text
-        newAlias.Command = aliasList(myposition).Command
-        aliasList(myposition) = newAlias
-        lstInternalCommands.Items.Clear()
-        For Each myAlias As AliasEntry In aliasList
-            lstInternalCommands.Items.Add(myAlias.Command & ": " & myAlias.CommandAlias)
-        Next
         lstInternalCommands.SelectedIndex = myposition
+        editingAlias = False
     End Sub
 
     Private Sub sbAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbAdd.Click
