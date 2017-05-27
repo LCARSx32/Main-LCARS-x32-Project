@@ -47,6 +47,7 @@ Public Class frmSpeechConsole
 
     Public Sub WriteLine(ByVal line As String)
         Me.lstHistory.Items.Add(line)
+        Application.DoEvents()
     End Sub
 
     Private Sub frmSpeechConsole_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load

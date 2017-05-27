@@ -119,9 +119,9 @@ Module modSpeech
         console.WriteLine(Result.PhraseInfo.GetText().ToUpper())
         Dim rule = Result.PhraseInfo.Rule.Name
         If rule = "Main" Then
-            grammar.CmdSetRuleState("Command", SpeechRuleState.SGDSActive)
             If Result.PhraseInfo.Rule.Children.Item(0).Children Is Nothing Then
                 muteAlert = True
+                grammar.CmdSetRuleState("Command", SpeechRuleState.SGDSActive)
                 LCARSSound.ListeningSound.Play()
                 If LCARS.x32.modSettings.CommandTimeoutEnabled And Not continuousCommands Then
                     timeoutTimer.Interval = LCARS.x32.modSettings.CommandTimeout * 1000 'Convert sec to ms
@@ -311,6 +311,7 @@ Module modSpeech
     End Sub
     Private Sub doContinuousCommands(ByVal result As ISpeechRecoResult)
         continuousCommands = True
+        grammar.CmdSetRuleState("Command", SpeechRuleState.SGDSActive)
         Try
             vox.Speak("Continuous commands enabled.")
         Catch ex As Exception
