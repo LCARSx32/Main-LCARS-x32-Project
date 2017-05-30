@@ -146,13 +146,16 @@ Module modSpeech
         Catch ex As KeyNotFoundException
             console.WriteLine("Unable to determine rule: " & name)
         End Try
-        'TODO: Handle commands that require authorization
-        'TODO: Clear confirm/authorization if not responded to
-        If command.RequiresConfirm Then
+        If command.RequiresAuthorize Then
+            Authorization = command
+            'TODO: Create authorization sound
+        ElseIf command.RequiresConfirm Then
             LCARSSound.ConfirmSound.Play()
             Confirm = command
         Else
             command.Execute(result)
+            Confirm = Nothing
+            Authorization = Nothing
         End If
         If Not continuousCommands Then
             grammar.CmdSetRuleState("Command", SpeechRuleState.SGDSInactive)

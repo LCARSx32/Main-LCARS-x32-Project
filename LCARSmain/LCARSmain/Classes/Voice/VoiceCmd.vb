@@ -32,6 +32,13 @@ Public MustInherit Class VoiceCmd
         End Get
     End Property
 
+    Public ReadOnly Property RequiresAuthorize() As Boolean
+        Get
+            'TODO: Handle authorization
+            Return False
+        End Get
+    End Property
+
     Public MustOverride Sub Execute(ByVal result As SpeechLib.ISpeechRecoResult)
 
     Public MustOverride Sub BuildRule(ByRef builder As SpeechLib.ISpGrammarBuilder, ByRef hStateInitial As IntPtr)
