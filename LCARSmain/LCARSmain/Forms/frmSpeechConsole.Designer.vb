@@ -26,7 +26,6 @@ Partial Class frmSpeechConsole
         Me.elbTop = New LCARS.Controls.Elbow
         Me.fbHide = New LCARS.Controls.FlatButton
         Me.fbOnOff = New LCARS.Controls.FlatButton
-        Me.lstHistory = New System.Windows.Forms.ListBox
         Me.txtEntry = New System.Windows.Forms.TextBox
         Me.elbReferenceBottom = New LCARS.Controls.Elbow
         Me.tbBottom = New LCARS.Controls.TextButton
@@ -35,6 +34,8 @@ Partial Class frmSpeechConsole
         Me.fbReferenceBorder = New LCARS.Controls.FlatButton
         Me.fbHistoryBorder = New LCARS.Controls.FlatButton
         Me.lstCommands = New System.Windows.Forms.ListBox
+        Me.txtHistory = New System.Windows.Forms.TextBox
+        Me.fbClearHistory = New LCARS.Controls.FlatButton
         Me.SuspendLayout()
         '
         'tbTitle
@@ -55,14 +56,14 @@ Partial Class frmSpeechConsole
         Me.tbTitle.Location = New System.Drawing.Point(172, 12)
         Me.tbTitle.Name = "tbTitle"
         Me.tbTitle.RedAlert = LCARS.LCARSalert.Normal
-        Me.tbTitle.Size = New System.Drawing.Size(457, 23)
+        Me.tbTitle.Size = New System.Drawing.Size(457, 24)
         Me.tbTitle.TabIndex = 0
         Me.tbTitle.Text = "VOICE RECOGNITION CONSOLE"
         '
         'elbTop
         '
         Me.elbTop.Beeping = False
-        Me.elbTop.ButtonHeight = 23
+        Me.elbTop.ButtonHeight = 24
         Me.elbTop.ButtonText = "COMMAND HISTORY"
         Me.elbTop.ButtonTextAlign = System.Drawing.ContentAlignment.BottomLeft
         Me.elbTop.ButtonTextHeight = 14
@@ -126,18 +127,6 @@ Partial Class frmSpeechConsole
         Me.fbOnOff.TabIndex = 2
         Me.fbOnOff.Text = "RECOGNITION ON"
         '
-        'lstHistory
-        '
-        Me.lstHistory.BackColor = System.Drawing.Color.Black
-        Me.lstHistory.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.lstHistory.ForeColor = System.Drawing.Color.Cyan
-        Me.lstHistory.FormattingEnabled = True
-        Me.lstHistory.ItemHeight = 21
-        Me.lstHistory.Location = New System.Drawing.Point(118, 42)
-        Me.lstHistory.Name = "lstHistory"
-        Me.lstHistory.Size = New System.Drawing.Size(511, 168)
-        Me.lstHistory.TabIndex = 3
-        '
         'txtEntry
         '
         Me.txtEntry.BackColor = System.Drawing.Color.Black
@@ -151,7 +140,7 @@ Partial Class frmSpeechConsole
         'elbReferenceBottom
         '
         Me.elbReferenceBottom.Beeping = False
-        Me.elbReferenceBottom.ButtonHeight = 23
+        Me.elbReferenceBottom.ButtonHeight = 24
         Me.elbReferenceBottom.ButtonText = ""
         Me.elbReferenceBottom.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.elbReferenceBottom.ButtonTextHeight = 14
@@ -169,7 +158,7 @@ Partial Class frmSpeechConsole
         Me.elbReferenceBottom.Location = New System.Drawing.Point(12, 364)
         Me.elbReferenceBottom.Name = "elbReferenceBottom"
         Me.elbReferenceBottom.RedAlert = LCARS.LCARSalert.Normal
-        Me.elbReferenceBottom.Size = New System.Drawing.Size(182, 44)
+        Me.elbReferenceBottom.Size = New System.Drawing.Size(182, 45)
         Me.elbReferenceBottom.TabIndex = 1
         '
         'tbBottom
@@ -190,7 +179,7 @@ Partial Class frmSpeechConsole
         Me.tbBottom.Location = New System.Drawing.Point(172, 385)
         Me.tbBottom.Name = "tbBottom"
         Me.tbBottom.RedAlert = LCARS.LCARSalert.Normal
-        Me.tbBottom.Size = New System.Drawing.Size(457, 23)
+        Me.tbBottom.Size = New System.Drawing.Size(457, 24)
         Me.tbBottom.TabIndex = 0
         Me.tbBottom.Text = "COMMAND REFERENCE"
         '
@@ -277,10 +266,10 @@ Partial Class frmSpeechConsole
         Me.fbHistoryBorder.FlashInterval = 500
         Me.fbHistoryBorder.holdDraw = False
         Me.fbHistoryBorder.Lit = True
-        Me.fbHistoryBorder.Location = New System.Drawing.Point(12, 120)
+        Me.fbHistoryBorder.Location = New System.Drawing.Point(12, 149)
         Me.fbHistoryBorder.Name = "fbHistoryBorder"
         Me.fbHistoryBorder.RedAlert = LCARS.LCARSalert.Normal
-        Me.fbHistoryBorder.Size = New System.Drawing.Size(100, 104)
+        Me.fbHistoryBorder.Size = New System.Drawing.Size(100, 75)
         Me.fbHistoryBorder.TabIndex = 6
         '
         'lstCommands
@@ -295,17 +284,55 @@ Partial Class frmSpeechConsole
         Me.lstCommands.Size = New System.Drawing.Size(511, 84)
         Me.lstCommands.TabIndex = 3
         '
+        'txtHistory
+        '
+        Me.txtHistory.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtHistory.BackColor = System.Drawing.Color.Black
+        Me.txtHistory.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtHistory.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.txtHistory.ForeColor = System.Drawing.Color.Orange
+        Me.txtHistory.Location = New System.Drawing.Point(118, 42)
+        Me.txtHistory.Multiline = True
+        Me.txtHistory.Name = "txtHistory"
+        Me.txtHistory.ReadOnly = True
+        Me.txtHistory.Size = New System.Drawing.Size(511, 168)
+        Me.txtHistory.TabIndex = 7
+        '
+        'fbClearHistory
+        '
+        Me.fbClearHistory.Beeping = False
+        Me.fbClearHistory.ButtonText = "CLEAR HISTORY"
+        Me.fbClearHistory.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.fbClearHistory.ButtonTextHeight = 14
+        Me.fbClearHistory.Clickable = True
+        Me.fbClearHistory.Color = LCARS.LCARScolorStyles.PrimaryFunction
+        Me.fbClearHistory.CustomAlertColor = System.Drawing.Color.Empty
+        Me.fbClearHistory.Data = Nothing
+        Me.fbClearHistory.Data2 = Nothing
+        Me.fbClearHistory.FlashInterval = 500
+        Me.fbClearHistory.holdDraw = False
+        Me.fbClearHistory.Lit = True
+        Me.fbClearHistory.Location = New System.Drawing.Point(12, 120)
+        Me.fbClearHistory.Name = "fbClearHistory"
+        Me.fbClearHistory.RedAlert = LCARS.LCARSalert.Normal
+        Me.fbClearHistory.Size = New System.Drawing.Size(101, 23)
+        Me.fbClearHistory.TabIndex = 8
+        Me.fbClearHistory.Text = "CLEAR HISTORY"
+        '
         'frmSpeechConsole
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(5.0!, 21.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Black
         Me.ClientSize = New System.Drawing.Size(641, 420)
+        Me.Controls.Add(Me.fbClearHistory)
+        Me.Controls.Add(Me.txtHistory)
         Me.Controls.Add(Me.fbHistoryBorder)
         Me.Controls.Add(Me.fbReferenceBorder)
         Me.Controls.Add(Me.txtEntry)
         Me.Controls.Add(Me.lstCommands)
-        Me.Controls.Add(Me.lstHistory)
         Me.Controls.Add(Me.fbOnOff)
         Me.Controls.Add(Me.fbHide)
         Me.Controls.Add(Me.elbReferenceTop)
@@ -328,7 +355,6 @@ Partial Class frmSpeechConsole
     Friend WithEvents elbTop As LCARS.Controls.Elbow
     Friend WithEvents fbHide As LCARS.Controls.FlatButton
     Friend WithEvents fbOnOff As LCARS.Controls.FlatButton
-    Friend WithEvents lstHistory As System.Windows.Forms.ListBox
     Friend WithEvents txtEntry As System.Windows.Forms.TextBox
     Friend WithEvents elbReferenceBottom As LCARS.Controls.Elbow
     Friend WithEvents tbBottom As LCARS.Controls.TextButton
@@ -337,4 +363,6 @@ Partial Class frmSpeechConsole
     Friend WithEvents fbReferenceBorder As LCARS.Controls.FlatButton
     Friend WithEvents fbHistoryBorder As LCARS.Controls.FlatButton
     Friend WithEvents lstCommands As System.Windows.Forms.ListBox
+    Friend WithEvents txtHistory As System.Windows.Forms.TextBox
+    Friend WithEvents fbClearHistory As LCARS.Controls.FlatButton
 End Class

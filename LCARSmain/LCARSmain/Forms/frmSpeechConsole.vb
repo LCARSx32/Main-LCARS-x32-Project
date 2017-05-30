@@ -1,6 +1,4 @@
-﻿'TODO: Show by screen index
-
-Public Class frmSpeechConsole
+﻿Public Class frmSpeechConsole
     Dim oloc As Point
     Private Sub fbHide_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbHide.Click
         Me.Hide()
@@ -13,8 +11,6 @@ Public Class frmSpeechConsole
     Private Sub txtEntry_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtEntry.KeyDown
         If e.KeyCode = Keys.Enter Then
             SimulateRecognition(txtEntry.Text)
-            lstHistory.SelectedIndex = lstHistory.Items.Count - 1
-            lstHistory.SelectedIndex = -1
             txtEntry.Clear()
         End If
     End Sub
@@ -46,7 +42,20 @@ Public Class frmSpeechConsole
     End Sub
 
     Public Sub WriteLine(ByVal line As String)
-        Me.lstHistory.Items.Add(line)
+        line = line & vbNewLine
+        If txtHistory.Text.Length() + line.Length > txtHistory.MaxLength Then
+            'Erase enough lines to fit
+            Dim loc As Integer = 0
+            While txtHistory.Text.Length + line.Length - loc > txtHistory.MaxLength
+                loc = txtHistory.Text.IndexOf(vbNewLine, loc) + vbNewLine.Length
+                If loc = -1 Then
+                    loc = txtHistory.Text.Length - vbNewLine.Length
+                    Exit While
+                End If
+            End While
+            txtHistory.Text = txtHistory.Text.Substring(loc)
+        End If
+        txtHistory.AppendText(line)
         Application.DoEvents()
     End Sub
 
@@ -62,5 +71,9 @@ Public Class frmSpeechConsole
             console.fbOnOff.Lit = False
             console.fbOnOff.Text = "Recognition off"
         End If
+    End Sub
+
+    Private Sub fbClearHistory_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbClearHistory.Click
+        txtHistory.Clear()
     End Sub
 End Class
