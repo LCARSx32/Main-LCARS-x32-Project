@@ -205,7 +205,7 @@ public Class modBusiness
     End Sub
 
     Public Sub myModeSelectButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        cancelAlert = True
+        CancelAlert() 'TODO: Find a way to cancel only on one screen
         Application.DoEvents()
         'Check that the images directory exists. If not, create it.
         If Not Directory.Exists(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\LCARS x32\Images") Then
@@ -234,18 +234,18 @@ public Class modBusiness
     End Sub
 
     Public Sub myAlertButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        If cancelAlert Then
-            GeneralAlert(0)
+        If AlertActive Then
+            CancelAlert()
         Else
-            cancelAlert = True
+            GeneralAlert(0)
         End If
     End Sub
 
     Public Sub myYellowAlertButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        If cancelAlert Then
-            GeneralAlert(1)
+        If AlertActive Then
+            CancelAlert()
         Else
-            cancelAlert = True
+            GeneralAlert(1)
         End If
     End Sub
 

@@ -120,7 +120,7 @@ Module modSpeech
         Dim rule = Result.PhraseInfo.Rule.Name
         If rule = "Main" Then
             If Result.PhraseInfo.Rule.Children.Item(0).Children Is Nothing Then
-                muteAlert = True
+                AlertMuted = True
                 grammar.CmdSetRuleState("Command", SpeechRuleState.SGDSActive)
                 LCARSSound.ListeningSound.Play()
                 If LCARS.x32.modSettings.CommandTimeoutEnabled And Not continuousCommands Then
@@ -130,12 +130,13 @@ Module modSpeech
             Else
                 Dim commandName As String = Result.PhraseInfo.Rule.Children.Item(0).Children.Item(0).Name
                 executeCommand(commandName, Result)
+                If AlertMuted Then AlertMuted = False
             End If
         Else
             timeoutTimer.Stop()
             Dim commandName As String = Result.PhraseInfo.Rule.Children.Item(0).Name
             executeCommand(commandName, Result)
-            muteAlert = False
+            AlertMuted = False
         End If
     End Sub
 
@@ -260,7 +261,7 @@ Module modSpeech
         GeneralAlert(0)
     End Sub
     Private Sub doCancelAlert(ByVal result As ISpeechRecoResult)
-        cancelAlert = True
+        CancelAlert()
     End Sub
     Private Sub doShutdown(ByVal result As ISpeechRecoResult)
         shutDownOptions.ExitWindows(cWrapExitWindows.Action.Shutdown)

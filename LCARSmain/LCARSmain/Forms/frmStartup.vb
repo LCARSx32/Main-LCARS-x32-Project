@@ -99,7 +99,7 @@ Public Class frmStartup
                     m.Result = 1
 
                     'Cancel current Alerts
-                    cancelAlert = True
+                    CancelAlert()
                 Case 8
                     m.Result = 1
 
