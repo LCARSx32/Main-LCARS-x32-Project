@@ -1,5 +1,6 @@
-﻿<Assembly: System.Security.Permissions.PermissionSet(Security.Permissions.SecurityAction.RequestMinimum, name:="FullTrust")> 
+﻿Option Strict On
 
+<Assembly: System.Security.Permissions.PermissionSet(Security.Permissions.SecurityAction.RequestMinimum, name:="FullTrust")> 
 Namespace My
 
     ' The following events are available for MyApplication:
@@ -22,7 +23,7 @@ Namespace My
                 Else
                     'Send message current instance to load settings.
                     InterMsgID = frmStartup.RegisterWindowMessage("LCARS_X32_MSG")
-                    SendMessage(HWND_BROADCAST, InterMsgID, 0, 2)
+                    SendMessage(HWND_BROADCAST, InterMsgID, IntPtr.Zero, New IntPtr(2))
                     End
                 End If
             Else
@@ -52,7 +53,7 @@ Namespace My
                         End While
                     Else
                         'Send message to current instance to switch to shell mode
-                        SendMessage(HWND_BROADCAST, InterMsgID, 0, 3)
+                        SendMessage(HWND_BROADCAST, InterMsgID, IntPtr.Zero, New IntPtr(3))
                     End If
                 End If
             End If

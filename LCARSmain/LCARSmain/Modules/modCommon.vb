@@ -89,13 +89,13 @@ Module modCommon
 
 #Region " Working Area "
     'Constants for setting the "working area" (the area programs load)
-    Public Const SPI_SETWORKAREA = 47
-    Public Const SPIF_SENDWININICHANGE = &H2
-    Public Const SPIF_UPDATEINIFILE = &H1
-    Public Const SPIF_change = SPIF_UPDATEINIFILE Or SPIF_SENDWININICHANGE
+    Public Const SPI_SETWORKAREA As Integer = 47
+    Public Const SPIF_SENDWININICHANGE As Integer = &H2
+    Public Const SPIF_UPDATEINIFILE As Integer = &H1
+    Public Const SPIF_change As Integer = SPIF_UPDATEINIFILE Or SPIF_SENDWININICHANGE
     'Constants for hiding minimized windows in shell mode
-    Public Const SPI_GETMINIMIZEDMETRICS = &H2B
-    Public Const SPI_SETMINIMIZEDMETRICS = &H2C
+    Public Const SPI_GETMINIMIZEDMETRICS As Integer = &H2B
+    Public Const SPI_SETMINIMIZEDMETRICS As Integer = &H2C
 
     <StructLayout(LayoutKind.Sequential)> _
     Public Structure MinimizedMetrics
@@ -152,7 +152,7 @@ Module modCommon
 
     Public Declare Auto Function SendMessage Lib "user32.dll" (ByVal hWnd As IntPtr, ByVal msg As Integer, ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
     Public InterMsgID As Integer
-    Public Const HWND_BROADCAST As Integer = &HFFFF
+    Public HWND_BROADCAST As New IntPtr(&HFFFF)
     Public Const WM_EXPLORER_CLOSE As Integer = &H5B4
 
 #End Region

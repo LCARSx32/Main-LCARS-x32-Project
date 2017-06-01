@@ -42,10 +42,10 @@ Module Keyboard
     Private Const LLKHF_UP As Integer = &H80
 
     ' Virtual Keys
-    Public Const VK_TAB = &H9
-    Public Const VK_CONTROL = &H11
-    Public Const VK_ESCAPE = &H1B
-    Public Const VK_DELETE = &H2E
+    Public Const VK_TAB As Integer = &H9
+    Public Const VK_CONTROL As Integer = &H11
+    Public Const VK_ESCAPE As Integer = &H1B
+    Public Const VK_DELETE As Integer = &H2E
 
     Private Const WH_KEYBOARD_LL As Integer = 13&
     Public KeyboardHandle As Integer
@@ -139,7 +139,7 @@ Module Keyboard
         End If
     End Sub
 
-    Private Function Hooked()
+    Private Function Hooked() As Boolean
         Hooked = KeyboardHandle <> 0
     End Function
 

@@ -1,3 +1,5 @@
+Option Strict On
+
 'Imports LCARS.UI
 Imports System.Runtime.InteropServices
 Imports LCARS.x32.modSettings
@@ -8,8 +10,8 @@ Public Class frmSettings
 #Region " Mode changing "
     Protected Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
         If m.Msg = InterMsgID And My.Application.IsSettingsMode Then
-            m.Result = 1
-            If m.LParam = 3 Then
+            m.Result = New IntPtr(1)
+            If m.LParam.ToInt64() = 3 Then
                 'They are telling this (settings) instance to run as a shell
                 My.Application.SwitchToShellFromSettings()
                 tbTitle.Color = LCARS.LCARScolorStyles.MiscFunction
@@ -25,7 +27,6 @@ Public Class frmSettings
     Dim myColors(-1) As String
     Dim myFiles() As String
     Dim myLanguageFiles() As String
-    Dim selectedMainScreen As String
     Dim aliasList() As AliasEntry
     Dim customList As New List(Of CustomEntry)
     Dim alertList As New List(Of AlertEntry)
@@ -72,7 +73,7 @@ Public Class frmSettings
             Dim myReg As Microsoft.Win32.RegistryKey = Microsoft.Win32.Registry.CurrentUser
 
             myReg = myReg.OpenSubKey("Software\Microsoft\Windows NT\CurrentVersion\Winlogon", False)
-            shellPath = myReg.GetValue("Shell")
+            shellPath = CType(myReg.GetValue("Shell"), String)
             shellPath = System.IO.Path.GetFileName(shellPath)
 
             myReg.Close()
@@ -115,7 +116,7 @@ Public Class frmSettings
             MsgBox(shellPath)
         End If
 
-        cbVoice.Lit = GetSetting("LCARS x32", "Application", "SpeechOn", "TRUE")
+        cbVoice.Lit = CBool(GetSetting("LCARS x32", "Application", "SpeechOn", "TRUE"))
 
         If cbVoice.Lit Then
             cbVoice.SideText = "ON"
@@ -132,23 +133,23 @@ Public Class frmSettings
 
         txtCommandTimeout.Text = LCARS.x32.modSettings.CommandTimeout.ToString()
 
-        cbDates.Lit = GetSetting("LCARS x32", "Application", "Stardate", "FALSE")
+        cbDates.Lit = CBool(GetSetting("LCARS x32", "Application", "Stardate", "FALSE"))
         If cbDates.Lit Then
             cbDates.SideText = "ON"
         Else
             cbDates.SideText = "OFF"
         End If
 
-        selectedMainScreen = MainScreen(screenIndex)
+        Dim selectedMainScreen As Integer = MainScreen(screenIndex)
 
         Select Case selectedMainScreen
-            Case "1"
+            Case 1
                 picMain1_Click(sender, e)
-            Case "2"
+            Case 2
                 picMain2_Click(sender, e)
-            Case "3"
+            Case 3
                 picMain3_Click(sender, e)
-            Case "4"
+            Case 4
                 picMain4_Click(sender, e)
 
         End Select
@@ -187,7 +188,7 @@ Public Class frmSettings
             For intloop As Integer = 0 To myVoiceReg.ValueCount - 1
                 Dim myCommand As New CustomEntry
                 myCommand.CommandName = myVoiceReg.GetValueNames(intloop)
-                myCommand.Command = myVoiceReg.GetValue(myCommand.CommandName)
+                myCommand.Command = CType(myVoiceReg.GetValue(myCommand.CommandName), String)
                 customList.Add(myCommand)
                 lstExternalCommands.Items.Add(myCommand.CommandName & ": " & myCommand.Command)
             Next
@@ -197,7 +198,7 @@ Public Class frmSettings
 
         'Updates
         lblVersion.Text = "Program Version: " & New LCARSUpdate.ProgramVersions(Application.StartupPath & "\versions.txt").getGlobalVersion()
-        cpxAutoUpdates.Lit = GetSetting("LCARS X32", "Application", "Updates", "FALSE")
+        cpxAutoUpdates.Lit = CBool(GetSetting("LCARS X32", "Application", "Updates", "FALSE"))
         If cpxAutoUpdates.Lit Then
             cpxAutoUpdates.SideText = "ON"
         Else
@@ -221,7 +222,7 @@ Public Class frmSettings
         loadAlerts()
 
         'Debug switch
-        cbDebug.Lit = GetSetting("LCARS x32", "Application", "DebugSwitch", "FALSE")
+        cbDebug.Lit = CBool(GetSetting("LCARS x32", "Application", "DebugSwitch", "FALSE"))
         If cbDebug.Lit Then
             cbDebug.SideText = "ON"
         End If
@@ -265,7 +266,7 @@ Public Class frmSettings
                 UpdateColors(pnlPreview)
             End If
         Catch
-            MsgBox("Error loading color profile.  Please check the file '" & lstColors.SelectedItem & ".lxcp' in the program folder.", MsgBoxStyle.Critical, "ERROR")
+            MsgBox("Error loading color profile.  Please check the file '" & lstColors.SelectedItem.ToString() & ".lxcp' in the program folder.", MsgBoxStyle.Critical, "ERROR")
         End Try
 
         FileClose(1)
@@ -277,8 +278,8 @@ Public Class frmSettings
         For Each myControl As Control In container.Controls
             If myControl.GetType.ToString.Substring(0, 5).ToLower = "lcars" Then
                 Try
-                    CType(myControl, Object).ColorsAvailable.setColors(myColors)
-                    CType(myControl, Object).DrawAllButtons()
+                    CType(myControl, LCARS.LCARSbuttonClass).ColorsAvailable.setColors(myColors)
+                    CType(myControl, LCARS.LCARSbuttonClass).DrawAllButtons()
                 Catch
                 End Try
 
@@ -419,10 +420,10 @@ Public Class frmSettings
             pnlScreens.Controls.Clear()
             SyncLock Screen.AllScreens 'Prevents problems with a screen being removed while loading, hopefully
                 Dim screenBounds(Screen.AllScreens.Length - 1) As RectangleF
-                Dim screenLeft As Integer = 0
-                Dim screenTop As Integer = 0
-                Dim screenRight As Integer = 0
-                Dim screenBottom As Integer = 0
+                Dim screenLeft As Single = 0
+                Dim screenTop As Single = 0
+                Dim screenRight As Single = 0
+                Dim screenBottom As Single = 0
                 For i As Integer = 0 To screenBounds.Length - 1
                     screenBounds(i) = Screen.AllScreens(i).Bounds
                     If screenBounds(i).Left < screenLeft Then
@@ -438,9 +439,9 @@ Public Class frmSettings
                         screenBottom = screenBounds(i).Bottom
                     End If
                 Next
-                Dim hScale As Double = pnlScreens.Width / (screenRight - screenLeft)
-                Dim vScale As Double = pnlScreens.Height / (screenBottom - screenTop)
-                Dim scaleFactor As Double
+                Dim hScale As Single = pnlScreens.Width / (screenRight - screenLeft)
+                Dim vScale As Single = pnlScreens.Height / (screenBottom - screenTop)
+                Dim scaleFactor As Single
                 If hScale > vScale Then
                     scaleFactor = vScale
                 Else
@@ -497,7 +498,7 @@ Public Class frmSettings
 
             End If
         Catch
-            MsgBox("Error loading language file.  Please check the file '" & lstLanguages.SelectedItem & ".lng' in the lang folder.", MsgBoxStyle.Critical, "ERROR")
+            MsgBox("Error loading language file.  Please check the file '" & lstLanguages.SelectedItem.ToString() & ".lng' in the lang folder.", MsgBoxStyle.Critical, "ERROR")
         End Try
 
         FileClose(1)
@@ -506,7 +507,7 @@ Public Class frmSettings
 
     Private Sub sbUseLanguage_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbUseLanguage.Click
         If lstLanguages.SelectedIndex > -1 Then
-            LanguageFileName(screenIndex) = lstLanguages.SelectedItem & ".lng"
+            LanguageFileName(screenIndex) = lstLanguages.SelectedItem.ToString() & ".lng"
             curBusiness(screenIndex).loadLanguage()
         End If
     End Sub
@@ -516,7 +517,7 @@ Public Class frmSettings
     Private Sub cbVoice_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbVoice.Click
         cbVoice.Lit = Not cbVoice.Lit
 
-        SaveSetting("LCARS x32", "Application", "SpeechOn", cbVoice.Lit)
+        SaveSetting("LCARS x32", "Application", "SpeechOn", cbVoice.Lit.ToString())
 
         If cbVoice.Lit Then
             cbVoice.SideText = "ON"
@@ -592,7 +593,7 @@ Public Class frmSettings
     Private Sub txtAlias_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAlias.TextChanged
         editingAlias = True
         Dim myposition As Integer = lstInternalCommands.SelectedIndex
-        Dim newAlias As AliasEntry = lstInternalCommands.SelectedItem
+        Dim newAlias As AliasEntry = CType(lstInternalCommands.SelectedItem, AliasEntry)
         newAlias.CommandAlias = txtAlias.Text
         lstInternalCommands.SelectedIndex = myposition
         editingAlias = False
@@ -716,7 +717,7 @@ Public Class frmSettings
         For Each alert As String In myAlerts
             Dim myAlert As New AlertEntry
             myAlert.id = LCARS.Alerts.GetAlertID(alert)
-            Dim alertstring As String = GetSetting("LCARS x32", "Alerts", myAlert.id, "")
+            Dim alertstring As String = GetSetting("LCARS x32", "Alerts", myAlert.id.ToString(), "")
             Dim startIndex As Integer = alertstring.IndexOf("|")
             myAlert.Name = alertstring.Substring(0, startIndex)
             myAlert.Color = alertstring.Substring(startIndex + 1, 7)
@@ -733,7 +734,7 @@ Public Class frmSettings
         LCARS.TryDeleteSetting("LCARS x32", "Alerts")
         For i As Integer = 0 To alertList.Count - 1
             Dim myAlert As AlertEntry = alertList(i)
-            SaveSetting("LCARS x32", "Alerts", alertList(i).id, myAlert.Name & "|" & myAlert.Color & "|" & myAlert.Sound)
+            SaveSetting("LCARS x32", "Alerts", alertList(i).id.ToString(), myAlert.Name & "|" & myAlert.Color & "|" & myAlert.Sound)
         Next
         LCARS.Alerts.RefreshAlerts(Me.Handle)
         loadAlerts()
@@ -792,7 +793,7 @@ Public Class frmSettings
     End Sub
 
     Private Sub cbDebug_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbDebug.Click
-        If GetSetting("LCARS x32", "Application", "DebugSwitch", "TRUE") Then
+        If CBool(GetSetting("LCARS x32", "Application", "DebugSwitch", "TRUE")) Then
             SaveSetting("LCARS x32", "Application", "DebugSwitch", "FALSE")
             cbDebug.SideText = "OFF"
             cbDebug.Lit = False
@@ -967,14 +968,14 @@ Public Class frmSettings
             fbChangeSound.Visible = True
             fbChangeSound_Click(sender, e)
             Return 'fbChangeSound_Click handles everything else
-        ElseIf lstSoundResources.SelectedItem = "DEFAULT" Then
+        ElseIf lstSoundResources.SelectedItem.ToString() = "DEFAULT" Then
             txtSoundPath.Visible = False
             fbChangeSound.Visible = False
             path = ""
         Else
             txtSoundPath.Visible = False
             fbChangeSound.Visible = False
-            path = "RESOURCE:" & lstSoundResources.SelectedItem
+            path = "RESOURCE:" & lstSoundResources.SelectedItem.ToString()
         End If
         Try
             CType(lstSounds.SelectedItem, LCARSSound).Path = path
@@ -1008,7 +1009,6 @@ Public Class frmSettings
         cpxDDE.Lit = Not cpxDDE.Lit
         LCARS.x32.modSettings.DDEEnabled = cpxDDE.Lit
         cpxDDE.SideText = If(cpxDDE.Lit, "ON", "OFF")
-        'TODO: Start/shutdown DDE?
         If shellMode Then
             If cpxDDE.Lit Then
                 initDDE()
