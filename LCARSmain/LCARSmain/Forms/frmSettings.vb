@@ -127,7 +127,7 @@ Public Class frmSettings
         If cpxVoiceTimeout.Lit Then
             cpxVoiceTimeout.SideText = "ON"
         Else
-            cpxVoiceTimeout.Lit = "OFF"
+            cpxVoiceTimeout.SideText = "OFF"
         End If
 
         txtCommandTimeout.Text = LCARS.x32.modSettings.CommandTimeout.ToString()
