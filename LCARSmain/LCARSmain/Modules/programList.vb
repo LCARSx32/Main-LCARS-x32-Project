@@ -44,10 +44,10 @@ Public Module programList
              ByVal cbFileInfo As Integer, _
              ByVal uFlags As Integer) As IntPtr
 
-    Private Const SHGFI_ICON = &H100
-    Private Const SHGFI_SMALLICON = &H1
-    Private Const SHGFI_LARGEICON = &H0    ' Large icon
-    Private nIndex = 0
+    Private Const SHGFI_ICON As Integer = &H100
+    Private Const SHGFI_SMALLICON As Integer = &H1
+    Private Const SHGFI_LARGEICON As Integer = &H0    ' Large icon
+    Private nIndex As Integer = 0
 #End Region
 
     Dim startItems As New Collection

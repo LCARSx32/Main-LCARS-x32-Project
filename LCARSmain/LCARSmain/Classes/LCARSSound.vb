@@ -1,4 +1,5 @@
-﻿Imports System.Collections.Generic
+﻿Option Strict On
+Imports System.Collections.Generic
 
 Public Class LCARSSound
     Private _name As String
@@ -160,7 +161,7 @@ Public Class LCARSSound
 
         Protected Overrides Sub save()
             SaveSetting("LCARS X32", "Application", "ButtonSound", _path)
-            SaveSetting("LCARS x32", "Application", "ButtonBeep", _enabled)
+            SaveSetting("LCARS x32", "Application", "ButtonBeep", _enabled.ToString())
         End Sub
 
         Public Overrides Property Path() As String

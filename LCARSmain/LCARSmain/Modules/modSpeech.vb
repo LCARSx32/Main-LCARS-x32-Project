@@ -1,3 +1,5 @@
+Option Strict Off 'Some speech types are badly defined. If this changes, fix this to On
+
 Imports SpeechLib
 Imports LCARS.UI
 
@@ -25,7 +27,7 @@ Module modSpeech
         myReg = myReg.OpenSubKey("Software\VB and VBA Program Settings\LCARS x32\CustomVoiceCommands", False)
         If Not myReg Is Nothing Then
             For Each extCmd As String In myReg.GetValueNames()
-                Dim command As String = myReg.GetValue(extCmd)
+                Dim command As String = CStr(myReg.GetValue(extCmd))
                 'TODO: Change settings so that a description can be stored
                 Dim myCommand As New ExternalVoiceCmd(extCmd, "External", extCmd, False)
                 RulesHandlers.Add(myCommand.Name, myCommand)
@@ -117,7 +119,7 @@ Module modSpeech
     End Sub
     Private Sub OnReco(ByVal StreamNumber As Integer, ByVal StreamPosition As Object, ByVal RecognitionType As SpeechRecognitionType, ByVal Result As ISpeechRecoResult)
         console.WriteLine(Result.PhraseInfo.GetText().ToUpper())
-        Dim rule = Result.PhraseInfo.Rule.Name
+        Dim rule As String = Result.PhraseInfo.Rule.Name
         If rule = "Main" Then
             If Result.PhraseInfo.Rule.Children.Item(0).Children Is Nothing Then
                 muteAlert = True
@@ -183,14 +185,14 @@ Module modSpeech
     Public Event SpeechEnableChanged As EventHandler
     Private needsReload As Boolean = False
 
-    Public Property SpeechEnabled()
+    Public Property SpeechEnabled() As Boolean
         Get
             If SpeechEngine Is Nothing Then
                 Return False
             End If
             Return Listener.State = SpeechRecoContextState.SRCS_Enabled
         End Get
-        Set(ByVal value)
+        Set(ByVal value As Boolean)
             If value Then
                 If SpeechEngine Is Nothing Or needsReload Then
                     beginVoiceRecognition()
@@ -267,9 +269,9 @@ Module modSpeech
     End Sub
     Private Sub doEndProgram(ByVal result As ISpeechRecoResult)
         Try
-            Dim hWndApp As IntPtr = GetForegroundWindow()
-            If Not hWndApp = Convert.ToInt64(GetSetting("LCARS x32", "Application", "MainWindowHandle")) Then
-                modCommon.CloseWindow(hWndApp)
+            Dim hWndApp As Integer = GetForegroundWindow()
+            If Not hWndApp = CInt(GetSetting("LCARS x32", "Application", "MainWindowHandle")) Then
+                modCommon.CloseWindow(New IntPtr(hWndApp))
             End If
         Catch ex As Exception
             MsgBox(ex.ToString())
@@ -349,7 +351,7 @@ Module modSpeech
     End Sub
     Private Sub doCrash(ByVal result As ISpeechRecoResult)
         'Causes an unhandled exception.
-        If GetSetting("LCARS x32", "Application", "DebugSwitch", "False") Then
+        If CBool(GetSetting("LCARS x32", "Application", "DebugSwitch", "False")) Then
             Throw New Exception()
         End If
     End Sub

@@ -1,4 +1,6 @@
-﻿Imports System.Drawing
+﻿Option Strict On
+
+Imports System.Drawing
 Imports LCARS.LightweightControls
 
 Public Class LCScreenImage
@@ -68,19 +70,19 @@ Public Class LCScreenImage
             'Draw image
             If Not _image Is Nothing Then
                 Dim NewHeight As Integer = _bounds.Height - _BoxWidth * 2
-                Dim NewWidth As Integer = NewHeight / _image.Height * _image.Width
+                Dim NewWidth As Integer = CInt(NewHeight / _image.Height * _image.Width)
                 If NewWidth > _bounds.Width - _BoxWidth * 4 Then
                     NewWidth = _bounds.Width - _BoxWidth * 4
-                    NewHeight = NewWidth / _image.Width * _image.Height
+                    NewHeight = CInt(NewWidth / _image.Width * _image.Height)
                 End If
-                Dim centerX As Integer = _BoxWidth * 2 + ((_bounds.Width - 4 * _BoxWidth) - NewWidth) / 2
-                Dim centerY As Integer = _BoxWidth * 1.5 + ((_bounds.Height - 3 * _BoxWidth) - NewHeight) / 2
+                Dim centerX As Integer = CInt(_BoxWidth * 2 + ((_bounds.Width - 4 * _BoxWidth) - NewWidth) / 2)
+                Dim centerY As Integer = CInt(_BoxWidth * 1.5 + ((_bounds.Height - 3 * _BoxWidth) - NewHeight) / 2)
                 g.DrawImage(_image, centerX, centerY, NewWidth, NewHeight)
             Else
                 Dim format As New StringFormat
                 format.Alignment = StringAlignment.Center
                 format.LineAlignment = StringAlignment.Center
-                g.DrawString("NO IMAGE", _font, myBrush, New PointF(_bounds.Width / 2, _bounds.Height / 2), format)
+                g.DrawString("NO IMAGE", _font, myBrush, New PointF(_bounds.Width / 2.0F, _bounds.Height / 2.0F), format)
             End If
 
             If _selected Then

@@ -52,7 +52,7 @@ public Class modBusiness
     Public myDeactivate As LCARS.LCARSbuttonClass
     Public myAlert As LCARS.LCARSbuttonClass
     Public myDestruct As LCARS.LCARSbuttonClass
-    Public myClock As Object
+    Public myClock As Control
     Public myPhoto As LCARS.LCARSbuttonClass
     Public myWebBrowser As LCARS.LCARSbuttonClass
     Public myButtonManager As LCARS.LCARSbuttonClass
@@ -590,7 +590,7 @@ public Class modBusiness
             newText = LCARS.Stardate.getStardate(Now)
         End If
 
-        If Not newText = myClock.text Then
+        If newText <> myClock.text Then
             myClock.text = newText
         End If
 
