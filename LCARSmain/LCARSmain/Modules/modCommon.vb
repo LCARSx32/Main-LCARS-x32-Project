@@ -150,8 +150,8 @@ Module modCommon
 
 #Region " Inter-Window Communications "
 
-    Public Declare Auto Function SendMessage Lib "user32.dll" (ByVal hWnd As IntPtr, ByVal msg As Integer, ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
-    Public InterMsgID As Integer
+    Public Declare Auto Function SendMessage Lib "user32.dll" (ByVal hWnd As IntPtr, ByVal msg As UInteger, ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
+    Public InterMsgID As UInteger
     Public HWND_BROADCAST As New IntPtr(&HFFFF)
     Public Const WM_EXPLORER_CLOSE As Integer = &H5B4
 
