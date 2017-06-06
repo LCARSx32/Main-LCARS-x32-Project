@@ -156,12 +156,12 @@ Public Class LCARSSound
 
         Public Overrides Sub Reload()
             _path = GetSetting("LCARS X32", "Application", "ButtonSound", "")
-            _enabled = CBool(GetSetting("LCARS x32", "Application", "ButtonBeep", "True"))
+            _enabled = LCARS.x32.modSettings.ButtonBeep
         End Sub
 
         Protected Overrides Sub save()
             SaveSetting("LCARS X32", "Application", "ButtonSound", _path)
-            SaveSetting("LCARS x32", "Application", "ButtonBeep", _enabled.ToString())
+            LCARS.x32.modSettings.ButtonBeep = _enabled
         End Sub
 
         Public Overrides Property Path() As String

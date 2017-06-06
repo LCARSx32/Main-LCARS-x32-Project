@@ -3,7 +3,6 @@
 'TODO: Options for how sounds are handled
 'TODO: Fix sound muting
 'TODO: Make cancel operation immediate
-'TODO: Handle mode-select operations better
 
 Option Strict On
 
@@ -20,7 +19,29 @@ Module modAlerts
     Private flashDelay As Integer = 50 'Milliseconds
     Private _cancelAlert As Boolean = True
     Private _muteAlert As Boolean = False
+    Private alertableForms As New Dictionary(Of Form, List(Of List(Of LCARSbuttonClass)))
+    Private alertablesLock As New Mutex()
 
+    Public Sub RegisterAlertForm(ByVal form As Form)
+        Dim myAlertables As New List(Of List(Of LCARSbuttonClass))
+        GetAlertPanels(form, myAlertables)
+        alertablesLock.WaitOne()
+        alertableForms.Add(form, myAlertables)
+        If AlertActive Then
+            For Each mytag As List(Of LCARSbuttonClass) In myAlertables
+                For Each mycontrol As LCARSbuttonClass In mytag
+                    initButton(mycontrol)
+                Next
+            Next
+        End If
+        alertablesLock.ReleaseMutex()
+    End Sub
+
+    Public Sub DeregisterAlertForm(ByVal form As Form)
+        alertablesLock.WaitOne()
+        alertableForms.Remove(form)
+        alertablesLock.ReleaseMutex()
+    End Sub
 
     Public Sub CancelAlert()
         _cancelAlert = True
@@ -57,6 +78,7 @@ Module modAlerts
             GetAlertPanels(curBusiness(i).myForm, alertables(i))
         Next
         alertThread = New Thread(New ParameterizedThreadStart(AddressOf MainAlert))
+        alertThread.IsBackground = True
         _cancelAlert = False
         alertThread.Start(alertables)
 
@@ -73,7 +95,7 @@ Module modAlerts
                     AndAlso item.Tag IsNot Nothing _
                     AndAlso item.Tag.ToString() <> "" _
                     AndAlso Integer.TryParse(item.Tag.ToString(), tag) = True Then
-                'it has a tag and is a container, so start it alerting!
+                'it has a tag, so start it alerting!
                 If tag >= alertables.Count Then 'Not enough lists yet
                     For i As Integer = alertables.Count To tag
                         alertables.Add(New List(Of LCARSbuttonClass))
@@ -88,51 +110,41 @@ Module modAlerts
     End Sub
 
     Private Sub MainAlert(ByVal params As Object)
-        Dim alertables As List(Of List(Of List(Of LCARSbuttonClass))) = _
-                CType(params, List(Of List(Of List(Of LCARSbuttonClass))))
-
         alertSoundMode = CType([Enum].Parse(GetType(Microsoft.VisualBasic.AudioPlayMode), _
                                             GetSetting("LCARS x32", "Application", "AlertSoundMode", AudioPlayMode.WaitToComplete.ToString())),  _
                                             Microsoft.VisualBasic.AudioPlayMode)
         inAlert = True
         Dim mySoundPath As String = alertSound
         Dim soundThread As Thread = Nothing
-        Dim screenThreads(alertables.Count - 1) As Threading.Thread
         ' Set initial color
-        For Each myscreen As List(Of List(Of LCARSbuttonClass)) In alertables
-            For Each mytag As List(Of LCARSbuttonClass) In myscreen
-                For Each myButton As LCARSbuttonClass In mytag
-                    initButton(myButton)
+        For Each scr As List(Of List(Of LCARSbuttonClass)) In alertableForms.Values 'For each screen
+            For Each mytag As List(Of LCARSbuttonClass) In scr
+                For Each mybutton As LCARSbuttonClass In mytag
+                    initButton(mybutton)
                 Next
             Next
         Next
         Application.DoEvents()
         'do the alert until cancelAlert is set to true:
-        Do Until _cancelAlert = True
+        Do Until _cancelAlert
             'Start the sound off
             If Not (mySoundPath = "") Then
                 soundThread = New Threading.Thread(New ParameterizedThreadStart(AddressOf AlertSoundSub))
                 soundThread.Start(mySoundPath)
+            Else
+                soundThread = Nothing
             End If
             'Start the flashing on each screen
-            For i As Integer = 0 To alertables.Count - 1
-                screenThreads(i) = New Thread(New ParameterizedThreadStart(AddressOf AlertScreenSub))
-                screenThreads(i).Start(alertables(i))
-            Next
-            'Wait for flash to end
-            For Each mythread As Threading.Thread In screenThreads
-                mythread.Join()
-            Next
+            DoFlashes()
             'Wait for sound to end
-            If Not mySoundPath = "" Then
+            If soundThread IsNot Nothing Then
                 soundThread.Join()
             End If
         Loop
-
-        For i As Integer = 0 To alertables.Count - 1 'For each screen
-            For Each mytag As List(Of LCARSbuttonClass) In alertables(i)
-                For Each mybutton As IAlertable In mytag
-                    resetAlert(CType(mybutton, LCARS.LCARSbuttonClass))
+        For Each scr As List(Of List(Of LCARSbuttonClass)) In alertableForms.Values 'For each screen
+            For Each mytag As List(Of LCARSbuttonClass) In scr
+                For Each mybutton As LCARSbuttonClass In mytag
+                    resetAlert(mybutton)
                 Next
             Next
         Next
@@ -148,38 +160,40 @@ Module modAlerts
         End Try
     End Sub
 
-    Private Sub AlertScreenSub(ByVal params As Object)
-        Dim alertables As List(Of List(Of LCARSbuttonClass)) = CType(params, List(Of List(Of LCARSbuttonClass)))
+    Private Sub DoFlashes()
+        Dim tag As Integer = 0
+        Dim hasNext As Boolean = True
         'For each tag value
-        For intloop As Integer = 0 To alertables.Count - 1
+        While hasNext
+            hasNext = False
             'Flash each button
-            For Each mycontrol As LCARSbuttonClass In alertables(intloop)
-                If _cancelAlert = True Then
-                    Exit Sub
+            alertablesLock.WaitOne()
+            For Each scr As List(Of List(Of LCARSbuttonClass)) In alertableForms.Values
+                If scr.Count > tag Then
+                    hasNext = True
+                    For Each mycontrol As LCARSbuttonClass In scr(tag)
+                        If _cancelAlert = True Then
+                            Exit Sub
+                        End If
+                        flashButton(mycontrol)
+                    Next
                 End If
-                flashButton(mycontrol)
+                'Clear flash from previous tag
+                If tag > 0 AndAlso scr.Count >= tag Then
+                    For Each mycontrol As LCARSbuttonClass In scr(tag - 1)
+                        If _cancelAlert = True Then
+                            Exit Sub
+                        End If
+                        unflashButton(mycontrol)
+                    Next
+                End If
             Next
-            'Clear flash from previous tag
-            If intloop > 0 Then
-                For Each mycontrol As LCARSbuttonClass In alertables(intloop - 1)
-                    If _cancelAlert = True Then
-                        Exit Sub
-                    End If
-                    unflashButton(mycontrol)
-                Next
-            End If
+            alertablesLock.ReleaseMutex()
+            tag += 1
             'Redraw and wait
             Application.DoEvents()
             Thread.Sleep(flashDelay)
-        Next
-        'Clear last flash
-        For Each mycontrol As LCARSbuttonClass In alertables(alertables.Count - 1)
-            If _cancelAlert = True Then
-                Exit Sub
-            End If
-            unflashButton(mycontrol)
-        Next
-        Application.DoEvents()
+        End While
     End Sub
 
     Private Delegate Sub processButtonDelegate(ByVal button As LCARSbuttonClass)

@@ -283,6 +283,21 @@ Label072:
             End Set
         End Property
 
+        Public Shared Property ButtonBeep() As Boolean
+            Get
+                Dim str As String = GetSetting("LCARS x32", "Application", "ButtonBeep", "True")
+                Try
+                    Return Boolean.Parse(str)
+                Catch ex As FormatException
+                    'Someone put in a bad value in the registry
+                    Return True
+                End Try
+            End Get
+            Set(ByVal value As Boolean)
+
+            End Set
+        End Property
+
         Private Shared Property SettingsVersion() As Version
             Get
                 Dim v As String = GetSetting("LCARS x32", "Application", "SettingsVersion", "0.7.1")

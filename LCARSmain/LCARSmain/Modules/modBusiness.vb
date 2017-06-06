@@ -16,15 +16,6 @@ public Class modBusiness
         Dim Name As String
         Dim Location As String
     End Structure
-
-    Public Structure FormButtonMethods
-        Dim StartMenu As String
-        Dim MyComputer As String
-        Dim Settings As String
-        Dim Engineering As String
-        Dim ModeSelect As String
-    End Structure
-
 #End Region
 
 #Region " Global Variables "
@@ -36,12 +27,8 @@ public Class modBusiness
     Public myMainBar As Panel
     Public myMainPanel As Panel
     Public ProgramsPanel As LCARS.Controls.WindowlessContainer
-    'Public ProgramsButton As LCARS.LCARSbuttonClass
-    'Public MyCompPanel As Panel
     Public UserButtonsPanel As LCARS.Controls.ButtonGrid
     Public myAppsPanel As Panel
-    'Public UserButtonsListBox As ListBox
-    'Public InstanceManager As IntPtr
 
     'Common Buttons
     Public myStartMenu As LCARS.LCARSbuttonClass
@@ -83,7 +70,6 @@ public Class modBusiness
     Public ScreenIndex As Integer
 
 
-    Public shellMode As Boolean = False
     Public progShowing As Boolean
     Public userButtonsShowing As Boolean
 
@@ -103,9 +89,6 @@ public Class modBusiness
     Dim WindowList(-1) As ExternalApp
     Dim excluded(-1) As IntPtr
     Dim mouseDown As Boolean = False
-
-    'Form Methods
-    Dim myMethods As FormButtonMethods
 
     'Time Format
     Dim timeFormat As String = "h:mm:sstt"
@@ -136,8 +119,6 @@ public Class modBusiness
                 bNoOwner = (GetWindow(hwnd, GW_OWNER) = 0)
                 lExStyle = GetWindowLong_Safe(hwnd, GWL_EXSTYLE)
 
-                'If (((lExStyle And WS_EX_TOOLWINDOW) = 0) Or (lExStyle And WS_EX_APPWINDOW)) Or _
-                '(((lExStyle And WS_EX_TOOLWINDOW) = 0) And ((lExStyle And WS_EX_APPWINDOW) = 0) And bNoOwner = True) Then
                 'This if statement is from code found at http://msdntracker.blogspot.com/2008/03/list-currently-opened-windows-with.html
                 If ((((lExStyle And WS_EX_TOOLWINDOW) = 0) And bNoOwner) Or ((lExStyle And WS_EX_APPWINDOW) And Not bNoOwner)) _
                             And ((lExStyle And WS_EX_NOREDIRECTIONBITMAP) = 0) Then
@@ -172,16 +153,6 @@ public Class modBusiness
         Return True
     End Function
 
-    Public Sub SetWallpaper(ByVal wall As Image)
-        myDesktop.curDesktop(ScreenIndex).BackgroundImage = wall
-    End Sub
-
-    Public Sub setWallpaperSizeMode(ByVal sizemode As ImageLayout)
-        myDesktop.curDesktop(ScreenIndex).BackgroundImageLayout = sizemode
-    End Sub
-
-
-
     Public Sub myStartMenu_Click(ByVal sender As Object, ByVal e As System.EventArgs)
 
     End Sub
@@ -205,8 +176,6 @@ public Class modBusiness
     End Sub
 
     Public Sub myModeSelectButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        CancelAlert() 'TODO: Find a way to cancel only on one screen
-        Application.DoEvents()
         'Check that the images directory exists. If not, create it.
         If Not Directory.Exists(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\LCARS x32\Images") Then
             Directory.CreateDirectory(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\LCARS x32\Images")
@@ -511,10 +480,8 @@ public Class modBusiness
         loadUserButtons()
         loadLanguage()
 
-
-        Dim DoBeeping As Boolean = Boolean.Parse(GetSetting("LCARS x32", "Application", "ButtonBeep", "True"))
-
-        LCARS.SetBeeping(myForm, DoBeeping)
+        LCARS.SetBeeping(myForm, modSettings.ButtonBeep)
+        RegisterAlertForm(myForm)
 
         AddHandler mainTimer.Tick, AddressOf mainTimer_Tick
 
@@ -616,11 +583,6 @@ public Class modBusiness
             Next
         End If
 
-
-        ReDim myWindows(-1)
-
-        ReDim WindowList(-1)
-
         Dim adjustedBounds As Rectangle
         If autohide = IAutohide.AutoHideModes.Hidden Then
             adjustedBounds = Screen.FromHandle(myForm.Handle).Bounds
@@ -674,6 +636,9 @@ public Class modBusiness
 
 
         'Refresh the taskbar if necessary
+        ReDim myWindows(-1)
+
+        ReDim WindowList(-1)
         'find all the windows
         EnumWindows(New EnumCallBack(AddressOf fEnumWindowsCallBack), IntPtr.Zero)
 
@@ -701,7 +666,7 @@ public Class modBusiness
         'refresh the taskbar
         If myAppsPanel.Controls.Count <> myWindows.Length * 2 + 2 Then
 
-            Dim beeping As Boolean = Boolean.Parse(GetSetting("LCARS x32", "Application", "ButtonBeep", "False"))
+            Dim beeping As Boolean = modSettings.ButtonBeep
 
             myAppsPanel.Controls.Clear()
 
