@@ -19,8 +19,8 @@ Partial Class frmMainscreen2
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim LcarScolor1 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor2 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor9 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor10 As LCARS.LCARScolor = New LCARS.LCARScolor
         Me.pnlProgs = New System.Windows.Forms.Panel
         Me.fbWebBrowser = New LCARS.Controls.FlatButton
         Me.myEngineering = New LCARS.Controls.FlatButton
@@ -161,7 +161,7 @@ Partial Class frmMainscreen2
         Me.fbWebBrowser.RedAlert = LCARS.LCARSalert.Normal
         Me.fbWebBrowser.Size = New System.Drawing.Size(127, 28)
         Me.fbWebBrowser.TabIndex = 50
-        Me.fbWebBrowser.Tag = "6"
+        Me.fbWebBrowser.Tag = "16"
         Me.fbWebBrowser.Text = "WEB BROWSER"
         '
         'myEngineering
@@ -184,7 +184,7 @@ Partial Class frmMainscreen2
         Me.myEngineering.RedAlert = LCARS.LCARSalert.Normal
         Me.myEngineering.Size = New System.Drawing.Size(127, 28)
         Me.myEngineering.TabIndex = 50
-        Me.myEngineering.Tag = "6"
+        Me.myEngineering.Tag = "15"
         Me.myEngineering.Text = "ENGINEERING"
         '
         'myRun
@@ -207,7 +207,7 @@ Partial Class frmMainscreen2
         Me.myRun.RedAlert = LCARS.LCARSalert.Normal
         Me.myRun.Size = New System.Drawing.Size(127, 28)
         Me.myRun.TabIndex = 32
-        Me.myRun.Tag = "8"
+        Me.myRun.Tag = "17"
         Me.myRun.Text = "RUN PROGRAM"
         '
         'mySettings
@@ -230,7 +230,7 @@ Partial Class frmMainscreen2
         Me.mySettings.RedAlert = LCARS.LCARSalert.Normal
         Me.mySettings.Size = New System.Drawing.Size(127, 28)
         Me.mySettings.TabIndex = 32
-        Me.mySettings.Tag = "8"
+        Me.mySettings.Tag = "12"
         Me.mySettings.Text = "SETTINGS"
         '
         'myMusic
@@ -253,6 +253,7 @@ Partial Class frmMainscreen2
         Me.myMusic.RedAlert = LCARS.LCARSalert.Normal
         Me.myMusic.Size = New System.Drawing.Size(127, 28)
         Me.myMusic.TabIndex = 1
+        Me.myMusic.Tag = "16"
         Me.myMusic.Text = "MY MUSIC"
         '
         'myVideos
@@ -275,6 +276,7 @@ Partial Class frmMainscreen2
         Me.myVideos.RedAlert = LCARS.LCARSalert.Normal
         Me.myVideos.Size = New System.Drawing.Size(127, 28)
         Me.myVideos.TabIndex = 1
+        Me.myVideos.Tag = "17"
         Me.myVideos.Text = "MY VIDEOS"
         '
         'myPictures
@@ -297,6 +299,7 @@ Partial Class frmMainscreen2
         Me.myPictures.RedAlert = LCARS.LCARSalert.Normal
         Me.myPictures.Size = New System.Drawing.Size(127, 28)
         Me.myPictures.TabIndex = 1
+        Me.myPictures.Tag = "15"
         Me.myPictures.Text = "MY PICTURES"
         '
         'myPhoto
@@ -319,7 +322,7 @@ Partial Class frmMainscreen2
         Me.myPhoto.RedAlert = LCARS.LCARSalert.Normal
         Me.myPhoto.Size = New System.Drawing.Size(127, 28)
         Me.myPhoto.TabIndex = 51
-        Me.myPhoto.Tag = "6"
+        Me.myPhoto.Tag = "14"
         Me.myPhoto.Text = "PHOTO VIEWER"
         '
         'myComp
@@ -342,7 +345,7 @@ Partial Class frmMainscreen2
         Me.myComp.RedAlert = LCARS.LCARSalert.Normal
         Me.myComp.Size = New System.Drawing.Size(127, 28)
         Me.myComp.TabIndex = 33
-        Me.myComp.Tag = "6"
+        Me.myComp.Tag = "12"
         Me.myComp.Text = "MY COMPUTER"
         '
         'myDocuments
@@ -365,6 +368,7 @@ Partial Class frmMainscreen2
         Me.myDocuments.RedAlert = LCARS.LCARSalert.Normal
         Me.myDocuments.Size = New System.Drawing.Size(127, 28)
         Me.myDocuments.TabIndex = 0
+        Me.myDocuments.Tag = "13"
         Me.myDocuments.Text = "MY DOCUMENTS"
         '
         'pnlPrograms
@@ -373,7 +377,7 @@ Partial Class frmMainscreen2
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlPrograms.Beeping = False
-        Me.pnlPrograms.ColorsAvailable = LcarScolor1
+        Me.pnlPrograms.ColorsAvailable = LcarScolor9
         Me.pnlPrograms.Location = New System.Drawing.Point(0, 173)
         Me.pnlPrograms.Name = "pnlPrograms"
         Me.pnlPrograms.Size = New System.Drawing.Size(260, 230)
@@ -401,7 +405,7 @@ Partial Class frmMainscreen2
         Me.myProgsUp.RedAlert = LCARS.LCARSalert.Normal
         Me.myProgsUp.Size = New System.Drawing.Size(260, 20)
         Me.myProgsUp.TabIndex = 46
-        Me.myProgsUp.Tag = "1"
+        Me.myProgsUp.Tag = "2"
         Me.myProgsUp.Text = "BACK"
         '
         'fbProgramPages
@@ -426,7 +430,7 @@ Partial Class frmMainscreen2
         Me.fbProgramPages.RedAlert = LCARS.LCARSalert.Normal
         Me.fbProgramPages.Size = New System.Drawing.Size(208, 20)
         Me.fbProgramPages.TabIndex = 24
-        Me.fbProgramPages.Tag = "0"
+        Me.fbProgramPages.Tag = "1"
         Me.fbProgramPages.Text = "PAGES 1 OF 15"
         '
         'myProgsNext
@@ -451,7 +455,7 @@ Partial Class frmMainscreen2
         Me.myProgsNext.RedAlert = LCARS.LCARSalert.Normal
         Me.myProgsNext.Size = New System.Drawing.Size(20, 20)
         Me.myProgsNext.TabIndex = 25
-        Me.myProgsNext.Tag = "0"
+        Me.myProgsNext.Tag = "1"
         '
         'myProgsBack
         '
@@ -475,7 +479,7 @@ Partial Class frmMainscreen2
         Me.myProgsBack.RedAlert = LCARS.LCARSalert.Normal
         Me.myProgsBack.Size = New System.Drawing.Size(20, 20)
         Me.myProgsBack.TabIndex = 26
-        Me.myProgsBack.Tag = "0"
+        Me.myProgsBack.Tag = "1"
         '
         'pnlMainTop
         '
@@ -511,6 +515,7 @@ Partial Class frmMainscreen2
         Me.FlatButton2.RedAlert = LCARS.LCARSalert.Normal
         Me.FlatButton2.Size = New System.Drawing.Size(33, 19)
         Me.FlatButton2.TabIndex = 54
+        Me.FlatButton2.Tag = "10"
         '
         'myHelp
         '
@@ -532,7 +537,7 @@ Partial Class frmMainscreen2
         Me.myHelp.RedAlert = LCARS.LCARSalert.Normal
         Me.myHelp.Size = New System.Drawing.Size(61, 19)
         Me.myHelp.TabIndex = 52
-        Me.myHelp.Tag = "6"
+        Me.myHelp.Tag = "9"
         Me.myHelp.Text = "HELP"
         '
         'mySpeech
@@ -555,7 +560,7 @@ Partial Class frmMainscreen2
         Me.mySpeech.RedAlert = LCARS.LCARSalert.Normal
         Me.mySpeech.Size = New System.Drawing.Size(72, 19)
         Me.mySpeech.TabIndex = 53
-        Me.mySpeech.Tag = "6"
+        Me.mySpeech.Tag = "7"
         Me.mySpeech.Text = "SPEECH"
         '
         'myOSK
@@ -578,7 +583,7 @@ Partial Class frmMainscreen2
         Me.myOSK.RedAlert = LCARS.LCARSalert.Normal
         Me.myOSK.Size = New System.Drawing.Size(61, 19)
         Me.myOSK.TabIndex = 52
-        Me.myOSK.Tag = "6"
+        Me.myOSK.Tag = "8"
         Me.myOSK.Text = "OSK"
         '
         'fbMainBar
@@ -603,7 +608,7 @@ Partial Class frmMainscreen2
         Me.fbMainBar.RedAlert = LCARS.LCARSalert.Normal
         Me.fbMainBar.Size = New System.Drawing.Size(269, 20)
         Me.fbMainBar.TabIndex = 13
-        Me.fbMainBar.Tag = "9"
+        Me.fbMainBar.Tag = "6"
         '
         'pnlApps
         '
@@ -651,7 +656,7 @@ Partial Class frmMainscreen2
         Me.fbMain2.RedAlert = LCARS.LCARSalert.Normal
         Me.fbMain2.Size = New System.Drawing.Size(190, 75)
         Me.fbMain2.TabIndex = 46
-        Me.fbMain2.Tag = "9"
+        Me.fbMain2.Tag = "7"
         '
         'myDeactivate
         '
@@ -675,7 +680,7 @@ Partial Class frmMainscreen2
         Me.myDeactivate.RedAlert = LCARS.LCARSalert.Normal
         Me.myDeactivate.Size = New System.Drawing.Size(154, 27)
         Me.myDeactivate.TabIndex = 5
-        Me.myDeactivate.Tag = "7"
+        Me.myDeactivate.Tag = "8"
         Me.myDeactivate.Text = "DEACTIVATE"
         '
         'fbMain1
@@ -722,7 +727,7 @@ Partial Class frmMainscreen2
         Me.myClock.RedAlert = LCARS.LCARSalert.Normal
         Me.myClock.Size = New System.Drawing.Size(154, 42)
         Me.myClock.TabIndex = 40
-        Me.myClock.Tag = "7"
+        Me.myClock.Tag = "8"
         Me.myClock.Text = "LOADING CLOCK"
         '
         'pnlProgsElbow
@@ -760,6 +765,7 @@ Partial Class frmMainscreen2
         Me.myAlertListButton.RedAlert = LCARS.LCARSalert.Normal
         Me.myAlertListButton.Size = New System.Drawing.Size(18, 36)
         Me.myAlertListButton.TabIndex = 52
+        Me.myAlertListButton.Tag = "11"
         '
         'myAlert
         '
@@ -782,7 +788,7 @@ Partial Class frmMainscreen2
         Me.myAlert.RedAlert = LCARS.LCARSalert.Normal
         Me.myAlert.Size = New System.Drawing.Size(69, 35)
         Me.myAlert.TabIndex = 34
-        Me.myAlert.Tag = "6"
+        Me.myAlert.Tag = "11"
         Me.myAlert.Text = "RED ALERT"
         '
         'myModeSelect
@@ -806,6 +812,7 @@ Partial Class frmMainscreen2
         Me.myModeSelect.RedAlert = LCARS.LCARSalert.Normal
         Me.myModeSelect.Size = New System.Drawing.Size(77, 75)
         Me.myModeSelect.TabIndex = 51
+        Me.myModeSelect.Tag = "10"
         Me.myModeSelect.Text = "MODE SELECT"
         '
         'myDestruct
@@ -829,7 +836,7 @@ Partial Class frmMainscreen2
         Me.myDestruct.RedAlert = LCARS.LCARSalert.Normal
         Me.myDestruct.Size = New System.Drawing.Size(93, 35)
         Me.myDestruct.TabIndex = 51
-        Me.myDestruct.Tag = "6"
+        Me.myDestruct.Tag = "11"
         Me.myDestruct.Text = "AUTO DESTRUCT"
         '
         'FlatButton1
@@ -855,7 +862,7 @@ Partial Class frmMainscreen2
         Me.FlatButton1.RedAlert = LCARS.LCARSalert.Normal
         Me.FlatButton1.Size = New System.Drawing.Size(51, 75)
         Me.FlatButton1.TabIndex = 9
-        Me.FlatButton1.Tag = "10"
+        Me.FlatButton1.Tag = "12"
         Me.FlatButton1.Text = "LCARS"
         '
         'StandardButton3
@@ -881,7 +888,7 @@ Partial Class frmMainscreen2
         Me.StandardButton3.RedAlert = LCARS.LCARSalert.Normal
         Me.StandardButton3.Size = New System.Drawing.Size(71, 75)
         Me.StandardButton3.TabIndex = 4
-        Me.StandardButton3.Tag = "10"
+        Me.StandardButton3.Tag = "12"
         '
         'pnlMainBar
         '
@@ -914,7 +921,7 @@ Partial Class frmMainscreen2
         Me.gridUserButtons.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.gridUserButtons.Beeping = False
-        Me.gridUserButtons.ColorsAvailable = LcarScolor2
+        Me.gridUserButtons.ColorsAvailable = LcarScolor10
         Me.gridUserButtons.ControlAddingDirection = LCARS.Controls.ButtonGrid.ControlDirection.Horizontal
         Me.gridUserButtons.ControlPadding = 5
         Me.gridUserButtons.ControlSize = New System.Drawing.Size(90, 25)
@@ -1041,7 +1048,7 @@ Partial Class frmMainscreen2
         Me.myStartMenu.RedAlert = LCARS.LCARSalert.Normal
         Me.myStartMenu.Size = New System.Drawing.Size(260, 19)
         Me.myStartMenu.TabIndex = 14
-        Me.myStartMenu.Tag = "10"
+        Me.myStartMenu.Tag = "11"
         Me.myStartMenu.Text = "PROGRAMS"
         '
         'myButtonManager
@@ -1065,7 +1072,7 @@ Partial Class frmMainscreen2
         Me.myButtonManager.RedAlert = LCARS.LCARSalert.Normal
         Me.myButtonManager.Size = New System.Drawing.Size(177, 20)
         Me.myButtonManager.TabIndex = 30
-        Me.myButtonManager.Tag = "5"
+        Me.myButtonManager.Tag = "4"
         Me.myButtonManager.Text = "MANAGE YOUR PROGRAMS"
         Me.myButtonManager.Visible = False
         '
@@ -1864,7 +1871,7 @@ Partial Class frmMainscreen2
         Me.FlatButton3.RedAlert = LCARS.LCARSalert.Normal
         Me.FlatButton3.Size = New System.Drawing.Size(128, 75)
         Me.FlatButton3.TabIndex = 45
-        Me.FlatButton3.Tag = "5"
+        Me.FlatButton3.Tag = "6"
         '
         'pnlTray
         '
@@ -1946,7 +1953,7 @@ Partial Class frmMainscreen2
         Me.sbTL.RedAlert = LCARS.LCARSalert.Normal
         Me.sbTL.Size = New System.Drawing.Size(156, 23)
         Me.sbTL.TabIndex = 53
-        Me.sbTL.Tag = "4"
+        Me.sbTL.Tag = "5"
         Me.sbTL.Text = "12:00 PM"
         Me.sbTL.Visible = False
         '
