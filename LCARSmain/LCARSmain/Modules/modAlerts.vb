@@ -9,6 +9,14 @@ Option Strict On
 Imports System.Threading
 Imports LCARS
 
+''' <summary>
+''' Contains methods for handling alerts
+''' </summary>
+''' <remarks>
+''' All Public properties and subroutines are intended to be called from the UI thread unless
+''' otherwise specified. Attempting to call them from any other thread may result in deadlocks,
+''' undefined behavior, or other unpleasentness.
+''' </remarks>
 Module modAlerts
     Private alertType As Integer
     Private alertColor As Color
@@ -22,6 +30,14 @@ Module modAlerts
     Private alertableForms As New Dictionary(Of Form, List(Of List(Of LCARSbuttonClass)))
     Private alertablesLock As New Mutex()
 
+    ''' <summary>
+    ''' Register a form to be used when displaying alerts
+    ''' </summary>
+    ''' <param name="form">Form to be used</param>
+    ''' <remarks>
+    ''' This is currently used only by main screens. Any forms added by this method must be
+    ''' removed with DeregisterAlertForm() before disposal.
+    ''' </remarks>
     Public Sub RegisterAlertForm(ByVal form As Form)
         Dim myAlertables As New List(Of List(Of LCARSbuttonClass))
         GetAlertPanels(form, myAlertables)
@@ -37,12 +53,19 @@ Module modAlerts
         alertablesLock.ReleaseMutex()
     End Sub
 
+    ''' <summary>
+    ''' Remove a form from alertable forms list
+    ''' </summary>
+    ''' <param name="form">Form to be removed</param>
     Public Sub DeregisterAlertForm(ByVal form As Form)
         alertablesLock.WaitOne()
         alertableForms.Remove(form)
         alertablesLock.ReleaseMutex()
     End Sub
 
+    ''' <summary>
+    ''' Cancel a current alert
+    ''' </summary>
     Public Sub CancelAlert()
         _cancelAlert = True
     End Sub
@@ -65,22 +88,18 @@ Module modAlerts
     Public Sub GeneralAlert(ByVal type As Integer)
         If inAlert Then
             'Code for canceling, then starting new alert
+            CancelAlert()
             alertThread.Abort()
         End If
-        CancelAlert()
+        'Extract alert information
         Dim alertstring As String = GetSetting("LCARS x32", "Alerts", type.ToString(), "Red|#FF0000|" & Application.StartupPath & "\red_alert.wav")
         Dim startIndex As Integer = alertstring.IndexOf("|")
         alertColor = ColorTranslator.FromHtml(alertstring.Substring(startIndex + 1, 7))
         alertSound = alertstring.Substring(startIndex + 9)
-        Dim alertables As New List(Of List(Of List(Of LCARSbuttonClass)))
-        For i As Integer = 0 To curBusiness.Count - 1
-            alertables.Add(New List(Of List(Of LCARSbuttonClass)))
-            GetAlertPanels(curBusiness(i).myForm, alertables(i))
-        Next
-        alertThread = New Thread(New ParameterizedThreadStart(AddressOf MainAlert))
+        alertThread = New Thread(New ThreadStart(AddressOf MainAlert))
         alertThread.IsBackground = True
         _cancelAlert = False
-        alertThread.Start(alertables)
+        alertThread.Start()
 
         PostMessage(HWND_BROADCAST, InterMsgID, New IntPtr(type), New IntPtr(11))
     End Sub
@@ -109,10 +128,10 @@ Module modAlerts
         Next
     End Sub
 
-    Private Sub MainAlert(ByVal params As Object)
-        alertSoundMode = CType([Enum].Parse(GetType(Microsoft.VisualBasic.AudioPlayMode), _
-                                            GetSetting("LCARS x32", "Application", "AlertSoundMode", AudioPlayMode.WaitToComplete.ToString())),  _
-                                            Microsoft.VisualBasic.AudioPlayMode)
+    Private Sub MainAlert()
+        'alertSoundMode = CType([Enum].Parse(alertSoundMode.GetType(), _
+        '                                    GetSetting("LCARS x32", "Application", "AlertSoundMode", AudioPlayMode.WaitToComplete.ToString())),  _
+        '                                    Microsoft.VisualBasic.AudioPlayMode)
         inAlert = True
         Dim mySoundPath As String = alertSound
         Dim soundThread As Thread = Nothing
@@ -141,13 +160,15 @@ Module modAlerts
                 soundThread.Join()
             End If
         Loop
-        For Each scr As List(Of List(Of LCARSbuttonClass)) In alertableForms.Values 'For each screen
+        ' Reset all buttons
+        For Each scr As List(Of List(Of LCARSbuttonClass)) In alertableForms.Values
             For Each mytag As List(Of LCARSbuttonClass) In scr
                 For Each mybutton As LCARSbuttonClass In mytag
                     resetAlert(mybutton)
                 Next
             Next
         Next
+        'Signal end of alert
         inAlert = False
         PostMessage(HWND_BROADCAST, InterMsgID, IntPtr.Zero, New IntPtr(7))
     End Sub
@@ -172,26 +193,23 @@ Module modAlerts
                 If scr.Count > tag Then
                     hasNext = True
                     For Each mycontrol As LCARSbuttonClass In scr(tag)
-                        If _cancelAlert = True Then
-                            Exit Sub
-                        End If
+                        If _cancelAlert Then Exit For
                         flashButton(mycontrol)
                     Next
                 End If
                 'Clear flash from previous tag
                 If tag > 0 AndAlso scr.Count >= tag Then
                     For Each mycontrol As LCARSbuttonClass In scr(tag - 1)
-                        If _cancelAlert = True Then
-                            Exit Sub
-                        End If
+                        If _cancelAlert Then Exit For
                         unflashButton(mycontrol)
                     Next
                 End If
+                If _cancelAlert Then Exit For
             Next
             alertablesLock.ReleaseMutex()
+            If _cancelAlert Then Exit Sub
             tag += 1
-            'Redraw and wait
-            Application.DoEvents()
+            'Wait
             Thread.Sleep(flashDelay)
         End While
     End Sub
@@ -231,6 +249,7 @@ Module modAlerts
             button.Invoke(New processButtonDelegate(AddressOf resetAlert), button)
         Else
             button.RedAlert = LCARS.LCARSalert.Normal
+            Application.DoEvents()
         End If
     End Sub
 End Module

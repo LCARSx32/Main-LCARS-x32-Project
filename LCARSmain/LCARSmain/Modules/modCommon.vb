@@ -563,6 +563,7 @@ Public Enum SetWindowPosFlags As UInteger
         '''' Close LCARS interface ''''
         '''''''''''''''''''''''''''''''
         PostMessage(HWND_BROADCAST, InterMsgID, myDesktop.Handle, 13)
+        CancelAlert()
         For Each myBusiness As modBusiness In curBusiness
             myBusiness.mainTimer.Enabled = False
             If Not myBusiness.myForm Is Nothing Then

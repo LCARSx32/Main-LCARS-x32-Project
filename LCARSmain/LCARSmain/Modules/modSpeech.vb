@@ -132,13 +132,11 @@ Module modSpeech
             Else
                 Dim commandName As String = Result.PhraseInfo.Rule.Children.Item(0).Children.Item(0).Name
                 executeCommand(commandName, Result)
-                If AlertMuted Then AlertMuted = False
             End If
         Else
             timeoutTimer.Stop()
             Dim commandName As String = Result.PhraseInfo.Rule.Children.Item(0).Name
             executeCommand(commandName, Result)
-            AlertMuted = False
         End If
     End Sub
 
@@ -162,6 +160,7 @@ Module modSpeech
         End If
         If Not continuousCommands Then
             grammar.CmdSetRuleState("Command", SpeechRuleState.SGDSInactive)
+            If AlertMuted Then AlertMuted = False
         End If
     End Sub
 
