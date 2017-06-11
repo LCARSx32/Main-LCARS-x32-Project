@@ -71,7 +71,7 @@ public Class modBusiness
     Public myRun As LCARS.LCARSbuttonClass
     Public myAlertListButton As LCARS.LCARSbuttonClass
     Public myProgramPagesDisplay As LCARS.LCARSbuttonClass
-    Dim bars() As Control
+    Dim bars() As LCARS.LCARSbuttonClass
     Public myProgsUp As LCARS.LCARSbuttonClass
     Public myProgsBack As LCARS.LCARSbuttonClass
     Public myProgsNext As LCARS.LCARSbuttonClass
@@ -452,7 +452,7 @@ public Class modBusiness
         myRun = myForm.Controls.Find("myRun", True)(0)
         myAlertListButton = myForm.Controls.Find("myAlertListButton", True)(0)
         myProgramPagesDisplay = myForm.Controls.Find("fbProgramPages", True)(0)
-        bars = New Control(9) { _
+        bars = New LCARS.LCARSbuttonClass(9) { _
             myBattery.Controls("fbBatt1"), _
             myBattery.Controls("fbBatt2"), _
             myBattery.Controls("fbBatt3"), _
@@ -612,7 +612,7 @@ public Class modBusiness
         If newBattLevel <> battLevel Then
             battLevel = newBattLevel
             For i As Integer = 0 To bars.Length - 1
-                bars(i).Visible = i < battLevel
+                bars(i).Lit = i < battLevel
             Next
         End If
 
