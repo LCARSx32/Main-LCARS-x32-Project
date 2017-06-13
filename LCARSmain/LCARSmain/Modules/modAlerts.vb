@@ -1,10 +1,4 @@
-﻿'TODO: Sort out threads
-'TODO: Clean up cross-thread signalling
-'TODO: Options for how sounds are handled
-'TODO: Fix sound muting
-'TODO: Make cancel operation immediate
-
-Option Strict On
+﻿Option Strict On
 
 Imports System.Threading
 Imports LCARS
@@ -23,12 +17,24 @@ Module modAlerts
     Private alertSound As String
     Private inAlert As Boolean = False
     Private alertThread As Thread
-    Private alertSoundMode As Microsoft.VisualBasic.AudioPlayMode = AudioPlayMode.WaitToComplete
     Private flashDelay As Integer = 50 'Milliseconds
     Private _cancelAlert As Boolean = True
     Private _muteAlert As Boolean = False
     Private alertableForms As New Dictionary(Of Form, List(Of List(Of LCARSbuttonClass)))
-    Private alertablesLock As New Mutex()
+    Private alertablesLock As New Mutex() 'Used to control access to alertableForms
+
+#Region " Synchronization objects "
+    'Used to synchronize flash and sound cycles
+    Private soundSem As New Semaphore(0, 2)
+    Private flashSem As New Semaphore(0, 2)
+
+    'Signals that sound state has changed (muted or alert canceled)
+    Private soundSig As New ManualResetEvent(False)
+    'Signals that alert state has changed (alert canceled)
+    Private flashSig As New ManualResetEvent(False)
+    'Used to indicate that alerts have finished shutting down
+    Private endSig As New ManualResetEvent(False)
+#End Region
 
     ''' <summary>
     ''' Register a form to be used when displaying alerts
@@ -67,12 +73,19 @@ Module modAlerts
     ''' Cancel a current alert
     ''' </summary>
     Public Sub CancelAlert()
+        If Not AlertActive Then Return
+        endSig.Reset()
         _cancelAlert = True
+        flashSig.Set()
+        soundSig.Set()
+        While Not endSig.WaitOne(0, False)
+            Application.DoEvents()
+        End While
     End Sub
 
     Public ReadOnly Property AlertActive() As Boolean
         Get
-            Return Not _cancelAlert
+            Return inAlert
         End Get
     End Property
 
@@ -82,15 +95,13 @@ Module modAlerts
         End Get
         Set(ByVal value As Boolean)
             _muteAlert = value
+            If value Then soundSig.Set()
         End Set
     End Property
 
     Public Sub GeneralAlert(ByVal type As Integer)
-        If inAlert Then
-            'Code for canceling, then starting new alert
-            CancelAlert()
-            alertThread.Abort()
-        End If
+        'Cancel any running alert
+        CancelAlert()
         'Extract alert information
         Dim alertstring As String = GetSetting("LCARS x32", "Alerts", type.ToString(), "Red|#FF0000|" & Application.StartupPath & "\red_alert.wav")
         Dim startIndex As Integer = alertstring.IndexOf("|")
@@ -99,6 +110,8 @@ Module modAlerts
         alertThread = New Thread(New ThreadStart(AddressOf MainAlert))
         alertThread.IsBackground = True
         _cancelAlert = False
+        flashSig.Reset()
+        soundSig.Reset()
         alertThread.Start()
 
         PostMessage(HWND_BROADCAST, InterMsgID, New IntPtr(type), New IntPtr(11))
@@ -144,21 +157,18 @@ Module modAlerts
             Next
         Next
         Application.DoEvents()
+        'Start the sound thread
+        soundThread = New Threading.Thread(New ParameterizedThreadStart(AddressOf AlertSoundSub))
+        soundThread.IsBackground = True
+        soundThread.Start(mySoundPath)
+
         'do the alert until cancelAlert is set to true:
         Do Until _cancelAlert
-            'Start the sound off
-            If Not (mySoundPath = "") Then
-                soundThread = New Threading.Thread(New ParameterizedThreadStart(AddressOf AlertSoundSub))
-                soundThread.Start(mySoundPath)
-            Else
-                soundThread = Nothing
-            End If
             'Start the flashing on each screen
             DoFlashes()
             'Wait for sound to end
-            If soundThread IsNot Nothing Then
-                soundThread.Join()
-            End If
+            flashSem.Release()
+            soundSem.WaitOne()
         Loop
         ' Reset all buttons
         For Each scr As List(Of List(Of LCARSbuttonClass)) In alertableForms.Values
@@ -171,14 +181,40 @@ Module modAlerts
         'Signal end of alert
         inAlert = False
         PostMessage(HWND_BROADCAST, InterMsgID, IntPtr.Zero, New IntPtr(7))
+        endSig.Set()
     End Sub
 
     Private Sub AlertSoundSub(ByVal params As Object)
         Dim soundPath As String = CType(params, String)
-        Try
-            My.Computer.Audio.Play(soundPath, alertSoundMode)
-        Catch ex As Exception
-        End Try
+        If soundPath = "" Then
+            'Dummy loop to keep the other threads happy
+            Do Until _cancelAlert
+                soundSem.Release()
+                flashSem.WaitOne()
+            Loop
+        Else
+            Dim duration As Integer = CInt(Math.Round(WAVReader.GetLength(soundPath)))
+            Dim player As New System.Media.SoundPlayer(soundPath)
+            If duration = -1 Then
+                ' Couldn't read the file for some reason. We'll time it.
+                Dim sw As New Stopwatch()
+                sw.Start()
+                player.PlaySync()
+                sw.Stop()
+                duration = CInt(sw.ElapsedMilliseconds)
+                soundSem.Release()
+                flashSem.WaitOne()
+            End If
+            Do Until _cancelAlert
+                If Not _muteAlert Then player.Play()
+                If soundSig.WaitOne(duration, False) Then
+                    player.Stop()
+                    soundSig.Reset()
+                End If
+                soundSem.Release()
+                flashSem.WaitOne()
+            Loop
+        End If
     End Sub
 
     Private Sub DoFlashes()
@@ -188,6 +224,7 @@ Module modAlerts
         While hasNext
             hasNext = False
             'Flash each button
+            If _cancelAlert Then Exit Sub
             alertablesLock.WaitOne()
             For Each scr As List(Of List(Of LCARSbuttonClass)) In alertableForms.Values
                 If scr.Count > tag Then
@@ -210,7 +247,7 @@ Module modAlerts
             If _cancelAlert Then Exit Sub
             tag += 1
             'Wait
-            Thread.Sleep(flashDelay)
+            flashSig.WaitOne(flashDelay, False)
         End While
     End Sub
 

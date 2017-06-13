@@ -169,9 +169,10 @@ Module modSpeech
             myDesktop.Invoke(New System.Timers.ElapsedEventHandler(AddressOf onCommandTimeout), source, e)
         Else
             If Not continuousCommands And LCARS.x32.modSettings.CommandTimeoutEnabled Then
-                LCARSSound.TimeoutSound.Play()
-                console.WriteLine("Command timed out (No command given)".ToUpper())
                 grammar.CmdSetRuleState("Command", SpeechRuleState.SGDSInactive)
+                console.WriteLine("Command timed out (No command given)".ToUpper())
+                LCARSSound.TimeoutSound.Play()
+                If AlertMuted Then AlertMuted = False
             End If
         End If
     End Sub
