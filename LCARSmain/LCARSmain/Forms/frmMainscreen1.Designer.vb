@@ -159,6 +159,7 @@ Partial Class frmMainscreen1
         Me.myAlertListButton.RedAlert = LCARS.LCARSalert.Normal
         Me.myAlertListButton.Size = New System.Drawing.Size(20, 20)
         Me.myAlertListButton.TabIndex = 63
+        Me.myAlertListButton.Tag = "10"
         '
         'myClock
         '
@@ -337,7 +338,7 @@ Partial Class frmMainscreen1
         Me.myButtonManager.RedAlert = LCARS.LCARSalert.Normal
         Me.myButtonManager.Size = New System.Drawing.Size(230, 20)
         Me.myButtonManager.TabIndex = 56
-        Me.myButtonManager.Tag = "9"
+        Me.myButtonManager.Tag = "16"
         Me.myButtonManager.Text = "MANAGE PERSONAL PROGRAMS"
         Me.myButtonManager.Visible = False
         '
@@ -856,7 +857,7 @@ Partial Class frmMainscreen1
         Me.HalfPillButton2.RedAlert = LCARS.LCARSalert.Normal
         Me.HalfPillButton2.Size = New System.Drawing.Size(33, 20)
         Me.HalfPillButton2.TabIndex = 48
-        Me.HalfPillButton2.Tag = "17"
+        Me.HalfPillButton2.Tag = "12"
         '
         'pnlBatt
         '
@@ -1529,6 +1530,7 @@ Partial Class frmMainscreen1
         Me.ShowTrayButton.RedAlert = LCARS.LCARSalert.Normal
         Me.ShowTrayButton.Size = New System.Drawing.Size(120, 25)
         Me.ShowTrayButton.TabIndex = 0
+        Me.ShowTrayButton.Tag = "18"
         Me.ShowTrayButton.Text = "SHOW TRAY ICONS"
         '
         'FlatButton1
@@ -1753,7 +1755,7 @@ Partial Class frmMainscreen1
         Me.myDocuments.RedAlert = LCARS.LCARSalert.Normal
         Me.myDocuments.Size = New System.Drawing.Size(100, 20)
         Me.myDocuments.TabIndex = 30
-        Me.myDocuments.Tag = "7"
+        Me.myDocuments.Tag = "9"
         Me.myDocuments.Text = "MY DOCUMENTS"
         '
         'HalfPillButton1
@@ -1777,7 +1779,7 @@ Partial Class frmMainscreen1
         Me.HalfPillButton1.RedAlert = LCARS.LCARSalert.Normal
         Me.HalfPillButton1.Size = New System.Drawing.Size(158, 20)
         Me.HalfPillButton1.TabIndex = 0
-        Me.HalfPillButton1.Tag = "10"
+        Me.HalfPillButton1.Tag = "12"
         Me.HalfPillButton1.Text = "START MENU"
         '
         'FlatButton30
@@ -1836,7 +1838,7 @@ Partial Class frmMainscreen1
         Me.FlatButton13.RedAlert = LCARS.LCARSalert.Normal
         Me.FlatButton13.Size = New System.Drawing.Size(100, 38)
         Me.FlatButton13.TabIndex = 23
-        Me.FlatButton13.Tag = "9"
+        Me.FlatButton13.Tag = "11"
         '
         'Elbow5
         '
@@ -1862,7 +1864,7 @@ Partial Class frmMainscreen1
         Me.Elbow5.RedAlert = LCARS.LCARSalert.Normal
         Me.Elbow5.Size = New System.Drawing.Size(128, 58)
         Me.Elbow5.TabIndex = 22
-        Me.Elbow5.Tag = "9"
+        Me.Elbow5.Tag = "11"
         '
         'myPictures
         '
@@ -1884,7 +1886,7 @@ Partial Class frmMainscreen1
         Me.myPictures.RedAlert = LCARS.LCARSalert.Normal
         Me.myPictures.Size = New System.Drawing.Size(100, 20)
         Me.myPictures.TabIndex = 18
-        Me.myPictures.Tag = "6"
+        Me.myPictures.Tag = "8"
         Me.myPictures.Text = "MY PICTURES"
         '
         'FlatButton12
@@ -2028,7 +2030,7 @@ Partial Class frmMainscreen1
         Me.fbWebBrowser.RedAlert = LCARS.LCARSalert.Normal
         Me.fbWebBrowser.Size = New System.Drawing.Size(100, 20)
         Me.fbWebBrowser.TabIndex = 8
-        Me.fbWebBrowser.Tag = "8"
+        Me.fbWebBrowser.Tag = "10"
         Me.fbWebBrowser.Text = "WEB BROWSER"
         '
         'myVideos
@@ -2051,7 +2053,7 @@ Partial Class frmMainscreen1
         Me.myVideos.RedAlert = LCARS.LCARSalert.Normal
         Me.myVideos.Size = New System.Drawing.Size(100, 20)
         Me.myVideos.TabIndex = 9
-        Me.myVideos.Tag = "5"
+        Me.myVideos.Tag = "6"
         Me.myVideos.Text = "MY VIDEOS"
         '
         'myMusic
@@ -2074,7 +2076,7 @@ Partial Class frmMainscreen1
         Me.myMusic.RedAlert = LCARS.LCARSalert.Normal
         Me.myMusic.Size = New System.Drawing.Size(100, 20)
         Me.myMusic.TabIndex = 9
-        Me.myMusic.Tag = "5"
+        Me.myMusic.Tag = "7"
         Me.myMusic.Text = "MY MUSIC"
         '
         'frmMainscreen1

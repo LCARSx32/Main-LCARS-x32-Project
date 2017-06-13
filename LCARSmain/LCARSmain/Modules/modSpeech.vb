@@ -122,7 +122,7 @@ Module modSpeech
         Dim rule As String = Result.PhraseInfo.Rule.Name
         If rule = "Main" Then
             If Result.PhraseInfo.Rule.Children.Item(0).Children Is Nothing Then
-                muteAlert = True
+                AlertMuted = True
                 grammar.CmdSetRuleState("Command", SpeechRuleState.SGDSActive)
                 LCARSSound.ListeningSound.Play()
                 If LCARS.x32.modSettings.CommandTimeoutEnabled And Not continuousCommands Then
@@ -137,7 +137,6 @@ Module modSpeech
             timeoutTimer.Stop()
             Dim commandName As String = Result.PhraseInfo.Rule.Children.Item(0).Name
             executeCommand(commandName, Result)
-            muteAlert = False
         End If
     End Sub
 
@@ -161,6 +160,7 @@ Module modSpeech
         End If
         If Not continuousCommands Then
             grammar.CmdSetRuleState("Command", SpeechRuleState.SGDSInactive)
+            If AlertMuted Then AlertMuted = False
         End If
     End Sub
 
@@ -169,9 +169,10 @@ Module modSpeech
             myDesktop.Invoke(New System.Timers.ElapsedEventHandler(AddressOf onCommandTimeout), source, e)
         Else
             If Not continuousCommands And LCARS.x32.modSettings.CommandTimeoutEnabled Then
-                LCARSSound.TimeoutSound.Play()
-                console.WriteLine("Command timed out (No command given)".ToUpper())
                 grammar.CmdSetRuleState("Command", SpeechRuleState.SGDSInactive)
+                console.WriteLine("Command timed out (No command given)".ToUpper())
+                LCARSSound.TimeoutSound.Play()
+                If AlertMuted Then AlertMuted = False
             End If
         End If
     End Sub
@@ -262,7 +263,7 @@ Module modSpeech
         GeneralAlert(0)
     End Sub
     Private Sub doCancelAlert(ByVal result As ISpeechRecoResult)
-        cancelAlert = True
+        CancelAlert()
     End Sub
     Private Sub doShutdown(ByVal result As ISpeechRecoResult)
         shutDownOptions.ExitWindows(cWrapExitWindows.Action.Shutdown)

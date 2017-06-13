@@ -26,6 +26,6 @@
     End Sub
 
     Private Sub FlatButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles FlatButton1.Click
-        cancelAlert = True
+        CancelAlert()
     End Sub
 End Class

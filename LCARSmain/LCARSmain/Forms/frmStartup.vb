@@ -10,7 +10,7 @@ Public Class frmStartup
 
     'Used to register the "LCARS_X32_MSG" window message which allows x32 to talk to it's various windows
     'and applications.
-    Declare Auto Function RegisterWindowMessage Lib "user32.dll" (ByVal lpString As String) As Integer
+    Declare Auto Function RegisterWindowMessage Lib "user32.dll" (ByVal lpString As String) As UInteger
 
     'Desktop panels
     Public curDesktop As New List(Of Panel)
@@ -99,7 +99,7 @@ Public Class frmStartup
                     m.Result = 1
 
                     'Cancel current Alerts
-                    cancelAlert = True
+                    CancelAlert()
                 Case 8
                     m.Result = 1
 
