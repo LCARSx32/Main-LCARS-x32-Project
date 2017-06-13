@@ -85,6 +85,7 @@
     <Compile Include="Classes\LCARSSound.vb" />
     <Compile Include="Classes\LCScreenImage.vb" />
     <Compile Include="Classes\Voice\VoiceCmd.vb" />
+    <Compile Include="Classes\WAVReader.vb" />
     <Compile Include="Forms\frmAlerts.Designer.vb">
       <DependentUpon>frmAlerts.vb</DependentUpon>
     </Compile>
