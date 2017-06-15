@@ -103,6 +103,7 @@ public Class modBusiness
     Dim hideCount As Integer = 0
 
     Private oldArea As Rectangle
+
 #End Region
 
 #End Region
@@ -127,21 +128,23 @@ public Class modBusiness
                     screen2 = MonitorFromWindow(myForm.Handle, MONITOR_DEFAULTTONEAREST)
                     'Check to see if it's actually on this screen
                     If screen1 = screen2 Then
-                        '
-                        ' Get the window's caption.
-                        '
-                        sWindowText = Space(256)
-                        lReturn = GetWindowText(hwnd, sWindowText, Len(sWindowText))
-                        If lReturn Then
+                        If VDesktopManager.IsWindowOnCurrentVirtualDesktop(hwnd) Then
                             '
-                            ' Add it to our list.
+                            ' Get the window's caption.
                             '
-                            sWindowText = Left(sWindowText, lReturn)
+                            sWindowText = Space(256)
+                            lReturn = GetWindowText(hwnd, sWindowText, Len(sWindowText))
+                            If lReturn Then
+                                '
+                                ' Add it to our list.
+                                '
+                                sWindowText = Left(sWindowText, lReturn)
 
-                            ReDim Preserve WindowList(WindowList.Length)
-                            WindowList(WindowList.GetUpperBound(0)).MainWindowText = Trim(sWindowText)
-                            WindowList(WindowList.GetUpperBound(0)).hWnd = hwnd
+                                ReDim Preserve WindowList(WindowList.Length)
+                                WindowList(WindowList.GetUpperBound(0)).MainWindowText = Trim(sWindowText)
+                                WindowList(WindowList.GetUpperBound(0)).hWnd = hwnd
 
+                            End If
                         End If
                     End If
                 End If
