@@ -193,6 +193,8 @@ Public Class frmStartup
             Next
         End If
 
+        VirtualDesktops.Init()
+
 
         '''''''''''''''''''''''''''''''''''''
         '''' Finish LCARS initialization ''''

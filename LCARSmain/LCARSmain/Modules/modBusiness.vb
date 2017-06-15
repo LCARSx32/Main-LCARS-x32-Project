@@ -104,8 +104,6 @@ public Class modBusiness
 
     Private oldArea As Rectangle
 
-    Private Shared VDesktopManager As New VirtualDesktops()
-
 #End Region
 
 #End Region
