@@ -86,7 +86,7 @@ public Class modBusiness
 
     'External application management
     Dim myWindows(-1) As ExternalApp
-    Dim WindowList(-1) As ExternalApp
+    Dim WindowList As New List(Of ExternalApp)
     Dim excluded(-1) As IntPtr
     Dim mouseDown As Boolean = False
 
@@ -109,50 +109,39 @@ public Class modBusiness
 #End Region
 
     Private Function fEnumWindowsCallBack(ByVal hwnd As Integer, ByVal lParam As Integer) As Integer
-        Dim lReturn As Integer
-        Dim lExStyle As Integer
-        Dim bNoOwner As Boolean
-        Dim sWindowText As String
+        'Invisible windows should not be shown
+        If Not IsWindowVisible(hwnd) Then Return True
+        'Windows with a parent should not be shown
+        If GetParent(hwnd) <> 0 Then Return True
 
-        If IsWindowVisible(hwnd) Then
-            If GetParent(hwnd) = 0 Then
+        Dim bNoOwner As Integer = (GetWindow(hwnd, GW_OWNER) = 0)
+        Dim lExStyle As Integer = GetWindowLong_Safe(hwnd, GWL_EXSTYLE)
 
-                bNoOwner = (GetWindow(hwnd, GW_OWNER) = 0)
-                lExStyle = GetWindowLong_Safe(hwnd, GWL_EXSTYLE)
+        'This if statement is from code found at http://msdntracker.blogspot.com/2008/03/list-currently-opened-windows-with.html
+        If ((((lExStyle And WS_EX_TOOLWINDOW) = 0) And bNoOwner) Or _
+            ((lExStyle And WS_EX_APPWINDOW) And Not bNoOwner)) _
+            And ((lExStyle And WS_EX_NOREDIRECTIONBITMAP) = 0) Then
 
-                'This if statement is from code found at http://msdntracker.blogspot.com/2008/03/list-currently-opened-windows-with.html
-                If ((((lExStyle And WS_EX_TOOLWINDOW) = 0) And bNoOwner) Or ((lExStyle And WS_EX_APPWINDOW) And Not bNoOwner)) _
-                            And ((lExStyle And WS_EX_NOREDIRECTIONBITMAP) = 0) Then
-                    Dim screen1, screen2 As Integer
-                    screen1 = MonitorFromWindow(hwnd, MONITOR_DEFAULTTONEAREST)
-                    screen2 = MonitorFromWindow(myForm.Handle, MONITOR_DEFAULTTONEAREST)
-                    'Check to see if it's actually on this screen
-                    If screen1 = screen2 Then
-                        If VDesktopManager.IsWindowOnCurrentVirtualDesktop(hwnd) Then
-                            '
-                            ' Get the window's caption.
-                            '
-                            sWindowText = Space(256)
-                            lReturn = GetWindowText(hwnd, sWindowText, Len(sWindowText))
-                            If lReturn Then
-                                '
-                                ' Add it to our list.
-                                '
-                                sWindowText = Left(sWindowText, lReturn)
+            'Check to see if it's actually on this screen
+            Dim screen1, screen2 As Integer
+            screen1 = MonitorFromWindow(hwnd, MONITOR_DEFAULTTONEAREST)
+            screen2 = MonitorFromWindow(myForm.Handle, MONITOR_DEFAULTTONEAREST)
+            If screen1 <> screen2 Then Return True
 
-                                ReDim Preserve WindowList(WindowList.Length)
-                                WindowList(WindowList.GetUpperBound(0)).MainWindowText = Trim(sWindowText)
-                                WindowList(WindowList.GetUpperBound(0)).hWnd = hwnd
+            'Check to see if it's on the current virtual desktop
+            If Not VirtualDesktops.IsWindowOnCurrentVirtualDesktop(hwnd) Then Return True
 
-                            End If
-                        End If
-                    End If
-                End If
+            ' Get the window's caption.
+            Dim sWindowText As String = Space(256)
+            Dim lReturn As Integer = GetWindowText(hwnd, sWindowText, Len(sWindowText))
+            If lReturn <> 0 Then
+                ' Add it to our list.
+                sWindowText = Left(sWindowText, lReturn)
 
-
+                Dim myApp As New ExternalApp() With {.hWnd = hwnd, .MainWindowText = Trim(sWindowText)}
+                WindowList.Add(myApp)
             End If
         End If
-
         Return True
     End Function
 
@@ -641,7 +630,7 @@ public Class modBusiness
         'Refresh the taskbar if necessary
         ReDim myWindows(-1)
 
-        ReDim WindowList(-1)
+        WindowList.Clear()
         'find all the windows
         EnumWindows(New EnumCallBack(AddressOf fEnumWindowsCallBack), IntPtr.Zero)
 
@@ -655,7 +644,7 @@ public Class modBusiness
                 End If
             Next
 
-            If found = False Then
+            If Not found Then
                 ReDim Preserve myWindows(myWindows.Length)
                 myWindows(myWindows.GetUpperBound(0)) = curWindow
             End If
