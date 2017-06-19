@@ -63,27 +63,12 @@ Public Class frmMainscreen3
 
                 pnlMainBar.Visible = True
 
-                UpdateRegion()
+                modBusiness.UpdateRegion()
 
             End If
 
         End If
 
-    End Sub
-
-    Private Sub UpdateRegion()
-        Dim myRegion As Region = New Region(New RectangleF(0, 0, Me.Width, Me.Height))
-        Try
-            Dim mainRect As New Rectangle
-            mainRect.X = pnlMainBar.Left + pnlMain.Left
-            mainRect.Y = pnlMainBar.Top + pnlMain.Top
-            mainRect.Width = pnlMain.Width
-            mainRect.Height = pnlMain.Height
-
-            myRegion.Exclude(mainRect)
-            Me.Region = myRegion
-        Catch
-        End Try
     End Sub
 
     Private Sub myStartMenu_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles myStartMenu.Click

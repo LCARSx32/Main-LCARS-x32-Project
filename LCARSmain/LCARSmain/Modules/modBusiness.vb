@@ -1279,4 +1279,10 @@ Retry:
         End If
     End Sub
 
+    Public Sub UpdateRegion()
+        Dim myRegion As Region = New Region(New RectangleF(0, 0, myForm.Width, myForm.Height))
+        Dim mainRect As New Rectangle(myForm.PointToClient(myMainPanel.PointToScreen(Drawing.Point.Empty)), myMainPanel.Size)
+        myRegion.Exclude(mainRect)
+        myForm.Region = myRegion
+    End Sub
 End Class

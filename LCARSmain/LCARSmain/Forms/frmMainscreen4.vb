@@ -6,21 +6,6 @@ Public Class frmMainscreen4
 
 #Region " AutoHide "
 
-    Private Sub UpdateRegion()
-        Dim myRegion As Region = New Region(New RectangleF(0, 0, Me.Width, Me.Height))
-        Try
-            Dim mainRect As New Rectangle
-            mainRect.X = pnlMainBar.Left + pnlMain.Left
-            mainRect.Y = pnlMainBar.Top + pnlMain.Top
-            mainRect.Width = pnlMain.Width
-            mainRect.Height = pnlMain.Height
-
-            myRegion.Exclude(mainRect)
-            Me.Region = myRegion
-        Catch
-        End Try
-    End Sub
-
     Public Function getAutohideEdges() As IAutohide.AutohideEdges Implements IAutohide.getAutohideEdges
         Return IAutohide.AutohideEdges.Top
     End Function
@@ -92,7 +77,7 @@ Public Class frmMainscreen4
 
                 pnlMainBar.Visible = True
 
-                UpdateRegion()
+                myBusiness.UpdateRegion()
             End If
 
         End If
