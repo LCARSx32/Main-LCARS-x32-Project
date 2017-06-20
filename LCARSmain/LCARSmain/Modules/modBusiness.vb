@@ -87,7 +87,7 @@ public Class modBusiness
     'External application management
     Dim myWindows As New List(Of ExternalApp) 'Current list of windows
     Dim WindowList As New List(Of ExternalApp) 'Used by fEnumWindows
-    Dim mouseDown As Boolean = False
+    Dim curTop As Integer
 
     'Time Format
     Dim timeFormat As String = "h:mm:sstt"
@@ -738,8 +738,6 @@ public Class modBusiness
                 myAppsPanel.Controls.Add(myButton)
 
                 AddHandler myButton.Click, AddressOf AppsButton_Click
-                AddHandler myButton.MouseDown, AddressOf AppsButton_MouseDown
-                AddHandler myButton.MouseUp, AddressOf AppsButton_MouseUp
             Next
             rightArrow.Location = New Point(myAppsPanel.Width - 31, 0)
             myAppsPanel.Controls.Add(rightArrow)
@@ -770,10 +768,11 @@ public Class modBusiness
 
         'Display topmost window
         Dim topmost As Integer = GetForegroundWindow()
-        If Not mouseDown Then
+        If curTop <> topmost And topmost <> myForm.Handle.ToInt32() Then
+            curTop = topmost
             For Each mybutton As LCARS.LCARSbuttonClass In myAppsPanel.Controls
-                If Not mybutton.Color = LCARS.LCARScolorStyles.FunctionOffline Then
-                    If mybutton.Data = topmost Then
+                If mybutton.Color <> LCARS.LCARScolorStyles.FunctionOffline Then
+                    If mybutton.Data = curTop Then
                         mybutton.Color = LCARS.LCARScolorStyles.PrimaryFunction
                     Else
                         mybutton.Color = LCARS.LCARScolorStyles.MiscFunction
@@ -828,15 +827,6 @@ public Class modBusiness
             End If
             SetTopWindow(myHandle)
         End If
-    End Sub
-
-    'Mouse up/down for window hiding
-    Private Sub AppsButton_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs)
-        mouseDown = True
-    End Sub
-
-    Private Sub AppsButton_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs)
-        mouseDown = False
     End Sub
 
     Public Sub loadUserButtons()
