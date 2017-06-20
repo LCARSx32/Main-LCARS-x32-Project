@@ -1188,10 +1188,8 @@ Retry:
     End Sub
 
     Public Sub myForm_Closing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs)
-        If Not modCommon.closing Then
-            e.Cancel = True
-            myDeactivate.doClick(sender, e)
-        End If
+        e.Cancel = True
+        myDeactivate.doClick(sender, e)
     End Sub
 
     Private Function FindRoot(ByVal hWnd As Int32) As Int32

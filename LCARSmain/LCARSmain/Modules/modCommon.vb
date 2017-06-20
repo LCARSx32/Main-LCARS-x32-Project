@@ -14,7 +14,6 @@ Module modCommon
     Public hTrayIcons As IntPtr
     Public hTrayParent As IntPtr
     Public myIconSaver As New frmIconSaver
-    Public closing As Boolean = False
     Public shellMode As Boolean = False
     Public displayOffset As Point
 
