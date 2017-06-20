@@ -85,9 +85,8 @@ public Class modBusiness
     Dim curProgIndex As Integer
 
     'External application management
-    Dim myWindows(-1) As ExternalApp
-    Dim WindowList As New List(Of ExternalApp)
-    Dim excluded(-1) As IntPtr
+    Dim myWindows As New List(Of ExternalApp) 'Current list of windows
+    Dim WindowList As New List(Of ExternalApp) 'Used by fEnumWindows
     Dim mouseDown As Boolean = False
 
     'Time Format
@@ -109,6 +108,8 @@ public Class modBusiness
 #End Region
 
     Private Function fEnumWindowsCallBack(ByVal hwnd As Integer, ByVal lParam As Integer) As Integer
+        'Abort if we're closing/closed
+        If myForm.IsDisposed Then Return False
         'Invisible windows should not be shown
         If Not IsWindowVisible(hwnd) Then Return True
         'Windows with a parent should not be shown
@@ -129,7 +130,10 @@ public Class modBusiness
             If screen1 <> screen2 Then Return True
 
             'Check to see if it's on the current virtual desktop
-            If Not VirtualDesktops.IsWindowOnCurrentVirtualDesktop(hwnd) Then Return True
+            Try
+                If Not VirtualDesktops.IsWindowOnCurrentVirtualDesktop(hwnd) Then Return True
+            Catch ex As COMException
+            End Try
 
             ' Get the window's caption.
             Dim sWindowText As String = Space(256)
@@ -365,8 +369,6 @@ public Class modBusiness
         'call this sub as soon as they load.
         setBusiness(Me, ScreenIndex)
 
-
-        ReDim myWindows(-1)
         myForm = curForm
 
         'Set the form's extended style to "WS_EX_TOOLWINDOW" which allows it
@@ -522,8 +524,8 @@ public Class modBusiness
     End Sub
 
     Private Sub mainTimer_Tick(ByVal sender As Object, ByVal e As System.EventArgs)
-        Dim found As Boolean = False
-        Dim intloop As Integer
+        If myForm.IsDisposed Then Return ' Don't access a disposed screen.
+
         Dim battInfo As PowerStatus = SystemInformation.PowerStatus
         Static battLevel As Short = 10
 
@@ -549,8 +551,8 @@ public Class modBusiness
             newText = LCARS.Stardate.getStardate(Now)
         End If
 
-        If newText <> myClock.text Then
-            myClock.text = newText
+        If newText <> myClock.Text Then
+            myClock.Text = newText
         End If
 
         '-------------------------
@@ -579,7 +581,7 @@ public Class modBusiness
         If autohide = IAutohide.AutoHideModes.Hidden Then
             adjustedBounds = Screen.FromHandle(myForm.Handle).Bounds
         Else
-            adjustedBounds = New Rectangle(myMainBar.PointToScreen(myMainPanel.Location).X, myMainBar.PointToScreen(myMainPanel.Location).Y, myMainPanel.Width, myMainPanel.Height)
+            adjustedBounds = New Rectangle(myMainPanel.PointToScreen(Drawing.Point.Empty), myMainPanel.Size)
         End If
         If Not adjustedBounds = oldArea Then
             'The working area needs to change, alert the linked windows (if there are any).
@@ -628,14 +630,16 @@ public Class modBusiness
 
 
         'Refresh the taskbar if necessary
-        ReDim myWindows(-1)
+        'myWindows.Clear()
 
         WindowList.Clear()
         'find all the windows
-        EnumWindows(New EnumCallBack(AddressOf fEnumWindowsCallBack), IntPtr.Zero)
+        EnumWindows(New EnumCallBack(AddressOf fEnumWindowsCallBack), 0)
 
+        Dim windowChange As Boolean = False
+        'Check for new windows
         For Each curWindow As ExternalApp In WindowList
-
+            Dim found As Boolean = False
             For Each myWindow As ExternalApp In myWindows
                 If myWindow.hWnd = curWindow.hWnd Then
                     myWindow.MainWindowText = curWindow.MainWindowText
@@ -643,20 +647,31 @@ public Class modBusiness
                     Exit For
                 End If
             Next
-
             If Not found Then
-                ReDim Preserve myWindows(myWindows.Length)
-                myWindows(myWindows.GetUpperBound(0)) = curWindow
+                myWindows.Add(curWindow)
+                windowChange = True
             End If
-
-            found = False
-
+        Next
+        Dim countOffset As Integer = 0
+        For i As Integer = 0 To myWindows.Count() - 1
+            Dim myWindow As ExternalApp = myWindows(i - countOffset)
+            Dim found As Boolean = False
+            For Each curWindow As ExternalApp In WindowList
+                If myWindow.hWnd = curWindow.hWnd Then
+                    found = True
+                    Exit For
+                End If
+            Next
+            If Not found Then
+                myWindows.Remove(myWindow)
+                countOffset += 1
+                windowChange = True
+            End If
         Next
 
 
-
         'refresh the taskbar
-        If myAppsPanel.Controls.Count <> myWindows.Length * 2 + 2 Then
+        If windowChange Then
 
             Dim beeping As Boolean = modSettings.ButtonBeep
 
@@ -687,7 +702,7 @@ public Class modBusiness
             AddHandler leftArrow.Click, AddressOf leftArrow_Click
             AddHandler rightArrow.Click, AddressOf rightArrow_Click
 
-            For intloop = 0 To myWindows.GetUpperBound(0)
+            For intloop As Integer = 0 To myWindows.Count() - 1
                 Dim myButton As New LCARS.Controls.HalfPillButton
                 Dim myCloseButton As New LCARS.Controls.FlatButton
                 myCloseButton.Size = New Point(20, 25)
@@ -729,7 +744,7 @@ public Class modBusiness
             rightArrow.Location = New Point(myAppsPanel.Width - 31, 0)
             myAppsPanel.Controls.Add(rightArrow)
             rightArrow.BringToFront()
-            myAppsPanel.Tag = (intloop + 6).ToString
+            myAppsPanel.Tag = (myWindows.Count() + 6).ToString
         Else
             For Each curWindow As ExternalApp In myWindows
                 For Each myButton As LCARS.LCARSbuttonClass In myAppsPanel.Controls
