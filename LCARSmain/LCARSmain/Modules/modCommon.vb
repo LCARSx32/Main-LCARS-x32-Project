@@ -457,6 +457,8 @@ Public Enum SetWindowPosFlags As UInteger
         For Each myBusiness As modBusiness In curBusiness
             LCARS.UpdateColors(myBusiness.myForm)
         Next
+        LCARS.UpdateColors(modSpeech.console)
+        LCARS.UpdateColors(frmAlerts)
 
         PostMessage(HWND_BROADCAST, InterMsgID, 0, 2)
     End Sub
@@ -465,6 +467,8 @@ Public Enum SetWindowPosFlags As UInteger
         For Each myBusiness As modBusiness In curBusiness
             LCARS.SetBeeping(myBusiness.myForm, value)
         Next
+        LCARS.SetBeeping(modSpeech.console, value)
+        LCARS.SetBeeping(frmAlerts, value)
 
         PostMessage(HWND_BROADCAST, InterMsgID, 0, 3)
     End Sub
@@ -585,7 +589,7 @@ Public Enum SetWindowPosFlags As UInteger
 
             'Restore working areas
             For Each myArea As Rectangle In StartingWorkingArea
-                If Not myArea = New Rectangle(0, 0, 0, 0) Then
+                If Not myArea = Rectangle.Empty Then
                     With myArea
                         resizeWorkingArea(.X, .Y, .Width, .Height)
                     End With

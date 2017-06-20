@@ -57,6 +57,18 @@ Public Module Util
     End Sub
 
     ''' <summary>
+    ''' Sets the beeping of a control and all subcontrols to the system default
+    ''' </summary>
+    ''' <param name="Container">The control to set beeping for</param>
+    ''' <remarks>
+    ''' If you are using windowless controls, the <see cref="Controls.WindowlessContainer">Windowless 
+    ''' Container</see> will set the beeping for all of its windowless controls if its own beeping is set.
+    ''' </remarks>
+    Public Sub SetBeeping(ByVal Container As System.Windows.Forms.Control)
+        SetBeeping(Container, x32.modSettings.ButtonBeep)
+    End Sub
+
+    ''' <summary>
     ''' Reloads all colors from the registry for the specified container
     ''' </summary>
     ''' <param name="Container">The control to reload the colors for.</param>

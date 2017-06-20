@@ -51,6 +51,7 @@ Public Class ScreenChooserDialog
             gridScreens.Add(myScreen)
         Next
         Me.Bounds = Screen.AllScreens(_screenIndex).Bounds
+        LCARS.SetBeeping(Me)
     End Sub
 
     Private Sub myScreen_Click(ByVal sender As Object, ByVal e As EventArgs)
