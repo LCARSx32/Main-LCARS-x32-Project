@@ -6,10 +6,10 @@ public Class modBusiness
 
 #Region " Structures "
 
-    Private Structure ExternalApp
-        Dim hWnd As Integer
-        Dim MainWindowText As String
-    End Structure
+    Private Class ExternalApp
+        Public hWnd As Integer
+        Public MainWindowText As String
+    End Class
 
     Public Structure UserButtonInfo
         Dim color As String
@@ -748,7 +748,7 @@ public Class modBusiness
         Else
             For Each curWindow As ExternalApp In myWindows
                 For Each myButton As LCARS.LCARSbuttonClass In myAppsPanel.Controls
-                    If myButton.Data = curWindow.hWnd Then
+                    If CInt(myButton.Data) = curWindow.hWnd Then
 
                         If getWindowState(curWindow.hWnd) = WindowStates.MINIMIZED Then
                             If myButton.Lit Then
@@ -759,8 +759,8 @@ public Class modBusiness
                                 myButton.Lit = True
                             End If
                         End If
-
-                        If Not (myButton.ButtonText = curWindow.MainWindowText.ToUpper Or myButton.ButtonText = "X") Then
+                        If myButton.Color = LCARS.LCARScolorStyles.FunctionOffline Then Continue For
+                        If Not myButton.ButtonText.Equals(curWindow.MainWindowText, StringComparison.CurrentCultureIgnoreCase) Then
                             myButton.ButtonText = curWindow.MainWindowText
                         End If
                     End If
