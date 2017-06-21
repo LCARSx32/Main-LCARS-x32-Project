@@ -200,7 +200,7 @@ Partial Class frmShutdown
         Me.tbTitle.ButtonTextAlign = System.Drawing.ContentAlignment.BottomLeft
         Me.tbTitle.ButtonTextHeight = 32
         Me.tbTitle.ButtonType = LCARS.Controls.TextButton.TextButtonType.DoublePills
-        Me.tbTitle.Clickable = True
+        Me.tbTitle.Clickable = False
         Me.tbTitle.Color = LCARS.LCARScolorStyles.MiscFunction
         Me.tbTitle.CustomAlertColor = System.Drawing.Color.Empty
         Me.tbTitle.Data = Nothing
@@ -211,7 +211,7 @@ Partial Class frmShutdown
         Me.tbTitle.Location = New System.Drawing.Point(12, 4)
         Me.tbTitle.Name = "tbTitle"
         Me.tbTitle.RedAlert = LCARS.LCARSalert.Normal
-        Me.tbTitle.Size = New System.Drawing.Size(587, 31)
+        Me.tbTitle.Size = New System.Drawing.Size(587, 32)
         Me.tbTitle.TabIndex = 62
         Me.tbTitle.Text = "DEACTIVATE"
         '

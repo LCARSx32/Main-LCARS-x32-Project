@@ -1,8 +1,12 @@
 Public Class frmShutdown
     Inherits LCARS.LCARSForm
 
+    Dim closingLCARS As Boolean = False
+
     Protected Overrides Sub OnLCARSClosing()
-        ' Do nothing. Overrides close on LCARS close.
+        If Not closingLCARS Then
+            MyBase.OnLCARSClosing()
+        End If
     End Sub
 #Region " API "
     Declare Function RegisterWindowMessageA Lib "user32.dll" (ByVal lpString As String) As Integer
@@ -26,14 +30,20 @@ Public Class frmShutdown
 
 
     Private Sub sbShutdown_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbShutdown.Click
+        closingLCARS = True
         Me.Hide()
         CloseLCARS()
         shutdownOptions.ExitWindows(cWrapExitWindows.Action.Shutdown)
     End Sub
 
     Private Sub sbExit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbExit.Click
+        closingLCARS = True
         Me.Hide()
         CloseLCARS()
+        While Process.GetProcessesByName("LCARSmain").Length > 0
+            Application.DoEvents()
+            Threading.Thread.Sleep(100)
+        End While
         If Not Process.GetProcessesByName("explorer").Length > 0 Then
             Process.Start("explorer.exe")
         End If
@@ -41,12 +51,14 @@ Public Class frmShutdown
     End Sub
 
     Private Sub sbRestart_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbRestart.Click
+        closingLCARS = True
         Me.Hide()
         CloseLCARS()
         shutdownOptions.ExitWindows(cWrapExitWindows.Action.Restart)
     End Sub
 
     Private Sub sbLogOff_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbLogOff.Click
+        closingLCARS = True
         Me.Hide()
         CloseLCARS()
         shutdownOptions.ExitWindows(cWrapExitWindows.Action.LogOff)
@@ -65,7 +77,7 @@ Public Class frmShutdown
         Dim myCommands() As String = System.Environment.CommandLine.Split("/")
 
         x32Handle = GetSetting("LCARS x32", "Application", "MainWindowHandle", "0")
-        SendMessage(InterMsgID, InterMsgID, Me.Handle, 1)
+        SendMessage(x32Handle, InterMsgID, Me.Handle, 1)
 
         If myCommands.GetUpperBound(0) > 1 Then
             If myCommands(2) = "c" Then
