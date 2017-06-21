@@ -373,9 +373,9 @@ public Class modBusiness
 
         'Set the form's extended style to "WS_EX_TOOLWINDOW" which allows it
         'to stay fullscreen instead of being resized by the working area.
-        Dim currentStyle As Integer = GetWindowLong_Safe(myForm.Handle, -20)
-        currentStyle = currentStyle Or (&H80)
-        SetWindowLong_Safe(myForm.Handle, -20, currentStyle)
+        Dim currentStyle As Integer = GetWindowLong_Safe(myForm.Handle, GWL_EXSTYLE)
+        currentStyle = currentStyle Or (WS_EX_TOOLWINDOW)
+        SetWindowLong_Safe(myForm.Handle, GWL_EXSTYLE, currentStyle)
 
         'Set the various panels and buttons that are controlled by this module.
         'These panels and buttons behave exactly the same on each mainscreen.

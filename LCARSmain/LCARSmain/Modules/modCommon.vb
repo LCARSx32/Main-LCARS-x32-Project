@@ -189,17 +189,14 @@ Module modCommon
     '
     ' Constants used with APIs
     '
-    Public Const GW_OWNER As Short = 4
+    Public Const GW_OWNER As Integer = 4
     Public Const GWL_EXSTYLE As Integer = (-20)
     Public Const GWL_STYLE As Integer = (-16)
-    Public Const WS_EX_TOOLWINDOW As Short = &H80S
+    Public Const WS_EX_TOOLWINDOW As Integer = &H80
     Public Const WS_EX_APPWINDOW As Integer = &H40000
     Public Const WS_EX_TRANSPARENT As Integer = &H20
     Public Const WS_EX_NOREDIRECTIONBITMAP As Integer = &H200000
     Public Const TBSTYLE_TRANSPARENT As Integer = &H8000
-
-    Dim myListBox As ListBox
-
 
 #End Region
 

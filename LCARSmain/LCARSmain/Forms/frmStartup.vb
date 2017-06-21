@@ -205,9 +205,9 @@ Public Class frmStartup
         PostMessage(HWND_BROADCAST, InterMsgID, myDesktop.Handle, 0)
 
         'Make desktop non-selectable and not in the alt-tab menu or taskbar
-        Dim currentStyle As Integer = GetWindowLong_Safe(Me.Handle, -20)
+        Dim currentStyle As Integer = GetWindowLong_Safe(Me.Handle, GWL_EXSTYLE)
         currentStyle = currentStyle Or WS_EX_TOOLWINDOW Or WS_EX_NOACTIVATE
-        SetWindowLong_Safe(Me.Handle, -20, currentStyle)
+        SetWindowLong_Safe(Me.Handle, GWL_EXSTYLE, currentStyle)
         setBackBounds()
 
         For i As Integer = 0 To Screen.AllScreens.Length - 1
