@@ -1004,14 +1004,17 @@ public Class modBusiness
         Next
         ProgramsPanel.Tag = (pageMax - index).ToString
 
+        'Update buttons
+        myProgsNext.Lit = curProgPage < pageCount
+        myProgsBack.Lit = curProgPage > 1
+        myProgsUp.Lit = ProgDir.GetUpperBound(0) > -1
+
     End Sub
 
     Public Sub nextProgPage()
         If curProgPage < pageCount Then
             curProgPage += 1
             loadProgList((curProgPage * ProgPageSize) - (ProgPageSize - 1))
-        Else
-            Beep()
         End If
     End Sub
 
@@ -1019,8 +1022,6 @@ public Class modBusiness
         If curProgPage > 1 Then
             curProgPage -= 1
             loadProgList((curProgPage * ProgPageSize) - (ProgPageSize - 1))
-        Else
-            Beep()
         End If
     End Sub
 
@@ -1182,8 +1183,6 @@ Retry:
         If ProgDir.GetUpperBound(0) > -1 Then
             ReDim Preserve ProgDir(ProgDir.GetUpperBound(0) - 1)
             loadProgList()
-        Else
-            Beep()
         End If
     End Sub
 
