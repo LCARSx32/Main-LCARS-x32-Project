@@ -78,7 +78,7 @@ public Class modBusiness
 #Region " Private Global Variables "
 
     'Program Pages
-    Dim ProgDir(-1) As Integer
+    Dim ProgDir As New List(Of Integer)
     Dim ProgPageSize As Integer
     Dim curProgPage As Integer = 1
     Dim pageCount As Integer
@@ -461,7 +461,6 @@ public Class modBusiness
         AddHandler myProgsUp.Click, AddressOf ProgBack
         AddHandler myProgsBack.Click, AddressOf previousProgPage
         AddHandler myProgsNext.Click, AddressOf nextProgPage
-        ReDim ProgDir(-1)
 
         setDoubleBuffered(myClock)
 
@@ -938,8 +937,8 @@ public Class modBusiness
         curProgIndex = index
 
         myDir = MyPrograms
-        For intloop As Integer = 0 To ProgDir.GetUpperBound(0)
-            myDir = myDir.subItems(ProgDir(intloop))
+        For Each myindex As Integer In ProgDir
+            myDir = myDir.subItems(myindex)
         Next
         ProgramsPanel.Clear()
 
@@ -1003,7 +1002,7 @@ public Class modBusiness
         'Update buttons
         myProgsNext.Lit = curProgPage < pageCount
         myProgsBack.Lit = curProgPage > 1
-        myProgsUp.Lit = ProgDir.GetUpperBound(0) > -1
+        myProgsUp.Lit = ProgDir.Count > 0
 
     End Sub
 
@@ -1022,16 +1021,15 @@ public Class modBusiness
     End Sub
 
     Public Sub ProgBack()
-        If ProgDir.GetUpperBound(0) > -1 Then
-            Dim index As Integer = ProgDir(ProgDir.GetUpperBound(0))
-            ReDim Preserve ProgDir(ProgDir.GetUpperBound(0) - 1)
+        If ProgDir.Count > 0 Then
+            Dim index As Integer = ProgDir(ProgDir.Count - 1)
+            ProgDir.RemoveAt(ProgDir.Count - 1)
             loadProgList(index)
         End If
     End Sub
 
     Private Sub myDir_click(ByVal sender As Object, ByVal e As System.EventArgs)
-        ReDim Preserve ProgDir(ProgDir.Length)
-        ProgDir(ProgDir.GetUpperBound(0)) = sender.data
+        ProgDir.Add(sender.data)
         loadProgList()
     End Sub
 #End Region
