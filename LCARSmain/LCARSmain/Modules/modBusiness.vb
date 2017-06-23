@@ -921,27 +921,24 @@ public Class modBusiness
         Next
     End Sub
 
+#Region " Start Menu Handlers "
     Private Sub ProgramsPanel_Resize(ByVal sender As Object, ByVal e As System.EventArgs)
         If myForm.WindowState <> FormWindowState.Minimized Then
-            Dim myPage As Integer
-
-            ProgPageSize = ProgramsPanel.Height \ 25
-            myPage = (curProgIndex \ ProgPageSize) + 1
-            loadProgList() '(myPage * ProgPageSize) - (ProgPageSize - 1))
+            loadProgList(curProgIndex)
         End If
     End Sub
 
     Private Sub loadProgList(Optional ByVal index As Integer = 0)
-        Dim intloop As Integer
         Dim itemCount As Integer = 0
         Dim myDir As DirectoryStartItem
-
         Dim pageMax As Integer
+
+        ProgPageSize = ProgramsPanel.Height \ 30
+        index = index - (index Mod ProgPageSize)
         curProgIndex = index
 
         myDir = MyPrograms
-        ProgPageSize = ProgramsPanel.Height \ 30
-        For intloop = 0 To ProgDir.GetUpperBound(0)
+        For intloop As Integer = 0 To ProgDir.GetUpperBound(0)
             myDir = myDir.subItems(ProgDir(intloop))
         Next
         ProgramsPanel.Clear()
@@ -963,7 +960,7 @@ public Class modBusiness
             pageMax = myDir.subItems.Count - 1
         End If
 
-        For intloop = index To pageMax
+        For intloop As Integer = index To pageMax
             If myDir.subItems(intloop).GetType Is GetType(DirectoryStartItem) Then
                 With CType(myDir.subItems(intloop), DirectoryStartItem)
                     Dim myButton As New LCARS.LightweightControls.LCComplexButton
@@ -1024,6 +1021,20 @@ public Class modBusiness
         End If
     End Sub
 
+    Public Sub ProgBack()
+        If ProgDir.GetUpperBound(0) > -1 Then
+            Dim index As Integer = ProgDir(ProgDir.GetUpperBound(0))
+            ReDim Preserve ProgDir(ProgDir.GetUpperBound(0) - 1)
+            loadProgList(index)
+        End If
+    End Sub
+
+    Private Sub myDir_click(ByVal sender As Object, ByVal e As System.EventArgs)
+        ReDim Preserve ProgDir(ProgDir.Length)
+        ProgDir(ProgDir.GetUpperBound(0)) = sender.data
+        loadProgList()
+    End Sub
+#End Region
 
     'Used for programs in start menu and in Personal Programs (userbuttons)
     Private Sub myfile_click(ByVal sender As Object, ByVal e As System.EventArgs)
@@ -1169,19 +1180,6 @@ Retry:
             myPlacement.ShowCmd = 3
             SetWindowPlacement(hWnd, myPlacement)
 
-        End If
-    End Sub
-
-    Private Sub myDir_click(ByVal sender As Object, ByVal e As System.EventArgs)
-        ReDim Preserve ProgDir(ProgDir.Length)
-        ProgDir(ProgDir.GetUpperBound(0)) = sender.data
-        loadProgList()
-    End Sub
-
-    Public Sub ProgBack()
-        If ProgDir.GetUpperBound(0) > -1 Then
-            ReDim Preserve ProgDir(ProgDir.GetUpperBound(0) - 1)
-            loadProgList()
         End If
     End Sub
 
