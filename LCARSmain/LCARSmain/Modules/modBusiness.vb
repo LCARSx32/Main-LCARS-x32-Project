@@ -931,7 +931,7 @@ public Class modBusiness
         End If
     End Sub
 
-    Private Sub loadProgList(Optional ByVal index As Integer = 1)
+    Private Sub loadProgList(Optional ByVal index As Integer = 0)
         Dim intloop As Integer
         Dim itemCount As Integer = 0
         Dim myDir As DirectoryStartItem

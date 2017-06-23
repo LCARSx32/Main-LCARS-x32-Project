@@ -1,3 +1,5 @@
+Option Strict On
+
 Imports System.Runtime.InteropServices
 
 Public Module programList
@@ -7,12 +9,12 @@ Public Module programList
     Public Structure LNKinfo
         Dim Executable As String
         Dim Args As String
-        Dim icon As Bitmap
     End Structure
 
     Public Class StartItem
         Implements IComparable(Of StartItem)
         Public Name As String
+        Public icon As Bitmap
 
         Public Function CompareTo(ByVal other As StartItem) As Integer Implements System.IComparable(Of StartItem).CompareTo
             If Me.GetType() Is other.GetType() Then
@@ -31,7 +33,6 @@ Public Module programList
     Public Class DirectoryStartItem
         Inherits StartItem
         Public subItems As New List(Of StartItem)
-        Public icon As Bitmap
     End Class
 
 #End Region
@@ -64,7 +65,7 @@ Public Module programList
 #End Region
 
     Dim startItems As DirectoryStartItem
-    Dim dirIcon As Bitmap = New Bitmap(1, 1)
+    Dim dirIcon As Bitmap = My.Resources.folder
 
 #Region " Properties "
 
@@ -94,37 +95,38 @@ Public Module programList
         Dim myFiles() As System.IO.FileSystemInfo
         Dim myDirs() As System.IO.FileSystemInfo
         Dim intloop As Integer
-        Dim curDirectory As New DirectoryStartItem
-        Dim curFile As New FileStartItem
+        Dim curDirectory As DirectoryStartItem
+        Dim curFile As FileStartItem
         Dim element As DirectoryStartItem = Nothing
         Dim myLinkInfo As New LNKinfo
 
         If path = "" Then
-            Dim OSinfo As String = getOS()
-
-
-            Select Case OSinfo
-                Case "Win98"
+            Select Case System.Environment.OSVersion.Platform
+                Case PlatformID.Win32Windows
                     GlobalStartPath = System.Environment.GetFolderPath(Environment.SpecialFolder.Programs)
                     UserStartPath = ""
-                Case "WinNT3.51"
-                    GlobalStartPath = System.Environment.GetFolderPath(Environment.SpecialFolder.Programs)
-                    UserStartPath = ""
-                Case "WinNT4.0"
-                    GlobalStartPath = System.Environment.GetFolderPath(Environment.SpecialFolder.Programs)
-                    UserStartPath = ""
-                Case "Modern"
-                    Dim myReg As Microsoft.Win32.RegistryKey = Microsoft.Win32.Registry.CurrentUser
-                    myReg = myReg.OpenSubKey("Software\Microsoft\Windows\CurrentVersion\explorer\Shell Folders\", False)
+                Case PlatformID.Win32NT
+                    Select Case (System.Environment.OSVersion.Version.Major)
+                        Case 3
+                            GlobalStartPath = System.Environment.GetFolderPath(Environment.SpecialFolder.Programs)
+                            UserStartPath = ""
+                        Case 4
+                            GlobalStartPath = System.Environment.GetFolderPath(Environment.SpecialFolder.Programs)
+                            UserStartPath = ""
+                        Case Is > 4
+                            Dim myReg As Microsoft.Win32.RegistryKey = Microsoft.Win32.Registry.CurrentUser
+                            myReg = myReg.OpenSubKey("Software\Microsoft\Windows\CurrentVersion\explorer\Shell Folders\", False)
 
-                    UserStartPath = myReg.GetValue("Programs")
-                    element = GetPrograms(UserStartPath)
+                            UserStartPath = myReg.GetValue("Programs").ToString()
+                            element = GetPrograms(UserStartPath)
 
-                    myReg = Microsoft.Win32.Registry.LocalMachine
-                    myReg = myReg.OpenSubKey("Software\Microsoft\Windows\CurrentVersion\explorer\Shell Folders\", False)
+                            myReg = Microsoft.Win32.Registry.LocalMachine
+                            myReg = myReg.OpenSubKey("Software\Microsoft\Windows\CurrentVersion\explorer\Shell Folders\", False)
 
-                    GlobalStartPath = myReg.GetValue("Common Programs")
+                            GlobalStartPath = myReg.GetValue("Common Programs").ToString()
+                    End Select
             End Select
+
 
             Dim globalItems As DirectoryStartItem = GetPrograms(GlobalStartPath)
             If element IsNot Nothing Then
@@ -173,7 +175,7 @@ Public Module programList
     ''' <param name="dir1">StartItem to RECEIVE all items</param>
     ''' <param name="dir2">StartItem to SUPPLY items to merge</param>
     ''' <remarks>Subitems in both StartItems are assumed to be sorted</remarks>
-    Private Sub mergeDirs(ByRef dir1 As programList.DirectoryStartItem, ByRef dir2 As programList.DirectoryStartItem)
+    Private Sub mergeDirs(ByVal dir1 As programList.DirectoryStartItem, ByVal dir2 As programList.DirectoryStartItem)
         Dim dir1Loc As Integer = 0
         Dim dir2Loc As Integer = 0
         While dir1Loc < dir1.subItems.Count And dir2Loc < dir2.subItems.Count
@@ -188,7 +190,8 @@ Public Module programList
                 dir2Loc += 1
             Else
                 If dir1.subItems(dir1Loc).GetType() Is GetType(DirectoryStartItem) Then
-                    mergeDirs(dir1.subItems(dir1Loc), dir2.subItems(dir2Loc))
+                    mergeDirs(CType(dir1.subItems(dir1Loc), DirectoryStartItem), _
+                              CType(dir2.subItems(dir2Loc), DirectoryStartItem))
                 Else
                     dir1.subItems(dir1Loc) = dir2.subItems(dir2Loc)
                 End If
@@ -202,30 +205,6 @@ Public Module programList
             Next
         End If
     End Sub
-
-
-    Public Function getOS() As String
-
-        Select Case System.Environment.OSVersion.Platform
-            Case PlatformID.Win32Windows
-                Return "Win98"
-            Case PlatformID.Win32NT
-                Select Case (System.Environment.OSVersion.Version.Major)
-                    Case 3
-                        Return "WinNT3.51"
-                    Case 4
-                        Return "WinNT4.0"
-                    Case Is > 4
-                        Return "Modern"
-                End Select
-        End Select
-
-        Return Nothing
-
-    End Function
-
-
-
 
     'Private Function getIcon(ByVal path As String) As Bitmap
     '    Dim myIcon As Bitmap
