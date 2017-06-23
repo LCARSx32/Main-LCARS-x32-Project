@@ -63,7 +63,7 @@ public Class modBusiness
     Public myProgsBack As LCARS.LCARSbuttonClass
     Public myProgsNext As LCARS.LCARSbuttonClass
 
-    Public MyPrograms As Collection = New Collection
+    Public MyPrograms As DirectoryStartItem
     Public myUserButtonCollection As New List(Of UserButtonInfo)
     Public mainTimer As New Timer
     Public WithEvents tmrAutohide As New Timer()
@@ -465,7 +465,6 @@ public Class modBusiness
 
         setDoubleBuffered(myClock)
 
-        MyPrograms.Clear()
         MyPrograms = GetAllPrograms
         loadProgList()
 
@@ -935,7 +934,7 @@ public Class modBusiness
     Private Sub loadProgList(Optional ByVal index As Integer = 1)
         Dim intloop As Integer
         Dim itemCount As Integer = 0
-        Dim myDir As Collection
+        Dim myDir As DirectoryStartItem
 
         Dim pageMax As Integer
         curProgIndex = index
@@ -943,13 +942,13 @@ public Class modBusiness
         myDir = MyPrograms
         ProgPageSize = ProgramsPanel.Height \ 30
         For intloop = 0 To ProgDir.GetUpperBound(0)
-            myDir = myDir(ProgDir(intloop)).subItems
+            myDir = myDir.subItems(ProgDir(intloop))
         Next
         ProgramsPanel.Clear()
 
-        pageCount = Int(myDir.Count / ProgPageSize)
+        pageCount = Int(myDir.subItems.Count / ProgPageSize)
 
-        If myDir.Count Mod ProgPageSize > 0 Then
+        If myDir.subItems.Count Mod ProgPageSize > 0 Then
             pageCount += 1
         End If
 
@@ -960,13 +959,13 @@ public Class modBusiness
 
         pageMax = ProgPageSize + (index - 1)
 
-        If pageMax > myDir.Count Then
-            pageMax = myDir.Count
+        If pageMax > myDir.subItems.Count - 1 Then
+            pageMax = myDir.subItems.Count - 1
         End If
 
         For intloop = index To pageMax
-            If myDir(intloop).GetType Is GetType(DirectoryStartItem) Then
-                With CType(myDir(intloop), DirectoryStartItem)
+            If myDir.subItems(intloop).GetType Is GetType(DirectoryStartItem) Then
+                With CType(myDir.subItems(intloop), DirectoryStartItem)
                     Dim myButton As New LCARS.LightweightControls.LCComplexButton
                     myButton.Width = ProgramsPanel.Width
                     myButton.Height = 25
@@ -985,7 +984,7 @@ public Class modBusiness
                     itemCount += 1
                 End With
             Else
-                With CType(myDir(intloop), FileStartItem)
+                With CType(myDir.subItems(intloop), FileStartItem)
                     Dim myButton As New LCARS.LightweightControls.LCStandardButton
                     myButton.Width = ProgramsPanel.Width
                     myButton.Height = 25

@@ -10,16 +10,29 @@ Public Module programList
         Dim icon As Bitmap
     End Structure
 
-    Public Structure FileStartItem
-        Dim Name As String
-        Dim Link As LNKinfo
-    End Structure
+    Public Class StartItem
+        Implements IComparable(Of StartItem)
+        Public Name As String
 
-    Public Structure DirectoryStartItem
-        Dim Name As String
-        Dim subItems As Collection
-        Dim icon As Bitmap
-    End Structure
+        Public Function CompareTo(ByVal other As StartItem) As Integer Implements System.IComparable(Of StartItem).CompareTo
+            If Me.GetType() Is other.GetType() Then
+                Return Me.Name.CompareTo(other.Name)
+            Else
+                Return If(Me.GetType() Is GetType(DirectoryStartItem), -1, 1)
+            End If
+        End Function
+    End Class
+
+    Public Class FileStartItem
+        Inherits StartItem
+        Public Link As LNKinfo
+    End Class
+
+    Public Class DirectoryStartItem
+        Inherits StartItem
+        Public subItems As New List(Of StartItem)
+        Public icon As Bitmap
+    End Class
 
 #End Region
 
@@ -50,12 +63,12 @@ Public Module programList
     Private nIndex As Integer = 0
 #End Region
 
-    Dim startItems As New Collection
+    Dim startItems As DirectoryStartItem
     Dim dirIcon As Bitmap = New Bitmap(1, 1)
 
 #Region " Properties "
 
-    Public ReadOnly Property GetAllPrograms() As Collection
+    Public ReadOnly Property GetAllPrograms() As DirectoryStartItem
         Get
             startItems = GetPrograms()
             Return startItems
@@ -74,7 +87,7 @@ Public Module programList
 #End Region
 
 
-    Private Function GetPrograms(Optional ByVal path As String = "") As Collection
+    Private Function GetPrograms(Optional ByVal path As String = "") As DirectoryStartItem
         Dim GlobalStartPath As String = ""
         Dim UserStartPath As String = ""
         Dim mydir As System.IO.DirectoryInfo
@@ -83,9 +96,8 @@ Public Module programList
         Dim intloop As Integer
         Dim curDirectory As New DirectoryStartItem
         Dim curFile As New FileStartItem
-        Dim buffer As New Collection
+        Dim element As DirectoryStartItem = Nothing
         Dim myLinkInfo As New LNKinfo
-        Dim mySorter As New DirectorySort
 
         If path = "" Then
             Dim OSinfo As String = getOS()
@@ -106,7 +118,7 @@ Public Module programList
                     myReg = myReg.OpenSubKey("Software\Microsoft\Windows\CurrentVersion\explorer\Shell Folders\", False)
 
                     UserStartPath = myReg.GetValue("Programs")
-                    buffer = GetPrograms(UserStartPath)
+                    element = GetPrograms(UserStartPath)
 
                     myReg = Microsoft.Win32.Registry.LocalMachine
                     myReg = myReg.OpenSubKey("Software\Microsoft\Windows\CurrentVersion\explorer\Shell Folders\", False)
@@ -114,59 +126,25 @@ Public Module programList
                     GlobalStartPath = myReg.GetValue("Common Programs")
             End Select
 
-            Dim tmpItems As New Collection
-            tmpItems = GetPrograms(GlobalStartPath)
-
-            If UserStartPath <> "" Then
-
-                For Each myItem As Object In tmpItems
-
-                    If myItem.GetType Is curFile.GetType Then
-
-                        curFile = CType(myItem, programList.FileStartItem)
-
-                        If Not buffer.Contains(curFile.Name) Then
-                            buffer.Add(curFile)
-                        End If
-
-                    ElseIf myItem.GetType Is curDirectory.GetType Then
-
-                        curDirectory = CType(myItem, programList.DirectoryStartItem)
-
-                        If Not buffer.Contains(curDirectory.Name) Then
-                            buffer.Add(curDirectory)
-                        Else
-
-                            For intloop = 1 To buffer.Count
-                                If buffer(intloop).name.tolower = curDirectory.Name.ToLower Then
-                                    buffer.Add(mergeDirs(buffer(intloop), curDirectory))
-                                    buffer.Remove(intloop)
-                                    Exit For
-                                End If
-                            Next
-
-                        End If
-
-                    End If
-                Next
-            Else
-                buffer = tmpItems
+            Dim globalItems As DirectoryStartItem = GetPrograms(GlobalStartPath)
+            If element IsNot Nothing Then
+                mergeDirs(globalItems, element)
             End If
+            element = globalItems
 
-            mySorter.sort(buffer)
 
         Else
+            element = New DirectoryStartItem()
             mydir = New System.IO.DirectoryInfo(path)
 
 
             myDirs = mydir.GetDirectories
 
             For intloop = 0 To myDirs.GetUpperBound(0)
-                curDirectory = New DirectoryStartItem
+                curDirectory = GetPrograms(myDirs(intloop).FullName)
                 curDirectory.Name = myDirs(intloop).Name
-                curDirectory.subItems = GetPrograms(myDirs(intloop).FullName)
                 curDirectory.icon = My.Resources.folder
-                buffer.Add(curDirectory, curDirectory.Name)
+                element.subItems.Add(curDirectory)
             Next
 
             myFiles = mydir.GetFiles
@@ -174,60 +152,61 @@ Public Module programList
             For intloop = 0 To myFiles.GetUpperBound(0)
                 If Not (myFiles(intloop).Name.ToLower = "desktop.ini" Or myFiles(intloop).Name.ToLower = "thumbs.db") Then
 
-                    curFile = New FileStartItem
+                    curFile = New FileStartItem()
                     curFile.Name = myFiles(intloop).Name
 
                     myLinkInfo.Executable = myFiles(intloop).FullName
                     ' myLinkInfo.icon = getIcon(myLinkInfo.Executable)
                     curFile.Link = myLinkInfo
 
-                    buffer.Add(curFile, curFile.Name)
+                    element.subItems.Add(curFile)
                 End If
             Next
         End If
-        mySorter.sort(buffer)
-        Return buffer
+        element.subItems.Sort()
+        Return element
     End Function
 
-    Private Function mergeDirs(ByVal dir1 As programList.DirectoryStartItem, ByVal dir2 As programList.DirectoryStartItem) As programList.DirectoryStartItem
-        Dim newDir As programList.DirectoryStartItem = dir1
-        Dim found As Boolean = False
-        Dim mySorter As New DirectorySort
-
-        For Each myItem2 As Object In dir2.subItems
-            found = False
-            Dim myItem1 As Object = New Object
-
-            For Each myItem1 In newDir.subItems
-
-                If myItem1.name = myItem2.name Then
-                    found = True
-                    Exit For
-                End If
-            Next
-
-            If found = False Then
-                newDir.subItems.Add(myItem2)
+    ''' <summary>
+    ''' Merges StartItems from dir2 into dir1
+    ''' </summary>
+    ''' <param name="dir1">StartItem to RECEIVE all items</param>
+    ''' <param name="dir2">StartItem to SUPPLY items to merge</param>
+    ''' <remarks>Subitems in both StartItems are assumed to be sorted</remarks>
+    Private Sub mergeDirs(ByRef dir1 As programList.DirectoryStartItem, ByRef dir2 As programList.DirectoryStartItem)
+        Dim dir1Loc As Integer = 0
+        Dim dir2Loc As Integer = 0
+        While dir1Loc < dir1.subItems.Count And dir2Loc < dir2.subItems.Count
+            Dim comp As Integer = dir1.subItems(dir1Loc).CompareTo(dir2.subItems(dir2Loc))
+            If comp < 0 Then
+                'Element at dir1Loc comes before element at dir2Loc
+                dir1Loc += 1
+            ElseIf comp > 0 Then
+                'Element at dir1Loc comes after element at dir2Loc
+                dir1.subItems.Insert(dir1Loc, dir2.subItems(dir2Loc))
+                dir1Loc += 1
+                dir2Loc += 1
             Else
-                If myItem2.GetType Is GetType(DirectoryStartItem) Then
-                    newDir.subItems.Remove(myItem1.name)
-                    newDir.subItems.Add(mergeDirs(myItem1, myItem2))
-
+                If dir1.subItems(dir1Loc).GetType() Is GetType(DirectoryStartItem) Then
+                    mergeDirs(dir1.subItems(dir1Loc), dir2.subItems(dir2Loc))
+                Else
+                    dir1.subItems(dir1Loc) = dir2.subItems(dir2Loc)
                 End If
+                dir1Loc += 1
+                dir2Loc += 1
             End If
-        Next
-
-        mySorter.sort(newDir.subItems)
-
-
-
-        Return newDir
-    End Function
+        End While
+        If dir2Loc < dir2.subItems.Count Then
+            For i As Integer = dir2Loc To dir2.subItems.Count - 1
+                dir1.subItems.Add(dir2.subItems(i))
+            Next
+        End If
+    End Sub
 
 
     Public Function getOS() As String
-      
-            Select Case System.Environment.OSVersion.Platform
+
+        Select Case System.Environment.OSVersion.Platform
             Case PlatformID.Win32Windows
                 Return "Win98"
             Case PlatformID.Win32NT
@@ -261,57 +240,3 @@ Public Module programList
 
 
 End Module
-
-Class DirectorySort
-
-    Public Sub sort(ByRef dir As Collection)
-        Dim intloop As Integer
-        Dim buffer As Object
-        Dim result As Integer
-        Dim needToSort As Boolean = True
-
-
-        Do Until needToSort = False
-            needToSort = False
-            For intloop = 1 To dir.Count - 1
-                result = Compare(dir.Item(intloop), dir.Item(intloop + 1))
-                If result = 0 Then
-                    buffer = dir.Item(intloop + 1)
-                    dir.Remove(intloop + 1)
-                    dir.Add(buffer, buffer.name, intloop)
-                    needToSort = True
-                End If
-            Next
-        Loop
-
-    End Sub
-
-
-    Private Function Compare(ByVal x As Object, ByVal y As Object) As Integer
-        Dim a, b As Object
-        Dim dir As New programList.DirectoryStartItem
-        Dim file As New programList.FileStartItem
-
-        a = x
-        b = y
-        If a.GetType Is dir.GetType And b.GetType Is file.GetType Then
-            Return 1
-        ElseIf a.GetType Is b.GetType Then
-            'they are the same type, sort them alphabetically
-            If a.name.tolower < b.name.tolower Then
-                Return 1
-            ElseIf a.name.tolower > b.name.Tolower Then
-                Return 0
-            Else
-                Return 1 'they are the same.  Technically, this should NEVER happen. 
-            End If
-
-            Return 1
-        ElseIf a.GetType Is file.GetType And b.GetType Is dir.GetType Then
-            Return 0
-        End If
-        'If x. is bigger than y then x.id-y.id will be positive. 
-        'And if y.id is bigger, then x.id-y.id will be negative
-        'And finally if they are equal then x.id-y.id will equal zero.
-    End Function
-End Class

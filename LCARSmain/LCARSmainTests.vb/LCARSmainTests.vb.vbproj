@@ -37,9 +37,21 @@
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Interop.IWshRuntimeLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\LCARSmain\obj\Debug\Interop.IWshRuntimeLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.SpeechLib, Version=5.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\LCARSmain\obj\Debug\Interop.SpeechLib.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
   </ItemGroup>
@@ -51,15 +63,79 @@
   <ItemGroup>
     <Compile Include="GlobalAtomTests.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="programListTest.vb" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AuthoringTests.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Lcars Web Browser\Lcars Web Browser.vbproj">
+      <Project>{B0C6DE26-9870-4CC1-A58F-E30B689D4338}</Project>
+      <Name>Lcars Web Browser</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\LCARSbuttons\LCARSbuttons\LCARSbuttons.vbproj">
+      <Project>{D3ED0098-5647-4C53-B87C-DFBD8BDE7FE5}</Project>
+      <Name>LCARSbuttons</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\LCARSdestruct\LCARSdestruct\LCARSdestruct.vbproj">
+      <Project>{18688100-8577-4902-9EE2-F0130D2DBFA7}</Project>
+      <Name>LCARSdestruct</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\LCARSengineering\LCARSengineering\LCARSengineering.vbproj">
+      <Project>{B884777B-0ED0-49FB-BCA9-918D279F0AA0}</Project>
+      <Name>LCARSengineering</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\LCARSexplorer\LCARSexplorer\LCARSexplorer.vbproj">
+      <Project>{143D31BF-B376-415C-88EF-FA313D85D4F4}</Project>
+      <Name>LCARSexplorer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\LCARSLock\LCARSLock\LCARSLock.vbproj">
+      <Project>{067270F2-6BB1-4B78-BBCF-323085D46520}</Project>
+      <Name>LCARSLock</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\LCARSpic\LCARSpic.vbproj">
+      <Project>{01C0B575-1C11-40E5-9C57-6A2E58A8A3A8}</Project>
+      <Name>LCARSpic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\LCARSsettings\LCARSsettings.vbproj">
+      <Project>{748D87C0-0C66-47E7-BCB7-B0D4096EDF9F}</Project>
+      <Name>LCARSsettings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\LCARSshutdown\LCARSshutdown\LCARSshutdown.vbproj">
+      <Project>{EFFA4A24-6AB8-473E-A4A6-38501CE8A278}</Project>
+      <Name>LCARSshutdown</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\LCARSTaskManager\LCARSTaskManager.vbproj">
+      <Project>{F42CFF5B-719E-4463-B5A0-A3D5EB9C3525}</Project>
+      <Name>LCARSTaskManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\LCARSUpdate\LCARSUpdate\LCARSUpdate.vbproj">
+      <Project>{E29F9B56-6C65-4BBB-B52D-FD29A61244C6}</Project>
+      <Name>LCARSUpdate</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\LcarsX32Manual\LcarsX32 Manual\LcarsX32 Manual.vbproj">
+      <Project>{62F03F45-D18A-4B2A-9E5E-BA86BC0A31D1}</Project>
+      <Name>LcarsX32 Manual</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\OnScreenKeyboard\OnScreenKeyboard\OnScreenKeyboard.vbproj">
+      <Project>{C5ACF266-50F1-49F7-8BEE-CD46C8BFA1C2}</Project>
+      <Name>OnScreenKeyboard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\runInstallScript\runInstallScript\runInstallScript.vbproj">
+      <Project>{483DE7B9-4F26-4D1D-AFB8-514076A08573}</Project>
+      <Name>runInstallScript</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SetShell\SetShell\SetShell.vbproj">
+      <Project>{24134098-B08C-4E16-B4AF-865C43DF7313}</Project>
+      <Name>SetShell</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LCARSmain\LCARSmain.vbproj">
       <Project>{C9BDBACC-9C69-4571-929D-DAED7874ED41}</Project>
       <Name>LCARSmain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Shadow Include="Test References\LCARSmain.accessor" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
