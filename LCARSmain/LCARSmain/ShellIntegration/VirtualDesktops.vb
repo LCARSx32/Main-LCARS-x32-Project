@@ -164,10 +164,10 @@ Namespace VirtualDesktops
             Catch ex As COMException
             End Try
             Try
-                'TODO: Figure out why this only works in shell mode
+                'TODO: Figure out why this doesn't work in shell mode
                 Dim shelltype As Type = Type.GetTypeFromCLSID(clsidImmersiveShell)
                 Dim shell As IServiceProvider = CType(Activator.CreateInstance(shelltype), IServiceProvider)
-                Dim ppvObject As Object
+                Dim ppvObject As Object = Nothing
                 shell.QueryService(clsidVirtualDesktopAPIUnknown, GetType(IVirtualDesktopManagerInternal14328).GUID, ppvObject)
                 managerInternal = CType(ppvObject, IVirtualDesktopManagerInternal14328)
             Catch ex As COMException
