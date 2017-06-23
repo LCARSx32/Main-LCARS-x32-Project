@@ -90,16 +90,13 @@ Namespace Controls
         Private Sub Me_MouseUp(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.MouseUp
             Dim localPoint As Point = PointToClient(Cursor.Position)
             For i As Integer = myList.Count - 1 To 0 Step -1
-                If myList(i).Bounds.Contains(localPoint) And myList(i).HoldDraw = False Then
+                Dim button As LightweightControls.ILightweightControl = myList(i)
+                If button.Bounds.Contains(localPoint) And myList(i).HoldDraw = False Then
                     'If the mouse is still where it was, do a click event too.
                     If localPoint = oldMouseDownPoint Then
-                        myList(i).doClick()
+                        button.doClick()
                     End If
-                    Try
-                        myList(i).doEvent(LightweightControls.ILightweightControl.LightweightEvents.MouseUp)
-                    Catch ex As Exception
-                        'Click modified the collection
-                    End Try
+                    button.doEvent(LightweightControls.ILightweightControl.LightweightEvents.MouseUp)
                     Exit For
                 End If
             Next
