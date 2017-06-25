@@ -253,6 +253,7 @@ Public Class frmStartup
         SysListViewParent = hwndSHELLDLL_DefView
         SysListView = FindWindowEx(hwndSHELLDLL_DefView, IntPtr.Zero, "SysListView32", IntPtr.Zero)
         SetParent(Me.Handle, hwndProgMan)
+        Me.BringToFront()
 
         myIconSaver.Bounds = Screen.PrimaryScreen.Bounds
         SetParent(SysListView, myIconSaver.Handle)
