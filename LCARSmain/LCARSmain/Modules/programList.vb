@@ -62,7 +62,14 @@ Public Module programList
     Private Const SHGFI_ICON As Integer = &H100
     Private Const SHGFI_SMALLICON As Integer = &H1
     Private Const SHGFI_LARGEICON As Integer = &H0    ' Large icon
-    Private nIndex As Integer = 0
+
+    Public Declare Auto Function LoadLibrary Lib "kernel32" (ByVal lpLibFileName As String) As IntPtr
+    Public Declare Auto Function FreeLibrary Lib "kernel32" (ByVal hLibModule As IntPtr) As Integer
+    Public Declare Auto Function LoadString Lib "user32" (<[In]()> ByVal hInstance As IntPtr, _
+                                                          <[In]()> ByVal uID As UInteger, _
+                                                          <[In](), Out()> ByVal lpBuffer As String, _
+                                                          <[In]()> ByVal nBufferMax As Integer) _
+                                                          As Integer
 #End Region
 
     Dim startItems As DirectoryStartItem
@@ -131,19 +138,70 @@ Public Module programList
         Dim curFile As FileStartItem
         Dim element As New DirectoryStartItem()
         Dim myLinkInfo As New LNKinfo()
+        Const iniName As String = "desktop.ini"
 
+        'Read subdirectories
         For intloop As Integer = 0 To myDirs.GetUpperBound(0)
             curDirectory = GetPrograms(myDirs(intloop).FullName)
-            curDirectory.Name = myDirs(intloop).Name
+            If curDirectory.Name Is Nothing Then
+                curDirectory.Name = myDirs(intloop).Name
+            End If
             curDirectory.icon = DirectoryIcon
             element.subItems.Add(curDirectory)
         Next
 
+        'Check for desktop.ini
+        Dim iniPath As String = mydir.FullName & IO.Path.DirectorySeparatorChar & iniName
+        Dim localNames As New Dictionary(Of String, String)
+        If File.Exists(iniPath) Then
+            Try
+                Using myReader As New IO.StreamReader(File.OpenRead(iniPath))
+                    Dim line As String = ""
+                    Do
+                        line = myReader.ReadLine()
+                        If line = "[.ShellClassInfo]" Then
+                            line = myReader.ReadLine()
+                            While line IsNot Nothing AndAlso line <> ""
+                                If line.StartsWith("LocalizedResourceName") Then
+                                    Dim index As Integer = line.IndexOf("@"c)
+                                    If index <> -1 Then
+                                        element.Name = loadStringResource(line.Substring(index + 1))
+                                    End If
+                                End If
+                                line = myReader.ReadLine()
+                            End While
+                        ElseIf line = "[LocalizedFileNames]" Then
+                            line = myReader.ReadLine()
+                            While line IsNot Nothing AndAlso line <> ""
+                                Dim index As Integer = line.IndexOf("=@")
+                                If index <> -1 Then
+                                    Dim fName As String = line.Substring(0, index)
+                                    Dim lName As String = loadStringResource(line.Substring(index + 2))
+                                    If lName IsNot Nothing AndAlso Not localNames.ContainsKey(fName) Then
+                                        localNames.Add(fName, lName)
+                                    End If
+                                End If
+                                line = myReader.ReadLine()
+                            End While
+                        End If
+                    Loop Until myReader.EndOfStream
+                End Using
+            Catch ex As IOException
+                Debug.Print("Error reading INI file: {0}", iniPath)
+            Catch ex As OutOfMemoryException
+                Debug.Print("Bad INI file: {0}", iniPath)
+            End Try
+        End If
+
+        'Read files
         For Each myFile As FileInfo In myFiles
-            If Not (myFile.Name.ToLower = "desktop.ini" Or myFile.Name.ToLower = "thumbs.db") Then
+            If Not (myFile.Name.ToLower = iniName Or myFile.Name.ToLower = "thumbs.db") Then
 
                 curFile = New FileStartItem()
                 curFile.Name = myFile.Name
+                If localNames.ContainsKey(curFile.Name) Then
+                    curFile.Name = localNames.Item(curFile.Name)
+                End If
 
                 myLinkInfo.Executable = myFile.FullName
                 'curFile.icon = getIcon(myLinkInfo.Executable)
@@ -205,5 +263,36 @@ Public Module programList
         Return myIcon
     End Function
 
+    Private Function loadStringResource(ByVal resourceString As String) As String
+        'Parse string
+        Dim index As Integer = resourceString.IndexOf(","c)
+        If index = -1 Then Return Nothing
+        Dim libStr As String = resourceString.Substring(0, index)
+        Dim resourceIndex As Integer
+        If Not Integer.TryParse(resourceString.Substring(index + 1), resourceIndex) Then Return Nothing
+        resourceIndex = Math.Abs(resourceIndex)
+        Dim realLib As String = Environment.ExpandEnvironmentVariables(libStr)
+
+        'Load library
+        Dim hLib As IntPtr = LoadLibrary(realLib)
+        If hLib = IntPtr.Zero Then Return Nothing
+
+        'Get string
+        Const bufferSize As Integer = 8192
+        Dim buffer As String = Space(bufferSize)
+        Dim ret As Integer = LoadString(hLib, CUInt(resourceIndex), buffer, bufferSize)
+
+        'Free library
+        If FreeLibrary(hLib) = 0 Then
+            Debug.Print("Error freeing library")
+        End If
+
+        'Parse output
+        If ret = 0 Then
+            Return Nothing
+        Else
+            Return Left(buffer, ret)
+        End If
+    End Function
 
 End Module
