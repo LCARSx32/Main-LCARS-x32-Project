@@ -92,12 +92,6 @@
     <Compile Include="Forms\frmAlerts.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmIconSaver.Designer.vb">
-      <DependentUpon>frmIconSaver.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\frmIconSaver.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Forms\frmMainscreen1.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -206,10 +200,6 @@
     <EmbeddedResource Include="Forms\frmAlerts.resx">
       <DependentUpon>frmAlerts.vb</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmIconSaver.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>frmIconSaver.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmMainscreen1.resx">
       <SubType>Designer</SubType>

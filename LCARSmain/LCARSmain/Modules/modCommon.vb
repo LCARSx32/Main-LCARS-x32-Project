@@ -13,7 +13,7 @@ Module modCommon
     Public SysListViewParent As IntPtr
     Public hTrayIcons As IntPtr
     Public hTrayParent As IntPtr
-    Public myIconSaver As New frmIconSaver
+    Public myIconSaver As New Form
     Public shellMode As Boolean = False
     Public displayOffset As Point
 
