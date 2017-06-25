@@ -39,7 +39,7 @@ Namespace Controls
         Dim pageSize As Integer = 1
         Dim _direction As ControlDirection = ControlDirection.Vertical
         Dim oldSize As Size
-        Dim oldMousePoint As Point
+
         ''' <summary>
         ''' Returns a new instance of the ButtonGrid control
         ''' </summary>

@@ -510,9 +510,13 @@ Namespace LightweightControls
             Set(ByVal value As Boolean)
                 If Not _tmrScroll.Enabled = value Then
                     If value Then
-                        Dim temp As New Bitmap(1, 1)
-                        Dim g As Graphics = Graphics.FromImage(temp)
-                        Dim textSize As SizeF = g.MeasureString(_text, _font)
+                        Dim g As Graphics = Graphics.FromImage(myBitmap)
+                        Dim textSize As SizeF
+                        If ForceCaps Then
+                            textSize = g.MeasureString(_text.ToUpper(), _font)
+                        Else
+                            textSize = g.MeasureString(_text, _font)
+                        End If
                         g.Dispose()
                         If textSize.Width > _textArea.Width Then
                             _visibleText = _text & "              "

@@ -766,7 +766,7 @@ public Class modBusiness
 
         'Display topmost window
         Dim topmost As Integer = GetForegroundWindow()
-        If curTop <> topmost And topmost <> myForm.Handle.ToInt32() Then
+        If curTop <> topmost AndAlso topmost <> myForm.Handle.ToInt32() Then
             curTop = topmost
             For Each mybutton As LCARS.LCARSbuttonClass In myAppsPanel.Controls
                 If mybutton.Color <> LCARS.LCARScolorStyles.FunctionOffline Then
@@ -963,6 +963,7 @@ public Class modBusiness
             If myDir.subItems(intloop).GetType Is GetType(DirectoryStartItem) Then
                 With CType(myDir.subItems(intloop), DirectoryStartItem)
                     Dim myButton As New LCARS.LightweightControls.LCComplexButton
+                    myButton.HoldDraw = True
                     myButton.Width = ProgramsPanel.Width
                     myButton.Height = 25
                     myButton.Left = 0
@@ -976,12 +977,14 @@ public Class modBusiness
                     myButton.Beeping = False
                     myButton.Data2 = ((pageMax - index) - (intloop - index)).ToString
                     ProgramsPanel.Add(myButton)
+                    myButton.HoldDraw = False
                     AddHandler myButton.Click, AddressOf myDir_click
                     itemCount += 1
                 End With
             Else
                 With CType(myDir.subItems(intloop), FileStartItem)
                     Dim myButton As New LCARS.LightweightControls.LCStandardButton
+                    myButton.HoldDraw = True
                     myButton.Width = ProgramsPanel.Width
                     myButton.Height = 25
                     myButton.Left = 0
@@ -992,6 +995,7 @@ public Class modBusiness
                     myButton.Beeping = False
                     myButton.Data2 = ((pageMax - index) - (intloop - index)).ToString
                     ProgramsPanel.Add(myButton)
+                    myButton.HoldDraw = False
                     AddHandler myButton.Click, AddressOf myfile_click
                     itemCount += 1
                 End With

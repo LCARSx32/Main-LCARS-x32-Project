@@ -5,7 +5,7 @@ Namespace LightweightControls
     ''' A lightweight implementation of the <see cref="LCARS.Controls.HalfPillButton">HalfPillButton</see>
     ''' </summary>
     Public Class LCHalfPillButton
-        Inherits LCStandardButton
+        Inherits LCFlatButton
 
         ''' <summary>
         ''' Describes the sides that the pill can be on

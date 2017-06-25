@@ -1,13 +1,12 @@
 ﻿Imports System.Drawing
-'ToDo:
-'Simplify Redraw()
+
 Namespace LightweightControls
     ''' <summary>
     ''' Lightweight implementation of a 
     ''' <see cref="LCARS.Controls.ComplexButton">complex button</see>
     ''' </summary>
     Public Class LCComplexButton
-        Inherits LCStandardButton
+        Inherits LCFlatButton
         Dim _sideText As String = "47"
         Dim _sideTextColor As LCARS.LCARScolorStyles = LCARScolorStyles.Orange
         Dim _sideBlockColor As LCARS.LCARScolorStyles = LCARScolorStyles.Orange
@@ -21,7 +20,7 @@ Namespace LightweightControls
                 If _bounds.Height > 0 And _bounds.Width > 0 Then
                     Dim sideFont As Font = New Font("LCARS", Me.Height + (Me.Height / 2.9), FontStyle.Regular, GraphicsUnit.Pixel)
                     'Set up brushes
-                    Dim myBrush As Drawing.SolidBrush = New System.Drawing.SolidBrush(ColorsAvailable.getColor(Me.Color))
+                    Dim myBrush As Drawing.SolidBrush
                     Dim sideBrush As Drawing.SolidBrush
                     Dim sideTextBrush As Drawing.SolidBrush
                     myBrush = GetBrush()
@@ -52,14 +51,14 @@ Namespace LightweightControls
                     End If
 
                     'draw the side text
-                    g.DrawString(_sideText.ToUpper, sideFont, sideTextBrush, curLeft, -Me.Height / 4.7)
                     If _sideText <> "" Then
-                        curLeft = (curLeft + sideTextSize.Width) - (Me.Height \ 6)
+                        g.DrawString(_sideText.ToUpper, sideFont, sideTextBrush, curLeft, -Me.Height / 4.7)
+                        curLeft += sideTextSize.Width - (Me.Height \ 6)
                     Else
                         curLeft = Me.Height / 2
                     End If
                     'Draw text and remainder of button
-                    Dim textRect As New Rectangle(curLeft, 0, (Me.Width - curLeft) - Me.Height / 2, Me.Height)
+                    Dim textRect As New Rectangle(curLeft, 0, Me.Width - curLeft - Me.Height / 2, Me.Height)
                     g.FillRectangle(myBrush, textRect)
                     g.FillEllipse(myBrush, Me.Width - Me.Height, 0, Me.Height, Me.Height)
                     DrawText(textRect, g)
