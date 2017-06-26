@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GlobalAtomTests.vb" />
+    <Compile Include="INIReaderTest.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="programListTest.vb" />
   </ItemGroup>

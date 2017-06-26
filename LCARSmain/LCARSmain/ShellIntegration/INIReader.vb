@@ -3,20 +3,65 @@
 Imports System.IO
 Imports System.Text.RegularExpressions
 
+''' <summary>
+''' Reads an INI file and stores its data in an easily queryable form.
+''' </summary>
+''' <remarks>
+''' This class is designed to read a standard INI file, then store the data for
+''' later reference. After the file has been read, all query operations are
+''' approximately O(1).
+''' 
+''' Supported format:
+''' 
+''' Section headers are denoted as the section name within a set of brackets [].
+''' There may be any amount of whitespace before or after the brackets, and the
+''' section name may contain any character except a newline. No other characters
+''' are permitted on the same line, including comments.
+''' 
+''' Comment lines are indicated by the first non-whitespace character being a
+''' semicolon (;). Comment lines are ignored for processing.
+''' 
+''' Key-value entries consist of a name followed by an equals sign and a value.
+''' Leading and trailing whitespace for both names and values is ignored. Names
+''' and values may contain whitespace, but not as the first or last character.
+''' 
+''' Invalid lines of the file will be ignored. Duplicate section headers are
+''' treated as a continuation of the first section with that name. Duplicate key
+''' names are ignored, and only the first value is recorded.
+''' </remarks>
 Public Class INIReader
+    'Stores the INI file's data
     Private data As Dictionary(Of String, Dictionary(Of String, String))
-    Private sections() As String
-
-    Private Shared headerRegex As New Regex("\[(.+)\]", RegexOptions.Compiled)
-    Private Shared lineRegex As New Regex("([^=]+)=(.+)", RegexOptions.Compiled)
 
     ''' <summary>
-    ''' 
+    ''' Matches the section header of an INI file
+    ''' </summary>
+    ''' <remarks>
+    ''' Assumes that leading and trailing whitespace has already been removed.
+    ''' Requires an opening and closing bracket with at least one non-newline
+    ''' character between them. First capture group is the section name.
+    ''' </remarks>
+    Private Shared headerRegex As New Regex("^\[(.+)\]$", RegexOptions.Compiled)
+    ''' <summary>
+    ''' Matches a key-value statement in an INI file
+    ''' </summary>
+    ''' <remarks>
+    ''' Assumes that leading and trailing whitespace has already been removed.
+    ''' Matches non-equals sign characters up until an equals sign, which may
+    ''' have any amount of whitespace on either side. Remainder of the string
+    ''' is matched as the value. First capture group is the key, second is the
+    ''' value.
+    ''' </remarks>
+    Private Shared lineRegex As New Regex("^([^=]+?)\s*=\s*(.*)$", RegexOptions.Compiled)
+
+    ''' <summary>
+    ''' Create a new INIReader instance
     ''' </summary>
     ''' <param name="INIpath">Path to INI file to read</param>
+    ''' <param name="caseSensitive">Case-sensitivity of key matching. Defaults to non-case sensitive.</param>
     ''' <remarks></remarks>
-    ''' <exception cref="System.IO.FileNotFoundException">INI file does not exist</exception>
-    ''' <exception cref="System.IO.IOException">IOException occurred during read</exception>
+    ''' <exception cref="FileNotFoundException">INI file does not exist</exception>
+    ''' <exception cref="IOException">IOException occurred during read</exception>
     ''' <exception cref="OutOfMemoryException">Insufficient memory to read the file</exception>
     Public Sub New(ByVal INIpath As String, Optional ByVal caseSensitive As Boolean = False)
         If Not File.Exists(INIpath) Then
@@ -66,6 +111,13 @@ Public Class INIReader
         End Using
     End Sub
 
+    ''' <summary>
+    ''' Query the INI file data for a value
+    ''' </summary>
+    ''' <param name="section">Section to query</param>
+    ''' <param name="name">Key to get the value for</param>
+    ''' <param name="defaultValue">Default value to return if key or section do not exist</param>
+    ''' <returns>Value requested or default value</returns>
     Public Function getValue(ByVal section As String, ByVal name As String, Optional ByVal defaultValue As String = Nothing) As String
         Dim sectionDict As Dictionary(Of String, String) = Nothing
         If Not data.TryGetValue(section, sectionDict) Then Return defaultValue
@@ -77,25 +129,22 @@ Public Class INIReader
         End If
     End Function
 
-    Public Function getSections() As String()
-        If sections Is Nothing Then
-            Dim sList As New List(Of String)(data.Keys.Count)
-            For Each mySection As String In data.Keys
-                sList.Add(mySection)
-            Next
-            sections = sList.ToArray()
-        End If
-        Return sections
+    ''' <summary>
+    ''' Get all sections defined in the INI file
+    ''' </summary>
+    ''' <returns>IEnumerable(Of String) with all section names</returns>
+    Public Function getSections() As IEnumerable(Of String)
+        Return data.Keys
     End Function
 
-    Public Function getKeys(ByVal section As String) As String()
+    ''' <summary>
+    ''' Get all keys defined in a given section
+    ''' </summary>
+    ''' <param name="section">Section to query</param>
+    ''' <returns>IEnumerable(of String) with section names if section exists, otherwise Nothing</returns>
+    Public Function getKeys(ByVal section As String) As IEnumerable(Of String)
         If Not data.ContainsKey(section) Then Return Nothing
-        Dim sectionDict As Dictionary(Of String, String) = data(section)
-        Dim sList As New List(Of String)(sectionDict.Keys.Count)
-        For Each myKey As String In sectionDict.Keys
-            sList.Add(myKey)
-        Next
-        Return sList.ToArray()
+        Return data(section).Keys
     End Function
 
 End Class
