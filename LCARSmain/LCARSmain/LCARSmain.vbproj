@@ -18,6 +18,8 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+    <OptionStrict>Off</OptionStrict>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -32,8 +34,6 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
-    <OptionStrict>Off</OptionStrict>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -191,6 +191,7 @@
     <Compile Include="Modules\MSIparser.vb" />
     <Compile Include="Modules\programList.vb" />
     <Compile Include="ShellIntegration\GlobalAtom.vb" />
+    <Compile Include="ShellIntegration\INIReader.vb" />
     <Compile Include="ShellIntegration\KnownFolderPaths.vb" />
     <Compile Include="ShellIntegration\modDDE.vb" />
     <Compile Include="ShellIntegration\StartupPrograms.vb" />

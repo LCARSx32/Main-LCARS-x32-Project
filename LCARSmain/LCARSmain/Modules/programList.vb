@@ -152,40 +152,14 @@ Public Module programList
 
         'Check for desktop.ini
         Dim iniPath As String = mydir.FullName & IO.Path.DirectorySeparatorChar & iniName
-        Dim localNames As New Dictionary(Of String, String)
+        Dim iniData As INIReader = Nothing
         If File.Exists(iniPath) Then
             Try
-                Using myReader As New IO.StreamReader(File.OpenRead(iniPath))
-                    Dim line As String = ""
-                    Do
-                        line = myReader.ReadLine()
-                        If line = "[.ShellClassInfo]" Then
-                            line = myReader.ReadLine()
-                            While line IsNot Nothing AndAlso line <> ""
-                                If line.StartsWith("LocalizedResourceName") Then
-                                    Dim index As Integer = line.IndexOf("@"c)
-                                    If index <> -1 Then
-                                        element.Name = loadStringResource(line.Substring(index + 1))
-                                    End If
-                                End If
-                                line = myReader.ReadLine()
-                            End While
-                        ElseIf line = "[LocalizedFileNames]" Then
-                            line = myReader.ReadLine()
-                            While line IsNot Nothing AndAlso line <> ""
-                                Dim index As Integer = line.IndexOf("=@")
-                                If index <> -1 Then
-                                    Dim fName As String = line.Substring(0, index)
-                                    Dim lName As String = loadStringResource(line.Substring(index + 2))
-                                    If lName IsNot Nothing AndAlso Not localNames.ContainsKey(fName) Then
-                                        localNames.Add(fName, lName)
-                                    End If
-                                End If
-                                line = myReader.ReadLine()
-                            End While
-                        End If
-                    Loop Until myReader.EndOfStream
-                End Using
+                iniData = New INIReader(iniPath)
+                element.Name = iniData.getValue(".ShellClassInfo", "LocalizedResourceName")
+                If element.Name IsNot Nothing Then
+                    element.Name = loadStringResource(element.Name)
+                End If
             Catch ex As IOException
                 Debug.Print("Error reading INI file: {0}", iniPath)
             Catch ex As OutOfMemoryException
@@ -199,8 +173,14 @@ Public Module programList
 
                 curFile = New FileStartItem()
                 curFile.Name = myFile.Name
-                If localNames.ContainsKey(curFile.Name) Then
-                    curFile.Name = localNames.Item(curFile.Name)
+                If iniData IsNot Nothing Then
+                    Dim resourcestring As String = iniData.getValue("LocalizedFileNames", curFile.Name)
+                    If resourcestring IsNot Nothing Then
+                        resourcestring = loadStringResource(resourcestring)
+                    End If
+                    If resourcestring IsNot Nothing Then
+                        curFile.Name = resourcestring
+                    End If
                 End If
 
                 myLinkInfo.Executable = myFile.FullName
@@ -263,14 +243,18 @@ Public Module programList
         Return myIcon
     End Function
 
+    ''' <summary>
+    ''' Get a string resource from a description in INI format
+    ''' </summary>
+    ''' <param name="resourceString">Resource string</param>
+    ''' <returns>Null (Nothing) on failure</returns>
     Private Function loadStringResource(ByVal resourceString As String) As String
         'Parse string
-        Dim index As Integer = resourceString.IndexOf(","c)
-        If index = -1 Then Return Nothing
-        Dim libStr As String = resourceString.Substring(0, index)
-        Dim resourceIndex As Integer
-        If Not Integer.TryParse(resourceString.Substring(index + 1), resourceIndex) Then Return Nothing
-        resourceIndex = Math.Abs(resourceIndex)
+        Static resourceRegex As New System.Text.RegularExpressions.Regex("@([^,]+),-?(\d+)", System.Text.RegularExpressions.RegexOptions.Compiled)
+        Dim m As System.Text.RegularExpressions.Match = resourceRegex.Match(resourceString)
+        If Not m.Success Then Return Nothing
+        Dim libStr As String = m.Groups(1).Value
+        Dim resourceIndex As Integer = Integer.Parse(m.Groups(2).Value)
         Dim realLib As String = Environment.ExpandEnvironmentVariables(libStr)
 
         'Load library
