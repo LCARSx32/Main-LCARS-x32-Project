@@ -488,7 +488,7 @@ Public Enum SetWindowPosFlags As UInteger
         'constantly be fighting explorer for control of the WorkingArea.
         Dim TaskbarSettings As APPBARDATA
 
-        TaskbarSettings.cbSize = Len(TaskbarSettings)
+        TaskbarSettings.cbSize = Marshal.SizeOf(TaskbarSettings)
         TaskBarState = SHAppBarMessage(ABM_GETSTATE, TaskbarSettings)
 
         TaskbarSettings.lParam = ABS_ALWAYSONTOP
@@ -518,7 +518,7 @@ Public Enum SetWindowPosFlags As UInteger
 
     Public Sub SetWindowState(ByVal hwnd As IntPtr, ByVal newState As WindowStates)
         Dim myPlacement As New WINDOWPLACEMENT()
-        myPlacement.Length = Len(myPlacement)
+        myPlacement.Length = Marshal.SizeOf(myPlacement)
         GetWindowPlacement(hwnd.ToInt32, myPlacement)
 
         If newState = WindowStates.NORMAL And myPlacement.flags = 2 Then
@@ -590,7 +590,7 @@ Public Enum SetWindowPosFlags As UInteger
         If Not shellMode Then
             'Restore taskbar state
             Dim TaskbarSettings As APPBARDATA
-            TaskbarSettings.cbSize = Len(TaskbarSettings)
+            TaskbarSettings.cbSize = Marshal.SizeOf(TaskbarSettings)
             SHAppBarMessage(ABM_GETSTATE, TaskbarSettings)
             TaskbarSettings.lParam = TaskBarState
             SHAppBarMessage(ABM_SETSTATE, TaskbarSettings) 'put the taskbar's "AutoHide" setting back to what it was
