@@ -69,6 +69,8 @@ public Class modBusiness
     Public WithEvents tmrAutohide As New Timer()
     Public ScreenIndex As Integer
 
+    Public leftArrow As LCARS.Controls.ArrowButton
+    Public rightArrow As LCARS.Controls.ArrowButton
 
     Public progShowing As Boolean
     Public userButtonsShowing As Boolean
@@ -467,6 +469,25 @@ public Class modBusiness
         MyPrograms = GetAllPrograms
         loadProgList()
 
+        'Create arrows for window list
+        leftArrow = New LCARS.Controls.ArrowButton()
+        leftArrow.ArrowDirection = LCARS.LCARSarrowDirection.Left
+        leftArrow.Size = New Point(25, 25)
+        leftArrow.Location = New Point(0, 0)
+        leftArrow.Lit = False
+        leftArrow.Name = "leftArrow"
+        rightArrow = New LCARS.Controls.ArrowButton()
+        AddHandler leftArrow.Click, AddressOf leftArrow_Click
+        myAppsPanel.Controls.Add(leftArrow)
+        rightArrow.ArrowDirection = LCARS.LCARSarrowDirection.Right
+        rightArrow.Size = leftArrow.Size
+        rightArrow.Anchor = AnchorStyles.Right
+        rightArrow.Lit = False
+        rightArrow.Name = "rightArrow"
+        rightArrow.Location = New Point(myAppsPanel.Width - rightArrow.Width, 0)
+        AddHandler rightArrow.Click, AddressOf rightArrow_Click
+        myAppsPanel.Controls.Add(rightArrow)
+
 
         myUserButtonCollection.Clear()
         loadUserButtons()
@@ -670,41 +691,16 @@ public Class modBusiness
 
         'refresh the taskbar
         If windowChange Then
-
             Dim beeping As Boolean = modSettings.ButtonBeep
 
             myAppsPanel.Controls.Clear()
-
-            Dim leftArrow As New LCARS.Controls.ArrowButton
-            Dim rightArrow As New LCARS.Controls.ArrowButton
-
-            leftArrow.ArrowDirection = LCARS.LCARSarrowDirection.Left
-            rightArrow.ArrowDirection = LCARS.LCARSarrowDirection.Right
-
-            leftArrow.Size = New Point(25, 25)
-            rightArrow.Size = leftArrow.Size
-
-            leftArrow.Location = New Point(0, 0)
-            rightArrow.Anchor = AnchorStyles.Right
-
-
-
-            leftArrow.Lit = False
-            rightArrow.Lit = False
-
-            leftArrow.Name = "leftArrow"
-            rightArrow.Name = "rightArrow"
-
             myAppsPanel.Controls.Add(leftArrow)
-
-            AddHandler leftArrow.Click, AddressOf leftArrow_Click
-            AddHandler rightArrow.Click, AddressOf rightArrow_Click
 
             For intloop As Integer = 0 To myWindows.Count() - 1
                 Dim myButton As New LCARS.Controls.HalfPillButton
                 Dim myCloseButton As New LCARS.Controls.FlatButton
                 myCloseButton.Size = New Point(20, 25)
-                myCloseButton.ButtonText = "X"
+                myCloseButton.Text = "X"
                 myCloseButton.ButtonTextAlign = ContentAlignment.MiddleCenter
                 myCloseButton.Color = LCARS.LCARScolorStyles.FunctionOffline
                 myCloseButton.Left = (((myAppsPanel.Controls.Count - 1) \ 2) * 134) + 31
@@ -717,7 +713,7 @@ public Class modBusiness
                 AddHandler myCloseButton.Click, AddressOf CloseButton_Click
 
 
-                myButton.ButtonText = myWindows(intloop).MainWindowText
+                myButton.Text = myWindows(intloop).MainWindowText
                 myButton.Size = New Point(100, 25)
                 myButton.Left = (((myAppsPanel.Controls.Count - 1) \ 2) * 134) + 56
                 myButton.Top = 0
@@ -725,11 +721,7 @@ public Class modBusiness
                 myButton.Data = myWindows(intloop).hWnd
                 myButton.Beeping = beeping
                 myButton.ButtonTextAlign = ContentAlignment.TopLeft
-                If getWindowState(myWindows(intloop).hWnd) = WindowStates.MINIMIZED Then
-                    myButton.Lit = False
-                Else
-                    myButton.Lit = True
-                End If
+                myButton.Lit = (getWindowState(myWindows(intloop).hWnd) <> WindowStates.MINIMIZED)
 
                 myButton.Tag = (intloop + 6).ToString
 
@@ -737,7 +729,6 @@ public Class modBusiness
 
                 AddHandler myButton.Click, AddressOf AppsButton_Click
             Next
-            rightArrow.Location = New Point(myAppsPanel.Width - 31, 0)
             myAppsPanel.Controls.Add(rightArrow)
             rightArrow.BringToFront()
             myAppsPanel.Tag = (myWindows.Count() + 6).ToString
@@ -766,7 +757,7 @@ public Class modBusiness
 
         'Display topmost window
         Dim topmost As Integer = GetForegroundWindow()
-        If curTop <> topmost AndAlso topmost <> myForm.Handle.ToInt32() Then
+        If curTop <> topmost AndAlso Not myForm.IsDisposed AndAlso topmost <> myForm.Handle.ToInt32() Then
             curTop = topmost
             For Each mybutton As LCARS.LCARSbuttonClass In myAppsPanel.Controls
                 If mybutton.Color <> LCARS.LCARScolorStyles.FunctionOffline Then
