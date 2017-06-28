@@ -42,19 +42,31 @@ Module modCommon
     End Structure
 
     Public Structure WINDOWPLACEMENT
-        Dim Length As Integer
-        Dim flags As Integer
-        Dim ShowCmd As Integer
+        Dim Length As UInteger
+        Dim flags As WindowPlacementFlags
+        Dim ShowCmd As WindowStates
         Dim ptMinPosition As POINTAPI
         Dim ptMaxPosition As POINTAPI
         Dim rcNormalPosition As RECT
     End Structure
 
-    Public Enum WindowStates
+    Public Enum WindowPlacementFlags As UInteger
+        SETMINPOSITION = 1
+        RESTORETOMAXIMIZED = 2
+        ASYNCWINDOWPLACEMENT = 4
+    End Enum
+
+    Public Enum WindowStates As Integer
+        HIDE = 0
         NORMAL = 1
         MINIMIZED = 2
         MAXIMIZED = 3
         NOACTIVATE = 4
+        SHOW = 5
+        MINIMIZE = 6
+        MINNOACTIVE = 7
+        SHOWNA = 8
+        RESTORE = 9
     End Enum
 
 
@@ -523,7 +535,7 @@ Public Enum SetWindowPosFlags As UInteger
 
     Public Function getWindowState(ByVal hwnd As IntPtr) As WindowStates
         Dim myPlacement As New WINDOWPLACEMENT
-        myPlacement.Length = Len(myPlacement)
+        myPlacement.Length = Marshal.SizeOf(myPlacement)
         GetWindowPlacement(hwnd.ToInt32, myPlacement)
         Return myPlacement.ShowCmd
     End Function

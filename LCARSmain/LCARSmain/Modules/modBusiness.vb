@@ -161,7 +161,7 @@ public Class modBusiness
 
     Public Sub mySettingsButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         Dim mySettings As New frmSettings()
-        MoveToScreen(Screen.FromHandle(myForm.Handle), mySettings.Handle)
+        MoveToScreen(mySettings.Handle)
         mySettings.Show()
     End Sub
 
@@ -187,7 +187,7 @@ public Class modBusiness
         End Try
         SetParent(hTrayIcons, hTrayParent)
         Dim myChoice As New ScreenChooserDialog(ScreenIndex)
-        MoveToScreen(Screen.FromHandle(myForm.Handle), myChoice.Handle)
+        MoveToScreen(myChoice.Handle)
         myChoice.Show()
     End Sub
 
@@ -333,11 +333,11 @@ public Class modBusiness
             If MonitorFromWindow(myForm.Handle, MONITOR_DEFAULTTONEAREST) = MonitorFromWindow(console.Handle, MONITOR_DEFAULTTONEAREST) Then
                 console.Hide()
             Else
-                MoveToScreen(Screen.FromHandle(myForm.Handle), console.Handle)
+                MoveToScreen(console.Handle)
             End If
         Else
             modSpeech.ShowConsole()
-            MoveToScreen(Screen.FromHandle(myForm.Handle), console.Handle)
+            MoveToScreen(console.Handle)
         End If
     End Sub
 
@@ -350,7 +350,7 @@ public Class modBusiness
 
     Public Sub myRun_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         Dim myRunDialog As New frmRunProgram
-        MoveToScreen(Screen.FromHandle(myForm.Handle), myRunDialog.Handle)
+        MoveToScreen(myRunDialog.Handle)
         myRunDialog.Show()
     End Sub
 
@@ -996,7 +996,7 @@ public Class modBusiness
                     myButton.Data2 = ((pageMax - index) - (intloop - index)).ToString
                     ProgramsPanel.Add(myButton)
                     myButton.HoldDraw = False
-                    AddHandler myButton.Click, AddressOf myfile_click
+                    AddHandler myButton.Click, AddressOf startItem_click
                     itemCount += 1
                 End With
             End If
@@ -1036,122 +1036,95 @@ public Class modBusiness
         ProgDir.Add(sender.data)
         loadProgList()
     End Sub
+
+    Private Sub startItem_click(ByVal sender As Object, ByVal e As System.EventArgs)
+        If ProgramsPanel.Visible Then myStartMenu.doClick(sender, e)
+        Application.DoEvents()
+        Dim myprocess As New System.Diagnostics.Process()
+        myprocess.StartInfo.FileName = CType(sender, LCARS.LightweightControls.LCFlatButton).Data
+        launchProcessOnScreen(myprocess)
+    End Sub
 #End Region
 
-    'Used for programs in start menu and in Personal Programs (userbuttons)
+    'Used for buttons in Personal Programs (userbuttons)
     Private Sub myfile_click(ByVal sender As Object, ByVal e As System.EventArgs)
-        If ProgramsPanel.Visible Then
-            myStartMenu.doClick(sender, e)
-        End If
         If UserButtonsPanel.Visible Then
             myUserButtons.doClick(sender, e)
         End If
         Application.DoEvents()
-        Try
-            If Path.GetExtension(sender.data.ToString.ToLower) = ".lnk" Then
-
-                Dim myProcess As New System.Diagnostics.Process
-                myProcess.StartInfo.FileName = sender.data
-                launchProcessOnScreen(myProcess)
-
-            Else
-                If File.Exists(sender.data) Then
-                    'The command string is an absolute path.
-                    Try
-                        Dim myprocess As New Process
-                        myprocess.StartInfo.FileName = sender.data
-                        myprocess.StartInfo.WorkingDirectory = Path.GetDirectoryName(sender.data)
-                        launchProcessOnScreen(myprocess)
-                    Catch ex As Exception
-                        GoTo Retry 'Yes, I know. If you have a better way, go for it.
-                    End Try
-                Else
-Retry:
-                    'The command will be interpreted as an absolute path, followed by arguments
-                    Try
-                        Dim myProcess As New Process()
-                        If (sender.data.Substring(0, 1) = """") Then
-                            Dim splitIndex As Integer = sender.data.Substring(1).IndexOf("""") + 2
-                            myProcess.StartInfo.FileName = sender.data.Substring(0, splitIndex)
-                            myProcess.StartInfo.Arguments = sender.data.Substring(splitIndex + 1)
-                            myProcess.StartInfo.WorkingDirectory = IO.Path.GetDirectoryName(myProcess.StartInfo.FileName)
-                        Else
-                            myProcess.StartInfo.FileName = sender.data.Split(" ")(0)
-                            myProcess.StartInfo.Arguments = sender.data.Substring(myProcess.StartInfo.FileName.Length + 1)
-                            myProcess.StartInfo.WorkingDirectory = IO.Path.GetDirectoryName(myProcess.StartInfo.FileName)
-                        End If
-                        launchProcessOnScreen(myProcess)
-                    Catch ex As Exception
-                        'Throw it to shell and see what happens.
-                        Try
-                            Dim myID As Integer
-                            myID = Shell(sender.data, AppWinStyle.NormalFocus)
-                            Dim myprocess As Process = Process.GetProcessById(myID)
-                            Do Until myprocess.MainWindowHandle <> 0
-                                If Now.Subtract(myprocess.StartTime) > New TimeSpan(0, 0, 15) Then
-                                    Exit Do
-                                Else
-                                    myprocess = Process.GetProcessById(myID)
-                                    Application.DoEvents()
-                                End If
-                            Loop
-                            MoveToScreen(Screen.FromHandle(myForm.Handle), myprocess.MainWindowHandle)
-                        Catch ex2 As Exception
-                            'Throw it to Process.Start and hope for the best
-                            Try
-                                Dim myProcess As Process = Process.Start(sender.data)
-                                Dim myID As Integer = myProcess.Id
-                                Do Until myProcess.MainWindowHandle <> 0
-                                    If Now.Subtract(myProcess.StartTime) > New TimeSpan(0, 0, 15) Then
-                                        Exit Do
-                                    Else
-                                        myProcess = Process.GetProcessById(myID)
-                                        Application.DoEvents()
-                                    End If
-                                Loop
-                                MoveToScreen(Screen.FromHandle(myForm.Handle), myProcess.MainWindowHandle)
-                            Catch ex3 As Exception
-                                MsgBox("Error: " & vbNewLine & vbNewLine & ex3.Message)
-                            End Try
-                        End Try
-                    End Try
-                End If
-
-            End If
-
-        Catch ex As Exception
-            MsgBox(ex.Message)
-
+        Dim cmdLine As String = CType(CType(sender, LCARS.LightweightControls.LCFlatButton).Data, String).Trim()
+        Dim myprocess As New Process()
+        If File.Exists(cmdLine) Then
+            'The command string is an absolute path.
+            myprocess.StartInfo.FileName = sender.data
+            myprocess.StartInfo.WorkingDirectory = Path.GetDirectoryName(sender.data)
+            launchProcessOnScreen(myprocess)
+        Else
+            'The command will be interpreted as a command followed by arguments
             Try
-                Dim myID As Integer
-                myID = Shell(sender.data, AppWinStyle.NormalFocus)
-                Dim myprocess As Process = Process.GetProcessById(myID)
-                MoveToScreen(Screen.FromHandle(myForm.Handle), myprocess.MainWindowHandle)
-            Catch ex2 As Exception
-                MsgBox("Error: " & vbNewLine & vbNewLine & ex2.Message)
+                If (sender.data.Substring(0, 1) = """") Then
+                    Dim splitIndex As Integer = sender.data.Substring(1).IndexOf("""") + 2
+                    myprocess.StartInfo.FileName = sender.data.Substring(0, splitIndex)
+                    myprocess.StartInfo.Arguments = sender.data.Substring(splitIndex + 1)
+                Else
+                    myprocess.StartInfo.FileName = sender.data.Split(" ")(0)
+                    myprocess.StartInfo.Arguments = sender.data.Substring(myprocess.StartInfo.FileName.Length + 1)
+                End If
+                'If full path specified, set working directory to containing folder
+                If File.Exists(myprocess.StartInfo.FileName) Then
+                    myprocess.StartInfo.WorkingDirectory = Path.GetDirectoryName(myprocess.StartInfo.FileName)
+                End If
+                launchProcessOnScreen(myProcess)
+            Catch ex As Exception
+                Debug.Print("Failed to interpret command line")
+                'Throw it to shell and see what happens.
+                Try
+                    Dim myID As Integer
+                    myID = Shell(sender.data, AppWinStyle.NormalFocus)
+                    myprocess = Process.GetProcessById(myID)
+                    launchProcessOnScreen(myprocess, False)
+                Catch ex2 As ArgumentException
+                    'Process already exited before we could get it.
+                Catch ex2 As FileNotFoundException
+                    MsgBox("Bad command string: " & cmdLine)
+                End Try
             End Try
-        End Try
+        End If
     End Sub
 
-    Public Sub launchProcessOnScreen(ByVal myProcess As Process)
-        myProcess.Start()
-        Dim myID As Integer = myProcess.Id
-        Dim startTime As Date = Now
-        Do Until myProcess.MainWindowHandle <> 0
-            If Now.Subtract(startTime) > New TimeSpan(0, 0, 15) Then
-                Exit Do
-            Else
-                myProcess.Refresh()
-                Application.DoEvents()
-            End If
+    Public Sub launchProcessOnScreen(ByVal myProcess As Process, Optional ByVal needsStart As Boolean = True)
+        If needsStart Then
+            Try
+                If Not myProcess.Start() Then Return
+            Catch ex As System.ComponentModel.Win32Exception
+                MsgBox("Unable to start process")
+                Return
+            End Try
+        End If
+        Dim sw As New Stopwatch()
+        sw.Start()
+        Do Until myProcess.HasExited OrElse _
+                 myProcess.MainWindowHandle <> IntPtr.Zero OrElse _
+                 sw.ElapsedMilliseconds > 15000L
+            myProcess.Refresh()
+            Application.DoEvents()
+            Threading.Thread.Sleep(50)
         Loop
-
-        MoveToScreen(Screen.FromHandle(myForm.Handle), myProcess.MainWindowHandle)
-
+        sw.Stop()
+        If Not myProcess.HasExited AndAlso _
+               myProcess.MainWindowHandle <> IntPtr.Zero Then
+            MoveToScreen(myProcess.MainWindowHandle)
+        End If
     End Sub
 
 
-    Private Sub MoveToScreen(ByVal myScreen As Screen, ByVal hWnd As IntPtr)
+    Private Sub MoveToScreen(ByVal hWnd As IntPtr)
+        If MonitorFromWindow(hWnd, MONITOR_DEFAULTTONEAREST) _
+                = MonitorFromWindow(myForm.Handle, MONITOR_DEFAULTTONEAREST) Then
+            'Already on correct screen
+            Return
+        End If
+        Dim myScreen As Screen = Screen.FromHandle(myForm.Handle)
         Dim myPlacement As New WINDOWPLACEMENT
         Dim isMax As Boolean = False
 
@@ -1162,26 +1135,21 @@ Retry:
         myPlacement.ptMaxPosition.X = myForm.Left
         myPlacement.ptMaxPosition.Y = myForm.Top
 
-
-        myPlacement.ptMinPosition.X = myForm.Location.X
-
-
         myPlacement.rcNormalPosition.Right_Renamed -= myPlacement.rcNormalPosition.Left_Renamed - myForm.Left
         myPlacement.rcNormalPosition.Bottom_Renamed -= myPlacement.rcNormalPosition.Top_Renamed - myForm.Top
         myPlacement.rcNormalPosition.Left_Renamed = myForm.Location.X
         myPlacement.rcNormalPosition.Top_Renamed = myForm.Location.Y
 
-        If myPlacement.ShowCmd = 3 Then
+        If myPlacement.ShowCmd = WindowStates.MAXIMIZED Then
             isMax = True
-            myPlacement.ShowCmd = 1
+            myPlacement.ShowCmd = WindowStates.NORMAL
         End If
 
         SetWindowPlacement(hWnd, myPlacement)
 
         If isMax Then
-            myPlacement.ShowCmd = 3
+            myPlacement.ShowCmd = WindowStates.MAXIMIZED
             SetWindowPlacement(hWnd, myPlacement)
-
         End If
     End Sub
 
