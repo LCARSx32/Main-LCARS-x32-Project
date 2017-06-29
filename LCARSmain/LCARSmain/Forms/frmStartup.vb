@@ -419,31 +419,9 @@ Public Class frmStartup
     End Sub
 
     Private Sub setBackBounds()
-        Dim leftLoc As Integer = Integer.MaxValue
-        Dim topLoc As Integer = Integer.MaxValue
-        Dim right As Integer = Integer.MinValue
-        Dim bottom As Integer = Integer.MinValue
-
-        For Each myScreen As Screen In Screen.AllScreens
-            If myScreen.Bounds.Left < leftLoc Then
-                leftLoc = myScreen.Bounds.Left
-            End If
-            If myScreen.Bounds.Top < topLoc Then
-                topLoc = myScreen.Bounds.Top
-            End If
-            If myScreen.Bounds.Right > right Then
-                right = myScreen.Bounds.Right
-            End If
-            If myScreen.Bounds.Bottom > bottom Then
-                bottom = myScreen.Bounds.Bottom
-            End If
-        Next
-        displayOffset = New Point(leftLoc, topLoc)
-        Dim myBounds As Rectangle
-        If shellMode Then
-            myBounds = New Rectangle(leftLoc, topLoc, right - leftLoc, bottom - topLoc)
-        Else
-            myBounds = New Rectangle(0, 0, right - leftLoc, bottom - topLoc)
+        Dim myBounds As Rectangle = SystemInformation.VirtualScreen
+        If Not shellMode Then
+            myBounds.Location = Point.Empty
         End If
         Me.Bounds = myBounds
     End Sub

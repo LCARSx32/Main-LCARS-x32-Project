@@ -15,7 +15,6 @@ Module modCommon
     Public hTrayParent As IntPtr
     Public myIconSaver As New Form
     Public shellMode As Boolean = False
-    Public displayOffset As Point
 
 #Region " API Calls "
 
@@ -635,7 +634,7 @@ Public Enum SetWindowPosFlags As UInteger
 
     Public Sub updateDesktopBounds(ByVal ScreenIndex As Integer, ByVal newBounds As Rectangle)
         myDesktop.curDesktop(ScreenIndex).Bounds = _
-            New Rectangle(newBounds.Location - displayOffset, _
+            New Rectangle(myDesktop.PointToClient(newBounds.Location), _
                           newBounds.Size)
     End Sub
 
