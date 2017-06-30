@@ -59,6 +59,8 @@ public Class modBusiness
     Public myAlertListButton As LCARS.LCARSbuttonClass
     Public myProgramPagesDisplay As LCARS.LCARSbuttonClass
     Dim bars() As LCARS.LCARSbuttonClass
+    Dim myBattPercent As Control
+    Dim myPowerSource As Control
     Public myProgsUp As LCARS.LCARSbuttonClass
     Public myProgsBack As LCARS.LCARSbuttonClass
     Public myProgsNext As LCARS.LCARSbuttonClass
@@ -428,6 +430,8 @@ public Class modBusiness
             myBattery.Controls("fbBatt8"), _
             myBattery.Controls("fbBatt9"), _
             myBattery.Controls("fbBatt10")}
+        myBattPercent = myBattery.Controls("lblBatt")
+        myPowerSource = myBattery.Controls("lblPowerSource")
         myProgsUp = myForm.Controls.Find("myProgsUp", True)(0)
         myProgsBack = myForm.Controls.Find("myProgsBack", True)(0)
         myProgsNext = myForm.Controls.Find("myProgsNext", True)(0)
@@ -579,12 +583,12 @@ public Class modBusiness
 
         'if we are on battery power, update the battery's status
         '-------------------------
-        myBattery.Controls("lblBatt").Text = battInfo.BatteryLifePercent * 100 & "%"
+        myBattPercent.Text = battInfo.BatteryLifePercent * 100 & "%"
 
         If battInfo.PowerLineStatus = PowerLineStatus.Offline Then
-            myBattery.Controls("lblPowerSource").Text = "AUXILIARY"
+            myPowerSource.Text = "AUXILIARY"
         Else
-            myBattery.Controls("lblPowerSource").Text = "PRIMARY"
+            myPowerSource.Text = "PRIMARY"
         End If
 
         Dim newBattLevel As Short = Math.Ceiling(battInfo.BatteryLifePercent * 10)
