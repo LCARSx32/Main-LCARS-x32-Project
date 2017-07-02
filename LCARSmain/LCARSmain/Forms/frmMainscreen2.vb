@@ -7,61 +7,31 @@ Public Class frmMainscreen2
     Dim isInit As Boolean = False
     Public myBusiness As New modBusiness
 
-#Region " AutoHide "
-
     Public Function getAutohideEdges() As IAutohide.AutohideEdges Implements IAutohide.getAutohideEdges
         Return IAutohide.AutohideEdges.Top Or IAutohide.AutohideEdges.Bottom Or IAutohide.AutohideEdges.Right
     End Function
 
-#End Region
-
-    Sub New(ByVal ScreenIndex As Integer)
+    Public Sub New(ByVal ScreenIndex As Integer)
         InitializeComponent()
         myBusiness.ScreenIndex = ScreenIndex
         myBusiness.init(Me)
     End Sub
 
-    Private Sub fbPrograms_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles myStartMenu.Click
-        If pnlProgs.Visible = True Then
-            pnlProgs.Visible = False
-        Else
-            pnlProgs.Visible = True
-            pnlPrograms.Visible = True
-        End If
-
+    Private Sub myStart_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles myStartMenu.Click
+        pnlProgs.Visible = Not pnlProgs.Visible
         myBusiness.progShowing = pnlProgs.Visible
         myBusiness.userButtonsShowing = gridUserButtons.Visible
-
         pnlMainBar_SizeChanged(sender, e)
-
     End Sub
 
-
     Private Sub fbUserButtons_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles myUserButtons.Click
-        If gridUserButtons.Visible = True Then
-            fbUBEndcap.Visible = False
-        Else
-            fbUBEndcap.Visible = True
-        End If
-
-
+        fbUBEndcap.Visible = Not gridUserButtons.Visible
     End Sub
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        pnlMainBar.Visible = False
-        pnlTopPanel.Visible = False
-        pnlApps.Visible = False
-
         Me.Bounds = Screen.AllScreens(myBusiness.ScreenIndex).Bounds
         Application.DoEvents()
-
-        pnlMainBar.Visible = True
-        pnlTopPanel.Visible = True
-        pnlApps.Visible = True
-
         Me.Show()
-
-
         isInit = True
         pnlMainBar_SizeChanged(sender, e)
         myBusiness.mainTimer.Enabled = True
@@ -70,10 +40,8 @@ Public Class frmMainscreen2
     Private Sub abExpand_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles abExpand.Click
         If abExpand.ArrowDirection = LCARS.LCARSarrowDirection.Up Then
             pnlTopPanel.Visible = False
-
             sbTL.Visible = True
             myBusiness.myClock = sbTL
-
 
             pnlApps.Top = 0
             pnlTray.Top = 0
@@ -83,14 +51,12 @@ Public Class frmMainscreen2
 
             abExpand.ArrowDirection = LCARS.LCARSarrowDirection.Down
 
-            'abExpand.Width = sbTL.Width
-            'abExpand.Left = fbUBRight.Right - abExpand.Width
-
             pnlTray.Left = (sbTL.Left - pnlTray.Width) - 6
             pnlApps.Width = pnlTray.Left - pnlApps.Left
 
         Else
             sbTL.Visible = False
+            pnlTopPanel.Visible = True
             myBusiness.myClock = Me.myClock
 
             pnlApps.Top = (pnlTopPanel.Height - pnlApps.Height)
@@ -98,8 +64,6 @@ Public Class frmMainscreen2
 
             pnlMainBar.Top = pnlTopPanel.Height + 6
             pnlMainBar.Height = (Me.ClientRectangle.Height - pnlMainBar.Top)
-
-            pnlTopPanel.Visible = True
 
             abExpand.ArrowDirection = LCARS.LCARSarrowDirection.Up
 
@@ -109,7 +73,7 @@ Public Class frmMainscreen2
     End Sub
 
     Private Sub pnlMainBar_SizeChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles pnlMainBar.SizeChanged
-        If isInit = True Then
+        If isInit Then
             Dim myRect As New Rectangle
 
             If myBusiness.progShowing Then
@@ -124,13 +88,10 @@ Public Class frmMainscreen2
                 myRect.Width = (fbBarRight.Left - 6) - myRect.X
             End If
 
-
-
             myRect.Y = pnlMainTop.Bottom + 6
             myRect.Height = (fbMainLower.Top - 6) - myRect.Y
 
             pnlMain.Bounds = myRect
-
             myBusiness.UpdateRegion()
         End If
     End Sub
@@ -141,10 +102,8 @@ Public Class frmMainscreen2
         fbMain2.Left = myClock.Right + 6
     End Sub
 
-    Private Sub myEngineering_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles myEngineering.Click, mySettings.Click, myPhoto.Click, myDocuments.Click, myPictures.Click, myComp.Click, myVideos.Click, fbWebBrowser.Click, myRun.Click, myMusic.Click
-        If pnlPrograms.Visible Then
-            fbPrograms_Click(sender, e)
-        End If
+    Private Sub startMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles myEngineering.Click, mySettings.Click, myPhoto.Click, myDocuments.Click, myPictures.Click, myComp.Click, myVideos.Click, fbWebBrowser.Click, myRun.Click, myMusic.Click
+        If pnlPrograms.Visible Then myStart_Click(sender, e)
     End Sub
 
     Public Shared ReadOnly Property ScreenImage() As Image

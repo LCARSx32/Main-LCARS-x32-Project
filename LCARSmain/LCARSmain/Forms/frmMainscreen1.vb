@@ -3,36 +3,29 @@ Public Class frmMainscreen1
 
     Dim isInit As Boolean
     Public myBusiness As New modBusiness
-#Region " AutoHide "
+
     Public Function getAutohideEdges() As IAutohide.AutohideEdges Implements IAutohide.getAutohideEdges
         Return IAutohide.AutohideEdges.Top Or IAutohide.AutohideEdges.Left
     End Function
 
-#End Region
-
-    Sub New(ByVal ScreenIndex As Integer)
+    Public Sub New(ByVal ScreenIndex As Integer)
         InitializeComponent()
         myBusiness.ScreenIndex = ScreenIndex
         myBusiness.init(Me)
-
     End Sub
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
         Me.Bounds = Screen.AllScreens(myBusiness.ScreenIndex).Bounds
         Me.Show()
-
         Application.DoEvents()
-
-
         isInit = True
-
-        pnlMainBar_Resize(New Object, New System.EventArgs)
+        pnlMainBar_Resize(sender, e)
         myBusiness.mainTimer.Enabled = True
     End Sub
 
-    Private Sub fbStart_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles myStartMenu.Click
-        If pnlStart.Visible = False Then
+    Private Sub myStart_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles myStartMenu.Click
+        pnlStart.Visible = Not pnlStart.Visible
+        If pnlStart.Visible Then
             fbBlock.Visible = False
             elbStart.Visible = True
             Application.DoEvents()
@@ -47,8 +40,6 @@ Public Class frmMainscreen1
             pnlMainContainer.Left = 0
         End If
         pnlMainBar_Resize(sender, e)
-        pnlStart.Visible = Not pnlStart.Visible
-
     End Sub
 
     Private Sub pnlMainContainer_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles pnlMainContainer.Resize
@@ -72,32 +63,22 @@ Public Class frmMainscreen1
         End If
     End Sub
 
-    Private Sub fbMyPictures_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles myPictures.Click
-        If pnlStart.Visible = True Then myStartMenu.doClick(sender, e)
-
-    End Sub
-
-    Private Sub fbMyMusic_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles myMusic.Click
-        myStartMenu.doClick(sender, e)
-
+    Private Sub startMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles myPictures.Click, myMusic.Click, myDocuments.Click, myRun.Click, fbWebBrowser.Click, myVideos.Click
+        If pnlStart.Visible Then myStartMenu.doClick(sender, e)
     End Sub
 
     Private Sub fbMyNetwork_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbMyNetwork.Click
-        'Dim myComp As New frmMyComp
-        'myComp.curPath = System.Environment.GetFolderPath(Environment.SpecialFolder.MyComputer)
-        'MsgBox(myComp.curPath )
-
+        'TODO: Not implemented yet
     End Sub
 
     Private Sub fbDesktop_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbDesktop.Click
+        'TODO: Move to modBusiness as optional component
         Process.Start(Application.StartupPath & "\LCARSexplorer.exe", System.Environment.GetFolderPath(Environment.SpecialFolder.Desktop))
         myStartMenu.doClick(sender, e)
-
     End Sub
 
-
     Private Sub pnlMainBar_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles pnlMainBar.Resize
-        If isInit = True Then
+        If isInit Then
             Dim myRect As New Rectangle
 
             myRect.Location = New Point(fbStartFill.Width + 6, FlatButton11.Bottom + 6)
@@ -112,28 +93,7 @@ Public Class frmMainscreen1
             pnlMain.Bounds = myRect
 
             myBusiness.UpdateRegion()
-
         End If
-
-    End Sub
-
-    Private Sub myDocuments_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles myDocuments.Click
-        If pnlStart.Visible = True Then myStartMenu.doClick(sender, e)
-    End Sub
-
-    Private Sub myRun_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles myRun.Click
-        If pnlStart.Visible = True Then myStartMenu.doClick(sender, e)
-    End Sub
-
-
-    Private Sub fbWebBrowser_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbWebBrowser.Click
-        If pnlStart.Visible Then
-            myStartMenu.doClick(sender, e)
-        End If
-    End Sub
-
-    Private Sub myVideos_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles myVideos.Click
-        If pnlStart.Visible Then myStartMenu.doClick(New Object, New EventArgs)
     End Sub
 
     Public Shared ReadOnly Property ScreenImage() As Image
