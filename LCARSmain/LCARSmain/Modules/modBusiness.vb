@@ -253,8 +253,10 @@ public Class modBusiness
     End Sub
 
     Public Sub myButtonManager_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Dim myUserButtons As New frmManageButtons(Me)
-
+        Static myUserButtons As New frmManageButtons(Me)
+        If myUserButtons.IsDisposed Then
+            myUserButtons = New frmManageButtons(Me)
+        End If
         myUserButtons.Show()
     End Sub
 
