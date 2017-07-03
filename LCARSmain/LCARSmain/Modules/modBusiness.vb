@@ -58,9 +58,9 @@ public Class modBusiness
     Public myRun As LCARS.LCARSbuttonClass
     Public myAlertListButton As LCARS.LCARSbuttonClass
     Public myProgramPagesDisplay As LCARS.LCARSbuttonClass
-    Dim bars() As LCARS.LCARSbuttonClass
-    Dim myBattPercent As Control
-    Dim myPowerSource As Control
+    Public bars() As LCARS.LCARSbuttonClass
+    Public myBattPercent As Control
+    Public myPowerSource As Control
     Public myProgsUp As LCARS.LCARSbuttonClass
     Public myProgsBack As LCARS.LCARSbuttonClass
     Public myProgsNext As LCARS.LCARSbuttonClass
@@ -380,6 +380,7 @@ public Class modBusiness
         isInit = True
         myMainBar.Width += 1
         myMainBar.Width -= 1
+        initCommonComponents(Me)
     End Sub
 
     Public Sub init(ByRef curForm As Form)
@@ -562,28 +563,6 @@ public Class modBusiness
 
     Public Sub mainTimer_Tick(ByVal sender As Object, ByVal e As System.EventArgs)
         If myForm.IsDisposed Then Return ' Don't access a disposed screen.
-
-        Dim battInfo As PowerStatus = SystemInformation.PowerStatus
-        Static battLevel As Short = 10
-        '-------------------------
-        'if we are on battery power, update the battery's status
-        '-------------------------
-        myBattPercent.Text = battInfo.BatteryLifePercent * 100 & "%"
-
-        If battInfo.PowerLineStatus = PowerLineStatus.Offline Then
-            myPowerSource.Text = "AUXILIARY"
-        Else
-            myPowerSource.Text = "PRIMARY"
-        End If
-
-        Dim newBattLevel As Short = Math.Ceiling(battInfo.BatteryLifePercent * 10)
-
-        If newBattLevel <> battLevel Then
-            battLevel = newBattLevel
-            For i As Integer = 0 To bars.Length - 1
-                bars(i).Lit = i < battLevel
-            Next
-        End If
 
         Dim adjustedBounds As Rectangle
         If autohide = IAutohide.AutoHideModes.Hidden Then
