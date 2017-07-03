@@ -1,5 +1,6 @@
 Public Class ScreenChooserDialog
     Private screenType As Type = Nothing
+    Private selectedScreen As LCScreenImage = Nothing
     Private _screenIndex As Integer
 
     Public Sub New(ByVal screenIndex As Integer)
@@ -55,11 +56,12 @@ Public Class ScreenChooserDialog
     End Sub
 
     Private Sub myScreen_Click(ByVal sender As Object, ByVal e As EventArgs)
-        For i As Integer = 0 To gridScreens.Count - 1
-            CType(gridScreens.Items(i), LCScreenImage).Selected = False
-        Next
-        CType(sender, LCScreenImage).Selected = True
-        screenType = CType(CType(sender, LCScreenImage).Data, Type)
+        If selectedScreen IsNot Nothing Then
+            selectedScreen.Selected = False
+        End If
+        selectedScreen = CType(sender, LCScreenImage)
+        selectedScreen.Selected = True
+        screenType = CType(selectedScreen.Data, Type)
     End Sub
 
     Private Sub ScreenChooserDialog_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Resize, Me.LocationChanged
