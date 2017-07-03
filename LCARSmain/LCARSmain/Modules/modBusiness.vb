@@ -586,7 +586,10 @@ public Class modBusiness
                 Marshal.StructureToPtr(myRectData, MyCopyData, False)
                 'Do not use SendDataToLinkedWindows; it uses PostMessage, not SendMessage
                 For Each targetHandle As IntPtr In LinkedWindows
-                    If Screen.ReferenceEquals(Screen.FromHandle(targetHandle), Screen.FromHandle(myForm.Handle)) Then
+                    Dim screen1, screen2 As Integer
+                    screen1 = MonitorFromWindow(targetHandle, MONITOR_DEFAULTTONEAREST)
+                    screen2 = MonitorFromWindow(myForm.Handle, MONITOR_DEFAULTTONEAREST)
+                    If screen1 = screen2 Then
                         Dim res As Integer = SendMessage(targetHandle, WM_COPYDATA, myDesktop.Handle, MyCopyData)
                     End If
                 Next
@@ -597,12 +600,12 @@ public Class modBusiness
             oldArea = adjustedBounds
         End If
 
-        If Not myDesktop.curDesktop(ScreenIndex).Size = adjustedBounds.Size Then
+        If myDesktop.curDesktop(ScreenIndex).Size <> adjustedBounds.Size Then
             updateDesktopBounds(ScreenIndex, adjustedBounds)
         End If
 
         'Deal with resizing the tray icon panel if necessary
-        If myHideTrayButton.Visible = True Then
+        If myHideTrayButton.Visible Then
             Dim myPlacement As New WINDOWPLACEMENT
             GetWindowPlacement(hTrayIcons, myPlacement)
             Dim myWidth As Integer = myPlacement.rcNormalPosition.Right_Renamed - myPlacement.rcNormalPosition.Left_Renamed
@@ -617,8 +620,6 @@ public Class modBusiness
 
 
         'Refresh the taskbar if necessary
-        'myWindows.Clear()
-
         WindowList.Clear()
         'find all the windows
         EnumWindows(New EnumCallBack(AddressOf fEnumWindowsCallBack), 0)
@@ -1191,12 +1192,6 @@ public Class modBusiness
     Public Sub resetWorkingArea()
         oldArea = New Rectangle(1, 1, 1, 1)
     End Sub
-
-    Public ReadOnly Property WorkingArea() As Rectangle
-        Get
-            Return oldArea
-        End Get
-    End Property
 
     Public Sub myform_MouseScroll(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)
         If Not ProgramsPanel.Visible Then Return

@@ -7,7 +7,6 @@ Public Class frmManageButtons
     Sub New(ByRef Business As modBusiness)
         InitializeComponent()
         myBusiness = Business
-        Me.Bounds = Business.WorkingArea
     End Sub
 
     Private Sub sbUBbrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbUBbrowse.Click
