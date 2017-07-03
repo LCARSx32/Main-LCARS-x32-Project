@@ -161,6 +161,7 @@
     </Compile>
     <Compile Include="Interfaces\IAutohide.vb" />
     <Compile Include="Interfaces\IMainScreen.vb" />
+    <Compile Include="Modules\CommonScreen.vb" />
     <Compile Include="Modules\keyboard.vb" />
     <Compile Include="Forms\frmMainscreen2.Designer.vb">
       <DependentUpon>frmMainscreen2.vb</DependentUpon>

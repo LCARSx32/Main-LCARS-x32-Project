@@ -67,7 +67,6 @@ public Class modBusiness
 
     Public MyPrograms As DirectoryStartItem
     Public myUserButtonCollection As New List(Of UserButtonInfo)
-    Public mainTimer As New Timer
     Public WithEvents tmrAutohide As New Timer()
     Public ScreenIndex As Integer
 
@@ -117,7 +116,6 @@ public Class modBusiness
     End Sub
 
     Public Sub ShutdownScreen()
-        mainTimer.Stop()
         tmrAutohide.Stop()
         isInit = False
         Application.DoEvents()
@@ -382,7 +380,6 @@ public Class modBusiness
         isInit = True
         myMainBar.Width += 1
         myMainBar.Width -= 1
-        mainTimer.Start()
     End Sub
 
     Public Sub init(ByRef curForm As Form)
@@ -520,9 +517,6 @@ public Class modBusiness
         LCARS.SetBeeping(myForm, modSettings.ButtonBeep)
         RegisterAlertForm(myForm)
 
-        AddHandler mainTimer.Tick, AddressOf mainTimer_Tick
-
-
         'load Mainscreen Settings:
         tmrAutohide.Interval = 100
         Dim AutoHideMode As Integer = modSettings.AutoHide(ScreenIndex)
@@ -566,41 +560,12 @@ public Class modBusiness
 
     End Sub
 
-    Private Sub mainTimer_Tick(ByVal sender As Object, ByVal e As System.EventArgs)
+    Public Sub mainTimer_Tick(ByVal sender As Object, ByVal e As System.EventArgs)
         If myForm.IsDisposed Then Return ' Don't access a disposed screen.
 
         Dim battInfo As PowerStatus = SystemInformation.PowerStatus
         Static battLevel As Short = 10
-
-
-        'Set the clock
         '-------------------------
-        'Get the time and date format
-        Dim newText As String = ""
-        If (GetSetting("LCARS x32", "Application", "Stardate", "TRUE") <> "TRUE") Then
-            Try
-                Dim myReg As Microsoft.Win32.RegistryKey = Microsoft.Win32.Registry.CurrentUser
-                myReg = myReg.OpenSubKey("Control Panel\International")
-                timeFormat = myReg.GetValue("sTimeFormat", "h:mm:sstt")
-                dateFormat = myReg.GetValue("sShortDate", "M/d/yyyy")
-            Catch ex As Exception
-                timeFormat = "h:mm:sstt"
-                dateFormat = "M/d/yyyy"
-            End Try
-
-            newText = Format(Now, timeFormat) & " " & Format(Now.Date, dateFormat)
-
-        Else
-            newText = LCARS.Stardate.getStardate(Now)
-        End If
-
-        If newText <> myClock.Text Then
-            myClock.Text = newText
-        End If
-
-        '-------------------------
-
-
         'if we are on battery power, update the battery's status
         '-------------------------
         myBattPercent.Text = battInfo.BatteryLifePercent * 100 & "%"

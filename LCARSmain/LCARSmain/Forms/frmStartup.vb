@@ -215,6 +215,7 @@ Public Class frmStartup
             loadForm(i)
             updateDesktopBounds(i, Screen.AllScreens(i).WorkingArea)
         Next
+        mainTimer.Start()
         AddHandler Microsoft.Win32.SystemEvents.DisplaySettingsChanged, AddressOf System_DisplayChanged
 
         modSpeech.SpeechEnabled = GetSetting("LCARS X32", "Application", "SpeechOn", "TRUE")

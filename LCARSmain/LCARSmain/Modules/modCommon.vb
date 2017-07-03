@@ -8,7 +8,6 @@ Module modCommon
     Public TaskBarState As Integer
     Public shutDownOptions As New cWrapExitWindows
     Public myDesktop As frmStartup
-    Public curBusiness As New List(Of modBusiness)
     Public SysListView As IntPtr
     Public SysListViewParent As IntPtr
     Public hTrayIcons As IntPtr
