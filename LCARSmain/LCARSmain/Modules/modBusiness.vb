@@ -76,6 +76,7 @@ public Class modBusiness
 
     Public progShowing As Boolean
     Public userButtonsShowing As Boolean
+    Public isInit As Boolean = False
 
 #End Region
 
@@ -110,6 +111,21 @@ public Class modBusiness
 #End Region
 
 #End Region
+
+    Public Sub New(ByVal screenIndex As Integer)
+        Me.ScreenIndex = screenIndex
+    End Sub
+
+    Public Sub ShutdownScreen()
+        mainTimer.Stop()
+        tmrAutohide.Stop()
+        isInit = False
+        Application.DoEvents()
+        If Not myForm Is Nothing Then
+            DeregisterAlertForm(myForm)
+            myForm.Dispose()
+        End If
+    End Sub
 
     Private Function fEnumWindowsCallBack(ByVal hwnd As Integer, ByVal lParam As Integer) As Integer
         'Abort if we're closing/closed
@@ -243,19 +259,11 @@ public Class modBusiness
     End Sub
 
     Public Sub myUserButtons_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        If UserButtonsPanel.Visible = True Then
-            UserButtonsPanel.Visible = False
-            myButtonManager.Visible = False
-        Else
-            UserButtonsPanel.Visible = True
-            myButtonManager.Visible = True
-        End If
-        progShowing = ProgramsPanel.Visible
+        UserButtonsPanel.Visible = Not UserButtonsPanel.Visible
+        myButtonManager.Visible = UserButtonsPanel.Visible
         userButtonsShowing = UserButtonsPanel.Visible
         myMainBar.Width -= 1
         myMainBar.Width += 1
-
-
     End Sub
 
     Public Sub myDocuments_Click(ByVal sender As Object, ByVal e As System.EventArgs)
@@ -366,12 +374,20 @@ public Class modBusiness
         End If
     End Sub
 
+    Private Sub myForm_Load(ByVal sender As Object, ByVal e As EventArgs)
+        myForm.Bounds = Screen.AllScreens(ScreenIndex).Bounds
+        myForm.Show()
+        isInit = True
+        myMainBar.Width += 1
+        myMainBar.Width -= 1
+        mainTimer.Start()
+    End Sub
+
     Public Sub init(ByRef curForm As Form)
         'When a mainscreen loads, it calls this sub to let LCARS x32 know
         'that it is now the mainscreen.  Since most of the functions of the
         'mainscreen are done through this module, it is imperitive that they
         'call this sub as soon as they load.
-        setBusiness(Me, ScreenIndex)
 
         myForm = curForm
 
@@ -436,8 +452,8 @@ public Class modBusiness
         myProgsBack = myForm.Controls.Find("myProgsBack", True)(0)
         myProgsNext = myForm.Controls.Find("myProgsNext", True)(0)
 
-        mySpeech.Lit = modSpeech.SpeechEnabled
         'event handlers:
+        AddHandler myForm.Load, AddressOf myForm_Load
         AddHandler ProgramsPanel.Resize, AddressOf ProgramsPanel_Resize
         AddHandler myStartMenu.Click, AddressOf myStartMenu_Click
         AddHandler myComputer.Click, AddressOf myCompButton_Click
@@ -467,6 +483,8 @@ public Class modBusiness
         AddHandler myProgsUp.Click, AddressOf ProgBack
         AddHandler myProgsBack.Click, AddressOf previousProgPage
         AddHandler myProgsNext.Click, AddressOf nextProgPage
+
+        mySpeech.Lit = modSpeech.SpeechEnabled
 
         setDoubleBuffered(myClock)
 

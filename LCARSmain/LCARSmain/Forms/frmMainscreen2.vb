@@ -4,37 +4,26 @@ Imports System.Reflection
 Public Class frmMainscreen2
     Implements IAutohide
 
-    Dim isInit As Boolean = False
-    Public myBusiness As New modBusiness
+    Private myBusiness As modBusiness
 
     Public Function getAutohideEdges() As IAutohide.AutohideEdges Implements IAutohide.getAutohideEdges
         Return IAutohide.AutohideEdges.Top Or IAutohide.AutohideEdges.Bottom Or IAutohide.AutohideEdges.Right
     End Function
 
-    Public Sub New(ByVal ScreenIndex As Integer)
+    Public Sub New(ByVal b As modBusiness)
         InitializeComponent()
-        myBusiness.ScreenIndex = ScreenIndex
-        myBusiness.init(Me)
+        Me.myBusiness = b
     End Sub
 
     Private Sub myStart_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles myStartMenu.Click
-        pnlProgs.Visible = Not pnlProgs.Visible
-        myBusiness.progShowing = pnlProgs.Visible
+        pnlStart.Visible = Not pnlStart.Visible
+        myBusiness.progShowing = pnlStart.Visible
         myBusiness.userButtonsShowing = gridUserButtons.Visible
         pnlMainBar_SizeChanged(sender, e)
     End Sub
 
     Private Sub fbUserButtons_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles myUserButtons.Click
         fbUBEndcap.Visible = Not gridUserButtons.Visible
-    End Sub
-
-    Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Me.Bounds = Screen.AllScreens(myBusiness.ScreenIndex).Bounds
-        Application.DoEvents()
-        Me.Show()
-        isInit = True
-        pnlMainBar_SizeChanged(sender, e)
-        myBusiness.mainTimer.Enabled = True
     End Sub
 
     Private Sub abExpand_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles abExpand.Click
@@ -57,7 +46,7 @@ Public Class frmMainscreen2
         Else
             sbTL.Visible = False
             pnlTopPanel.Visible = True
-            myBusiness.myClock = Me.myClock
+            myBusiness.myClock = myClock
 
             pnlApps.Top = (pnlTopPanel.Height - pnlApps.Height)
             pnlTray.Top = pnlApps.Top
@@ -73,11 +62,11 @@ Public Class frmMainscreen2
     End Sub
 
     Private Sub pnlMainBar_SizeChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles pnlMainBar.SizeChanged
-        If isInit Then
+        If myBusiness IsNot Nothing AndAlso myBusiness.isInit Then
             Dim myRect As New Rectangle
 
             If myBusiness.progShowing Then
-                myRect.X = pnlProgs.Right + 6
+                myRect.X = pnlStart.Right + 6
             Else
                 myRect.X = 0
             End If

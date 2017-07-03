@@ -435,10 +435,6 @@ Public Enum SetWindowPosFlags As UInteger
 #End Region
 #End Region
 
-    Public Sub setBusiness(ByRef business As modBusiness, ByVal ScreenIndex As Integer)
-        curBusiness(ScreenIndex) = business
-    End Sub
-
     Public Sub SetWallpaper(ByVal wall As Image, ByVal ScreenIndex As Integer)
         If Not My.Application.IsSettingsMode Then
             myDesktop.curDesktop(ScreenIndex).BackgroundImage = wall
@@ -457,7 +453,7 @@ Public Enum SetWindowPosFlags As UInteger
         End If
     End Sub
 
-    Public Sub SetDesktop(ByVal desktop As Form)
+    Public Sub SetDesktop(ByVal desktop As frmStartup)
         myDesktop = desktop
     End Sub
 
@@ -576,10 +572,7 @@ Public Enum SetWindowPosFlags As UInteger
         PostMessage(HWND_BROADCAST, InterMsgID, myDesktop.Handle, 13)
         CancelAlert()
         For Each myBusiness As modBusiness In curBusiness
-            myBusiness.mainTimer.Enabled = False
-            If Not myBusiness.myForm Is Nothing Then
-                myBusiness.myForm.Dispose()
-            End If
+            myBusiness.ShutdownScreen()
         Next
 
         ''''''''''''''''''''''''''''''''''''''''

@@ -19,9 +19,9 @@ Partial Class frmMainscreen2
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim LcarScolor9 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Dim LcarScolor10 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Me.pnlProgs = New System.Windows.Forms.Panel
+        Dim LcarScolor1 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor2 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Me.pnlStart = New System.Windows.Forms.Panel
         Me.fbWebBrowser = New LCARS.Controls.FlatButton
         Me.myEngineering = New LCARS.Controls.FlatButton
         Me.myRun = New LCARS.Controls.FlatButton
@@ -104,7 +104,7 @@ Partial Class frmMainscreen2
         Me.HideTrayButton = New LCARS.Controls.ArrowButton
         Me.ShowTrayButton = New LCARS.Controls.HalfPillButton
         Me.sbTL = New LCARS.Controls.StandardButton
-        Me.pnlProgs.SuspendLayout()
+        Me.pnlStart.SuspendLayout()
         Me.pnlMainTop.SuspendLayout()
         Me.pnlMainElbow.SuspendLayout()
         Me.pnlProgsElbow.SuspendLayout()
@@ -115,31 +115,31 @@ Partial Class frmMainscreen2
         Me.pnlTray.SuspendLayout()
         Me.SuspendLayout()
         '
-        'pnlProgs
+        'pnlStart
         '
-        Me.pnlProgs.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.pnlStart.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.pnlProgs.Controls.Add(Me.fbWebBrowser)
-        Me.pnlProgs.Controls.Add(Me.myEngineering)
-        Me.pnlProgs.Controls.Add(Me.myRun)
-        Me.pnlProgs.Controls.Add(Me.mySettings)
-        Me.pnlProgs.Controls.Add(Me.myMusic)
-        Me.pnlProgs.Controls.Add(Me.myVideos)
-        Me.pnlProgs.Controls.Add(Me.myPictures)
-        Me.pnlProgs.Controls.Add(Me.myPhoto)
-        Me.pnlProgs.Controls.Add(Me.myComp)
-        Me.pnlProgs.Controls.Add(Me.myDocuments)
-        Me.pnlProgs.Controls.Add(Me.pnlPrograms)
-        Me.pnlProgs.Controls.Add(Me.myProgsUp)
-        Me.pnlProgs.Controls.Add(Me.fbProgramPages)
-        Me.pnlProgs.Controls.Add(Me.myProgsNext)
-        Me.pnlProgs.Controls.Add(Me.myProgsBack)
-        Me.pnlProgs.Location = New System.Drawing.Point(0, 25)
-        Me.pnlProgs.Name = "pnlProgs"
-        Me.pnlProgs.Size = New System.Drawing.Size(260, 454)
-        Me.pnlProgs.TabIndex = 47
-        Me.pnlProgs.Tag = "2"
-        Me.pnlProgs.Visible = False
+        Me.pnlStart.Controls.Add(Me.fbWebBrowser)
+        Me.pnlStart.Controls.Add(Me.myEngineering)
+        Me.pnlStart.Controls.Add(Me.myRun)
+        Me.pnlStart.Controls.Add(Me.mySettings)
+        Me.pnlStart.Controls.Add(Me.myMusic)
+        Me.pnlStart.Controls.Add(Me.myVideos)
+        Me.pnlStart.Controls.Add(Me.myPictures)
+        Me.pnlStart.Controls.Add(Me.myPhoto)
+        Me.pnlStart.Controls.Add(Me.myComp)
+        Me.pnlStart.Controls.Add(Me.myDocuments)
+        Me.pnlStart.Controls.Add(Me.pnlPrograms)
+        Me.pnlStart.Controls.Add(Me.myProgsUp)
+        Me.pnlStart.Controls.Add(Me.fbProgramPages)
+        Me.pnlStart.Controls.Add(Me.myProgsNext)
+        Me.pnlStart.Controls.Add(Me.myProgsBack)
+        Me.pnlStart.Location = New System.Drawing.Point(0, 25)
+        Me.pnlStart.Name = "pnlStart"
+        Me.pnlStart.Size = New System.Drawing.Size(260, 454)
+        Me.pnlStart.TabIndex = 47
+        Me.pnlStart.Tag = "2"
+        Me.pnlStart.Visible = False
         '
         'fbWebBrowser
         '
@@ -377,7 +377,7 @@ Partial Class frmMainscreen2
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlPrograms.Beeping = False
-        Me.pnlPrograms.ColorsAvailable = LcarScolor9
+        Me.pnlPrograms.ColorsAvailable = LcarScolor1
         Me.pnlPrograms.Location = New System.Drawing.Point(0, 173)
         Me.pnlPrograms.Name = "pnlPrograms"
         Me.pnlPrograms.Size = New System.Drawing.Size(260, 230)
@@ -897,7 +897,7 @@ Partial Class frmMainscreen2
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlMainBar.Controls.Add(Me.gridUserButtons)
         Me.pnlMainBar.Controls.Add(Me.fbUBRight)
-        Me.pnlMainBar.Controls.Add(Me.pnlProgs)
+        Me.pnlMainBar.Controls.Add(Me.pnlStart)
         Me.pnlMainBar.Controls.Add(Me.abExpand)
         Me.pnlMainBar.Controls.Add(Me.myUserButtons)
         Me.pnlMainBar.Controls.Add(Me.fbUBEndcap)
@@ -921,7 +921,7 @@ Partial Class frmMainscreen2
         Me.gridUserButtons.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.gridUserButtons.Beeping = False
-        Me.gridUserButtons.ColorsAvailable = LcarScolor10
+        Me.gridUserButtons.ColorsAvailable = LcarScolor2
         Me.gridUserButtons.ControlAddingDirection = LCARS.Controls.ButtonGrid.ControlDirection.Horizontal
         Me.gridUserButtons.ControlPadding = 5
         Me.gridUserButtons.ControlSize = New System.Drawing.Size(90, 25)
@@ -1973,7 +1973,7 @@ Partial Class frmMainscreen2
         Me.ShowInTaskbar = False
         Me.Tag = "4"
         Me.Text = "MainScreen2"
-        Me.pnlProgs.ResumeLayout(False)
+        Me.pnlStart.ResumeLayout(False)
         Me.pnlMainTop.ResumeLayout(False)
         Me.pnlMainElbow.ResumeLayout(False)
         Me.pnlProgsElbow.ResumeLayout(False)
@@ -1989,7 +1989,7 @@ Partial Class frmMainscreen2
     Friend WithEvents myUserButtons As LCARS.Controls.FlatButton
     Friend WithEvents myComp As LCARS.Controls.FlatButton
     Friend WithEvents mySettings As LCARS.Controls.FlatButton
-    Friend WithEvents pnlProgs As System.Windows.Forms.Panel
+    Friend WithEvents pnlStart As System.Windows.Forms.Panel
     Friend WithEvents pnlPrograms As LCARS.Controls.WindowlessContainer
     Friend WithEvents fbMainBar As LCARS.Controls.FlatButton
     Friend WithEvents pnlMainTop As System.Windows.Forms.Panel

@@ -121,7 +121,6 @@ Partial Class frmMainscreen1
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlMainContainer.BackColor = System.Drawing.Color.Black
         Me.pnlMainContainer.Controls.Add(Me.myAlertListButton)
-        Me.pnlMainContainer.Controls.Add(Me.myClock)
         Me.pnlMainContainer.Controls.Add(Me.pnlMainBar)
         Me.pnlMainContainer.Controls.Add(Me.pnlApps)
         Me.pnlMainContainer.Controls.Add(Me.myAlert)
@@ -132,6 +131,7 @@ Partial Class frmMainscreen1
         Me.pnlMainContainer.Controls.Add(Me.Elbow2)
         Me.pnlMainContainer.Controls.Add(Me.pnlTray)
         Me.pnlMainContainer.Controls.Add(Me.FlatButton1)
+        Me.pnlMainContainer.Controls.Add(Me.myClock)
         Me.pnlMainContainer.Location = New System.Drawing.Point(0, 0)
         Me.pnlMainContainer.Name = "pnlMainContainer"
         Me.pnlMainContainer.Size = New System.Drawing.Size(800, 600)

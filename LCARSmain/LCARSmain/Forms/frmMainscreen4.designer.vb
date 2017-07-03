@@ -68,7 +68,7 @@ Partial Class frmMainscreen4
         Me.myOSK = New LCARS.Controls.FlatButton
         Me.myButtonManager = New LCARS.Controls.FlatButton
         Me.pnlMain = New System.Windows.Forms.Panel
-        Me.pnlProgs = New System.Windows.Forms.Panel
+        Me.pnlStart = New System.Windows.Forms.Panel
         Me.myProgsNext = New LCARS.Controls.ArrowButton
         Me.fbProgramPages = New LCARS.Controls.FlatButton
         Me.pnlPrograms = New LCARS.Controls.WindowlessContainer
@@ -80,7 +80,7 @@ Partial Class frmMainscreen4
         Me.pnlMainBar.SuspendLayout()
         Me.pnlBatt.SuspendLayout()
         Me.pnlTray.SuspendLayout()
-        Me.pnlProgs.SuspendLayout()
+        Me.pnlStart.SuspendLayout()
         Me.SuspendLayout()
         '
         'pnlMainBar
@@ -113,7 +113,7 @@ Partial Class frmMainscreen4
         Me.pnlMainBar.Controls.Add(Me.myOSK)
         Me.pnlMainBar.Controls.Add(Me.myButtonManager)
         Me.pnlMainBar.Controls.Add(Me.pnlMain)
-        Me.pnlMainBar.Controls.Add(Me.pnlProgs)
+        Me.pnlMainBar.Controls.Add(Me.pnlStart)
         Me.pnlMainBar.Controls.Add(Me.myMusic)
         Me.pnlMainBar.Controls.Add(Me.MyComp)
         Me.pnlMainBar.Controls.Add(Me.gridUserButtons)
@@ -629,10 +629,10 @@ Partial Class frmMainscreen4
         Me.myClock.FlashInterval = 500
         Me.myClock.holdDraw = False
         Me.myClock.Lit = True
-        Me.myClock.Location = New System.Drawing.Point(475, 111)
+        Me.myClock.Location = New System.Drawing.Point(473, 111)
         Me.myClock.Name = "myClock"
         Me.myClock.RedAlert = LCARS.LCARSalert.Normal
-        Me.myClock.Size = New System.Drawing.Size(81, 40)
+        Me.myClock.Size = New System.Drawing.Size(83, 40)
         Me.myClock.TabIndex = 69
         Me.myClock.Tag = "4"
         Me.myClock.Text = "LOADING CLOCK"
@@ -1029,7 +1029,7 @@ Partial Class frmMainscreen4
         Me.mySpeech.FlashInterval = 500
         Me.mySpeech.holdDraw = False
         Me.mySpeech.Lit = False
-        Me.mySpeech.Location = New System.Drawing.Point(323, 111)
+        Me.mySpeech.Location = New System.Drawing.Point(321, 111)
         Me.mySpeech.Name = "mySpeech"
         Me.mySpeech.RedAlert = LCARS.LCARSalert.Normal
         Me.mySpeech.Size = New System.Drawing.Size(67, 40)
@@ -1076,7 +1076,7 @@ Partial Class frmMainscreen4
         Me.myHelp.FlashInterval = 500
         Me.myHelp.holdDraw = False
         Me.myHelp.Lit = True
-        Me.myHelp.Location = New System.Drawing.Point(246, 111)
+        Me.myHelp.Location = New System.Drawing.Point(244, 111)
         Me.myHelp.Name = "myHelp"
         Me.myHelp.RedAlert = LCARS.LCARSalert.Normal
         Me.myHelp.Size = New System.Drawing.Size(71, 40)
@@ -1099,7 +1099,7 @@ Partial Class frmMainscreen4
         Me.myOSK.FlashInterval = 500
         Me.myOSK.holdDraw = False
         Me.myOSK.Lit = True
-        Me.myOSK.Location = New System.Drawing.Point(396, 111)
+        Me.myOSK.Location = New System.Drawing.Point(394, 111)
         Me.myOSK.Name = "myOSK"
         Me.myOSK.RedAlert = LCARS.LCARSalert.Normal
         Me.myOSK.Size = New System.Drawing.Size(73, 40)
@@ -1142,21 +1142,21 @@ Partial Class frmMainscreen4
         Me.pnlMain.Size = New System.Drawing.Size(311, 443)
         Me.pnlMain.TabIndex = 75
         '
-        'pnlProgs
+        'pnlStart
         '
-        Me.pnlProgs.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.pnlStart.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.pnlProgs.Controls.Add(Me.myProgsNext)
-        Me.pnlProgs.Controls.Add(Me.fbProgramPages)
-        Me.pnlProgs.Controls.Add(Me.pnlPrograms)
-        Me.pnlProgs.Controls.Add(Me.myProgsUp)
-        Me.pnlProgs.Controls.Add(Me.myProgsBack)
-        Me.pnlProgs.Location = New System.Drawing.Point(0, 157)
-        Me.pnlProgs.Name = "pnlProgs"
-        Me.pnlProgs.Size = New System.Drawing.Size(238, 443)
-        Me.pnlProgs.TabIndex = 73
-        Me.pnlProgs.Tag = "9"
-        Me.pnlProgs.Visible = False
+        Me.pnlStart.Controls.Add(Me.myProgsNext)
+        Me.pnlStart.Controls.Add(Me.fbProgramPages)
+        Me.pnlStart.Controls.Add(Me.pnlPrograms)
+        Me.pnlStart.Controls.Add(Me.myProgsUp)
+        Me.pnlStart.Controls.Add(Me.myProgsBack)
+        Me.pnlStart.Location = New System.Drawing.Point(0, 157)
+        Me.pnlStart.Name = "pnlStart"
+        Me.pnlStart.Size = New System.Drawing.Size(238, 443)
+        Me.pnlStart.TabIndex = 73
+        Me.pnlStart.Tag = "9"
+        Me.pnlStart.Visible = False
         '
         'myProgsNext
         '
@@ -1346,7 +1346,7 @@ Partial Class frmMainscreen4
         Me.pnlBatt.ResumeLayout(False)
         Me.pnlBatt.PerformLayout()
         Me.pnlTray.ResumeLayout(False)
-        Me.pnlProgs.ResumeLayout(False)
+        Me.pnlStart.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -1357,7 +1357,7 @@ Partial Class frmMainscreen4
     Friend WithEvents myStartMenu As LCARS.Controls.FlatButton
     Friend WithEvents pnlMain As System.Windows.Forms.Panel
     Friend WithEvents pnlApps As System.Windows.Forms.Panel
-    Friend WithEvents pnlProgs As System.Windows.Forms.Panel
+    Friend WithEvents pnlStart As System.Windows.Forms.Panel
     Friend WithEvents myAlert As LCARS.Controls.FlatButton
     Friend WithEvents myEngineering As LCARS.Controls.FlatButton
     Friend WithEvents myModeSelect As LCARS.Controls.FlatButton

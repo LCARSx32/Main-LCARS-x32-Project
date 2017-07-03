@@ -1,44 +1,34 @@
 
 Public Class frmMainscreen4
     Implements IAutohide
-    Dim isInit As Boolean = False
-    Public myBusiness As New modBusiness
+
+    private myBusiness As modBusiness
 
     Public Function getAutohideEdges() As IAutohide.AutohideEdges Implements IAutohide.getAutohideEdges
         Return IAutohide.AutohideEdges.Top
     End Function
 
-    Public Sub New(ByVal ScreenIndex As Integer)
+    Public Sub New(ByVal b As modBusiness)
         InitializeComponent()
-        myBusiness.ScreenIndex = ScreenIndex
-        myBusiness.init(Me)
-    End Sub
-
-    Private Sub frmMainscreen4_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Me.Bounds = Screen.AllScreens(myBusiness.ScreenIndex).Bounds
-        Me.Show()
-        Application.DoEvents()
-        isInit = True
-        pnlMainBar_SizeChanged(New Object, New System.EventArgs)
-        myBusiness.mainTimer.Enabled = True
+        Me.myBusiness = b
     End Sub
 
     Private Sub pnlMainBar_SizeChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles pnlMainBar.SizeChanged
-        If isInit Then
+        If myBusiness IsNot Nothing AndAlso myBusiness.isInit Then
             Dim mainWidth As Integer = pnlMainBar.Width
             Dim mainHeight As Integer = Me.Height - (myStartMenu.Bottom + 6)
             Dim mainLeft As Integer = 0
             Dim mainTop As Integer = myStartMenu.Bottom + 6
 
             If myBusiness.progShowing And Not myBusiness.userButtonsShowing Then
-                mainWidth = pnlMainBar.Width - (pnlProgs.Right + 6)
-                mainLeft = pnlProgs.Right + 6
+                mainWidth = pnlMainBar.Width - (pnlStart.Right + 6)
+                mainLeft = pnlStart.Right + 6
             ElseIf myBusiness.userButtonsShowing And Not myBusiness.progShowing Then
                 mainWidth = gridUserButtons.Left - 6
                 mainLeft = 0
             ElseIf myBusiness.userButtonsShowing And myBusiness.progShowing Then
-                mainWidth = (gridUserButtons.Left - 6) - (pnlProgs.Right + 6)
-                mainLeft = pnlProgs.Right + 6
+                mainWidth = (gridUserButtons.Left - 6) - (pnlStart.Right + 6)
+                mainLeft = pnlStart.Right + 6
             End If
 
             pnlMain.Bounds = New Rectangle(mainLeft, mainTop, mainWidth, mainHeight)
@@ -47,8 +37,8 @@ Public Class frmMainscreen4
     End Sub
 
     Private Sub myStartMenu_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles myStartMenu.Click
-        pnlProgs.Visible = Not pnlProgs.Visible
-        myBusiness.progShowing = pnlProgs.Visible
+        pnlStart.Visible = Not pnlStart.Visible
+        myBusiness.progShowing = pnlStart.Visible
         myBusiness.userButtonsShowing = gridUserButtons.Visible
         pnlMainBar_SizeChanged(sender, e)
     End Sub

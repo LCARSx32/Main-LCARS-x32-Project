@@ -338,7 +338,9 @@ Public Class frmStartup
                 'Add desktop, working area, empty modBusiness, and form
                 For i As Integer = curBusiness.Count To Screen.AllScreens.Length - 1
                     CreateDesktop(i)
-                    StartingWorkingArea.Add(Screen.AllScreens(i).Bounds)
+                    If Not shellMode Then
+                        StartingWorkingArea.Add(Screen.AllScreens(i).Bounds)
+                    End If
                     loadForm(i)
                 Next
             Else
@@ -347,13 +349,13 @@ Public Class frmStartup
                 'Remove desktop, working area, form, and modBusiness
                 'Loop runs backwards to avoid indexing changes
                 For i As Integer = curBusiness.Count - 1 To Screen.AllScreens.Length Step -1
-                    curBusiness(i).mainTimer.Stop()
-                    curBusiness(i).tmrAutohide.Stop()
-                    curBusiness(i).myForm.Dispose()
+                    curBusiness(i).ShutdownScreen()
                     curBusiness.RemoveAt(i)
                     Me.Controls.Remove(curDesktop(i))
                     curDesktop.RemoveAt(i)
-                    StartingWorkingArea.RemoveAt(i)
+                    If Not shellMode Then
+                        StartingWorkingArea.RemoveAt(i)
+                    End If
                 Next
             End If
         End If
@@ -400,22 +402,22 @@ Public Class frmStartup
     End Sub
 
     Private Sub loadForm(ByVal i As Integer)
-        curBusiness.Add(Nothing)
-        Dim myForm As New Form
+        Dim b As New modBusiness(i)
+        curBusiness.Add(b)
+        Dim myForm As Form
         Select Case modSettings.MainScreen(i)
             Case 1
-                myForm = New frmMainscreen1(i)
+                myForm = New frmMainscreen1(b)
             Case 2
-                myForm = New frmMainscreen2(i)
+                myForm = New frmMainscreen2(b)
             Case 3
-                myForm = New frmMainscreen3(i)
+                myForm = New frmMainscreen3(b)
             Case 4
-                myForm = New frmMainscreen4(i)
+                myForm = New frmMainscreen4(b)
             Case Else
                 myForm = New frmFirstRun
         End Select
-        myForm.Show()
-        myForm.BringToFront()
+        b.init(myForm)
     End Sub
 
     Private Sub setBackBounds()

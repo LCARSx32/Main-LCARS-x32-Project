@@ -1,62 +1,39 @@
 Public Class frmMainscreen1
     Implements IAutohide
 
-    Dim isInit As Boolean
-    Public myBusiness As New modBusiness
+    Private myBusiness As modBusiness
 
     Public Function getAutohideEdges() As IAutohide.AutohideEdges Implements IAutohide.getAutohideEdges
         Return IAutohide.AutohideEdges.Top Or IAutohide.AutohideEdges.Left
     End Function
 
-    Public Sub New(ByVal ScreenIndex As Integer)
+    Public Sub New(ByVal b As modBusiness)
         InitializeComponent()
-        myBusiness.ScreenIndex = ScreenIndex
-        myBusiness.init(Me)
-    End Sub
-
-    Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Me.Bounds = Screen.AllScreens(myBusiness.ScreenIndex).Bounds
-        Me.Show()
-        Application.DoEvents()
-        isInit = True
-        pnlMainBar_Resize(sender, e)
-        myBusiness.mainTimer.Enabled = True
+        Me.myBusiness = b
     End Sub
 
     Private Sub myStart_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles myStartMenu.Click
         pnlStart.Visible = Not pnlStart.Visible
+        fbBlock.Visible = Not pnlStart.Visible
+        elbStart.Visible = pnlStart.Visible
         If pnlStart.Visible Then
-            fbBlock.Visible = False
-            elbStart.Visible = True
-            Application.DoEvents()
-            pnlMainContainer.Width = Me.Width - pnlStart.Width
             pnlMainContainer.Left = pnlStart.Width
-            pnlStart.BringToFront()
+            pnlMainContainer.Width = Me.Width - pnlStart.Width
         Else
-            elbStart.Visible = False
-            fbBlock.Visible = True
-            Application.DoEvents()
-            pnlMainContainer.Width = Me.Width
             pnlMainContainer.Left = 0
+            pnlMainContainer.Width = Me.Width
         End If
-        pnlMainBar_Resize(sender, e)
-    End Sub
-
-    Private Sub pnlMainContainer_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles pnlMainContainer.Resize
-        pnlMainBar_Resize(sender, e)
     End Sub
 
     Private Sub ArrowButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ArrowButton1.Click
         If Not pnlMainBar.Top = 0 Then
             pnlMainBar.Top = 0
-            myClock.Visible = False
             pnlMainBar.Height = Me.Height
             ArrowButton1.ArrowDirection = LCARS.LCARSarrowDirection.Down
             myBusiness.myClock = fbClock
         Else
             pnlMainBar.Top = Elbow2.Bottom + 6
             pnlMainBar.Height = Me.Height - Elbow2.Bottom - 6
-            myClock.Visible = True
             ArrowButton1.ArrowDirection = LCARS.LCARSarrowDirection.Up
             myBusiness.myClock = myClock
             fbClock.ButtonText = "X32"
@@ -78,7 +55,7 @@ Public Class frmMainscreen1
     End Sub
 
     Private Sub pnlMainBar_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles pnlMainBar.Resize
-        If isInit Then
+        If myBusiness IsNot Nothing AndAlso myBusiness.isInit Then
             Dim myRect As New Rectangle
 
             myRect.Location = New Point(fbStartFill.Width + 6, FlatButton11.Bottom + 6)
