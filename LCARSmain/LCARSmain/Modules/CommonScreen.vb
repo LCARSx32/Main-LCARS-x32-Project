@@ -1,23 +1,22 @@
 ﻿Option Strict On
 
-Module CommonScreen
+Imports System.Runtime.InteropServices
+
+Public Module CommonScreen
     Public curBusiness As New List(Of modBusiness)
 
-    Public WithEvents mainTimer As New Timer
-
-    Private clockText As String = ""
-    Private lineStatus As PowerLineStatus = PowerLineStatus.Unknown
-    Private battPercent As Short = -1
-    Private barNumber As Short = -1
+    Public WithEvents mainTimer As New Timer With {.Interval = 100}
 
     Public Sub initCommonComponents(ByVal b As modBusiness)
         initClock(b)
         initPowerStatus(b)
+        initWindows(b)
     End Sub
 
     Private Sub mainTimer_tick(ByVal sender As Object, ByVal e As EventArgs) Handles mainTimer.Tick
         updateClock()
         updatePowerStatus()
+        updateWindows()
         'Update screens
         For Each myBusiness As modBusiness In curBusiness
             If myBusiness.isInit Then
@@ -25,6 +24,9 @@ Module CommonScreen
             End If
         Next
     End Sub
+
+#Region " Clock "
+    Private clockText As String = ""
 
     Private Sub initClock(ByVal b As modBusiness)
         b.myClock.Text = clockText
@@ -59,6 +61,12 @@ Module CommonScreen
             Next
         End If
     End Sub
+#End Region
+
+#Region " Power Status "
+    Private lineStatus As PowerLineStatus = PowerLineStatus.Unknown
+    Private battPercent As Short = -1
+    Private barNumber As Short = -1
 
     Private Sub initPowerStatus(ByVal b As modBusiness)
         b.myBattPercent.Text = battPercent & "%"
@@ -113,4 +121,158 @@ Module CommonScreen
             barNumber = newBarNumber
         End If
     End Sub
+#End Region
+
+#Region " Window tracking "
+    Private windowList As New Dictionary(Of Integer, ExternalApp)
+    Private newWindowList As New Dictionary(Of Integer, ExternalApp)
+    Private topmostWindow As Integer = 0
+
+    <Flags()> _
+    Public Enum WindowUpdateFlags As Integer
+        None = 0
+        Text = 1
+        State = 2
+    End Enum
+
+    Private Sub initWindows(ByVal b As modBusiness)
+        Dim bScreen As Integer = MonitorFromWindow(b.myForm.Handle.ToInt32(), MONITOR_DEFAULTTONEAREST)
+        For Each app As ExternalApp In windowList.Values
+            If app.hScreen = bScreen Then
+                b.AddWindow(app)
+            End If
+        Next
+    End Sub
+
+    Private Sub updateWindows()
+        'Get new window information
+        newWindowList.Clear()
+        EnumWindows(New EnumCallBack(AddressOf fEnumWindowsCallBack), 0)
+        Dim newTopmost As Integer = GetForegroundWindow()
+
+        'See which screens are available
+        Dim screenDict As New Dictionary(Of Integer, modBusiness)
+        For Each b As modBusiness In curBusiness
+            If b.isInit Then
+                screenDict.Add(MonitorFromWindow(b.myForm.Handle.ToInt32(), MONITOR_DEFAULTTONEAREST), b)
+            End If
+        Next
+
+        'Get the list of windows to remove
+        Dim removeList As New List(Of Integer)
+        For Each myKey As Integer In windowList.Keys
+            If Not newWindowList.ContainsKey(myKey) Then
+                removeList.Add(myKey)
+            End If
+        Next
+        For Each myKey As Integer In removeList
+            Dim removedApp As ExternalApp = windowList(myKey)
+            If screenDict.ContainsKey(removedApp.hScreen) Then
+                screenDict(removedApp.hScreen).RemoveWindow(removedApp)
+                'If not in the screen list, assume that it's already gone
+            End If
+            windowList.Remove(myKey)
+        Next
+
+        'Update or add remaining windows
+        For Each mykey As Integer In newWindowList.Keys
+            Dim newApp As ExternalApp = newWindowList(mykey)
+            If windowList.ContainsKey(mykey) Then
+                Dim oldApp As ExternalApp = windowList(mykey)
+                If newApp.hScreen = oldApp.hScreen Then
+                    'Update window properties
+                    Dim flags As WindowUpdateFlags = WindowUpdateFlags.None
+                    If newApp.Text <> oldApp.Text Then
+                        oldApp.Text = newApp.Text
+                        flags = WindowUpdateFlags.Text
+                    End If
+                    If newApp.Minimized <> oldApp.Minimized Then
+                        oldApp.Minimized = newApp.Minimized
+                        flags = flags Or WindowUpdateFlags.State
+                    End If
+                    If flags <> WindowUpdateFlags.None AndAlso _
+                            screenDict.ContainsKey(oldApp.hScreen) Then
+                        screenDict(oldApp.hScreen).UpdateWindow(oldApp, flags)
+                    End If
+                Else
+                    'Remove from old screen, then add to new screen
+                    If screenDict.ContainsKey(oldApp.hScreen) Then
+                        screenDict(oldApp.hScreen).RemoveWindow(oldApp)
+                    End If
+                    windowList(mykey) = newApp
+                    If screenDict.ContainsKey(newApp.hScreen) Then
+                        screenDict(newApp.hScreen).AddWindow(newApp)
+                    Else
+                        'TODO: Add default handler
+                    End If
+                End If
+            Else
+                windowList.Add(mykey, newWindowList(mykey))
+                If screenDict.ContainsKey(newApp.hScreen) Then
+                    screenDict(newApp.hScreen).AddWindow(newApp)
+                Else
+                    'TODO: Add default handler
+                End If
+            End If
+        Next
+        If newTopmost <> topmostWindow Then
+            If windowList.ContainsKey(topmostWindow) Then
+                windowList(topmostWindow).topmost = False
+            End If
+            If windowList.ContainsKey(newTopmost) Then
+                windowList(newTopmost).topmost = True
+            End If
+            topmostWindow = newTopmost
+        End If
+    End Sub
+
+    Private Function fEnumWindowsCallBack(ByVal hwnd As Integer, ByVal lParam As Integer) As Integer
+        Const continueEnumeration As Integer = 1 ' True
+        Const stopEnumration As Integer = 0 ' False
+        'Stop if main timer disabled
+        If Not mainTimer.Enabled Then Return stopEnumration
+        'Hidden windows should not be shown
+        If Not IsWindowVisible(hwnd) Then Return continueEnumeration
+        'Windows with a parent should not be shown
+        If GetParent(hwnd) <> 0 Then Return continueEnumeration
+
+        Dim bNoOwner As Boolean = (GetWindow(hwnd, GW_OWNER) = 0)
+        Dim lExStyle As Integer = GetWindowLong_Safe(hwnd, GWL_EXSTYLE)
+        Dim toolWindow As Boolean = (lExStyle And WS_EX_TOOLWINDOW) = 0
+        Dim appWindow As Boolean = (lExStyle And WS_EX_APPWINDOW) = WS_EX_APPWINDOW
+        Dim modernApp As Boolean = (lExStyle And WS_EX_NOREDIRECTIONBITMAP) = WS_EX_NOREDIRECTIONBITMAP
+
+        If ((toolWindow And bNoOwner) Or (appWindow And Not bNoOwner)) Then
+            If modernApp Then
+                'Check to see if it's suspended
+                Dim pid As Integer = 0
+                GetWindowThreadProcessId(hwnd, pid) 'Return value ignored
+                Dim proc As Process = Process.GetProcessById(pid)
+                If proc IsNot Nothing Then
+                    If proc.Threads(0).WaitReason = ThreadWaitReason.Suspended Then
+                        Return continueEnumeration
+                    End If
+                    If proc.ProcessName = "ApplicationFrameHost" Then
+                        Return continueEnumeration
+                    End If
+                Else
+                    Return continueEnumeration
+                End If
+            End If
+
+            'Check to see if it's on the current virtual desktop
+            Try
+                If Not (modernApp OrElse VirtualDesktops.IsWindowOnCurrentVirtualDesktop(New IntPtr(hwnd))) Then
+                    Return continueEnumeration
+                End If
+            Catch ex As COMException
+            End Try
+
+            Dim myApp As New ExternalApp(hwnd)
+            newWindowList.Add(hwnd, myApp)
+        End If
+        Return continueEnumeration
+    End Function
+
+#End Region
 End Module

@@ -5,12 +5,6 @@ Imports LCARS.x32
 public Class modBusiness
 
 #Region " Structures "
-
-    Private Class ExternalApp
-        Public hWnd As Integer
-        Public MainWindowText As String
-    End Class
-
     Public Structure UserButtonInfo
         Dim color As String
         Dim Name As String
@@ -89,13 +83,10 @@ public Class modBusiness
     Dim curProgIndex As Integer
 
     'External application management
-    Dim myWindows As New List(Of ExternalApp) 'Current list of windows
-    Dim WindowList As New List(Of ExternalApp) 'Used by fEnumWindows
     Dim curTop As Integer
-
-    'Time Format
-    Dim timeFormat As String = "h:mm:sstt"
-    Dim dateFormat As String = "M/d/yyyy"
+    Dim windowMap As New Dictionary(Of ExternalApp, TaskbarItem)()
+    Dim taskbarList As New List(Of TaskbarItem)()
+    Dim taskbarOffset As Integer = 0
 
     'On Screen Keyboard (OSK)
     Dim OSKproc As New Process
@@ -106,7 +97,6 @@ public Class modBusiness
     Dim hideCount As Integer = 0
 
     Private oldArea As Rectangle
-
 #End Region
 
 #End Region
@@ -124,48 +114,6 @@ public Class modBusiness
             myForm.Dispose()
         End If
     End Sub
-
-    Private Function fEnumWindowsCallBack(ByVal hwnd As Integer, ByVal lParam As Integer) As Integer
-        'Abort if we're closing/closed
-        If myForm.IsDisposed Then Return False
-        'Invisible windows should not be shown
-        If Not IsWindowVisible(hwnd) Then Return True
-        'Windows with a parent should not be shown
-        If GetParent(hwnd) <> 0 Then Return True
-
-        Dim bNoOwner As Integer = (GetWindow(hwnd, GW_OWNER) = 0)
-        Dim lExStyle As Integer = GetWindowLong_Safe(hwnd, GWL_EXSTYLE)
-
-        'This if statement is from code found at http://msdntracker.blogspot.com/2008/03/list-currently-opened-windows-with.html
-        If ((((lExStyle And WS_EX_TOOLWINDOW) = 0) And bNoOwner) Or _
-            ((lExStyle And WS_EX_APPWINDOW) And Not bNoOwner)) _
-            And ((lExStyle And WS_EX_NOREDIRECTIONBITMAP) = 0) Then
-
-            'Check to see if it's actually on this screen
-            Dim screen1, screen2 As Integer
-            screen1 = MonitorFromWindow(hwnd, MONITOR_DEFAULTTONEAREST)
-            screen2 = MonitorFromWindow(myForm.Handle, MONITOR_DEFAULTTONEAREST)
-            If screen1 <> screen2 Then Return True
-
-            'Check to see if it's on the current virtual desktop
-            Try
-                If Not VirtualDesktops.IsWindowOnCurrentVirtualDesktop(hwnd) Then Return True
-            Catch ex As COMException
-            End Try
-
-            ' Get the window's caption.
-            Dim sWindowText As String = Space(256)
-            Dim lReturn As Integer = GetWindowText(hwnd, sWindowText, Len(sWindowText))
-            If lReturn <> 0 Then
-                ' Add it to our list.
-                sWindowText = Left(sWindowText, lReturn)
-
-                Dim myApp As New ExternalApp() With {.hWnd = hwnd, .MainWindowText = Trim(sWindowText)}
-                WindowList.Add(myApp)
-            End If
-        End If
-        Return True
-    End Function
 
     Public Sub myStartMenu_Click(ByVal sender As Object, ByVal e As System.EventArgs)
 
@@ -510,6 +458,10 @@ public Class modBusiness
         AddHandler rightArrow.Click, AddressOf rightArrow_Click
         myAppsPanel.Controls.Add(rightArrow)
 
+        windowMap.Clear()
+        taskbarList.Clear()
+        taskbarOffset = 0
+
 
         myUserButtonCollection.Clear()
         loadUserButtons()
@@ -585,10 +537,9 @@ public Class modBusiness
                 Dim MyCopyData As IntPtr = Marshal.AllocCoTaskMem(Marshal.SizeOf(GetType(COPYDATASTRUCT)))
                 Marshal.StructureToPtr(myRectData, MyCopyData, False)
                 'Do not use SendDataToLinkedWindows; it uses PostMessage, not SendMessage
+                Dim screen2 As Integer = MonitorFromWindow(myForm.Handle, MONITOR_DEFAULTTONEAREST)
                 For Each targetHandle As IntPtr In LinkedWindows
-                    Dim screen1, screen2 As Integer
-                    screen1 = MonitorFromWindow(targetHandle, MONITOR_DEFAULTTONEAREST)
-                    screen2 = MonitorFromWindow(myForm.Handle, MONITOR_DEFAULTTONEAREST)
+                    Dim screen1 = MonitorFromWindow(targetHandle, MONITOR_DEFAULTTONEAREST)
                     If screen1 = screen2 Then
                         Dim res As Integer = SendMessage(targetHandle, WM_COPYDATA, myDesktop.Handle, MyCopyData)
                     End If
@@ -617,113 +568,6 @@ public Class modBusiness
             End If
         End If
 
-
-
-        'Refresh the taskbar if necessary
-        WindowList.Clear()
-        'find all the windows
-        EnumWindows(New EnumCallBack(AddressOf fEnumWindowsCallBack), 0)
-
-        Dim windowChange As Boolean = False
-        'Check for new windows
-        For Each curWindow As ExternalApp In WindowList
-            Dim found As Boolean = False
-            For Each myWindow As ExternalApp In myWindows
-                If myWindow.hWnd = curWindow.hWnd Then
-                    myWindow.MainWindowText = curWindow.MainWindowText
-                    found = True
-                    Exit For
-                End If
-            Next
-            If Not found Then
-                myWindows.Add(curWindow)
-                windowChange = True
-            End If
-        Next
-        Dim countOffset As Integer = 0
-        For i As Integer = 0 To myWindows.Count() - 1
-            Dim myWindow As ExternalApp = myWindows(i - countOffset)
-            Dim found As Boolean = False
-            For Each curWindow As ExternalApp In WindowList
-                If myWindow.hWnd = curWindow.hWnd Then
-                    found = True
-                    Exit For
-                End If
-            Next
-            If Not found Then
-                myWindows.Remove(myWindow)
-                countOffset += 1
-                windowChange = True
-            End If
-        Next
-
-
-        'refresh the taskbar
-        If windowChange Then
-            Dim beeping As Boolean = modSettings.ButtonBeep
-
-            myAppsPanel.Controls.Clear()
-            myAppsPanel.Controls.Add(leftArrow)
-
-            For intloop As Integer = 0 To myWindows.Count() - 1
-                Dim myButton As New LCARS.Controls.HalfPillButton
-                Dim myCloseButton As New LCARS.Controls.FlatButton
-                myCloseButton.Size = New Point(20, 25)
-                myCloseButton.Text = "X"
-                myCloseButton.ButtonTextAlign = ContentAlignment.MiddleCenter
-                myCloseButton.Color = LCARS.LCARScolorStyles.FunctionOffline
-                myCloseButton.Left = (((myAppsPanel.Controls.Count - 1) \ 2) * 134) + 31
-                myCloseButton.Top = 0
-                myCloseButton.Data = myWindows(intloop).hWnd
-                myCloseButton.Beeping = beeping
-                myCloseButton.Tag = (intloop + 6).ToString
-                myAppsPanel.Controls.Add(myCloseButton)
-
-                AddHandler myCloseButton.Click, AddressOf CloseButton_Click
-
-
-                myButton.Text = myWindows(intloop).MainWindowText
-                myButton.Size = New Point(100, 25)
-                myButton.Left = (((myAppsPanel.Controls.Count - 1) \ 2) * 134) + 56
-                myButton.Top = 0
-                myButton.Beeping = False
-                myButton.Data = myWindows(intloop).hWnd
-                myButton.Beeping = beeping
-                myButton.ButtonTextAlign = ContentAlignment.TopLeft
-                myButton.Lit = (getWindowState(myWindows(intloop).hWnd) <> WindowStates.MINIMIZED)
-
-                myButton.Tag = (intloop + 6).ToString
-
-                myAppsPanel.Controls.Add(myButton)
-
-                AddHandler myButton.Click, AddressOf AppsButton_Click
-            Next
-            myAppsPanel.Controls.Add(rightArrow)
-            rightArrow.BringToFront()
-            myAppsPanel.Tag = (myWindows.Count() + 6).ToString
-        Else
-            For Each curWindow As ExternalApp In myWindows
-                For Each myButton As LCARS.LCARSbuttonClass In myAppsPanel.Controls
-                    If CInt(myButton.Data) = curWindow.hWnd Then
-
-                        If getWindowState(curWindow.hWnd) = WindowStates.MINIMIZED Then
-                            If myButton.Lit Then
-                                myButton.Lit = False
-                            End If
-                        Else
-                            If myButton.Lit = False Then
-                                myButton.Lit = True
-                            End If
-                        End If
-                        If myButton.Color = LCARS.LCARScolorStyles.FunctionOffline Then Continue For
-                        If Not myButton.ButtonText.Equals(curWindow.MainWindowText, StringComparison.CurrentCultureIgnoreCase) Then
-                            myButton.ButtonText = curWindow.MainWindowText
-                        End If
-                    End If
-                Next
-            Next
-        End If
-
         'Display topmost window
         Dim topmost As Integer = GetForegroundWindow()
         If curTop <> topmost AndAlso Not myForm.IsDisposed AndAlso topmost <> myForm.Handle.ToInt32() Then
@@ -739,53 +583,46 @@ public Class modBusiness
             Next
         End If
     End Sub
+
+#Region " Taskbar buttons "
+    Public Sub AddWindow(ByVal window As ExternalApp)
+        Dim newItem As New TaskbarItem(window, Me, taskbarList.Count)
+        newItem.Offset = taskbarOffset
+        taskbarList.Add(newItem)
+        windowMap.Add(window, newItem)
+    End Sub
+
+    Public Sub RemoveWindow(ByVal window As ExternalApp)
+        Dim oldItem As TaskbarItem = windowMap(window)
+        windowMap.Remove(window)
+        For i As Integer = oldItem.Index + 1 To taskbarList.Count - 1
+            taskbarList(i).Index = i - 1
+        Next
+        taskbarList.RemoveAt(oldItem.Index)
+        oldItem.Remove()
+    End Sub
+
+    Public Sub UpdateWindow(ByVal window As ExternalApp, ByVal flags As WindowUpdateFlags)
+        windowMap(window).Update(window, flags)
+    End Sub
+
     'Moves the taskbar buttons to the right
     Private Sub rightArrow_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        For Each myControl As LCARS.LCARSbuttonClass In myAppsPanel.Controls
-            If Not (myControl.Name.ToLower = "leftarrow" Or myControl.Name.ToLower = "rightarrow") Then
-                myControl.Left -= 134
-            End If
+        taskbarOffset += 1
+        For Each myTaskbarItem As TaskbarItem In taskbarList
+            myTaskbarItem.Offset = taskbarOffset
         Next
     End Sub
+
     'Moves the taskbar buttons to the left
     Private Sub leftArrow_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        For Each myControl As LCARS.LCARSbuttonClass In myAppsPanel.Controls
-            If Not (myControl.Name.ToLower = "leftarrow" Or myControl.Name.ToLower = "rightarrow") Then
-                myControl.Left += 134
-            End If
+        taskbarOffset -= 1
+        For Each myTaskbarItem As TaskbarItem In taskbarList
+            myTaskbarItem.Offset = taskbarOffset
         Next
     End Sub
-    'Red "X" next to the taskbar button
-    Private Sub CloseButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        CloseWindow(CInt(CType(sender, LCARS.LCARSbuttonClass).Data))
-    End Sub
-    'Taskbar button
-    Private Sub AppsButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Dim myButton As LCARS.LCARSbuttonClass = CType(sender, LCARS.LCARSbuttonClass)
-        Dim myHandle As Integer = myButton.Data
 
-        If myButton.Color = LCARS.LCARScolorStyles.PrimaryFunction Then
-            If getWindowState(myHandle) <> WindowStates.MINIMIZED Then
-                myButton.Data2 = getWindowState(myHandle)
-                SetWindowState(myHandle, WindowStates.MINIMIZED)
-            Else
-                If Not myButton.Data2 Is Nothing Then
-                    SetWindowState(myHandle, myButton.Data2)
-                Else
-                    SetWindowState(myHandle, WindowStates.NORMAL)
-                End If
-            End If
-        Else
-            If getWindowState(myHandle) = WindowStates.MINIMIZED Then
-                If Not myButton.Data2 Is Nothing Then
-                    SetWindowState(myHandle, myButton.Data2)
-                Else
-                    SetWindowState(myHandle, WindowStates.NORMAL)
-                End If
-            End If
-            SetTopWindow(myHandle)
-        End If
-    End Sub
+#End Region
 
     Public Sub loadUserButtons()
 
@@ -1034,7 +871,7 @@ public Class modBusiness
                 If File.Exists(myprocess.StartInfo.FileName) Then
                     myprocess.StartInfo.WorkingDirectory = Path.GetDirectoryName(myprocess.StartInfo.FileName)
                 End If
-                launchProcessOnScreen(myProcess)
+                launchProcessOnScreen(myprocess)
             Catch ex As Exception
                 Debug.Print("Failed to interpret command line")
                 'Throw it to shell and see what happens.

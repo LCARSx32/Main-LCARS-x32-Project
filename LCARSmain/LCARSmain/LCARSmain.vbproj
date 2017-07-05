@@ -82,8 +82,10 @@
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="Classes\cWrapExitWindows.vb" />
+    <Compile Include="Classes\ExternalApp.vb" />
     <Compile Include="Classes\LCARSSound.vb" />
     <Compile Include="Classes\LCScreenImage.vb" />
+    <Compile Include="Classes\TaskbarItem.vb" />
     <Compile Include="Classes\Voice\VoiceCmd.vb" />
     <Compile Include="Classes\WAVReader.vb" />
     <Compile Include="Forms\frmAlerts.Designer.vb">

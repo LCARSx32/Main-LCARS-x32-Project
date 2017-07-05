@@ -94,6 +94,10 @@ Module modCommon
     Public Declare Function MonitorFromWindow Lib "user32" (ByVal hwnd As Int32, ByVal dwFlags As Int32) As Int32
 
     Public Declare Auto Function GetMonitorInfo Lib "user32" (ByVal hMonitor As Int32, ByRef lpmi As MONITORINFO) As Integer
+
+    Public Declare Function GetWindowThreadProcessId Lib "user32" (<[In]()> ByVal hwnd As Int32, _
+                                                                   <Out()> ByRef lpdwProcessId As Integer _
+                                                                   ) As Integer
 #End Region
 
 #Region " Working Area "
@@ -177,6 +181,9 @@ Module modCommon
     Declare Function GetWindow Lib "user32" (ByVal hwnd As Integer, ByVal wCmd As Integer) As Integer
     Private Declare Function GetWindowLongPtr Lib "user32" Alias "GetWindowLongPtrA" (ByVal hwnd As IntPtr, ByVal nIndex As Integer) As IntPtr
     Private Declare Function GetWindowLong Lib "user32" Alias "GetWindowLongA" (ByVal hwnd As IntPtr, ByVal nIndex As Integer) As Integer
+    Public Function GetWindowLong_Safe(ByVal hwnd As Integer, ByVal nIndex As Integer) As Integer
+        Return GetWindowLong_Safe(New IntPtr(hwnd), nIndex)
+    End Function
     Public Function GetWindowLong_Safe(ByVal hwnd As IntPtr, ByVal nIndex As Integer) As Integer
         If IntPtr.Size = 4 Then
             Return GetWindowLong(hwnd, nIndex)
@@ -195,7 +202,7 @@ Module modCommon
     End Function
 
     Declare Function GetWindowText Lib "user32" Alias "GetWindowTextA" (ByVal hwnd As Integer, ByVal lpString As String, ByVal cch As Integer) As Integer
-    Declare Function IsWindowVisible Lib "user32" (ByVal hwnd As IntPtr) As Boolean
+    Declare Function IsWindowVisible Lib "user32" (ByVal hwnd As Integer) As Boolean
     '
     ' Constants used with APIs
     '
@@ -527,10 +534,10 @@ Public Enum SetWindowPosFlags As UInteger
         SetForegroundWindow(hWnd)
     End Sub
 
-    Public Function getWindowState(ByVal hwnd As IntPtr) As WindowStates
+    Public Function getWindowState(ByVal hwnd As Integer) As WindowStates
         Dim myPlacement As New WINDOWPLACEMENT
         myPlacement.Length = Marshal.SizeOf(myPlacement)
-        GetWindowPlacement(hwnd.ToInt32, myPlacement)
+        GetWindowPlacement(hwnd, myPlacement)
         Return myPlacement.ShowCmd
     End Function
 
@@ -573,6 +580,7 @@ Public Enum SetWindowPosFlags As UInteger
         For Each myBusiness As modBusiness In curBusiness
             myBusiness.ShutdownScreen()
         Next
+        mainTimer.Stop()
 
         ''''''''''''''''''''''''''''''''''''''''
         '''' Restore Windows Explorer State ''''
