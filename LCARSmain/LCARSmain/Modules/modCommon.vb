@@ -33,10 +33,10 @@ Module modCommon
     End Structure
 
     Public Structure RECT
-        Dim Left_Renamed As Integer
-        Dim Top_Renamed As Integer
-        Dim Right_Renamed As Integer
-        Dim Bottom_Renamed As Integer
+        Dim Left As Integer
+        Dim Top As Integer
+        Dim Right As Integer
+        Dim Bottom As Integer
     End Structure
 
     Public Structure WINDOWPLACEMENT
@@ -543,10 +543,10 @@ Public Enum SetWindowPosFlags As UInteger
 
     Public Sub resizeWorkingArea(ByVal x As Integer, ByVal y As Integer, ByVal width As Integer, ByVal height As Integer)
         Dim myArea As New RECT
-        myArea.Left_Renamed = x
-        myArea.Top_Renamed = y
-        myArea.Right_Renamed = x + width
-        myArea.Bottom_Renamed = y + height
+        myArea.Left = x
+        myArea.Top = y
+        myArea.Right = x + width
+        myArea.Bottom = y + height
 
         Dim ptr As IntPtr = IntPtr.Zero
 

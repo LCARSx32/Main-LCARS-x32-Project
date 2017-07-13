@@ -236,7 +236,7 @@ public Class modBusiness
         modSettings.ShowTrayIcons(ScreenIndex) = True
         Dim myPlacement As New WINDOWPLACEMENT
         GetWindowPlacement(hTrayIcons, myPlacement)
-        Dim myWidth As Integer = myPlacement.rcNormalPosition.Right_Renamed - myPlacement.rcNormalPosition.Left_Renamed
+        Dim myWidth As Integer = myPlacement.rcNormalPosition.Right - myPlacement.rcNormalPosition.Left
 
         myAppsPanel.Width -= (myWidth + myHideTrayButton.Width) - myTrayPanel.Width
         myTrayPanel.Left -= (myWidth + myHideTrayButton.Width) - myTrayPanel.Width
@@ -499,12 +499,11 @@ public Class modBusiness
     End Sub
 
     Public Sub mainTimer_Tick(ByVal sender As Object, ByVal e As System.EventArgs)
-        If myForm.IsDisposed Then Return ' Don't access a disposed screen.
         'Deal with resizing the tray icon panel if necessary
         If myHideTrayButton.Visible Then
             Dim myPlacement As New WINDOWPLACEMENT
             GetWindowPlacement(hTrayIcons, myPlacement)
-            Dim myWidth As Integer = myPlacement.rcNormalPosition.Right_Renamed - myPlacement.rcNormalPosition.Left_Renamed
+            Dim myWidth As Integer = myPlacement.rcNormalPosition.Right - myPlacement.rcNormalPosition.Left
             If myWidth <> myWidth + myHideTrayButton.Width Then
                 myAppsPanel.Width -= (myWidth + myHideTrayButton.Width) - myTrayPanel.Width
                 myTrayPanel.Left -= (myWidth + myHideTrayButton.Width) - myTrayPanel.Width
@@ -862,10 +861,10 @@ public Class modBusiness
         myPlacement.ptMaxPosition.X = myForm.Left
         myPlacement.ptMaxPosition.Y = myForm.Top
 
-        myPlacement.rcNormalPosition.Right_Renamed -= myPlacement.rcNormalPosition.Left_Renamed - myForm.Left
-        myPlacement.rcNormalPosition.Bottom_Renamed -= myPlacement.rcNormalPosition.Top_Renamed - myForm.Top
-        myPlacement.rcNormalPosition.Left_Renamed = myForm.Location.X
-        myPlacement.rcNormalPosition.Top_Renamed = myForm.Location.Y
+        myPlacement.rcNormalPosition.Right -= myPlacement.rcNormalPosition.Left - myForm.Left
+        myPlacement.rcNormalPosition.Bottom -= myPlacement.rcNormalPosition.Top - myForm.Top
+        myPlacement.rcNormalPosition.Left = myForm.Location.X
+        myPlacement.rcNormalPosition.Top = myForm.Location.Y
 
         If myPlacement.ShowCmd = WindowStates.MAXIMIZED Then
             isMax = True
