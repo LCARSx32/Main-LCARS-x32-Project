@@ -17,7 +17,6 @@ Public Class frmMainscreen2
 
     Private Sub myStart_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles myStartMenu.Click
         pnlStart.Visible = Not pnlStart.Visible
-        myBusiness.progShowing = pnlStart.Visible
         If pnlStart.Visible Then
             pnlMain.Left += pnlStart.Width + 6
             pnlMain.Width -= pnlStart.Width + 6

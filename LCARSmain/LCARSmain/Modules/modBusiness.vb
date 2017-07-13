@@ -66,8 +66,6 @@ public Class modBusiness
     Public leftArrow As LCARS.Controls.ArrowButton
     Public rightArrow As LCARS.Controls.ArrowButton
 
-    Public progShowing As Boolean
-    Public userButtonsShowing As Boolean
     Public isInit As Boolean = False
 
 #End Region
@@ -82,7 +80,6 @@ public Class modBusiness
     Dim curProgIndex As Integer
 
     'External application management
-    Dim curTop As Integer
     Dim windowMap As New Dictionary(Of ExternalApp, TaskbarItem)()
     Dim taskbarList As New List(Of TaskbarItem)()
     Dim taskbarOffset As Integer = 0
@@ -206,7 +203,6 @@ public Class modBusiness
     Public Sub myUserButtons_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         UserButtonsPanel.Visible = Not UserButtonsPanel.Visible
         myButtonManager.Visible = UserButtonsPanel.Visible
-        userButtonsShowing = UserButtonsPanel.Visible
     End Sub
 
     Public Sub myDocuments_Click(ByVal sender As Object, ByVal e As System.EventArgs)
@@ -453,7 +449,6 @@ public Class modBusiness
         windowMap.Clear()
         taskbarList.Clear()
         taskbarOffset = 0
-
 
         myUserButtonCollection.Clear()
         loadUserButtons()
@@ -941,7 +936,7 @@ public Class modBusiness
                 End If
             End If
             If rootHwnd = myForm.Handle Or isAtEdge Or _
-                    progShowing = True Or userButtonsShowing = True Then
+                    ProgramsPanel.Visible Or UserButtonsPanel.Visible Then
                 hideCount = 0
 
                 If Not autohide = IAutohide.AutoHideModes.Visible Or myForm.Visible = False Then
@@ -961,7 +956,6 @@ public Class modBusiness
         Else
             tmrAutohide.Enabled = False
         End If
-
     End Sub
 
     Public Sub myform_MouseScroll(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)
