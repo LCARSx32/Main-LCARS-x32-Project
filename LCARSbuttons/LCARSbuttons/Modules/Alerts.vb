@@ -95,14 +95,17 @@ Public Module Alerts
     ''' <param name="ID">ID of alert to call</param>
     ''' <param name="hwnd">Handle of calling object</param>
     ''' <remarks>Use this if you already have the alert ID.</remarks>
-    Public Sub ActivateAlert(ByVal ID As Integer, ByVal hwnd As System.IntPtr)
+    Public Sub ActivateAlert(ByVal ID As Int32, ByVal hwnd As System.IntPtr)
         Dim myData As New COPYDATASTRUCT
         myData.dwData = New IntPtr(11)
-        myData.cdData = ID
+        myData.cdData = Runtime.InteropServices.Marshal.SizeOf(ID)
+        myData.lpData = Runtime.InteropServices.Marshal.AllocCoTaskMem(myData.cdData)
+        Runtime.InteropServices.Marshal.StructureToPtr(ID, myData.lpData, False)
         Dim MyCopyData As IntPtr = System.Runtime.InteropServices.Marshal.AllocCoTaskMem(System.Runtime.InteropServices.Marshal.SizeOf(GetType(COPYDATASTRUCT)))
         System.Runtime.InteropServices.Marshal.StructureToPtr(myData, MyCopyData, True)
 
         SendMessage(New IntPtr(CInt(GetSetting("LCARS x32", "Application", "MainWindowHandle", "0"))), WM_COPYDATA, hwnd, MyCopyData)
+        Runtime.InteropServices.Marshal.FreeCoTaskMem(myData.lpData)
         System.Runtime.InteropServices.Marshal.FreeCoTaskMem(MyCopyData)
     End Sub
 

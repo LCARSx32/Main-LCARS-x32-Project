@@ -15,7 +15,7 @@ Public Class frmStartup
     'Desktop panels
     Public curDesktop As New List(Of Panel)
 
-    <System.Diagnostics.DebuggerStepThrough()> _
+    '<System.Diagnostics.DebuggerStepThrough()> _
     Protected Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
         'This method intercepts incomming window messages and looks to see if any need to be read
 
@@ -119,7 +119,14 @@ Public Class frmStartup
                     m.Result = 1
 
                     'Set an alert
-                    GeneralAlert(myData.cdData)
+                    Dim alertID As Int32
+                    If Marshal.SizeOf(alertID) = myData.cdData Then
+                        alertID = Marshal.PtrToStructure(myData.lpData, GetType(Int32))
+                        GeneralAlert(alertID)
+                    Else
+                        GeneralAlert(0)
+                    End If
+
                 Case 12
                     m.Result = 1
                     'Alerts updated
