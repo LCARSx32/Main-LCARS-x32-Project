@@ -94,8 +94,6 @@ public Class modBusiness
     'Autohide
     Dim autohide As IAutohide.AutoHideModes
     Dim hideCount As Integer = 0
-
-    Private oldArea As Rectangle
 #End Region
 
 #End Region
@@ -471,8 +469,6 @@ public Class modBusiness
         If modSettings.ShowTrayIcons(ScreenIndex) = True Then
             myShowTrayButton_Click(New Object, New EventArgs)
         End If
-
-        oldArea = Screen.AllScreens(ScreenIndex).WorkingArea
     End Sub
 
     Public Sub loadLanguage()
@@ -509,47 +505,6 @@ public Class modBusiness
 
     Public Sub mainTimer_Tick(ByVal sender As Object, ByVal e As System.EventArgs)
         If myForm.IsDisposed Then Return ' Don't access a disposed screen.
-
-        Dim adjustedBounds As Rectangle
-        If autohide = IAutohide.AutoHideModes.Hidden Then
-            adjustedBounds = Screen.FromHandle(myForm.Handle).Bounds
-        Else
-            adjustedBounds = New Rectangle(myMainPanel.PointToScreen(Drawing.Point.Empty), myMainPanel.Size)
-        End If
-        If Not adjustedBounds = oldArea Then
-            'The working area needs to change, alert the linked windows (if there are any).
-            If LinkedWindows.Count > 0 Then
-                Dim myRectData As New COPYDATASTRUCT
-                myRectData.dwData = 100
-                myRectData.cdData = Marshal.SizeOf(GetType(Rectangle))
-
-                Dim myPtr As IntPtr = Marshal.AllocCoTaskMem(myRectData.cdData)
-                Marshal.StructureToPtr(adjustedBounds, myPtr, False)
-
-                myRectData.lpData = myPtr
-
-                Dim MyCopyData As IntPtr = Marshal.AllocCoTaskMem(Marshal.SizeOf(GetType(COPYDATASTRUCT)))
-                Marshal.StructureToPtr(myRectData, MyCopyData, False)
-                'Do not use SendDataToLinkedWindows; it uses PostMessage, not SendMessage
-                Dim screen2 As Integer = MonitorFromWindow(myForm.Handle, MONITOR_DEFAULTTONEAREST)
-                'TODO: Drop linked window if SendMessage returns 0
-                For Each targetHandle As IntPtr In LinkedWindows
-                    Dim screen1 = MonitorFromWindow(targetHandle, MONITOR_DEFAULTTONEAREST)
-                    If screen1 = screen2 Then
-                        Dim res As Integer = SendMessage(targetHandle, WM_COPYDATA, myDesktop.Handle, MyCopyData)
-                    End If
-                Next
-                Marshal.FreeCoTaskMem(MyCopyData)
-                Marshal.FreeCoTaskMem(myPtr)
-            End If
-            resizeWorkingArea(adjustedBounds.X, adjustedBounds.Y, adjustedBounds.Width, adjustedBounds.Height)
-            oldArea = adjustedBounds
-        End If
-
-        If myDesktop.curDesktop(ScreenIndex).Size <> adjustedBounds.Size Then
-            updateDesktopBounds(ScreenIndex, adjustedBounds)
-        End If
-
         'Deal with resizing the tray icon panel if necessary
         If myHideTrayButton.Visible Then
             Dim myPlacement As New WINDOWPLACEMENT
@@ -950,6 +905,7 @@ public Class modBusiness
             tmrAutohide.Enabled = False
             hideCount = 0
             myForm.Visible = True
+            UpdateWorkingArea()
         Else
             autohide = IAutohide.AutoHideModes.Visible
             tmrAutohide.Enabled = True
@@ -991,6 +947,7 @@ public Class modBusiness
                 If Not autohide = IAutohide.AutoHideModes.Visible Or myForm.Visible = False Then
                     myForm.Visible = True
                     autohide = IAutohide.AutoHideModes.Visible
+                    UpdateWorkingArea()
                 End If
             End If
 
@@ -999,15 +956,12 @@ public Class modBusiness
             Else
                 autohide = IAutohide.AutoHideModes.Hidden
                 myForm.Visible = False
+                UpdateWorkingArea()
             End If
         Else
             tmrAutohide.Enabled = False
         End If
 
-    End Sub
-
-    Public Sub resetWorkingArea()
-        oldArea = New Rectangle(1, 1, 1, 1)
     End Sub
 
     Public Sub myform_MouseScroll(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)
@@ -1030,5 +984,45 @@ public Class modBusiness
         Dim mainRect As New Rectangle(myForm.PointToClient(myMainPanel.PointToScreen(Drawing.Point.Empty)), myMainPanel.Size)
         myRegion.Exclude(mainRect)
         myForm.Region = myRegion
+        UpdateWorkingArea()
+    End Sub
+
+    Public Sub UpdateWorkingArea()
+        Dim adjustedBounds As Rectangle
+        If autohide = IAutohide.AutoHideModes.Hidden Then
+            adjustedBounds = Screen.FromHandle(myForm.Handle).Bounds
+        Else
+            adjustedBounds = New Rectangle(myMainPanel.PointToScreen(Drawing.Point.Empty), myMainPanel.Size)
+        End If
+        'Update working area and desktop panel
+        resizeWorkingArea(adjustedBounds.X, adjustedBounds.Y, adjustedBounds.Width, adjustedBounds.Height)
+        updateDesktopBounds(ScreenIndex, adjustedBounds)
+        'Alert the linked windows (if there are any).
+        If LinkedWindows.Count > 0 Then
+            Dim myRectData As New COPYDATASTRUCT
+            myRectData.dwData = 100
+            myRectData.cdData = Marshal.SizeOf(GetType(Rectangle))
+
+            Dim myPtr As IntPtr = Marshal.AllocCoTaskMem(myRectData.cdData)
+            Marshal.StructureToPtr(adjustedBounds, myPtr, False)
+
+            myRectData.lpData = myPtr
+
+            Dim MyCopyData As IntPtr = Marshal.AllocCoTaskMem(Marshal.SizeOf(GetType(COPYDATASTRUCT)))
+            Marshal.StructureToPtr(myRectData, MyCopyData, False)
+            Dim screen1 As Integer = MonitorFromWindow(myForm.Handle, MONITOR_DEFAULTTONEAREST)
+            Dim i As Integer = LinkedWindows.Count - 1
+            While i > 0
+                Dim screen2 = MonitorFromWindow(LinkedWindows(i), MONITOR_DEFAULTTONEAREST)
+                If screen1 <> screen2 Then Continue While
+                Dim res As Integer = SendMessage(LinkedWindows(i), WM_COPYDATA, myDesktop.Handle, MyCopyData)
+                If res = 0 Then 'Drop linked window if not responding
+                    LinkedWindows.RemoveAt(i)
+                End If
+                i -= 1
+            End While
+            Marshal.FreeCoTaskMem(MyCopyData)
+            Marshal.FreeCoTaskMem(myPtr)
+        End If
     End Sub
 End Class

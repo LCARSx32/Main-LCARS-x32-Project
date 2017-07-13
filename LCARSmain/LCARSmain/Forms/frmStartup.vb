@@ -369,7 +369,7 @@ Public Class frmStartup
         End If
         For Each b As modBusiness In curBusiness
             b.myForm.Bounds = Screen.AllScreens(b.ScreenIndex).Bounds
-            b.resetWorkingArea()
+            b.UpdateWorkingArea()
         Next
     End Sub
 
