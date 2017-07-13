@@ -18,12 +18,22 @@ Public Class frmMainscreen2
     Private Sub myStart_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles myStartMenu.Click
         pnlStart.Visible = Not pnlStart.Visible
         myBusiness.progShowing = pnlStart.Visible
-        myBusiness.userButtonsShowing = gridUserButtons.Visible
-        pnlMainBar_SizeChanged(sender, e)
+        If pnlStart.Visible Then
+            pnlMain.Left += pnlStart.Width + 6
+            pnlMain.Width -= pnlStart.Width + 6
+        Else
+            pnlMain.Left -= pnlStart.Width + 6
+            pnlMain.Width += pnlStart.Width + 6
+        End If
     End Sub
 
     Private Sub fbUserButtons_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles myUserButtons.Click
         fbUBEndcap.Visible = Not gridUserButtons.Visible
+        If gridUserButtons.Visible Then
+            pnlMain.Width += gridUserButtons.Width + 6
+        Else
+            pnlMain.Width -= gridUserButtons.Width + 6
+        End If
     End Sub
 
     Private Sub abExpand_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles abExpand.Click
@@ -58,30 +68,6 @@ Public Class frmMainscreen2
 
             pnlTray.Left = pnlTopPanel.Width - pnlTray.Width - 40
             pnlApps.Width = pnlTray.Left - pnlApps.Left
-        End If
-    End Sub
-
-    Private Sub pnlMainBar_SizeChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles pnlMainBar.SizeChanged
-        If myBusiness IsNot Nothing AndAlso myBusiness.isInit Then
-            Dim myRect As New Rectangle
-
-            If myBusiness.progShowing Then
-                myRect.X = pnlStart.Right + 6
-            Else
-                myRect.X = 0
-            End If
-
-            If myBusiness.userButtonsShowing Then
-                myRect.Width = (gridUserButtons.Left - 6) - myRect.X
-            Else
-                myRect.Width = (fbBarRight.Left - 6) - myRect.X
-            End If
-
-            myRect.Y = pnlMainTop.Bottom + 6
-            myRect.Height = (fbMainLower.Top - 6) - myRect.Y
-
-            pnlMain.Bounds = myRect
-            myBusiness.UpdateRegion()
         End If
     End Sub
 

@@ -1176,9 +1176,9 @@ Partial Class frmMainscreen2
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlMain.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.pnlMain.Location = New System.Drawing.Point(266, 25)
+        Me.pnlMain.Location = New System.Drawing.Point(0, 25)
         Me.pnlMain.Name = "pnlMain"
-        Me.pnlMain.Size = New System.Drawing.Size(521, 455)
+        Me.pnlMain.Size = New System.Drawing.Size(993, 455)
         Me.pnlMain.TabIndex = 50
         '
         'Elbow2

@@ -67,7 +67,6 @@ Partial Class frmMainscreen4
         Me.myHelp = New LCARS.Controls.FlatButton
         Me.myOSK = New LCARS.Controls.FlatButton
         Me.myButtonManager = New LCARS.Controls.FlatButton
-        Me.pnlMain = New System.Windows.Forms.Panel
         Me.pnlStart = New System.Windows.Forms.Panel
         Me.myProgsNext = New LCARS.Controls.ArrowButton
         Me.fbProgramPages = New LCARS.Controls.FlatButton
@@ -77,6 +76,7 @@ Partial Class frmMainscreen4
         Me.myMusic = New LCARS.Controls.FlatButton
         Me.MyComp = New LCARS.Controls.FlatButton
         Me.gridUserButtons = New LCARS.Controls.ButtonGrid
+        Me.pnlMain = New System.Windows.Forms.Panel
         Me.pnlMainBar.SuspendLayout()
         Me.pnlBatt.SuspendLayout()
         Me.pnlTray.SuspendLayout()
@@ -112,11 +112,11 @@ Partial Class frmMainscreen4
         Me.pnlMainBar.Controls.Add(Me.myHelp)
         Me.pnlMainBar.Controls.Add(Me.myOSK)
         Me.pnlMainBar.Controls.Add(Me.myButtonManager)
-        Me.pnlMainBar.Controls.Add(Me.pnlMain)
         Me.pnlMainBar.Controls.Add(Me.pnlStart)
         Me.pnlMainBar.Controls.Add(Me.myMusic)
         Me.pnlMainBar.Controls.Add(Me.MyComp)
         Me.pnlMainBar.Controls.Add(Me.gridUserButtons)
+        Me.pnlMainBar.Controls.Add(Me.pnlMain)
         Me.pnlMainBar.Location = New System.Drawing.Point(0, 0)
         Me.pnlMainBar.Name = "pnlMainBar"
         Me.pnlMainBar.Size = New System.Drawing.Size(800, 600)
@@ -1132,16 +1132,6 @@ Partial Class frmMainscreen4
         Me.myButtonManager.Text = "MANAGE YOUR PROGRAMS"
         Me.myButtonManager.Visible = False
         '
-        'pnlMain
-        '
-        Me.pnlMain.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom), System.Windows.Forms.AnchorStyles)
-        Me.pnlMain.BackColor = System.Drawing.Color.Black
-        Me.pnlMain.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.pnlMain.Location = New System.Drawing.Point(245, 157)
-        Me.pnlMain.Name = "pnlMain"
-        Me.pnlMain.Size = New System.Drawing.Size(311, 443)
-        Me.pnlMain.TabIndex = 75
-        '
         'pnlStart
         '
         Me.pnlStart.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -1330,6 +1320,18 @@ Partial Class frmMainscreen4
         Me.gridUserButtons.Size = New System.Drawing.Size(238, 417)
         Me.gridUserButtons.TabIndex = 71
         Me.gridUserButtons.Visible = False
+        '
+        'pnlMain
+        '
+        Me.pnlMain.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pnlMain.BackColor = System.Drawing.Color.Black
+        Me.pnlMain.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.pnlMain.Location = New System.Drawing.Point(0, 157)
+        Me.pnlMain.Name = "pnlMain"
+        Me.pnlMain.Size = New System.Drawing.Size(800, 443)
+        Me.pnlMain.TabIndex = 75
         '
         'frmMainscreen4
         '

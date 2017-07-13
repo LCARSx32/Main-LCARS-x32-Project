@@ -18,7 +18,6 @@ public Class modBusiness
 
     'Common form components
     Public myForm As Form
-    Public myMainBar As Panel
     Public myMainPanel As Panel
     Public ProgramsPanel As LCARS.Controls.WindowlessContainer
     Public UserButtonsPanel As LCARS.Controls.ButtonGrid
@@ -210,8 +209,6 @@ public Class modBusiness
         UserButtonsPanel.Visible = Not UserButtonsPanel.Visible
         myButtonManager.Visible = UserButtonsPanel.Visible
         userButtonsShowing = UserButtonsPanel.Visible
-        myMainBar.Width -= 1
-        myMainBar.Width += 1
     End Sub
 
     Public Sub myDocuments_Click(ByVal sender As Object, ByVal e As System.EventArgs)
@@ -326,8 +323,7 @@ public Class modBusiness
         myForm.Bounds = Screen.AllScreens(ScreenIndex).Bounds
         myForm.Show()
         isInit = True
-        myMainBar.Width += 1
-        myMainBar.Width -= 1
+        UpdateRegion()
         initCommonComponents(Me)
     End Sub
 
@@ -348,9 +344,7 @@ public Class modBusiness
         'Set the various panels and buttons that are controlled by this module.
         'These panels and buttons behave exactly the same on each mainscreen.
         ProgramsPanel = myForm.Controls.Find("pnlPrograms", True)(0)
-        'ProgramsButton = myForm.Controls.Find("fbPrograms", True)(0)
         myMainPanel = myForm.Controls.Find("pnlMain", True)(0)
-        myMainBar = myForm.Controls.Find("pnlMainBar", True)(0)
         UserButtonsPanel = myForm.Controls.Find("gridUserButtons", True)(0)
         myAppsPanel = myForm.Controls.Find("pnlApps", True)(0)
 
@@ -362,7 +356,6 @@ public Class modBusiness
         myModeSelect = myForm.Controls.Find("myModeSelect", True)(0)
         myDeactivate = myForm.Controls.Find("myDeactivate", True)(0)
         myAlert = myForm.Controls.Find("myAlert", True)(0)
-        'myYellowAlert = myForm.Controls.Find("myYellowAlert", True)(0)
         myDestruct = myForm.Controls.Find("myDestruct", True)(0)
         myClock = myForm.Controls.Find("myClock", True)(0)
         myPhoto = myForm.Controls.Find("myPhoto", True)(0)
@@ -403,6 +396,7 @@ public Class modBusiness
         'event handlers:
         AddHandler myForm.Load, AddressOf myForm_Load
         AddHandler ProgramsPanel.Resize, AddressOf ProgramsPanel_Resize
+        AddHandler myMainPanel.Resize, AddressOf myMainPanel_Resize
         AddHandler myStartMenu.Click, AddressOf myStartMenu_Click
         AddHandler myComputer.Click, AddressOf myCompButton_Click
         AddHandler mySettings.Click, AddressOf mySettingsButton_Click
@@ -538,6 +532,7 @@ public Class modBusiness
                 Marshal.StructureToPtr(myRectData, MyCopyData, False)
                 'Do not use SendDataToLinkedWindows; it uses PostMessage, not SendMessage
                 Dim screen2 As Integer = MonitorFromWindow(myForm.Handle, MONITOR_DEFAULTTONEAREST)
+                'TODO: Drop linked window if SendMessage returns 0
                 For Each targetHandle As IntPtr In LinkedWindows
                     Dim screen1 = MonitorFromWindow(targetHandle, MONITOR_DEFAULTTONEAREST)
                     If screen1 = screen2 Then
@@ -1021,6 +1016,12 @@ public Class modBusiness
             previousProgPage()
         Else
             nextProgPage()
+        End If
+    End Sub
+
+    Public Sub myMainPanel_Resize(ByVal sender As Object, ByVal e As EventArgs)
+        If isInit Then
+            UpdateRegion()
         End If
     End Sub
 

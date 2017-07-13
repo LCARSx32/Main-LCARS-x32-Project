@@ -23,7 +23,6 @@ Partial Class frmMainscreen1
         Dim LcarScolor2 As LCARS.LCARScolor = New LCARS.LCARScolor
         Me.pnlMainContainer = New System.Windows.Forms.Panel
         Me.myAlertListButton = New LCARS.Controls.ArrowButton
-        Me.myClock = New System.Windows.Forms.Label
         Me.pnlMainBar = New System.Windows.Forms.Panel
         Me.gridUserButtons = New LCARS.Controls.ButtonGrid
         Me.mySpeech = New LCARS.Controls.FlatButton
@@ -85,6 +84,7 @@ Partial Class frmMainscreen1
         Me.HideTrayButton = New LCARS.Controls.ArrowButton
         Me.ShowTrayButton = New LCARS.Controls.HalfPillButton
         Me.FlatButton1 = New LCARS.Controls.FlatButton
+        Me.myClock = New System.Windows.Forms.Label
         Me.pnlStart = New System.Windows.Forms.Panel
         Me.elbStart2 = New LCARS.Controls.Elbow
         Me.fbDesktop = New LCARS.Controls.FlatButton
@@ -160,17 +160,6 @@ Partial Class frmMainscreen1
         Me.myAlertListButton.Size = New System.Drawing.Size(20, 20)
         Me.myAlertListButton.TabIndex = 63
         Me.myAlertListButton.Tag = "10"
-        '
-        'myClock
-        '
-        Me.myClock.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.myClock.Font = New System.Drawing.Font("LCARS", 48.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.myClock.Location = New System.Drawing.Point(316, 0)
-        Me.myClock.Name = "myClock"
-        Me.myClock.Size = New System.Drawing.Size(484, 66)
-        Me.myClock.TabIndex = 62
-        Me.myClock.Text = "LOADING CLOCK"
-        Me.myClock.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'pnlMainBar
         '
@@ -465,7 +454,7 @@ Partial Class frmMainscreen1
         Me.pnlMain.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.pnlMain.Location = New System.Drawing.Point(107, 37)
         Me.pnlMain.Name = "pnlMain"
-        Me.pnlMain.Size = New System.Drawing.Size(687, 429)
+        Me.pnlMain.Size = New System.Drawing.Size(693, 437)
         Me.pnlMain.TabIndex = 57
         '
         'FlatButton2
@@ -1554,6 +1543,17 @@ Partial Class frmMainscreen1
         Me.FlatButton1.Size = New System.Drawing.Size(97, 5)
         Me.FlatButton1.TabIndex = 13
         Me.FlatButton1.Tag = "9"
+        '
+        'myClock
+        '
+        Me.myClock.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.myClock.Font = New System.Drawing.Font("LCARS", 48.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.myClock.Location = New System.Drawing.Point(316, 0)
+        Me.myClock.Name = "myClock"
+        Me.myClock.Size = New System.Drawing.Size(484, 66)
+        Me.myClock.TabIndex = 62
+        Me.myClock.Text = "LOADING CLOCK"
+        Me.myClock.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'pnlStart
         '

@@ -26,7 +26,6 @@ Partial Class frmMainscreen3
         Me.HalfPillButton1 = New LCARS.Controls.HalfPillButton
         Me.myClock = New LCARS.Controls.FlatButton
         Me.myStartMenu = New LCARS.Controls.FlatButton
-        Me.pnlMain = New System.Windows.Forms.Panel
         Me.FlatButton5 = New LCARS.Controls.FlatButton
         Me.StandardButton4 = New LCARS.Controls.StandardButton
         Me.myHelp = New LCARS.Controls.FlatButton
@@ -87,6 +86,7 @@ Partial Class frmMainscreen3
         Me.Elbow1 = New LCARS.Controls.Elbow
         Me.gridUserButtons = New LCARS.Controls.ButtonGrid
         Me.StandardButton3 = New LCARS.Controls.StandardButton
+        Me.pnlMain = New System.Windows.Forms.Panel
         Me.pnlMainBar.SuspendLayout()
         Me.pnlTray.SuspendLayout()
         Me.pnlStart.SuspendLayout()
@@ -102,7 +102,6 @@ Partial Class frmMainscreen3
         Me.pnlMainBar.Controls.Add(Me.HalfPillButton1)
         Me.pnlMainBar.Controls.Add(Me.myClock)
         Me.pnlMainBar.Controls.Add(Me.myStartMenu)
-        Me.pnlMainBar.Controls.Add(Me.pnlMain)
         Me.pnlMainBar.Controls.Add(Me.FlatButton5)
         Me.pnlMainBar.Controls.Add(Me.StandardButton4)
         Me.pnlMainBar.Controls.Add(Me.myHelp)
@@ -116,6 +115,7 @@ Partial Class frmMainscreen3
         Me.pnlMainBar.Controls.Add(Me.pnlStart)
         Me.pnlMainBar.Controls.Add(Me.gridUserButtons)
         Me.pnlMainBar.Controls.Add(Me.StandardButton3)
+        Me.pnlMainBar.Controls.Add(Me.pnlMain)
         Me.pnlMainBar.Location = New System.Drawing.Point(0, 0)
         Me.pnlMainBar.Name = "pnlMainBar"
         Me.pnlMainBar.Size = New System.Drawing.Size(800, 764)
@@ -215,16 +215,6 @@ Partial Class frmMainscreen3
         Me.myStartMenu.TabIndex = 69
         Me.myStartMenu.Tag = "1"
         Me.myStartMenu.Text = "PROGRAMS"
-        '
-        'pnlMain
-        '
-        Me.pnlMain.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom), System.Windows.Forms.AnchorStyles)
-        Me.pnlMain.BackColor = System.Drawing.Color.Black
-        Me.pnlMain.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.pnlMain.Location = New System.Drawing.Point(367, 29)
-        Me.pnlMain.Name = "pnlMain"
-        Me.pnlMain.Size = New System.Drawing.Size(213, 704)
-        Me.pnlMain.TabIndex = 75
         '
         'FlatButton5
         '
@@ -1450,10 +1440,10 @@ Partial Class frmMainscreen3
         Me.myProgsUp.FlashInterval = 500
         Me.myProgsUp.holdDraw = False
         Me.myProgsUp.Lit = True
-        Me.myProgsUp.Location = New System.Drawing.Point(-1, 646)
+        Me.myProgsUp.Location = New System.Drawing.Point(0, 646)
         Me.myProgsUp.Name = "myProgsUp"
         Me.myProgsUp.RedAlert = LCARS.LCARSalert.Normal
-        Me.myProgsUp.Size = New System.Drawing.Size(232, 30)
+        Me.myProgsUp.Size = New System.Drawing.Size(231, 30)
         Me.myProgsUp.TabIndex = 46
         Me.myProgsUp.Tag = "1"
         Me.myProgsUp.Text = "BACK"
@@ -1552,10 +1542,10 @@ Partial Class frmMainscreen3
         Me.Elbow1.FlashInterval = 500
         Me.Elbow1.holdDraw = False
         Me.Elbow1.Lit = True
-        Me.Elbow1.Location = New System.Drawing.Point(-1, 0)
+        Me.Elbow1.Location = New System.Drawing.Point(0, 0)
         Me.Elbow1.Name = "Elbow1"
         Me.Elbow1.RedAlert = LCARS.LCARSalert.Normal
-        Me.Elbow1.Size = New System.Drawing.Size(362, 54)
+        Me.Elbow1.Size = New System.Drawing.Size(361, 54)
         Me.Elbow1.TabIndex = 0
         Me.Elbow1.Tag = "20"
         Me.Elbow1.Text = "LCARS"
@@ -1601,6 +1591,18 @@ Partial Class frmMainscreen3
         Me.StandardButton3.TabIndex = 85
         Me.StandardButton3.Tag = "0"
         Me.StandardButton3.Text = "4"
+        '
+        'pnlMain
+        '
+        Me.pnlMain.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pnlMain.BackColor = System.Drawing.Color.Black
+        Me.pnlMain.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.pnlMain.Location = New System.Drawing.Point(0, 29)
+        Me.pnlMain.Name = "pnlMain"
+        Me.pnlMain.Size = New System.Drawing.Size(800, 704)
+        Me.pnlMain.TabIndex = 75
         '
         'frmMainscreen3
         '

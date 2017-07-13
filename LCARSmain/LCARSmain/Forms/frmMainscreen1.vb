@@ -54,29 +54,18 @@ Public Class frmMainscreen1
         myStartMenu.doClick(sender, e)
     End Sub
 
-    Private Sub pnlMainBar_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles pnlMainBar.Resize
-        If myBusiness IsNot Nothing AndAlso myBusiness.isInit Then
-            Dim myRect As New Rectangle
-
-            myRect.Location = New Point(fbStartFill.Width + 6, FlatButton11.Bottom + 6)
-            myRect.Size = New Size(pnlMainBar.Width - fbStartFill.Width - 6, pnlMainBar.Height - myRect.Top)
-
-            If myBusiness.userButtonsShowing Then
-                myRect.Width -= gridUserButtons.Width + 6
-            Else
-                myRect.Width = (pnlMainContainer.Width - pnlMain.Left)
-            End If
-
-            pnlMain.Bounds = myRect
-
-            myBusiness.UpdateRegion()
-        End If
-    End Sub
-
     Public Shared ReadOnly Property ScreenImage() As Image
         Get
             Return My.Resources.frmmainscreen1
         End Get
     End Property
+
+    Private Sub myUserButtons_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles myUserButtons.Click
+        If gridUserButtons.Visible Then
+            pnlMain.Width += gridUserButtons.Width + 6
+        Else
+            pnlMain.Width -= gridUserButtons.Width + 6
+        End If
+    End Sub
 End Class
 
