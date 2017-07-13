@@ -8,6 +8,14 @@ Public Class StartupPrograms
 
     Private Const RunRecordString As String = "RunStuffHasBeenRun"
     Private Const StartupRecordString As String = "StartupHasBeenRun"
+    Private Const RunKey As String = "Software\Microsoft\Windows\CurrentVersion\Run"
+    Private Const RunKey32 As String = "Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Run"
+    Private Const RunOnceKey As String = "Software\Microsoft\Windows\CurrentVersion\RunOnce"
+    Private Const RunOnceKey32 As String = "Software\Wow6432Node\Microsoft\Windows\CurrentVersion\RunOnce"
+    Private Const ApprovedBase As String = "Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\"
+    Private Const ApprovedRun As String = ApprovedBase & "Run"
+    Private Const ApprovedRun32 As String = ApprovedBase & "Run32"
+    Private Const ApprovedStartup As String = ApprovedBase & "StartupFolder"
 
 #Region " Windows API "
     Private Declare Auto Function SHRestricted Lib "Shell32" (ByVal restriction As RestrictionsEnum) As Boolean
@@ -204,8 +212,35 @@ Public Class StartupPrograms
                                                             As Integer
 #End Region
 
-    Public Shared Sub StartAll()
+    Private Enum ApprovedRecordState As Integer
+        Approved = 2
+        Disabled = 3
+    End Enum
 
+    ''' <summary>
+    ''' Used to read a record stored in a StartupApproved subkey
+    ''' </summary>
+    ''' <remarks>
+    ''' As of Windows 10 build 1607, the record is 12 bytes, with the first 4 being 
+    ''' some form of indicator of state, and the last 8 as a filetime. This structure
+    ''' is being kept for documentation, but is not actually used to avoid exceptions
+    ''' if the format changes.
+    ''' </remarks>
+    Private Structure ApprovedRecord
+        Public Sub New(ByVal bytes() As Byte)
+            If bytes.Length = 12 Then
+                State = BitConverter.ToInt32(bytes, 0)
+                ModifiedTime = DateTime.FromFileTime(BitConverter.ToInt64(bytes, 4))
+            Else
+                State = -1
+            End If
+        End Sub
+
+        Public State As Integer
+        Public ModifiedTime As DateTime
+    End Structure
+
+    Public Shared Sub StartAll()
         Try
             Dim runKeysRun As Boolean = checkCompletion(RunRecordString)
             If Not runKeysRun Then
@@ -229,57 +264,77 @@ Public Class StartupPrograms
         End Try
     End Sub
 
-    Private Shared Sub processKey(ByVal key As RegistryKey, Optional ByVal delete As Boolean = False)
+    Private Shared Sub processKey(ByVal key As RegistryKey, ByVal approvedKey As RegistryKey, Optional ByVal delete As Boolean = False)
         Dim isSafe As Boolean = Not (SystemInformation.BootMode = BootMode.Normal)
         Dim names As String() = key.GetValueNames()
         Dim val As String
         Dim DeleteAfterRun As Boolean
+        Dim keyType As RegistryValueKind
         For Each myName As String In names
-            If Not String.IsNullOrEmpty(myName) Then
-                val = CStr(key.GetValue(myName))
+            If String.IsNullOrEmpty(myName) Then
+                Continue For
+            End If
+            keyType = key.GetValueKind(myName)
+            If Not (keyType = RegistryValueKind.String Or keyType = RegistryValueKind.ExpandString) Then
+                Debug.Print("Bad value type for key {0}", myName)
+                Continue For
+            End If
+            val = CStr(key.GetValue(myName))
 
-                'Expand environment variables if necessary
-                If key.GetValueKind(myName) = RegistryValueKind.ExpandString Then
-                    val = Environment.ExpandEnvironmentVariables(val)
-                End If
+            'Expand environment variables if necessary
+            If keyType = RegistryValueKind.ExpandString Then
+                val = Environment.ExpandEnvironmentVariables(val)
+            End If
 
-                'Check safe mode
+            'Check safe mode
+            If val.StartsWith("*") Then
+                val = val.TrimStart("*"c)
+            Else
                 If isSafe Then
-                    If val.StartsWith("*") Then
-                        val = val.TrimStart("*"c)
-                    Else
-                        Continue For
+                    Continue For
+                End If
+            End If
+
+            'Check approval
+            If approvedKey IsNot Nothing Then
+                Dim approvedObj As Object = approvedKey.GetValue(myName, Nothing)
+                If approvedObj IsNot Nothing Then
+                    If approvedKey.GetValueKind(myName) = RegistryValueKind.Binary Then
+                        Dim bytes() As Byte = CType(approvedObj, Byte())
+                        If bytes(0) <> ApprovedRecordState.Approved Then
+                            Continue For
+                        End If
                     End If
                 End If
+            End If
 
-                DeleteAfterRun = delete And val.StartsWith("!")
-                If DeleteAfterRun Then val = val.TrimStart("!"c)
-                If delete And Not DeleteAfterRun Then
-                    Try
-                        key.DeleteValue(myName)
-                    Catch ex As ArgumentException
-                        'Key already deleted?
-                    Catch ex As Security.SecurityException
-                        Debug.Print("Unable to clear runonce key: {0}, value {1}, access denied", key.Name, myName)
-                    End Try
-                End If
-
+            DeleteAfterRun = delete And val.StartsWith("!")
+            If DeleteAfterRun Then val = val.TrimStart("!"c)
+            If delete And Not DeleteAfterRun Then
                 Try
-                    val = val.Trim()
-                    Shell(val, , False)
-                Catch ex As Exception
-                    Debug.Print("Error running program {0}", val)
+                    key.DeleteValue(myName)
+                Catch ex As ArgumentException
+                    'Key already deleted?
+                Catch ex As Security.SecurityException
+                    Debug.Print("Unable to clear runonce key: {0}, value {1}, access denied", key.Name, myName)
                 End Try
+            End If
 
-                If DeleteAfterRun Then
-                    Try
-                        key.DeleteValue(myName)
-                    Catch ex As ArgumentException
-                        'Key already deleted?
-                    Catch ex As Security.SecurityException
-                        Debug.Print("Unable to clear runonce key: {0}, value {1}, access denied", key.Name, myName)
-                    End Try
-                End If
+            Try
+                val = val.Trim()
+                Shell(val, , False)
+            Catch ex As Exception
+                Debug.Print("Error running program {0}", val)
+            End Try
+
+            If DeleteAfterRun Then
+                Try
+                    key.DeleteValue(myName)
+                Catch ex As ArgumentException
+                    'Key already deleted?
+                Catch ex As Security.SecurityException
+                    Debug.Print("Unable to clear runonce key: {0}, value {1}, access denied", key.Name, myName)
+                End Try
             End If
         Next
     End Sub
@@ -288,15 +343,23 @@ Public Class StartupPrograms
         If SHRestricted(RestrictionsEnum.REST_NOCURRENTUSERRUN) Or force Then
             Return
         End If
-        Dim myKey As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Microsoft\Windows\CurrentVersion\Run", False)
+        Dim myKey As RegistryKey = Registry.CurrentUser.OpenSubKey(RunKey, False)
+        Dim approvedKey As RegistryKey = Registry.CurrentUser.OpenSubKey(ApprovedRun, False)
         If myKey IsNot Nothing Then
-            processKey(myKey)
+            processKey(myKey, approvedKey)
             myKey.Close()
         End If
-        myKey = Registry.CurrentUser.OpenSubKey("Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Run", False)
+        If approvedKey IsNot Nothing Then
+            approvedKey.Close()
+        End If
+        myKey = Registry.CurrentUser.OpenSubKey(RunKey32, False)
+        approvedKey = Registry.CurrentUser.OpenSubKey(ApprovedRun32, False)
         If myKey IsNot Nothing Then
-            processKey(myKey)
+            processKey(myKey, myKey)
             myKey.Close()
+        End If
+        If approvedKey IsNot Nothing Then
+            approvedKey.Close()
         End If
     End Sub
 
@@ -304,14 +367,14 @@ Public Class StartupPrograms
         If SHRestricted(RestrictionsEnum.REST_NOCURRENTUSERRUNONCE) Or force Then
             Return
         End If
-        Dim myKey As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Microsoft\Windows\CurrentVersion\RunOnce", True)
+        Dim myKey As RegistryKey = Registry.CurrentUser.OpenSubKey(RunOnceKey, True)
         If myKey IsNot Nothing Then
-            processKey(myKey, True)
+            processKey(myKey, Nothing, True)
             myKey.Close()
         End If
-        myKey = Registry.CurrentUser.OpenSubKey("Software\Wow6432Node\Microsoft\Windows\CurrentVersion\RunOnce", True)
+        myKey = Registry.CurrentUser.OpenSubKey(RunOnceKey32, True)
         If myKey IsNot Nothing Then
-            processKey(myKey, True)
+            processKey(myKey, Nothing, True)
             myKey.Close()
         End If
     End Sub
@@ -320,22 +383,41 @@ Public Class StartupPrograms
         If SHRestricted(RestrictionsEnum.REST_NOLOCALMACHINERUN) Or force Then
             Return
         End If
-        Dim myKey As RegistryKey = Registry.LocalMachine.OpenSubKey("Software\Microsoft\Windows\CurrentVersion\Run", False)
+        Dim myKey As RegistryKey = Registry.LocalMachine.OpenSubKey(RunKey, False)
+        Dim approvedKey As RegistryKey = Registry.LocalMachine.OpenSubKey(ApprovedRun, False)
         If myKey IsNot Nothing Then
-            processKey(myKey)
+            processKey(myKey, approvedKey)
             myKey.Close()
         End If
-        myKey = Registry.LocalMachine.OpenSubKey("Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Run", False)
+        If approvedKey IsNot Nothing Then
+            approvedKey.Close()
+        End If
+        myKey = Registry.LocalMachine.OpenSubKey(RunKey32, False)
+        approvedKey = Registry.LocalMachine.OpenSubKey(ApprovedRun32, False)
         If myKey IsNot Nothing Then
-            processKey(myKey)
+            processKey(myKey, approvedKey)
             myKey.Close()
+        End If
+        If approvedKey IsNot Nothing Then
+            approvedKey.Close()
         End If
     End Sub
 
-    Private Shared Sub ProcessFolder(ByVal folder As IO.DirectoryInfo)
+    Private Shared Sub ProcessFolder(ByVal folder As IO.DirectoryInfo, ByVal approvedKey As RegistryKey)
         Try
             For Each f As IO.FileInfo In folder.GetFiles()
                 If Not f.Name.ToLower() = "desktop.ini" Then
+                    If approvedKey IsNot Nothing Then
+                        Dim approvedObj As Object = approvedKey.GetValue(f.Name, Nothing)
+                        If approvedObj IsNot Nothing Then
+                            If approvedKey.GetValueKind(f.Name) = RegistryValueKind.Binary Then
+                                Dim bytes() As Byte = CType(approvedObj, Byte())
+                                If bytes(0) <> ApprovedRecordState.Approved Then
+                                    Continue For
+                                End If
+                            End If
+                        End If
+                    End If
                     Try
                         Process.Start(f.FullName)
                     Catch ex As Exception
@@ -352,7 +434,11 @@ Public Class StartupPrograms
         If SystemInformation.BootMode = BootMode.Normal Then
             Dim path As String = KnownFolderPaths.GetFolderPath(KnownFolderPaths.SpecialFolders.Startup)
             Dim info As New System.IO.DirectoryInfo(path)
-            ProcessFolder(info)
+            Dim approvedKey As RegistryKey = Registry.CurrentUser.OpenSubKey(ApprovedStartup, False)
+            ProcessFolder(info, approvedKey)
+            If approvedKey IsNot Nothing Then
+                approvedKey.Close()
+            End If
         End If
     End Sub
 
@@ -360,7 +446,11 @@ Public Class StartupPrograms
         If SystemInformation.BootMode = BootMode.Normal Then
             Dim path As String = KnownFolderPaths.GetFolderPath(KnownFolderPaths.SpecialFolders.Common_Startup)
             Dim info As New System.IO.DirectoryInfo(path)
-            ProcessFolder(info)
+            Dim approvedKey As RegistryKey = Registry.LocalMachine.OpenSubKey(ApprovedStartup, False)
+            ProcessFolder(info, approvedKey)
+            If approvedKey IsNot Nothing Then
+                approvedKey.Close()
+            End If
         End If
     End Sub
 
