@@ -567,21 +567,6 @@ public Class modBusiness
                 myTrayPanel.Width = myWidth + myHideTrayButton.Width
             End If
         End If
-
-        'Display topmost window
-        Dim topmost As Integer = GetForegroundWindow()
-        If curTop <> topmost AndAlso Not myForm.IsDisposed AndAlso topmost <> myForm.Handle.ToInt32() Then
-            curTop = topmost
-            For Each mybutton As LCARS.LCARSbuttonClass In myAppsPanel.Controls
-                If mybutton.Color <> LCARS.LCARScolorStyles.FunctionOffline Then
-                    If mybutton.Data = curTop Then
-                        mybutton.Color = LCARS.LCARScolorStyles.PrimaryFunction
-                    Else
-                        mybutton.Color = LCARS.LCARScolorStyles.MiscFunction
-                    End If
-                End If
-            Next
-        End If
     End Sub
 
 #Region " Taskbar buttons "
@@ -603,7 +588,7 @@ public Class modBusiness
     End Sub
 
     Public Sub UpdateWindow(ByVal window As ExternalApp, ByVal flags As WindowUpdateFlags)
-        windowMap(window).Update(window, flags)
+        windowMap(window).Update(flags)
     End Sub
 
     'Moves the taskbar buttons to the right

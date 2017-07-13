@@ -133,6 +133,7 @@ Public Module CommonScreen
         None = 0
         Text = 1
         State = 2
+        Topmost = 4
     End Enum
 
     Private Sub initWindows(ByVal b As modBusiness)
@@ -217,10 +218,18 @@ Public Module CommonScreen
         Next
         If newTopmost <> topmostWindow Then
             If windowList.ContainsKey(topmostWindow) Then
-                windowList(topmostWindow).topmost = False
+                Dim oldTop As ExternalApp = windowList(topmostWindow)
+                oldTop.topmost = False
+                If screenDict.ContainsKey(oldTop.hScreen) Then
+                    screenDict(oldTop.hScreen).UpdateWindow(oldTop, WindowUpdateFlags.Topmost)
+                End If
             End If
             If windowList.ContainsKey(newTopmost) Then
-                windowList(newTopmost).topmost = True
+                Dim newTop As ExternalApp = windowList(newTopmost)
+                newTop.topmost = True
+                If screenDict.ContainsKey(newTop.hScreen) Then
+                    screenDict(newTop.hScreen).UpdateWindow(newTop, WindowUpdateFlags.Topmost)
+                End If
             End If
             topmostWindow = newTopmost
         End If

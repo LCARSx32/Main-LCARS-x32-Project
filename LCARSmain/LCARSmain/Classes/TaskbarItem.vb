@@ -3,9 +3,12 @@
     Dim _windowButton As LCARS.Controls.HalfPillButton
     Dim _index As Integer
     Dim _offset As Integer = 0
+    Dim _app As ExternalApp
+    Dim _topmostSavedState As Boolean
     Dim b As modBusiness
 
     Public Sub New(ByVal app As ExternalApp, ByVal b As modBusiness, ByVal index As Integer)
+        _app = app
         _closeButton = New LCARS.Controls.FlatButton()
         Me.b = b
         Dim beeping As Boolean = LCARS.x32.modSettings.ButtonBeep
@@ -21,15 +24,15 @@
         End With
         _windowButton = New LCARS.Controls.HalfPillButton()
         With _windowButton
-            .Text = app.Text
             .Size = New Point(100, 25)
             .Top = 0
             .Data = app.HWND
             .Beeping = beeping
             .ButtonTextAlign = ContentAlignment.TopLeft
-            .Lit = Not app.Minimized
             AddHandler .Click, AddressOf AppsButton_Click
+            AddHandler .MouseDown, AddressOf WindowButton_MouseDown
         End With
+        Update(WindowUpdateFlags.State Or WindowUpdateFlags.Text Or WindowUpdateFlags.Topmost)
         Me.Index = index
         b.myAppsPanel.Controls.Add(_closeButton)
         b.myAppsPanel.Controls.Add(_windowButton)
@@ -57,12 +60,19 @@
         End Set
     End Property
 
-    Public Sub Update(ByVal app As ExternalApp, ByVal flags As WindowUpdateFlags)
+    Public Sub Update(ByVal flags As WindowUpdateFlags)
         If (flags And WindowUpdateFlags.State) = WindowUpdateFlags.State Then
-            _windowButton.Lit = Not app.Minimized
+            _windowButton.Lit = Not _app.Minimized
         End If
         If (flags And WindowUpdateFlags.Text) = WindowUpdateFlags.Text Then
-            _windowButton.Text = app.Text
+            _windowButton.Text = _app.Text
+        End If
+        If (flags And WindowUpdateFlags.Topmost) = WindowUpdateFlags.Topmost Then
+            If _app.topmost Then
+                _windowButton.Color = LCARS.LCARScolorStyles.PrimaryFunction
+            Else
+                _windowButton.Color = LCARS.LCARScolorStyles.MiscFunction
+            End If
         End If
     End Sub
 
@@ -78,29 +88,30 @@
 
     'Taskbar button
     Private Sub AppsButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Dim myButton As LCARS.LCARSbuttonClass = CType(sender, LCARS.LCARSbuttonClass)
-        Dim myHandle As Integer = myButton.Data
-
-        If myButton.Color = LCARS.LCARScolorStyles.PrimaryFunction Then
-            If getWindowState(myHandle) <> WindowStates.MINIMIZED Then
-                myButton.Data2 = getWindowState(myHandle)
-                SetWindowState(myHandle, WindowStates.MINIMIZED)
+        If _topmostSavedState Then
+            If getWindowState(_app.HWND) <> WindowStates.MINIMIZED Then
+                _windowButton.Data2 = getWindowState(_app.HWND)
+                SetWindowState(_app.HWND, WindowStates.MINIMIZED)
             Else
-                If Not myButton.Data2 Is Nothing Then
-                    SetWindowState(myHandle, myButton.Data2)
+                If Not _windowButton.Data2 Is Nothing Then
+                    SetWindowState(_app.HWND, _windowButton.Data2)
                 Else
-                    SetWindowState(myHandle, WindowStates.NORMAL)
+                    SetWindowState(_app.HWND, WindowStates.NORMAL)
                 End If
             End If
         Else
-            If getWindowState(myHandle) = WindowStates.MINIMIZED Then
-                If Not myButton.Data2 Is Nothing Then
-                    SetWindowState(myHandle, myButton.Data2)
+            If getWindowState(_app.HWND) = WindowStates.MINIMIZED Then
+                If Not _windowButton.Data2 Is Nothing Then
+                    SetWindowState(_app.HWND, _windowButton.Data2)
                 Else
-                    SetWindowState(myHandle, WindowStates.NORMAL)
+                    SetWindowState(_app.HWND, WindowStates.NORMAL)
                 End If
             End If
-            SetTopWindow(myHandle)
+            SetTopWindow(_app.HWND)
         End If
+    End Sub
+
+    Private Sub WindowButton_MouseDown(ByVal sender As Object, ByVal e As EventArgs)
+        _topmostSavedState = _app.topmost
     End Sub
 End Class
