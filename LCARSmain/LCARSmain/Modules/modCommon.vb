@@ -98,6 +98,7 @@ Module modCommon
     Public Declare Function GetWindowThreadProcessId Lib "user32" (<[In]()> ByVal hwnd As Int32, _
                                                                    <Out()> ByRef lpdwProcessId As Integer _
                                                                    ) As Integer
+    Public Declare Function IsHungAppWindow Lib "user32" (<[In]()> ByVal hwnd As Int32) As Boolean
 #End Region
 
 #Region " Working Area "
@@ -201,7 +202,8 @@ Module modCommon
         End If
     End Function
 
-    Declare Function GetWindowText Lib "user32" Alias "GetWindowTextA" (ByVal hwnd As Integer, ByVal lpString As String, ByVal cch As Integer) As Integer
+    Public Declare Auto Function GetWindowText Lib "user32" (ByVal hwnd As Integer, ByVal lpString As String, ByVal cch As Integer) As Integer
+    Public Declare Auto Function GetWindowTextLength Lib "user32" (ByVal hwnd As Int32) As Integer
     Declare Function IsWindowVisible Lib "user32" (ByVal hwnd As Integer) As Boolean
     '
     ' Constants used with APIs

@@ -7,15 +7,17 @@ Public Class ExternalApp
     Private _topmost As Boolean = False
     Private _minimized As Boolean
 
+    Private Const windowTextLen As Integer = 256
+
     Public Sub New(ByVal hwnd As Integer)
         _hwnd = hwnd
         'Get window text
-        Dim sWindowText As String = Space(256)
-        Dim lReturn As Integer = GetWindowText(hwnd, sWindowText, Len(sWindowText))
+        Dim sWindowText As String = Space(windowTextLen)
+        Dim lReturn As Integer = GetWindowText(hwnd, sWindowText, windowTextLen)
         If lReturn <> 0 Then
             _text = Left(sWindowText, lReturn)
         Else
-            _text = "[No caption]"
+            _text = ""
         End If
         'Get screen
         _hScreen = MonitorFromWindow(hwnd, MONITOR_DEFAULTTONEAREST)

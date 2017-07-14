@@ -248,25 +248,19 @@ Public Module CommonScreen
 
         If ((toolWindow And bNoOwner) Or (appWindow And Not bNoOwner)) Then
             If modernApp Then
-                'Check to see if it's suspended
-                Dim pid As Integer = 0
-                GetWindowThreadProcessId(hwnd, pid) 'Return value ignored
-                Dim proc As Process = Process.GetProcessById(pid)
-                If proc IsNot Nothing Then
-                    If proc.Threads(0).WaitReason = ThreadWaitReason.Suspended Then
-                        Return continueEnumeration
-                    End If
-                    If proc.ProcessName = "ApplicationFrameHost" Then
-                        Return continueEnumeration
-                    End If
-                Else
+                'Filters out suspended apps (fairly quickly, but not immediately)
+                If IsHungAppWindow(hwnd) Then
                     Return continueEnumeration
                 End If
+            End If
+            'Take out windows with no caption
+            If GetWindowTextLength(hwnd) = 0 Then
+                Return continueEnumeration
             End If
 
             'Check to see if it's on the current virtual desktop
             Try
-                If Not (modernApp OrElse VirtualDesktops.IsWindowOnCurrentVirtualDesktop(New IntPtr(hwnd))) Then
+                If Not VirtualDesktops.IsWindowOnCurrentVirtualDesktop(New IntPtr(hwnd)) Then
                     Return continueEnumeration
                 End If
             Catch ex As COMException
@@ -277,6 +271,5 @@ Public Module CommonScreen
         End If
         Return continueEnumeration
     End Function
-
 #End Region
 End Module
