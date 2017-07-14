@@ -232,35 +232,6 @@ public Class modBusiness
         launchProcessOnScreen(myProcess)
     End Sub
 
-    Public Sub myShowTrayButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        modSettings.ShowTrayIcons(ScreenIndex) = True
-        Dim myPlacement As New WINDOWPLACEMENT
-        GetWindowPlacement(hTrayIcons, myPlacement)
-        Dim myWidth As Integer = myPlacement.rcNormalPosition.Right - myPlacement.rcNormalPosition.Left
-
-        myAppsPanel.Width -= (myWidth + myHideTrayButton.Width) - myTrayPanel.Width
-        myTrayPanel.Left -= (myWidth + myHideTrayButton.Width) - myTrayPanel.Width
-
-        myTrayPanel.Width = myWidth + myHideTrayButton.Width
-
-        myShowTrayButton.Visible = False
-        myHideTrayButton.Visible = True
-        SetParent(hTrayIcons, myTrayPanel.Handle)
-
-    End Sub
-
-    Public Sub myHideTrayButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        modSettings.ShowTrayIcons(ScreenIndex) = False
-        Dim mywidth As Integer = myShowTrayButton.Width - myTrayPanel.Width
-        myTrayPanel.Width = myShowTrayButton.Width
-        myTrayPanel.Left -= mywidth
-        myAppsPanel.Width -= mywidth
-        myHideTrayButton.Visible = False
-        myShowTrayButton.Visible = True
-        myShowTrayButton.BringToFront()
-        SetParent(hTrayIcons, myIconSaver.Handle)
-    End Sub
-
     Public Sub myOSK_Click(ByVal Sender As Object, ByVal e As System.EventArgs)
         If OSKproc.StartInfo.FileName = "" Then
             OSKproc = Process.Start(Application.StartupPath & "\OnScreenKeyboard.exe")
@@ -498,20 +469,50 @@ public Class modBusiness
 
     End Sub
 
-    Public Sub mainTimer_Tick(ByVal sender As Object, ByVal e As System.EventArgs)
+#Region " Tray Icon Handling "
+    Public Sub UpdateTray()
         'Deal with resizing the tray icon panel if necessary
-        If myHideTrayButton.Visible Then
-            Dim myPlacement As New WINDOWPLACEMENT
-            GetWindowPlacement(hTrayIcons, myPlacement)
-            Dim myWidth As Integer = myPlacement.rcNormalPosition.Right - myPlacement.rcNormalPosition.Left
-            If myWidth <> myWidth + myHideTrayButton.Width Then
-                myAppsPanel.Width -= (myWidth + myHideTrayButton.Width) - myTrayPanel.Width
-                myTrayPanel.Left -= (myWidth + myHideTrayButton.Width) - myTrayPanel.Width
+        Dim myPlacement As New WINDOWPLACEMENT
+        GetWindowPlacement(hTrayIcons, myPlacement)
+        Dim myWidth As Integer = myPlacement.rcNormalPosition.Right - myPlacement.rcNormalPosition.Left
+        If myWidth <> myWidth + myHideTrayButton.Width Then
+            myAppsPanel.Width -= (myWidth + myHideTrayButton.Width) - myTrayPanel.Width
+            myTrayPanel.Left -= (myWidth + myHideTrayButton.Width) - myTrayPanel.Width
 
-                myTrayPanel.Width = myWidth + myHideTrayButton.Width
-            End If
+            myTrayPanel.Width = myWidth + myHideTrayButton.Width
         End If
     End Sub
+
+    Public Sub myShowTrayButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+        GetTray(Me)
+        modSettings.ShowTrayIcons(ScreenIndex) = True
+        Dim myPlacement As New WINDOWPLACEMENT
+        GetWindowPlacement(hTrayIcons, myPlacement)
+        Dim myWidth As Integer = myPlacement.rcNormalPosition.Right - myPlacement.rcNormalPosition.Left
+
+        myAppsPanel.Width -= (myWidth + myHideTrayButton.Width) - myTrayPanel.Width
+        myTrayPanel.Left -= (myWidth + myHideTrayButton.Width) - myTrayPanel.Width
+
+        myTrayPanel.Width = myWidth + myHideTrayButton.Width
+
+        myShowTrayButton.Visible = False
+        myHideTrayButton.Visible = True
+        SetParent(hTrayIcons, myTrayPanel.Handle)
+    End Sub
+
+    Public Sub myHideTrayButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+        modSettings.ShowTrayIcons(ScreenIndex) = False
+        ReturnTray(Me)
+        Dim mywidth As Integer = myShowTrayButton.Width - myTrayPanel.Width
+        myTrayPanel.Width = myShowTrayButton.Width
+        myTrayPanel.Left -= mywidth
+        myAppsPanel.Width -= mywidth
+        myHideTrayButton.Visible = False
+        myShowTrayButton.Visible = True
+        myShowTrayButton.BringToFront()
+        SetParent(hTrayIcons, myIconSaver.Handle)
+    End Sub
+#End Region
 
 #Region " Taskbar buttons "
     Public Sub AddWindow(ByVal window As ExternalApp)

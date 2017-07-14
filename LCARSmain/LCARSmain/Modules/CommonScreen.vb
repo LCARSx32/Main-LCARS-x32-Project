@@ -17,12 +17,7 @@ Public Module CommonScreen
         updateClock()
         updatePowerStatus()
         updateWindows()
-        'Update screens
-        For Each myBusiness As modBusiness In curBusiness
-            If myBusiness.isInit Then
-                myBusiness.mainTimer_Tick(Nothing, Nothing)
-            End If
-        Next
+        UpdateTray()
     End Sub
 
 #Region " Clock "
