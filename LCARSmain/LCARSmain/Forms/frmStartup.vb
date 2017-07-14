@@ -220,7 +220,6 @@ Public Class frmStartup
         For i As Integer = 0 To Screen.AllScreens.Length - 1
             CreateDesktop(i)
             loadForm(i)
-            updateDesktopBounds(i, Screen.AllScreens(i).WorkingArea)
         Next
         mainTimer.Start()
         AddHandler Microsoft.Win32.SystemEvents.DisplaySettingsChanged, AddressOf System_DisplayChanged
