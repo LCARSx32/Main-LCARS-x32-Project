@@ -1,4 +1,5 @@
 Public Class ScreenChooserDialog
+    Inherits LCARS.LCARSForm
     Private screenType As Type = Nothing
     Private selectedScreen As LCScreenImage = Nothing
     Private _screenIndex As Integer
@@ -48,7 +49,6 @@ Public Class ScreenChooserDialog
             End Try
             gridScreens.Add(myScreen)
         Next
-        Me.Bounds = Screen.AllScreens(_screenIndex).Bounds
         LCARS.SetBeeping(Me)
     End Sub
 
@@ -59,13 +59,5 @@ Public Class ScreenChooserDialog
         selectedScreen = CType(sender, LCScreenImage)
         selectedScreen.Selected = True
         screenType = CType(selectedScreen.Data, Type)
-    End Sub
-
-    Private Sub ScreenChooserDialog_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Resize, Me.LocationChanged
-        Dim adjustedBounds As Rectangle = Screen.FromHandle(Me.Handle).WorkingArea
-        adjustedBounds.Location -= Screen.FromHandle(Me.Handle).Bounds.Location
-        If Not Me.MaximizedBounds = adjustedBounds Then
-            Me.MaximizedBounds = adjustedBounds
-        End If
     End Sub
 End Class
