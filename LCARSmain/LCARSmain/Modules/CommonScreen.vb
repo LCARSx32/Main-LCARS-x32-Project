@@ -8,9 +8,9 @@ Public Module CommonScreen
     Public WithEvents mainTimer As New Timer With {.Interval = 100}
 
     Public Sub initCommonComponents(ByVal b As modBusiness)
-        initClock(b)
-        initPowerStatus(b)
-        initWindows(b)
+        If b.hasClock Then initClock(b)
+        If b.hasPowerMonitor Then initPowerStatus(b)
+        If b.hasTaskbar Then initWindows(b)
     End Sub
 
     Private Sub mainTimer_tick(ByVal sender As Object, ByVal e As EventArgs) Handles mainTimer.Tick
@@ -50,7 +50,7 @@ Public Module CommonScreen
         If clockText <> newText Then
             clockText = newText
             For Each myBusiness As modBusiness In curBusiness
-                If myBusiness.isInit Then
+                If myBusiness.isInit And myBusiness.hasClock Then
                     myBusiness.myClock.Text = clockText
                 End If
             Next
@@ -86,7 +86,7 @@ Public Module CommonScreen
         If battPercent <> newBattPercent Then
             battPercent = newBattPercent
             For Each myBusiness As modBusiness In curBusiness
-                If myBusiness.isInit Then
+                If myBusiness.isInit And myBusiness.hasPowerMonitor Then
                     myBusiness.myBattPercent.Text = battPercent & "%"
                 End If
             Next
@@ -95,7 +95,7 @@ Public Module CommonScreen
         If lineStatus <> newLineStatus Then
             lineStatus = newLineStatus
             For Each myBusiness As modBusiness In curBusiness
-                If myBusiness.isInit Then
+                If myBusiness.isInit And myBusiness.hasPowerMonitor Then
                     If lineStatus = PowerLineStatus.Offline Then
                         myBusiness.myPowerSource.Text = "AUXILIARY"
                     Else
@@ -107,7 +107,7 @@ Public Module CommonScreen
 
         If newBarNumber <> barNumber Then
             For Each myBusiness As modBusiness In curBusiness
-                If myBusiness.isInit Then
+                If myBusiness.isInit And myBusiness.hasPowerMonitor Then
                     For i As Integer = 0 To myBusiness.bars.Length - 1
                         myBusiness.bars(i).Lit = i < newBarNumber
                     Next
@@ -149,7 +149,7 @@ Public Module CommonScreen
         'See which screens are available
         Dim screenDict As New Dictionary(Of Integer, modBusiness)
         For Each b As modBusiness In curBusiness
-            If b.isInit Then
+            If b.isInit And b.hasTaskbar Then
                 screenDict.Add(MonitorFromWindow(b.myForm.Handle.ToInt32(), MONITOR_DEFAULTTONEAREST), b)
             End If
         Next

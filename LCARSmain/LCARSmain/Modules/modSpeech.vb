@@ -205,10 +205,6 @@ Module modSpeech
                     Listener.State = SpeechRecoContextState.SRCS_Disabled
                 End If
             End If
-            'TODO: Use event handler here too if possible
-            For Each myBusiness As modBusiness In curBusiness
-                myBusiness.mySpeech.Lit = SpeechEnabled
-            Next
             RaiseEvent SpeechEnableChanged(Nothing, Nothing)
         End Set
     End Property
@@ -223,7 +219,9 @@ Module modSpeech
 
 #Region " Internal Command Subs "
     Private Sub doMenu(ByVal result As ISpeechRecoResult)
-        curBusiness(0).myStartMenu.doClick(Nothing, Nothing)
+        If curBusiness(0).myStartMenu IsNot Nothing Then
+            curBusiness(0).myStartMenu.doClick(Nothing, Nothing)
+        End If
     End Sub
     Private Sub doComputer(ByVal result As ISpeechRecoResult)
         curBusiness(0).myCompButton_Click(Nothing, Nothing)
@@ -238,23 +236,23 @@ Module modSpeech
         curBusiness(0).myModeSelectButton_Click(Nothing, Nothing)
     End Sub
     Private Sub doDocuments(ByVal result As ISpeechRecoResult)
-        curBusiness(0).myDocuments.doClick(Nothing, Nothing)
+        curBusiness(0).myDocuments_Click(Nothing, Nothing)
     End Sub
     Private Sub doPictures(ByVal result As ISpeechRecoResult)
-        curBusiness(0).myPictures.doClick(Nothing, Nothing)
+        curBusiness(0).myPictures_Click(Nothing, Nothing)
     End Sub
     Private Sub doMusic(ByVal result As ISpeechRecoResult)
-        Process.Start(Application.StartupPath & "\LCARSexplorer.exe", System.Environment.GetFolderPath(Environment.SpecialFolder.MyMusic))
+        curBusiness(0).myMusic_Click(Nothing, Nothing)
     End Sub
     Private Sub doVideos(ByVal result As ISpeechRecoResult)
-        curBusiness(0).myVideos.doClick(Nothing, Nothing)
+        curBusiness(0).myVideos_Click(Nothing, Nothing)
     End Sub
     'This is public because it is used in ApplicationEvents
     Public Sub doDeactivate(ByVal result As ISpeechRecoResult)
         Process.Start(Application.StartupPath & "\LCARSshutdown.exe", "/" & myDesktop.Handle.ToString & "/c")
     End Sub
     Private Sub doSelfDestruct(ByVal result As ISpeechRecoResult)
-        curBusiness(0).myDestruct.doClick(Nothing, Nothing)
+        curBusiness(0).myDestructButton_Click(Nothing, Nothing)
     End Sub
     Private Sub doLogOff(ByVal result As ISpeechRecoResult)
         shutDownOptions.ExitWindows(cWrapExitWindows.Action.LogOff)
@@ -306,7 +304,7 @@ Module modSpeech
         End Try
     End Sub
     Private Sub doKeyboard(ByVal result As ISpeechRecoResult)
-        curBusiness(0).myOSK.doClick(Nothing, Nothing)
+        curBusiness(0).myOSK_Click(Nothing, Nothing)
     End Sub
     Private Sub doTaskManager(ByVal result As ISpeechRecoResult)
         Try
@@ -333,7 +331,7 @@ Module modSpeech
         End If
     End Sub
     Private Sub doHelp(ByVal result As ISpeechRecoResult)
-        curBusiness(0).myHelp.doClick(Nothing, Nothing)
+        curBusiness(0).myHelp_Click(Nothing, Nothing)
     End Sub
     Private Sub doAuthorization(ByVal result As ISpeechRecoResult)
         If Authorization IsNot Nothing Then
@@ -348,7 +346,7 @@ Module modSpeech
         console.Hide()
     End Sub
     Private Sub doWebBrowser(ByVal result As ISpeechRecoResult)
-        curBusiness(0).myWebBrowser.doClick(Nothing, Nothing)
+        curBusiness(0).myWebBrowser_Click(Nothing, Nothing)
     End Sub
     Private Sub doCrash(ByVal result As ISpeechRecoResult)
         'Causes an unhandled exception.

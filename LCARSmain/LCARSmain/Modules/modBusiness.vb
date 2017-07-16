@@ -112,8 +112,10 @@ public Class modBusiness
 
     Public Sub New(ByVal screenIndex As Integer)
         _screenIndex = screenIndex
+        AddHandler SpeechEnableChanged, AddressOf Me.speech_EnableChanged
     End Sub
 
+#Region " Properties "
     Public ReadOnly Property ScreenIndex() As Integer
         Get
             Return _screenIndex
@@ -125,6 +127,43 @@ public Class modBusiness
             Return _isInit
         End Get
     End Property
+
+    Public ReadOnly Property hasProgramsList() As Boolean
+        Get
+            Return _hasProgramsList
+        End Get
+    End Property
+
+    Public ReadOnly Property hasUserButtons() As Boolean
+        Get
+            Return _hasUserButtons
+        End Get
+    End Property
+
+    Public ReadOnly Property hasTaskbar() As Boolean
+        Get
+            Return _hasTaskbar
+        End Get
+    End Property
+
+    Public ReadOnly Property hasPowerMonitor() As Boolean
+        Get
+            Return _hasPowerMonitor
+        End Get
+    End Property
+
+    Public ReadOnly Property hasClock() As Boolean
+        Get
+            Return _hasClock
+        End Get
+    End Property
+
+    Public ReadOnly Property hasSpeechIndicator() As Boolean
+        Get
+            Return _hasSpeechIndicator
+        End Get
+    End Property
+#End Region
 
     Public Sub ShutdownScreen()
         tmrAutohide.Stop()
@@ -166,7 +205,7 @@ public Class modBusiness
         'Save screenshot and show the selection form
         Dim screenImage As New Bitmap(myForm.Width, myForm.Height)
         Dim g As System.Drawing.Graphics = System.Drawing.Graphics.FromImage(screenImage)
-        g.CopyFromScreen(myForm.PointToScreen(New Point(0, 0)), New Point(0, 0), myForm.Size)
+        g.CopyFromScreen(myForm.PointToScreen(Point.Empty), Point.Empty, myForm.Size)
         Try
             screenImage.Save(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\LCARS x32\Images\" & myForm.Name.ToLower() & "_" & ScreenIndex & ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg)
         Catch ex As Exception
@@ -281,6 +320,12 @@ public Class modBusiness
                 ShowWindow(OSKproc.MainWindowHandle, SW_SHOW)
                 isVisible = True
             End If
+        End If
+    End Sub
+
+    Private Sub speech_EnableChanged(ByVal sender As Object, ByVal e As EventArgs)
+        If isInit And hasSpeechIndicator Then
+            mySpeech.Lit = modSpeech.SpeechEnabled
         End If
     End Sub
 
@@ -1053,6 +1098,7 @@ public Class modBusiness
     End Sub
 
     Public Sub myform_MouseScroll(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)
+        If Not hasProgramsList Then Return
         If Not ProgramsPanel.Visible Then Return
         If e.Delta > 0 Then
             previousProgPage()
