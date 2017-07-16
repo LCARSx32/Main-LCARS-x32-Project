@@ -40,7 +40,7 @@ Module modCommon
     End Structure
 
     Public Structure WINDOWPLACEMENT
-        Dim Length As UInteger
+        Dim Length As Integer
         Dim flags As WindowPlacementFlags
         Dim ShowCmd As WindowStates
         Dim ptMinPosition As POINTAPI
@@ -69,8 +69,10 @@ Module modCommon
 
 
     Public Declare Function SetWindowPlacement Lib "user32" (ByVal hwnd As Integer, ByRef lpwndpl As WINDOWPLACEMENT) As Integer
+    Public Declare Function SetWindowPlacement Lib "user32" (ByVal hwnd As IntPtr, ByRef lpwndpl As WINDOWPLACEMENT) As Integer
 
     Public Declare Function GetWindowPlacement Lib "user32" (ByVal hwnd As Integer, ByRef lpwndpl As WINDOWPLACEMENT) As Integer
+    Public Declare Function GetWindowPlacement Lib "user32" (ByVal hwnd As IntPtr, ByRef lpwndpl As WINDOWPLACEMENT) As Integer
 
     Public Declare Function GetWindowRect Lib "user32" (ByVal hwnd As IntPtr, ByRef rectangle As RECT) As Integer
 
@@ -91,7 +93,9 @@ Module modCommon
 
     Public Const MONITOR_DEFAULTTONEAREST As Int32 = &H2
 
+    'Double declaration to handle handles stored as integers or IntPtr
     Public Declare Function MonitorFromWindow Lib "user32" (ByVal hwnd As Int32, ByVal dwFlags As Int32) As Int32
+    Public Declare Function MonitorFromWindow Lib "user32" (ByVal hwnd As IntPtr, ByVal dwFlags As Int32) As Int32
 
     Public Declare Auto Function GetMonitorInfo Lib "user32" (ByVal hMonitor As Int32, ByRef lpmi As MONITORINFO) As Integer
 
@@ -155,16 +159,16 @@ Module modCommon
 #Region " Send Data to Other Windows "
     <StructLayout(LayoutKind.Sequential)> _
   Public Structure COPYDATASTRUCT
-        Public dwData As IntPtr
+        Public dwData As Integer
         Public cdData As Integer
         Public lpData As IntPtr
     End Structure
-    Public Const WM_COPYDATA As Integer = &H4A
+    Public Const WM_COPYDATA As UInteger = &H4A
 #End Region
 
 #Region " Inter-Window Communications "
 
-    Public Declare Auto Function SendMessage Lib "user32.dll" (ByVal hWnd As IntPtr, ByVal msg As UInteger, ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
+    Public Declare Auto Function SendMessage Lib "user32.dll" (ByVal hWnd As IntPtr, ByVal msg As UInteger, ByVal wParam As Integer, ByVal lParam As IntPtr) As Integer
     Public InterMsgID As UInteger
     Public HWND_BROADCAST As New IntPtr(&HFFFF)
     Public Const WM_EXPLORER_CLOSE As Integer = &H5B4
@@ -252,7 +256,7 @@ Module modCommon
 #End Region
 
 #Region " Cover Desktop "
-    Public Declare Function SetParent Lib "user32.dll" (ByVal hWndChild As Integer, ByVal hWndNewParent As Integer) As Integer
+    Public Declare Function SetParent Lib "user32.dll" (ByVal hWndChild As IntPtr, ByVal hWndNewParent As IntPtr) As Integer
 
     <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)> _
    Public Function FindWindowEx(ByVal parentHandle As IntPtr, ByVal childAfter As IntPtr, ByVal lclassName As String, ByVal windowTitle As IntPtr) As IntPtr

@@ -23,7 +23,7 @@ Namespace My
                 Else
                     'Send message current instance to load settings.
                     InterMsgID = frmStartup.RegisterWindowMessage("LCARS_X32_MSG")
-                    SendMessage(HWND_BROADCAST, InterMsgID, IntPtr.Zero, New IntPtr(2))
+                    SendMessage(HWND_BROADCAST, InterMsgID, 0, New IntPtr(2))
                     End
                 End If
             Else
@@ -45,7 +45,7 @@ Namespace My
                         Dim handle As IntPtr = New IntPtr(CInt(GetSetting("LCARS x32", "Application", "MainWindowHandle", "0")))
                         While Not other.HasExited And handle <> IntPtr.Zero
                             Try
-                                SendMessage(handle, WM_EXPLORER_CLOSE, IntPtr.Zero, IntPtr.Zero)
+                                SendMessage(handle, WM_EXPLORER_CLOSE, 0, IntPtr.Zero)
                             Catch ex As Exception
                                 MsgBox(ex.ToString & vbNewLine & ex.StackTrace, Title:="Error taking control")
                             End Try
@@ -53,7 +53,7 @@ Namespace My
                         End While
                     Else
                         'Send message to current instance to switch to shell mode
-                        SendMessage(HWND_BROADCAST, InterMsgID, IntPtr.Zero, New IntPtr(3))
+                        SendMessage(HWND_BROADCAST, InterMsgID, 0, New IntPtr(3))
                     End If
                 End If
             End If

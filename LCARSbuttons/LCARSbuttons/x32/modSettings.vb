@@ -194,7 +194,7 @@ Label072:
 
         Public Shared Property AutoHide(ByVal screenIndex As Integer) As Boolean
             Get
-                Return CBool(GetSetting("LCARS x32", "Screen" & screenIndex, "Autohide", "0"))
+                Return CBool(GetSetting("LCARS x32", "Screen" & screenIndex, "Autohide", "False"))
             End Get
             Set(ByVal value As Boolean)
                 SaveSetting("LCARS x32", "Screen" & screenIndex, "Autohide", CStr(value))

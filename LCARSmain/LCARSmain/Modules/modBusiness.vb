@@ -1,3 +1,5 @@
+Option Strict On
+
 Imports System.IO
 Imports System.Runtime.InteropServices
 Imports LCARS
@@ -487,7 +489,7 @@ public Class modBusiness
             'Create arrows for window list
             leftArrow = New LCARS.Controls.ArrowButton()
             leftArrow.ArrowDirection = LCARS.LCARSarrowDirection.Left
-            leftArrow.Size = New Point(25, 25)
+            leftArrow.Size = New Size(25, 25)
             leftArrow.Location = New Point(0, 0)
             leftArrow.Lit = False
             leftArrow.Name = "leftArrow"
@@ -572,8 +574,11 @@ public Class modBusiness
 
         'load Autohide settings:
         tmrAutohide.Interval = 100
-        Dim AutoHideMode As Integer = modSettings.AutoHide(ScreenIndex)
-        SetAutoHide(AutoHideMode)
+        If modSettings.AutoHide(ScreenIndex) Then
+            SetAutoHide(IAutohide.AutoHideModes.Visible)
+        Else
+            SetAutoHide(IAutohide.AutoHideModes.Disabled)
+        End If
     End Sub
 
     Public Sub loadLanguage()
@@ -588,7 +593,7 @@ public Class modBusiness
                 Do Until EOF(1)
                     Input(1, strinput)
                     If strinput.Contains("=") Then
-                        split = strinput.Split("=")
+                        split = strinput.Split("="c)
                         'Makes sure that one bad line doesn't stop loading the whole language file.
                         If myForm.Controls.Find(split(0).Trim, True).Length > 0 Then
                             CType(myForm.Controls.Find(split(0).Trim, True)(0), LCARS.LCARSbuttonClass).ButtonText = split(1).Trim.Replace(Chr(34), "")
@@ -725,7 +730,7 @@ public Class modBusiness
                     myUserButtonInfo.Name = mybutton.Text
                     'myUserButtonInfo.color = Convert.ToInt32(myReg.GetValueNames(intloop).Substring(0, 2))
                     mybutton.Data = myReg.GetValue(myReg.GetValueNames(intloop))
-                    myUserButtonInfo.Location = mybutton.Data
+                    myUserButtonInfo.Location = CStr(mybutton.Data)
 
                     UserButtonsPanel.Add(mybutton)
 
@@ -804,11 +809,11 @@ public Class modBusiness
 
         myDir = MyPrograms
         For Each myindex As Integer In ProgDir
-            myDir = myDir.subItems(myindex)
+            myDir = CType(myDir.subItems(myindex), DirectoryStartItem)
         Next
         ProgramsPanel.Clear()
 
-        pageCount = Int(myDir.subItems.Count / ProgPageSize)
+        pageCount = CInt(Int(myDir.subItems.Count / ProgPageSize))
 
         If myDir.subItems.Count Mod ProgPageSize > 0 Then
             pageCount += 1
@@ -835,7 +840,7 @@ public Class modBusiness
                     myButton.Left = 0
                     myButton.Color = LCARS.LCARScolorStyles.NavigationFunction
                     myButton.Text = .Name
-                    myButton.SideText = .subItems.Count
+                    myButton.SideText = .subItems.Count.ToString()
                     myButton.TextHeight = 14
                     myButton.TextAlign = ContentAlignment.BottomRight
                     myButton.Data = intloop
@@ -876,21 +881,21 @@ public Class modBusiness
 
     End Sub
 
-    Public Sub nextProgPage()
+    Public Sub nextProgPage(ByVal sender As Object, ByVal e As EventArgs)
         If curProgPage < pageCount Then
             curProgPage += 1
             loadProgList((curProgPage * ProgPageSize) - (ProgPageSize - 1))
         End If
     End Sub
 
-    Public Sub previousProgPage()
+    Public Sub previousProgPage(ByVal sender As Object, ByVal e As EventArgs)
         If curProgPage > 1 Then
             curProgPage -= 1
             loadProgList((curProgPage * ProgPageSize) - (ProgPageSize - 1))
         End If
     End Sub
 
-    Public Sub ProgBack()
+    Public Sub ProgBack(ByVal sender As Object, ByVal e As EventArgs)
         If ProgDir.Count > 0 Then
             Dim index As Integer = ProgDir(ProgDir.Count - 1)
             ProgDir.RemoveAt(ProgDir.Count - 1)
@@ -899,7 +904,7 @@ public Class modBusiness
     End Sub
 
     Private Sub myDir_click(ByVal sender As Object, ByVal e As System.EventArgs)
-        ProgDir.Add(sender.data)
+        ProgDir.Add(CInt(CType(sender, LightweightControls.LCFlatButton).Data))
         loadProgList()
     End Sub
 
@@ -907,7 +912,7 @@ public Class modBusiness
         If ProgramsPanel.Visible Then myStartMenu.doClick(sender, e)
         Application.DoEvents()
         Dim myprocess As New System.Diagnostics.Process()
-        myprocess.StartInfo.FileName = CType(sender, LCARS.LightweightControls.LCFlatButton).Data
+        myprocess.StartInfo.FileName = CStr(CType(sender, LCARS.LightweightControls.LCFlatButton).Data)
         launchProcessOnScreen(myprocess)
     End Sub
 #End Region
@@ -922,19 +927,19 @@ public Class modBusiness
         Dim myprocess As New Process()
         If File.Exists(cmdLine) Then
             'The command string is an absolute path.
-            myprocess.StartInfo.FileName = sender.data
-            myprocess.StartInfo.WorkingDirectory = Path.GetDirectoryName(sender.data)
+            myprocess.StartInfo.FileName = cmdLine
+            myprocess.StartInfo.WorkingDirectory = Path.GetDirectoryName(cmdLine)
             launchProcessOnScreen(myprocess)
         Else
             'The command will be interpreted as a command followed by arguments
             Try
-                If (sender.data.Substring(0, 1) = """") Then
-                    Dim splitIndex As Integer = sender.data.Substring(1).IndexOf("""") + 2
-                    myprocess.StartInfo.FileName = sender.data.Substring(0, splitIndex)
-                    myprocess.StartInfo.Arguments = sender.data.Substring(splitIndex + 1)
+                If (cmdLine.Substring(0, 1) = """") Then
+                    Dim splitIndex As Integer = cmdLine.Substring(1).IndexOf("""") + 2
+                    myprocess.StartInfo.FileName = cmdLine.Substring(0, splitIndex)
+                    myprocess.StartInfo.Arguments = cmdLine.Substring(splitIndex + 1)
                 Else
-                    myprocess.StartInfo.FileName = sender.data.Split(" ")(0)
-                    myprocess.StartInfo.Arguments = sender.data.Substring(myprocess.StartInfo.FileName.Length + 1)
+                    myprocess.StartInfo.FileName = cmdLine.Split(" "c)(0)
+                    myprocess.StartInfo.Arguments = cmdLine.Substring(myprocess.StartInfo.FileName.Length + 1)
                 End If
                 'If full path specified, set working directory to containing folder
                 If File.Exists(myprocess.StartInfo.FileName) Then
@@ -946,7 +951,7 @@ public Class modBusiness
                 'Throw it to shell and see what happens.
                 Try
                     Dim myID As Integer
-                    myID = Shell(sender.data, AppWinStyle.NormalFocus)
+                    myID = Shell(cmdLine, AppWinStyle.NormalFocus)
                     myprocess = Process.GetProcessById(myID)
                     launchProcessOnScreen(myprocess, False)
                 Catch ex2 As ArgumentException
@@ -1024,7 +1029,7 @@ public Class modBusiness
         myDeactivate.doClick(sender, e)
     End Sub
 
-    Private Function FindRoot(ByVal hWnd As Int32) As Int32
+    Private Function FindRoot(ByVal hWnd As Integer) As Integer
         Do
             Dim parent_hwnd As Int32 = GetParent(hWnd)
             If parent_hwnd = 0 Then Return hWnd
@@ -1052,7 +1057,7 @@ public Class modBusiness
             myPoint.X = Cursor.Position.X
             myPoint.Y = Cursor.Position.Y
 
-            Dim rootHwnd As IntPtr = FindRoot(WindowFromPoint(myPoint))
+            Dim rootHwnd As IntPtr = New IntPtr(FindRoot(WindowFromPoint(myPoint).ToInt32()))
 
             'The mouse must be within this many pixels of the edge to show the screen
             Const edgeWidth As Integer = 1
@@ -1101,9 +1106,9 @@ public Class modBusiness
         If Not hasProgramsList Then Return
         If Not ProgramsPanel.Visible Then Return
         If e.Delta > 0 Then
-            previousProgPage()
+            previousProgPage(Nothing, Nothing)
         Else
-            nextProgPage()
+            nextProgPage(Nothing, Nothing)
         End If
     End Sub
 
@@ -1147,9 +1152,9 @@ public Class modBusiness
             Dim screen1 As Integer = MonitorFromWindow(myForm.Handle, MONITOR_DEFAULTTONEAREST)
             Dim i As Integer = LinkedWindows.Count - 1
             While i > 0
-                Dim screen2 = MonitorFromWindow(LinkedWindows(i), MONITOR_DEFAULTTONEAREST)
+                Dim screen2 As Integer = MonitorFromWindow(LinkedWindows(i), MONITOR_DEFAULTTONEAREST)
                 If screen1 <> screen2 Then Continue While
-                Dim res As Integer = SendMessage(LinkedWindows(i), WM_COPYDATA, myDesktop.Handle, MyCopyData)
+                Dim res As Integer = SendMessage(LinkedWindows(i), WM_COPYDATA, myDesktop.Handle.ToInt32(), MyCopyData)
                 If res = 0 Then 'Drop linked window if not responding
                     LinkedWindows.RemoveAt(i)
                 End If
