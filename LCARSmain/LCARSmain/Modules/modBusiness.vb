@@ -169,6 +169,7 @@ public Class modBusiness
 
     Public Sub ShutdownScreen()
         tmrAutohide.Stop()
+        ReturnTray(Me)
         _isInit = False
         Application.DoEvents()
         If Not myForm Is Nothing Then
@@ -213,7 +214,6 @@ public Class modBusiness
         Catch ex As Exception
             MsgBox("Error saving image for interface " & myForm.Name & " on screen " & ScreenIndex & ".")
         End Try
-        SetParent(hTrayIcons, hTrayParent)
         Dim myChoice As New ScreenChooserDialog(ScreenIndex)
         MoveToScreen(myChoice.Handle)
         myChoice.Show()
@@ -641,7 +641,6 @@ public Class modBusiness
 
         myShowTrayButton.Visible = False
         myHideTrayButton.Visible = True
-        SetParent(hTrayIcons, myTrayPanel.Handle)
     End Sub
 
     Public Sub myHideTrayButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
@@ -654,7 +653,6 @@ public Class modBusiness
         myHideTrayButton.Visible = False
         myShowTrayButton.Visible = True
         myShowTrayButton.BringToFront()
-        SetParent(hTrayIcons, myIconSaver.Handle)
     End Sub
 #End Region
 

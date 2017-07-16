@@ -8,10 +8,14 @@ Public Module modTray
             curTray.myHideTrayButton_Click(Nothing, Nothing)
         End If
         curTray = b
+        SetParent(hTrayIcons, b.myTrayPanel.Handle)
     End Sub
 
     Public Sub ReturnTray(ByVal b As modBusiness)
-        curTray = Nothing
+        If curTray Is b Then 'Only return the tray if we actually have it.
+            curTray = Nothing
+            SetParent(hTrayIcons, hTrayParent)
+        End If
     End Sub
 
     Public Sub UpdateTray()
