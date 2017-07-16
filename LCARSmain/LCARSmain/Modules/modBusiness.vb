@@ -65,6 +65,7 @@ public Class modBusiness
     Public myHelp As LCARSbuttonClass
     Public myRun As LCARSbuttonClass
     Public myAlertListButton As LCARSbuttonClass
+    Public myDesktopFiles As LCARSbuttonClass
 
     'Public state
     'TODO: Find a better way to handle this
@@ -248,6 +249,13 @@ public Class modBusiness
         Dim myProcess As New Process()
         myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSexplorer.exe"
         myProcess.StartInfo.Arguments = GetMyVideosPath()
+        launchProcessOnScreen(myProcess)
+    End Sub
+
+    Public Sub myDesktopFiles_Click(ByVal sender As Object, ByVal e As EventArgs)
+        Dim myProcess As New Process()
+        myProcess.StartInfo.FileName = Application.StartupPath & "\LCARSexplorer.exe"
+        myProcess.StartInfo.Arguments = System.Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
         launchProcessOnScreen(myProcess)
     End Sub
 
@@ -510,6 +518,7 @@ public Class modBusiness
         tryAssocButton("myHelp", myHelp, AddressOf myHelp_Click)
         tryAssocButton("myRun", myRun, AddressOf myRun_Click)
         tryAssocButton("myAlertListButton", myAlertListButton, AddressOf myAlertListButton_Click)
+        tryAssocButton("fbDesktop", myDesktopFiles, AddressOf myDesktopFiles_Click)
 
         'Final setup
         loadLanguage()

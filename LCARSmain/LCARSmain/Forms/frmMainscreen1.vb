@@ -40,18 +40,12 @@ Public Class frmMainscreen1
         End If
     End Sub
 
-    Private Sub startMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles myPictures.Click, myMusic.Click, myDocuments.Click, myRun.Click, fbWebBrowser.Click, myVideos.Click
+    Private Sub startMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles myPictures.Click, myMusic.Click, myDocuments.Click, myRun.Click, fbWebBrowser.Click, myVideos.Click, fbDesktop.Click
         If pnlStart.Visible Then myStartMenu.doClick(sender, e)
     End Sub
 
     Private Sub fbMyNetwork_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbMyNetwork.Click
         'TODO: Not implemented yet
-    End Sub
-
-    Private Sub fbDesktop_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbDesktop.Click
-        'TODO: Move to modBusiness as optional component
-        Process.Start(Application.StartupPath & "\LCARSexplorer.exe", System.Environment.GetFolderPath(Environment.SpecialFolder.Desktop))
-        myStartMenu.doClick(sender, e)
     End Sub
 
     Public Shared ReadOnly Property ScreenImage() As Image
