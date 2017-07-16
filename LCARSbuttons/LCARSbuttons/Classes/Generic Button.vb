@@ -76,21 +76,6 @@ Public Class LCARSbuttonClass
 #End Region
 
 #Region " Global Variables "
-    'Left button constants
-    Const lButtonClick = &H201
-    Const lButtonUp = &H202
-    Const lButtonDouble = &H203
-
-    'Right button constants
-    Const rButtonClick = &H204
-    Const rButtonUp = &H205
-    Const rButtonDouble = &H206
-
-    'Middle button constants
-    Const mButtonClick = &H207
-    Const mButtonUp = &H208
-    Const mButtonDouble = &H209
-
     Private WithEvents _ColorsAvailable As New LCARS.LCARScolor
 
 
@@ -126,28 +111,47 @@ Public Class LCARSbuttonClass
     Protected _textLocation As Point = New Point(0, 0)
 #End Region
 
-#Region " Events "
+#Region " Event Handlers "
+    Protected Overrides Sub OnClick(ByVal e As System.EventArgs)
+        If canClick Then
+            playSound()
+            MyBase.OnClick(e)
+        End If
+    End Sub
 
-    ''' <summary>
-    ''' Raised when the button is clicked
-    ''' </summary>
-    Public Shadows Event Click(ByVal sender As Object, ByVal e As EventArgs)
-    ''' <summary>
-    ''' Raised when the button is double-clicked
-    ''' </summary>
-    Public Shadows Event DoubleClick(ByVal sender As Object, ByVal e As EventArgs)
-    ''' <summary>
-    ''' Raised when a mouse button is depressed while the mouse is over the button
-    ''' </summary>
-    Public Shadows Event MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)
-    ''' <summary>
-    ''' Raised when a mouse button is released while the mouse is over the button
-    ''' </summary>
-    Public Shadows Event MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)
-    ''' <summary>
-    ''' Raised when the mouse moves over the button
-    ''' </summary>
-    Public Shadows Event MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)
+    Protected Overrides Sub OnDoubleClick(ByVal e As System.EventArgs)
+        If canClick Then
+            playSound()
+            MyBase.OnDoubleClick(e)
+        End If
+    End Sub
+
+    Protected Overrides Sub OnMouseDown(ByVal e As System.Windows.Forms.MouseEventArgs)
+        If canClick Then
+            If _ColorsAvailable.getColor(myColor).ToArgb = System.Drawing.Color.White.ToArgb Then
+                inRedAlert = LCARSalert.Red
+            Else
+                inRedAlert = LCARSalert.White
+            End If
+            DrawAllButtons()
+            MyBase.OnMouseDown(e)
+        End If
+    End Sub
+
+    Protected Overrides Sub OnMouseMove(ByVal e As System.Windows.Forms.MouseEventArgs)
+        If canClick Then
+            MyBase.OnMouseMove(e)
+        End If
+    End Sub
+
+    Protected Overrides Sub OnMouseUp(ByVal e As System.Windows.Forms.MouseEventArgs)
+        If canClick Then
+            If RA = False Then
+                Me.RedAlert = LCARSalert.Normal
+            End If
+            MyBase.OnMouseUp(e)
+        End If
+    End Sub
 #End Region
 
 #Region " Enum "
@@ -618,48 +622,9 @@ Public Class LCARSbuttonClass
 #End Region
 
 #Region " Subs "
-    <System.Diagnostics.DebuggerStepThrough()> _
-    Protected Overloads Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
-
-        Try
-            If canClick = False Then
-
-                If m.Msg = lButtonClick Or m.Msg = lButtonUp Or m.Msg = lButtonDouble _
-                Or m.Msg = rButtonClick Or m.Msg = rButtonUp Or m.Msg = rButtonDouble _
-                Or m.Msg = mButtonClick Or m.Msg = mButtonUp Or m.Msg = mButtonDouble Then
-
-                    Return
-
-                End If
-            End If
-
-            If m.Msg = lButtonDouble Then
-                m.Msg = lButtonClick
-            End If
-
-            MyBase.WndProc(m)
-        Catch ex As Exception
-
-        End Try
-
-    End Sub
-
     Protected Overrides Sub ScaleControl(ByVal factor As System.Drawing.SizeF, ByVal specified As System.Windows.Forms.BoundsSpecified)
         Me.ButtonTextHeight = textHeight * factor.Height
         MyBase.ScaleControl(factor, specified)
-    End Sub
-
-    Private Sub lblText_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Click
-        If Me.canClick Then
-            buttonDown()
-        End If
-    End Sub
-
-
-    Private Sub lblText_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.DoubleClick
-        If Me.canClick Then
-            buttonDown()
-        End If
     End Sub
 
     Private Sub lblText_MouseEnter(ByVal sender As Object, ByVal e As EventArgs) Handles Me.MouseEnter
@@ -703,12 +668,10 @@ Public Class LCARSbuttonClass
     End Sub
 
     ''' <summary>
-    ''' Raises a click event from this control.
+    ''' Raises a click event from this control, if clickable.
     ''' </summary>
-    Public Sub doClick(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Click
-        If Me.canClick Then
-            RaiseEvent Click(Me, e) 'allow the user to create a click event (for voice commands)
-        End If
+    Public Sub doClick(ByVal sender As Object, ByVal e As EventArgs)
+        OnClick(e)
     End Sub
 
     Private Sub flashThread()
@@ -726,6 +689,7 @@ Public Class LCARSbuttonClass
     End Sub
 
     Private Sub playSound()
+        If Not doBeep Then Return
         Dim soundPath As String = GetSetting("LCARS X32", "Application", "ButtonSound", "")
         If Sound Is Nothing Or Sound.SoundLocation <> soundPath Then
             If System.IO.File.Exists(soundPath) Then
@@ -767,54 +731,6 @@ Public Class LCARSbuttonClass
             ButtonTextHeight = -1 'resize the text
         End If
         DrawAllButtons()
-    End Sub
-
-    Private Sub lblText_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles MyBase.MouseDown
-        If canClick Then
-            RaiseEvent MouseDown(Me, e)
-            GenericButton_MouseDown(Me, e)
-        End If
-    End Sub
-    Private Sub lblText_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles MyBase.MouseMove
-        If canClick Then
-            RaiseEvent MouseMove(Me, e)
-        End If
-    End Sub
-
-
-
-    Private Sub lblText_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles MyBase.MouseUp
-        If canClick Then
-            RaiseEvent MouseUp(Me, e)
-            GenericButton_MouseUp(Me, e)
-        End If
-    End Sub
-
-    Private Sub GenericButton_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles MyBase.MouseDown
-        Dim lcarsColor As New LCARS.LCARScolor
-        If lcarsColor.getColor(myColor).ToArgb = System.Drawing.Color.White.ToArgb Then
-            inRedAlert = LCARSalert.Red
-        Else
-            inRedAlert = LCARSalert.White
-        End If
-        DrawAllButtons()
-    End Sub
-
-    Private Sub GenericButton_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles MyBase.MouseUp
-        If RA = False Then
-            Me.RedAlert = LCARSalert.Normal
-        End If
-    End Sub
-
-    Private Sub buttonDown()
-        If doBeep Then
-            playSound()
-        End If
-    End Sub
-    Private Sub GenericButton_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Click
-        If RA = False Then
-            Me.RedAlert = LCARSalert.Normal
-        End If
     End Sub
 
     Protected Overrides Sub OnPaint(ByVal e As System.Windows.Forms.PaintEventArgs)
