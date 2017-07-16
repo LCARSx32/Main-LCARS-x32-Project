@@ -279,7 +279,6 @@ Public Class frmSettings
             If myControl.GetType.ToString.Substring(0, 5).ToLower = "lcars" Then
                 Try
                     CType(myControl, LCARS.LCARSbuttonClass).ColorsAvailable.setColors(myColors)
-                    CType(myControl, LCARS.LCARSbuttonClass).DrawAllButtons()
                 Catch
                 End Try
 

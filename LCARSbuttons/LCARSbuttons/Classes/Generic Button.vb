@@ -172,27 +172,6 @@ Public Class LCARSbuttonClass
 #End Region
 
 #Region " Properties "
-
-    ''' <summary>
-    ''' The background image of the control
-    ''' </summary>
-    ''' <value>New image to be set as background</value>
-    ''' <returns>Current background image</returns>
-    ''' <remarks>
-    ''' This property is hidden by default, and would be protected if it could be. It is used internally to draw the button, 
-    ''' so should not be modified. 
-    ''' </remarks>
-    <Browsable(False), EditorBrowsable(EditorBrowsableState.Never), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)> _
-        Public Overrides Property BackgroundImage() As System.Drawing.Image
-        Get
-            Return MyBase.BackgroundImage
-        End Get
-        Set(ByVal value As System.Drawing.Image)
-            MyBase.BackgroundImage = value
-        End Set
-    End Property
-
-
     ''' <summary>
     ''' The font used by the label for drawing text.
     ''' </summary>
@@ -238,7 +217,6 @@ Public Class LCARSbuttonClass
     <DefaultValue(ContentAlignment.BottomRight)> _
         Public Overridable Property ButtonTextAlign() As ContentAlignment
         Get
-
             Return _textAlign
         End Get
         Set(ByVal value As ContentAlignment)
@@ -323,7 +301,7 @@ Public Class LCARSbuttonClass
         End Get
         Set(ByVal value As Boolean)
             flashing = value
-            If Me.DesignMode = False Then
+            If Not Me.DesignMode Then
                 If flashing Then
                     flasher = New Threading.Thread(AddressOf flashThread)
                     flasher.Start()
@@ -331,7 +309,6 @@ Public Class LCARSbuttonClass
                     flasher.Abort()
                 End If
             End If
-
         End Set
     End Property
 
@@ -628,7 +605,7 @@ Public Class LCARSbuttonClass
     End Sub
 
     Private Sub lblText_MouseEnter(ByVal sender As Object, ByVal e As EventArgs) Handles Me.MouseEnter
-        If Me.CreateGraphics.MeasureString(myText, _font).Width > lblTextSize.width Then
+        If Me.CreateGraphics.MeasureString(myText, _font).Width > lblTextSize.Width Then
             tmrTextScroll.Interval = 200
             oAlign = _textAlign
             If _textAlign <= 16 Then
@@ -664,7 +641,6 @@ Public Class LCARSbuttonClass
     Private Sub tmrTextScroll_Tick(ByVal sender As Object, ByVal e As EventArgs) Handles tmrTextScroll.Tick
         tmpStr = tmpStr.Substring(1) & tmpStr.Substring(0, 1)
         Me.Invalidate()
-
     End Sub
 
     ''' <summary>
@@ -704,7 +680,7 @@ Public Class LCARSbuttonClass
     ''' <summary>
     ''' Redraws the button and stores the bitmaps to memory.
     ''' </summary>
-    Public Sub DrawAllButtons()
+    Protected Sub DrawAllButtons()
         If noDraw = False Then
             If Not (Me.Width = 0 Or Me.Height = 0) Then
                 If Not NormalButton Is Nothing Then
@@ -867,7 +843,6 @@ Public Class GenericButtonDesigner
         Properties.Remove("AccessibleDescription")
         Properties.Remove("AllowDrop")
         Properties.Remove("BackColor")
-        Properties.Remove("BackgroundImageLayout")
         Properties.Remove("CausesValidation")
         Properties.Remove("ContextMenuStrip")
         Properties.Remove("Enabled")

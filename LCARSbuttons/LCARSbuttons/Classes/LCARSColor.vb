@@ -74,7 +74,7 @@ Public Class LCARScolor
         For intloop = 0 To upper
             colors(intloop) = newColors(intloop)
         Next
-
+        RaiseEvent ColorsUpdated(Me, New EventArgs)
     End Sub
 
     ''' <summary>
