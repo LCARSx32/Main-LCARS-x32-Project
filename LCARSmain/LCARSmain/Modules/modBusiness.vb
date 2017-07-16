@@ -1,6 +1,8 @@
 Imports System.IO
 Imports System.Runtime.InteropServices
+Imports LCARS
 Imports LCARS.x32
+Imports LCARS.Controls
 
 public Class modBusiness
 
@@ -15,64 +17,73 @@ public Class modBusiness
 #Region " Global Variables "
 
 #Region " Public Global Variables "
-
-    'Common form components
+    'Required components
     Public myForm As Form
     Public myMainPanel As Panel
-    Public ProgramsPanel As LCARS.Controls.WindowlessContainer
-    Public UserButtonsPanel As LCARS.Controls.ButtonGrid
-    Public myAppsPanel As Panel
-
-    'Common Buttons
-    Public myStartMenu As LCARS.LCARSbuttonClass
-    Public myComputer As LCARS.LCARSbuttonClass
-    Public mySettings As LCARS.LCARSbuttonClass
-    Public myEngineering As LCARS.LCARSbuttonClass
     Public myModeSelect As LCARS.LCARSbuttonClass
-    Public myDeactivate As LCARS.LCARSbuttonClass
-    Public myAlert As LCARS.LCARSbuttonClass
-    Public myDestruct As LCARS.LCARSbuttonClass
-    Public myClock As Control
-    Public myPhoto As LCARS.LCARSbuttonClass
-    Public myWebBrowser As LCARS.LCARSbuttonClass
-    Public myButtonManager As LCARS.LCARSbuttonClass
-    Public myUserButtons As LCARS.LCARSbuttonClass
-    Public myDocuments As LCARS.LCARSbuttonClass
-    Public myPictures As LCARS.LCARSbuttonClass
-    Public myVideos As LCARS.LCARSbuttonClass
-    Public myMusic As LCARS.LCARSbuttonClass
-    Public myBattery As Panel
-    Public myTrayPanel As Panel
-    Public myShowTrayButton As LCARS.LCARSbuttonClass
-    Public myHideTrayButton As LCARS.Controls.ArrowButton
-    Public myOSK As LCARS.Controls.FlatButton
-    Public mySpeech As LCARS.Controls.FlatButton
-    Public myHelp As LCARS.LCARSbuttonClass
-    Public myRun As LCARS.LCARSbuttonClass
-    Public myAlertListButton As LCARS.LCARSbuttonClass
+
+    'Programs list components
+    Public ProgramsPanel As LCARS.Controls.WindowlessContainer
     Public myProgramPagesDisplay As LCARS.LCARSbuttonClass
-    Public bars() As LCARS.LCARSbuttonClass
-    Public myBattPercent As Control
-    Public myPowerSource As Control
     Public myProgsUp As LCARS.LCARSbuttonClass
     Public myProgsBack As LCARS.LCARSbuttonClass
     Public myProgsNext As LCARS.LCARSbuttonClass
 
-    Public MyPrograms As DirectoryStartItem
+    'Userbuttons components
+    Public UserButtonsPanel As LCARS.Controls.ButtonGrid
+    Public myButtonManager As LCARS.LCARSbuttonClass
+    Public myUserButtons As LCARS.LCARSbuttonClass
+
+    'Taskbar components
+    Public myAppsPanel As Panel
+    Public myTrayPanel As Panel
+    Public myShowTrayButton As LCARSbuttonClass
+    Public myHideTrayButton As LCARSbuttonClass
+
+    'Power monitor components
+    Public bars() As LCARSbuttonClass
+    Public myBattPercent As Control
+    Public myPowerSource As Control
+
+    'Common Buttons
+    Public myStartMenu As LCARSbuttonClass
+    Public myComputer As LCARSbuttonClass
+    Public mySettings As LCARSbuttonClass
+    Public myEngineering As LCARSbuttonClass
+    Public myDeactivate As LCARSbuttonClass
+    Public myAlert As LCARSbuttonClass
+    Public myDestruct As LCARSbuttonClass
+    Public myClock As Control
+    Public myPhoto As LCARSbuttonClass
+    Public myWebBrowser As LCARSbuttonClass
+    Public myDocuments As LCARSbuttonClass
+    Public myPictures As LCARSbuttonClass
+    Public myVideos As LCARSbuttonClass
+    Public myMusic As LCARSbuttonClass
+    Public myOSK As LCARSbuttonClass
+    Public mySpeech As LCARSbuttonClass
+    Public myHelp As LCARSbuttonClass
+    Public myRun As LCARSbuttonClass
+    Public myAlertListButton As LCARSbuttonClass
+
+    'Public state
+    'TODO: Find a better way to handle this
     Public myUserButtonCollection As New List(Of UserButtonInfo)
-    Public WithEvents tmrAutohide As New Timer()
-    Public ScreenIndex As Integer
-
-    Public leftArrow As LCARS.Controls.ArrowButton
-    Public rightArrow As LCARS.Controls.ArrowButton
-
-    Public isInit As Boolean = False
-
 #End Region
 
 #Region " Private Global Variables "
+    'State
+    Dim _screenIndex As Integer
+    Dim _isInit As Boolean = False
+    Dim _hasProgramsList As Boolean = False
+    Dim _hasUserButtons As Boolean = False
+    Dim _hasTaskbar As Boolean = False
+    Dim _hasPowerMonitor As Boolean = False
+    Dim _hasClock As Boolean = False
+    Dim _hasSpeechIndicator As Boolean = False
 
     'Program Pages
+    Dim MyPrograms As DirectoryStartItem
     Dim ProgDir As New List(Of Integer)
     Dim ProgPageSize As Integer
     Dim curProgPage As Integer = 1
@@ -80,6 +91,8 @@ public Class modBusiness
     Dim curProgIndex As Integer
 
     'External application management
+    Dim leftArrow As ArrowButton
+    Dim rightArrow As ArrowButton
     Dim windowMap As New Dictionary(Of ExternalApp, TaskbarItem)()
     Dim taskbarList As New List(Of TaskbarItem)()
     Dim taskbarOffset As Integer = 0
@@ -89,6 +102,7 @@ public Class modBusiness
     Dim isVisible As Boolean = False
 
     'Autohide
+    Dim WithEvents tmrAutohide As New Timer()
     Dim autohide As IAutohide.AutoHideModes
     Dim hideCount As Integer = 0
 #End Region
@@ -96,12 +110,24 @@ public Class modBusiness
 #End Region
 
     Public Sub New(ByVal screenIndex As Integer)
-        Me.ScreenIndex = screenIndex
+        _screenIndex = screenIndex
     End Sub
+
+    Public ReadOnly Property ScreenIndex() As Integer
+        Get
+            Return _screenIndex
+        End Get
+    End Property
+
+    Public ReadOnly Property isInit() As Boolean
+        Get
+            Return _isInit
+        End Get
+    End Property
 
     Public Sub ShutdownScreen()
         tmrAutohide.Stop()
-        isInit = False
+        _isInit = False
         Application.DoEvents()
         If Not myForm Is Nothing Then
             DeregisterAlertForm(myForm)
@@ -110,7 +136,7 @@ public Class modBusiness
     End Sub
 
     Public Sub myStartMenu_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-
+        'No common functionality. Everything is UI-specific
     End Sub
 
     Public Sub myCompButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
@@ -287,154 +313,213 @@ public Class modBusiness
     Private Sub myForm_Load(ByVal sender As Object, ByVal e As EventArgs)
         myForm.Bounds = Screen.AllScreens(ScreenIndex).Bounds
         myForm.Show()
-        isInit = True
+        _isInit = True
         UpdateRegion()
         initCommonComponents(Me)
     End Sub
 
-    Public Sub init(ByRef curForm As Form)
-        'When a mainscreen loads, it calls this sub to let LCARS x32 know
+    ''' <summary>
+    ''' Try to find a component with the given name
+    ''' </summary>
+    ''' <param name="componentName">Name of component to find</param>
+    ''' <returns>Component found</returns>
+    ''' <remarks>
+    ''' If the component is not found, NULL is returned and no exceptions are thrown.
+    ''' </remarks>
+    Private Function tryLoadComponent(ByVal componentName As String) As Control
+        Dim foundControls As Control() = myForm.Controls.Find(componentName, True)
+        If foundControls.Length <> 1 Then Return Nothing
+        Return foundControls(0)
+    End Function
+
+    ''' <summary>
+    ''' Try associating a button with a handler
+    ''' </summary>
+    ''' <param name="componentName">Name of control to find</param>
+    ''' <param name="var">Variable to assign to</param>
+    ''' <param name="handler">Click handler to add</param>
+    ''' <remarks>
+    ''' If the control is not found, or is of incorrect type, no handler will be
+    ''' added, and the variable will be initialized to NULL. No exceptions should
+    ''' be thrown.
+    ''' </remarks>
+    Private Sub tryAssocButton(ByVal componentName As String, ByRef var As LCARSbuttonClass, ByVal handler As EventHandler)
+        var = TryCast(tryLoadComponent(componentName), LCARSbuttonClass)
+        If var IsNot Nothing Then
+            AddHandler var.Click, handler
+        End If
+    End Sub
+
+    Public Sub init(ByVal curForm As Form)
+        'When a mainscreen is loaded, this sub is called to let LCARS x32 know
         'that it is now the mainscreen.  Since most of the functions of the
-        'mainscreen are done through this module, it is imperitive that they
-        'call this sub as soon as they load.
+        'mainscreen are done through this module, it is imperative that it be
+        'called as soon as they are created.
 
+
+        'Get required components: Main screen cannot function without these
         myForm = curForm
+        myMainPanel = TryCast(tryLoadComponent("pnlMain"), Panel)
+        myModeSelect = TryCast(tryLoadComponent("myModeSelect"), LCARSbuttonClass)
 
-        'Set the form's extended style to "WS_EX_TOOLWINDOW" which allows it
-        'to stay fullscreen instead of being resized by the working area.
-        Dim currentStyle As Integer = GetWindowLong_Safe(myForm.Handle, GWL_EXSTYLE)
-        currentStyle = currentStyle Or (WS_EX_TOOLWINDOW)
-        SetWindowLong_Safe(myForm.Handle, GWL_EXSTYLE, currentStyle)
+        If myForm Is Nothing Or myMainPanel Is Nothing Or myModeSelect Is Nothing Then
+            'No way we can use this form for ANYTHING; abort
+            MsgBox(String.Format("Invalid interface on screen {0}. Loading default.", ScreenIndex))
+            curForm.Dispose()
+            init(New frmMainscreen1(Me))
+            Return
+        Else
+            AddHandler myForm.Load, AddressOf myForm_Load
+            AddHandler myForm.FormClosing, AddressOf myForm_Closing
+            AddHandler myMainPanel.Resize, AddressOf myMainPanel_Resize
+            AddHandler myModeSelect.Click, AddressOf myModeSelectButton_Click
 
-        'Set the various panels and buttons that are controlled by this module.
-        'These panels and buttons behave exactly the same on each mainscreen.
-        ProgramsPanel = myForm.Controls.Find("pnlPrograms", True)(0)
-        myMainPanel = myForm.Controls.Find("pnlMain", True)(0)
-        UserButtonsPanel = myForm.Controls.Find("gridUserButtons", True)(0)
-        myAppsPanel = myForm.Controls.Find("pnlApps", True)(0)
+            'Set the form's extended style to "WS_EX_TOOLWINDOW" which allows it
+            'to stay fullscreen instead of being resized by the working area.
+            Dim currentStyle As Integer = GetWindowLong_Safe(myForm.Handle, GWL_EXSTYLE)
+            currentStyle = currentStyle Or (WS_EX_TOOLWINDOW)
+            SetWindowLong_Safe(myForm.Handle, GWL_EXSTYLE, currentStyle)
+        End If
 
-        'Mainscreen Buttons:
-        myStartMenu = myForm.Controls.Find("myStartMenu", True)(0)
-        myComputer = myForm.Controls.Find("MyComp", True)(0)
-        mySettings = myForm.Controls.Find("mySettings", True)(0)
-        myEngineering = myForm.Controls.Find("myEngineering", True)(0)
-        myModeSelect = myForm.Controls.Find("myModeSelect", True)(0)
-        myDeactivate = myForm.Controls.Find("myDeactivate", True)(0)
-        myAlert = myForm.Controls.Find("myAlert", True)(0)
-        myDestruct = myForm.Controls.Find("myDestruct", True)(0)
-        myClock = myForm.Controls.Find("myClock", True)(0)
-        myPhoto = myForm.Controls.Find("myPhoto", True)(0)
-        myWebBrowser = myForm.Controls.Find("fbWebBrowser", True)(0)
-        myButtonManager = myForm.Controls.Find("myButtonManager", True)(0)
-        myUserButtons = myForm.Controls.Find("myUserButtons", True)(0)
-        myDocuments = myForm.Controls.Find("myDocuments", True)(0)
-        myPictures = myForm.Controls.Find("myPictures", True)(0)
-        myVideos = myForm.Controls.Find("myVideos", True)(0)
-        myMusic = myForm.Controls.Find("myMusic", True)(0)
-        myBattery = myForm.Controls.Find("pnlBatt", True)(0)
-        myTrayPanel = myForm.Controls.Find("pnlTray", True)(0)
-        myShowTrayButton = myForm.Controls.Find("ShowTrayButton", True)(0)
-        myHideTrayButton = myForm.Controls.Find("HideTrayButton", True)(0)
-        myOSK = myForm.Controls.Find("myOSK", True)(0)
-        mySpeech = myForm.Controls.Find("mySpeech", True)(0)
-        myHelp = myForm.Controls.Find("myHelp", True)(0)
-        myRun = myForm.Controls.Find("myRun", True)(0)
-        myAlertListButton = myForm.Controls.Find("myAlertListButton", True)(0)
-        myProgramPagesDisplay = myForm.Controls.Find("fbProgramPages", True)(0)
-        bars = New LCARS.LCARSbuttonClass(9) { _
-            myBattery.Controls("fbBatt1"), _
-            myBattery.Controls("fbBatt2"), _
-            myBattery.Controls("fbBatt3"), _
-            myBattery.Controls("fbBatt4"), _
-            myBattery.Controls("fbBatt5"), _
-            myBattery.Controls("fbBatt6"), _
-            myBattery.Controls("fbBatt7"), _
-            myBattery.Controls("fbBatt8"), _
-            myBattery.Controls("fbBatt9"), _
-            myBattery.Controls("fbBatt10")}
-        myBattPercent = myBattery.Controls("lblBatt")
-        myPowerSource = myBattery.Controls("lblPowerSource")
-        myProgsUp = myForm.Controls.Find("myProgsUp", True)(0)
-        myProgsBack = myForm.Controls.Find("myProgsBack", True)(0)
-        myProgsNext = myForm.Controls.Find("myProgsNext", True)(0)
+        'Get programs list components: All components needed for program list in start menu
+        ProgramsPanel = TryCast(tryLoadComponent("pnlPrograms"), WindowlessContainer)
+        myProgramPagesDisplay = TryCast(tryLoadComponent("fbProgramPages"), LCARSbuttonClass)
+        myProgsUp = TryCast(tryLoadComponent("myProgsUp"), LCARSbuttonClass)
+        myProgsBack = TryCast(tryLoadComponent("myProgsBack"), LCARSbuttonClass)
+        myProgsNext = TryCast(tryLoadComponent("myProgsNext"), LCARSbuttonClass)
+        _hasProgramsList = Not (ProgramsPanel Is Nothing Or _
+                                myProgramPagesDisplay Is Nothing Or _
+                                myProgsUp Is Nothing Or _
+                                myProgsBack Is Nothing Or _
+                                myProgsNext Is Nothing)
+        If _hasProgramsList Then
+            'Only add handlers if we actually have all components
+            AddHandler myForm.MouseWheel, AddressOf myform_MouseScroll
+            AddHandler ProgramsPanel.Resize, AddressOf ProgramsPanel_Resize
+            AddHandler myProgsUp.Click, AddressOf ProgBack
+            AddHandler myProgsBack.Click, AddressOf previousProgPage
+            AddHandler myProgsNext.Click, AddressOf nextProgPage
+            MyPrograms = GetAllPrograms
+            loadProgList()
+        End If
 
-        'event handlers:
-        AddHandler myForm.Load, AddressOf myForm_Load
-        AddHandler ProgramsPanel.Resize, AddressOf ProgramsPanel_Resize
-        AddHandler myMainPanel.Resize, AddressOf myMainPanel_Resize
-        AddHandler myStartMenu.Click, AddressOf myStartMenu_Click
-        AddHandler myComputer.Click, AddressOf myCompButton_Click
-        AddHandler mySettings.Click, AddressOf mySettingsButton_Click
-        AddHandler myEngineering.Click, AddressOf myEngineeringButton_Click
-        AddHandler myModeSelect.Click, AddressOf myModeSelectButton_Click
-        AddHandler myDeactivate.Click, AddressOf myDeactivateButton_Click
-        AddHandler myAlert.Click, AddressOf myAlertButton_Click
-        AddHandler myDestruct.Click, AddressOf myDestructButton_Click
-        AddHandler myPhoto.Click, AddressOf myPhoto_Click
-        AddHandler myWebBrowser.Click, AddressOf myWebBrowser_Click
-        AddHandler myButtonManager.Click, AddressOf myButtonManager_Click
-        AddHandler myUserButtons.Click, AddressOf myUserButtons_Click
-        AddHandler myDocuments.Click, AddressOf myDocuments_Click
-        AddHandler myPictures.Click, AddressOf myPictures_Click
-        AddHandler myVideos.Click, AddressOf myVideos_Click
-        AddHandler myMusic.Click, AddressOf myMusic_Click
-        AddHandler myShowTrayButton.Click, AddressOf myShowTrayButton_Click
-        AddHandler myHideTrayButton.Click, AddressOf myHideTrayButton_Click
-        AddHandler myOSK.Click, AddressOf myOSK_Click
-        AddHandler mySpeech.Click, AddressOf mySpeech_Click
-        AddHandler myHelp.Click, AddressOf myHelp_Click
-        AddHandler myForm.FormClosing, AddressOf myForm_Closing
-        AddHandler myRun.Click, AddressOf myRun_Click
-        AddHandler myAlertListButton.Click, AddressOf myAlertListButton_Click
-        AddHandler myForm.MouseWheel, AddressOf myform_MouseScroll
-        AddHandler myProgsUp.Click, AddressOf ProgBack
-        AddHandler myProgsBack.Click, AddressOf previousProgPage
-        AddHandler myProgsNext.Click, AddressOf nextProgPage
+        'Get userbutton components: All components required for userbutton handling
+        UserButtonsPanel = TryCast(tryLoadComponent("gridUserButtons"), ButtonGrid)
+        myButtonManager = TryCast(tryLoadComponent("myButtonManager"), LCARSbuttonClass)
+        myUserButtons = TryCast(tryLoadComponent("myUserButtons"), LCARSbuttonClass)
+        _hasUserButtons = Not (UserButtonsPanel Is Nothing Or myButtonManager Is Nothing Or myUserButtons Is Nothing)
+        If _hasUserButtons Then
+            'Only add handlers if we actually have all components
+            AddHandler myButtonManager.Click, AddressOf myButtonManager_Click
+            AddHandler myUserButtons.Click, AddressOf myUserButtons_Click
+            myUserButtonCollection.Clear()
+            loadUserButtons()
+        End If
 
-        mySpeech.Lit = modSpeech.SpeechEnabled
+        'Get taskbar components: All components required for taskbar
+        'TODO: Separate window list and tray icons
+        myAppsPanel = TryCast(tryLoadComponent("pnlApps"), Panel)
+        myTrayPanel = TryCast(tryLoadComponent("pnlTray"), Panel)
+        myShowTrayButton = TryCast(tryLoadComponent("ShowTrayButton"), LCARSbuttonClass)
+        myHideTrayButton = TryCast(tryLoadComponent("HideTrayButton"), LCARSbuttonClass)
+        _hasTaskbar = Not (myAppsPanel Is Nothing Or _
+                           myTrayPanel Is Nothing Or _
+                           myShowTrayButton Is Nothing Or _
+                           myHideTrayButton Is Nothing)
+        If _hasTaskbar Then
+            'Only add handlers if we actually have all components
+            AddHandler myShowTrayButton.Click, AddressOf myShowTrayButton_Click
+            AddHandler myHideTrayButton.Click, AddressOf myHideTrayButton_Click
 
-        setDoubleBuffered(myClock)
+            'Create arrows for window list
+            leftArrow = New LCARS.Controls.ArrowButton()
+            leftArrow.ArrowDirection = LCARS.LCARSarrowDirection.Left
+            leftArrow.Size = New Point(25, 25)
+            leftArrow.Location = New Point(0, 0)
+            leftArrow.Lit = False
+            leftArrow.Name = "leftArrow"
+            rightArrow = New LCARS.Controls.ArrowButton()
+            AddHandler leftArrow.Click, AddressOf leftArrow_Click
+            myAppsPanel.Controls.Add(leftArrow)
+            rightArrow.ArrowDirection = LCARS.LCARSarrowDirection.Right
+            rightArrow.Size = leftArrow.Size
+            rightArrow.Anchor = AnchorStyles.Right
+            rightArrow.Lit = False
+            rightArrow.Name = "rightArrow"
+            rightArrow.Location = New Point(myAppsPanel.Width - rightArrow.Width, 0)
+            AddHandler rightArrow.Click, AddressOf rightArrow_Click
+            myAppsPanel.Controls.Add(rightArrow)
 
-        MyPrograms = GetAllPrograms
-        loadProgList()
+            windowMap.Clear()
+            taskbarList.Clear()
+            taskbarOffset = 0
+            If modSettings.ShowTrayIcons(ScreenIndex) Then
+                myShowTrayButton_Click(Nothing, Nothing)
+            End If
+        End If
 
-        'Create arrows for window list
-        leftArrow = New LCARS.Controls.ArrowButton()
-        leftArrow.ArrowDirection = LCARS.LCARSarrowDirection.Left
-        leftArrow.Size = New Point(25, 25)
-        leftArrow.Location = New Point(0, 0)
-        leftArrow.Lit = False
-        leftArrow.Name = "leftArrow"
-        rightArrow = New LCARS.Controls.ArrowButton()
-        AddHandler leftArrow.Click, AddressOf leftArrow_Click
-        myAppsPanel.Controls.Add(leftArrow)
-        rightArrow.ArrowDirection = LCARS.LCARSarrowDirection.Right
-        rightArrow.Size = leftArrow.Size
-        rightArrow.Anchor = AnchorStyles.Right
-        rightArrow.Lit = False
-        rightArrow.Name = "rightArrow"
-        rightArrow.Location = New Point(myAppsPanel.Width - rightArrow.Width, 0)
-        AddHandler rightArrow.Click, AddressOf rightArrow_Click
-        myAppsPanel.Controls.Add(rightArrow)
+        'Get power monitor components
+        bars = New LCARSbuttonClass(9) { _
+                TryCast(tryLoadComponent("fbBatt1"), LCARSbuttonClass), _
+                TryCast(tryLoadComponent("fbBatt2"), LCARSbuttonClass), _
+                TryCast(tryLoadComponent("fbBatt3"), LCARSbuttonClass), _
+                TryCast(tryLoadComponent("fbBatt4"), LCARSbuttonClass), _
+                TryCast(tryLoadComponent("fbBatt5"), LCARSbuttonClass), _
+                TryCast(tryLoadComponent("fbBatt6"), LCARSbuttonClass), _
+                TryCast(tryLoadComponent("fbBatt7"), LCARSbuttonClass), _
+                TryCast(tryLoadComponent("fbBatt8"), LCARSbuttonClass), _
+                TryCast(tryLoadComponent("fbBatt9"), LCARSbuttonClass), _
+                TryCast(tryLoadComponent("fbBatt10"), LCARSbuttonClass)}
+        myBattPercent = tryLoadComponent("lblBatt")
+        myPowerSource = tryLoadComponent("lblPowerSource")
+        _hasPowerMonitor = Not (myBattPercent Is Nothing Or myPowerSource Is Nothing)
+        For Each myBar As LCARSbuttonClass In bars
+            _hasPowerMonitor = _hasPowerMonitor And myBar IsNot Nothing
+        Next
 
-        windowMap.Clear()
-        taskbarList.Clear()
-        taskbarOffset = 0
+        'Get clock: This is a single component, but needs extra handling
+        myClock = tryLoadComponent("myClock")
+        _hasClock = myClock IsNot Nothing
+        If _hasClock Then
+            setDoubleBuffered(myClock)
+        End If
 
-        myUserButtonCollection.Clear()
-        loadUserButtons()
+        'Get speech indicator: This is a single component, but needs extra handling
+        mySpeech = TryCast(tryLoadComponent("mySpeech"), LCARSbuttonClass)
+        _hasSpeechIndicator = mySpeech IsNot Nothing
+        If _hasSpeechIndicator Then
+            AddHandler mySpeech.Click, AddressOf mySpeech_Click
+            mySpeech.Lit = modSpeech.SpeechEnabled
+        End If
+
+        'Common Buttons: Only have a click event to associate, and that's it.
+        tryAssocButton("myStartMenu", myStartMenu, AddressOf myStartMenu_Click)
+        tryAssocButton("MyComp", myComputer, AddressOf myCompButton_Click)
+        tryAssocButton("mySettings", mySettings, AddressOf mySettingsButton_Click)
+        tryAssocButton("myEngineering", myEngineering, AddressOf myEngineeringButton_Click)
+        tryAssocButton("myDeactivate", myDeactivate, AddressOf myDeactivateButton_Click)
+        tryAssocButton("myAlert", myAlert, AddressOf myAlertButton_Click)
+        tryAssocButton("myDestruct", myDestruct, AddressOf myDestructButton_Click)
+        tryAssocButton("myPhoto", myPhoto, AddressOf myPhoto_Click)
+        tryAssocButton("fbWebBrowser", myWebBrowser, AddressOf myWebBrowser_Click)
+        tryAssocButton("myDocuments", myDocuments, AddressOf myDocuments_Click)
+        tryAssocButton("myPictures", myPictures, AddressOf myPictures_Click)
+        tryAssocButton("myVideos", myVideos, AddressOf myVideos_Click)
+        tryAssocButton("myMusic", myMusic, AddressOf myMusic_Click)
+        tryAssocButton("myOSK", myOSK, AddressOf myOSK_Click)
+        tryAssocButton("myHelp", myHelp, AddressOf myHelp_Click)
+        tryAssocButton("myRun", myRun, AddressOf myRun_Click)
+        tryAssocButton("myAlertListButton", myAlertListButton, AddressOf myAlertListButton_Click)
+
+        'Final setup
         loadLanguage()
-
         LCARS.SetBeeping(myForm, modSettings.ButtonBeep)
         RegisterAlertForm(myForm)
 
-        'load Mainscreen Settings:
+        'load Autohide settings:
         tmrAutohide.Interval = 100
         Dim AutoHideMode As Integer = modSettings.AutoHide(ScreenIndex)
         SetAutoHide(AutoHideMode)
-        If modSettings.ShowTrayIcons(ScreenIndex) = True Then
-            myShowTrayButton_Click(New Object, New EventArgs)
-        End If
     End Sub
 
     Public Sub loadLanguage()
