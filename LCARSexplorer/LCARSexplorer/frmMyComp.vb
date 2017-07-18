@@ -102,14 +102,9 @@ Public Class frmMyComp
                 curPath = Command()
             End If
         End If
-
-
         nextInChain = SetClipboardViewer(Me.Handle)
 
-        beeping = Boolean.Parse(GetSetting("LCARS x32", "Application", "ButtonBeep", "False"))
-        SetBeeping(beeping, Me)
-        Me.Bounds = Screen.PrimaryScreen.WorkingArea
-        Me.pnlEdit.Parent = Me
+        LCARS.SetBeeping(Me)
         loadDir(curPath)
     End Sub
 
@@ -921,27 +916,6 @@ Public Class frmMyComp
             Return p
         End Get
     End Property
-
-
-    Public Sub SetBeeping(ByVal Enabled As Boolean, ByVal searchContainer As Control)
-
-        For Each myControl As Control In searchContainer.Controls
-            If myControl.GetType.ToString.Substring(0, 5) = "LCARS" Then
-                Try
-                    CType(myControl, LCARS.LCARSbuttonClass).Beeping = Enabled
-                Catch ex As Exception
-                    Try
-                        CType(myControl, LCARS.Controls.TrackBar).Beeping = Enabled
-                    Catch ex2 As Exception
-                    End Try
-                End Try
-            Else
-                If myControl.Controls.Count > 0 Then
-                    SetBeeping(Enabled, myControl)
-                End If
-            End If
-        Next
-    End Sub
 
     Private Sub sbClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbClose.Click
         Application.Exit()
