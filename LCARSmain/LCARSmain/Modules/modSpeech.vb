@@ -36,7 +36,8 @@ Module modSpeech
 
         'Add commands to console
         console.ClearCommands()
-        'TODO: Add "computer" + description
+        'Command initializer. Not used as actual command.
+        console.AddCommand(New InternalVoiceCmd("computer", "Command initializer. Must be spoken to use other commands", Nothing, False))
         For Each myItem As VoiceCmd In RulesHandlers.Values
             console.AddCommand(myItem)
         Next
