@@ -78,13 +78,15 @@ Namespace My
                     LCARS.UI.MsgBox("An error has occured in LCARSmain.exe" & vbNewLine & "The error could not be recorded." & vbNewLine & _
                                      "LCARS x32 will now attempt to return you to Windows.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Critical Error")
                 End Try
-                Try
-                    e.ExitApplication = False
-                    doDeactivate(Nothing)
-                Catch ex As Exception
-                    LCARS.UI.MsgBox("LCARS x32 could not close successfully. Please restart your computer.", MsgBoxStyle.Critical, "Critical Error")
-                    End
-                End Try
+                If Not IsSettingsMode Then
+                    Try
+                        e.ExitApplication = False
+                        doDeactivate(Nothing)
+                    Catch ex As Exception
+                        LCARS.UI.MsgBox("LCARS x32 could not close successfully. Please restart your computer.", MsgBoxStyle.Critical, "Critical Error")
+                        End
+                    End Try
+                End If
             Else
                 LCARS.UI.MsgBox("LCARS x32 could not close successfully. Please restart your computer.", MsgBoxStyle.Critical, "Critical Error")
                 End
