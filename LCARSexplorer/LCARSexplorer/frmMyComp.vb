@@ -74,7 +74,7 @@ Public Class frmMyComp
 
 
 
-    Private Sub frmMyComp_KeyUp(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyUp
+    Private Sub frmMyComp_KeyUp(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
         If e.KeyData = Keys.PageDown Then
             If gridMyComp.CurrentPage + 1 < gridMyComp.PageCount Then
                 gridMyComp.CurrentPage += 1
@@ -91,7 +91,6 @@ Public Class frmMyComp
     Private Sub myKeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles Me.KeyUp
         If e.KeyCode = Keys.ShiftKey Then
             myShift = False
-            'MsgBox(myShift)
         End If
     End Sub
 
