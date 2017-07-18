@@ -111,9 +111,6 @@ Public Class frmMyComp
         Me.Bounds = Screen.PrimaryScreen.WorkingArea
         Me.pnlEdit.Parent = Me
         loadDir(curPath)
-
-        Dim myColor As New LCARS.LCARScolor
-        mySelection.BackColor = myColor.getColor(LCARS.LCARScolorStyles.StaticBlue)
     End Sub
 
     Private Sub loadMyComp()
