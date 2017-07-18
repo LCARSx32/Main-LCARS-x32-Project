@@ -141,12 +141,13 @@ Module modSpeech
     End Sub
 
     Private Sub executeCommand(ByVal name As String, ByRef result As ISpeechRecoResult)
-        Dim command As VoiceCmd = Nothing
-        Try
-            command = RulesHandlers.Item(name)
-        Catch ex As KeyNotFoundException
+        Dim command As VoiceCmd
+        If RulesHandlers.ContainsKey(name) Then
+            command = RulesHandlers(name)
+        Else ' *Should* never happen, but let's be really careful.
             console.WriteLine("Unable to determine rule: " & name)
-        End Try
+            Return
+        End If
         If command.RequiresAuthorize Then
             Authorization = command
             'TODO: Create authorization sound
