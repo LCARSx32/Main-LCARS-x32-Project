@@ -565,24 +565,19 @@ Public Class frmSettings
 
     Private Sub sbInternal_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbInternal.Click
         pnlInternal.Visible = True
-        pnlInternal.BringToFront()
         lstInternalCommands.Visible = True
-        lstInternalCommands.BringToFront()
         pnlExternal.Visible = False
         lstExternalCommands.Visible = False
     End Sub
 
     Private Sub sbExternal_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbExternal.Click
         pnlExternal.Visible = True
-        pnlExternal.BringToFront()
         lstExternalCommands.Visible = True
-        lstExternalCommands.BringToFront()
         pnlInternal.Visible = False
         lstInternalCommands.Visible = False
     End Sub
-    Dim editingAlias As Boolean = False
+
     Private Sub lstInternalCommands_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lstInternalCommands.SelectedIndexChanged
-        If editingAlias Then Return
         If lstInternalCommands.SelectedIndex = -1 Then Return
         lblIntCommandName.Text = "Command Name: " & aliasList(lstInternalCommands.SelectedIndex).Command
         txtAlias.Text = aliasList(lstInternalCommands.SelectedIndex).CommandAlias
@@ -590,12 +585,9 @@ Public Class frmSettings
     End Sub
 
     Private Sub txtAlias_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAlias.TextChanged
-        editingAlias = True
-        Dim myposition As Integer = lstInternalCommands.SelectedIndex
         Dim newAlias As AliasEntry = CType(lstInternalCommands.SelectedItem, AliasEntry)
         newAlias.CommandAlias = txtAlias.Text
-        lstInternalCommands.SelectedIndex = myposition
-        editingAlias = False
+        lstInternalCommands.RefreshItem(lstInternalCommands.SelectedIndex)
     End Sub
 
     Private Sub sbAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbAdd.Click
