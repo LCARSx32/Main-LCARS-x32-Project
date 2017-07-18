@@ -12,10 +12,16 @@ Public Class frmMyComp
     Inherits LCARS.LCARSForm
 
 #Region " API "
-    Public Declare Auto Function SendMessage Lib "user32.dll" (ByVal hWnd As IntPtr, ByVal msg As Integer, ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
+    Private Declare Auto Function SendMessage Lib "user32.dll" (ByVal hWnd As IntPtr, ByVal msg As Integer, ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
 
     Private Declare Auto Function SetClipboardViewer Lib "user32" (ByVal hWndNewViewer As IntPtr) As IntPtr
 
+    Private Declare Auto Function ChangeClipboardChain Lib "user32" (ByVal hwndRemove As IntPtr, ByVal hwndNewNext As IntPtr) As Boolean
+
+    Private Const WM_DESTROY As Integer = &H2
+    Private Const WM_DRAWCLIPBOARD As Integer = &H308
+    Private Const WM_CHANGECBCHAIN As Integer = &H30D
+    Private Const WS_EX_APPWINDOW As Integer = &H40000
 #End Region
 
 #Region " Global Variables "
@@ -40,23 +46,30 @@ Public Class frmMyComp
 
 #End Region
 
-    Private Const WM_DRAWCLIPBOARD As Integer = &H308
-    Private Const WS_EX_APPWINDOW As Integer = &H40000
 
 
     Protected Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
-
-        If m.Msg = WM_DRAWCLIPBOARD Then
-            Clipboard_Changed()
-
-            If Not nextInChain = IntPtr.Zero Then
-                SendMessage(nextInChain, WM_DRAWCLIPBOARD, Nothing, Nothing)
-            End If
-        Else
-            MyBase.WndProc(m)
-
-        End If
-
+        Select Case m.Msg
+            Case WM_DRAWCLIPBOARD
+                Clipboard_Changed()
+                If nextInChain <> IntPtr.Zero Then
+                    SendMessage(nextInChain, WM_DRAWCLIPBOARD, Nothing, Nothing)
+                End If
+                m.Result = IntPtr.Zero
+            Case WM_CHANGECBCHAIN
+                If m.WParam = nextInChain Then
+                    nextInChain = m.LParam
+                End If
+                If nextInChain <> IntPtr.Zero Then
+                    SendMessage(nextInChain, WM_CHANGECBCHAIN, m.WParam, m.LParam)
+                End If
+                m.Result = IntPtr.Zero
+            Case WM_DESTROY
+                ChangeClipboardChain(Me.Handle, nextInChain)
+                MyBase.WndProc(m)
+            Case Else
+                MyBase.WndProc(m)
+        End Select
     End Sub
 
 
@@ -934,7 +947,7 @@ Public Class frmMyComp
     End Sub
 
     Private Sub sbClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbClose.Click
-        End
+        Application.Exit()
     End Sub
 
     Private Sub sbNewFolder_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbNewFolder.Click
