@@ -63,9 +63,6 @@ Public Class frmFileSelect
                 End If
             End If
 
-            'AddHandler myButton.MouseDown, AddressOf drive_MouseDown
-            'AddHandler myButton.MouseUp, AddressOf drive_MouseUp
-
             myButton.Data = myDrive.Name
             myButton.Beeping = beeping
             myButton.HoldDraw = False
@@ -74,44 +71,6 @@ Public Class frmFileSelect
         Next
 
     End Sub
-    Private Function ToDriveSize(ByVal bytes As Decimal, Optional ByVal Round As Boolean = False) As String
-        Dim mySize As String = ""
-        Dim SizeCount As Decimal = bytes
-        Dim Remainder As Integer = 0
-        Dim SizeType As String = "B"
-
-
-        If SizeCount > 1024 Then
-            SizeType = "KB"
-            SizeCount = SizeCount / 1024
-
-            If SizeCount > 1024 Then
-                SizeType = "MB"
-                SizeCount = SizeCount / 1024
-
-                If SizeCount > 1024 Then
-                    SizeType = "GB"
-                    SizeCount = SizeCount / 1024
-
-                    If SizeCount > 1024 Then
-                        SizeType = "TB"
-                        SizeCount = SizeCount / 1024
-
-                        If SizeCount > 1024 Then
-                            SizeType = "HB"
-                            SizeCount = SizeCount / 1024
-                        End If
-                    End If
-                End If
-            End If
-        End If
-
-        If Round = True Then
-            Return Math.Round(SizeCount) & SizeType
-        Else
-            Return SizeCount.ToString("N2") & SizeType
-        End If
-    End Function
 
     Private Sub drive_click(ByVal sender As Object, ByVal e As EventArgs)
         loadDir(CType(sender, LCARS.LightweightControls.LCComplexButton).Data)

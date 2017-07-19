@@ -82,7 +82,7 @@ Public Class frmCopying
                 totalSize += My.Computer.FileSystem.GetFileInfo(myPath).Length() + 1
                 totalItems += 1
             End If
-            RaiseEvent statusChanged(0, "Initializing", "0% complete", "Estimated time remaining: Calculating" & vbNewLine & "Items Remaining: " & totalItems - copiedItems & vbNewLine & "Data Remaining: " & frmMyComp.ToDriveSize(totalSize - copiedSize))
+            RaiseEvent statusChanged(0, "Initializing", "0% complete", "Estimated time remaining: Calculating" & vbNewLine & "Items Remaining: " & totalItems - copiedItems & vbNewLine & "Data Remaining: " & ToDriveSize(totalSize - copiedSize))
         Next
         Dim cut As Boolean = False
         Dim delete As Boolean = False
@@ -98,7 +98,7 @@ Public Class frmCopying
                 If Directory.Exists(myPath) Then
                     dirCopy(New System.IO.DirectoryInfo(myPath), destination & "\" & New DirectoryInfo(myPath).Name, cut, overwriteAction, mergeAction, copiedSize, copiedItems, totalSize, totalItems)
                 Else
-                    RaiseEvent statusChanged(copiedSize / totalSize, Path.GetFileName(myPath), ((copiedSize / totalSize) * 100).ToString("F2") & "% complete", "Estimated time remaining: " & toStandardTime(((totalSize - copiedSize) * (Now - start).TotalSeconds / (totalSize))) & vbNewLine & "Items Remaining: " & totalItems - copiedItems & vbNewLine & "Data Remaining: " & frmMyComp.ToDriveSize(totalSize - copiedSize))
+                    RaiseEvent statusChanged(copiedSize / totalSize, Path.GetFileName(myPath), ((copiedSize / totalSize) * 100).ToString("F2") & "% complete", "Estimated time remaining: " & toStandardTime(((totalSize - copiedSize) * (Now - start).TotalSeconds / (totalSize))) & vbNewLine & "Items Remaining: " & totalItems - copiedItems & vbNewLine & "Data Remaining: " & ToDriveSize(totalSize - copiedSize))
                     copiedSize += New FileInfo(myPath).Length + 1
                     copiedItems += 1
                     If File.Exists(destination & "\" & Path.GetFileName(myPath)) Then
@@ -141,7 +141,7 @@ Public Class frmCopying
                 If Directory.Exists(mypath) Then
                     dirDelete(New DirectoryInfo(mypath), copiedSize, copiedItems, totalSize, totalItems)
                 Else
-                    RaiseEvent statusChanged(copiedSize / totalSize, Path.GetFileName(mypath), ((copiedSize / totalSize) * 100).ToString("F2") & "% complete", "Estimated time remaining: " & toStandardTime((totalSize - copiedSize) * (Now - start).TotalSeconds / (totalSize)) & vbNewLine & "Items Remaining: " & totalItems - copiedItems & vbNewLine & "Data Remaining: " & frmMyComp.ToDriveSize(totalSize - copiedSize))
+                    RaiseEvent statusChanged(copiedSize / totalSize, Path.GetFileName(mypath), ((copiedSize / totalSize) * 100).ToString("F2") & "% complete", "Estimated time remaining: " & toStandardTime((totalSize - copiedSize) * (Now - start).TotalSeconds / (totalSize)) & vbNewLine & "Items Remaining: " & totalItems - copiedItems & vbNewLine & "Data Remaining: " & ToDriveSize(totalSize - copiedSize))
                     copiedSize += New FileInfo(mypath).Length + 1
                     copiedItems += 1
                     Try
@@ -165,7 +165,7 @@ Public Class frmCopying
             size += fi.Length + 1
             items += 1
             Try
-                RaiseEvent statusChanged(0, "Initializing", "0% complete", "Estimated time remaining: Calculating" & vbNewLine & "Items Remaining: " & items & vbNewLine & "Data Remaining: " & frmMyComp.ToDriveSize(size))
+                RaiseEvent statusChanged(0, "Initializing", "0% complete", "Estimated time remaining: Calculating" & vbNewLine & "Items Remaining: " & items & vbNewLine & "Data Remaining: " & ToDriveSize(size))
             Catch ex As Exception
             End Try
         Next fi
@@ -209,7 +209,7 @@ Public Class frmCopying
                 size += f.Length + 1
                 items += 1
                 'MsgBox((totalSize - size) / (totalSize / (Now - start).TotalSeconds))
-                RaiseEvent statusChanged(size / totalSize, f.Name, ((size / totalSize) * 100).ToString("F2") & "% complete", "Estimated time remaining: " & toStandardTime((totalSize - size) * (Now - start).TotalSeconds / (totalSize)) & vbNewLine & "Items Remaining: " & totalItems - items & vbNewLine & "Data Remaining: " & frmMyComp.ToDriveSize(totalSize - size))
+                RaiseEvent statusChanged(size / totalSize, f.Name, ((size / totalSize) * 100).ToString("F2") & "% complete", "Estimated time remaining: " & toStandardTime((totalSize - size) * (Now - start).TotalSeconds / (totalSize)) & vbNewLine & "Items Remaining: " & totalItems - items & vbNewLine & "Data Remaining: " & ToDriveSize(totalSize - size))
                 'copy file
                 If File.Exists(workingDir & "\" & Path.GetFileName(f.FullName)) Then
                     Dim action As OverWriteActions = conflictAction
@@ -268,7 +268,7 @@ Public Class frmCopying
         For Each f As FileInfo In files
             size += f.Length + 1
             items += 1
-            RaiseEvent statusChanged(size / totalSize, f.Name, ((size / totalSize) * 100).ToString("F2") & "% complete", "Estimated time remaining: Calculating" & vbNewLine & "Items Remaining: " & totalItems - items & vbNewLine & "Data Remaining: " & frmMyComp.ToDriveSize(totalSize - size))
+            RaiseEvent statusChanged(size / totalSize, f.Name, ((size / totalSize) * 100).ToString("F2") & "% complete", "Estimated time remaining: Calculating" & vbNewLine & "Items Remaining: " & totalItems - items & vbNewLine & "Data Remaining: " & ToDriveSize(totalSize - size))
             File.Delete(f.FullName)
         Next
         For Each di As DirectoryInfo In d.GetDirectories()

@@ -156,18 +156,6 @@ Public Class frmMyComp
 
     End Sub
 
-    Public Function ToDriveSize(ByVal bytes As Decimal) As String
-        If bytes < 0 Then Return "-" & ToDriveSize(-1 * bytes)
-        If bytes = 0 Then Return "0B"
-        Dim units() As String = {"B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"}
-
-        Dim order As Integer = Math.Floor(Math.Log(bytes, 1024))
-        If order > units.GetUpperBound(0) Then
-            order = units.GetUpperBound(0)
-        End If
-        Dim adjustedSize As Decimal = bytes / (1L << (order * 10))
-        Return adjustedSize.ToString("N2") & units(order)
-    End Function
 
     Private Sub drive_click(ByVal sender As Object, ByVal e As EventArgs)
         If (cancelClick = False And CType(sender, LCARS.LightweightControls.LCComplexButton).SideText <> "--") Then
@@ -882,22 +870,6 @@ Public Class frmMyComp
         End If
 
     End Sub
-    Public Shared Function DirSize(ByVal d As DirectoryInfo) As Long
-        Dim Size As Long = 0
-        ' Add file sizes.
-        Dim fis As FileInfo() = d.GetFiles()
-        Dim fi As FileInfo
-        For Each fi In fis
-            Size += fi.Length
-        Next fi
-        ' Add subdirectory sizes.
-        Dim dis As DirectoryInfo() = d.GetDirectories()
-        Dim di As DirectoryInfo
-        For Each di In dis
-            Size += DirSize(di)
-        Next di
-        Return Size
-    End Function
 
     Private Sub sbOpenWith_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbOpenWith.Click
         If (selectedButtons.Count = 1) Then
