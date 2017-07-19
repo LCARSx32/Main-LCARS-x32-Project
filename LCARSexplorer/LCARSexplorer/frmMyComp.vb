@@ -276,9 +276,9 @@ Public Class frmMyComp
                         Dim ext As String = Path.GetExtension(curItem.FullName).Replace(".", "")
                         If ext <> "" Then
                             If ext.Length > 6 Then
-                                ext = ext.Substring(1, 6) & "."
+                                ext = ext.Substring(0, 6) & "."
                             End If
-                            myButton.SideText = ext.ToUpper  'ToDriveSize(curItem.Value.Length, True)
+                            myButton.SideText = ext.ToUpper
                         Else
                             myButton.SideText = "---"
                         End If
