@@ -34,4 +34,20 @@ Module modCommon
         End Try
         Return Size
     End Function
+
+    Public Function getExtColor(ByVal ext As String) As String
+        ext = ext.Replace(".", "").ToLower
+
+        Dim c() As Integer = {150, 150, 150}
+        For i As Integer = 0 To Math.Min(ext.Length - 1, 2)
+            Dim ch As Char = ext.Chars(i)
+            If Char.IsDigit(ch) Then
+                c(i) = CInt((((Convert.ToInt32(ch) - 48) * 157) / 10) + 98)
+            Else
+                c(i) = CInt((((Convert.ToInt32(ch) - 97) * 157) / 25) + 98)
+            End If
+            If c(i) < 0 Then c(i) = 0
+        Next
+        Return System.Drawing.ColorTranslator.ToHtml(Color.FromArgb(255, c(0), c(1), c(2)))
+    End Function
 End Module

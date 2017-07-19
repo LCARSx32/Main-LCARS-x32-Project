@@ -317,48 +317,6 @@ Public Class frmMyComp
 
     End Sub
 
-    Friend Function getExtColor(ByVal ext As String) As String
-        ext = ext.Replace(".", "").ToLower
-
-        Dim r, g, b As Integer
-
-        If ext.Length > 0 Then
-            If Char.IsDigit(ext.Chars(0)) Then
-                r = (((Convert.ToInt32(ext.Chars(0)) - 48) * 157) / 10) + 98
-            Else
-                r = (((Convert.ToInt32(ext.Chars(0)) - 97) * 157) / 25) + 98
-            End If
-            If ext.Length > 1 Then
-                If Char.IsDigit(ext.Chars(1)) Then
-                    g = (((Convert.ToInt32(ext.Chars(1)) - 48) * 157) / 10) + 98
-                Else
-                    g = (((Convert.ToInt32(ext.Chars(1)) - 97) * 157) / 25) + 98
-                End If
-                If ext.Length > 2 Then
-                    If Char.IsDigit(ext.Chars(2)) Then
-                        b = (((Convert.ToInt32(ext.Chars(2)) - 48) * 157) / 10) + 98
-                    Else
-                        b = (((Convert.ToInt32(ext.Chars(2)) - 97) * 157) / 25) + 98
-                    End If
-                Else
-                    b = 150
-                End If
-            Else
-                g = 150
-                b = 150
-            End If
-        Else
-            r = 150
-            g = 150
-            b = 150
-        End If
-        If r < 0 Then r = 0
-        If g < 0 Then g = 0
-        If b < 0 Then b = 0
-
-        Return System.Drawing.ColorTranslator.ToHtml(Color.FromArgb(255, r, g, b))
-
-    End Function
     Private Sub myFile_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         If (cancelClick = False And CType(sender, LCARS.LightweightControls.LCComplexButton).SideText <> "--") Then
             Try

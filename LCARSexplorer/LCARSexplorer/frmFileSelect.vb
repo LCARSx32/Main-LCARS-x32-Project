@@ -160,7 +160,7 @@ Public Class frmFileSelect
                     Try
                         If My.Settings.ColorFiles Then
                             Dim mycolors() As String = myButton.ColorsAvailable.getColors
-                            mycolors(2) = frmMyComp.getExtColor(System.IO.Path.GetExtension(curItem.Name))
+                            mycolors(2) = getExtColor(System.IO.Path.GetExtension(curItem.Name))
                             myButton.ColorsAvailable.setColors(mycolors)
                         End If
 
