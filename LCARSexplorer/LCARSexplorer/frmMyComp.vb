@@ -29,15 +29,10 @@ Public Class frmMyComp
     Public curPath As String = My.Settings.startDir
     Dim selectedButtons As New Collection
     Dim selStart As Point
-    Dim MouseDownCount As Integer
     Dim curSelected As LCARS.LightweightControls.LCComplexButton
     Dim cancelClick As Boolean
-    Dim beeping As Boolean = False
     Dim mySelection As New frmSelect
-    Dim maximized As Boolean = True
-    Dim CurItems As New exCollection
     Dim showSystem As Boolean = False 'flag to show system files and folders
-    Dim PageCount As Integer
     Dim myShift As Boolean = False
     Dim nextInChain As IntPtr
 
@@ -120,6 +115,7 @@ Public Class frmMyComp
         Loop
         pnlEdit.Visible = False
 
+        Dim beeping As Boolean = LCARS.x32.modSettings.ButtonBeep
         For Each myDrive As DriveInfo In myDrives
             Dim myButton As New LCARS.LightweightControls.LCComplexButton 'LCARS.Controls.ComplexButton
             myButton.HoldDraw = True
@@ -172,14 +168,12 @@ Public Class frmMyComp
             selectedButtons.Clear()
             checkSelected(0, 0, 0, 0)
             curSelected = CType(sender, LCARS.LightweightControls.LCComplexButton)
-            MouseDownCount = 0
             tmrMouseSelect.Enabled = True
         End If
     End Sub
 
     Private Sub drive_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs)
         curSelected = Nothing
-        MouseDownCount = 0
         tmrMouseSelect.Enabled = False
         cancelClick = False
     End Sub
@@ -201,7 +195,7 @@ Public Class frmMyComp
             Dim myDir As DirectoryInfo = New DirectoryInfo(newpath)
 
             curPath = newpath
-            CurItems.Clear()
+            Dim CurItems As New exCollection
 
             Dim title As String = System.IO.Path.GetFileNameWithoutExtension(curPath)
             If title <> "" Then
@@ -243,6 +237,7 @@ Public Class frmMyComp
 
             gridMyComp.Clear()
             gridMyComp.ControlSize = New Size(300, 30)
+            Dim beeping As Boolean = LCARS.x32.modSettings.ButtonBeep
             For intloop As Integer = 0 To CurItems.Count - 1
 
                 Dim curItem As exCollectionItem = CurItems.Item(intloop)

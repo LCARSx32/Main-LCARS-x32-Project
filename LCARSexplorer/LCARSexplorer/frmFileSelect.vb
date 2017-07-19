@@ -4,11 +4,6 @@ Imports Microsoft.Win32
 Public Class frmFileSelect
 
     Dim curPath As String = ""
-    Dim CurItems As New exCollection
-    Dim beeping As Boolean = False
-    Dim bpp As Integer 'buttons per page
-    Dim pageCount As Integer
-    Dim curPage As Integer
     Dim extensions() As String = {}
     Dim myResult As Windows.Forms.DialogResult
     Dim oloc As Point
@@ -39,6 +34,7 @@ Public Class frmFileSelect
         hpLocation.ButtonText = "MY COMPUTER"
         Me.Text = "MY COMPUTER"
 
+        Dim beeping As Boolean = LCARS.x32.modSettings.ButtonBeep
         For Each myDrive As DriveInfo In myDrives
             Dim myButton As New LCARS.LightweightControls.LCComplexButton 'LCARS.Controls.ComplexButton
             myButton.HoldDraw = True
@@ -85,7 +81,7 @@ Public Class frmFileSelect
             Dim myDir As DirectoryInfo = New DirectoryInfo(newpath)
 
             curPath = newpath
-            CurItems.Clear()
+            Dim CurItems As New exCollection
 
             Dim title As String = System.IO.Path.GetFileNameWithoutExtension(curPath)
             If title <> "" Then
@@ -131,6 +127,7 @@ Public Class frmFileSelect
                 End Try
             Next
 
+            Dim beeping As Boolean = LCARS.x32.modSettings.ButtonBeep
             gridMyComp.Clear()
             gridMyComp.ControlSize = New Size(300, 30)
             For intloop As Integer = 0 To CurItems.Count - 1
