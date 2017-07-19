@@ -854,15 +854,6 @@ Public Class frmMyComp
         txtNew.Text = ""
     End Sub
 
-    Protected Overloads Overrides ReadOnly Property CreateParams() As CreateParams
-        Get
-            Dim p As CreateParams = MyBase.CreateParams
-            p.ExStyle = p.ExStyle Or (WS_EX_APPWINDOW)
-            p.Parent = IntPtr.Zero
-            Return p
-        End Get
-    End Property
-
     Private Sub sbClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbClose.Click
         Application.Exit()
     End Sub
