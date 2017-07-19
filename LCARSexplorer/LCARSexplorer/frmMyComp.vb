@@ -428,7 +428,7 @@ Public Class frmMyComp
 
     Private Sub sbProperties_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbProperties.Click
         If selectedButtons.Count > 0 Then
-            Dim props As New frmProperties(selectedButtons)
+            Dim props As New frmProperties(getSelectedFiles())
             dockDialog(props)
         Else
             MsgBox("No item selected.  Select an item by holding the mouse down for more than a second (it will stay white)." & vbNewLine & "You can also select multiple items by clicking in the back area and dragging around the desired items.", MsgBoxStyle.Exclamation, "ERROR: NO ITEM SLECTED")
@@ -480,6 +480,13 @@ Public Class frmMyComp
         loadDir(Path.GetDirectoryName(curPath))
     End Sub
 
+    Private Function getSelectedFiles() As String()
+        Dim myFiles As New List(Of String)(selectedButtons.Count)
+        For Each mybutton As LCComplexButton In selectedButtons
+            myFiles.Add(DirectCast(mybutton.Data, String))
+        Next
+        Return myFiles.ToArray()
+    End Function
 
     Private Sub sbDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbDelete.Click
         Dim result As MsgBoxResult
@@ -487,12 +494,7 @@ Public Class frmMyComp
         result = MsgBox("Are you sure you want to delete the selected file(s)/folder(s)?!", MsgBoxStyle.YesNo, "DELETE?")
 
         If result = MsgBoxResult.Yes Then
-            Dim myfiles(-1) As String
-            For Each myButton As LCARS.LightweightControls.LCComplexButton In selectedButtons
-                ReDim Preserve myfiles(myfiles.GetUpperBound(0) + 1)
-                myfiles(myfiles.GetUpperBound(0)) = myButton.Data
-            Next
-            Dim form As New frmCopying(myfiles, "", frmCopying.FileActions.Delete)
+            Dim form As New frmCopying(getSelectedFiles(), "", frmCopying.FileActions.Delete)
             AddHandler form.TaskCompleted, AddressOf Task_Finished
             form.Show()
         End If
@@ -500,14 +502,9 @@ Public Class frmMyComp
     End Sub
 
     Private Sub sbCopy_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbCopy.Click
-        Dim myfiles(-1) As String
+        Dim myfiles() As String = getSelectedFiles()
 
-        For Each myButton As LCARS.LightweightControls.LCComplexButton In selectedButtons
-            ReDim Preserve myfiles(myfiles.GetUpperBound(0) + 1)
-            myfiles(myfiles.GetUpperBound(0)) = myButton.Data
-        Next
-
-        If Not myfiles Is Nothing Then
+        If myfiles.Length > 0 Then
             Dim myStream As New MemoryStream(4)
             Dim bytes(3) As Byte
             bytes(0) = 5
@@ -527,15 +524,9 @@ Public Class frmMyComp
     End Sub
 
     Private Sub sbCut_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbCut.Click
+        Dim myfiles() As String = getSelectedFiles()
 
-        Dim myfiles(-1) As String
-
-        For Each myButton As LCARS.LightweightControls.LCComplexButton In selectedButtons
-            ReDim Preserve myfiles(myfiles.GetUpperBound(0) + 1)
-            myfiles(myfiles.GetUpperBound(0)) = myButton.Data
-        Next
-
-        If Not myfiles Is Nothing Then
+        If myfiles.Length > 0 Then
             Dim myStream As New MemoryStream(4)
             Dim bytes(3) As Byte
             bytes(0) = 2

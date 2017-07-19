@@ -4,12 +4,12 @@ Imports System.Text
 
 Public Class frmProperties
     Inherits LCARS.LCARSForm
-    'TODO: Change to take a List(Of String)
-    Public Sub New(ByVal selectedButtons As Collection)
+
+    Public Sub New(ByVal selectedFiles() As String)
         InitializeComponent()
         TopLevel = False
-        If selectedButtons.Count = 1 Then
-            Dim path As String = CType(selectedButtons(1).data, String)
+        If selectedFiles.Length = 1 Then
+            Dim path As String = selectedFiles(0)
             If path.Length = 3 Then
                 'it's a drive
                 loadDriveProps(path)
@@ -24,7 +24,7 @@ Public Class frmProperties
             End If
         Else
             'Multiple things have been selected.
-            loadMultipleProps(selectedButtons)
+            loadMultipleProps(selectedFiles)
         End If
     End Sub
 
@@ -112,25 +112,24 @@ Public Class frmProperties
         pnlFile.Visible = True
     End Sub
 
-    Private Sub loadMultipleProps(ByVal selectedButtons As Collection)
+    Private Sub loadMultipleProps(ByVal selectedFiles() As String)
         Dim myString As New StringBuilder()
-        If selectedButtons(1).data.ToString().Length = 3 Then
+        If selectedFiles(0).Length = 3 Then
             'We're viewing drives
-            myString.Append("Number of drives: " & selectedButtons.Count & vbNewLine)
+            myString.Append("Number of drives: " & selectedFiles.Length & vbNewLine)
         Else
             'We have multiple files/folders
-            myString.Append("Number of items: " & selectedButtons.Count & vbNewLine)
+            myString.Append("Number of items: " & selectedFiles.Length & vbNewLine)
             Dim numberFiles As Integer = 0
             Dim numberFolders As Integer = 0
             Dim size As Long = 0
-            For Each myButton As LCARS.LightweightControls.LCComplexButton In selectedButtons
-                Dim myPath As String = myButton.Data.ToString()
-                If Directory.Exists(myPath) Then
+            For Each myFile As String In selectedFiles
+                If Directory.Exists(myFile) Then
                     numberFolders += 1
-                    size += DirSize(New System.IO.DirectoryInfo(myPath))
+                    size += DirSize(New System.IO.DirectoryInfo(myFile))
                 Else
                     numberFiles += 1
-                    size += My.Computer.FileSystem.GetFileInfo(myPath).Length()
+                    size += My.Computer.FileSystem.GetFileInfo(myFile).Length()
                 End If
             Next
             myString.Append("     Files: " & numberFiles & vbNewLine)
