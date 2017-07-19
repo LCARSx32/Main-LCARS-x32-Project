@@ -1,7 +1,8 @@
-Option Strict Off
+Option Strict On
 Imports System.IO
 Imports Microsoft.Win32
 Imports LCARS.UI
+Imports LCARS.LightweightControls
 
 'To do:
 'Finish file associations
@@ -29,7 +30,7 @@ Public Class frmMyComp
     Public curPath As String = My.Settings.startDir
     Dim selectedButtons As New Collection
     Dim selStart As Point
-    Dim curSelected As LCARS.LightweightControls.LCComplexButton
+    Dim curSelected As LCComplexButton
     Dim cancelClick As Boolean
     Dim mySelection As New frmSelect
     Dim showSystem As Boolean = False 'flag to show system files and folders
@@ -118,7 +119,7 @@ Public Class frmMyComp
 
         Dim beeping As Boolean = LCARS.x32.modSettings.ButtonBeep
         For Each myDrive As DriveInfo In myDrives
-            Dim myButton As New LCARS.LightweightControls.LCComplexButton 'LCARS.Controls.ComplexButton
+            Dim myButton As New LCComplexButton 'LCARS.Controls.ComplexButton
             myButton.HoldDraw = True
 
             If myDrive.IsReady Then
@@ -130,23 +131,23 @@ Public Class frmMyComp
                 End If
                 myButton.SideText = ToDriveSize(myDrive.TotalSize)
                 If My.Settings.ClickMode = "Single" Then
-                    AddHandler myButton.Click, AddressOf drive_click
+                    AddHandler myButton.Click, AddressOf directory_click
                 Else
-                    AddHandler myButton.DoubleClick, AddressOf drive_click
+                    AddHandler myButton.DoubleClick, AddressOf directory_click
                 End If
             Else
                 myButton.Color = LCARS.LCARScolorStyles.FunctionOffline
                 myButton.Text = "DRIVE OFFLINE (" & myDrive.Name & ")"
                 myButton.SideText = "--"
                 If My.Settings.ClickMode = "Single" Then
-                    AddHandler myButton.Click, AddressOf OfflineDrive_click
+                    AddHandler myButton.Click, AddressOf myErrorAlert
                 Else
-                    AddHandler myButton.DoubleClick, AddressOf OfflineDrive_click
+                    AddHandler myButton.DoubleClick, AddressOf myErrorAlert
                 End If
             End If
 
-            AddHandler myButton.MouseDown, AddressOf drive_MouseDown
-            AddHandler myButton.MouseUp, AddressOf drive_MouseUp
+            AddHandler myButton.MouseDown, AddressOf item_MouseDown
+            AddHandler myButton.MouseUp, AddressOf item_MouseUp
 
             myButton.Data = myDrive.Name
             myButton.Beeping = beeping
@@ -158,29 +159,25 @@ Public Class frmMyComp
     End Sub
 
 
-    Private Sub drive_click(ByVal sender As Object, ByVal e As EventArgs)
-        If (cancelClick = False And CType(sender, LCARS.LightweightControls.LCComplexButton).SideText <> "--") Then
-            loadDir(CType(sender, LCARS.LightweightControls.LCComplexButton).Data)
+    Private Sub directory_click(ByVal sender As Object, ByVal e As EventArgs)
+        If (cancelClick = False And CType(sender, LCComplexButton).SideText <> "--") Then
+            loadDir(CStr(CType(sender, LCComplexButton).Data))
         End If
     End Sub
 
-    Private Sub drive_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs)
+    Private Sub item_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs)
         If tmrMouseSelect.Enabled = False Then
             selectedButtons.Clear()
             checkSelected(0, 0, 0, 0)
-            curSelected = CType(sender, LCARS.LightweightControls.LCComplexButton)
+            curSelected = CType(sender, LCComplexButton)
             tmrMouseSelect.Enabled = True
         End If
     End Sub
 
-    Private Sub drive_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs)
+    Private Sub item_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs)
         curSelected = Nothing
         tmrMouseSelect.Enabled = False
         cancelClick = False
-    End Sub
-
-    Private Sub OfflineDrive_click(ByVal sender As Object, ByVal e As EventArgs)
-        myErrorAlert(sender, e)
     End Sub
 
     Public Sub loadDir(ByVal newpath As String)
@@ -241,7 +238,7 @@ Public Class frmMyComp
             Dim beeping As Boolean = LCARS.x32.modSettings.ButtonBeep
             For Each curItem As FileSystemInfo In CurItems
 
-                Dim myButton As New LCARS.LightweightControls.LCComplexButton()
+                Dim myButton As New LCComplexButton()
 
                 myButton.HoldDraw = True
 
@@ -251,9 +248,9 @@ Public Class frmMyComp
                         myButton.Color = LCARS.LCARScolorStyles.NavigationFunction
                         myButton.SideText = curDir.GetDirectories.GetUpperBound(0) + 1 & "." & curDir.GetFiles.GetUpperBound(0) + 1
                         If My.Settings.ClickMode = "Single" Then
-                            AddHandler myButton.Click, AddressOf drive_click
+                            AddHandler myButton.Click, AddressOf directory_click
                         Else
-                            AddHandler myButton.DoubleClick, AddressOf drive_click
+                            AddHandler myButton.DoubleClick, AddressOf directory_click
                         End If
                     Catch ex As Exception
                         myButton.SideText = "--"
@@ -302,8 +299,8 @@ Public Class frmMyComp
                 End If
 
 
-                AddHandler myButton.MouseDown, AddressOf drive_MouseDown
-                AddHandler myButton.MouseUp, AddressOf drive_MouseUp
+                AddHandler myButton.MouseDown, AddressOf item_MouseDown
+                AddHandler myButton.MouseUp, AddressOf item_MouseUp
 
                 myButton.Text = curItem.Name
                 myButton.Data = curItem.FullName
@@ -319,17 +316,18 @@ Public Class frmMyComp
     End Sub
 
     Private Sub myFile_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        If (cancelClick = False And CType(sender, LCARS.LightweightControls.LCComplexButton).SideText <> "--") Then
+        Dim btn As LCComplexButton = CType(sender, LCComplexButton)
+        If (cancelClick = False And btn.SideText <> "--") Then
             Try
                 Dim myNewProcess As New System.Diagnostics.ProcessStartInfo
                 Dim myProcess As Process
 
-                myNewProcess.FileName = sender.data
+                myNewProcess.FileName = CStr(btn.Data)
                 myNewProcess.WorkingDirectory = curPath
                 myProcess = Process.Start(myNewProcess)
             Catch
                 Try
-                    Shell(sender.data, AppWinStyle.NormalFocus)
+                    Shell(CStr(btn.Data), AppWinStyle.NormalFocus)
                 Catch ex As Exception
                     MsgBox("Error: " & vbNewLine & vbNewLine & ex.Message)
                 End Try
@@ -337,13 +335,13 @@ Public Class frmMyComp
         End If
     End Sub
 
-    Private Sub pnlMyComp_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles gridMyComp.MouseDown 'pnlMyComp.MouseDown
+    Private Sub pnlMyComp_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles gridMyComp.MouseDown
         selectedButtons.Clear()
         checkSelected(0, 0, 0, 0)
         selStart = e.Location
     End Sub
 
-    Private Sub pnlMyComp_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles gridMyComp.MouseMove ' pnlMyComp.MouseMove
+    Private Sub pnlMyComp_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles gridMyComp.MouseMove
         If e.Button = Windows.Forms.MouseButtons.Left Then
             tmrMouseSelect.Enabled = False
             Dim x1, x2, y1, y2 As Integer
@@ -365,7 +363,7 @@ Public Class frmMyComp
             End If
 
             mySelection.Bounds = gridMyComp.RectangleToScreen(New Rectangle(x1, y1, x2 - x1, y2 - y1))
-            If mySelection.Visible = False Then
+            If Not mySelection.Visible Then
                 mySelection.Show()
             End If
 
@@ -374,15 +372,15 @@ Public Class frmMyComp
     End Sub
 
     Private Sub checkSelected(ByVal x1 As Integer, ByVal y1 As Integer, ByVal x2 As Integer, ByVal y2 As Integer, Optional ByVal rememberSelection As Boolean = False)
-        Dim myButton As LCARS.LightweightControls.LCComplexButton
+        Dim myButton As LCComplexButton
         For i As Integer = 0 To gridMyComp.Count - 1
-            myButton = CType(gridMyComp.Items(i), LCARS.LightweightControls.LCComplexButton)
+            myButton = CType(gridMyComp.Items(i), LCComplexButton)
             If myButton.Bounds.Bottom > y1 And myButton.Top < y2 And myButton.Bounds.Right > x1 And myButton.Left < x2 And myButton.HoldDraw = False Then
                 If myButton.RedAlert <> LCARS.LCARSalert.White Then
                     myButton.RedAlert = LCARS.LCARSalert.White
                 End If
                 If rememberSelection Then
-                    selectedButtons.Add(CType(myButton, LCARS.LightweightControls.LCComplexButton))
+                    selectedButtons.Add(CType(myButton, LCComplexButton))
                 End If
             Else
                 If myButton.RedAlert <> LCARS.LCARSalert.Normal Then
@@ -400,7 +398,7 @@ Public Class frmMyComp
         End If
     End Sub
 
-    Private Sub pnlMyComp_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles gridMyComp.MouseUp ' pnlMyComp.MouseUp
+    Private Sub pnlMyComp_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles gridMyComp.MouseUp
         If Not e.Location = selStart Then
             Dim x1, x2, y1, y2 As Integer
 
@@ -489,16 +487,15 @@ Public Class frmMyComp
     End Function
 
     Private Sub sbDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbDelete.Click
-        Dim result As MsgBoxResult
-
-        result = MsgBox("Are you sure you want to delete the selected file(s)/folder(s)?!", MsgBoxStyle.YesNo, "DELETE?")
+        Dim result As MsgBoxResult = MsgBox( _
+                "Are you sure you want to delete the selected file(s)/folder(s)?!", _
+                MsgBoxStyle.YesNo, "DELETE?")
 
         If result = MsgBoxResult.Yes Then
             Dim form As New frmCopying(getSelectedFiles(), "", frmCopying.FileActions.Delete)
             AddHandler form.TaskCompleted, AddressOf Task_Finished
             form.Show()
         End If
-
     End Sub
 
     Private Sub sbCopy_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbCopy.Click
@@ -546,17 +543,12 @@ Public Class frmMyComp
     End Sub
 
     Private Sub Clipboard_Changed()
-        If Clipboard.ContainsFileDropList Then
-            sbPaste.Lit = True
-            sbPaste.Clickable = True
-        Else
-            sbPaste.Lit = False
-            sbPaste.Clickable = False
-        End If
+        sbPaste.Lit = Clipboard.ContainsFileDropList()
+        sbPaste.Clickable = sbPaste.Lit
     End Sub
 
     Private Sub sbPaste_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbPaste.Click
-        If Clipboard.ContainsFileDropList = True Then
+        If Clipboard.ContainsFileDropList Then
             Dim data As IDataObject = Clipboard.GetDataObject
 
             Dim files() As String = DirectCast(Clipboard.GetData(DataFormats.FileDrop), String())
@@ -578,58 +570,9 @@ Public Class frmMyComp
         End If
     End Sub
 
-    Private Sub CopyPaths(ByVal SourcePaths() As String, ByVal Dest As String, ByVal delete As Boolean)
-
-        For Each myPath As String In SourcePaths
-            If Directory.Exists(myPath) Then
-                If (Directory.Exists(Dest + "\" + System.IO.Path.GetFileNameWithoutExtension(myPath))) Then
-                    If (MsgBox("Merge with existing directory " & System.IO.Path.GetFileNameWithoutExtension(myPath) & "?", MsgBoxStyle.YesNo, "Merge Directory?") = MsgBoxResult.Yes) Then
-                        My.Computer.FileSystem.CopyDirectory(myPath, Dest + "\" + System.IO.Path.GetFileNameWithoutExtension(myPath), True)
-                        If delete = True Then
-                            My.Computer.FileSystem.DeleteDirectory(myPath, FileIO.DeleteDirectoryOption.DeleteAllContents)
-                        End If
-                    End If
-                Else
-                    My.Computer.FileSystem.CreateDirectory(Dest + "\" + System.IO.Path.GetFileNameWithoutExtension(myPath))
-                    My.Computer.FileSystem.CopyDirectory(myPath, Dest + "\" + System.IO.Path.GetFileNameWithoutExtension(myPath))
-                    If delete = True Then
-                        My.Computer.FileSystem.DeleteDirectory(myPath, FileIO.DeleteDirectoryOption.DeleteAllContents)
-                    End If
-                End If
-            Else
-                If File.Exists(myPath) Then
-
-                    Dim destFile As String = Dest & "\" & Path.GetFileName(myPath)
-
-                    If File.Exists(Dest & "\" & Path.GetFileName(myPath)) Then
-                        Dim result As MsgBoxResult = MsgBox("Overwrite file " & Path.GetFileName(myPath) & "?", MsgBoxStyle.YesNo, "OVERWRITE FILE?")
-
-                        If result = MsgBoxResult.Yes Then
-                            If delete = True Then
-                                File.Delete(destFile)
-                                File.Move(myPath, destFile)
-                            Else
-                                File.Delete(destFile)
-                                File.Copy(myPath, destFile)
-                            End If
-                        End If
-
-                    Else
-                        If delete = True Then
-                            File.Move(myPath, destFile)
-                        Else
-                            File.Copy(myPath, destFile)
-                        End If
-                    End If
-                End If
-            End If
-        Next
-
-    End Sub
-
     Private Sub sbRename_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbRename.Click
         If selectedButtons.Count = 1 Then
-            Dim path As String = CStr(CType(selectedButtons(1), LCARS.LightweightControls.LCComplexButton).Data)
+            Dim path As String = CStr(CType(selectedButtons(1), LCComplexButton).Data)
             Dim ren As New frmRename(path)
             dockDialog(ren)
             AddHandler ren.FormClosed, AddressOf dialog_closed_reload
@@ -667,7 +610,7 @@ Public Class frmMyComp
             mySelect.ShowDialog()
             If (mySelect.Result = Windows.Forms.DialogResult.OK) Then
                 Dim newProg As String = mySelect.lblCurrentSelected.Text
-                Shell("""" & newProg & """" & " """ & selectedButtons(1).data.ToString() & """", AppWinStyle.NormalFocus)
+                Shell("""" & newProg & """" & " """ & CStr(CType(selectedButtons(1), LCComplexButton).Data) & """", AppWinStyle.NormalFocus)
             End If
         Else
             MsgBox("Please select one file", MsgBoxStyle.Information)
@@ -680,22 +623,18 @@ Public Class frmMyComp
     End Sub
 
     Private Sub sbEdit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbEdit.Click
-        pnlSystemDefined.Visible = False
-        If (pnlEdit.Visible = False) Then
-            pnlEdit.Visible = True
+        pnlEdit.Visible = Not pnlEdit.Visible
+        If pnlEdit.Visible Then
             pnlEdit.BringToFront()
-        Else
-            pnlEdit.Visible = False
+            pnlSystemDefined.Visible = False
         End If
     End Sub
 
     Private Sub sbGoTo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbGoTo.Click
-        pnlEdit.Visible = False
-        If (pnlSystemDefined.Visible = True) Then
-            pnlSystemDefined.Visible = False
-        Else
+        pnlSystemDefined.Visible = Not pnlSystemDefined.Visible
+        If pnlSystemDefined.Visible Then
+            pnlEdit.Visible = False
             loadShortcuts()
-            pnlSystemDefined.Visible = True
             pnlSystemDefined.BringToFront()
         End If
     End Sub
@@ -721,7 +660,7 @@ Public Class frmMyComp
     End Sub
     Private Sub MyShortcut_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         pnlSystemDefined.Visible = False
-        loadDir(sender.data)
+        loadDir(CStr(CType(sender, LCComplexButton).Data))
     End Sub
     Private Sub myErrorAlert(ByVal sender As Object, ByVal e As EventArgs)
         LCARS.Alerts.ActivateAlert("Red", Me.Handle)
@@ -771,13 +710,13 @@ Public Class frmMyComp
             Try
                 Dim myReg As Microsoft.Win32.RegistryKey = Microsoft.Win32.Registry.CurrentUser
                 myReg = myReg.OpenSubKey("Software\Microsoft\Windows\CurrentVersion\explorer\Shell Folders\", False)
-                result = myReg.GetValue("My Video")
+                result = CStr(myReg.GetValue("My Video"))
                 SaveSetting("LCARS x32", "Application", "Videos", result)
             Catch ex As Exception
             End Try
             If result = "" Then
-                Dim res As DialogResult = MsgBox("Unable to find ""My Videos"". Would you like to manually set the path?", MsgBoxStyle.YesNo)
-                If res = DialogResult.Yes Then
+                Dim res As MsgBoxResult = MsgBox("Unable to find ""My Videos"". Would you like to manually set the path?", MsgBoxStyle.YesNo)
+                If res = MsgBoxResult.Yes Then
                     result = inputbox("Input the complete path to your ""My Videos"" directory:", "Input My Videos directory")
                     If System.IO.Directory.Exists(result) Then
                         SaveSetting("LCARS x32", "Application", "Videos", result)
