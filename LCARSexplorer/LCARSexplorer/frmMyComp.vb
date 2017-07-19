@@ -157,43 +157,17 @@ Public Class frmMyComp
 
     End Sub
 
-    Public Function ToDriveSize(ByVal bytes As Decimal, Optional ByVal Round As Boolean = False) As String
-        Dim mySize As String = ""
-        Dim SizeCount As Decimal = bytes
-        Dim Remainder As Integer = 0
-        Dim SizeType As String = "B"
+    Public Function ToDriveSize(ByVal bytes As Decimal) As String
+        If bytes < 0 Then Return "-" & ToDriveSize(-1 * bytes)
+        If bytes = 0 Then Return "0B"
+        Dim units() As String = {"B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"}
 
-
-        If SizeCount > 1024 Then
-            SizeType = "KB"
-            SizeCount = SizeCount / 1024
-
-            If SizeCount > 1024 Then
-                SizeType = "MB"
-                SizeCount = SizeCount / 1024
-
-                If SizeCount > 1024 Then
-                    SizeType = "GB"
-                    SizeCount = SizeCount / 1024
-
-                    If SizeCount > 1024 Then
-                        SizeType = "TB"
-                        SizeCount = SizeCount / 1024
-
-                        If SizeCount > 1024 Then
-                            SizeType = "HB"
-                            SizeCount = SizeCount / 1024
-                        End If
-                    End If
-                End If
-            End If
+        Dim order As Integer = Math.Floor(Math.Log(bytes, 1024))
+        If order > units.GetUpperBound(0) Then
+            order = units.GetUpperBound(0)
         End If
-
-        If Round = True Then
-            Return Math.Round(SizeCount) & SizeType
-        Else
-            Return SizeCount.ToString("N2") & SizeType
-        End If
+        Dim adjustedSize As Decimal = bytes / (1L << (order * 10))
+        Return adjustedSize.ToString("N2") & units(order)
     End Function
 
     Private Sub drive_click(ByVal sender As Object, ByVal e As EventArgs)
