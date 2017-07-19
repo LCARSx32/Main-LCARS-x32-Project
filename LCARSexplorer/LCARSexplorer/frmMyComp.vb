@@ -109,6 +109,7 @@ Public Class frmMyComp
 
         tbTitle.ButtonText = "MY COMPUTER"
         Me.Text = "MY COMPUTER"
+        sbUpDir.Lit = False
 
         Do Until pnlVisible.Controls.Count = 0
             pnlOptionalComponents.Controls.Add(pnlVisible.Controls(0))
@@ -475,21 +476,8 @@ Public Class frmMyComp
     End Sub
 
     Private Sub sbUpDir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbUpDir.Click
-
-        If curPath <> "" Then
-            curPath = curPath.Substring(0, Len(curPath) - 1)
-            If InStr(curPath, "\") > 0 Then
-                curPath = curPath.Substring(0, InStrRev(curPath, "\") - 1)
-                If curPath.Length = 2 Then
-                    curPath += "\"
-                End If
-                loadDir(curPath)
-            Else
-                sbUpDir.Lit = False
-                curPath = ""
-                loadMyComp()
-            End If
-        End If
+        If curPath = "" Then Return
+        loadDir(Path.GetDirectoryName(curPath))
     End Sub
 
 
