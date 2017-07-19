@@ -38,7 +38,6 @@ Public Class frmMyComp
     Dim CurItems As New exCollection
     Dim showSystem As Boolean = False 'flag to show system files and folders
     Dim PageCount As Integer
-    'Dim bpp As Integer 'Buttons Per Page
     Dim myShift As Boolean = False
     Dim nextInChain As IntPtr
 
@@ -381,7 +380,6 @@ Public Class frmMyComp
 
                 myNewProcess.FileName = sender.data
                 myNewProcess.WorkingDirectory = curPath
-                '  myProcess.WindowStyle = ProcessWindowStyle.Minimized
                 myProcess = Process.Start(myNewProcess)
             Catch
                 Try
@@ -402,13 +400,7 @@ Public Class frmMyComp
     Private Sub pnlMyComp_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles gridMyComp.MouseMove ' pnlMyComp.MouseMove
         If e.Button = Windows.Forms.MouseButtons.Left Then
             tmrMouseSelect.Enabled = False
-            'Dim mybitmap As Bitmap = New Bitmap(pnlMyComp.Width, pnlMyComp.Height)
             Dim x1, x2, y1, y2 As Integer
-            'Dim lcarsColors As New LCARS.LCARScolor
-
-            'Dim g As Graphics = Graphics.FromImage(mybitmap)
-
-            ' g.FillRectangle(Brushes.Black, New Rectangle(0, 0, mybitmap.Width, mybitmap.Height))
 
             If e.X > selStart.X Then
                 x1 = selStart.X
@@ -426,23 +418,10 @@ Public Class frmMyComp
                 y2 = selStart.Y
             End If
 
-            ' g.FillRectangle(New System.Drawing.SolidBrush(lcarsColors.getColor(LCARS.LCARScolorStyles.StaticBlue)), New Rectangle(x1, y1, x2 - x1, y2 - y1))
             mySelection.Bounds = gridMyComp.RectangleToScreen(New Rectangle(x1, y1, x2 - x1, y2 - y1))
             If mySelection.Visible = False Then
                 mySelection.Show()
             End If
-
-            ' myLabel.Refresh()
-            'Application.DoEvents()
-
-            ' Dim Offline As Color = lcarsColors.getColor(LCARS.LCARScolorStyles.FunctionOffline)
-            ' Offline = Color.FromArgb(128, Offline.A, Offline.G, Offline.B)
-
-            ' Dim myPen As System.Drawing.Pen = New System.Drawing.Pen(Offline, 10)
-            'g.DrawLine(myPen, e.X, 0, e.X, mybitmap.Height)
-            'g.DrawLine(myPen, 0, e.Y, mybitmap.Width, e.Y)
-
-            'pnlMyComp.CreateGraphics.DrawImage(mybitmap, 0, 0)
 
             checkSelected(x1, y1, x2, y2)
         End If
@@ -476,13 +455,8 @@ Public Class frmMyComp
     End Sub
 
     Private Sub pnlMyComp_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles gridMyComp.MouseUp ' pnlMyComp.MouseUp
-        'Dim mybitmap As Bitmap = New Bitmap(pnlMyComp.Width, pnlMyComp.Height)
-        'Dim g As Graphics = Graphics.FromImage(mybitmap)
         If Not e.Location = selStart Then
             Dim x1, x2, y1, y2 As Integer
-
-            'g.FillRectangle(Brushes.Black, New Rectangle(0, 0, mybitmap.Width, mybitmap.Height))
-            'pnlMyComp.CreateGraphics.DrawImage(mybitmap, 0, 0)
 
             If e.X > selStart.X Then
                 x1 = selStart.X
@@ -884,7 +858,6 @@ Public Class frmMyComp
         Get
             Dim p As CreateParams = MyBase.CreateParams
             p.ExStyle = p.ExStyle Or (WS_EX_APPWINDOW)
-            'p.Style = p.Style Or Not WS_VISIBLE
             p.Parent = IntPtr.Zero
             Return p
         End Get
