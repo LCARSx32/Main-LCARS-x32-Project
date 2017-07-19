@@ -92,7 +92,6 @@
     <Compile Include="frmMergeOptions.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="exCollection.vb" />
     <Compile Include="frmCopying.Designer.vb">
       <DependentUpon>frmCopying.vb</DependentUpon>
     </Compile>

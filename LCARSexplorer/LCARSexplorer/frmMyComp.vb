@@ -195,7 +195,7 @@ Public Class frmMyComp
             Dim myDir As DirectoryInfo = New DirectoryInfo(newpath)
 
             curPath = newpath
-            Dim CurItems As New exCollection
+            Dim CurItems As New List(Of FileSystemInfo)
 
             Dim title As String = System.IO.Path.GetFileNameWithoutExtension(curPath)
             If title <> "" Then
@@ -210,12 +210,12 @@ Public Class frmMyComp
             'get directories and add them to the list
             For Each curDir As DirectoryInfo In myDir.GetDirectories
                 Try
-                    If (My.Settings.check = True) Then
+                    If My.Settings.check Then
                         curDir.GetDirectories()
                     End If
                     Dim dirAttr As FileAttributes = curDir.Attributes
                     If (dirAttr <> FileAttributes.Hidden Or My.Settings.showHidden = True) And (dirAttr <> FileAttributes.System Or showSystem = True) Then
-                        CurItems.Add(curDir, "dir")
+                        CurItems.Add(curDir)
                     End If
                 Catch ex As Exception
 
@@ -224,12 +224,12 @@ Public Class frmMyComp
             'get files and add them to the list
             For Each curFile As FileInfo In myDir.GetFiles
                 Try
-                    If (My.Settings.check = True) Then
+                    If My.Settings.check Then
                         Dim blank As String = curFile.Extension
                     End If
                     Dim fileAttr As FileAttributes = curFile.Attributes
                     If (fileAttr <> FileAttributes.Hidden Or My.Settings.showHidden = True) And (fileAttr <> FileAttributes.System Or showSystem = True) Then
-                        CurItems.Add(curFile, "file")
+                        CurItems.Add(curFile)
                     End If
                 Catch ex As Exception
                 End Try
@@ -238,17 +238,17 @@ Public Class frmMyComp
             gridMyComp.Clear()
             gridMyComp.ControlSize = New Size(300, 30)
             Dim beeping As Boolean = LCARS.x32.modSettings.ButtonBeep
-            For intloop As Integer = 0 To CurItems.Count - 1
+            For Each curItem As FileSystemInfo In CurItems
 
-                Dim curItem As exCollectionItem = CurItems.Item(intloop)
                 Dim myButton As New LCARS.LightweightControls.LCComplexButton()
 
                 myButton.HoldDraw = True
 
-                If curItem.Key = "dir" Then
+                If curItem.GetType() Is GetType(DirectoryInfo) Then
                     Try
+                        Dim curDir As DirectoryInfo = CType(curItem, DirectoryInfo)
                         myButton.Color = LCARS.LCARScolorStyles.NavigationFunction
-                        myButton.SideText = curItem.Value.GetDirectories.GetUpperBound(0) + 1 & "." & curItem.Value.GetFiles.GetUpperBound(0) + 1
+                        myButton.SideText = curDir.GetDirectories.GetUpperBound(0) + 1 & "." & curDir.GetFiles.GetUpperBound(0) + 1
                         If My.Settings.ClickMode = "Single" Then
                             AddHandler myButton.Click, AddressOf drive_click
                         Else
@@ -268,12 +268,12 @@ Public Class frmMyComp
                     Try
                         If My.Settings.ColorFiles Then
                             Dim mycolors() As String = myButton.ColorsAvailable.getColors
-                            mycolors(2) = getExtColor(Path.GetExtension(curItem.Value.name))
+                            mycolors(2) = getExtColor(Path.GetExtension(curItem.Name))
                             myButton.ColorsAvailable.setColors(mycolors)
                         End If
 
                         myButton.Color = LCARS.LCARScolorStyles.MiscFunction
-                        Dim ext As String = Path.GetExtension(curItem.Value.FullName).Replace(".", "")
+                        Dim ext As String = Path.GetExtension(curItem.FullName).Replace(".", "")
                         If ext <> "" Then
                             If ext.Length > 6 Then
                                 ext = ext.Substring(1, 6) & "."
@@ -304,8 +304,8 @@ Public Class frmMyComp
                 AddHandler myButton.MouseDown, AddressOf drive_MouseDown
                 AddHandler myButton.MouseUp, AddressOf drive_MouseUp
 
-                myButton.Text = curItem.Value.name
-                myButton.Data = curItem.Value.FullName
+                myButton.Text = curItem.Name
+                myButton.Data = curItem.FullName
                 myButton.Beeping = beeping
                 myButton.HoldDraw = False
 

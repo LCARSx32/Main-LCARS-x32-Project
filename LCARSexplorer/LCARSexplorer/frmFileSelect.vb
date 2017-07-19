@@ -81,7 +81,7 @@ Public Class frmFileSelect
             Dim myDir As DirectoryInfo = New DirectoryInfo(newpath)
 
             curPath = newpath
-            Dim CurItems As New exCollection
+            Dim CurItems As New List(Of FileSystemInfo)
 
             Dim title As String = System.IO.Path.GetFileNameWithoutExtension(curPath)
             If title <> "" Then
@@ -101,7 +101,7 @@ Public Class frmFileSelect
                     End If
                     Dim dirAttr As FileAttributes = curDir.Attributes
                     If (dirAttr <> FileAttributes.Hidden Or My.Settings.showHidden = True) Then
-                        CurItems.Add(curDir, "dir")
+                        CurItems.Add(curDir)
                     End If
                 Catch ex As Exception
 
@@ -110,7 +110,7 @@ Public Class frmFileSelect
             'get files and add them to the list
             For Each curFile As FileInfo In myDir.GetFiles
                 Try
-                    If (My.Settings.check = True) Then
+                    If My.Settings.check Then
                         Dim blank As String = curFile.Extension
                     End If
                     Dim fileAttr As FileAttributes = curFile.Attributes
@@ -118,7 +118,7 @@ Public Class frmFileSelect
                         Dim i As Integer = 1
                         While (i < extensions.Length)
                             If (curFile.Extension = extensions(i) And curFile.Extension <> "") Then
-                                CurItems.Add(curFile, "file")
+                                CurItems.Add(curFile)
                             End If
                             i += 1
                         End While
@@ -130,17 +130,17 @@ Public Class frmFileSelect
             Dim beeping As Boolean = LCARS.x32.modSettings.ButtonBeep
             gridMyComp.Clear()
             gridMyComp.ControlSize = New Size(300, 30)
-            For intloop As Integer = 0 To CurItems.Count - 1
+            For Each curItem As FileSystemInfo In CurItems
 
-                Dim curItem As exCollectionItem = CurItems.Item(intloop)
                 Dim myButton As New LCARS.LightweightControls.LCComplexButton()
 
                 myButton.HoldDraw = True
 
-                If curItem.Key = "dir" Then
+                If curItem.GetType() Is GetType(DirectoryInfo) Then
                     Try
+                        Dim curDir As DirectoryInfo = CType(curItem, DirectoryInfo)
                         myButton.Color = LCARS.LCARScolorStyles.NavigationFunction
-                        myButton.SideText = curItem.Value.GetDirectories.GetUpperBound(0) + 1 & "." & curItem.Value.GetFiles.GetUpperBound(0) + 1
+                        myButton.SideText = curDir.GetDirectories.GetUpperBound(0) + 1 & "." & curDir.GetFiles.GetUpperBound(0) + 1
                         If My.Settings.ClickMode = "Single" Then
                             AddHandler myButton.Click, AddressOf drive_click
                         Else
@@ -160,12 +160,12 @@ Public Class frmFileSelect
                     Try
                         If My.Settings.ColorFiles Then
                             Dim mycolors() As String = myButton.ColorsAvailable.getColors
-                            mycolors(2) = frmMyComp.getExtColor(System.IO.Path.GetExtension(curItem.Value.name))
+                            mycolors(2) = frmMyComp.getExtColor(System.IO.Path.GetExtension(curItem.Name))
                             myButton.ColorsAvailable.setColors(mycolors)
                         End If
 
                         myButton.Color = LCARS.LCARScolorStyles.MiscFunction
-                        Dim ext As String = System.IO.Path.GetExtension(curItem.Value.FullName).Replace(".", "")
+                        Dim ext As String = System.IO.Path.GetExtension(curItem.FullName).Replace(".", "")
                         If ext <> "" Then
                             If ext.Length > 6 Then
                                 ext = ext.Substring(1, 6) & "."
@@ -192,8 +192,8 @@ Public Class frmFileSelect
 
                 End If
 
-                myButton.Text = curItem.Value.name
-                myButton.Data = curItem.Value.FullName
+                myButton.Text = curItem.Name
+                myButton.Data = curItem.FullName
                 myButton.Beeping = beeping
                 myButton.HoldDraw = False
 
