@@ -172,9 +172,10 @@ Partial Class frmFileSelect
         '
         Me.lblCurrentSelected.AutoSize = True
         Me.lblCurrentSelected.Font = New System.Drawing.Font("LCARS", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCurrentSelected.ForeColor = System.Drawing.Color.Orange
         Me.lblCurrentSelected.Location = New System.Drawing.Point(129, 414)
         Me.lblCurrentSelected.Name = "lblCurrentSelected"
-        Me.lblCurrentSelected.Size = New System.Drawing.Size(71, 24)
+        Me.lblCurrentSelected.Size = New System.Drawing.Size(70, 24)
         Me.lblCurrentSelected.TabIndex = 6
         Me.lblCurrentSelected.Text = "Current File"
         '
