@@ -20,55 +20,9 @@ Partial Class frmMyComp
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
-        Dim LcarScolor2 As LCARS.LCARScolor = New LCARS.LCARScolor
-        Me.pnlProperties = New System.Windows.Forms.Panel
-        Me.pnlMultiple = New System.Windows.Forms.Panel
-        Me.lblMultipleOut = New System.Windows.Forms.Label
-        Me.pnlFolder = New System.Windows.Forms.Panel
-        Me.lblFolderSizeValue = New System.Windows.Forms.Label
-        Me.lblFolderSize = New System.Windows.Forms.Label
-        Me.lblContainsValue = New System.Windows.Forms.Label
-        Me.lblFolderCreatedValue = New System.Windows.Forms.Label
-        Me.lblFolderPathValue = New System.Windows.Forms.Label
-        Me.lblContains = New System.Windows.Forms.Label
-        Me.lblFolderCreated = New System.Windows.Forms.Label
-        Me.lblFolderPath = New System.Windows.Forms.Label
-        Me.pnlDrive = New System.Windows.Forms.Panel
-        Me.liDrive = New LCARS.Controls.LevelIndicator
-        Me.lblUsed = New System.Windows.Forms.Label
-        Me.lblFreeLabel = New System.Windows.Forms.Label
-        Me.lblFree = New System.Windows.Forms.Label
-        Me.lblFreeSpace = New System.Windows.Forms.Label
-        Me.lblFileSystemLabel = New System.Windows.Forms.Label
-        Me.lblFS = New System.Windows.Forms.Label
-        Me.lblCapacity = New System.Windows.Forms.Label
-        Me.lblUsedLabel = New System.Windows.Forms.Label
-        Me.lblCapacityLabel = New System.Windows.Forms.Label
-        Me.lblDrive = New System.Windows.Forms.Label
-        Me.pnlFile = New System.Windows.Forms.Panel
-        Me.lblSizeValue = New System.Windows.Forms.Label
-        Me.lblSize = New System.Windows.Forms.Label
-        Me.sbChangeProgram = New LCARS.Controls.StandardButton
-        Me.lblCreatedValue = New System.Windows.Forms.Label
-        Me.lblModified = New System.Windows.Forms.Label
-        Me.lblModifiedValue = New System.Windows.Forms.Label
-        Me.lblOpensWith = New System.Windows.Forms.Label
-        Me.lblAccessed = New System.Windows.Forms.Label
-        Me.lblOpensWithValue = New System.Windows.Forms.Label
-        Me.lblAccessedValue = New System.Windows.Forms.Label
-        Me.lblPathValue = New System.Windows.Forms.Label
-        Me.lblCreated = New System.Windows.Forms.Label
-        Me.lblPath = New System.Windows.Forms.Label
-        Me.lblPropTitle = New System.Windows.Forms.Label
-        Me.sbCloseProperties = New LCARS.Controls.StandardButton
+        Dim LcarScolor1 As LCARS.LCARScolor = New LCARS.LCARScolor
         Me.pnlVisible = New System.Windows.Forms.Panel
         Me.tmrMouseSelect = New System.Windows.Forms.Timer(Me.components)
-        Me.pnlRename = New System.Windows.Forms.Panel
-        Me.sbOK = New LCARS.Controls.StandardButton
-        Me.txtNew = New System.Windows.Forms.TextBox
-        Me.lblFileName = New System.Windows.Forms.Label
-        Me.lblRename = New System.Windows.Forms.Label
-        Me.sbCancel = New LCARS.Controls.StandardButton
         Me.pnlEdit = New System.Windows.Forms.Panel
         Me.sbRename = New LCARS.Controls.StandardButton
         Me.sbCut = New LCARS.Controls.StandardButton
@@ -105,514 +59,10 @@ Partial Class frmMyComp
         Me.elbActionsTop = New LCARS.Controls.Elbow
         Me.elbActionsBottom = New LCARS.Controls.Elbow
         Me.gridMyComp = New LCARS.Controls.ButtonGrid
-        Me.lblDriveTypeLabel = New LCARS.Controls.LCARSLabel
-        Me.lblDriveType = New LCARS.Controls.LCARSLabel
-        Me.pnlProperties.SuspendLayout()
-        Me.pnlMultiple.SuspendLayout()
-        Me.pnlFolder.SuspendLayout()
-        Me.pnlDrive.SuspendLayout()
-        Me.pnlFile.SuspendLayout()
-        Me.pnlRename.SuspendLayout()
         Me.pnlEdit.SuspendLayout()
         Me.pnlOptionalComponents.SuspendLayout()
         Me.pnlSystemDefined.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'pnlProperties
-        '
-        Me.pnlProperties.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pnlProperties.Controls.Add(Me.pnlDrive)
-        Me.pnlProperties.Controls.Add(Me.pnlMultiple)
-        Me.pnlProperties.Controls.Add(Me.pnlFolder)
-        Me.pnlProperties.Controls.Add(Me.pnlFile)
-        Me.pnlProperties.Controls.Add(Me.lblPropTitle)
-        Me.pnlProperties.Controls.Add(Me.sbCloseProperties)
-        Me.pnlProperties.Location = New System.Drawing.Point(6, 41)
-        Me.pnlProperties.Name = "pnlProperties"
-        Me.pnlProperties.Size = New System.Drawing.Size(497, 503)
-        Me.pnlProperties.TabIndex = 48
-        Me.pnlProperties.Visible = False
-        '
-        'pnlMultiple
-        '
-        Me.pnlMultiple.Controls.Add(Me.lblMultipleOut)
-        Me.pnlMultiple.Location = New System.Drawing.Point(17, 62)
-        Me.pnlMultiple.Name = "pnlMultiple"
-        Me.pnlMultiple.Size = New System.Drawing.Size(470, 407)
-        Me.pnlMultiple.TabIndex = 93
-        Me.pnlMultiple.Visible = False
-        '
-        'lblMultipleOut
-        '
-        Me.lblMultipleOut.AutoSize = True
-        Me.lblMultipleOut.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblMultipleOut.ForeColor = System.Drawing.Color.Orange
-        Me.lblMultipleOut.Location = New System.Drawing.Point(13, 31)
-        Me.lblMultipleOut.Name = "lblMultipleOut"
-        Me.lblMultipleOut.Size = New System.Drawing.Size(35, 21)
-        Me.lblMultipleOut.TabIndex = 75
-        Me.lblMultipleOut.Text = "Path: "
-        '
-        'pnlFolder
-        '
-        Me.pnlFolder.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pnlFolder.Controls.Add(Me.lblFolderSizeValue)
-        Me.pnlFolder.Controls.Add(Me.lblFolderSize)
-        Me.pnlFolder.Controls.Add(Me.lblContainsValue)
-        Me.pnlFolder.Controls.Add(Me.lblFolderCreatedValue)
-        Me.pnlFolder.Controls.Add(Me.lblFolderPathValue)
-        Me.pnlFolder.Controls.Add(Me.lblContains)
-        Me.pnlFolder.Controls.Add(Me.lblFolderCreated)
-        Me.pnlFolder.Controls.Add(Me.lblFolderPath)
-        Me.pnlFolder.Location = New System.Drawing.Point(17, 64)
-        Me.pnlFolder.Name = "pnlFolder"
-        Me.pnlFolder.Size = New System.Drawing.Size(470, 407)
-        Me.pnlFolder.TabIndex = 93
-        Me.pnlFolder.Visible = False
-        '
-        'lblFolderSizeValue
-        '
-        Me.lblFolderSizeValue.AutoSize = True
-        Me.lblFolderSizeValue.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblFolderSizeValue.ForeColor = System.Drawing.Color.Orange
-        Me.lblFolderSizeValue.Location = New System.Drawing.Point(72, 63)
-        Me.lblFolderSizeValue.Name = "lblFolderSizeValue"
-        Me.lblFolderSizeValue.Size = New System.Drawing.Size(25, 21)
-        Me.lblFolderSizeValue.TabIndex = 91
-        Me.lblFolderSizeValue.Text = "xkb"
-        '
-        'lblFolderSize
-        '
-        Me.lblFolderSize.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblFolderSize.ForeColor = System.Drawing.Color.Orange
-        Me.lblFolderSize.Location = New System.Drawing.Point(6, 63)
-        Me.lblFolderSize.Name = "lblFolderSize"
-        Me.lblFolderSize.Size = New System.Drawing.Size(64, 26)
-        Me.lblFolderSize.TabIndex = 92
-        Me.lblFolderSize.Text = "Size"
-        '
-        'lblContainsValue
-        '
-        Me.lblContainsValue.AutoSize = True
-        Me.lblContainsValue.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblContainsValue.ForeColor = System.Drawing.Color.Orange
-        Me.lblContainsValue.Location = New System.Drawing.Point(71, 115)
-        Me.lblContainsValue.Name = "lblContainsValue"
-        Me.lblContainsValue.Size = New System.Drawing.Size(71, 21)
-        Me.lblContainsValue.TabIndex = 52
-        Me.lblContainsValue.Text = "X files, X dirs"
-        '
-        'lblFolderCreatedValue
-        '
-        Me.lblFolderCreatedValue.AutoSize = True
-        Me.lblFolderCreatedValue.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblFolderCreatedValue.ForeColor = System.Drawing.Color.Orange
-        Me.lblFolderCreatedValue.Location = New System.Drawing.Point(71, 89)
-        Me.lblFolderCreatedValue.Name = "lblFolderCreatedValue"
-        Me.lblFolderCreatedValue.Size = New System.Drawing.Size(35, 21)
-        Me.lblFolderCreatedValue.TabIndex = 52
-        Me.lblFolderCreatedValue.Text = "x/x/x"
-        '
-        'lblFolderPathValue
-        '
-        Me.lblFolderPathValue.AutoEllipsis = True
-        Me.lblFolderPathValue.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblFolderPathValue.ForeColor = System.Drawing.Color.Orange
-        Me.lblFolderPathValue.Location = New System.Drawing.Point(75, 33)
-        Me.lblFolderPathValue.Name = "lblFolderPathValue"
-        Me.lblFolderPathValue.Size = New System.Drawing.Size(378, 26)
-        Me.lblFolderPathValue.TabIndex = 76
-        Me.lblFolderPathValue.Text = "C:\"
-        '
-        'lblContains
-        '
-        Me.lblContains.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblContains.ForeColor = System.Drawing.Color.Orange
-        Me.lblContains.Location = New System.Drawing.Point(5, 115)
-        Me.lblContains.Name = "lblContains"
-        Me.lblContains.Size = New System.Drawing.Size(64, 26)
-        Me.lblContains.TabIndex = 74
-        Me.lblContains.Text = "Contains:"
-        '
-        'lblFolderCreated
-        '
-        Me.lblFolderCreated.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblFolderCreated.ForeColor = System.Drawing.Color.Orange
-        Me.lblFolderCreated.Location = New System.Drawing.Point(5, 89)
-        Me.lblFolderCreated.Name = "lblFolderCreated"
-        Me.lblFolderCreated.Size = New System.Drawing.Size(64, 26)
-        Me.lblFolderCreated.TabIndex = 74
-        Me.lblFolderCreated.Text = "Created:"
-        '
-        'lblFolderPath
-        '
-        Me.lblFolderPath.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblFolderPath.ForeColor = System.Drawing.Color.Orange
-        Me.lblFolderPath.Location = New System.Drawing.Point(6, 34)
-        Me.lblFolderPath.Name = "lblFolderPath"
-        Me.lblFolderPath.Size = New System.Drawing.Size(60, 29)
-        Me.lblFolderPath.TabIndex = 75
-        Me.lblFolderPath.Text = "Path: "
-        '
-        'pnlDrive
-        '
-        Me.pnlDrive.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pnlDrive.Controls.Add(Me.lblDriveType)
-        Me.pnlDrive.Controls.Add(Me.lblDriveTypeLabel)
-        Me.pnlDrive.Controls.Add(Me.liDrive)
-        Me.pnlDrive.Controls.Add(Me.lblUsed)
-        Me.pnlDrive.Controls.Add(Me.lblFreeLabel)
-        Me.pnlDrive.Controls.Add(Me.lblFree)
-        Me.pnlDrive.Controls.Add(Me.lblFreeSpace)
-        Me.pnlDrive.Controls.Add(Me.lblFileSystemLabel)
-        Me.pnlDrive.Controls.Add(Me.lblFS)
-        Me.pnlDrive.Controls.Add(Me.lblCapacity)
-        Me.pnlDrive.Controls.Add(Me.lblUsedLabel)
-        Me.pnlDrive.Controls.Add(Me.lblCapacityLabel)
-        Me.pnlDrive.Controls.Add(Me.lblDrive)
-        Me.pnlDrive.Location = New System.Drawing.Point(17, 64)
-        Me.pnlDrive.Name = "pnlDrive"
-        Me.pnlDrive.Size = New System.Drawing.Size(470, 407)
-        Me.pnlDrive.TabIndex = 51
-        Me.pnlDrive.Visible = False
-        '
-        'liDrive
-        '
-        Me.liDrive.Beeping = False
-        Me.liDrive.ButtonText = "50%"
-        Me.liDrive.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.liDrive.ButtonTextHeight = 14
-        Me.liDrive.Clickable = False
-        Me.liDrive.Color = LCARS.LCARScolorStyles.Orange
-        Me.liDrive.Color2 = LCARS.LCARScolorStyles.FunctionUnavailable
-        Me.liDrive.CustomAlertColor = System.Drawing.Color.Empty
-        Me.liDrive.Data = Nothing
-        Me.liDrive.Data2 = Nothing
-        Me.liDrive.FlashInterval = 500
-        Me.liDrive.holdDraw = False
-        Me.liDrive.Lit = True
-        Me.liDrive.Location = New System.Drawing.Point(148, 31)
-        Me.liDrive.Name = "liDrive"
-        Me.liDrive.RedAlert = LCARS.LCARSalert.Normal
-        Me.liDrive.Size = New System.Drawing.Size(147, 164)
-        Me.liDrive.TabIndex = 91
-        Me.liDrive.Text = "50%"
-        Me.liDrive.Value = 50
-        '
-        'lblUsed
-        '
-        Me.lblUsed.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblUsed.ForeColor = System.Drawing.Color.Orange
-        Me.lblUsed.Location = New System.Drawing.Point(75, 63)
-        Me.lblUsed.Name = "lblUsed"
-        Me.lblUsed.Size = New System.Drawing.Size(62, 26)
-        Me.lblUsed.TabIndex = 52
-        Me.lblUsed.Text = "200GB"
-        '
-        'lblFreeLabel
-        '
-        Me.lblFreeLabel.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblFreeLabel.ForeColor = System.Drawing.Color.Orange
-        Me.lblFreeLabel.Location = New System.Drawing.Point(9, 96)
-        Me.lblFreeLabel.Name = "lblFreeLabel"
-        Me.lblFreeLabel.Size = New System.Drawing.Size(64, 26)
-        Me.lblFreeLabel.TabIndex = 90
-        Me.lblFreeLabel.Text = "Free Space: "
-        '
-        'lblFree
-        '
-        Me.lblFree.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblFree.ForeColor = System.Drawing.Color.Orange
-        Me.lblFree.Location = New System.Drawing.Point(75, 96)
-        Me.lblFree.Name = "lblFree"
-        Me.lblFree.Size = New System.Drawing.Size(62, 26)
-        Me.lblFree.TabIndex = 89
-        Me.lblFree.Text = "200GB"
-        '
-        'lblFreeSpace
-        '
-        Me.lblFreeSpace.AutoSize = True
-        Me.lblFreeSpace.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblFreeSpace.ForeColor = System.Drawing.Color.Orange
-        Me.lblFreeSpace.Location = New System.Drawing.Point(206, 198)
-        Me.lblFreeSpace.Name = "lblFreeSpace"
-        Me.lblFreeSpace.Size = New System.Drawing.Size(30, 21)
-        Me.lblFreeSpace.TabIndex = 88
-        Me.lblFreeSpace.Text = "Free"
-        '
-        'lblFileSystemLabel
-        '
-        Me.lblFileSystemLabel.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblFileSystemLabel.ForeColor = System.Drawing.Color.Orange
-        Me.lblFileSystemLabel.Location = New System.Drawing.Point(9, 129)
-        Me.lblFileSystemLabel.Name = "lblFileSystemLabel"
-        Me.lblFileSystemLabel.Size = New System.Drawing.Size(64, 26)
-        Me.lblFileSystemLabel.TabIndex = 88
-        Me.lblFileSystemLabel.Text = "File System:"
-        '
-        'lblFS
-        '
-        Me.lblFS.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblFS.ForeColor = System.Drawing.Color.Orange
-        Me.lblFS.Location = New System.Drawing.Point(75, 129)
-        Me.lblFS.Name = "lblFS"
-        Me.lblFS.Size = New System.Drawing.Size(62, 26)
-        Me.lblFS.TabIndex = 87
-        Me.lblFS.Text = "NTFS"
-        '
-        'lblCapacity
-        '
-        Me.lblCapacity.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCapacity.ForeColor = System.Drawing.Color.Orange
-        Me.lblCapacity.Location = New System.Drawing.Point(75, 33)
-        Me.lblCapacity.Name = "lblCapacity"
-        Me.lblCapacity.Size = New System.Drawing.Size(62, 26)
-        Me.lblCapacity.TabIndex = 76
-        Me.lblCapacity.Text = "200GB"
-        '
-        'lblUsedLabel
-        '
-        Me.lblUsedLabel.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblUsedLabel.ForeColor = System.Drawing.Color.Orange
-        Me.lblUsedLabel.Location = New System.Drawing.Point(9, 63)
-        Me.lblUsedLabel.Name = "lblUsedLabel"
-        Me.lblUsedLabel.Size = New System.Drawing.Size(64, 26)
-        Me.lblUsedLabel.TabIndex = 74
-        Me.lblUsedLabel.Text = "Used Space: "
-        '
-        'lblCapacityLabel
-        '
-        Me.lblCapacityLabel.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCapacityLabel.ForeColor = System.Drawing.Color.Orange
-        Me.lblCapacityLabel.Location = New System.Drawing.Point(9, 34)
-        Me.lblCapacityLabel.Name = "lblCapacityLabel"
-        Me.lblCapacityLabel.Size = New System.Drawing.Size(60, 29)
-        Me.lblCapacityLabel.TabIndex = 75
-        Me.lblCapacityLabel.Text = "Capacity: "
-        '
-        'lblDrive
-        '
-        Me.lblDrive.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDrive.ForeColor = System.Drawing.Color.Orange
-        Me.lblDrive.Location = New System.Drawing.Point(143, 1)
-        Me.lblDrive.Name = "lblDrive"
-        Me.lblDrive.Size = New System.Drawing.Size(156, 29)
-        Me.lblDrive.TabIndex = 73
-        Me.lblDrive.Text = "Drive C:"
-        Me.lblDrive.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
-        'pnlFile
-        '
-        Me.pnlFile.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pnlFile.Controls.Add(Me.lblSizeValue)
-        Me.pnlFile.Controls.Add(Me.lblSize)
-        Me.pnlFile.Controls.Add(Me.sbChangeProgram)
-        Me.pnlFile.Controls.Add(Me.lblCreatedValue)
-        Me.pnlFile.Controls.Add(Me.lblModified)
-        Me.pnlFile.Controls.Add(Me.lblModifiedValue)
-        Me.pnlFile.Controls.Add(Me.lblOpensWith)
-        Me.pnlFile.Controls.Add(Me.lblAccessed)
-        Me.pnlFile.Controls.Add(Me.lblOpensWithValue)
-        Me.pnlFile.Controls.Add(Me.lblAccessedValue)
-        Me.pnlFile.Controls.Add(Me.lblPathValue)
-        Me.pnlFile.Controls.Add(Me.lblCreated)
-        Me.pnlFile.Controls.Add(Me.lblPath)
-        Me.pnlFile.Location = New System.Drawing.Point(17, 64)
-        Me.pnlFile.Name = "pnlFile"
-        Me.pnlFile.Size = New System.Drawing.Size(470, 407)
-        Me.pnlFile.TabIndex = 91
-        Me.pnlFile.Visible = False
-        '
-        'lblSizeValue
-        '
-        Me.lblSizeValue.AutoSize = True
-        Me.lblSizeValue.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSizeValue.ForeColor = System.Drawing.Color.Orange
-        Me.lblSizeValue.Location = New System.Drawing.Point(72, 63)
-        Me.lblSizeValue.Name = "lblSizeValue"
-        Me.lblSizeValue.Size = New System.Drawing.Size(25, 21)
-        Me.lblSizeValue.TabIndex = 91
-        Me.lblSizeValue.Text = "xkb"
-        '
-        'lblSize
-        '
-        Me.lblSize.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSize.ForeColor = System.Drawing.Color.Orange
-        Me.lblSize.Location = New System.Drawing.Point(6, 63)
-        Me.lblSize.Name = "lblSize"
-        Me.lblSize.Size = New System.Drawing.Size(64, 26)
-        Me.lblSize.TabIndex = 92
-        Me.lblSize.Text = "Size"
-        '
-        'sbChangeProgram
-        '
-        Me.sbChangeProgram.Beeping = False
-        Me.sbChangeProgram.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
-        Me.sbChangeProgram.ButtonText = "CHANGE"
-        Me.sbChangeProgram.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.sbChangeProgram.ButtonTextHeight = 14
-        Me.sbChangeProgram.Clickable = True
-        Me.sbChangeProgram.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.sbChangeProgram.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbChangeProgram.Data = Nothing
-        Me.sbChangeProgram.Data2 = Nothing
-        Me.sbChangeProgram.FlashInterval = 500
-        Me.sbChangeProgram.holdDraw = False
-        Me.sbChangeProgram.Lit = True
-        Me.sbChangeProgram.Location = New System.Drawing.Point(9, 205)
-        Me.sbChangeProgram.Name = "sbChangeProgram"
-        Me.sbChangeProgram.RedAlert = LCARS.LCARSalert.Normal
-        Me.sbChangeProgram.Size = New System.Drawing.Size(66, 20)
-        Me.sbChangeProgram.TabIndex = 49
-        Me.sbChangeProgram.Text = "CHANGE"
-        '
-        'lblCreatedValue
-        '
-        Me.lblCreatedValue.AutoSize = True
-        Me.lblCreatedValue.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCreatedValue.ForeColor = System.Drawing.Color.Orange
-        Me.lblCreatedValue.Location = New System.Drawing.Point(71, 89)
-        Me.lblCreatedValue.Name = "lblCreatedValue"
-        Me.lblCreatedValue.Size = New System.Drawing.Size(35, 21)
-        Me.lblCreatedValue.TabIndex = 52
-        Me.lblCreatedValue.Text = "x/x/x"
-        '
-        'lblModified
-        '
-        Me.lblModified.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblModified.ForeColor = System.Drawing.Color.Orange
-        Me.lblModified.Location = New System.Drawing.Point(5, 122)
-        Me.lblModified.Name = "lblModified"
-        Me.lblModified.Size = New System.Drawing.Size(64, 26)
-        Me.lblModified.TabIndex = 90
-        Me.lblModified.Text = "Modified:"
-        '
-        'lblModifiedValue
-        '
-        Me.lblModifiedValue.AutoSize = True
-        Me.lblModifiedValue.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblModifiedValue.ForeColor = System.Drawing.Color.Orange
-        Me.lblModifiedValue.Location = New System.Drawing.Point(71, 122)
-        Me.lblModifiedValue.Name = "lblModifiedValue"
-        Me.lblModifiedValue.Size = New System.Drawing.Size(35, 21)
-        Me.lblModifiedValue.TabIndex = 89
-        Me.lblModifiedValue.Text = "x/x/x"
-        '
-        'lblOpensWith
-        '
-        Me.lblOpensWith.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblOpensWith.ForeColor = System.Drawing.Color.Orange
-        Me.lblOpensWith.Location = New System.Drawing.Point(5, 181)
-        Me.lblOpensWith.Name = "lblOpensWith"
-        Me.lblOpensWith.Size = New System.Drawing.Size(64, 26)
-        Me.lblOpensWith.TabIndex = 88
-        Me.lblOpensWith.Text = "Opens With: "
-        '
-        'lblAccessed
-        '
-        Me.lblAccessed.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblAccessed.ForeColor = System.Drawing.Color.Orange
-        Me.lblAccessed.Location = New System.Drawing.Point(5, 155)
-        Me.lblAccessed.Name = "lblAccessed"
-        Me.lblAccessed.Size = New System.Drawing.Size(64, 26)
-        Me.lblAccessed.TabIndex = 88
-        Me.lblAccessed.Text = "Accessed:"
-        '
-        'lblOpensWithValue
-        '
-        Me.lblOpensWithValue.AutoSize = True
-        Me.lblOpensWithValue.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblOpensWithValue.ForeColor = System.Drawing.Color.Orange
-        Me.lblOpensWithValue.Location = New System.Drawing.Point(71, 181)
-        Me.lblOpensWithValue.Name = "lblOpensWithValue"
-        Me.lblOpensWithValue.Size = New System.Drawing.Size(87, 21)
-        Me.lblOpensWithValue.TabIndex = 87
-        Me.lblOpensWithValue.Text = "example program"
-        '
-        'lblAccessedValue
-        '
-        Me.lblAccessedValue.AutoSize = True
-        Me.lblAccessedValue.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblAccessedValue.ForeColor = System.Drawing.Color.Orange
-        Me.lblAccessedValue.Location = New System.Drawing.Point(71, 155)
-        Me.lblAccessedValue.Name = "lblAccessedValue"
-        Me.lblAccessedValue.Size = New System.Drawing.Size(35, 21)
-        Me.lblAccessedValue.TabIndex = 87
-        Me.lblAccessedValue.Text = "x/x/x"
-        '
-        'lblPathValue
-        '
-        Me.lblPathValue.AutoEllipsis = True
-        Me.lblPathValue.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPathValue.ForeColor = System.Drawing.Color.Orange
-        Me.lblPathValue.Location = New System.Drawing.Point(75, 33)
-        Me.lblPathValue.Name = "lblPathValue"
-        Me.lblPathValue.Size = New System.Drawing.Size(378, 26)
-        Me.lblPathValue.TabIndex = 76
-        Me.lblPathValue.Text = "C:\"
-        '
-        'lblCreated
-        '
-        Me.lblCreated.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCreated.ForeColor = System.Drawing.Color.Orange
-        Me.lblCreated.Location = New System.Drawing.Point(5, 89)
-        Me.lblCreated.Name = "lblCreated"
-        Me.lblCreated.Size = New System.Drawing.Size(64, 26)
-        Me.lblCreated.TabIndex = 74
-        Me.lblCreated.Text = "Created:"
-        '
-        'lblPath
-        '
-        Me.lblPath.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPath.ForeColor = System.Drawing.Color.Orange
-        Me.lblPath.Location = New System.Drawing.Point(9, 34)
-        Me.lblPath.Name = "lblPath"
-        Me.lblPath.Size = New System.Drawing.Size(60, 29)
-        Me.lblPath.TabIndex = 75
-        Me.lblPath.Text = "Path: "
-        '
-        'lblPropTitle
-        '
-        Me.lblPropTitle.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lblPropTitle.Font = New System.Drawing.Font("LCARS", 36.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPropTitle.ForeColor = System.Drawing.Color.Orange
-        Me.lblPropTitle.Location = New System.Drawing.Point(17, 13)
-        Me.lblPropTitle.Name = "lblPropTitle"
-        Me.lblPropTitle.Size = New System.Drawing.Size(470, 52)
-        Me.lblPropTitle.TabIndex = 50
-        Me.lblPropTitle.Text = "PROPERTIES"
-        '
-        'sbCloseProperties
-        '
-        Me.sbCloseProperties.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbCloseProperties.Beeping = False
-        Me.sbCloseProperties.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
-        Me.sbCloseProperties.ButtonText = "CLOSE"
-        Me.sbCloseProperties.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
-        Me.sbCloseProperties.ButtonTextHeight = 14
-        Me.sbCloseProperties.Clickable = True
-        Me.sbCloseProperties.Color = LCARS.LCARScolorStyles.PrimaryFunction
-        Me.sbCloseProperties.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbCloseProperties.Data = Nothing
-        Me.sbCloseProperties.Data2 = Nothing
-        Me.sbCloseProperties.FlashInterval = 500
-        Me.sbCloseProperties.holdDraw = False
-        Me.sbCloseProperties.Lit = True
-        Me.sbCloseProperties.Location = New System.Drawing.Point(407, 477)
-        Me.sbCloseProperties.Name = "sbCloseProperties"
-        Me.sbCloseProperties.RedAlert = LCARS.LCARSalert.Normal
-        Me.sbCloseProperties.Size = New System.Drawing.Size(87, 26)
-        Me.sbCloseProperties.TabIndex = 49
-        Me.sbCloseProperties.Text = "CLOSE"
         '
         'pnlVisible
         '
@@ -626,103 +76,6 @@ Partial Class frmMyComp
         'tmrMouseSelect
         '
         Me.tmrMouseSelect.Interval = 500
-        '
-        'pnlRename
-        '
-        Me.pnlRename.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pnlRename.Controls.Add(Me.sbOK)
-        Me.pnlRename.Controls.Add(Me.txtNew)
-        Me.pnlRename.Controls.Add(Me.lblFileName)
-        Me.pnlRename.Controls.Add(Me.lblRename)
-        Me.pnlRename.Controls.Add(Me.sbCancel)
-        Me.pnlRename.Font = New System.Drawing.Font("LCARS", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.pnlRename.ForeColor = System.Drawing.Color.Orange
-        Me.pnlRename.Location = New System.Drawing.Point(33, 40)
-        Me.pnlRename.Name = "pnlRename"
-        Me.pnlRename.Size = New System.Drawing.Size(470, 492)
-        Me.pnlRename.TabIndex = 91
-        Me.pnlRename.Visible = False
-        '
-        'sbOK
-        '
-        Me.sbOK.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbOK.Beeping = False
-        Me.sbOK.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
-        Me.sbOK.ButtonText = "OK"
-        Me.sbOK.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
-        Me.sbOK.ButtonTextHeight = 14
-        Me.sbOK.Clickable = True
-        Me.sbOK.Color = LCARS.LCARScolorStyles.PrimaryFunction
-        Me.sbOK.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbOK.Data = Nothing
-        Me.sbOK.Data2 = Nothing
-        Me.sbOK.FlashInterval = 500
-        Me.sbOK.holdDraw = False
-        Me.sbOK.Lit = True
-        Me.sbOK.Location = New System.Drawing.Point(356, 456)
-        Me.sbOK.Name = "sbOK"
-        Me.sbOK.RedAlert = LCARS.LCARSalert.Normal
-        Me.sbOK.Size = New System.Drawing.Size(87, 26)
-        Me.sbOK.TabIndex = 55
-        Me.sbOK.Text = "OK"
-        '
-        'txtNew
-        '
-        Me.txtNew.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtNew.BackColor = System.Drawing.Color.Black
-        Me.txtNew.Font = New System.Drawing.Font("LCARS", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtNew.ForeColor = System.Drawing.Color.Orange
-        Me.txtNew.Location = New System.Drawing.Point(46, 243)
-        Me.txtNew.Name = "txtNew"
-        Me.txtNew.Size = New System.Drawing.Size(397, 38)
-        Me.txtNew.TabIndex = 54
-        '
-        'lblFileName
-        '
-        Me.lblFileName.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.lblFileName.AutoSize = True
-        Me.lblFileName.Location = New System.Drawing.Point(42, 211)
-        Me.lblFileName.Name = "lblFileName"
-        Me.lblFileName.Size = New System.Drawing.Size(117, 24)
-        Me.lblFileName.TabIndex = 53
-        Me.lblFileName.Text = "File/Directory Name:"
-        '
-        'lblRename
-        '
-        Me.lblRename.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lblRename.Font = New System.Drawing.Font("LCARS", 36.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblRename.ForeColor = System.Drawing.Color.Orange
-        Me.lblRename.Location = New System.Drawing.Point(17, 0)
-        Me.lblRename.Name = "lblRename"
-        Me.lblRename.Size = New System.Drawing.Size(443, 52)
-        Me.lblRename.TabIndex = 50
-        Me.lblRename.Text = "RENAME"
-        '
-        'sbCancel
-        '
-        Me.sbCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbCancel.Beeping = False
-        Me.sbCancel.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
-        Me.sbCancel.ButtonText = "CANCEL"
-        Me.sbCancel.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
-        Me.sbCancel.ButtonTextHeight = 14
-        Me.sbCancel.Clickable = True
-        Me.sbCancel.Color = LCARS.LCARScolorStyles.CriticalFunction
-        Me.sbCancel.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbCancel.Data = Nothing
-        Me.sbCancel.Data2 = Nothing
-        Me.sbCancel.FlashInterval = 500
-        Me.sbCancel.holdDraw = False
-        Me.sbCancel.Lit = True
-        Me.sbCancel.Location = New System.Drawing.Point(263, 456)
-        Me.sbCancel.Name = "sbCancel"
-        Me.sbCancel.RedAlert = LCARS.LCARSalert.Normal
-        Me.sbCancel.Size = New System.Drawing.Size(87, 26)
-        Me.sbCancel.TabIndex = 49
-        Me.sbCancel.Text = "CANCEL"
         '
         'pnlEdit
         '
@@ -1506,7 +859,7 @@ Partial Class frmMyComp
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.gridMyComp.Beeping = False
-        Me.gridMyComp.ColorsAvailable = LcarScolor2
+        Me.gridMyComp.ColorsAvailable = LcarScolor1
         Me.gridMyComp.ControlAddingDirection = LCARS.Controls.ButtonGrid.ControlDirection.Vertical
         Me.gridMyComp.ControlPadding = 5
         Me.gridMyComp.ControlSize = New System.Drawing.Size(150, 30)
@@ -1518,35 +871,12 @@ Partial Class frmMyComp
         Me.gridMyComp.TabIndex = 97
         Me.gridMyComp.Text = "ButtonGrid1"
         '
-        'lblDriveTypeLabel
-        '
-        Me.lblDriveTypeLabel.AutoSize = True
-        Me.lblDriveTypeLabel.Color = LCARS.LCARScolorStyles.Orange
-        Me.lblDriveTypeLabel.Location = New System.Drawing.Point(9, 160)
-        Me.lblDriveTypeLabel.Name = "lblDriveTypeLabel"
-        Me.lblDriveTypeLabel.Size = New System.Drawing.Size(58, 21)
-        Me.lblDriveTypeLabel.TabIndex = 92
-        Me.lblDriveTypeLabel.Text = "Drive type:"
-        Me.lblDriveTypeLabel.TextHeight = 14
-        '
-        'lblDriveType
-        '
-        Me.lblDriveType.AutoSize = True
-        Me.lblDriveType.Color = LCARS.LCARScolorStyles.Orange
-        Me.lblDriveType.Location = New System.Drawing.Point(75, 160)
-        Me.lblDriveType.Name = "lblDriveType"
-        Me.lblDriveType.Size = New System.Drawing.Size(57, 21)
-        Me.lblDriveType.TabIndex = 92
-        Me.lblDriveType.Text = "Removable"
-        Me.lblDriveType.TextHeight = 14
-        '
         'frmMyComp
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Black
         Me.ClientSize = New System.Drawing.Size(640, 562)
-        Me.Controls.Add(Me.pnlProperties)
         Me.Controls.Add(Me.gridMyComp)
         Me.Controls.Add(Me.pnlSystemDefined)
         Me.Controls.Add(Me.pnlEdit)
@@ -1563,23 +893,11 @@ Partial Class frmMyComp
         Me.Controls.Add(Me.elbActionsBottom)
         Me.Controls.Add(Me.pnlOptionalComponents)
         Me.Controls.Add(Me.pnlVisible)
-        Me.Controls.Add(Me.pnlRename)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.KeyPreview = True
         Me.Name = "frmMyComp"
         Me.Text = "My Computer"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
-        Me.pnlProperties.ResumeLayout(False)
-        Me.pnlMultiple.ResumeLayout(False)
-        Me.pnlMultiple.PerformLayout()
-        Me.pnlFolder.ResumeLayout(False)
-        Me.pnlFolder.PerformLayout()
-        Me.pnlDrive.ResumeLayout(False)
-        Me.pnlDrive.PerformLayout()
-        Me.pnlFile.ResumeLayout(False)
-        Me.pnlFile.PerformLayout()
-        Me.pnlRename.ResumeLayout(False)
-        Me.pnlRename.PerformLayout()
         Me.pnlEdit.ResumeLayout(False)
         Me.pnlOptionalComponents.ResumeLayout(False)
         Me.pnlSystemDefined.ResumeLayout(False)
@@ -1588,52 +906,10 @@ Partial Class frmMyComp
     End Sub
     Friend WithEvents sbOptions As LCARS.Controls.StandardButton
     Friend WithEvents sbProperties As LCARS.Controls.StandardButton
-    Friend WithEvents pnlProperties As System.Windows.Forms.Panel
-    Friend WithEvents sbCloseProperties As LCARS.Controls.StandardButton
-    Friend WithEvents pnlDrive As System.Windows.Forms.Panel
-    Friend WithEvents lblPropTitle As System.Windows.Forms.Label
-    Friend WithEvents lblUsed As System.Windows.Forms.Label
     Friend WithEvents pnlVisible As System.Windows.Forms.Panel
-    Friend WithEvents lblDrive As System.Windows.Forms.Label
-    Friend WithEvents lblUsedLabel As System.Windows.Forms.Label
-    Friend WithEvents lblCapacityLabel As System.Windows.Forms.Label
-    Friend WithEvents lblCapacity As System.Windows.Forms.Label
-    Friend WithEvents lblFileSystemLabel As System.Windows.Forms.Label
-    Friend WithEvents lblFS As System.Windows.Forms.Label
     Friend WithEvents tmrMouseSelect As System.Windows.Forms.Timer
     Friend WithEvents sbUpDir As LCARS.Controls.StandardButton
-    Friend WithEvents pnlRename As System.Windows.Forms.Panel
-    Friend WithEvents lblRename As System.Windows.Forms.Label
-    Friend WithEvents sbCancel As LCARS.Controls.StandardButton
-    Friend WithEvents txtNew As System.Windows.Forms.TextBox
-    Friend WithEvents lblFileName As System.Windows.Forms.Label
-    Friend WithEvents sbOK As LCARS.Controls.StandardButton
-    Friend WithEvents lblFreeLabel As System.Windows.Forms.Label
-    Friend WithEvents lblFree As System.Windows.Forms.Label
     Friend WithEvents sbClose As LCARS.Controls.StandardButton
-    Friend WithEvents pnlFile As System.Windows.Forms.Panel
-    Friend WithEvents lblCreatedValue As System.Windows.Forms.Label
-    Friend WithEvents lblModified As System.Windows.Forms.Label
-    Friend WithEvents lblModifiedValue As System.Windows.Forms.Label
-    Friend WithEvents lblAccessed As System.Windows.Forms.Label
-    Friend WithEvents lblAccessedValue As System.Windows.Forms.Label
-    Friend WithEvents lblPathValue As System.Windows.Forms.Label
-    Friend WithEvents lblCreated As System.Windows.Forms.Label
-    Friend WithEvents lblPath As System.Windows.Forms.Label
-    Friend WithEvents lblSizeValue As System.Windows.Forms.Label
-    Friend WithEvents lblSize As System.Windows.Forms.Label
-    Friend WithEvents lblOpensWith As System.Windows.Forms.Label
-    Friend WithEvents sbChangeProgram As LCARS.Controls.StandardButton
-    Friend WithEvents lblOpensWithValue As System.Windows.Forms.Label
-    Friend WithEvents pnlFolder As System.Windows.Forms.Panel
-    Friend WithEvents lblFolderSizeValue As System.Windows.Forms.Label
-    Friend WithEvents lblFolderSize As System.Windows.Forms.Label
-    Friend WithEvents lblFolderCreatedValue As System.Windows.Forms.Label
-    Friend WithEvents lblFolderPathValue As System.Windows.Forms.Label
-    Friend WithEvents lblFolderCreated As System.Windows.Forms.Label
-    Friend WithEvents lblFolderPath As System.Windows.Forms.Label
-    Friend WithEvents lblContainsValue As System.Windows.Forms.Label
-    Friend WithEvents lblContains As System.Windows.Forms.Label
     Friend WithEvents sbRename As LCARS.Controls.StandardButton
     Friend WithEvents sbCopy As LCARS.Controls.StandardButton
     Friend WithEvents sbPaste As LCARS.Controls.StandardButton
@@ -1652,11 +928,7 @@ Partial Class frmMyComp
     Friend WithEvents pnlOptionalComponents As System.Windows.Forms.Panel
     Friend WithEvents sbGoTo As LCARS.Controls.StandardButton
     Friend WithEvents pnlShortcuts As System.Windows.Forms.Panel
-    Friend WithEvents liDrive As LCARS.Controls.LevelIndicator
-    Friend WithEvents lblFreeSpace As System.Windows.Forms.Label
     Friend WithEvents sbRefresh As LCARS.Controls.StandardButton
-    Friend WithEvents pnlMultiple As System.Windows.Forms.Panel
-    Friend WithEvents lblMultipleOut As System.Windows.Forms.Label
     Friend WithEvents pnlSystemDefined As System.Windows.Forms.Panel
     Friend WithEvents sbMyComp As LCARS.Controls.StandardButton
     Friend WithEvents sbDocuments As LCARS.Controls.StandardButton
@@ -1670,7 +942,5 @@ Partial Class frmMyComp
     Friend WithEvents sbEnterPath As LCARS.Controls.StandardButton
     Friend WithEvents sbSaveCurrent As LCARS.Controls.StandardButton
     Friend WithEvents gridMyComp As LCARS.Controls.ButtonGrid
-    Friend WithEvents lblDriveTypeLabel As LCARS.Controls.LCARSLabel
-    Friend WithEvents lblDriveType As LCARS.Controls.LCARSLabel
 
 End Class

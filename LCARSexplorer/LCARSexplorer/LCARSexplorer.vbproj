@@ -74,6 +74,18 @@
     <Import Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dialogs\frmProperties.Designer.vb">
+      <DependentUpon>frmProperties.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\frmProperties.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\frmRename.Designer.vb">
+      <DependentUpon>frmRename.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\frmRename.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmMergeOptions.Designer.vb">
       <DependentUpon>frmMergeOptions.vb</DependentUpon>
     </Compile>
@@ -135,6 +147,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Dialogs\frmProperties.resx">
+      <DependentUpon>frmProperties.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\frmRename.resx">
+      <DependentUpon>frmRename.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMergeOptions.resx">
       <DependentUpon>frmMergeOptions.vb</DependentUpon>
       <SubType>Designer</SubType>

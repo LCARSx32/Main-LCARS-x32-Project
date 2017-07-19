@@ -126,7 +126,11 @@ Public Class frmMyComp
 
             If myDrive.IsReady Then
                 myButton.Color = LCARS.LCARScolorStyles.NavigationFunction
-                myButton.Text = myDrive.VolumeLabel & " (" & myDrive.Name & ")"
+                If myDrive.VolumeLabel = "" Then
+                    myButton.Text = "Local Disk (" & myDrive.Name & ")"
+                Else
+                    myButton.Text = myDrive.VolumeLabel & " (" & myDrive.Name & ")"
+                End If
                 myButton.SideText = ToDriveSize(myDrive.TotalSize)
                 If My.Settings.ClickMode = "Single" Then
                     AddHandler myButton.Click, AddressOf drive_click
@@ -469,144 +473,31 @@ Public Class frmMyComp
 
 
     Private Sub sbProperties_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbProperties.Click
-        pnlProperties.Bounds = gridMyComp.Bounds
         If selectedButtons.Count > 0 Then
-            If (selectedButtons.Count = 1) Then
-
-                If selectedButtons(1).data.Length = 3 Then
-                    'it's a drive
-                    Dim myInfo As DriveInfo = New DriveInfo(selectedButtons(1).data.Substring(0, 1))
-
-                    lblDriveType.Text = myInfo.DriveType.ToString()
-                    If myInfo.IsReady = True Then
-                        Dim AvailablePercent As String
-                        Dim Used As Long
-                        Used = myInfo.TotalSize - myInfo.TotalFreeSpace
-                        AvailablePercent = (myInfo.AvailableFreeSpace / myInfo.TotalSize) * 100
-
-                        lblCapacity.Text = ToDriveSize(myInfo.TotalSize)
-                        lblUsed.Text = ToDriveSize(Used)
-                        lblFree.Text = ToDriveSize(myInfo.TotalFreeSpace)
-                        lblFS.Text = myInfo.DriveFormat
-                        liDrive.Color = LCARS.LCARScolorStyles.Orange
-                        liDrive.Value = Convert.ToDecimal(AvailablePercent)
-                        lblDrive.Text = "Drive: " & myInfo.Name
-                    Else
-                        'The drive is offline.
-                        lblCapacity.Text = "N/A"
-                        lblUsed.Text = "N/A"
-                        lblFS.Text = "N/A"
-                        liDrive.Value = 0
-                        liDrive.Color = LCARS.LCARScolorStyles.FunctionOffline
-                        lblDrive.Text = "Drive: " & myInfo.Name & "(OFFLINE)"
-                    End If
-                    pnlDrive.Visible = True
-                    pnlDrive.BringToFront()
-                Else 'Handles files and folders. Added by Tim 5/29/11
-                    If (Directory.Exists(selectedButtons(1).data.ToString())) Then
-                        'its a folder
-                        Try
-                            lblFolderPathValue.Text = selectedButtons(1).data.ToString()
-                            lblFolderSizeValue.Text = ToDriveSize(DirSize(New System.IO.DirectoryInfo(selectedButtons(1).data.ToString())))
-                            If (GetSetting("LCARS x32", "Application", "Stardate", "FALSE") <> "TRUE") Then
-                                lblFolderCreatedValue.Text = System.IO.Directory.GetCreationTime(selectedButtons(1).ToString())
-                            Else
-                                lblFolderCreatedValue.Text = LCARS.Stardate.getStardate(System.IO.Directory.GetCreationTime(selectedButtons(1).ToString()))
-                            End If
-                            lblContainsValue.Text = System.IO.Directory.GetDirectories(selectedButtons(1).data.ToString()).Length & " directories, " & System.IO.Directory.GetFiles(selectedButtons(1).data.ToString()).Length & " files"
-                            pnlFolder.Visible = True
-                            pnlFolder.BringToFront()
-                        Catch ex As Exception
-                            lblFolderSizeValue.Text = "N/A"
-                            lblFolderCreatedValue.Text = "N/A"
-                            lblContains.Text = "N/A"
-                        End Try
-                    Else
-                        'its a file
-                        Try
-                            lblPathValue.Text = selectedButtons(1).data.ToString()
-                            Dim size As Integer = My.Computer.FileSystem.GetFileInfo(selectedButtons(1).data.ToString()).Length()
-                            lblSizeValue.Text = ToDriveSize(size)
-                            If (GetSetting("LCARS x32", "Application", "Stardate", "FALSE") <> "TRUE") Then
-                                lblCreatedValue.Text = System.IO.File.GetCreationTime(selectedButtons(1).data.ToString()).ToString("g")
-                                lblModifiedValue.Text = System.IO.File.GetLastWriteTime(selectedButtons(1).data.ToString()).ToString("g")
-                                lblAccessedValue.Text = System.IO.File.GetLastAccessTime(selectedButtons(1).data.ToString()).ToString("g")
-                            Else
-                                lblCreatedValue.Text = LCARS.Stardate.getStardate(System.IO.File.GetCreationTime(selectedButtons(1).data.ToString()).ToString("g"))
-                                lblModifiedValue.Text = LCARS.Stardate.getStardate(System.IO.File.GetLastWriteTime(selectedButtons(1).data.ToString()).ToString("g"))
-                                lblAccessedValue.Text = LCARS.Stardate.getStardate(System.IO.File.GetLastAccessTime(selectedButtons(1).data.ToString()).ToString("g"))
-                            End If
-                            'finding what it opens with
-                            sbChangeProgram.Visible = True
-                            Try
-                                Dim strExtension As String = System.IO.Path.GetExtension(selectedButtons(1).data.ToString())
-                                Dim myKey As RegistryKey = Registry.ClassesRoot.OpenSubKey(strExtension)
-                                Dim myKeyTwo As RegistryKey = Registry.ClassesRoot.OpenSubKey(myKey.GetValue("") & "\shell\open\command")
-                                lblOpensWithValue.Text = myKeyTwo.GetValue("")
-                            Catch ex As Exception
-                                lblOpensWithValue.Text = ""
-                                sbChangeProgram.Visible = False
-                            End Try
-                        Catch ex As Exception
-                            lblSizeValue.Text = "N/A"
-                            lblCreatedValue.Text = "N/A"
-                            lblModifiedValue.Text = "N/A"
-                            lblAccessedValue.Text = "N/A"
-                            lblOpensWithValue.Text = "N/A"
-                            sbChangeProgram.Visible = False
-                        End Try
-                        pnlFile.Visible = True
-                        pnlFile.BringToFront()
-                    End If
-                End If
-            Else
-                'Use a string as an accumulator for the information
-                Dim myString As String
-                If selectedButtons(1).data.ToString().Length = 3 Then
-                    'We're viewing drives
-                    myString = "Number of drives: " & selectedButtons.Count & vbNewLine
-                Else
-                    'We have multiple files/folders
-                    myString = "Number of items: " & selectedButtons.Count & vbNewLine
-                    Dim numberFiles As Integer = 0
-                    Dim numberFolders As Integer = 0
-                    Dim size As Long = 0
-                    For Each myButton As LCARS.LightweightControls.LCComplexButton In selectedButtons
-                        Dim myPath As String = myButton.Data.ToString()
-                        If Directory.Exists(myPath) Then
-                            numberFolders += 1
-                            size += DirSize(New System.IO.DirectoryInfo(myPath))
-                        Else
-                            numberFiles += 1
-                            size += My.Computer.FileSystem.GetFileInfo(myPath).Length()
-                        End If
-                    Next
-                    myString = myString & "     Files: " & numberFiles & vbNewLine
-                    myString = myString & "     Folders: " & numberFolders & vbNewLine & vbNewLine
-                    myString = myString & "Total size: " & ToDriveSize(size)
-                End If
-                'Display the string
-                lblMultipleOut.Text = myString
-                pnlMultiple.Visible = True
-                pnlMultiple.BringToFront()
-            End If
-            enableNavigation(False)
-            pnlProperties.Visible = True
-            pnlProperties.BringToFront()
+            Dim props As New frmProperties(selectedButtons)
+            dockDialog(props)
         Else
             MsgBox("No item selected.  Select an item by holding the mouse down for more than a second (it will stay white)." & vbNewLine & "You can also select multiple items by clicking in the back area and dragging around the desired items.", MsgBoxStyle.Exclamation, "ERROR: NO ITEM SLECTED")
         End If
     End Sub
 
-    Private Sub sbCloseProperties_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbCloseProperties.Click
-        enableNavigation(True)
-        pnlFolder.Visible = False
-        pnlFile.Visible = False
-        pnlDrive.Visible = False
-        pnlMultiple.Visible = False
-        pnlProperties.Visible = False
+    Private Sub dockDialog(ByVal dialog As Form)
+        enableNavigation(False)
+        AddHandler dialog.FormClosed, AddressOf dialog_closed
+        dialog.Size = gridMyComp.Size
+        dialog.Location = Point.Empty
+        dialog.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Bottom Or AnchorStyles.Right
+        gridMyComp.Controls.Add(dialog)
+        dialog.Show()
+        dialog.BringToFront()
     End Sub
-    Private Sub enableNavigation(ByVal en As Boolean)
+
+    Private Sub dialog_closed(ByVal sender As Object, ByVal e As EventArgs)
+        gridMyComp.Controls.Remove(CType(sender, Form))
+        enableNavigation(True)
+    End Sub
+
+    Public Sub enableNavigation(ByVal en As Boolean)
         pnlVisible.Enabled = en
         sbUpDir.Enabled = en
         sbProperties.Enabled = en
@@ -804,46 +695,24 @@ Public Class frmMyComp
 
     End Sub
 
-    Private Sub sbOK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbOK.Click
-        Try
-            Dim tmpPage As Integer = gridMyComp.CurrentPage
-            If (System.IO.Path.GetDirectoryName(sbOK.Data).EndsWith("\")) Then 'Error checking added by Tim 5/57/11
-                Rename(sbOK.Data, System.IO.Path.GetDirectoryName(sbOK.Data) & txtNew.Text) 'Corrects renaming bug
-            Else
-                Rename(sbOK.Data, System.IO.Path.GetDirectoryName(sbOK.Data) & "\" & txtNew.Text)
-            End If
-            sbCancel_Click(sender, e)
-
-            loadDir(curPath)
-            gridMyComp.CurrentPage = tmpPage
-
-        Catch ex As Exception
-
-        End Try
-    End Sub
-
     Private Sub sbRename_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbRename.Click
         If selectedButtons.Count = 1 Then
-            pnlRename.Bounds = gridMyComp.Bounds
-            pnlRename.Visible = True
-            pnlRename.BringToFront()
-
-            sbOK.Data = CType(selectedButtons(1), LCARS.LightweightControls.LCComplexButton).Data
-            txtNew.Text = Path.GetFileName(sbOK.Data)
-            enableNavigation(False)
-            loadDir(curPath)
+            Dim path As String = CStr(CType(selectedButtons(1), LCARS.LightweightControls.LCComplexButton).Data)
+            Dim ren As New frmRename(path)
+            dockDialog(ren)
+            AddHandler ren.FormClosed, AddressOf dialog_closed_reload
+            pnlEdit.Visible = False
         End If
     End Sub
 
-    Private Sub sbCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbCancel.Click
-        enableNavigation(True)
-        pnlRename.Visible = False
-        sbOK.Data = ""
-        txtNew.Text = ""
+    Private Sub dialog_closed_reload(ByVal sender As Object, ByVal e As EventArgs)
+        Dim tmpPage As Integer = gridMyComp.CurrentPage
+        loadDir(curPath)
+        gridMyComp.CurrentPage = tmpPage
     End Sub
 
     Private Sub sbClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbClose.Click
-        Application.Exit()
+        Me.Close()
     End Sub
 
     Private Sub sbNewFolder_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbNewFolder.Click
@@ -858,17 +727,6 @@ Public Class frmMyComp
             IO.Directory.CreateDirectory(strName)
             loadDir(curPath)
         End If
-    End Sub
-
-    Private Sub sbChangeProgram_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbChangeProgram.Click
-        MsgBox("This function is not fully working; everything displays properly, but no changes to file associations are made.")
-        Dim mySelect As frmFileSelect = New frmFileSelect("C:\Program Files\", ".exe,.bat,", "Select program executable")
-        mySelect.ShowDialog()
-        If (mySelect.Result = Windows.Forms.DialogResult.OK) Then
-            Dim newProg As String = mySelect.lblCurrentSelected.Text
-            'need to find which registry key to edit
-        End If
-
     End Sub
 
     Private Sub sbOpenWith_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbOpenWith.Click
