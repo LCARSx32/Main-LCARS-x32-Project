@@ -65,6 +65,15 @@ Public Class frmCopying
         lblStatus.Text = status
     End Sub
 
+    Private Sub OnTaskComplete()
+        If Me.InvokeRequired Then
+            Me.Invoke(New Threading.ThreadStart(AddressOf OnTaskComplete))
+        Else
+            RaiseEvent TaskCompleted(Me, EventArgs.Empty)
+            Me.Close()
+        End If
+    End Sub
+
     Private Sub CopySub()
         Dim totalSize As Long = 0
         Dim copiedSize As Long = 0
@@ -152,8 +161,7 @@ Public Class frmCopying
             Next
         End If
         RaiseEvent statusChanged(1, "Completed", "100% complete", "Time Remaining: 0 seconds" & vbNewLine & "Items Remaining: 0" & vbNewLine & "Data Remaining: 0B")
-        RaiseEvent TaskCompleted(Me, New EventArgs)
-        Me.Close()
+        OnTaskComplete()
     End Sub
 
     Private Function DirInit(ByVal d As DirectoryInfo, ByRef size As Long, ByRef items As Long) As Long

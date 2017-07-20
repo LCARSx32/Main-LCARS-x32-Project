@@ -37,8 +37,6 @@ Public Class frmMyComp
     Dim myShift As Boolean = False
     Dim nextInChain As IntPtr
 
-    Private Delegate Sub NoArgs()
-
 #End Region
 
 
@@ -745,10 +743,6 @@ Public Class frmMyComp
     End Sub
 
     Private Sub Task_Finished(ByVal sender As Object, ByVal e As System.EventArgs)
-        Me.Invoke(New NoArgs(AddressOf Reload))
-    End Sub
-
-    Private Sub Reload()
         loadDir(curPath)
     End Sub
 End Class
