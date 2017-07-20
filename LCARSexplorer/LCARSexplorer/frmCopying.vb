@@ -1,5 +1,9 @@
-﻿Imports System.IO
+﻿Option Strict On
+
+Imports System.IO
 Imports System.Threading
+
+'TODO: Combine Overwrite and Merge options enums and dialogs
 
 Public Class frmCopying
     Dim copyThread As New Thread(AddressOf CopySub)

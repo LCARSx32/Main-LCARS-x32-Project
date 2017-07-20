@@ -1,7 +1,9 @@
-﻿Public Class frmMergeOptions
+﻿Option Strict On
+
+Public Class frmMergeOptions
     Dim _action As frmCopying.MergeOptions = frmCopying.MergeOptions.Undecided
     Dim _IsGlobal As Boolean = False
-    Public ReadOnly Property action() As frmCopying.OverWriteActions
+    Public ReadOnly Property action() As frmCopying.MergeOptions
         Get
             Return _action
         End Get
@@ -27,7 +29,7 @@
             Case sbmerge.Lit
                 _action = frmCopying.MergeOptions.Merge
             Case sbKeepBoth.Lit
-                _action = frmCopying.OverWriteActions.MoveAndKeepBoth
+                _action = frmCopying.MergeOptions.MoveAndKeepBoth
         End Select
         _IsGlobal = sbGlobal.Lit
         If _action = frmCopying.OverWriteActions.Undecided Then

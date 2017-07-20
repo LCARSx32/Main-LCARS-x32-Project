@@ -1,4 +1,6 @@
-﻿Public Class frmOverwriteOptions
+﻿Option Strict On
+
+Public Class frmOverwriteOptions
     Dim _action As frmCopying.OverWriteActions = frmCopying.OverWriteActions.Undecided
     Dim _IsGlobal As Boolean = False
     Public ReadOnly Property action() As frmCopying.OverWriteActions
