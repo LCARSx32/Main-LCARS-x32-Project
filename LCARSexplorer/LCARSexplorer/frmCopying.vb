@@ -111,17 +111,17 @@ Public Class frmCopying
         Dim overwriteAction As OverWriteActions = OverWriteActions.Undecided
         Dim mergeAction As MergeOptions = MergeOptions.Undecided
         'If Path.GetDirectoryName(paths(0)) = destination Then overwriteAction = OverWriteActions.MoveAndKeepBoth
-        'Find the total size and items
-        For Each myPath As String In paths
-            If Directory.Exists(myPath) Then
-                DirInit(New System.IO.DirectoryInfo(myPath), totalSize, totalItems)
+        'Translate paths into FileSystemInfo's to simplify handling
+        Dim infos(paths.Length - 1) As FileSystemInfo
+        For i As Integer = 0 To paths.Length - 1
+            If (File.GetAttributes(paths(i)) And FileAttributes.Directory) = FileAttributes.Directory Then
+                infos(i) = New DirectoryInfo(paths(i))
             Else
-                statusLock.WaitOne()
-                totalSize += My.Computer.FileSystem.GetFileInfo(myPath).Length() + 1
-                totalItems += 1
-                statusLock.ReleaseMutex()
+                infos(i) = New FileInfo(paths(i))
             End If
         Next
+        'Find the total size and items
+        ReadSizes(infos)
         Dim cut As Boolean = False
         Dim delete As Boolean = False
         If copyAction = FileActions.Cut Then
@@ -199,27 +199,22 @@ Public Class frmCopying
         OnTaskComplete()
     End Sub
 
-    Private Function DirInit(ByVal d As DirectoryInfo, ByRef size As Long, ByRef items As Long) As Long
-        ' Add file sizes.
-        Dim fis As FileInfo() = d.GetFiles()
-        Dim fi As FileInfo
-        statusLock.WaitOne()
-        items += 1
-        statusLock.ReleaseMutex()
-        For Each fi In fis
-            statusLock.WaitOne()
-            size += fi.Length + 1
-            items += 1
-            statusLock.ReleaseMutex()
-        Next fi
-        ' Add subdirectory sizes.
-        Dim dis As DirectoryInfo() = d.GetDirectories()
-        Dim di As DirectoryInfo
-        For Each di In dis
-            DirInit(di, size, items)
-        Next di
-        Return size
-    End Function
+    Private Sub ReadSizes(ByVal infos() As FileSystemInfo)
+        For Each info As FileSystemInfo In infos
+            If info.GetType() Is GetType(DirectoryInfo) Then
+                statusLock.WaitOne()
+                totalItems += 1
+                totalSize += 1 'Prevent divide by zero errors. Also, directories take up space.
+                statusLock.ReleaseMutex()
+                ReadSizes(DirectCast(info, DirectoryInfo).GetFileSystemInfos)
+            Else
+                statusLock.WaitOne()
+                totalItems += 1
+                totalItems += DirectCast(info, FileInfo).Length + 1
+                statusLock.ReleaseMutex()
+            End If
+        Next
+    End Sub
 
     Private Sub dirCopy(ByVal d As DirectoryInfo, ByVal workingDir As String, ByVal delete As Boolean, ByRef conflictAction As OverWriteActions, ByRef mergeAction As MergeOptions, ByRef size As Long, ByRef items As Long, ByVal totalSize As Long, ByVal totalItems As Long)
         Dim LocAction As MergeOptions = mergeAction
