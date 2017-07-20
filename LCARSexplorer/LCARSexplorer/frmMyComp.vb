@@ -130,20 +130,12 @@ Public Class frmMyComp
                     myButton.Text = myDrive.VolumeLabel & " (" & myDrive.Name & ")"
                 End If
                 myButton.SideText = ToDriveSize(myDrive.TotalSize)
-                If My.Settings.ClickMode = "Single" Then
-                    AddHandler myButton.Click, AddressOf directory_click
-                Else
-                    AddHandler myButton.DoubleClick, AddressOf directory_click
-                End If
+                associateClickHandler(myButton, AddressOf directory_click)
             Else
                 myButton.Color = LCARS.LCARScolorStyles.FunctionOffline
                 myButton.Text = "DRIVE OFFLINE (" & myDrive.Name & ")"
                 myButton.SideText = "--"
-                If My.Settings.ClickMode = "Single" Then
-                    AddHandler myButton.Click, AddressOf myErrorAlert
-                Else
-                    AddHandler myButton.DoubleClick, AddressOf myErrorAlert
-                End If
+                associateClickHandler(myButton, AddressOf myErrorAlert)
             End If
 
             AddHandler myButton.MouseDown, AddressOf item_MouseDown
@@ -178,6 +170,14 @@ Public Class frmMyComp
         curSelected = Nothing
         tmrMouseSelect.Enabled = False
         cancelClick = False
+    End Sub
+
+    Private Sub associateClickHandler(ByVal control As LCARS.LightweightControls.LCComplexButton, ByVal handler As EventHandler)
+        If My.Settings.ClickMode = "Single" Then
+            AddHandler control.Click, handler
+        Else
+            AddHandler control.DoubleClick, handler
+        End If
     End Sub
 
     Public Sub loadDir(ByVal newpath As String)
@@ -247,19 +247,11 @@ Public Class frmMyComp
                         Dim curDir As DirectoryInfo = CType(curItem, DirectoryInfo)
                         myButton.Color = LCARS.LCARScolorStyles.NavigationFunction
                         myButton.SideText = curDir.GetDirectories.GetUpperBound(0) + 1 & "." & curDir.GetFiles.GetUpperBound(0) + 1
-                        If My.Settings.ClickMode = "Single" Then
-                            AddHandler myButton.Click, AddressOf directory_click
-                        Else
-                            AddHandler myButton.DoubleClick, AddressOf directory_click
-                        End If
+                        associateClickHandler(myButton, AddressOf directory_click)
                     Catch ex As Exception
                         myButton.SideText = "--"
                         myButton.Color = LCARS.LCARScolorStyles.FunctionOffline
-                        If My.Settings.ClickMode = "Single" Then
-                            AddHandler myButton.Click, AddressOf myErrorAlert
-                        Else
-                            AddHandler myButton.DoubleClick, AddressOf myErrorAlert
-                        End If
+                        associateClickHandler(myButton, AddressOf myErrorAlert)
                     End Try
 
                 Else
@@ -280,20 +272,11 @@ Public Class frmMyComp
                         Else
                             myButton.SideText = "---"
                         End If
-                        If My.Settings.ClickMode = "Single" Then
-                            AddHandler myButton.Click, AddressOf myFile_Click
-                        Else
-                            AddHandler myButton.DoubleClick, AddressOf myFile_Click
-                        End If
-
+                        associateClickHandler(myButton, AddressOf myFile_Click)
                     Catch ex As Exception
                         myButton.SideText = "--"
                         myButton.Color = LCARS.LCARScolorStyles.FunctionOffline
-                        If My.Settings.ClickMode = "Single" Then
-                            AddHandler myButton.Click, AddressOf myErrorAlert
-                        Else
-                            AddHandler myButton.DoubleClick, AddressOf myErrorAlert
-                        End If
+                        associateClickHandler(myButton, AddressOf myErrorAlert)
                     End Try
 
                 End If
