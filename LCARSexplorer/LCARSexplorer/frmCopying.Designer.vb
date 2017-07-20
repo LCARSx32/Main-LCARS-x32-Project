@@ -37,6 +37,8 @@ Partial Class frmCopying
         '
         'tbTitle
         '
+        Me.tbTitle.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.tbTitle.Beeping = False
         Me.tbTitle.ButtonText = "COPYING FILES"
         Me.tbTitle.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -53,14 +55,14 @@ Partial Class frmCopying
         Me.tbTitle.Location = New System.Drawing.Point(129, 12)
         Me.tbTitle.Name = "tbTitle"
         Me.tbTitle.RedAlert = LCARS.LCARSalert.Normal
-        Me.tbTitle.Size = New System.Drawing.Size(456, 22)
+        Me.tbTitle.Size = New System.Drawing.Size(456, 24)
         Me.tbTitle.TabIndex = 0
         Me.tbTitle.Text = "COPYING FILES"
         '
         'elbTop
         '
         Me.elbTop.Beeping = False
-        Me.elbTop.ButtonHeight = 22
+        Me.elbTop.ButtonHeight = 24
         Me.elbTop.ButtonText = ""
         Me.elbTop.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.elbTop.ButtonTextHeight = 14
@@ -83,6 +85,8 @@ Partial Class frmCopying
         '
         'FlatButton1
         '
+        Me.FlatButton1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.FlatButton1.Beeping = False
         Me.FlatButton1.ButtonText = ""
         Me.FlatButton1.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
@@ -103,8 +107,9 @@ Partial Class frmCopying
         '
         'Elbow1
         '
+        Me.Elbow1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Elbow1.Beeping = False
-        Me.Elbow1.ButtonHeight = 22
+        Me.Elbow1.ButtonHeight = 24
         Me.Elbow1.ButtonText = ""
         Me.Elbow1.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.Elbow1.ButtonTextHeight = 14
@@ -122,11 +127,13 @@ Partial Class frmCopying
         Me.Elbow1.Location = New System.Drawing.Point(12, 224)
         Me.Elbow1.Name = "Elbow1"
         Me.Elbow1.RedAlert = LCARS.LCARSalert.Normal
-        Me.Elbow1.Size = New System.Drawing.Size(139, 47)
+        Me.Elbow1.Size = New System.Drawing.Size(139, 49)
         Me.Elbow1.TabIndex = 4
         '
         'TextButton1
         '
+        Me.TextButton1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TextButton1.Beeping = False
         Me.TextButton1.ButtonText = ""
         Me.TextButton1.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -143,11 +150,14 @@ Partial Class frmCopying
         Me.TextButton1.Location = New System.Drawing.Point(129, 249)
         Me.TextButton1.Name = "TextButton1"
         Me.TextButton1.RedAlert = LCARS.LCARSalert.Normal
-        Me.TextButton1.Size = New System.Drawing.Size(456, 22)
+        Me.TextButton1.Size = New System.Drawing.Size(456, 24)
         Me.TextButton1.TabIndex = 3
         '
         'prgCopying
         '
+        Me.prgCopying.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.prgCopying.BackColor = System.Drawing.Color.Black
         Me.prgCopying.BottomText = "0%"
         Me.prgCopying.BottomTextAlign = System.Drawing.ContentAlignment.BottomRight
@@ -177,6 +187,7 @@ Partial Class frmCopying
         '
         'lblStatus
         '
+        Me.lblStatus.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lblStatus.AutoSize = True
         Me.lblStatus.Location = New System.Drawing.Point(119, 172)
         Me.lblStatus.Name = "lblStatus"
@@ -186,6 +197,7 @@ Partial Class frmCopying
         '
         'sbCancel
         '
+        Me.sbCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.sbCancel.Beeping = False
         Me.sbCancel.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbCancel.ButtonText = "CANCEL"
@@ -214,7 +226,7 @@ Partial Class frmCopying
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.BackColor = System.Drawing.Color.Black
-        Me.ClientSize = New System.Drawing.Size(597, 283)
+        Me.ClientSize = New System.Drawing.Size(597, 285)
         Me.Controls.Add(Me.sbCancel)
         Me.Controls.Add(Me.lblStatus)
         Me.Controls.Add(Me.lblPaths)
