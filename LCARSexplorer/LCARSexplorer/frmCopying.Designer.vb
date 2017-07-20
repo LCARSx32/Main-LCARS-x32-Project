@@ -22,6 +22,7 @@ Partial Class frmCopying
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container
         Me.tbTitle = New LCARS.Controls.TextButton
         Me.elbTop = New LCARS.Controls.Elbow
         Me.FlatButton1 = New LCARS.Controls.FlatButton
@@ -31,6 +32,7 @@ Partial Class frmCopying
         Me.lblPaths = New System.Windows.Forms.Label
         Me.lblStatus = New System.Windows.Forms.Label
         Me.sbCancel = New LCARS.Controls.StandardButton
+        Me.tmrUIUpdate = New System.Windows.Forms.Timer(Me.components)
         Me.SuspendLayout()
         '
         'tbTitle
@@ -204,6 +206,10 @@ Partial Class frmCopying
         Me.sbCancel.TabIndex = 8
         Me.sbCancel.Text = "CANCEL"
         '
+        'tmrUIUpdate
+        '
+        Me.tmrUIUpdate.Enabled = True
+        '
         'frmCopying
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -239,4 +245,5 @@ Partial Class frmCopying
     Friend WithEvents lblPaths As System.Windows.Forms.Label
     Friend WithEvents lblStatus As System.Windows.Forms.Label
     Friend WithEvents sbCancel As LCARS.Controls.StandardButton
+    Private WithEvents tmrUIUpdate As System.Windows.Forms.Timer
 End Class

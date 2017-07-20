@@ -1,14 +1,21 @@
 ﻿Imports System.IO
+Imports System.Threading
 
 Public Class frmCopying
-    Dim copyThread As New System.Threading.Thread(AddressOf CopySub)
+    Dim copyThread As New Thread(AddressOf CopySub)
     Dim paths() As String
     Dim destination As String
     Dim copyAction As FileActions
-    Private Event statusChanged(ByVal progress As Decimal, ByVal topText As String, ByVal bottomText As String, ByVal status As String)
     Public Event TaskCompleted As EventHandler
-    Delegate Sub setText(ByVal text As String)
-    Dim start As DateTime
+    Dim start As DateTime = DateTime.MinValue
+
+    'Status variables
+    Dim statusLock As New Mutex()
+    Dim topText As String = "Initializing"
+    Dim totalSize As Long = 0
+    Dim copiedSize As Long = 0
+    Dim totalItems As Long = 0
+    Dim copiedItems As Long = 0
 
     Public Enum FileActions
         Copy = 0
@@ -31,11 +38,8 @@ Public Class frmCopying
     End Enum
 
     Public Sub New(ByVal sourcePaths() As String, ByVal fileDestination As String, Optional ByVal action As FileActions = FileActions.Copy)
-
-        ' This call is required by the Windows Form Designer.
         InitializeComponent()
 
-        ' Add any initialization after the InitializeComponent() call.
         paths = sourcePaths
         destination = fileDestination
         copyAction = action
@@ -58,11 +62,33 @@ Public Class frmCopying
         Me.Close()
     End Sub
 
-    Private Sub Me_StatusChanged(ByVal progress As Decimal, ByVal topText As String, ByVal bottomText As String, ByVal status As String) Handles Me.statusChanged
+    Private Sub tmrUIUpdate_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrUIUpdate.Tick
+        statusLock.WaitOne()
         prgCopying.TopText = topText
-        prgCopying.BottomText = bottomText
-        prgCopying.Value = progress
-        lblStatus.Text = status
+        Dim progress As Double = copiedSize / totalSize
+        prgCopying.BottomText = String.Format("{0:F2}% complete", progress * 100)
+        prgCopying.Value = CDec(progress)
+        If start = DateTime.MinValue Then
+            lblStatus.Text = String.Format("Estimated time remaining: Calculating" & vbNewLine & _
+                                           "Items remaining: {0}" & vbNewLine & _
+                                           "Data remaining: {1}", _
+                                           totalItems, _
+                                           ToDriveSize(totalSize))
+        Else
+            Dim timeEst As Double
+            If progress = 1 Then
+                timeEst = 0
+            Else
+                timeEst = (totalSize - copiedSize) * (Now - start).TotalSeconds / (totalSize)
+            End If
+            lblStatus.Text = String.Format("Estimated time remaining: {0}" & vbNewLine & _
+                                           "Items remaining: {1}" & vbNewLine & _
+                                           "Data remaining: {2}", _
+                                           TimeSpan.FromSeconds(timeEst), _
+                                           totalItems - copiedItems, _
+                                           ToDriveSize(totalSize - copiedSize))
+        End If
+        statusLock.ReleaseMutex()
     End Sub
 
     Private Sub OnTaskComplete()
@@ -75,23 +101,19 @@ Public Class frmCopying
     End Sub
 
     Private Sub CopySub()
-        Dim totalSize As Long = 0
-        Dim copiedSize As Long = 0
-        Dim totalItems As Long = 0
-        Dim copiedItems As Long = 0
         Dim overwriteAction As OverWriteActions = OverWriteActions.Undecided
         Dim mergeAction As MergeOptions = MergeOptions.Undecided
-        RaiseEvent statusChanged(0, "Initializing", "0% complete", "Estimated time remaining: Calculating" & vbNewLine & "Items Remaining: Calculating" & vbNewLine & "Data Remaining: Calculating")
         'If Path.GetDirectoryName(paths(0)) = destination Then overwriteAction = OverWriteActions.MoveAndKeepBoth
         'Find the total size and items
         For Each myPath As String In paths
             If Directory.Exists(myPath) Then
                 DirInit(New System.IO.DirectoryInfo(myPath), totalSize, totalItems)
             Else
+                statusLock.WaitOne()
                 totalSize += My.Computer.FileSystem.GetFileInfo(myPath).Length() + 1
                 totalItems += 1
+                statusLock.ReleaseMutex()
             End If
-            RaiseEvent statusChanged(0, "Initializing", "0% complete", "Estimated time remaining: Calculating" & vbNewLine & "Items Remaining: " & totalItems - copiedItems & vbNewLine & "Data Remaining: " & ToDriveSize(totalSize - copiedSize))
         Next
         Dim cut As Boolean = False
         Dim delete As Boolean = False
@@ -107,9 +129,11 @@ Public Class frmCopying
                 If Directory.Exists(myPath) Then
                     dirCopy(New System.IO.DirectoryInfo(myPath), destination & "\" & New DirectoryInfo(myPath).Name, cut, overwriteAction, mergeAction, copiedSize, copiedItems, totalSize, totalItems)
                 Else
-                    RaiseEvent statusChanged(copiedSize / totalSize, Path.GetFileName(myPath), ((copiedSize / totalSize) * 100).ToString("F2") & "% complete", "Estimated time remaining: " & toStandardTime(((totalSize - copiedSize) * (Now - start).TotalSeconds / (totalSize))) & vbNewLine & "Items Remaining: " & totalItems - copiedItems & vbNewLine & "Data Remaining: " & ToDriveSize(totalSize - copiedSize))
+                    statusLock.WaitOne()
+                    topText = Path.GetFileName(myPath)
                     copiedSize += New FileInfo(myPath).Length + 1
                     copiedItems += 1
+                    statusLock.ReleaseMutex()
                     If File.Exists(destination & "\" & Path.GetFileName(myPath)) Then
                         Dim action As OverWriteActions = overwriteAction
                         If action = OverWriteActions.Undecided Then
@@ -150,9 +174,11 @@ Public Class frmCopying
                 If Directory.Exists(mypath) Then
                     dirDelete(New DirectoryInfo(mypath), copiedSize, copiedItems, totalSize, totalItems)
                 Else
-                    RaiseEvent statusChanged(copiedSize / totalSize, Path.GetFileName(mypath), ((copiedSize / totalSize) * 100).ToString("F2") & "% complete", "Estimated time remaining: " & toStandardTime((totalSize - copiedSize) * (Now - start).TotalSeconds / (totalSize)) & vbNewLine & "Items Remaining: " & totalItems - copiedItems & vbNewLine & "Data Remaining: " & ToDriveSize(totalSize - copiedSize))
+                    statusLock.WaitOne()
+                    topText = Path.GetFileName(mypath)
                     copiedSize += New FileInfo(mypath).Length + 1
                     copiedItems += 1
+                    statusLock.ReleaseMutex()
                     Try
                         System.IO.File.Delete(mypath)
                     Catch ex As Exception
@@ -160,7 +186,9 @@ Public Class frmCopying
                 End If
             Next
         End If
-        RaiseEvent statusChanged(1, "Completed", "100% complete", "Time Remaining: 0 seconds" & vbNewLine & "Items Remaining: 0" & vbNewLine & "Data Remaining: 0B")
+        statusLock.WaitOne()
+        topText = "Completed"
+        statusLock.ReleaseMutex()
         OnTaskComplete()
     End Sub
 
@@ -168,14 +196,14 @@ Public Class frmCopying
         ' Add file sizes.
         Dim fis As FileInfo() = d.GetFiles()
         Dim fi As FileInfo
+        statusLock.WaitOne()
         items += 1
+        statusLock.ReleaseMutex()
         For Each fi In fis
+            statusLock.WaitOne()
             size += fi.Length + 1
             items += 1
-            Try
-                RaiseEvent statusChanged(0, "Initializing", "0% complete", "Estimated time remaining: Calculating" & vbNewLine & "Items Remaining: " & items & vbNewLine & "Data Remaining: " & ToDriveSize(size))
-            Catch ex As Exception
-            End Try
+            statusLock.ReleaseMutex()
         Next fi
         ' Add subdirectory sizes.
         Dim dis As DirectoryInfo() = d.GetDirectories()
@@ -214,10 +242,11 @@ Public Class frmCopying
         If copy Then
             Dim files As FileInfo() = Filelist
             For Each f As FileInfo In files
+                statusLock.WaitOne()
                 size += f.Length + 1
                 items += 1
-                'MsgBox((totalSize - size) / (totalSize / (Now - start).TotalSeconds))
-                RaiseEvent statusChanged(size / totalSize, f.Name, ((size / totalSize) * 100).ToString("F2") & "% complete", "Estimated time remaining: " & toStandardTime((totalSize - size) * (Now - start).TotalSeconds / (totalSize)) & vbNewLine & "Items Remaining: " & totalItems - items & vbNewLine & "Data Remaining: " & ToDriveSize(totalSize - size))
+                topText = f.Name
+                statusLock.ReleaseMutex()
                 'copy file
                 If File.Exists(workingDir & "\" & Path.GetFileName(f.FullName)) Then
                     Dim action As OverWriteActions = conflictAction
@@ -274,9 +303,11 @@ Public Class frmCopying
     Private Sub dirDelete(ByVal d As DirectoryInfo, ByRef size As Long, ByRef items As Long, ByVal totalSize As Long, ByVal totalItems As Long)
         Dim files As FileInfo() = d.GetFiles()
         For Each f As FileInfo In files
+            statusLock.WaitOne()
             size += f.Length + 1
             items += 1
-            RaiseEvent statusChanged(size / totalSize, f.Name, ((size / totalSize) * 100).ToString("F2") & "% complete", "Estimated time remaining: Calculating" & vbNewLine & "Items Remaining: " & totalItems - items & vbNewLine & "Data Remaining: " & ToDriveSize(totalSize - size))
+            topText = f.Name
+            statusLock.ReleaseMutex()
             File.Delete(f.FullName)
         Next
         For Each di As DirectoryInfo In d.GetDirectories()
@@ -284,10 +315,4 @@ Public Class frmCopying
         Next
         Directory.Delete(d.FullName)
     End Sub
-
-    Private Function toStandardTime(ByVal totalSeconds As Decimal) As String
-        Dim myTime As System.TimeSpan = System.TimeSpan.FromSeconds(totalSeconds)
-        Return myTime.ToString()
-    End Function
-
 End Class
