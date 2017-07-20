@@ -52,7 +52,7 @@ Namespace LightweightControls
         Public Event MouseMove As System.Windows.Forms.MouseEventHandler
         Public Event MouseUp As System.Windows.Forms.MouseEventHandler
         Public Event MouseLeave As EventHandler
-        Public Event DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs)
+        Public Event DoubleClick As EventHandler
 
         ''' <summary>
         ''' Contains the types for different methods of AutoEllipsis functionality
