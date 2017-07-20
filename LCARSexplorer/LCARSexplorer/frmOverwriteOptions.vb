@@ -1,9 +1,9 @@
 ﻿Option Strict On
 
 Public Class frmOverwriteOptions
-    Dim _action As frmCopying.OverWriteActions = frmCopying.OverWriteActions.Undecided
+    Dim _action As OverWriteActions = OverWriteActions.Undecided
     Dim _IsGlobal As Boolean = False
-    Public ReadOnly Property action() As frmCopying.OverWriteActions
+    Public ReadOnly Property action() As OverWriteActions
         Get
             Return _action
         End Get
@@ -25,14 +25,14 @@ Public Class frmOverwriteOptions
     Private Sub sbOK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbOK.Click
         Select Case True
             Case sbDoNotCopy.Lit
-                _action = frmCopying.OverWriteActions.DoNotMove
+                _action = OverWriteActions.DoNotMove
             Case sbOverwrite.Lit
-                _action = frmCopying.OverWriteActions.Overwrite
+                _action = OverWriteActions.Overwrite
             Case sbKeepBoth.Lit
-                _action = frmCopying.OverWriteActions.MoveAndKeepBoth
+                _action = OverWriteActions.MoveAndKeepBoth
         End Select
         _IsGlobal = sbGlobal.Lit
-        If _action = frmCopying.OverWriteActions.Undecided Then
+        If _action = OverWriteActions.Undecided Then
             MsgBox("Please choose an option.")
         Else
             Me.Close()

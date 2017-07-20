@@ -473,7 +473,7 @@ Public Class frmMyComp
                 MsgBoxStyle.YesNo, "DELETE?")
 
         If result = MsgBoxResult.Yes Then
-            Dim form As New frmCopying(getSelectedFiles(), "", frmCopying.FileActions.Delete)
+            Dim form As New frmCopying(getSelectedFiles(), "", FileActions.Delete)
             AddHandler form.TaskCompleted, AddressOf Task_Finished
             form.Show()
         End If
@@ -538,13 +538,13 @@ Public Class frmMyComp
 
             If flag = 2 Then
                 'cut
-                Dim form As New frmCopying(files, curPath, frmCopying.FileActions.Cut)
+                Dim form As New frmCopying(files, curPath, FileActions.Cut)
                 AddHandler form.TaskCompleted, AddressOf Task_Finished
                 form.Show()
                 Clipboard.Clear()
             Else
                 'copy
-                Dim form As New frmCopying(files, curPath, frmCopying.FileActions.Copy)
+                Dim form As New frmCopying(files, curPath, FileActions.Copy)
                 AddHandler form.TaskCompleted, AddressOf Task_Finished
                 form.Show()
             End If

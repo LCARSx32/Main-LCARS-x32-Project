@@ -5,6 +5,28 @@ Imports System.Threading
 
 'TODO: Combine Overwrite and Merge options enums and dialogs
 
+#Region " Enums "
+Public Enum FileActions
+    Copy = 0
+    Cut = 1
+    Delete = 2
+End Enum
+
+Public Enum OverWriteActions
+    Undecided = 0
+    Overwrite = 1
+    DoNotMove = 2
+    MoveAndKeepBoth = 3
+End Enum
+
+Public Enum MergeOptions
+    Undecided = 0
+    Merge = 1
+    DoNotMove = 2
+    MoveAndKeepBoth = 3
+End Enum
+#End Region
+
 Public Class frmCopying
     Dim copyThread As New Thread(AddressOf CopySub)
     Dim paths() As String
@@ -21,25 +43,6 @@ Public Class frmCopying
     Dim totalItems As Long = 0
     Dim copiedItems As Long = 0
 
-    Public Enum FileActions
-        Copy = 0
-        Cut = 1
-        Delete = 2
-    End Enum
-
-    Public Enum OverWriteActions
-        Undecided = 0
-        Overwrite = 1
-        DoNotMove = 2
-        MoveAndKeepBoth = 3
-    End Enum
-
-    Public Enum MergeOptions
-        Undecided = 0
-        Merge = 1
-        DoNotMove = 2
-        MoveAndKeepBoth = 3
-    End Enum
 
     Public Sub New(ByVal sourcePaths() As String, ByVal fileDestination As String, Optional ByVal action As FileActions = FileActions.Copy)
         InitializeComponent()

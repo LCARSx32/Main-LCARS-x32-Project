@@ -1,9 +1,9 @@
 ﻿Option Strict On
 
 Public Class frmMergeOptions
-    Dim _action As frmCopying.MergeOptions = frmCopying.MergeOptions.Undecided
+    Dim _action As MergeOptions = MergeOptions.Undecided
     Dim _IsGlobal As Boolean = False
-    Public ReadOnly Property action() As frmCopying.MergeOptions
+    Public ReadOnly Property action() As MergeOptions
         Get
             Return _action
         End Get
@@ -25,14 +25,14 @@ Public Class frmMergeOptions
     Private Sub sbOK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbOK.Click
         Select Case True
             Case sbDoNotCopy.Lit
-                _action = frmCopying.MergeOptions.DoNotMove
+                _action = MergeOptions.DoNotMove
             Case sbmerge.Lit
-                _action = frmCopying.MergeOptions.Merge
+                _action = MergeOptions.Merge
             Case sbKeepBoth.Lit
-                _action = frmCopying.MergeOptions.MoveAndKeepBoth
+                _action = MergeOptions.MoveAndKeepBoth
         End Select
         _IsGlobal = sbGlobal.Lit
-        If _action = frmCopying.OverWriteActions.Undecided Then
+        If _action = MergeOptions.Undecided Then
             MsgBox("Please choose an option.")
         Else
             Me.Close()
