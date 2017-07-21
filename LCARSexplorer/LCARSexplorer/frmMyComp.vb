@@ -210,23 +210,34 @@ Public Class frmMyComp
                         curDir.GetDirectories()
                     End If
                     Dim dirAttr As FileAttributes = curDir.Attributes
-                    If (dirAttr <> FileAttributes.Hidden Or My.Settings.showHidden = True) And (dirAttr <> FileAttributes.System Or showSystem = True) Then
-                        CurItems.Add(curDir)
+                    If ((dirAttr And FileAttributes.Hidden) = FileAttributes.Hidden) _
+                            And Not My.Settings.showHidden Then
+                        Continue For
                     End If
+                    If ((dirAttr And FileAttributes.System) = FileAttributes.System) _
+                            And Not showSystem Then
+                        Continue For
+                    End If
+                    CurItems.Add(curDir)
                 Catch ex As Exception
-
                 End Try
             Next
             'get files and add them to the list
             For Each curFile As FileInfo In myDir.GetFiles
                 Try
                     If My.Settings.check Then
-                        Dim blank As String = curFile.Extension
+                        'TODO: Find a real check
                     End If
                     Dim fileAttr As FileAttributes = curFile.Attributes
-                    If (fileAttr <> FileAttributes.Hidden Or My.Settings.showHidden = True) And (fileAttr <> FileAttributes.System Or showSystem = True) Then
-                        CurItems.Add(curFile)
+                    If ((fileAttr And FileAttributes.Hidden) = FileAttributes.Hidden) _
+                            And Not My.Settings.showHidden Then
+                        Continue For
                     End If
+                    If ((fileAttr And FileAttributes.System) = FileAttributes.System) _
+                            And Not showSystem Then
+                        Continue For
+                    End If
+                    CurItems.Add(curFile)
                 Catch ex As Exception
                 End Try
             Next

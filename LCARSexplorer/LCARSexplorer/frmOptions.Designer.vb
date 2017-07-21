@@ -28,13 +28,7 @@ Partial Class frmOptions
         Me.lblStartDir = New System.Windows.Forms.Label
         Me.txtStartDir = New System.Windows.Forms.TextBox
         Me.tcOptions = New LCARS.Controls.x32TabControl
-        Me.tabMain = CType(New LCARS.Controls.x32TabPage, LCARS.Controls.x32TabPage)
-        Me.sbColors = New LCARS.Controls.StandardButton
-        Me.fbClickMode = New LCARS.Controls.FlatButton
-        Me.hpDouble = New LCARS.Controls.HalfPillButton
-        Me.hpSingle = New LCARS.Controls.HalfPillButton
-        Me.lblClickMode = New System.Windows.Forms.Label
-        Me.tabShortcuts = CType(New LCARS.Controls.x32TabPage, LCARS.Controls.x32TabPage)
+        Me.tabShortcuts = New LCARS.Controls.x32TabPage
         Me.fbEdit = New LCARS.Controls.FlatButton
         Me.fbDown = New LCARS.Controls.FlatButton
         Me.fbAdd = New LCARS.Controls.FlatButton
@@ -42,9 +36,15 @@ Partial Class frmOptions
         Me.fbUp = New LCARS.Controls.FlatButton
         Me.lstShortcutNames = New System.Windows.Forms.ListBox
         Me.lstShortcuts = New System.Windows.Forms.ListBox
+        Me.tabMain = New LCARS.Controls.x32TabPage
+        Me.sbColors = New LCARS.Controls.StandardButton
+        Me.fbClickMode = New LCARS.Controls.FlatButton
+        Me.hpDouble = New LCARS.Controls.HalfPillButton
+        Me.hpSingle = New LCARS.Controls.HalfPillButton
+        Me.lblClickMode = New System.Windows.Forms.Label
         Me.tcOptions.SuspendLayout()
-        Me.tabMain.SuspendLayout()
         Me.tabShortcuts.SuspendLayout()
+        Me.tabMain.SuspendLayout()
         Me.SuspendLayout()
         '
         'sbHidden
@@ -54,8 +54,8 @@ Partial Class frmOptions
         Me.sbHidden.ButtonText = "SHOW HIDDEN FILES AND FOLDERS"
         Me.sbHidden.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbHidden.ButtonTextHeight = 14
-        Me.sbHidden.Clickable = False
-        Me.sbHidden.Color = LCARS.LCARScolorStyles.FunctionUnavailable
+        Me.sbHidden.Clickable = True
+        Me.sbHidden.Color = LCARS.LCARScolorStyles.SystemFunction
         Me.sbHidden.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbHidden.Data = Nothing
         Me.sbHidden.Data2 = Nothing
@@ -68,7 +68,6 @@ Partial Class frmOptions
         Me.sbHidden.Size = New System.Drawing.Size(194, 30)
         Me.sbHidden.TabIndex = 2
         Me.sbHidden.Text = "SHOW HIDDEN FILES AND FOLDERS"
-        Me.sbHidden.Visible = False
         '
         'sbCheck
         '
@@ -139,135 +138,16 @@ Partial Class frmOptions
         'tcOptions
         '
         Me.tcOptions.BackColor = System.Drawing.Color.Black
-        Me.tcOptions.Controls.Add(Me.tabShortcuts)
         Me.tcOptions.Controls.Add(Me.tabMain)
+        Me.tcOptions.Controls.Add(Me.tabShortcuts)
         Me.tcOptions.Location = New System.Drawing.Point(12, 12)
         Me.tcOptions.Name = "tcOptions"
-        Me.tcOptions.SelectedTab = Me.tabShortcuts
+        Me.tcOptions.SelectedTab = Me.tabMain
         Me.tcOptions.Size = New System.Drawing.Size(511, 306)
         Me.tcOptions.TabIndex = 5
         Me.tcOptions.TabPages.Add(Me.tabMain)
         Me.tcOptions.TabPages.Add(Me.tabShortcuts)
         Me.tcOptions.Text = "X32TabControl1"
-        '
-        'tabMain
-        '
-        Me.tabMain.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tabMain.BackColor = System.Drawing.Color.Black
-        Me.tabMain.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.tabMain.Controls.Add(Me.sbColors)
-        Me.tabMain.Controls.Add(Me.fbClickMode)
-        Me.tabMain.Controls.Add(Me.hpDouble)
-        Me.tabMain.Controls.Add(Me.hpSingle)
-        Me.tabMain.Controls.Add(Me.sbHidden)
-        Me.tabMain.Controls.Add(Me.txtStartDir)
-        Me.tabMain.Controls.Add(Me.sbCheck)
-        Me.tabMain.Controls.Add(Me.lblClickMode)
-        Me.tabMain.Controls.Add(Me.lblStartDir)
-        Me.tabMain.Location = New System.Drawing.Point(0, 26)
-        Me.tabMain.Name = "tabMain"
-        Me.tabMain.Size = New System.Drawing.Size(401, 280)
-        Me.tabMain.TabIndex = 4
-        Me.tabMain.Text = "MAIN OPTIONS"
-        '
-        'sbColors
-        '
-        Me.sbColors.Beeping = False
-        Me.sbColors.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
-        Me.sbColors.ButtonText = "COLOR FILES BY EXTENSION"
-        Me.sbColors.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.sbColors.ButtonTextHeight = 14
-        Me.sbColors.Clickable = True
-        Me.sbColors.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbColors.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbColors.Data = Nothing
-        Me.sbColors.Data2 = Nothing
-        Me.sbColors.FlashInterval = 500
-        Me.sbColors.holdDraw = False
-        Me.sbColors.Lit = True
-        Me.sbColors.Location = New System.Drawing.Point(203, 39)
-        Me.sbColors.Name = "sbColors"
-        Me.sbColors.RedAlert = LCARS.LCARSalert.Normal
-        Me.sbColors.Size = New System.Drawing.Size(194, 30)
-        Me.sbColors.TabIndex = 7
-        Me.sbColors.Text = "COLOR FILES BY EXTENSION"
-        '
-        'fbClickMode
-        '
-        Me.fbClickMode.Beeping = False
-        Me.fbClickMode.ButtonText = ""
-        Me.fbClickMode.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.fbClickMode.ButtonTextHeight = 14
-        Me.fbClickMode.Clickable = False
-        Me.fbClickMode.Color = LCARS.LCARScolorStyles.CriticalFunction
-        Me.fbClickMode.CustomAlertColor = System.Drawing.Color.Empty
-        Me.fbClickMode.Data = Nothing
-        Me.fbClickMode.Data2 = Nothing
-        Me.fbClickMode.FlashInterval = 500
-        Me.fbClickMode.holdDraw = False
-        Me.fbClickMode.Lit = True
-        Me.fbClickMode.Location = New System.Drawing.Point(7, 168)
-        Me.fbClickMode.Name = "fbClickMode"
-        Me.fbClickMode.RedAlert = LCARS.LCARSalert.Normal
-        Me.fbClickMode.Size = New System.Drawing.Size(25, 25)
-        Me.fbClickMode.TabIndex = 6
-        '
-        'hpDouble
-        '
-        Me.hpDouble.Beeping = False
-        Me.hpDouble.ButtonStyle = LCARS.Controls.HalfPillButton.LCARSbuttonStyles.PillRight
-        Me.hpDouble.ButtonText = "DOUBLE CLICK"
-        Me.hpDouble.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.hpDouble.ButtonTextHeight = 14
-        Me.hpDouble.Clickable = True
-        Me.hpDouble.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.hpDouble.CustomAlertColor = System.Drawing.Color.Empty
-        Me.hpDouble.Data = Nothing
-        Me.hpDouble.Data2 = Nothing
-        Me.hpDouble.FlashInterval = 500
-        Me.hpDouble.holdDraw = False
-        Me.hpDouble.Lit = True
-        Me.hpDouble.Location = New System.Drawing.Point(38, 199)
-        Me.hpDouble.Name = "hpDouble"
-        Me.hpDouble.RedAlert = LCARS.LCARSalert.Normal
-        Me.hpDouble.Size = New System.Drawing.Size(130, 25)
-        Me.hpDouble.TabIndex = 5
-        Me.hpDouble.Text = "DOUBLE CLICK"
-        '
-        'hpSingle
-        '
-        Me.hpSingle.Beeping = False
-        Me.hpSingle.ButtonStyle = LCARS.Controls.HalfPillButton.LCARSbuttonStyles.PillRight
-        Me.hpSingle.ButtonText = "SINGLE CLICK"
-        Me.hpSingle.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.hpSingle.ButtonTextHeight = 14
-        Me.hpSingle.Clickable = True
-        Me.hpSingle.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.hpSingle.CustomAlertColor = System.Drawing.Color.Empty
-        Me.hpSingle.Data = Nothing
-        Me.hpSingle.Data2 = Nothing
-        Me.hpSingle.FlashInterval = 500
-        Me.hpSingle.holdDraw = False
-        Me.hpSingle.Lit = True
-        Me.hpSingle.Location = New System.Drawing.Point(38, 168)
-        Me.hpSingle.Name = "hpSingle"
-        Me.hpSingle.RedAlert = LCARS.LCARSalert.Normal
-        Me.hpSingle.Size = New System.Drawing.Size(130, 25)
-        Me.hpSingle.TabIndex = 5
-        Me.hpSingle.Text = "SINGLE CLICK"
-        '
-        'lblClickMode
-        '
-        Me.lblClickMode.AutoSize = True
-        Me.lblClickMode.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblClickMode.ForeColor = System.Drawing.Color.Orange
-        Me.lblClickMode.Location = New System.Drawing.Point(3, 143)
-        Me.lblClickMode.Name = "lblClickMode"
-        Me.lblClickMode.Size = New System.Drawing.Size(59, 21)
-        Me.lblClickMode.TabIndex = 3
-        Me.lblClickMode.Text = "Click Mode"
         '
         'tabShortcuts
         '
@@ -420,6 +300,125 @@ Partial Class frmOptions
         Me.lstShortcuts.Size = New System.Drawing.Size(278, 170)
         Me.lstShortcuts.TabIndex = 0
         '
+        'tabMain
+        '
+        Me.tabMain.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tabMain.BackColor = System.Drawing.Color.Black
+        Me.tabMain.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.tabMain.Controls.Add(Me.sbColors)
+        Me.tabMain.Controls.Add(Me.fbClickMode)
+        Me.tabMain.Controls.Add(Me.hpDouble)
+        Me.tabMain.Controls.Add(Me.hpSingle)
+        Me.tabMain.Controls.Add(Me.sbHidden)
+        Me.tabMain.Controls.Add(Me.txtStartDir)
+        Me.tabMain.Controls.Add(Me.sbCheck)
+        Me.tabMain.Controls.Add(Me.lblClickMode)
+        Me.tabMain.Controls.Add(Me.lblStartDir)
+        Me.tabMain.Location = New System.Drawing.Point(0, 26)
+        Me.tabMain.Name = "tabMain"
+        Me.tabMain.Size = New System.Drawing.Size(401, 280)
+        Me.tabMain.TabIndex = 4
+        Me.tabMain.Text = "MAIN OPTIONS"
+        '
+        'sbColors
+        '
+        Me.sbColors.Beeping = False
+        Me.sbColors.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
+        Me.sbColors.ButtonText = "COLOR FILES BY EXTENSION"
+        Me.sbColors.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.sbColors.ButtonTextHeight = 14
+        Me.sbColors.Clickable = True
+        Me.sbColors.Color = LCARS.LCARScolorStyles.MiscFunction
+        Me.sbColors.CustomAlertColor = System.Drawing.Color.Empty
+        Me.sbColors.Data = Nothing
+        Me.sbColors.Data2 = Nothing
+        Me.sbColors.FlashInterval = 500
+        Me.sbColors.holdDraw = False
+        Me.sbColors.Lit = True
+        Me.sbColors.Location = New System.Drawing.Point(203, 39)
+        Me.sbColors.Name = "sbColors"
+        Me.sbColors.RedAlert = LCARS.LCARSalert.Normal
+        Me.sbColors.Size = New System.Drawing.Size(194, 30)
+        Me.sbColors.TabIndex = 7
+        Me.sbColors.Text = "COLOR FILES BY EXTENSION"
+        '
+        'fbClickMode
+        '
+        Me.fbClickMode.Beeping = False
+        Me.fbClickMode.ButtonText = ""
+        Me.fbClickMode.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.fbClickMode.ButtonTextHeight = 14
+        Me.fbClickMode.Clickable = False
+        Me.fbClickMode.Color = LCARS.LCARScolorStyles.CriticalFunction
+        Me.fbClickMode.CustomAlertColor = System.Drawing.Color.Empty
+        Me.fbClickMode.Data = Nothing
+        Me.fbClickMode.Data2 = Nothing
+        Me.fbClickMode.FlashInterval = 500
+        Me.fbClickMode.holdDraw = False
+        Me.fbClickMode.Lit = True
+        Me.fbClickMode.Location = New System.Drawing.Point(7, 168)
+        Me.fbClickMode.Name = "fbClickMode"
+        Me.fbClickMode.RedAlert = LCARS.LCARSalert.Normal
+        Me.fbClickMode.Size = New System.Drawing.Size(25, 25)
+        Me.fbClickMode.TabIndex = 6
+        '
+        'hpDouble
+        '
+        Me.hpDouble.Beeping = False
+        Me.hpDouble.ButtonStyle = LCARS.Controls.HalfPillButton.LCARSbuttonStyles.PillRight
+        Me.hpDouble.ButtonText = "DOUBLE CLICK"
+        Me.hpDouble.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.hpDouble.ButtonTextHeight = 14
+        Me.hpDouble.Clickable = True
+        Me.hpDouble.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.hpDouble.CustomAlertColor = System.Drawing.Color.Empty
+        Me.hpDouble.Data = Nothing
+        Me.hpDouble.Data2 = Nothing
+        Me.hpDouble.FlashInterval = 500
+        Me.hpDouble.holdDraw = False
+        Me.hpDouble.Lit = True
+        Me.hpDouble.Location = New System.Drawing.Point(38, 199)
+        Me.hpDouble.Name = "hpDouble"
+        Me.hpDouble.RedAlert = LCARS.LCARSalert.Normal
+        Me.hpDouble.Size = New System.Drawing.Size(130, 25)
+        Me.hpDouble.TabIndex = 5
+        Me.hpDouble.Text = "DOUBLE CLICK"
+        '
+        'hpSingle
+        '
+        Me.hpSingle.Beeping = False
+        Me.hpSingle.ButtonStyle = LCARS.Controls.HalfPillButton.LCARSbuttonStyles.PillRight
+        Me.hpSingle.ButtonText = "SINGLE CLICK"
+        Me.hpSingle.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.hpSingle.ButtonTextHeight = 14
+        Me.hpSingle.Clickable = True
+        Me.hpSingle.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.hpSingle.CustomAlertColor = System.Drawing.Color.Empty
+        Me.hpSingle.Data = Nothing
+        Me.hpSingle.Data2 = Nothing
+        Me.hpSingle.FlashInterval = 500
+        Me.hpSingle.holdDraw = False
+        Me.hpSingle.Lit = True
+        Me.hpSingle.Location = New System.Drawing.Point(38, 168)
+        Me.hpSingle.Name = "hpSingle"
+        Me.hpSingle.RedAlert = LCARS.LCARSalert.Normal
+        Me.hpSingle.Size = New System.Drawing.Size(130, 25)
+        Me.hpSingle.TabIndex = 5
+        Me.hpSingle.Text = "SINGLE CLICK"
+        '
+        'lblClickMode
+        '
+        Me.lblClickMode.AutoSize = True
+        Me.lblClickMode.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblClickMode.ForeColor = System.Drawing.Color.Orange
+        Me.lblClickMode.Location = New System.Drawing.Point(3, 143)
+        Me.lblClickMode.Name = "lblClickMode"
+        Me.lblClickMode.Size = New System.Drawing.Size(59, 21)
+        Me.lblClickMode.TabIndex = 3
+        Me.lblClickMode.Text = "Click Mode"
+        '
         'frmOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -435,9 +434,9 @@ Partial Class frmOptions
         Me.Text = "frmOptions"
         Me.tcOptions.ResumeLayout(False)
         Me.tcOptions.PerformLayout()
+        Me.tabShortcuts.ResumeLayout(False)
         Me.tabMain.ResumeLayout(False)
         Me.tabMain.PerformLayout()
-        Me.tabShortcuts.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
