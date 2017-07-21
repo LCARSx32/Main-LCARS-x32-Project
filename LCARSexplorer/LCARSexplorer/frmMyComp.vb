@@ -495,11 +495,7 @@ Public Class frmMyComp
 
         If myfiles.Length > 0 Then
             Dim myStream As New MemoryStream(4)
-            Dim bytes(3) As Byte
-            bytes(0) = 5
-            bytes(1) = 0
-            bytes(2) = 0
-            bytes(3) = 0
+            Dim bytes() As Byte = {5, 0, 0, 0}
 
             myStream.Write(bytes, 0, bytes.Length)
             Dim data_object As New DataObject()
@@ -517,11 +513,7 @@ Public Class frmMyComp
 
         If myfiles.Length > 0 Then
             Dim myStream As New MemoryStream(4)
-            Dim bytes(3) As Byte
-            bytes(0) = 2
-            bytes(1) = 0
-            bytes(2) = 0
-            bytes(3) = 0
+            Dim bytes() As Byte = {2, 0, 0, 0}
 
             myStream.Write(bytes, 0, bytes.Length)
             Dim data_object As New DataObject()
