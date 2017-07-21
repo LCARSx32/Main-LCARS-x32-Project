@@ -3,6 +3,9 @@
 Imports System.IO
 Imports System.Threading
 
+'TODO: Use better signaling than thread abort
+'TODO: Verify correctness of copying
+'TODO: Handle access problems better
 'TODO: Combine Overwrite and Merge options enums and dialogs
 
 #Region " Enums "
@@ -34,6 +37,8 @@ Public Class frmCopying
     Dim copyAction As FileActions
     Public Event TaskCompleted As EventHandler
     Dim start As DateTime = DateTime.MinValue
+    Dim _overwriteAction As OverWriteActions = OverWriteActions.Undecided
+    Dim _mergeAction As MergeOptions = MergeOptions.Undecided
 
     'Status variables
     Dim statusLock As New Mutex()
@@ -102,15 +107,18 @@ Public Class frmCopying
         If Me.InvokeRequired Then
             Me.Invoke(New Threading.ThreadStart(AddressOf OnTaskComplete))
         Else
+            topText = "Completed"
             RaiseEvent TaskCompleted(Me, EventArgs.Empty)
             Me.Close()
         End If
     End Sub
 
     Private Sub CopySub()
-        Dim overwriteAction As OverWriteActions = OverWriteActions.Undecided
-        Dim mergeAction As MergeOptions = MergeOptions.Undecided
-        'If Path.GetDirectoryName(paths(0)) = destination Then overwriteAction = OverWriteActions.MoveAndKeepBoth
+        'Automatically create duplicate if same path
+        If Path.GetDirectoryName(paths(0)) = destination Then
+            _overwriteAction = OverWriteActions.MoveAndKeepBoth
+            _mergeAction = MergeOptions.MoveAndKeepBoth
+        End If
         'Translate paths into FileSystemInfo's to simplify handling
         Dim infos(paths.Length - 1) As FileSystemInfo
         For i As Integer = 0 To paths.Length - 1
@@ -122,65 +130,15 @@ Public Class frmCopying
         Next
         'Find the total size and items
         ReadSizes(infos)
-        Dim cut As Boolean = False
-        Dim delete As Boolean = False
-        If copyAction = FileActions.Cut Then
-            cut = True
-        ElseIf copyAction = FileActions.Delete Then
-            delete = True
-        End If
         start = Now
-        If Not delete Then
-            'begin copying
-            For Each myPath As String In paths
-                If Directory.Exists(myPath) Then
-                    dirCopy(New System.IO.DirectoryInfo(myPath), destination & "\" & New DirectoryInfo(myPath).Name, cut, overwriteAction, mergeAction, copiedSize, copiedItems, totalSize, totalItems)
-                Else
-                    statusLock.WaitOne()
-                    topText = Path.GetFileName(myPath)
-                    copiedSize += New FileInfo(myPath).Length + 1
-                    copiedItems += 1
-                    statusLock.ReleaseMutex()
-                    If File.Exists(destination & "\" & Path.GetFileName(myPath)) Then
-                        Dim action As OverWriteActions = overwriteAction
-                        If action = OverWriteActions.Undecided Then
-                            Dim myForm As New frmOverwriteOptions(destination & Path.GetFileName(myPath))
-                            myForm.ShowDialog()
-                            action = myForm.action
-                            If myForm.IsGlobalSetting Then
-                                overwriteAction = action
-                            End If
-                        End If
-                        Select Case action
-                            Case OverWriteActions.Overwrite
-                                Try
-                                    System.IO.File.Copy(myPath, destination & "\" & Path.GetFileName(myPath), True)
-                                Catch ex As Exception
-                                End Try
-                            Case OverWriteActions.MoveAndKeepBoth
-                                Try
-                                    System.IO.File.Copy(myPath, destination & "\" & Path.GetFileNameWithoutExtension(myPath) & " - 2" & Path.GetExtension(myPath))
-                                Catch ex As Exception
-                                End Try
-                        End Select
-                    Else
-                        Try
-                            System.IO.File.Copy(myPath, destination & "\" & Path.GetFileName(myPath))
-                            If cut Then
-                                System.IO.File.Delete(myPath)
-                            End If
-                        Catch ex As Exception
-                        End Try
-                    End If
-
-                End If
-            Next
-        Else
-            DeleteItems(infos)
-        End If
-        statusLock.WaitOne()
-        topText = "Completed"
-        statusLock.ReleaseMutex()
+        Select Case copyAction
+            Case FileActions.Copy
+                CopyItems(infos, destination, False)
+            Case FileActions.Cut
+                CopyItems(infos, destination, True)
+            Case FileActions.Delete
+                DeleteItems(infos)
+        End Select
         OnTaskComplete()
     End Sub
 
@@ -195,109 +153,161 @@ Public Class frmCopying
             Else
                 statusLock.WaitOne()
                 totalItems += 1
-                totalItems += DirectCast(info, FileInfo).Length + 1
+                totalSize += DirectCast(info, FileInfo).Length + 1
                 statusLock.ReleaseMutex()
             End If
         Next
     End Sub
 
-    Private Sub dirCopy(ByVal d As DirectoryInfo, ByVal workingDir As String, ByVal delete As Boolean, ByRef conflictAction As OverWriteActions, ByRef mergeAction As MergeOptions, ByRef size As Long, ByRef items As Long, ByVal totalSize As Long, ByVal totalItems As Long)
-        Dim LocAction As MergeOptions = mergeAction
-        Dim copy As Boolean = True
-        Dim directoryList As DirectoryInfo() = d.GetDirectories()
-        Dim Filelist As FileInfo() = d.GetFiles()
-        If Directory.Exists(workingDir) Then
-            If LocAction = MergeOptions.Undecided Then
-                Dim myForm As New frmMergeOptions(workingDir)
-                myForm.ShowDialog()
-                LocAction = myForm.action
-                If myForm.IsGlobalSetting Then
-                    mergeAction = LocAction
-                End If
-            End If
-            If LocAction = MergeOptions.MoveAndKeepBoth Then
-                Dim i As Integer = 2
-                Do Until Not Directory.Exists(workingDir & " - " & i)
-                    i += 1
-                Loop
-                workingDir = workingDir & " - " & i
-            End If
-            If LocAction = MergeOptions.DoNotMove Then copy = False
-        Else
-            Directory.CreateDirectory(workingDir)
-        End If
-        If copy Then
-            Dim files As FileInfo() = Filelist
-            For Each f As FileInfo In files
-                statusLock.WaitOne()
-                size += f.Length + 1
-                items += 1
-                topText = f.Name
-                statusLock.ReleaseMutex()
-                'copy file
-                If File.Exists(workingDir & "\" & Path.GetFileName(f.FullName)) Then
-                    Dim action As OverWriteActions = conflictAction
-                    If action = OverWriteActions.Undecided Then
-                        Dim myForm As New frmOverwriteOptions(workingDir & Path.GetFileName(f.FullName))
-                        myForm.ShowDialog()
-                        action = myForm.action
-                        If myForm.IsGlobalSetting Then
-                            conflictAction = action
-                        End If
-                    End If
-                    Select Case action
-                        Case OverWriteActions.Overwrite
-                            Try
-                                If delete Then
-                                    System.IO.File.Move(f.FullName, workingDir & "\" & Path.GetFileName(f.FullName))
-                                Else
-                                    System.IO.File.Copy(f.FullName, workingDir & "\" & Path.GetFileName(f.FullName), True)
-                                End If
-                            Catch ex As Exception
-                            End Try
-                        Case OverWriteActions.MoveAndKeepBoth
-                            Try
-                                If delete Then
-                                    System.IO.File.Move(f.FullName, workingDir & "\" & Path.GetFileNameWithoutExtension(f.FullName) & " - 2" & Path.GetExtension(f.FullName))
-                                Else
-                                    System.IO.File.Copy(f.FullName, workingDir & "\" & Path.GetFileNameWithoutExtension(f.FullName) & " - 2" & Path.GetExtension(f.FullName))
-                                End If
-                            Catch ex As Exception
-                            End Try
-                    End Select
-                Else
+
+    Private Sub CopyItems(ByVal items() As FileSystemInfo, ByVal workingDir As String, ByVal move As Boolean)
+        For Each item As FileSystemInfo In items
+            'Update status
+            statusLock.WaitOne()
+            topText = item.Name
+            statusLock.ReleaseMutex()
+            Dim size As Long = 1
+            'Handle copy
+            If item.GetType() Is GetType(DirectoryInfo) Then
+                Dim oldDir As DirectoryInfo = DirectCast(item, DirectoryInfo)
+                Dim newDirName As String = checkDirName(Path.Combine(workingDir, oldDir.Name))
+                If newDirName IsNot Nothing Then
                     Try
-                        If delete Then
-                            System.IO.File.Move(f.FullName, workingDir & "\" & Path.GetFileName(f.FullName))
-                        Else
-                            System.IO.File.Copy(f.FullName, workingDir & "\" & Path.GetFileName(f.FullName))
+                        Directory.CreateDirectory(newDirName, oldDir.GetAccessControl())
+                        Dim newDirInfo As DirectoryInfo = New DirectoryInfo(newDirName)
+                        newDirInfo.Attributes = oldDir.Attributes
+                        CopyItems(oldDir.GetFileSystemInfos(), newDirName, move)
+                        If move Then
+                            oldDir.Delete(False)
                         End If
                     Catch ex As Exception
+                        MsgBox("Problem creating directory:" & vbNewLine & _
+                               newDirName & vbNewLine & _
+                               "Exception message:" & vbNewLine & _
+                               ex.Message)
                     End Try
                 End If
-            Next
-        End If
-        For Each di As DirectoryInfo In directoryList
-            dirCopy(di, workingDir & "\" & di.Name, delete, conflictAction, mergeAction, size, items, totalSize, totalItems)
-        Next
-        If copy Then
-            If delete Then
-                Directory.Delete(d.FullName)
+            Else
+                Dim oldFile As FileInfo = DirectCast(item, FileInfo)
+                size += oldFile.Length
+                Dim newFileName As String = checkFileName(Path.Combine(workingDir, oldFile.Name))
+                If newFileName IsNot Nothing Then
+                    If move Then
+                        Try
+                            oldFile.MoveTo(newFileName)
+                        Catch ex As Exception
+                            MsgBox("Problem moving file" & vbNewLine _
+                                   & oldFile.Name & vbNewLine _
+                                   & "Exception message:" & vbNewLine _
+                                   & ex.Message)
+                        End Try
+                    Else
+                        Try
+                            oldFile.CopyTo(newFileName, True)
+                            Dim newFileInfo As New FileInfo(newFileName)
+                            newFileInfo.Attributes = oldFile.Attributes
+                            newFileInfo.SetAccessControl(oldFile.GetAccessControl())
+                        Catch ex As Exception
+                            MsgBox("Problem creating file:" & vbNewLine & _
+                                   newFileName & vbNewLine & _
+                                   "Exception message:" & vbNewLine & _
+                                   ex.Message)
+                        End Try
+                    End If
+                End If
             End If
-        End If
+            statusLock.WaitOne()
+            copiedItems += 1
+            copiedSize += size
+            statusLock.ReleaseMutex()
+        Next
     End Sub
+
+    Private ReadOnly Property MergeAction(ByVal dir As String) As MergeOptions
+        Get
+            If _mergeAction = MergeOptions.Undecided Then
+                Dim mergeDialogue As New frmMergeOptions(dir)
+                mergeDialogue.ShowDialog()
+                If mergeDialogue.IsGlobalSetting Then
+                    _mergeAction = mergeDialogue.action
+                End If
+                Return mergeDialogue.action
+            Else
+                Return _mergeAction
+            End If
+        End Get
+    End Property
+
+    Private ReadOnly Property OverwriteAction(ByVal file As String) As OverWriteActions
+        Get
+            If _overwriteAction = OverWriteActions.Undecided Then
+                Dim mergeDialogue As New frmOverwriteOptions(file)
+                mergeDialogue.ShowDialog()
+                If mergeDialogue.IsGlobalSetting Then
+                    _overwriteAction = mergeDialogue.action
+                End If
+                Return mergeDialogue.action
+            Else
+                Return _overwriteAction
+            End If
+        End Get
+    End Property
+
+    Private Function checkDirName(ByVal name As String) As String
+        If Directory.Exists(name) Then
+            Select Case MergeAction(name)
+                Case MergeOptions.Merge
+                    Return name
+                Case MergeOptions.DoNotMove
+                    Return Nothing
+                Case MergeOptions.MoveAndKeepBoth
+                    Dim i As Integer = 0
+                    While Directory.Exists(String.Format("{0} ({1})", name, i))
+                        i += 1
+                    End While
+                    Return String.Format("{0} ({1})", name, i)
+                Case Else 'Should never happen
+                    Return Nothing
+            End Select
+        Else
+            Return name
+        End If
+    End Function
+
+    Private Function checkFileName(ByVal name As String) As String
+        If File.Exists(name) Then
+            Select Case OverwriteAction(name)
+                Case OverWriteActions.Overwrite
+                    Return name
+                Case OverWriteActions.DoNotMove
+                    Return Nothing
+                Case OverWriteActions.MoveAndKeepBoth
+                    Dim i As Integer = 0
+                    Dim leading As String = Path.GetFileNameWithoutExtension(name)
+                    Dim trailing As String = Path.GetExtension(name)
+                    While File.Exists(String.Format("{0} ({1}){2}", leading, i, trailing))
+                        i += 1
+                    End While
+                    Return String.Format("{0} ({1}){2}", leading, i, trailing)
+                Case Else 'Should never happen
+                    Return Nothing
+            End Select
+        Else
+            Return name
+        End If
+    End Function
 
     Private Sub DeleteItems(ByVal items() As FileSystemInfo)
         For Each item As FileSystemInfo In items
+            statusLock.WaitOne()
+            topText = item.Name
+            statusLock.ReleaseMutex()
             Dim size As Long = 1
             If item.GetType() Is GetType(DirectoryInfo) Then
                 DeleteItems(DirectCast(item, DirectoryInfo).GetFileSystemInfos())
             Else
                 size += DirectCast(item, FileInfo).Length
             End If
-            statusLock.WaitOne()
-            topText = item.Name
-            statusLock.ReleaseMutex()
             Try
                 item.Delete()
             Catch ex As Security.SecurityException
