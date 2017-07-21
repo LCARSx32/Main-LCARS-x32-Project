@@ -576,12 +576,8 @@ Public Class frmMyComp
 
     Private Sub sbNewFolder_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbNewFolder.Click
         Dim strName As String 'New Folder button added by Tim 5/26/11
-        strName = inputbox("Enter the name of the new folder", "New Folder")
-        If (curPath.EndsWith("\")) Then
-            strName = curPath + strName
-        Else
-            strName = curPath + "\" + strName
-        End If
+        strName = inputbox("Enter the name of the new folder", "New Folder", "New Folder")
+        strName = Path.Combine(curPath, strName)
         If Not Directory.Exists(strName) Then
             IO.Directory.CreateDirectory(strName)
             loadDir(curPath)
