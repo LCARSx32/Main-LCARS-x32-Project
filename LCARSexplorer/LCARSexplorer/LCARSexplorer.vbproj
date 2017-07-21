@@ -116,12 +116,6 @@
     <Compile Include="frmOptions.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmOverwriteOptions.Designer.vb">
-      <DependentUpon>frmOverwriteOptions.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmOverwriteOptions.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="frmSelect.designer.vb">
       <DependentUpon>frmSelect.vb</DependentUpon>
     </Compile>
@@ -173,10 +167,6 @@
     <EmbeddedResource Include="frmOptions.resx">
       <SubType>Designer</SubType>
       <DependentUpon>frmOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmOverwriteOptions.resx">
-      <DependentUpon>frmOverwriteOptions.vb</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSelect.resx">
       <DependentUpon>frmSelect.vb</DependentUpon>

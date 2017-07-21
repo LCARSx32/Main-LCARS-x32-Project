@@ -5,8 +5,8 @@ Imports System.Threading
 
 'TODO: Use better signaling than thread abort
 'TODO: Verify correctness of copying
+'TODO: Verify correctness of time estimate
 'TODO: Handle access problems better
-'TODO: Combine Overwrite and Merge options enums and dialogs
 
 #Region " Enums "
 Public Enum FileActions
@@ -15,16 +15,10 @@ Public Enum FileActions
     Delete = 2
 End Enum
 
-Public Enum OverWriteActions
-    Undecided = 0
-    Overwrite = 1
-    DoNotMove = 2
-    MoveAndKeepBoth = 3
-End Enum
-
 Public Enum MergeOptions
     Undecided = 0
     Merge = 1
+    Overwrite = 1
     DoNotMove = 2
     MoveAndKeepBoth = 3
 End Enum
@@ -36,12 +30,12 @@ Public Class frmCopying
     Dim destination As String
     Dim copyAction As FileActions
     Public Event TaskCompleted As EventHandler
-    Dim start As DateTime = DateTime.MinValue
-    Dim _overwriteAction As OverWriteActions = OverWriteActions.Undecided
+    Dim _overwriteAction As MergeOptions = MergeOptions.Undecided
     Dim _mergeAction As MergeOptions = MergeOptions.Undecided
 
     'Status variables
     Dim statusLock As New Mutex()
+    Dim start As DateTime = DateTime.MinValue
     Dim topText As String = "Initializing"
     Dim totalSize As Long = 0
     Dim copiedSize As Long = 0
@@ -116,7 +110,7 @@ Public Class frmCopying
     Private Sub CopySub()
         'Automatically create duplicate if same path
         If Path.GetDirectoryName(paths(0)) = destination Then
-            _overwriteAction = OverWriteActions.MoveAndKeepBoth
+            _overwriteAction = MergeOptions.MoveAndKeepBoth
             _mergeAction = MergeOptions.MoveAndKeepBoth
         End If
         'Translate paths into FileSystemInfo's to simplify handling
@@ -130,7 +124,9 @@ Public Class frmCopying
         Next
         'Find the total size and items
         ReadSizes(infos)
+        statusLock.WaitOne()
         start = Now
+        statusLock.ReleaseMutex()
         Select Case copyAction
             Case FileActions.Copy
                 CopyItems(infos, destination, False)
@@ -226,7 +222,7 @@ Public Class frmCopying
     Private ReadOnly Property MergeAction(ByVal dir As String) As MergeOptions
         Get
             If _mergeAction = MergeOptions.Undecided Then
-                Dim mergeDialogue As New frmMergeOptions(dir)
+                Dim mergeDialogue As New frmMergeOptions(dir, False)
                 mergeDialogue.ShowDialog()
                 If mergeDialogue.IsGlobalSetting Then
                     _mergeAction = mergeDialogue.action
@@ -238,10 +234,10 @@ Public Class frmCopying
         End Get
     End Property
 
-    Private ReadOnly Property OverwriteAction(ByVal file As String) As OverWriteActions
+    Private ReadOnly Property OverwriteAction(ByVal file As String) As MergeOptions
         Get
-            If _overwriteAction = OverWriteActions.Undecided Then
-                Dim mergeDialogue As New frmOverwriteOptions(file)
+            If _overwriteAction = MergeOptions.Undecided Then
+                Dim mergeDialogue As New frmMergeOptions(file, True)
                 mergeDialogue.ShowDialog()
                 If mergeDialogue.IsGlobalSetting Then
                     _overwriteAction = mergeDialogue.action
@@ -277,11 +273,11 @@ Public Class frmCopying
     Private Function checkFileName(ByVal name As String) As String
         If File.Exists(name) Then
             Select Case OverwriteAction(name)
-                Case OverWriteActions.Overwrite
+                Case MergeOptions.Overwrite
                     Return name
-                Case OverWriteActions.DoNotMove
+                Case MergeOptions.DoNotMove
                     Return Nothing
-                Case OverWriteActions.MoveAndKeepBoth
+                Case MergeOptions.MoveAndKeepBoth
                     Dim i As Integer = 0
                     Dim leading As String = Path.GetFileNameWithoutExtension(name)
                     Dim trailing As String = Path.GetExtension(name)

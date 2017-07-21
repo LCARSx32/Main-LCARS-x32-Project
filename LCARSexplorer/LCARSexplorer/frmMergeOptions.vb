@@ -13,13 +13,16 @@ Public Class frmMergeOptions
             Return _IsGlobal
         End Get
     End Property
-    Public Sub New(ByVal file As String)
-
-        ' This call is required by the Windows Form Designer.
+    Public Sub New(ByVal file As String, ByVal isFile As Boolean)
         InitializeComponent()
-
-        ' Add any initialization after the InitializeComponent() call.
-        lblPrompt.Text = "The file: " & file & " already exists."
+        If isFile Then
+            lblPrompt.Text = "The file: " & file & " already exists."
+            sbmerge.Text = "Overwrite"
+            sbKeepBoth.Text = "Keep both files"
+            tbTitle.Text = "Overwrite file?"
+        Else
+            lblPrompt.Text = "The directory: " & file & " already exists."
+        End If
     End Sub
 
     Private Sub sbOK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbOK.Click
@@ -31,7 +34,6 @@ Public Class frmMergeOptions
             Case sbKeepBoth.Lit
                 _action = MergeOptions.MoveAndKeepBoth
         End Select
-        _IsGlobal = sbGlobal.Lit
         If _action = MergeOptions.Undecided Then
             MsgBox("Please choose an option.")
         Else
@@ -59,5 +61,6 @@ Public Class frmMergeOptions
 
     Private Sub sbGlobal_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbGlobal.Click
         sbGlobal.Lit = Not sbGlobal.Lit
+        _IsGlobal = sbGlobal.Lit
     End Sub
 End Class
