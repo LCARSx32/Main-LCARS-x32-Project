@@ -176,22 +176,7 @@ Public Class frmCopying
                 End If
             Next
         Else
-            'begin deleting
-            For Each mypath As String In paths
-                If Directory.Exists(mypath) Then
-                    dirDelete(New DirectoryInfo(mypath), copiedSize, copiedItems, totalSize, totalItems)
-                Else
-                    statusLock.WaitOne()
-                    topText = Path.GetFileName(mypath)
-                    copiedSize += New FileInfo(mypath).Length + 1
-                    copiedItems += 1
-                    statusLock.ReleaseMutex()
-                    Try
-                        System.IO.File.Delete(mypath)
-                    Catch ex As Exception
-                    End Try
-                End If
-            Next
+            DeleteItems(infos)
         End If
         statusLock.WaitOne()
         topText = "Completed"
@@ -302,19 +287,31 @@ Public Class frmCopying
         End If
     End Sub
 
-    Private Sub dirDelete(ByVal d As DirectoryInfo, ByRef size As Long, ByRef items As Long, ByVal totalSize As Long, ByVal totalItems As Long)
-        Dim files As FileInfo() = d.GetFiles()
-        For Each f As FileInfo In files
+    Private Sub DeleteItems(ByVal items() As FileSystemInfo)
+        For Each item As FileSystemInfo In items
+            Dim size As Long = 1
+            If item.GetType() Is GetType(DirectoryInfo) Then
+                DeleteItems(DirectCast(item, DirectoryInfo).GetFileSystemInfos())
+            Else
+                size += DirectCast(item, FileInfo).Length
+            End If
             statusLock.WaitOne()
-            size += f.Length + 1
-            items += 1
-            topText = f.Name
+            topText = item.Name
             statusLock.ReleaseMutex()
-            File.Delete(f.FullName)
+            Try
+                item.Delete()
+            Catch ex As Security.SecurityException
+                MsgBox("You do not have permission to delete this item" & vbNewLine _
+                       & item.FullName)
+            Catch ex As IOException
+                MsgBox("Unable to delete file:" & vbNewLine _
+                       & item.FullName & vbNewLine _
+                       & "Item is in use ")
+            End Try
+            statusLock.WaitOne()
+            copiedItems += 1
+            copiedSize += size
+            statusLock.ReleaseMutex()
         Next
-        For Each di As DirectoryInfo In d.GetDirectories()
-            dirDelete(di, size, items, totalSize, totalItems)
-        Next
-        Directory.Delete(d.FullName)
     End Sub
 End Class
