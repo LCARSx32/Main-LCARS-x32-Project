@@ -108,11 +108,6 @@ Public Class frmCopying
     End Sub
 
     Private Sub CopySub()
-        'Automatically create duplicate if same path
-        If Path.GetDirectoryName(paths(0)) = destination Then
-            _overwriteAction = MergeOptions.MoveAndKeepBoth
-            _mergeAction = MergeOptions.MoveAndKeepBoth
-        End If
         'Translate paths into FileSystemInfo's to simplify handling
         Dim infos(paths.Length - 1) As FileSystemInfo
         For i As Integer = 0 To paths.Length - 1
@@ -129,9 +124,18 @@ Public Class frmCopying
         statusLock.ReleaseMutex()
         Select Case copyAction
             Case FileActions.Copy
+                'Automatically create duplicate if same path
+                If Path.GetDirectoryName(paths(0)) = destination Then
+                    _overwriteAction = MergeOptions.MoveAndKeepBoth
+                    _mergeAction = MergeOptions.MoveAndKeepBoth
+                End If
                 CopyItems(infos, destination, False)
             Case FileActions.Cut
-                CopyItems(infos, destination, True)
+                If Path.GetDirectoryName(paths(0)) = destination Then
+                    MsgBox("Files are already in place.")
+                Else
+                    CopyItems(infos, destination, True)
+                End If
             Case FileActions.Delete
                 DeleteItems(infos)
         End Select
