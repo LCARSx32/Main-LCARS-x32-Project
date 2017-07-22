@@ -96,7 +96,7 @@ Public Class frmMyComp
             End If
         End If
         nextInChain = SetClipboardViewer(Me.Handle)
-
+        Clipboard_Changed()
         LCARS.SetBeeping(Me)
         loadDir(curPath)
     End Sub
