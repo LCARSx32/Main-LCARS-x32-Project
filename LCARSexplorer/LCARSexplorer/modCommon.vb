@@ -50,4 +50,8 @@ Module modCommon
         Next
         Return System.Drawing.ColorTranslator.ToHtml(Color.FromArgb(255, c(0), c(1), c(2)))
     End Function
+
+    Public Function FileHasFlag(ByVal fileAttributes As FileAttributes, ByVal flag As FileAttributes) As Boolean
+        Return (fileAttributes And flag) = flag
+    End Function
 End Module

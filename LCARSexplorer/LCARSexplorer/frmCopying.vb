@@ -111,7 +111,7 @@ Public Class frmCopying
         'Translate paths into FileSystemInfo's to simplify handling
         Dim infos(paths.Length - 1) As FileSystemInfo
         For i As Integer = 0 To paths.Length - 1
-            If (File.GetAttributes(paths(i)) And FileAttributes.Directory) = FileAttributes.Directory Then
+            If FileHasFlag(File.GetAttributes(paths(i)), FileAttributes.Directory) Then
                 infos(i) = New DirectoryInfo(paths(i))
             Else
                 infos(i) = New FileInfo(paths(i))
