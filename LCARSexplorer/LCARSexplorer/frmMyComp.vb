@@ -32,7 +32,6 @@ Public Class frmMyComp
     Dim selStart As Point
     Dim curSelected As LCComplexButton
     Dim cancelClick As Boolean
-    Dim myShift As Boolean = False
     Dim mySelection As New frmSelect()
     Dim nextInChain As IntPtr
 
@@ -66,7 +65,7 @@ Public Class frmMyComp
 
 
 
-    Private Sub frmMyComp_KeyUp(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
+    Private Sub frmMyComp_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
         If e.KeyData = Keys.PageDown Then
             If gridMyComp.CurrentPage + 1 < gridMyComp.PageCount Then
                 gridMyComp.CurrentPage += 1
@@ -75,17 +74,8 @@ Public Class frmMyComp
             If gridMyComp.CurrentPage > 0 Then
                 gridMyComp.CurrentPage -= 1
             End If
-        ElseIf e.KeyData = Keys.Shift Then
-            myShift = True
-        End If
-
-    End Sub
-    Private Sub myKeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles Me.KeyUp
-        If e.KeyCode = Keys.ShiftKey Then
-            myShift = False
         End If
     End Sub
-
 
     Private Sub frmMyComp_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         If Command() <> "" Then
