@@ -20,7 +20,7 @@ Partial Class frmMyComp
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
-        Dim LcarScolor1 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor2 As LCARS.LCARScolor = New LCARS.LCARScolor
         Me.pnlVisible = New System.Windows.Forms.Panel
         Me.tmrMouseSelect = New System.Windows.Forms.Timer(Me.components)
         Me.pnlEdit = New System.Windows.Forms.Panel
@@ -29,7 +29,6 @@ Partial Class frmMyComp
         Me.sbPaste = New LCARS.Controls.StandardButton
         Me.sbDelete = New LCARS.Controls.StandardButton
         Me.sbCopy = New LCARS.Controls.StandardButton
-        Me.pnlOptionalComponents = New System.Windows.Forms.Panel
         Me.sbEdit = New LCARS.Controls.StandardButton
         Me.sbFormat = New LCARS.Controls.StandardButton
         Me.sbOpenWith = New LCARS.Controls.StandardButton
@@ -59,8 +58,8 @@ Partial Class frmMyComp
         Me.elbActionsTop = New LCARS.Controls.Elbow
         Me.elbActionsBottom = New LCARS.Controls.Elbow
         Me.gridMyComp = New LCARS.Controls.ButtonGrid
+        Me.pnlVisible.SuspendLayout()
         Me.pnlEdit.SuspendLayout()
-        Me.pnlOptionalComponents.SuspendLayout()
         Me.pnlSystemDefined.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -68,6 +67,10 @@ Partial Class frmMyComp
         '
         Me.pnlVisible.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pnlVisible.Controls.Add(Me.sbOpenWith)
+        Me.pnlVisible.Controls.Add(Me.sbFormat)
+        Me.pnlVisible.Controls.Add(Me.sbNewFolder)
+        Me.pnlVisible.Controls.Add(Me.sbEdit)
         Me.pnlVisible.Location = New System.Drawing.Point(533, 241)
         Me.pnlVisible.Name = "pnlVisible"
         Me.pnlVisible.Size = New System.Drawing.Size(87, 281)
@@ -206,20 +209,6 @@ Partial Class frmMyComp
         Me.sbCopy.TabIndex = 42
         Me.sbCopy.Text = "COPY"
         '
-        'pnlOptionalComponents
-        '
-        Me.pnlOptionalComponents.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pnlOptionalComponents.Controls.Add(Me.sbEdit)
-        Me.pnlOptionalComponents.Controls.Add(Me.sbFormat)
-        Me.pnlOptionalComponents.Controls.Add(Me.sbOpenWith)
-        Me.pnlOptionalComponents.Controls.Add(Me.sbNewFolder)
-        Me.pnlOptionalComponents.Location = New System.Drawing.Point(533, 251)
-        Me.pnlOptionalComponents.Name = "pnlOptionalComponents"
-        Me.pnlOptionalComponents.Size = New System.Drawing.Size(87, 259)
-        Me.pnlOptionalComponents.TabIndex = 53
-        Me.pnlOptionalComponents.Visible = False
-        '
         'sbEdit
         '
         Me.sbEdit.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -236,7 +225,7 @@ Partial Class frmMyComp
         Me.sbEdit.FlashInterval = 500
         Me.sbEdit.holdDraw = False
         Me.sbEdit.Lit = True
-        Me.sbEdit.Location = New System.Drawing.Point(0, 3)
+        Me.sbEdit.Location = New System.Drawing.Point(0, 0)
         Me.sbEdit.Name = "sbEdit"
         Me.sbEdit.RedAlert = LCARS.LCARSalert.Normal
         Me.sbEdit.Size = New System.Drawing.Size(87, 26)
@@ -259,12 +248,13 @@ Partial Class frmMyComp
         Me.sbFormat.FlashInterval = 500
         Me.sbFormat.holdDraw = False
         Me.sbFormat.Lit = True
-        Me.sbFormat.Location = New System.Drawing.Point(0, 35)
+        Me.sbFormat.Location = New System.Drawing.Point(0, 32)
         Me.sbFormat.Name = "sbFormat"
         Me.sbFormat.RedAlert = LCARS.LCARSalert.Normal
         Me.sbFormat.Size = New System.Drawing.Size(87, 26)
         Me.sbFormat.TabIndex = 52
         Me.sbFormat.Text = "FORMAT"
+        Me.sbFormat.Visible = False
         '
         'sbOpenWith
         '
@@ -282,7 +272,7 @@ Partial Class frmMyComp
         Me.sbOpenWith.FlashInterval = 500
         Me.sbOpenWith.holdDraw = False
         Me.sbOpenWith.Lit = True
-        Me.sbOpenWith.Location = New System.Drawing.Point(0, 99)
+        Me.sbOpenWith.Location = New System.Drawing.Point(0, 96)
         Me.sbOpenWith.Name = "sbOpenWith"
         Me.sbOpenWith.RedAlert = LCARS.LCARSalert.Normal
         Me.sbOpenWith.Size = New System.Drawing.Size(87, 26)
@@ -305,7 +295,7 @@ Partial Class frmMyComp
         Me.sbNewFolder.FlashInterval = 500
         Me.sbNewFolder.holdDraw = False
         Me.sbNewFolder.Lit = True
-        Me.sbNewFolder.Location = New System.Drawing.Point(0, 67)
+        Me.sbNewFolder.Location = New System.Drawing.Point(0, 64)
         Me.sbNewFolder.Name = "sbNewFolder"
         Me.sbNewFolder.RedAlert = LCARS.LCARSalert.Normal
         Me.sbNewFolder.Size = New System.Drawing.Size(87, 26)
@@ -859,7 +849,7 @@ Partial Class frmMyComp
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.gridMyComp.Beeping = False
-        Me.gridMyComp.ColorsAvailable = LcarScolor1
+        Me.gridMyComp.ColorsAvailable = LcarScolor2
         Me.gridMyComp.ControlAddingDirection = LCARS.Controls.ButtonGrid.ControlDirection.Vertical
         Me.gridMyComp.ControlPadding = 5
         Me.gridMyComp.ControlSize = New System.Drawing.Size(150, 30)
@@ -891,15 +881,14 @@ Partial Class frmMyComp
         Me.Controls.Add(Me.sbProperties)
         Me.Controls.Add(Me.elbActionsTop)
         Me.Controls.Add(Me.elbActionsBottom)
-        Me.Controls.Add(Me.pnlOptionalComponents)
         Me.Controls.Add(Me.pnlVisible)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.KeyPreview = True
         Me.Name = "frmMyComp"
         Me.Text = "My Computer"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
+        Me.pnlVisible.ResumeLayout(False)
         Me.pnlEdit.ResumeLayout(False)
-        Me.pnlOptionalComponents.ResumeLayout(False)
         Me.pnlSystemDefined.ResumeLayout(False)
         Me.ResumeLayout(False)
 
@@ -925,7 +914,6 @@ Partial Class frmMyComp
     Friend WithEvents sbOpenWith As LCARS.Controls.StandardButton
     Friend WithEvents sbFormat As LCARS.Controls.StandardButton
     Friend WithEvents sbEdit As LCARS.Controls.StandardButton
-    Friend WithEvents pnlOptionalComponents As System.Windows.Forms.Panel
     Friend WithEvents sbGoTo As LCARS.Controls.StandardButton
     Friend WithEvents pnlShortcuts As System.Windows.Forms.Panel
     Friend WithEvents sbRefresh As LCARS.Controls.StandardButton

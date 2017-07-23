@@ -109,9 +109,7 @@ Public Class frmMyComp
         Me.Text = "MY COMPUTER"
         sbUpDir.Lit = False
 
-        Do Until pnlVisible.Controls.Count = 0
-            pnlOptionalComponents.Controls.Add(pnlVisible.Controls(0))
-        Loop
+        pnlVisible.Visible = False
         pnlEdit.Visible = False
 
         Dim beeping As Boolean = LCARS.x32.modSettings.ButtonBeep
@@ -190,9 +188,7 @@ Public Class frmMyComp
         Else
             sbUpDir.Lit = True
 
-            pnlVisible.Controls.Add(sbEdit)
-            pnlVisible.Controls.Add(sbNewFolder)
-            pnlVisible.Controls.Add(sbOpenWith)
+            pnlVisible.Visible = True
 
             Dim myDir As DirectoryInfo = New DirectoryInfo(newpath)
 
