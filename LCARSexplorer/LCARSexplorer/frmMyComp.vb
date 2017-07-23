@@ -28,12 +28,12 @@ Public Class frmMyComp
 #Region " Global Variables "
 
     Public curPath As String = My.Settings.startDir
-    Dim selectedButtons As New Collection
+    Dim selectedButtons As New List(Of LCComplexButton)
     Dim selStart As Point
     Dim curSelected As LCComplexButton
     Dim cancelClick As Boolean
-    Dim mySelection As New frmSelect
     Dim myShift As Boolean = False
+    Dim mySelection As New frmSelect()
     Dim nextInChain As IntPtr
 
 #End Region
@@ -160,9 +160,9 @@ Public Class frmMyComp
     End Sub
 
     Private Sub item_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs)
-        If tmrMouseSelect.Enabled = False Then
+        If Not tmrMouseSelect.Enabled Then
             selectedButtons.Clear()
-            checkSelected(0, 0, 0, 0)
+            checkSelected(Rectangle.Empty)
             curSelected = CType(sender, LCComplexButton)
             tmrMouseSelect.Enabled = True
         End If
@@ -305,50 +305,56 @@ Public Class frmMyComp
 
     Private Sub pnlMyComp_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles gridMyComp.MouseDown
         selectedButtons.Clear()
-        checkSelected(0, 0, 0, 0)
+        checkSelected(Rectangle.Empty)
         selStart = e.Location
     End Sub
 
     Private Sub pnlMyComp_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles gridMyComp.MouseMove
         If e.Button = Windows.Forms.MouseButtons.Left Then
             tmrMouseSelect.Enabled = False
-            Dim x1, x2, y1, y2 As Integer
-
-            If e.X > selStart.X Then
-                x1 = selStart.X
-                x2 = e.X
-            Else
-                x1 = e.X
-                x2 = selStart.X
-            End If
-
-            If e.Y > selStart.Y Then
-                y1 = selStart.Y
-                y2 = e.Y
-            Else
-                y1 = e.Y
-                y2 = selStart.Y
-            End If
-
-            mySelection.Bounds = gridMyComp.RectangleToScreen(New Rectangle(x1, y1, x2 - x1, y2 - y1))
+            Dim selectionRect As Rectangle = getSelectionRect(e.Location)
+            mySelection.Bounds = gridMyComp.RectangleToScreen(selectionRect)
             If Not mySelection.Visible Then
                 mySelection.Show()
             End If
 
-            checkSelected(x1, y1, x2, y2)
+            checkSelected(selectionRect)
         End If
     End Sub
 
-    Private Sub checkSelected(ByVal x1 As Integer, ByVal y1 As Integer, ByVal x2 As Integer, ByVal y2 As Integer, Optional ByVal rememberSelection As Boolean = False)
+    Private Function getSelectionRect(ByVal p As Point) As Rectangle
+        Dim x1, x2, y1, y2 As Integer
+
+        If p.X > selStart.X Then
+            x1 = selStart.X
+            x2 = p.X
+        Else
+            x1 = p.X
+            x2 = selStart.X
+        End If
+
+        If p.Y > selStart.Y Then
+            y1 = selStart.Y
+            y2 = p.Y
+        Else
+            y1 = p.Y
+            y2 = selStart.Y
+        End If
+
+        Return New Rectangle(x1, y1, x2 - x1, y2 - y1)
+    End Function
+
+    Private Sub checkSelected(ByVal selectionRect As Rectangle, Optional ByVal rememberSelection As Boolean = False)
         Dim myButton As LCComplexButton
         For i As Integer = 0 To gridMyComp.Count - 1
-            myButton = CType(gridMyComp.Items(i), LCComplexButton)
-            If myButton.Bounds.Bottom > y1 And myButton.Top < y2 And myButton.Bounds.Right > x1 And myButton.Left < x2 And myButton.HoldDraw = False Then
+            myButton = DirectCast(gridMyComp.Items(i), LCComplexButton)
+
+            If Not myButton.HoldDraw AndAlso myButton.Bounds.IntersectsWith(selectionRect) Then
                 If myButton.RedAlert <> LCARS.LCARSalert.White Then
                     myButton.RedAlert = LCARS.LCARSalert.White
                 End If
                 If rememberSelection Then
-                    selectedButtons.Add(CType(myButton, LCComplexButton))
+                    selectedButtons.Add(myButton)
                 End If
             Else
                 If myButton.RedAlert <> LCARS.LCARSalert.Normal Then
@@ -368,25 +374,7 @@ Public Class frmMyComp
 
     Private Sub pnlMyComp_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles gridMyComp.MouseUp
         If Not e.Location = selStart Then
-            Dim x1, x2, y1, y2 As Integer
-
-            If e.X > selStart.X Then
-                x1 = selStart.X
-                x2 = e.X
-            Else
-                x1 = e.X
-                x2 = selStart.X
-            End If
-
-            If e.Y > selStart.Y Then
-                y1 = selStart.Y
-                y2 = e.Y
-            Else
-                y1 = e.Y
-                y2 = selStart.Y
-            End If
-
-            checkSelected(x1, y1, x2, y2, True)
+            checkSelected(getSelectionRect(e.Location), True)
         End If
         mySelection.Hide()
     End Sub
@@ -532,7 +520,7 @@ Public Class frmMyComp
 
     Private Sub sbRename_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbRename.Click
         If selectedButtons.Count = 1 Then
-            Dim path As String = CStr(CType(selectedButtons(1), LCComplexButton).Data)
+            Dim path As String = DirectCast(selectedButtons(1).Data, String)
             Dim ren As New frmRename(path)
             dockDialog(ren)
             AddHandler ren.FormClosed, AddressOf dialog_closed_reload
@@ -566,7 +554,7 @@ Public Class frmMyComp
             mySelect.ShowDialog()
             If (mySelect.Result = Windows.Forms.DialogResult.OK) Then
                 Dim newProg As String = mySelect.lblCurrentSelected.Text
-                Shell("""" & newProg & """" & " """ & CStr(CType(selectedButtons(1), LCComplexButton).Data) & """", AppWinStyle.NormalFocus)
+                Shell("""" & newProg & """" & " """ & CStr(selectedButtons(1).Data) & """", AppWinStyle.NormalFocus)
             End If
         Else
             MsgBox("Please select one file", MsgBoxStyle.Information)
