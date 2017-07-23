@@ -90,9 +90,8 @@ Public Class frmMyComp
     End Sub
 
     Private Sub loadMyComp()
-        Dim myDrives() As DriveInfo = DriveInfo.GetDrives
-        gridMyComp.ControlSize = New Size((gridMyComp.Width - 38) \ 2, 30)
         gridMyComp.Clear()
+        gridMyComp.ControlSize = New Size((gridMyComp.Width - 38) \ 2, 30)
 
         gridMyComp.Text = "MY COMPUTER"
         sbUpDir.Lit = False
@@ -101,7 +100,7 @@ Public Class frmMyComp
         pnlEdit.Visible = False
 
         Dim beeping As Boolean = LCARS.x32.modSettings.ButtonBeep
-        For Each myDrive As DriveInfo In myDrives
+        For Each myDrive As DriveInfo In DriveInfo.GetDrives()
             Dim myButton As New LCComplexButton
             myButton.HoldDraw = True
 
@@ -124,13 +123,12 @@ Public Class frmMyComp
             AddHandler myButton.MouseDown, AddressOf item_MouseDown
             AddHandler myButton.MouseUp, AddressOf item_MouseUp
 
-            myButton.Data = myDrive.Name
+            myButton.Data = myDrive.RootDirectory.FullName()
             myButton.Beeping = beeping
             myButton.HoldDraw = False
 
             gridMyComp.Add(myButton)
         Next
-
     End Sub
 
     Private Sub offlineDrive_Click(ByVal sender As Object, ByVal e As EventArgs)
