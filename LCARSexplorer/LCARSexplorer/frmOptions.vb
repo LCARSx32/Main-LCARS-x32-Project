@@ -1,18 +1,12 @@
 Public Class frmOptions
-    Private Sub sbHidden_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbHidden.Click
-        sbHidden.Lit = Not sbHidden.Lit
-        My.Settings.showHidden = Not My.Settings.showHidden
-    End Sub
-
-    Private Sub sbCheck_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbCheck.Click
-        sbCheck.Lit = Not sbCheck.Lit
-        My.Settings.check = Not My.Settings.check
-    End Sub
 
     Private Sub frmOptions_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        sbHidden.Lit = My.Settings.showHidden
-        sbCheck.Lit = My.Settings.check
-        sbColors.Lit = My.Settings.ColorFiles
+        tglShowHidden.State = My.Settings.showHidden
+        tglSystem.State = My.Settings.showSystem
+        tglReparse.State = My.Settings.showReparse
+        tglCheck.State = My.Settings.check
+        tglColor.State = My.Settings.ColorFiles
+        tglDimHidden.State = My.Settings.dimHidden
         txtStartDir.Text = My.Settings.startDir
         If My.Settings.ClickMode = "Single" Then
             fbClickMode.Top = hpSingle.Top
@@ -110,8 +104,27 @@ Public Class frmOptions
         My.Settings.ClickMode = "Double"
     End Sub
 
-    Private Sub sbColors_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbColors.Click
-        sbColors.Lit = Not sbColors.Lit
-        My.Settings.ColorFiles = sbColors.Lit
+    Private Sub tglShowHidden_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tglShowHidden.Click
+        My.Settings.showHidden = tglShowHidden.State
+    End Sub
+
+    Private Sub tglSystem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tglSystem.Click
+        My.Settings.showSystem = tglSystem.State
+    End Sub
+
+    Private Sub tglReparse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tglReparse.Click
+        My.Settings.showReparse = tglReparse.State
+    End Sub
+
+    Private Sub tglCheck_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tglCheck.Click
+        My.Settings.check = tglCheck.State
+    End Sub
+
+    Private Sub tglColor_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tglColor.Click
+        My.Settings.ColorFiles = tglColor.State
+    End Sub
+
+    Private Sub tglDimHidden_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tglDimHidden.Click
+        My.Settings.dimHidden = tglDimHidden.State
     End Sub
 End Class

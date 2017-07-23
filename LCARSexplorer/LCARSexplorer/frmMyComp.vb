@@ -33,8 +33,6 @@ Public Class frmMyComp
     Dim curSelected As LCComplexButton
     Dim cancelClick As Boolean
     Dim mySelection As New frmSelect
-    Dim showSystem As Boolean = True 'flag to show system files and folders
-    Dim showReparsePoints As Boolean = True
     Dim myShift As Boolean = False
     Dim nextInChain As IntPtr
 
@@ -228,8 +226,8 @@ Public Class frmMyComp
                     End Try
                 End If
                 If hidden And Not My.Settings.showHidden Or _
-                    system And Not showSystem Or _
-                    reparsePoint And Not showReparsePoints Or _
+                    system And Not My.Settings.showSystem Or _
+                    reparsePoint And Not My.Settings.showReparse Or _
                     My.Settings.check And Not canStat Then
                     Continue For
                 End If
@@ -238,7 +236,7 @@ Public Class frmMyComp
 
                 myButton.HoldDraw = True
 
-                myButton.Lit = Not hidden
+                If My.Settings.dimHidden Then myButton.Lit = Not hidden
 
                 If reparsePoint Then
                     myButton.Color = LCARS.LCARScolorStyles.FunctionUnavailable
