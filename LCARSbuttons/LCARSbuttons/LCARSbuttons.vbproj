@@ -132,6 +132,9 @@
     <Compile Include="Controls\TextButton.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\ToggleButton.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\Trackbar.vb">
       <SubType>Component</SubType>
     </Compile>
