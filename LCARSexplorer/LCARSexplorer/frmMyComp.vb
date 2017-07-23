@@ -104,9 +104,7 @@ Public Class frmMyComp
         gridMyComp.ControlSize = New Size((gridMyComp.Width - 38) \ 2, 30)
         gridMyComp.Clear()
 
-
-        tbTitle.ButtonText = "MY COMPUTER"
-        Me.Text = "MY COMPUTER"
+        gridMyComp.Text = "MY COMPUTER"
         sbUpDir.Lit = False
 
         pnlVisible.Visible = False
@@ -196,11 +194,9 @@ Public Class frmMyComp
 
             Dim title As String = Path.GetFileNameWithoutExtension(curPath)
             If title <> "" Then
-                tbTitle.ButtonText = title
-                Me.Text = title
+                gridMyComp.Text = title
             Else
-                tbTitle.ButtonText = newpath
-                Me.Text = newpath
+                gridMyComp.Text = newpath
             End If
 
             gridMyComp.Clear()
@@ -704,5 +700,10 @@ Public Class frmMyComp
 
     Private Sub Task_Finished(ByVal sender As Object, ByVal e As System.EventArgs)
         loadDir(curPath)
+    End Sub
+
+    Private Sub gridMyComp_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles gridMyComp.TextChanged
+        Me.Text = gridMyComp.Text
+        tbTitle.Text = gridMyComp.Text
     End Sub
 End Class
