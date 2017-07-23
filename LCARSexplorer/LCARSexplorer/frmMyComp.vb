@@ -125,10 +125,10 @@ Public Class frmMyComp
                 myButton.SideText = ToDriveSize(myDrive.TotalSize)
                 associateClickHandler(myButton, AddressOf directory_click)
             Else
-                myButton.Color = LCARS.LCARScolorStyles.FunctionOffline
+                myButton.Color = LCARS.LCARScolorStyles.FunctionUnavailable
                 myButton.Text = "DRIVE OFFLINE (" & myDrive.Name & ")"
                 myButton.SideText = "--"
-                associateClickHandler(myButton, AddressOf myErrorAlert)
+                associateClickHandler(myButton, AddressOf offlineDrive_Click)
             End If
 
             AddHandler myButton.MouseDown, AddressOf item_MouseDown
@@ -143,6 +143,10 @@ Public Class frmMyComp
 
     End Sub
 
+    Private Sub offlineDrive_Click(ByVal sender As Object, ByVal e As EventArgs)
+        MsgBox("Drive not ready.", MsgBoxStyle.OkOnly, "Drive offline")
+        DirectCast(sender, LCComplexButton).RedAlert = LCARS.LCARSalert.Normal
+    End Sub
 
     Private Sub directory_click(ByVal sender As Object, ByVal e As EventArgs)
         If Not cancelClick Then
@@ -172,7 +176,7 @@ Public Class frmMyComp
         cancelClick = False
     End Sub
 
-    Private Sub associateClickHandler(ByVal control As LCARS.LightweightControls.LCComplexButton, ByVal handler As EventHandler)
+    Private Sub associateClickHandler(ByVal control As LCComplexButton, ByVal handler As EventHandler)
         If My.Settings.ClickMode = "Single" Then
             AddHandler control.Click, handler
         Else
