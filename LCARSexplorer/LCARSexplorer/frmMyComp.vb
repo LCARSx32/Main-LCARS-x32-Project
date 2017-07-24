@@ -132,17 +132,19 @@ Public Class frmMyComp
     End Sub
 
     Private Sub offlineDrive_Click(ByVal sender As Object, ByVal e As EventArgs)
+        If cancelClick Then Return
         MsgBox("Drive not ready.", MsgBoxStyle.OkOnly, "Drive offline")
         DirectCast(sender, LCComplexButton).RedAlert = LCARS.LCARSalert.Normal
     End Sub
 
     Private Sub directory_click(ByVal sender As Object, ByVal e As EventArgs)
         If Not cancelClick Then
-            loadDir(CStr(CType(sender, LCComplexButton).Data))
+            loadDir(CStr(DirectCast(sender, LCComplexButton).Data))
         End If
     End Sub
 
     Private Sub reparsePoint_Click(ByVal sender As Object, ByVal e As EventArgs)
+        If cancelClick Then Return
         MsgBox("Reparse points cannot (yet) be traversed", _
                MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, _
                "Not available")
