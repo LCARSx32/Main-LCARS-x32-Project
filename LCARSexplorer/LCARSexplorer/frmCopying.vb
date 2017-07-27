@@ -283,8 +283,8 @@ Public Class frmCopying
                     Return Nothing
                 Case MergeOptions.MoveAndKeepBoth
                     Dim i As Integer = 0
-                    Dim leading As String = Path.GetFileNameWithoutExtension(name)
                     Dim trailing As String = Path.GetExtension(name)
+                    Dim leading As String = name.Substring(0, name.Length - trailing.Length)
                     While File.Exists(String.Format("{0} ({1}){2}", leading, i, trailing))
                         i += 1
                     End While
