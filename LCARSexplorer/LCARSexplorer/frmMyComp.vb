@@ -510,7 +510,7 @@ Public Class frmMyComp
 
     Private Sub sbRename_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbRename.Click
         If selectedButtons.Count = 1 Then
-            Dim path As String = DirectCast(selectedButtons(1).Data, String)
+            Dim path As String = DirectCast(selectedButtons(0).Data, String)
             Dim ren As New frmRename(path)
             dockDialog(ren)
             AddHandler ren.FormClosed, AddressOf dialog_closed_reload
@@ -544,7 +544,7 @@ Public Class frmMyComp
             mySelect.ShowDialog()
             If (mySelect.Result = Windows.Forms.DialogResult.OK) Then
                 Dim newProg As String = mySelect.lblCurrentSelected.Text
-                Shell("""" & newProg & """" & " """ & CStr(selectedButtons(1).Data) & """", AppWinStyle.NormalFocus)
+                Shell("""" & newProg & """" & " """ & CStr(selectedButtons(0).Data) & """", AppWinStyle.NormalFocus)
             End If
         Else
             MsgBox("Please select one file", MsgBoxStyle.Information)
