@@ -490,17 +490,8 @@ Friend Class LCARSInputBoxForm
         End With
         Me.Controls.Add(sbCancel)
         AddHandler sbCancel.Click, AddressOf sbCancel_Click
-        Me.KeyPreview = True
-        AddHandler Me.KeyDown, AddressOf Me_KeyDown
-    End Sub
-
-    Private Sub Me_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs)
-        Select Case e.KeyCode
-            Case Keys.Enter
-                sbOK_Click(sender, e)
-            Case Keys.Escape
-                sbCancel_Click(sender, e)
-        End Select
+        Me.AcceptButton = sbOK
+        Me.CancelButton = sbCancel
     End Sub
 
     Private Sub sbOK_Click(ByVal sender As Object, ByVal e As System.EventArgs)
