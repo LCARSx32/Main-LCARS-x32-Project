@@ -42,6 +42,7 @@ Partial Class frmRename
         Me.sbOK.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbOK.Data = Nothing
         Me.sbOK.Data2 = Nothing
+        Me.sbOK.DialogResult = System.Windows.Forms.DialogResult.None
         Me.sbOK.FlashInterval = 500
         Me.sbOK.holdDraw = False
         Me.sbOK.Lit = True
@@ -49,7 +50,7 @@ Partial Class frmRename
         Me.sbOK.Name = "sbOK"
         Me.sbOK.RedAlert = LCARS.LCARSalert.Normal
         Me.sbOK.Size = New System.Drawing.Size(87, 26)
-        Me.sbOK.TabIndex = 60
+        Me.sbOK.TabIndex = 2
         Me.sbOK.Text = "OK"
         '
         'txtNew
@@ -61,7 +62,7 @@ Partial Class frmRename
         Me.txtNew.Location = New System.Drawing.Point(41, 187)
         Me.txtNew.Name = "txtNew"
         Me.txtNew.Size = New System.Drawing.Size(351, 38)
-        Me.txtNew.TabIndex = 59
+        Me.txtNew.TabIndex = 1
         '
         'lblFileName
         '
@@ -98,6 +99,7 @@ Partial Class frmRename
         Me.sbCancel.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbCancel.Data = Nothing
         Me.sbCancel.Data2 = Nothing
+        Me.sbCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.sbCancel.FlashInterval = 500
         Me.sbCancel.holdDraw = False
         Me.sbCancel.Lit = True
@@ -105,14 +107,16 @@ Partial Class frmRename
         Me.sbCancel.Name = "sbCancel"
         Me.sbCancel.RedAlert = LCARS.LCARSalert.Normal
         Me.sbCancel.Size = New System.Drawing.Size(87, 26)
-        Me.sbCancel.TabIndex = 56
+        Me.sbCancel.TabIndex = 3
         Me.sbCancel.Text = "CANCEL"
         '
         'frmRename
         '
+        Me.AcceptButton = Me.sbOK
         Me.AutoScaleDimensions = New System.Drawing.SizeF(5.0!, 21.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Black
+        Me.CancelButton = Me.sbCancel
         Me.ClientSize = New System.Drawing.Size(422, 371)
         Me.Controls.Add(Me.sbOK)
         Me.Controls.Add(Me.txtNew)

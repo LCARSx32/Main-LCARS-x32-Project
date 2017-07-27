@@ -388,6 +388,7 @@ Public Class frmMyComp
         gridMyComp.Controls.Add(dialog)
         dialog.Show()
         dialog.BringToFront()
+        dialog.Focus()
     End Sub
 
     Private Sub dialog_closed(ByVal sender As Object, ByVal e As EventArgs)

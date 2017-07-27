@@ -34,4 +34,8 @@ Public Class frmRename
     Private Sub sbCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbCancel.Click
         Me.Close()
     End Sub
+
+    Private Sub frmRename_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        txtNew.Focus()
+    End Sub
 End Class
