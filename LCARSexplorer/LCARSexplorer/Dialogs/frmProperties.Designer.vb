@@ -127,6 +127,7 @@ Partial Class frmProperties
         Me.liDrive.CustomAlertColor = System.Drawing.Color.Empty
         Me.liDrive.Data = Nothing
         Me.liDrive.Data2 = Nothing
+        Me.liDrive.DialogResult = System.Windows.Forms.DialogResult.None
         Me.liDrive.FlashInterval = 500
         Me.liDrive.holdDraw = False
         Me.liDrive.Lit = True
@@ -423,6 +424,7 @@ Partial Class frmProperties
         Me.sbChangeProgram.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbChangeProgram.Data = Nothing
         Me.sbChangeProgram.Data2 = Nothing
+        Me.sbChangeProgram.DialogResult = System.Windows.Forms.DialogResult.None
         Me.sbChangeProgram.FlashInterval = 500
         Me.sbChangeProgram.holdDraw = False
         Me.sbChangeProgram.Lit = True
@@ -563,6 +565,7 @@ Partial Class frmProperties
         Me.sbCloseProperties.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbCloseProperties.Data = Nothing
         Me.sbCloseProperties.Data2 = Nothing
+        Me.sbCloseProperties.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.sbCloseProperties.FlashInterval = 500
         Me.sbCloseProperties.holdDraw = False
         Me.sbCloseProperties.Lit = True
@@ -578,6 +581,7 @@ Partial Class frmProperties
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 24.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Black
+        Me.CancelButton = Me.sbCloseProperties
         Me.ClientSize = New System.Drawing.Size(462, 438)
         Me.Controls.Add(Me.pnlDrive)
         Me.Controls.Add(Me.pnlMultiple)
