@@ -1,4 +1,6 @@
-﻿Imports System.IO
+﻿Option Strict On
+
+Imports System.IO
 Imports Microsoft.Win32
 Imports System.Text
 
@@ -33,17 +35,15 @@ Public Class frmProperties
 
         lblDriveType.Text = myInfo.DriveType.ToString()
         If myInfo.IsReady = True Then
-            Dim AvailablePercent As String
-            Dim Used As Long
-            Used = myInfo.TotalSize - myInfo.TotalFreeSpace
-            AvailablePercent = (myInfo.AvailableFreeSpace / myInfo.TotalSize) * 100
+            Dim AvailablePercent As Double = (myInfo.AvailableFreeSpace / myInfo.TotalSize) * 100
+            Dim Used As Long = myInfo.TotalSize - myInfo.TotalFreeSpace
 
             lblCapacity.Text = ToDriveSize(myInfo.TotalSize)
             lblUsed.Text = ToDriveSize(Used)
             lblFree.Text = ToDriveSize(myInfo.TotalFreeSpace)
             lblFS.Text = myInfo.DriveFormat
             liDrive.Color = LCARS.LCARScolorStyles.Orange
-            liDrive.Value = Convert.ToDecimal(AvailablePercent)
+            liDrive.Value = CInt(AvailablePercent)
             lblDrive.Text = "Drive: " & myInfo.Name
         Else
             'The drive is offline.
@@ -63,9 +63,9 @@ Public Class frmProperties
             lblFolderSizeValue.Text = ToDriveSize(DirSize(New System.IO.DirectoryInfo(path)))
             Dim createTime As DateTime = System.IO.Directory.GetCreationTime(path)
             If CBool(GetSetting("LCARS x32", "Application", "Stardate", "FALSE")) Then
-                lblFolderCreatedValue.Text = LCARS.Stardate.getStardate(createTime)
+                lblFolderCreatedValue.Text = LCARS.Stardate.getStardate(createTime).ToString()
             Else
-                lblFolderCreatedValue.Text = createTime
+                lblFolderCreatedValue.Text = createTime.ToString()
             End If
             lblContainsValue.Text = System.IO.Directory.GetDirectories(path).Length & " directories, " & System.IO.Directory.GetFiles(path).Length & " files"
         Catch ex As Exception
@@ -79,24 +79,24 @@ Public Class frmProperties
     Private Sub loadFileProps(ByVal path As String)
         Try
             lblPathValue.Text = path
-            Dim size As Integer = My.Computer.FileSystem.GetFileInfo(path).Length()
+            Dim size As Long = My.Computer.FileSystem.GetFileInfo(path).Length()
             lblSizeValue.Text = ToDriveSize(size)
             If (GetSetting("LCARS x32", "Application", "Stardate", "FALSE") <> "TRUE") Then
                 lblCreatedValue.Text = System.IO.File.GetCreationTime(path).ToString("g")
                 lblModifiedValue.Text = System.IO.File.GetLastWriteTime(path).ToString("g")
                 lblAccessedValue.Text = System.IO.File.GetLastAccessTime(path).ToString("g")
             Else
-                lblCreatedValue.Text = LCARS.Stardate.getStardate(System.IO.File.GetCreationTime(path).ToString("g"))
-                lblModifiedValue.Text = LCARS.Stardate.getStardate(System.IO.File.GetLastWriteTime(path).ToString("g"))
-                lblAccessedValue.Text = LCARS.Stardate.getStardate(System.IO.File.GetLastAccessTime(path).ToString("g"))
+                lblCreatedValue.Text = LCARS.Stardate.getStardate(System.IO.File.GetCreationTime(path)).ToString()
+                lblModifiedValue.Text = LCARS.Stardate.getStardate(System.IO.File.GetLastWriteTime(path)).ToString()
+                lblAccessedValue.Text = LCARS.Stardate.getStardate(System.IO.File.GetLastAccessTime(path)).ToString()
             End If
             'finding what it opens with
             sbChangeProgram.Visible = True
             Try
                 Dim strExtension As String = System.IO.Path.GetExtension(path)
                 Dim myKey As RegistryKey = Registry.ClassesRoot.OpenSubKey(strExtension)
-                Dim myKeyTwo As RegistryKey = Registry.ClassesRoot.OpenSubKey(myKey.GetValue("") & "\shell\open\command")
-                lblOpensWithValue.Text = myKeyTwo.GetValue("")
+                Dim myKeyTwo As RegistryKey = Registry.ClassesRoot.OpenSubKey(CStr(myKey.GetValue("")) & "\shell\open\command")
+                lblOpensWithValue.Text = CStr(myKeyTwo.GetValue(""))
             Catch ex As Exception
                 lblOpensWithValue.Text = ""
                 sbChangeProgram.Visible = False
