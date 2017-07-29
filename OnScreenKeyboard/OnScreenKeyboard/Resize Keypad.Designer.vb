@@ -50,46 +50,26 @@ Partial Class Resize_Keypad
         '
         'sbIncrementMinus
         '
-        Me.sbIncrementMinus.AutoEllipsis = False
-        Me.sbIncrementMinus.Beeping = False
         Me.sbIncrementMinus.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbIncrementMinus.ButtonText = "–"
         Me.sbIncrementMinus.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbIncrementMinus.ButtonTextHeight = -1
-        Me.sbIncrementMinus.Clickable = True
         Me.sbIncrementMinus.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.sbIncrementMinus.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbIncrementMinus.Data = Nothing
-        Me.sbIncrementMinus.Data2 = Nothing
-        Me.sbIncrementMinus.FlashInterval = 500
-        Me.sbIncrementMinus.holdDraw = False
-        Me.sbIncrementMinus.Lit = True
         Me.sbIncrementMinus.Location = New System.Drawing.Point(310, 103)
         Me.sbIncrementMinus.Name = "sbIncrementMinus"
-        Me.sbIncrementMinus.RedAlert = LCARS.LCARSalert.Normal
         Me.sbIncrementMinus.Size = New System.Drawing.Size(43, 35)
         Me.sbIncrementMinus.TabIndex = 73
         Me.sbIncrementMinus.Text = "–"
         '
         'sbIncrementPlus
         '
-        Me.sbIncrementPlus.AutoEllipsis = False
-        Me.sbIncrementPlus.Beeping = False
         Me.sbIncrementPlus.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbIncrementPlus.ButtonText = "+"
         Me.sbIncrementPlus.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbIncrementPlus.ButtonTextHeight = -1
-        Me.sbIncrementPlus.Clickable = True
         Me.sbIncrementPlus.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.sbIncrementPlus.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbIncrementPlus.Data = Nothing
-        Me.sbIncrementPlus.Data2 = Nothing
-        Me.sbIncrementPlus.FlashInterval = 500
-        Me.sbIncrementPlus.holdDraw = False
-        Me.sbIncrementPlus.Lit = True
         Me.sbIncrementPlus.Location = New System.Drawing.Point(370, 103)
         Me.sbIncrementPlus.Name = "sbIncrementPlus"
-        Me.sbIncrementPlus.RedAlert = LCARS.LCARSalert.Normal
         Me.sbIncrementPlus.Size = New System.Drawing.Size(43, 35)
         Me.sbIncrementPlus.TabIndex = 72
         Me.sbIncrementPlus.Text = "+"
@@ -129,92 +109,52 @@ Partial Class Resize_Keypad
         '
         'sbHeightMinus
         '
-        Me.sbHeightMinus.AutoEllipsis = False
-        Me.sbHeightMinus.Beeping = False
         Me.sbHeightMinus.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbHeightMinus.ButtonText = "–"
         Me.sbHeightMinus.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbHeightMinus.ButtonTextHeight = -1
-        Me.sbHeightMinus.Clickable = True
         Me.sbHeightMinus.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.sbHeightMinus.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbHeightMinus.Data = Nothing
-        Me.sbHeightMinus.Data2 = Nothing
-        Me.sbHeightMinus.FlashInterval = 500
-        Me.sbHeightMinus.holdDraw = False
-        Me.sbHeightMinus.Lit = True
         Me.sbHeightMinus.Location = New System.Drawing.Point(164, 103)
         Me.sbHeightMinus.Name = "sbHeightMinus"
-        Me.sbHeightMinus.RedAlert = LCARS.LCARSalert.Normal
         Me.sbHeightMinus.Size = New System.Drawing.Size(43, 35)
         Me.sbHeightMinus.TabIndex = 69
         Me.sbHeightMinus.Text = "–"
         '
         'sbHeightPlus
         '
-        Me.sbHeightPlus.AutoEllipsis = False
-        Me.sbHeightPlus.Beeping = False
         Me.sbHeightPlus.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbHeightPlus.ButtonText = "+"
         Me.sbHeightPlus.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbHeightPlus.ButtonTextHeight = -1
-        Me.sbHeightPlus.Clickable = True
         Me.sbHeightPlus.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.sbHeightPlus.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbHeightPlus.Data = Nothing
-        Me.sbHeightPlus.Data2 = Nothing
-        Me.sbHeightPlus.FlashInterval = 500
-        Me.sbHeightPlus.holdDraw = False
-        Me.sbHeightPlus.Lit = True
         Me.sbHeightPlus.Location = New System.Drawing.Point(229, 103)
         Me.sbHeightPlus.Name = "sbHeightPlus"
-        Me.sbHeightPlus.RedAlert = LCARS.LCARSalert.Normal
         Me.sbHeightPlus.Size = New System.Drawing.Size(43, 35)
         Me.sbHeightPlus.TabIndex = 68
         Me.sbHeightPlus.Text = "+"
         '
         'sbWidthMinus
         '
-        Me.sbWidthMinus.AutoEllipsis = False
-        Me.sbWidthMinus.Beeping = False
         Me.sbWidthMinus.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbWidthMinus.ButtonText = "–"
         Me.sbWidthMinus.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbWidthMinus.ButtonTextHeight = -1
-        Me.sbWidthMinus.Clickable = True
         Me.sbWidthMinus.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.sbWidthMinus.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbWidthMinus.Data = Nothing
-        Me.sbWidthMinus.Data2 = Nothing
-        Me.sbWidthMinus.FlashInterval = 500
-        Me.sbWidthMinus.holdDraw = False
-        Me.sbWidthMinus.Lit = True
         Me.sbWidthMinus.Location = New System.Drawing.Point(38, 103)
         Me.sbWidthMinus.Name = "sbWidthMinus"
-        Me.sbWidthMinus.RedAlert = LCARS.LCARSalert.Normal
         Me.sbWidthMinus.Size = New System.Drawing.Size(43, 35)
         Me.sbWidthMinus.TabIndex = 66
         Me.sbWidthMinus.Text = "–"
         '
         'sbWidthPlus
         '
-        Me.sbWidthPlus.AutoEllipsis = False
-        Me.sbWidthPlus.Beeping = False
         Me.sbWidthPlus.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbWidthPlus.ButtonText = "+"
         Me.sbWidthPlus.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbWidthPlus.ButtonTextHeight = -1
-        Me.sbWidthPlus.Clickable = True
         Me.sbWidthPlus.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.sbWidthPlus.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbWidthPlus.Data = Nothing
-        Me.sbWidthPlus.Data2 = Nothing
-        Me.sbWidthPlus.FlashInterval = 500
-        Me.sbWidthPlus.holdDraw = False
-        Me.sbWidthPlus.Lit = True
         Me.sbWidthPlus.Location = New System.Drawing.Point(95, 103)
         Me.sbWidthPlus.Name = "sbWidthPlus"
-        Me.sbWidthPlus.RedAlert = LCARS.LCARSalert.Normal
         Me.sbWidthPlus.Size = New System.Drawing.Size(43, 35)
         Me.sbWidthPlus.TabIndex = 65
         Me.sbWidthPlus.Text = "+"
@@ -232,47 +172,23 @@ Partial Class Resize_Keypad
         '
         'sbDone
         '
-        Me.sbDone.AutoEllipsis = False
-        Me.sbDone.Beeping = False
-        Me.sbDone.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbDone.ButtonText = "DONE"
         Me.sbDone.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbDone.ButtonTextHeight = -1
-        Me.sbDone.Clickable = True
-        Me.sbDone.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbDone.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbDone.Data = Nothing
-        Me.sbDone.Data2 = Nothing
         Me.sbDone.Flash = True
-        Me.sbDone.FlashInterval = 500
-        Me.sbDone.holdDraw = False
-        Me.sbDone.Lit = True
         Me.sbDone.Location = New System.Drawing.Point(301, 151)
         Me.sbDone.Name = "sbDone"
-        Me.sbDone.RedAlert = LCARS.LCARSalert.Normal
         Me.sbDone.Size = New System.Drawing.Size(112, 35)
         Me.sbDone.TabIndex = 75
         Me.sbDone.Text = "DONE"
         '
         'sbMove
         '
-        Me.sbMove.AutoEllipsis = False
-        Me.sbMove.Beeping = False
-        Me.sbMove.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbMove.ButtonText = "MOVE RESIZE PAD"
         Me.sbMove.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbMove.ButtonTextHeight = -1
-        Me.sbMove.Clickable = True
-        Me.sbMove.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbMove.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbMove.Data = Nothing
-        Me.sbMove.Data2 = Nothing
-        Me.sbMove.FlashInterval = 500
-        Me.sbMove.holdDraw = False
-        Me.sbMove.Lit = True
         Me.sbMove.Location = New System.Drawing.Point(38, 151)
         Me.sbMove.Name = "sbMove"
-        Me.sbMove.RedAlert = LCARS.LCARSalert.Normal
         Me.sbMove.Size = New System.Drawing.Size(234, 35)
         Me.sbMove.TabIndex = 76
         Me.sbMove.Text = "MOVE RESIZE PAD"

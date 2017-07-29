@@ -33,22 +33,12 @@ Partial Class frmShutdown
         'sbShutdown
         '
         Me.sbShutdown.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.sbShutdown.Beeping = False
-        Me.sbShutdown.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbShutdown.ButtonText = "SHUT DOWN"
         Me.sbShutdown.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.sbShutdown.ButtonTextHeight = 18
-        Me.sbShutdown.Clickable = True
         Me.sbShutdown.Color = LCARS.LCARScolorStyles.FunctionOffline
-        Me.sbShutdown.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbShutdown.Data = Nothing
-        Me.sbShutdown.Data2 = Nothing
-        Me.sbShutdown.FlashInterval = 500
-        Me.sbShutdown.holdDraw = False
-        Me.sbShutdown.Lit = True
         Me.sbShutdown.Location = New System.Drawing.Point(331, 219)
         Me.sbShutdown.Name = "sbShutdown"
-        Me.sbShutdown.RedAlert = LCARS.LCARSalert.Normal
         Me.sbShutdown.Size = New System.Drawing.Size(153, 36)
         Me.sbShutdown.TabIndex = 0
         Me.sbShutdown.Text = "SHUT DOWN"
@@ -56,22 +46,12 @@ Partial Class frmShutdown
         'sbRestart
         '
         Me.sbRestart.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.sbRestart.Beeping = False
-        Me.sbRestart.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbRestart.ButtonText = "RESTART"
         Me.sbRestart.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.sbRestart.ButtonTextHeight = 18
-        Me.sbRestart.Clickable = True
         Me.sbRestart.Color = LCARS.LCARScolorStyles.CriticalFunction
-        Me.sbRestart.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbRestart.Data = Nothing
-        Me.sbRestart.Data2 = Nothing
-        Me.sbRestart.FlashInterval = 500
-        Me.sbRestart.holdDraw = False
-        Me.sbRestart.Lit = True
         Me.sbRestart.Location = New System.Drawing.Point(331, 177)
         Me.sbRestart.Name = "sbRestart"
-        Me.sbRestart.RedAlert = LCARS.LCARSalert.Normal
         Me.sbRestart.Size = New System.Drawing.Size(153, 36)
         Me.sbRestart.TabIndex = 1
         Me.sbRestart.Text = "RESTART"
@@ -79,22 +59,12 @@ Partial Class frmShutdown
         'sbLogOff
         '
         Me.sbLogOff.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.sbLogOff.Beeping = False
-        Me.sbLogOff.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbLogOff.ButtonText = "LOG OFF"
         Me.sbLogOff.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.sbLogOff.ButtonTextHeight = 18
-        Me.sbLogOff.Clickable = True
         Me.sbLogOff.Color = LCARS.LCARScolorStyles.PrimaryFunction
-        Me.sbLogOff.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbLogOff.Data = Nothing
-        Me.sbLogOff.Data2 = Nothing
-        Me.sbLogOff.FlashInterval = 500
-        Me.sbLogOff.holdDraw = False
-        Me.sbLogOff.Lit = True
         Me.sbLogOff.Location = New System.Drawing.Point(331, 135)
         Me.sbLogOff.Name = "sbLogOff"
-        Me.sbLogOff.RedAlert = LCARS.LCARSalert.Normal
         Me.sbLogOff.Size = New System.Drawing.Size(153, 36)
         Me.sbLogOff.TabIndex = 2
         Me.sbLogOff.Text = "LOG OFF"
@@ -102,22 +72,12 @@ Partial Class frmShutdown
         'sbSuspend
         '
         Me.sbSuspend.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.sbSuspend.Beeping = False
-        Me.sbSuspend.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbSuspend.ButtonText = "SUSPEND"
         Me.sbSuspend.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.sbSuspend.ButtonTextHeight = 18
-        Me.sbSuspend.Clickable = True
         Me.sbSuspend.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.sbSuspend.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbSuspend.Data = Nothing
-        Me.sbSuspend.Data2 = Nothing
-        Me.sbSuspend.FlashInterval = 500
-        Me.sbSuspend.holdDraw = False
-        Me.sbSuspend.Lit = True
         Me.sbSuspend.Location = New System.Drawing.Point(156, 177)
         Me.sbSuspend.Name = "sbSuspend"
-        Me.sbSuspend.RedAlert = LCARS.LCARSalert.Normal
         Me.sbSuspend.Size = New System.Drawing.Size(153, 36)
         Me.sbSuspend.TabIndex = 3
         Me.sbSuspend.Text = "SUSPEND"
@@ -125,22 +85,12 @@ Partial Class frmShutdown
         'sbHibernate
         '
         Me.sbHibernate.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.sbHibernate.Beeping = False
-        Me.sbHibernate.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbHibernate.ButtonText = "HIBERNATE"
         Me.sbHibernate.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.sbHibernate.ButtonTextHeight = 18
-        Me.sbHibernate.Clickable = True
         Me.sbHibernate.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.sbHibernate.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbHibernate.Data = Nothing
-        Me.sbHibernate.Data2 = Nothing
-        Me.sbHibernate.FlashInterval = 500
-        Me.sbHibernate.holdDraw = False
-        Me.sbHibernate.Lit = True
         Me.sbHibernate.Location = New System.Drawing.Point(156, 135)
         Me.sbHibernate.Name = "sbHibernate"
-        Me.sbHibernate.RedAlert = LCARS.LCARSalert.Normal
         Me.sbHibernate.Size = New System.Drawing.Size(153, 36)
         Me.sbHibernate.TabIndex = 4
         Me.sbHibernate.Text = "HIBERNATE"
@@ -148,22 +98,12 @@ Partial Class frmShutdown
         'sbExit
         '
         Me.sbExit.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.sbExit.Beeping = False
-        Me.sbExit.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbExit.ButtonText = "CLOSE LCARS"
         Me.sbExit.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.sbExit.ButtonTextHeight = 18
-        Me.sbExit.Clickable = True
         Me.sbExit.Color = LCARS.LCARScolorStyles.PrimaryFunction
-        Me.sbExit.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbExit.Data = Nothing
-        Me.sbExit.Data2 = Nothing
-        Me.sbExit.FlashInterval = 500
-        Me.sbExit.holdDraw = False
-        Me.sbExit.Lit = True
         Me.sbExit.Location = New System.Drawing.Point(331, 309)
         Me.sbExit.Name = "sbExit"
-        Me.sbExit.RedAlert = LCARS.LCARSalert.Normal
         Me.sbExit.Size = New System.Drawing.Size(153, 36)
         Me.sbExit.TabIndex = 5
         Me.sbExit.Text = "CLOSE LCARS"
@@ -171,22 +111,12 @@ Partial Class frmShutdown
         'sbExitMyComp
         '
         Me.sbExitMyComp.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbExitMyComp.Beeping = False
         Me.sbExitMyComp.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbExitMyComp.ButtonText = "X"
         Me.sbExitMyComp.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
-        Me.sbExitMyComp.ButtonTextHeight = 14
-        Me.sbExitMyComp.Clickable = True
         Me.sbExitMyComp.Color = LCARS.LCARScolorStyles.FunctionOffline
-        Me.sbExitMyComp.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbExitMyComp.Data = Nothing
-        Me.sbExitMyComp.Data2 = Nothing
-        Me.sbExitMyComp.FlashInterval = 500
-        Me.sbExitMyComp.holdDraw = False
-        Me.sbExitMyComp.Lit = True
         Me.sbExitMyComp.Location = New System.Drawing.Point(605, 4)
         Me.sbExitMyComp.Name = "sbExitMyComp"
-        Me.sbExitMyComp.RedAlert = LCARS.LCARSalert.Normal
         Me.sbExitMyComp.Size = New System.Drawing.Size(33, 32)
         Me.sbExitMyComp.TabIndex = 57
         Me.sbExitMyComp.Text = "X"
@@ -195,22 +125,12 @@ Partial Class frmShutdown
         '
         Me.tbTitle.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbTitle.Beeping = False
         Me.tbTitle.ButtonText = "DEACTIVATE"
         Me.tbTitle.ButtonTextAlign = System.Drawing.ContentAlignment.BottomLeft
         Me.tbTitle.ButtonTextHeight = 32
-        Me.tbTitle.ButtonType = LCARS.Controls.TextButton.TextButtonType.DoublePills
         Me.tbTitle.Clickable = False
-        Me.tbTitle.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.tbTitle.CustomAlertColor = System.Drawing.Color.Empty
-        Me.tbTitle.Data = Nothing
-        Me.tbTitle.Data2 = Nothing
-        Me.tbTitle.FlashInterval = 500
-        Me.tbTitle.holdDraw = False
-        Me.tbTitle.Lit = True
         Me.tbTitle.Location = New System.Drawing.Point(12, 4)
         Me.tbTitle.Name = "tbTitle"
-        Me.tbTitle.RedAlert = LCARS.LCARSalert.Normal
         Me.tbTitle.Size = New System.Drawing.Size(587, 32)
         Me.tbTitle.TabIndex = 62
         Me.tbTitle.Text = "DEACTIVATE"
@@ -218,22 +138,12 @@ Partial Class frmShutdown
         'sbLock
         '
         Me.sbLock.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.sbLock.Beeping = False
-        Me.sbLock.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbLock.ButtonText = "LOCK"
         Me.sbLock.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.sbLock.ButtonTextHeight = 18
-        Me.sbLock.Clickable = True
         Me.sbLock.Color = LCARS.LCARScolorStyles.PrimaryFunction
-        Me.sbLock.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbLock.Data = Nothing
-        Me.sbLock.Data2 = Nothing
-        Me.sbLock.FlashInterval = 500
-        Me.sbLock.holdDraw = False
-        Me.sbLock.Lit = True
         Me.sbLock.Location = New System.Drawing.Point(156, 309)
         Me.sbLock.Name = "sbLock"
-        Me.sbLock.RedAlert = LCARS.LCARSalert.Normal
         Me.sbLock.Size = New System.Drawing.Size(153, 36)
         Me.sbLock.TabIndex = 63
         Me.sbLock.Text = "LOCK"

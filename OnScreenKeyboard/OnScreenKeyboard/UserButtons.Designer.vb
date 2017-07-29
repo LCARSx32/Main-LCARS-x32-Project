@@ -46,23 +46,12 @@ Partial Class UserButtons
         '
         'sbDone
         '
-        Me.sbDone.AutoEllipsis = False
-        Me.sbDone.Beeping = False
         Me.sbDone.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbDone.ButtonText = "OK"
         Me.sbDone.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbDone.ButtonTextHeight = -1
-        Me.sbDone.Clickable = True
-        Me.sbDone.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbDone.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbDone.Data = Nothing
-        Me.sbDone.Data2 = Nothing
-        Me.sbDone.FlashInterval = 500
-        Me.sbDone.holdDraw = False
-        Me.sbDone.Lit = True
         Me.sbDone.Location = New System.Drawing.Point(396, 12)
         Me.sbDone.Name = "sbDone"
-        Me.sbDone.RedAlert = LCARS.LCARSalert.Normal
         Me.sbDone.Size = New System.Drawing.Size(80, 24)
         Me.sbDone.TabIndex = 76
         Me.sbDone.Text = "OK"
@@ -109,46 +98,24 @@ Partial Class UserButtons
         '
         'sbBrowse
         '
-        Me.sbBrowse.AutoEllipsis = False
-        Me.sbBrowse.Beeping = False
         Me.sbBrowse.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbBrowse.ButtonText = "BROWSE"
         Me.sbBrowse.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbBrowse.ButtonTextHeight = -1
-        Me.sbBrowse.Clickable = True
-        Me.sbBrowse.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbBrowse.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbBrowse.Data = Nothing
-        Me.sbBrowse.Data2 = Nothing
-        Me.sbBrowse.FlashInterval = 500
-        Me.sbBrowse.holdDraw = False
-        Me.sbBrowse.Lit = True
         Me.sbBrowse.Location = New System.Drawing.Point(392, 148)
         Me.sbBrowse.Name = "sbBrowse"
-        Me.sbBrowse.RedAlert = LCARS.LCARSalert.Normal
         Me.sbBrowse.Size = New System.Drawing.Size(80, 24)
         Me.sbBrowse.TabIndex = 81
         Me.sbBrowse.Text = "BROWSE"
         '
         'sbMove
         '
-        Me.sbMove.AutoEllipsis = False
-        Me.sbMove.Beeping = False
         Me.sbMove.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbMove.ButtonText = "MOVE"
         Me.sbMove.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbMove.ButtonTextHeight = -1
-        Me.sbMove.Clickable = True
-        Me.sbMove.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbMove.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbMove.Data = Nothing
-        Me.sbMove.Data2 = Nothing
-        Me.sbMove.FlashInterval = 500
-        Me.sbMove.holdDraw = False
-        Me.sbMove.Lit = True
         Me.sbMove.Location = New System.Drawing.Point(288, 12)
         Me.sbMove.Name = "sbMove"
-        Me.sbMove.RedAlert = LCARS.LCARSalert.Normal
         Me.sbMove.Size = New System.Drawing.Size(80, 24)
         Me.sbMove.TabIndex = 82
         Me.sbMove.Text = "MOVE"

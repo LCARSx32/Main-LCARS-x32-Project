@@ -156,23 +156,14 @@ Partial Class frmKeyboard
         '
         Me.sbNum._ForceCaps = False
         Me.sbNum.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbNum.AutoEllipsis = False
-        Me.sbNum.Beeping = False
         Me.sbNum.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbNum.ButtonText = "Num"
         Me.sbNum.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbNum.ButtonTextHeight = -1
-        Me.sbNum.Clickable = True
-        Me.sbNum.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbNum.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbNum.Data = "Num"
         Me.sbNum.Data2 = "Num"
-        Me.sbNum.FlashInterval = 500
-        Me.sbNum.holdDraw = False
-        Me.sbNum.Lit = True
         Me.sbNum.Location = New System.Drawing.Point(1087, 4)
         Me.sbNum.Name = "sbNum"
-        Me.sbNum.RedAlert = LCARS.LCARSalert.Normal
         Me.sbNum.Size = New System.Drawing.Size(64, 35)
         Me.sbNum.TabIndex = 96
         Me.sbNum.Tag = "39"
@@ -194,23 +185,10 @@ Partial Class frmKeyboard
         '
         Me.sbTitle.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbTitle.AutoEllipsis = False
-        Me.sbTitle.Beeping = False
-        Me.sbTitle.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbTitle.ButtonText = "MOVE KEYPAD"
-        Me.sbTitle.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.sbTitle.ButtonTextHeight = -1
-        Me.sbTitle.Clickable = True
-        Me.sbTitle.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbTitle.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbTitle.Data = Nothing
-        Me.sbTitle.Data2 = Nothing
-        Me.sbTitle.FlashInterval = 500
-        Me.sbTitle.holdDraw = False
-        Me.sbTitle.Lit = True
         Me.sbTitle.Location = New System.Drawing.Point(7, 4)
         Me.sbTitle.Name = "sbTitle"
-        Me.sbTitle.RedAlert = LCARS.LCARSalert.Normal
         Me.sbTitle.Size = New System.Drawing.Size(1074, 35)
         Me.sbTitle.TabIndex = 53
         Me.sbTitle.Text = "MOVE KEYPAD"
@@ -218,23 +196,13 @@ Partial Class frmKeyboard
         'StandardButton1
         '
         Me.StandardButton1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.StandardButton1.AutoEllipsis = False
-        Me.StandardButton1.Beeping = False
         Me.StandardButton1.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.StandardButton1.ButtonText = "X"
         Me.StandardButton1.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.StandardButton1.ButtonTextHeight = -1
-        Me.StandardButton1.Clickable = True
         Me.StandardButton1.Color = LCARS.LCARScolorStyles.FunctionOffline
-        Me.StandardButton1.CustomAlertColor = System.Drawing.Color.Empty
-        Me.StandardButton1.Data = Nothing
-        Me.StandardButton1.Data2 = Nothing
-        Me.StandardButton1.FlashInterval = 500
-        Me.StandardButton1.holdDraw = False
-        Me.StandardButton1.Lit = True
         Me.StandardButton1.Location = New System.Drawing.Point(1297, 4)
         Me.StandardButton1.Name = "StandardButton1"
-        Me.StandardButton1.RedAlert = LCARS.LCARSalert.Normal
         Me.StandardButton1.Size = New System.Drawing.Size(43, 35)
         Me.StandardButton1.TabIndex = 54
         Me.StandardButton1.Text = "X"
@@ -242,23 +210,13 @@ Partial Class frmKeyboard
         'sbChangeSize
         '
         Me.sbChangeSize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbChangeSize.AutoEllipsis = False
-        Me.sbChangeSize.Beeping = False
         Me.sbChangeSize.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbChangeSize.ButtonText = "RESIZE KEYPAD"
         Me.sbChangeSize.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbChangeSize.ButtonTextHeight = -1
-        Me.sbChangeSize.Clickable = True
         Me.sbChangeSize.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.sbChangeSize.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbChangeSize.Data = Nothing
-        Me.sbChangeSize.Data2 = Nothing
-        Me.sbChangeSize.FlashInterval = 500
-        Me.sbChangeSize.holdDraw = False
-        Me.sbChangeSize.Lit = True
         Me.sbChangeSize.Location = New System.Drawing.Point(1157, 4)
         Me.sbChangeSize.Name = "sbChangeSize"
-        Me.sbChangeSize.RedAlert = LCARS.LCARSalert.Normal
         Me.sbChangeSize.Size = New System.Drawing.Size(134, 35)
         Me.sbChangeSize.TabIndex = 55
         Me.sbChangeSize.Text = "RESIZE KEYPAD"
@@ -425,23 +383,15 @@ Partial Class frmKeyboard
         'sbLock
         '
         Me.sbLock._ForceCaps = False
-        Me.sbLock.AutoEllipsis = False
-        Me.sbLock.Beeping = False
         Me.sbLock.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbLock.ButtonText = "FN LOCK/UNLOCK"
         Me.sbLock.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbLock.ButtonTextHeight = -1
-        Me.sbLock.Clickable = True
         Me.sbLock.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.sbLock.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbLock.Data = "FN LOCK/UNLOCK"
         Me.sbLock.Data2 = "FN LOCK/UNLOCK"
-        Me.sbLock.FlashInterval = 500
-        Me.sbLock.holdDraw = False
-        Me.sbLock.Lit = True
         Me.sbLock.Location = New System.Drawing.Point(834, 3)
         Me.sbLock.Name = "sbLock"
-        Me.sbLock.RedAlert = LCARS.LCARSalert.Normal
         Me.sbLock.Size = New System.Drawing.Size(182, 45)
         Me.sbLock.TabIndex = 489
         Me.sbLock.Tag = "13"
@@ -450,23 +400,14 @@ Partial Class frmKeyboard
         'sbFn12
         '
         Me.sbFn12._ForceCaps = False
-        Me.sbFn12.AutoEllipsis = False
-        Me.sbFn12.Beeping = False
         Me.sbFn12.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbFn12.ButtonText = "FN12"
         Me.sbFn12.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbFn12.ButtonTextHeight = -1
-        Me.sbFn12.Clickable = True
-        Me.sbFn12.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbFn12.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbFn12.Data = "FN12"
         Me.sbFn12.Data2 = "FN12"
-        Me.sbFn12.FlashInterval = 500
-        Me.sbFn12.holdDraw = False
-        Me.sbFn12.Lit = True
         Me.sbFn12.Location = New System.Drawing.Point(766, 3)
         Me.sbFn12.Name = "sbFn12"
-        Me.sbFn12.RedAlert = LCARS.LCARSalert.Normal
         Me.sbFn12.Size = New System.Drawing.Size(62, 45)
         Me.sbFn12.TabIndex = 488
         Me.sbFn12.Tag = "1"
@@ -475,23 +416,14 @@ Partial Class frmKeyboard
         'sbFn11
         '
         Me.sbFn11._ForceCaps = False
-        Me.sbFn11.AutoEllipsis = False
-        Me.sbFn11.Beeping = False
         Me.sbFn11.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbFn11.ButtonText = "FN11"
         Me.sbFn11.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbFn11.ButtonTextHeight = -1
-        Me.sbFn11.Clickable = True
-        Me.sbFn11.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbFn11.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbFn11.Data = "FN11"
         Me.sbFn11.Data2 = "FN11"
-        Me.sbFn11.FlashInterval = 500
-        Me.sbFn11.holdDraw = False
-        Me.sbFn11.Lit = True
         Me.sbFn11.Location = New System.Drawing.Point(696, 3)
         Me.sbFn11.Name = "sbFn11"
-        Me.sbFn11.RedAlert = LCARS.LCARSalert.Normal
         Me.sbFn11.Size = New System.Drawing.Size(62, 45)
         Me.sbFn11.TabIndex = 487
         Me.sbFn11.Tag = "1"
@@ -500,23 +432,14 @@ Partial Class frmKeyboard
         'sbFn10
         '
         Me.sbFn10._ForceCaps = False
-        Me.sbFn10.AutoEllipsis = False
-        Me.sbFn10.Beeping = False
         Me.sbFn10.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbFn10.ButtonText = "FN10"
         Me.sbFn10.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbFn10.ButtonTextHeight = -1
-        Me.sbFn10.Clickable = True
-        Me.sbFn10.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbFn10.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbFn10.Data = "FN10"
         Me.sbFn10.Data2 = "FN10"
-        Me.sbFn10.FlashInterval = 500
-        Me.sbFn10.holdDraw = False
-        Me.sbFn10.Lit = True
         Me.sbFn10.Location = New System.Drawing.Point(626, 3)
         Me.sbFn10.Name = "sbFn10"
-        Me.sbFn10.RedAlert = LCARS.LCARSalert.Normal
         Me.sbFn10.Size = New System.Drawing.Size(62, 45)
         Me.sbFn10.TabIndex = 486
         Me.sbFn10.Tag = "1"
@@ -525,23 +448,14 @@ Partial Class frmKeyboard
         'sbFn9
         '
         Me.sbFn9._ForceCaps = False
-        Me.sbFn9.AutoEllipsis = False
-        Me.sbFn9.Beeping = False
         Me.sbFn9.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbFn9.ButtonText = "FN9"
         Me.sbFn9.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbFn9.ButtonTextHeight = -1
-        Me.sbFn9.Clickable = True
-        Me.sbFn9.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbFn9.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbFn9.Data = "FN9"
         Me.sbFn9.Data2 = "FN9"
-        Me.sbFn9.FlashInterval = 500
-        Me.sbFn9.holdDraw = False
-        Me.sbFn9.Lit = True
         Me.sbFn9.Location = New System.Drawing.Point(556, 3)
         Me.sbFn9.Name = "sbFn9"
-        Me.sbFn9.RedAlert = LCARS.LCARSalert.Normal
         Me.sbFn9.Size = New System.Drawing.Size(64, 45)
         Me.sbFn9.TabIndex = 485
         Me.sbFn9.Tag = "1"
@@ -550,23 +464,14 @@ Partial Class frmKeyboard
         'sbFn8
         '
         Me.sbFn8._ForceCaps = False
-        Me.sbFn8.AutoEllipsis = False
-        Me.sbFn8.Beeping = False
         Me.sbFn8.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbFn8.ButtonText = "FN8"
         Me.sbFn8.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbFn8.ButtonTextHeight = -1
-        Me.sbFn8.Clickable = True
-        Me.sbFn8.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbFn8.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbFn8.Data = "FN8"
         Me.sbFn8.Data2 = "FN8"
-        Me.sbFn8.FlashInterval = 500
-        Me.sbFn8.holdDraw = False
-        Me.sbFn8.Lit = True
         Me.sbFn8.Location = New System.Drawing.Point(486, 3)
         Me.sbFn8.Name = "sbFn8"
-        Me.sbFn8.RedAlert = LCARS.LCARSalert.Normal
         Me.sbFn8.Size = New System.Drawing.Size(64, 45)
         Me.sbFn8.TabIndex = 484
         Me.sbFn8.Tag = "1"
@@ -575,23 +480,14 @@ Partial Class frmKeyboard
         'sbFn7
         '
         Me.sbFn7._ForceCaps = False
-        Me.sbFn7.AutoEllipsis = False
-        Me.sbFn7.Beeping = False
         Me.sbFn7.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbFn7.ButtonText = "FN7"
         Me.sbFn7.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbFn7.ButtonTextHeight = -1
-        Me.sbFn7.Clickable = True
-        Me.sbFn7.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbFn7.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbFn7.Data = "FN7"
         Me.sbFn7.Data2 = "FN7"
-        Me.sbFn7.FlashInterval = 500
-        Me.sbFn7.holdDraw = False
-        Me.sbFn7.Lit = True
         Me.sbFn7.Location = New System.Drawing.Point(416, 3)
         Me.sbFn7.Name = "sbFn7"
-        Me.sbFn7.RedAlert = LCARS.LCARSalert.Normal
         Me.sbFn7.Size = New System.Drawing.Size(64, 45)
         Me.sbFn7.TabIndex = 483
         Me.sbFn7.Tag = "1"
@@ -600,23 +496,14 @@ Partial Class frmKeyboard
         'sbFn6
         '
         Me.sbFn6._ForceCaps = False
-        Me.sbFn6.AutoEllipsis = False
-        Me.sbFn6.Beeping = False
         Me.sbFn6.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbFn6.ButtonText = "FN6"
         Me.sbFn6.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbFn6.ButtonTextHeight = -1
-        Me.sbFn6.Clickable = True
-        Me.sbFn6.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbFn6.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbFn6.Data = "FN6"
         Me.sbFn6.Data2 = "FN6"
-        Me.sbFn6.FlashInterval = 500
-        Me.sbFn6.holdDraw = False
-        Me.sbFn6.Lit = True
         Me.sbFn6.Location = New System.Drawing.Point(346, 3)
         Me.sbFn6.Name = "sbFn6"
-        Me.sbFn6.RedAlert = LCARS.LCARSalert.Normal
         Me.sbFn6.Size = New System.Drawing.Size(64, 45)
         Me.sbFn6.TabIndex = 482
         Me.sbFn6.Tag = "1"
@@ -625,23 +512,14 @@ Partial Class frmKeyboard
         'sbFn5
         '
         Me.sbFn5._ForceCaps = False
-        Me.sbFn5.AutoEllipsis = False
-        Me.sbFn5.Beeping = False
         Me.sbFn5.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbFn5.ButtonText = "FN5"
         Me.sbFn5.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbFn5.ButtonTextHeight = -1
-        Me.sbFn5.Clickable = True
-        Me.sbFn5.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbFn5.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbFn5.Data = "FN5"
         Me.sbFn5.Data2 = "FN5"
-        Me.sbFn5.FlashInterval = 500
-        Me.sbFn5.holdDraw = False
-        Me.sbFn5.Lit = True
         Me.sbFn5.Location = New System.Drawing.Point(276, 3)
         Me.sbFn5.Name = "sbFn5"
-        Me.sbFn5.RedAlert = LCARS.LCARSalert.Normal
         Me.sbFn5.Size = New System.Drawing.Size(64, 45)
         Me.sbFn5.TabIndex = 481
         Me.sbFn5.Tag = "1"
@@ -650,23 +528,14 @@ Partial Class frmKeyboard
         'sbFn4
         '
         Me.sbFn4._ForceCaps = False
-        Me.sbFn4.AutoEllipsis = False
-        Me.sbFn4.Beeping = False
         Me.sbFn4.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbFn4.ButtonText = "FN4"
         Me.sbFn4.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbFn4.ButtonTextHeight = -1
-        Me.sbFn4.Clickable = True
-        Me.sbFn4.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbFn4.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbFn4.Data = "FN4"
         Me.sbFn4.Data2 = "FN4"
-        Me.sbFn4.FlashInterval = 500
-        Me.sbFn4.holdDraw = False
-        Me.sbFn4.Lit = True
         Me.sbFn4.Location = New System.Drawing.Point(206, 3)
         Me.sbFn4.Name = "sbFn4"
-        Me.sbFn4.RedAlert = LCARS.LCARSalert.Normal
         Me.sbFn4.Size = New System.Drawing.Size(64, 45)
         Me.sbFn4.TabIndex = 480
         Me.sbFn4.Tag = "1"
@@ -675,23 +544,14 @@ Partial Class frmKeyboard
         'sbFN3
         '
         Me.sbFN3._ForceCaps = False
-        Me.sbFN3.AutoEllipsis = False
-        Me.sbFN3.Beeping = False
         Me.sbFN3.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbFN3.ButtonText = "FN3"
         Me.sbFN3.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbFN3.ButtonTextHeight = -1
-        Me.sbFN3.Clickable = True
-        Me.sbFN3.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbFN3.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbFN3.Data = "FN3"
         Me.sbFN3.Data2 = "FN3"
-        Me.sbFN3.FlashInterval = 500
-        Me.sbFN3.holdDraw = False
-        Me.sbFN3.Lit = True
         Me.sbFN3.Location = New System.Drawing.Point(136, 3)
         Me.sbFN3.Name = "sbFN3"
-        Me.sbFN3.RedAlert = LCARS.LCARSalert.Normal
         Me.sbFN3.Size = New System.Drawing.Size(64, 45)
         Me.sbFN3.TabIndex = 479
         Me.sbFN3.Tag = "1"
@@ -700,23 +560,14 @@ Partial Class frmKeyboard
         'sbFn2
         '
         Me.sbFn2._ForceCaps = False
-        Me.sbFn2.AutoEllipsis = False
-        Me.sbFn2.Beeping = False
         Me.sbFn2.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbFn2.ButtonText = "FN2"
         Me.sbFn2.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbFn2.ButtonTextHeight = -1
-        Me.sbFn2.Clickable = True
-        Me.sbFn2.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbFn2.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbFn2.Data = "FN2"
         Me.sbFn2.Data2 = "FN2"
-        Me.sbFn2.FlashInterval = 500
-        Me.sbFn2.holdDraw = False
-        Me.sbFn2.Lit = True
         Me.sbFn2.Location = New System.Drawing.Point(71, 3)
         Me.sbFn2.Name = "sbFn2"
-        Me.sbFn2.RedAlert = LCARS.LCARSalert.Normal
         Me.sbFn2.Size = New System.Drawing.Size(59, 45)
         Me.sbFn2.TabIndex = 478
         Me.sbFn2.Tag = "1"
@@ -725,23 +576,14 @@ Partial Class frmKeyboard
         'sbFn1
         '
         Me.sbFn1._ForceCaps = False
-        Me.sbFn1.AutoEllipsis = False
-        Me.sbFn1.Beeping = False
         Me.sbFn1.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbFn1.ButtonText = "FN1"
         Me.sbFn1.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbFn1.ButtonTextHeight = -1
-        Me.sbFn1.Clickable = True
-        Me.sbFn1.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbFn1.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbFn1.Data = "FN1"
         Me.sbFn1.Data2 = "FN1"
-        Me.sbFn1.FlashInterval = 500
-        Me.sbFn1.holdDraw = False
-        Me.sbFn1.Lit = True
         Me.sbFn1.Location = New System.Drawing.Point(4, 3)
         Me.sbFn1.Name = "sbFn1"
-        Me.sbFn1.RedAlert = LCARS.LCARSalert.Normal
         Me.sbFn1.Size = New System.Drawing.Size(59, 45)
         Me.sbFn1.TabIndex = 477
         Me.sbFn1.Tag = "1"
@@ -750,23 +592,15 @@ Partial Class frmKeyboard
         'StandardButton2
         '
         Me.StandardButton2._ForceCaps = False
-        Me.StandardButton2.AutoEllipsis = False
-        Me.StandardButton2.Beeping = False
         Me.StandardButton2.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.StandardButton2.ButtonText = "Hide"
         Me.StandardButton2.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.StandardButton2.ButtonTextHeight = -1
-        Me.StandardButton2.Clickable = True
         Me.StandardButton2.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.StandardButton2.CustomAlertColor = System.Drawing.Color.Empty
         Me.StandardButton2.Data = "HIDE"
         Me.StandardButton2.Data2 = "HIDE"
-        Me.StandardButton2.FlashInterval = 500
-        Me.StandardButton2.holdDraw = False
-        Me.StandardButton2.Lit = True
         Me.StandardButton2.Location = New System.Drawing.Point(952, 336)
         Me.StandardButton2.Name = "StandardButton2"
-        Me.StandardButton2.RedAlert = LCARS.LCARSalert.Normal
         Me.StandardButton2.Size = New System.Drawing.Size(64, 64)
         Me.StandardButton2.TabIndex = 476
         Me.StandardButton2.Tag = "36"
@@ -775,23 +609,15 @@ Partial Class frmKeyboard
         'sbFn
         '
         Me.sbFn._ForceCaps = False
-        Me.sbFn.AutoEllipsis = False
-        Me.sbFn.Beeping = False
         Me.sbFn.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbFn.ButtonText = "FN"
         Me.sbFn.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbFn.ButtonTextHeight = -1
-        Me.sbFn.Clickable = True
         Me.sbFn.Color = LCARS.LCARScolorStyles.StaticTan
-        Me.sbFn.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbFn.Data = "Fn"
         Me.sbFn.Data2 = "Fn"
-        Me.sbFn.FlashInterval = 500
-        Me.sbFn.holdDraw = False
-        Me.sbFn.Lit = True
         Me.sbFn.Location = New System.Drawing.Point(69, 61)
         Me.sbFn.Name = "sbFn"
-        Me.sbFn.RedAlert = LCARS.LCARSalert.Normal
         Me.sbFn.Size = New System.Drawing.Size(61, 48)
         Me.sbFn.TabIndex = 475
         Me.sbFn.Tag = "1"
@@ -800,23 +626,14 @@ Partial Class frmKeyboard
         'sbF8
         '
         Me.sbF8._ForceCaps = False
-        Me.sbF8.AutoEllipsis = False
-        Me.sbF8.Beeping = False
         Me.sbF8.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbF8.ButtonText = "F8"
         Me.sbF8.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbF8.ButtonTextHeight = -1
-        Me.sbF8.Clickable = True
-        Me.sbF8.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbF8.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbF8.Data = "F8"
         Me.sbF8.Data2 = "F8"
-        Me.sbF8.FlashInterval = 500
-        Me.sbF8.holdDraw = False
-        Me.sbF8.Lit = True
         Me.sbF8.Location = New System.Drawing.Point(626, 61)
         Me.sbF8.Name = "sbF8"
-        Me.sbF8.RedAlert = LCARS.LCARSalert.Normal
         Me.sbF8.Size = New System.Drawing.Size(62, 48)
         Me.sbF8.TabIndex = 474
         Me.sbF8.Tag = "8"
@@ -825,23 +642,14 @@ Partial Class frmKeyboard
         'sbF7
         '
         Me.sbF7._ForceCaps = False
-        Me.sbF7.AutoEllipsis = False
-        Me.sbF7.Beeping = False
         Me.sbF7.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbF7.ButtonText = "F7"
         Me.sbF7.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbF7.ButtonTextHeight = -1
-        Me.sbF7.Clickable = True
-        Me.sbF7.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbF7.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbF7.Data = "F7"
         Me.sbF7.Data2 = "F7"
-        Me.sbF7.FlashInterval = 500
-        Me.sbF7.holdDraw = False
-        Me.sbF7.Lit = True
         Me.sbF7.Location = New System.Drawing.Point(556, 61)
         Me.sbF7.Name = "sbF7"
-        Me.sbF7.RedAlert = LCARS.LCARSalert.Normal
         Me.sbF7.Size = New System.Drawing.Size(64, 48)
         Me.sbF7.TabIndex = 473
         Me.sbF7.Tag = "7"
@@ -850,23 +658,14 @@ Partial Class frmKeyboard
         'sbF6
         '
         Me.sbF6._ForceCaps = False
-        Me.sbF6.AutoEllipsis = False
-        Me.sbF6.Beeping = False
         Me.sbF6.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbF6.ButtonText = "F6"
         Me.sbF6.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbF6.ButtonTextHeight = -1
-        Me.sbF6.Clickable = True
-        Me.sbF6.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbF6.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbF6.Data = "F6"
         Me.sbF6.Data2 = "F6"
-        Me.sbF6.FlashInterval = 500
-        Me.sbF6.holdDraw = False
-        Me.sbF6.Lit = True
         Me.sbF6.Location = New System.Drawing.Point(486, 61)
         Me.sbF6.Name = "sbF6"
-        Me.sbF6.RedAlert = LCARS.LCARSalert.Normal
         Me.sbF6.Size = New System.Drawing.Size(64, 48)
         Me.sbF6.TabIndex = 472
         Me.sbF6.Tag = "6"
@@ -875,23 +674,14 @@ Partial Class frmKeyboard
         'sbF9
         '
         Me.sbF9._ForceCaps = False
-        Me.sbF9.AutoEllipsis = False
-        Me.sbF9.Beeping = False
         Me.sbF9.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbF9.ButtonText = "F9"
         Me.sbF9.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbF9.ButtonTextHeight = -1
-        Me.sbF9.Clickable = True
-        Me.sbF9.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbF9.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbF9.Data = "F9"
         Me.sbF9.Data2 = "F9"
-        Me.sbF9.FlashInterval = 500
-        Me.sbF9.holdDraw = False
-        Me.sbF9.Lit = True
         Me.sbF9.Location = New System.Drawing.Point(694, 61)
         Me.sbF9.Name = "sbF9"
-        Me.sbF9.RedAlert = LCARS.LCARSalert.Normal
         Me.sbF9.Size = New System.Drawing.Size(64, 48)
         Me.sbF9.TabIndex = 471
         Me.sbF9.Tag = "9"
@@ -900,23 +690,14 @@ Partial Class frmKeyboard
         'sbF10
         '
         Me.sbF10._ForceCaps = False
-        Me.sbF10.AutoEllipsis = False
-        Me.sbF10.Beeping = False
         Me.sbF10.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbF10.ButtonText = "F10"
         Me.sbF10.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbF10.ButtonTextHeight = -1
-        Me.sbF10.Clickable = True
-        Me.sbF10.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbF10.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbF10.Data = "F10"
         Me.sbF10.Data2 = "F10"
-        Me.sbF10.FlashInterval = 500
-        Me.sbF10.holdDraw = False
-        Me.sbF10.Lit = True
         Me.sbF10.Location = New System.Drawing.Point(764, 61)
         Me.sbF10.Name = "sbF10"
-        Me.sbF10.RedAlert = LCARS.LCARSalert.Normal
         Me.sbF10.Size = New System.Drawing.Size(64, 48)
         Me.sbF10.TabIndex = 470
         Me.sbF10.Tag = "10"
@@ -925,23 +706,14 @@ Partial Class frmKeyboard
         'sbF11
         '
         Me.sbF11._ForceCaps = False
-        Me.sbF11.AutoEllipsis = False
-        Me.sbF11.Beeping = False
         Me.sbF11.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbF11.ButtonText = "F11"
         Me.sbF11.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbF11.ButtonTextHeight = -1
-        Me.sbF11.Clickable = True
-        Me.sbF11.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbF11.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbF11.Data = "F11"
         Me.sbF11.Data2 = "F11"
-        Me.sbF11.FlashInterval = 500
-        Me.sbF11.holdDraw = False
-        Me.sbF11.Lit = True
         Me.sbF11.Location = New System.Drawing.Point(834, 61)
         Me.sbF11.Name = "sbF11"
-        Me.sbF11.RedAlert = LCARS.LCARSalert.Normal
         Me.sbF11.Size = New System.Drawing.Size(64, 48)
         Me.sbF11.TabIndex = 469
         Me.sbF11.Tag = "11"
@@ -950,23 +722,14 @@ Partial Class frmKeyboard
         'sbF12
         '
         Me.sbF12._ForceCaps = False
-        Me.sbF12.AutoEllipsis = False
-        Me.sbF12.Beeping = False
         Me.sbF12.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbF12.ButtonText = "F12"
         Me.sbF12.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbF12.ButtonTextHeight = -1
-        Me.sbF12.Clickable = True
-        Me.sbF12.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbF12.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbF12.Data = "F12"
         Me.sbF12.Data2 = "F12"
-        Me.sbF12.FlashInterval = 500
-        Me.sbF12.holdDraw = False
-        Me.sbF12.Lit = True
         Me.sbF12.Location = New System.Drawing.Point(903, 61)
         Me.sbF12.Name = "sbF12"
-        Me.sbF12.RedAlert = LCARS.LCARSalert.Normal
         Me.sbF12.Size = New System.Drawing.Size(64, 48)
         Me.sbF12.TabIndex = 468
         Me.sbF12.Tag = "12"
@@ -975,23 +738,14 @@ Partial Class frmKeyboard
         'sbF4
         '
         Me.sbF4._ForceCaps = False
-        Me.sbF4.AutoEllipsis = False
-        Me.sbF4.Beeping = False
         Me.sbF4.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbF4.ButtonText = "F4"
         Me.sbF4.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbF4.ButtonTextHeight = -1
-        Me.sbF4.Clickable = True
-        Me.sbF4.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbF4.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbF4.Data = "F4"
         Me.sbF4.Data2 = "F4"
-        Me.sbF4.FlashInterval = 500
-        Me.sbF4.holdDraw = False
-        Me.sbF4.Lit = True
         Me.sbF4.Location = New System.Drawing.Point(346, 61)
         Me.sbF4.Name = "sbF4"
-        Me.sbF4.RedAlert = LCARS.LCARSalert.Normal
         Me.sbF4.Size = New System.Drawing.Size(64, 48)
         Me.sbF4.TabIndex = 467
         Me.sbF4.Tag = "4"
@@ -1000,23 +754,14 @@ Partial Class frmKeyboard
         'sbF5
         '
         Me.sbF5._ForceCaps = False
-        Me.sbF5.AutoEllipsis = False
-        Me.sbF5.Beeping = False
         Me.sbF5.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbF5.ButtonText = "F5"
         Me.sbF5.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbF5.ButtonTextHeight = -1
-        Me.sbF5.Clickable = True
-        Me.sbF5.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbF5.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbF5.Data = "F5"
         Me.sbF5.Data2 = "F5"
-        Me.sbF5.FlashInterval = 500
-        Me.sbF5.holdDraw = False
-        Me.sbF5.Lit = True
         Me.sbF5.Location = New System.Drawing.Point(416, 61)
         Me.sbF5.Name = "sbF5"
-        Me.sbF5.RedAlert = LCARS.LCARSalert.Normal
         Me.sbF5.Size = New System.Drawing.Size(64, 48)
         Me.sbF5.TabIndex = 466
         Me.sbF5.Tag = "5"
@@ -1025,23 +770,14 @@ Partial Class frmKeyboard
         'sbF3
         '
         Me.sbF3._ForceCaps = False
-        Me.sbF3.AutoEllipsis = False
-        Me.sbF3.Beeping = False
         Me.sbF3.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbF3.ButtonText = "F3"
         Me.sbF3.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbF3.ButtonTextHeight = -1
-        Me.sbF3.Clickable = True
-        Me.sbF3.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbF3.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbF3.Data = "F3"
         Me.sbF3.Data2 = "F3"
-        Me.sbF3.FlashInterval = 500
-        Me.sbF3.holdDraw = False
-        Me.sbF3.Lit = True
         Me.sbF3.Location = New System.Drawing.Point(276, 61)
         Me.sbF3.Name = "sbF3"
-        Me.sbF3.RedAlert = LCARS.LCARSalert.Normal
         Me.sbF3.Size = New System.Drawing.Size(64, 48)
         Me.sbF3.TabIndex = 465
         Me.sbF3.Tag = "3"
@@ -1050,23 +786,14 @@ Partial Class frmKeyboard
         'sbF2
         '
         Me.sbF2._ForceCaps = False
-        Me.sbF2.AutoEllipsis = False
-        Me.sbF2.Beeping = False
         Me.sbF2.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbF2.ButtonText = "F2"
         Me.sbF2.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbF2.ButtonTextHeight = -1
-        Me.sbF2.Clickable = True
-        Me.sbF2.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbF2.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbF2.Data = "F2"
         Me.sbF2.Data2 = "F2"
-        Me.sbF2.FlashInterval = 500
-        Me.sbF2.holdDraw = False
-        Me.sbF2.Lit = True
         Me.sbF2.Location = New System.Drawing.Point(206, 61)
         Me.sbF2.Name = "sbF2"
-        Me.sbF2.RedAlert = LCARS.LCARSalert.Normal
         Me.sbF2.Size = New System.Drawing.Size(64, 48)
         Me.sbF2.TabIndex = 464
         Me.sbF2.Tag = "2"
@@ -1075,23 +802,14 @@ Partial Class frmKeyboard
         'sbF1
         '
         Me.sbF1._ForceCaps = False
-        Me.sbF1.AutoEllipsis = False
-        Me.sbF1.Beeping = False
         Me.sbF1.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbF1.ButtonText = "F1"
         Me.sbF1.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbF1.ButtonTextHeight = -1
-        Me.sbF1.Clickable = True
-        Me.sbF1.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbF1.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbF1.Data = "F1"
         Me.sbF1.Data2 = "F1"
-        Me.sbF1.FlashInterval = 500
-        Me.sbF1.holdDraw = False
-        Me.sbF1.Lit = True
         Me.sbF1.Location = New System.Drawing.Point(136, 61)
         Me.sbF1.Name = "sbF1"
-        Me.sbF1.RedAlert = LCARS.LCARSalert.Normal
         Me.sbF1.Size = New System.Drawing.Size(64, 48)
         Me.sbF1.TabIndex = 463
         Me.sbF1.Tag = "1"
@@ -1099,23 +817,15 @@ Partial Class frmKeyboard
         '
         'sbDEL
         '
-        Me.sbDEL.AutoEllipsis = False
-        Me.sbDEL.Beeping = False
         Me.sbDEL.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbDEL.ButtonText = "DEL"
         Me.sbDEL.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbDEL.ButtonTextHeight = -1
-        Me.sbDEL.Clickable = True
         Me.sbDEL.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.sbDEL.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbDEL.Data = "DEL"
         Me.sbDEL.Data2 = "DEL"
-        Me.sbDEL.FlashInterval = 500
-        Me.sbDEL.holdDraw = False
-        Me.sbDEL.Lit = True
         Me.sbDEL.Location = New System.Drawing.Point(973, 61)
         Me.sbDEL.Name = "sbDEL"
-        Me.sbDEL.RedAlert = LCARS.LCARSalert.Normal
         Me.sbDEL.Size = New System.Drawing.Size(43, 48)
         Me.sbDEL.TabIndex = 462
         Me.sbDEL.Tag = "15"
@@ -1123,23 +833,15 @@ Partial Class frmKeyboard
         '
         'sbESC
         '
-        Me.sbESC.AutoEllipsis = False
-        Me.sbESC.Beeping = False
         Me.sbESC.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbESC.ButtonText = "ESC"
         Me.sbESC.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbESC.ButtonTextHeight = -1
-        Me.sbESC.Clickable = True
         Me.sbESC.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.sbESC.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbESC.Data = "ESC"
         Me.sbESC.Data2 = "ESC"
-        Me.sbESC.FlashInterval = 500
-        Me.sbESC.holdDraw = False
-        Me.sbESC.Lit = True
         Me.sbESC.Location = New System.Drawing.Point(4, 61)
         Me.sbESC.Name = "sbESC"
-        Me.sbESC.RedAlert = LCARS.LCARSalert.Normal
         Me.sbESC.Size = New System.Drawing.Size(59, 48)
         Me.sbESC.TabIndex = 461
         Me.sbESC.Tag = "15"
@@ -1148,111 +850,49 @@ Partial Class frmKeyboard
         'abLeft
         '
         Me.abLeft.ArrowDirection = LCARS.LCARSarrowDirection.Left
-        Me.abLeft.AutoEllipsis = Nothing
         Me.abLeft.Beeping = True
-        Me.abLeft.ButtonText = ""
-        Me.abLeft.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.abLeft.ButtonTextHeight = 14
-        Me.abLeft.Clickable = True
-        Me.abLeft.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.abLeft.CustomAlertColor = System.Drawing.Color.Empty
-        Me.abLeft.Data = Nothing
-        Me.abLeft.Data2 = Nothing
-        Me.abLeft.FlashInterval = 500
-        Me.abLeft.holdDraw = False
-        Me.abLeft.Lit = True
         Me.abLeft.Location = New System.Drawing.Point(812, 406)
         Me.abLeft.Name = "abLeft"
-        Me.abLeft.RedAlert = LCARS.LCARSalert.Normal
         Me.abLeft.Size = New System.Drawing.Size(64, 64)
         Me.abLeft.TabIndex = 460
         '
         'abRight
         '
         Me.abRight.ArrowDirection = LCARS.LCARSarrowDirection.Right
-        Me.abRight.AutoEllipsis = Nothing
         Me.abRight.Beeping = True
-        Me.abRight.ButtonText = ""
-        Me.abRight.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.abRight.ButtonTextHeight = 14
-        Me.abRight.Clickable = True
-        Me.abRight.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.abRight.CustomAlertColor = System.Drawing.Color.Empty
-        Me.abRight.Data = Nothing
-        Me.abRight.Data2 = Nothing
-        Me.abRight.FlashInterval = 500
-        Me.abRight.holdDraw = False
-        Me.abRight.Lit = True
         Me.abRight.Location = New System.Drawing.Point(952, 406)
         Me.abRight.Name = "abRight"
-        Me.abRight.RedAlert = LCARS.LCARSalert.Normal
         Me.abRight.Size = New System.Drawing.Size(64, 64)
         Me.abRight.TabIndex = 459
         '
         'abDown
         '
         Me.abDown.ArrowDirection = LCARS.LCARSarrowDirection.Down
-        Me.abDown.AutoEllipsis = Nothing
         Me.abDown.Beeping = True
-        Me.abDown.ButtonText = ""
-        Me.abDown.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.abDown.ButtonTextHeight = 14
-        Me.abDown.Clickable = True
-        Me.abDown.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.abDown.CustomAlertColor = System.Drawing.Color.Empty
-        Me.abDown.Data = Nothing
-        Me.abDown.Data2 = Nothing
-        Me.abDown.FlashInterval = 500
-        Me.abDown.holdDraw = False
-        Me.abDown.Lit = True
         Me.abDown.Location = New System.Drawing.Point(882, 406)
         Me.abDown.Name = "abDown"
-        Me.abDown.RedAlert = LCARS.LCARSalert.Normal
         Me.abDown.Size = New System.Drawing.Size(64, 64)
         Me.abDown.TabIndex = 458
         '
         'abUp
         '
-        Me.abUp.ArrowDirection = LCARS.LCARSarrowDirection.Up
-        Me.abUp.AutoEllipsis = Nothing
         Me.abUp.Beeping = True
-        Me.abUp.ButtonText = ""
-        Me.abUp.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.abUp.ButtonTextHeight = 14
-        Me.abUp.Clickable = True
-        Me.abUp.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.abUp.CustomAlertColor = System.Drawing.Color.Empty
-        Me.abUp.Data = Nothing
-        Me.abUp.Data2 = Nothing
-        Me.abUp.FlashInterval = 500
-        Me.abUp.holdDraw = False
-        Me.abUp.Lit = True
         Me.abUp.Location = New System.Drawing.Point(882, 336)
         Me.abUp.Name = "abUp"
-        Me.abUp.RedAlert = LCARS.LCARSalert.Normal
         Me.abUp.Size = New System.Drawing.Size(64, 64)
         Me.abUp.TabIndex = 457
         '
         'sbSpace
         '
         Me.sbSpace._ForceCaps = False
-        Me.sbSpace.AutoEllipsis = False
-        Me.sbSpace.Beeping = False
         Me.sbSpace.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbSpace.ButtonText = " "
         Me.sbSpace.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbSpace.ButtonTextHeight = -1
-        Me.sbSpace.Clickable = True
-        Me.sbSpace.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbSpace.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbSpace.Data = " "
         Me.sbSpace.Data2 = " "
-        Me.sbSpace.FlashInterval = 500
-        Me.sbSpace.holdDraw = False
-        Me.sbSpace.Lit = True
         Me.sbSpace.Location = New System.Drawing.Point(280, 406)
         Me.sbSpace.Name = "sbSpace"
-        Me.sbSpace.RedAlert = LCARS.LCARSalert.Normal
         Me.sbSpace.Size = New System.Drawing.Size(364, 64)
         Me.sbSpace.TabIndex = 456
         Me.sbSpace.Tag = "56"
@@ -1261,23 +901,15 @@ Partial Class frmKeyboard
         'sbRAlt
         '
         Me.sbRAlt._ForceCaps = False
-        Me.sbRAlt.AutoEllipsis = False
-        Me.sbRAlt.Beeping = False
         Me.sbRAlt.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbRAlt.ButtonText = "ALT"
         Me.sbRAlt.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbRAlt.ButtonTextHeight = -1
-        Me.sbRAlt.Clickable = True
         Me.sbRAlt.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.sbRAlt.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbRAlt.Data = "ALT"
         Me.sbRAlt.Data2 = "ALT"
-        Me.sbRAlt.FlashInterval = 500
-        Me.sbRAlt.holdDraw = False
-        Me.sbRAlt.Lit = True
         Me.sbRAlt.Location = New System.Drawing.Point(650, 406)
         Me.sbRAlt.Name = "sbRAlt"
-        Me.sbRAlt.RedAlert = LCARS.LCARSalert.Normal
         Me.sbRAlt.Size = New System.Drawing.Size(48, 64)
         Me.sbRAlt.TabIndex = 455
         Me.sbRAlt.Tag = "57"
@@ -1286,23 +918,15 @@ Partial Class frmKeyboard
         'sbRwin
         '
         Me.sbRwin._ForceCaps = False
-        Me.sbRwin.AutoEllipsis = False
-        Me.sbRwin.Beeping = False
         Me.sbRwin.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbRwin.ButtonText = "WIN"
         Me.sbRwin.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbRwin.ButtonTextHeight = -1
-        Me.sbRwin.Clickable = True
         Me.sbRwin.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.sbRwin.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbRwin.Data = "WIN"
         Me.sbRwin.Data2 = "WIN"
-        Me.sbRwin.FlashInterval = 500
-        Me.sbRwin.holdDraw = False
-        Me.sbRwin.Lit = True
         Me.sbRwin.Location = New System.Drawing.Point(704, 406)
         Me.sbRwin.Name = "sbRwin"
-        Me.sbRwin.RedAlert = LCARS.LCARSalert.Normal
         Me.sbRwin.Size = New System.Drawing.Size(48, 64)
         Me.sbRwin.TabIndex = 454
         Me.sbRwin.Tag = "58"
@@ -1311,23 +935,15 @@ Partial Class frmKeyboard
         'sbRCtrl
         '
         Me.sbRCtrl._ForceCaps = False
-        Me.sbRCtrl.AutoEllipsis = False
-        Me.sbRCtrl.Beeping = False
         Me.sbRCtrl.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbRCtrl.ButtonText = "CTRL"
         Me.sbRCtrl.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbRCtrl.ButtonTextHeight = -1
-        Me.sbRCtrl.Clickable = True
         Me.sbRCtrl.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.sbRCtrl.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbRCtrl.Data = "CTRL"
         Me.sbRCtrl.Data2 = "CTRL"
-        Me.sbRCtrl.FlashInterval = 500
-        Me.sbRCtrl.holdDraw = False
-        Me.sbRCtrl.Lit = True
         Me.sbRCtrl.Location = New System.Drawing.Point(758, 406)
         Me.sbRCtrl.Name = "sbRCtrl"
-        Me.sbRCtrl.RedAlert = LCARS.LCARSalert.Normal
         Me.sbRCtrl.Size = New System.Drawing.Size(48, 64)
         Me.sbRCtrl.TabIndex = 453
         Me.sbRCtrl.Tag = "59!"
@@ -1336,23 +952,15 @@ Partial Class frmKeyboard
         'sbLAlt
         '
         Me.sbLAlt._ForceCaps = False
-        Me.sbLAlt.AutoEllipsis = False
-        Me.sbLAlt.Beeping = False
         Me.sbLAlt.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbLAlt.ButtonText = "ALT"
         Me.sbLAlt.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbLAlt.ButtonTextHeight = -1
-        Me.sbLAlt.Clickable = True
         Me.sbLAlt.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.sbLAlt.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbLAlt.Data = "ALT"
         Me.sbLAlt.Data2 = "ALT"
-        Me.sbLAlt.FlashInterval = 500
-        Me.sbLAlt.holdDraw = False
-        Me.sbLAlt.Lit = True
         Me.sbLAlt.Location = New System.Drawing.Point(188, 406)
         Me.sbLAlt.Name = "sbLAlt"
-        Me.sbLAlt.RedAlert = LCARS.LCARSalert.Normal
         Me.sbLAlt.Size = New System.Drawing.Size(86, 64)
         Me.sbLAlt.TabIndex = 452
         Me.sbLAlt.Tag = "55"
@@ -1361,23 +969,15 @@ Partial Class frmKeyboard
         'sbLWin
         '
         Me.sbLWin._ForceCaps = False
-        Me.sbLWin.AutoEllipsis = False
-        Me.sbLWin.Beeping = False
         Me.sbLWin.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbLWin.ButtonText = "WIN"
         Me.sbLWin.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbLWin.ButtonTextHeight = -1
-        Me.sbLWin.Clickable = True
         Me.sbLWin.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.sbLWin.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbLWin.Data = "WIN"
         Me.sbLWin.Data2 = "WIN"
-        Me.sbLWin.FlashInterval = 500
-        Me.sbLWin.holdDraw = False
-        Me.sbLWin.Lit = True
         Me.sbLWin.Location = New System.Drawing.Point(96, 406)
         Me.sbLWin.Name = "sbLWin"
-        Me.sbLWin.RedAlert = LCARS.LCARSalert.Normal
         Me.sbLWin.Size = New System.Drawing.Size(86, 64)
         Me.sbLWin.TabIndex = 451
         Me.sbLWin.Tag = "54"
@@ -1386,23 +986,15 @@ Partial Class frmKeyboard
         'sbLCtrl
         '
         Me.sbLCtrl._ForceCaps = False
-        Me.sbLCtrl.AutoEllipsis = False
-        Me.sbLCtrl.Beeping = False
         Me.sbLCtrl.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbLCtrl.ButtonText = "CTRL"
         Me.sbLCtrl.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbLCtrl.ButtonTextHeight = -1
-        Me.sbLCtrl.Clickable = True
         Me.sbLCtrl.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.sbLCtrl.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbLCtrl.Data = "CTRL"
         Me.sbLCtrl.Data2 = "CTRL"
-        Me.sbLCtrl.FlashInterval = 500
-        Me.sbLCtrl.holdDraw = False
-        Me.sbLCtrl.Lit = True
         Me.sbLCtrl.Location = New System.Drawing.Point(4, 406)
         Me.sbLCtrl.Name = "sbLCtrl"
-        Me.sbLCtrl.RedAlert = LCARS.LCARSalert.Normal
         Me.sbLCtrl.Size = New System.Drawing.Size(86, 64)
         Me.sbLCtrl.TabIndex = 450
         Me.sbLCtrl.Tag = "53."
@@ -1411,23 +1003,15 @@ Partial Class frmKeyboard
         'sbLShift
         '
         Me.sbLShift._ForceCaps = False
-        Me.sbLShift.AutoEllipsis = False
-        Me.sbLShift.Beeping = False
         Me.sbLShift.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbLShift.ButtonText = "SHIFT"
         Me.sbLShift.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbLShift.ButtonTextHeight = -1
-        Me.sbLShift.Clickable = True
         Me.sbLShift.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.sbLShift.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbLShift.Data = "SHIFT"
         Me.sbLShift.Data2 = "SHIFT"
-        Me.sbLShift.FlashInterval = 500
-        Me.sbLShift.holdDraw = False
-        Me.sbLShift.Lit = True
         Me.sbLShift.Location = New System.Drawing.Point(4, 336)
         Me.sbLShift.Name = "sbLShift"
-        Me.sbLShift.RedAlert = LCARS.LCARSalert.Normal
         Me.sbLShift.Size = New System.Drawing.Size(126, 64)
         Me.sbLShift.TabIndex = 449
         Me.sbLShift.Tag = "41."
@@ -1436,23 +1020,14 @@ Partial Class frmKeyboard
         'sbComma
         '
         Me.sbComma._ForceCaps = False
-        Me.sbComma.AutoEllipsis = False
-        Me.sbComma.Beeping = False
         Me.sbComma.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbComma.ButtonText = ","
         Me.sbComma.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbComma.ButtonTextHeight = -1
-        Me.sbComma.Clickable = True
-        Me.sbComma.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbComma.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbComma.Data = ","
         Me.sbComma.Data2 = "<"
-        Me.sbComma.FlashInterval = 500
-        Me.sbComma.holdDraw = False
-        Me.sbComma.Lit = True
         Me.sbComma.Location = New System.Drawing.Point(626, 336)
         Me.sbComma.Name = "sbComma"
-        Me.sbComma.RedAlert = LCARS.LCARSalert.Normal
         Me.sbComma.Size = New System.Drawing.Size(60, 64)
         Me.sbComma.TabIndex = 448
         Me.sbComma.Tag = "49"
@@ -1461,23 +1036,14 @@ Partial Class frmKeyboard
         'sbM
         '
         Me.sbM._ForceCaps = False
-        Me.sbM.AutoEllipsis = False
-        Me.sbM.Beeping = False
         Me.sbM.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbM.ButtonText = "m"
         Me.sbM.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbM.ButtonTextHeight = -1
-        Me.sbM.Clickable = True
-        Me.sbM.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbM.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbM.Data = "m"
         Me.sbM.Data2 = "M"
-        Me.sbM.FlashInterval = 500
-        Me.sbM.holdDraw = False
-        Me.sbM.Lit = True
         Me.sbM.Location = New System.Drawing.Point(556, 336)
         Me.sbM.Name = "sbM"
-        Me.sbM.RedAlert = LCARS.LCARSalert.Normal
         Me.sbM.Size = New System.Drawing.Size(64, 64)
         Me.sbM.TabIndex = 447
         Me.sbM.Tag = "48"
@@ -1486,23 +1052,14 @@ Partial Class frmKeyboard
         'sbN
         '
         Me.sbN._ForceCaps = False
-        Me.sbN.AutoEllipsis = False
-        Me.sbN.Beeping = False
         Me.sbN.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbN.ButtonText = "n"
         Me.sbN.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbN.ButtonTextHeight = -1
-        Me.sbN.Clickable = True
-        Me.sbN.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbN.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbN.Data = "n"
         Me.sbN.Data2 = "N"
-        Me.sbN.FlashInterval = 500
-        Me.sbN.holdDraw = False
-        Me.sbN.Lit = True
         Me.sbN.Location = New System.Drawing.Point(486, 336)
         Me.sbN.Name = "sbN"
-        Me.sbN.RedAlert = LCARS.LCARSalert.Normal
         Me.sbN.Size = New System.Drawing.Size(64, 64)
         Me.sbN.TabIndex = 446
         Me.sbN.Tag = "47"
@@ -1511,23 +1068,14 @@ Partial Class frmKeyboard
         'sbPeriod
         '
         Me.sbPeriod._ForceCaps = False
-        Me.sbPeriod.AutoEllipsis = False
-        Me.sbPeriod.Beeping = False
         Me.sbPeriod.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbPeriod.ButtonText = "."
         Me.sbPeriod.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbPeriod.ButtonTextHeight = -1
-        Me.sbPeriod.Clickable = True
-        Me.sbPeriod.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbPeriod.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbPeriod.Data = "."
         Me.sbPeriod.Data2 = ">"
-        Me.sbPeriod.FlashInterval = 500
-        Me.sbPeriod.holdDraw = False
-        Me.sbPeriod.Lit = True
         Me.sbPeriod.Location = New System.Drawing.Point(692, 337)
         Me.sbPeriod.Name = "sbPeriod"
-        Me.sbPeriod.RedAlert = LCARS.LCARSalert.Normal
         Me.sbPeriod.Size = New System.Drawing.Size(60, 64)
         Me.sbPeriod.TabIndex = 445
         Me.sbPeriod.Tag = "50"
@@ -1536,23 +1084,14 @@ Partial Class frmKeyboard
         'sbForwardSlash
         '
         Me.sbForwardSlash._ForceCaps = False
-        Me.sbForwardSlash.AutoEllipsis = False
-        Me.sbForwardSlash.Beeping = False
         Me.sbForwardSlash.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbForwardSlash.ButtonText = "/"
         Me.sbForwardSlash.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbForwardSlash.ButtonTextHeight = -1
-        Me.sbForwardSlash.Clickable = True
-        Me.sbForwardSlash.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbForwardSlash.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbForwardSlash.Data = "/"
         Me.sbForwardSlash.Data2 = "?"
-        Me.sbForwardSlash.FlashInterval = 500
-        Me.sbForwardSlash.holdDraw = False
-        Me.sbForwardSlash.Lit = True
         Me.sbForwardSlash.Location = New System.Drawing.Point(758, 336)
         Me.sbForwardSlash.Name = "sbForwardSlash"
-        Me.sbForwardSlash.RedAlert = LCARS.LCARSalert.Normal
         Me.sbForwardSlash.Size = New System.Drawing.Size(60, 64)
         Me.sbForwardSlash.TabIndex = 444
         Me.sbForwardSlash.Tag = "51"
@@ -1561,23 +1100,14 @@ Partial Class frmKeyboard
         'sbV
         '
         Me.sbV._ForceCaps = False
-        Me.sbV.AutoEllipsis = False
-        Me.sbV.Beeping = False
         Me.sbV.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbV.ButtonText = "v"
         Me.sbV.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbV.ButtonTextHeight = -1
-        Me.sbV.Clickable = True
-        Me.sbV.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbV.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbV.Data = "v"
         Me.sbV.Data2 = "V"
-        Me.sbV.FlashInterval = 500
-        Me.sbV.holdDraw = False
-        Me.sbV.Lit = True
         Me.sbV.Location = New System.Drawing.Point(346, 336)
         Me.sbV.Name = "sbV"
-        Me.sbV.RedAlert = LCARS.LCARSalert.Normal
         Me.sbV.Size = New System.Drawing.Size(64, 64)
         Me.sbV.TabIndex = 443
         Me.sbV.Tag = "45"
@@ -1586,23 +1116,14 @@ Partial Class frmKeyboard
         'sbB
         '
         Me.sbB._ForceCaps = False
-        Me.sbB.AutoEllipsis = False
-        Me.sbB.Beeping = False
         Me.sbB.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbB.ButtonText = "b"
         Me.sbB.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbB.ButtonTextHeight = -1
-        Me.sbB.Clickable = True
-        Me.sbB.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbB.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbB.Data = "b"
         Me.sbB.Data2 = "B"
-        Me.sbB.FlashInterval = 500
-        Me.sbB.holdDraw = False
-        Me.sbB.Lit = True
         Me.sbB.Location = New System.Drawing.Point(416, 336)
         Me.sbB.Name = "sbB"
-        Me.sbB.RedAlert = LCARS.LCARSalert.Normal
         Me.sbB.Size = New System.Drawing.Size(64, 64)
         Me.sbB.TabIndex = 442
         Me.sbB.Tag = "46"
@@ -1611,23 +1132,15 @@ Partial Class frmKeyboard
         'sbRShift
         '
         Me.sbRShift._ForceCaps = False
-        Me.sbRShift.AutoEllipsis = False
-        Me.sbRShift.Beeping = False
         Me.sbRShift.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbRShift.ButtonText = "SHIFT"
         Me.sbRShift.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbRShift.ButtonTextHeight = -1
-        Me.sbRShift.Clickable = True
         Me.sbRShift.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.sbRShift.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbRShift.Data = "SHIFT"
         Me.sbRShift.Data2 = "SHIFT"
-        Me.sbRShift.FlashInterval = 500
-        Me.sbRShift.holdDraw = False
-        Me.sbRShift.Lit = True
         Me.sbRShift.Location = New System.Drawing.Point(824, 336)
         Me.sbRShift.Name = "sbRShift"
-        Me.sbRShift.RedAlert = LCARS.LCARSalert.Normal
         Me.sbRShift.Size = New System.Drawing.Size(52, 64)
         Me.sbRShift.TabIndex = 441
         Me.sbRShift.Tag = "52"
@@ -1636,23 +1149,14 @@ Partial Class frmKeyboard
         'sbC
         '
         Me.sbC._ForceCaps = False
-        Me.sbC.AutoEllipsis = False
-        Me.sbC.Beeping = False
         Me.sbC.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbC.ButtonText = "c"
         Me.sbC.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbC.ButtonTextHeight = -1
-        Me.sbC.Clickable = True
-        Me.sbC.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbC.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbC.Data = "c"
         Me.sbC.Data2 = "C"
-        Me.sbC.FlashInterval = 500
-        Me.sbC.holdDraw = False
-        Me.sbC.Lit = True
         Me.sbC.Location = New System.Drawing.Point(276, 336)
         Me.sbC.Name = "sbC"
-        Me.sbC.RedAlert = LCARS.LCARSalert.Normal
         Me.sbC.Size = New System.Drawing.Size(64, 64)
         Me.sbC.TabIndex = 440
         Me.sbC.Tag = "44"
@@ -1661,23 +1165,14 @@ Partial Class frmKeyboard
         'sbX
         '
         Me.sbX._ForceCaps = False
-        Me.sbX.AutoEllipsis = False
-        Me.sbX.Beeping = False
         Me.sbX.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbX.ButtonText = "x"
         Me.sbX.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbX.ButtonTextHeight = -1
-        Me.sbX.Clickable = True
-        Me.sbX.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbX.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbX.Data = "x"
         Me.sbX.Data2 = "X"
-        Me.sbX.FlashInterval = 500
-        Me.sbX.holdDraw = False
-        Me.sbX.Lit = True
         Me.sbX.Location = New System.Drawing.Point(206, 336)
         Me.sbX.Name = "sbX"
-        Me.sbX.RedAlert = LCARS.LCARSalert.Normal
         Me.sbX.Size = New System.Drawing.Size(64, 64)
         Me.sbX.TabIndex = 439
         Me.sbX.Tag = "43"
@@ -1686,23 +1181,14 @@ Partial Class frmKeyboard
         'sbZ
         '
         Me.sbZ._ForceCaps = False
-        Me.sbZ.AutoEllipsis = False
-        Me.sbZ.Beeping = False
         Me.sbZ.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbZ.ButtonText = "z"
         Me.sbZ.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbZ.ButtonTextHeight = -1
-        Me.sbZ.Clickable = True
-        Me.sbZ.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbZ.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbZ.Data = "z"
         Me.sbZ.Data2 = "Z"
-        Me.sbZ.FlashInterval = 500
-        Me.sbZ.holdDraw = False
-        Me.sbZ.Lit = True
         Me.sbZ.Location = New System.Drawing.Point(136, 336)
         Me.sbZ.Name = "sbZ"
-        Me.sbZ.RedAlert = LCARS.LCARSalert.Normal
         Me.sbZ.Size = New System.Drawing.Size(64, 64)
         Me.sbZ.TabIndex = 438
         Me.sbZ.Tag = "42"
@@ -1711,23 +1197,15 @@ Partial Class frmKeyboard
         'sbCaps
         '
         Me.sbCaps._ForceCaps = False
-        Me.sbCaps.AutoEllipsis = False
-        Me.sbCaps.Beeping = False
         Me.sbCaps.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbCaps.ButtonText = "CAPS "
         Me.sbCaps.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbCaps.ButtonTextHeight = -1
-        Me.sbCaps.Clickable = True
         Me.sbCaps.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.sbCaps.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbCaps.Data = "CAPS"
         Me.sbCaps.Data2 = "CAPS"
-        Me.sbCaps.FlashInterval = 500
-        Me.sbCaps.holdDraw = False
-        Me.sbCaps.Lit = True
         Me.sbCaps.Location = New System.Drawing.Point(4, 266)
         Me.sbCaps.Name = "sbCaps"
-        Me.sbCaps.RedAlert = LCARS.LCARSalert.Normal
         Me.sbCaps.Size = New System.Drawing.Size(102, 64)
         Me.sbCaps.TabIndex = 437
         Me.sbCaps.Tag = "28."
@@ -1736,23 +1214,14 @@ Partial Class frmKeyboard
         'sbK
         '
         Me.sbK._ForceCaps = False
-        Me.sbK.AutoEllipsis = False
-        Me.sbK.Beeping = False
         Me.sbK.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbK.ButtonText = "k"
         Me.sbK.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbK.ButtonTextHeight = -1
-        Me.sbK.Clickable = True
-        Me.sbK.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbK.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbK.Data = "k"
         Me.sbK.Data2 = "K"
-        Me.sbK.FlashInterval = 500
-        Me.sbK.holdDraw = False
-        Me.sbK.Lit = True
         Me.sbK.Location = New System.Drawing.Point(602, 266)
         Me.sbK.Name = "sbK"
-        Me.sbK.RedAlert = LCARS.LCARSalert.Normal
         Me.sbK.Size = New System.Drawing.Size(64, 64)
         Me.sbK.TabIndex = 436
         Me.sbK.Tag = "36"
@@ -1761,23 +1230,14 @@ Partial Class frmKeyboard
         'sbJ
         '
         Me.sbJ._ForceCaps = False
-        Me.sbJ.AutoEllipsis = False
-        Me.sbJ.Beeping = False
         Me.sbJ.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbJ.ButtonText = "j"
         Me.sbJ.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbJ.ButtonTextHeight = -1
-        Me.sbJ.Clickable = True
-        Me.sbJ.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbJ.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbJ.Data = "j"
         Me.sbJ.Data2 = "J"
-        Me.sbJ.FlashInterval = 500
-        Me.sbJ.holdDraw = False
-        Me.sbJ.Lit = True
         Me.sbJ.Location = New System.Drawing.Point(532, 266)
         Me.sbJ.Name = "sbJ"
-        Me.sbJ.RedAlert = LCARS.LCARSalert.Normal
         Me.sbJ.Size = New System.Drawing.Size(64, 64)
         Me.sbJ.TabIndex = 435
         Me.sbJ.Tag = "35"
@@ -1786,23 +1246,14 @@ Partial Class frmKeyboard
         'sbH
         '
         Me.sbH._ForceCaps = False
-        Me.sbH.AutoEllipsis = False
-        Me.sbH.Beeping = False
         Me.sbH.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbH.ButtonText = "h"
         Me.sbH.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbH.ButtonTextHeight = -1
-        Me.sbH.Clickable = True
-        Me.sbH.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbH.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbH.Data = "h"
         Me.sbH.Data2 = "H"
-        Me.sbH.FlashInterval = 500
-        Me.sbH.holdDraw = False
-        Me.sbH.Lit = True
         Me.sbH.Location = New System.Drawing.Point(462, 266)
         Me.sbH.Name = "sbH"
-        Me.sbH.RedAlert = LCARS.LCARSalert.Normal
         Me.sbH.Size = New System.Drawing.Size(64, 64)
         Me.sbH.TabIndex = 434
         Me.sbH.Tag = "34"
@@ -1811,23 +1262,14 @@ Partial Class frmKeyboard
         'sbL
         '
         Me.sbL._ForceCaps = False
-        Me.sbL.AutoEllipsis = False
-        Me.sbL.Beeping = False
         Me.sbL.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbL.ButtonText = "l"
         Me.sbL.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbL.ButtonTextHeight = -1
-        Me.sbL.Clickable = True
-        Me.sbL.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbL.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbL.Data = "l"
         Me.sbL.Data2 = "L"
-        Me.sbL.FlashInterval = 500
-        Me.sbL.holdDraw = False
-        Me.sbL.Lit = True
         Me.sbL.Location = New System.Drawing.Point(672, 266)
         Me.sbL.Name = "sbL"
-        Me.sbL.RedAlert = LCARS.LCARSalert.Normal
         Me.sbL.Size = New System.Drawing.Size(64, 64)
         Me.sbL.TabIndex = 433
         Me.sbL.Tag = "37"
@@ -1836,23 +1278,14 @@ Partial Class frmKeyboard
         'sbSemiColon
         '
         Me.sbSemiColon._ForceCaps = False
-        Me.sbSemiColon.AutoEllipsis = False
-        Me.sbSemiColon.Beeping = False
         Me.sbSemiColon.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbSemiColon.ButtonText = ";"
         Me.sbSemiColon.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbSemiColon.ButtonTextHeight = -1
-        Me.sbSemiColon.Clickable = True
-        Me.sbSemiColon.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbSemiColon.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbSemiColon.Data = ";"
         Me.sbSemiColon.Data2 = ":"
-        Me.sbSemiColon.FlashInterval = 500
-        Me.sbSemiColon.holdDraw = False
-        Me.sbSemiColon.Lit = True
         Me.sbSemiColon.Location = New System.Drawing.Point(742, 266)
         Me.sbSemiColon.Name = "sbSemiColon"
-        Me.sbSemiColon.RedAlert = LCARS.LCARSalert.Normal
         Me.sbSemiColon.Size = New System.Drawing.Size(64, 64)
         Me.sbSemiColon.TabIndex = 432
         Me.sbSemiColon.Tag = "38"
@@ -1861,23 +1294,14 @@ Partial Class frmKeyboard
         'sbQuote
         '
         Me.sbQuote._ForceCaps = False
-        Me.sbQuote.AutoEllipsis = False
-        Me.sbQuote.Beeping = False
         Me.sbQuote.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbQuote.ButtonText = "'"
         Me.sbQuote.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbQuote.ButtonTextHeight = -1
-        Me.sbQuote.Clickable = True
-        Me.sbQuote.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbQuote.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbQuote.Data = "'"
         Me.sbQuote.Data2 = """"
-        Me.sbQuote.FlashInterval = 500
-        Me.sbQuote.holdDraw = False
-        Me.sbQuote.Lit = True
         Me.sbQuote.Location = New System.Drawing.Point(812, 266)
         Me.sbQuote.Name = "sbQuote"
-        Me.sbQuote.RedAlert = LCARS.LCARSalert.Normal
         Me.sbQuote.Size = New System.Drawing.Size(64, 64)
         Me.sbQuote.TabIndex = 431
         Me.sbQuote.Tag = "39"
@@ -1886,23 +1310,14 @@ Partial Class frmKeyboard
         'sbF
         '
         Me.sbF._ForceCaps = False
-        Me.sbF.AutoEllipsis = False
-        Me.sbF.Beeping = False
         Me.sbF.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbF.ButtonText = "f"
         Me.sbF.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbF.ButtonTextHeight = -1
-        Me.sbF.Clickable = True
-        Me.sbF.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbF.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbF.Data = "f"
         Me.sbF.Data2 = "F"
-        Me.sbF.FlashInterval = 500
-        Me.sbF.holdDraw = False
-        Me.sbF.Lit = True
         Me.sbF.Location = New System.Drawing.Point(322, 266)
         Me.sbF.Name = "sbF"
-        Me.sbF.RedAlert = LCARS.LCARSalert.Normal
         Me.sbF.Size = New System.Drawing.Size(64, 64)
         Me.sbF.TabIndex = 430
         Me.sbF.Tag = "32"
@@ -1911,23 +1326,14 @@ Partial Class frmKeyboard
         'sbG
         '
         Me.sbG._ForceCaps = False
-        Me.sbG.AutoEllipsis = False
-        Me.sbG.Beeping = False
         Me.sbG.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbG.ButtonText = "g"
         Me.sbG.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbG.ButtonTextHeight = -1
-        Me.sbG.Clickable = True
-        Me.sbG.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbG.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbG.Data = "g"
         Me.sbG.Data2 = "G"
-        Me.sbG.FlashInterval = 500
-        Me.sbG.holdDraw = False
-        Me.sbG.Lit = True
         Me.sbG.Location = New System.Drawing.Point(392, 266)
         Me.sbG.Name = "sbG"
-        Me.sbG.RedAlert = LCARS.LCARSalert.Normal
         Me.sbG.Size = New System.Drawing.Size(64, 64)
         Me.sbG.TabIndex = 429
         Me.sbG.Tag = "33"
@@ -1936,23 +1342,15 @@ Partial Class frmKeyboard
         'sbEnter
         '
         Me.sbEnter._ForceCaps = False
-        Me.sbEnter.AutoEllipsis = False
-        Me.sbEnter.Beeping = False
         Me.sbEnter.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbEnter.ButtonText = "ENTER"
         Me.sbEnter.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbEnter.ButtonTextHeight = -1
-        Me.sbEnter.Clickable = True
         Me.sbEnter.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.sbEnter.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbEnter.Data = "ENTER"
         Me.sbEnter.Data2 = "ENTER"
-        Me.sbEnter.FlashInterval = 500
-        Me.sbEnter.holdDraw = False
-        Me.sbEnter.Lit = True
         Me.sbEnter.Location = New System.Drawing.Point(882, 266)
         Me.sbEnter.Name = "sbEnter"
-        Me.sbEnter.RedAlert = LCARS.LCARSalert.Normal
         Me.sbEnter.Size = New System.Drawing.Size(134, 64)
         Me.sbEnter.TabIndex = 428
         Me.sbEnter.Tag = "40"
@@ -1961,23 +1359,14 @@ Partial Class frmKeyboard
         'sbD
         '
         Me.sbD._ForceCaps = False
-        Me.sbD.AutoEllipsis = False
-        Me.sbD.Beeping = False
         Me.sbD.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbD.ButtonText = "d"
         Me.sbD.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbD.ButtonTextHeight = -1
-        Me.sbD.Clickable = True
-        Me.sbD.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbD.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbD.Data = "d"
         Me.sbD.Data2 = "D"
-        Me.sbD.FlashInterval = 500
-        Me.sbD.holdDraw = False
-        Me.sbD.Lit = True
         Me.sbD.Location = New System.Drawing.Point(252, 266)
         Me.sbD.Name = "sbD"
-        Me.sbD.RedAlert = LCARS.LCARSalert.Normal
         Me.sbD.Size = New System.Drawing.Size(64, 64)
         Me.sbD.TabIndex = 427
         Me.sbD.Tag = "31"
@@ -1986,23 +1375,14 @@ Partial Class frmKeyboard
         'sbS
         '
         Me.sbS._ForceCaps = False
-        Me.sbS.AutoEllipsis = False
-        Me.sbS.Beeping = False
         Me.sbS.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbS.ButtonText = "s"
         Me.sbS.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbS.ButtonTextHeight = -1
-        Me.sbS.Clickable = True
-        Me.sbS.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbS.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbS.Data = "s"
         Me.sbS.Data2 = "S"
-        Me.sbS.FlashInterval = 500
-        Me.sbS.holdDraw = False
-        Me.sbS.Lit = True
         Me.sbS.Location = New System.Drawing.Point(182, 266)
         Me.sbS.Name = "sbS"
-        Me.sbS.RedAlert = LCARS.LCARSalert.Normal
         Me.sbS.Size = New System.Drawing.Size(64, 64)
         Me.sbS.TabIndex = 426
         Me.sbS.Tag = "30"
@@ -2011,23 +1391,14 @@ Partial Class frmKeyboard
         'sbA
         '
         Me.sbA._ForceCaps = False
-        Me.sbA.AutoEllipsis = False
-        Me.sbA.Beeping = False
         Me.sbA.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbA.ButtonText = "a"
         Me.sbA.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbA.ButtonTextHeight = -1
-        Me.sbA.Clickable = True
-        Me.sbA.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbA.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbA.Data = "a"
         Me.sbA.Data2 = "A"
-        Me.sbA.FlashInterval = 500
-        Me.sbA.holdDraw = False
-        Me.sbA.Lit = True
         Me.sbA.Location = New System.Drawing.Point(112, 266)
         Me.sbA.Name = "sbA"
-        Me.sbA.RedAlert = LCARS.LCARSalert.Normal
         Me.sbA.Size = New System.Drawing.Size(64, 64)
         Me.sbA.TabIndex = 425
         Me.sbA.Tag = "29"
@@ -2036,23 +1407,14 @@ Partial Class frmKeyboard
         'sbTilde
         '
         Me.sbTilde._ForceCaps = False
-        Me.sbTilde.AutoEllipsis = False
-        Me.sbTilde.Beeping = False
         Me.sbTilde.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbTilde.ButtonText = "`"
         Me.sbTilde.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbTilde.ButtonTextHeight = -1
-        Me.sbTilde.Clickable = True
-        Me.sbTilde.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbTilde.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbTilde.Data = "`"
         Me.sbTilde.Data2 = "~"
-        Me.sbTilde.FlashInterval = 500
-        Me.sbTilde.holdDraw = False
-        Me.sbTilde.Lit = True
         Me.sbTilde.Location = New System.Drawing.Point(4, 126)
         Me.sbTilde.Name = "sbTilde"
-        Me.sbTilde.RedAlert = LCARS.LCARSalert.Normal
         Me.sbTilde.Size = New System.Drawing.Size(54, 64)
         Me.sbTilde.TabIndex = 424
         Me.sbTilde.Tag = "0"
@@ -2061,23 +1423,14 @@ Partial Class frmKeyboard
         'sb8
         '
         Me.sb8._ForceCaps = False
-        Me.sb8.AutoEllipsis = False
-        Me.sb8.Beeping = False
         Me.sb8.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sb8.ButtonText = "8"
         Me.sb8.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sb8.ButtonTextHeight = -1
-        Me.sb8.Clickable = True
-        Me.sb8.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sb8.CustomAlertColor = System.Drawing.Color.Empty
         Me.sb8.Data = "8"
         Me.sb8.Data2 = "*"
-        Me.sb8.FlashInterval = 500
-        Me.sb8.holdDraw = False
-        Me.sb8.Lit = True
         Me.sb8.Location = New System.Drawing.Point(554, 126)
         Me.sb8.Name = "sb8"
-        Me.sb8.RedAlert = LCARS.LCARSalert.Normal
         Me.sb8.Size = New System.Drawing.Size(62, 64)
         Me.sb8.TabIndex = 423
         Me.sb8.Tag = "8"
@@ -2086,23 +1439,14 @@ Partial Class frmKeyboard
         'sb7
         '
         Me.sb7._ForceCaps = False
-        Me.sb7.AutoEllipsis = False
-        Me.sb7.Beeping = False
         Me.sb7.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sb7.ButtonText = "7"
         Me.sb7.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sb7.ButtonTextHeight = -1
-        Me.sb7.Clickable = True
-        Me.sb7.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sb7.CustomAlertColor = System.Drawing.Color.Empty
         Me.sb7.Data = "7"
         Me.sb7.Data2 = "&"
-        Me.sb7.FlashInterval = 500
-        Me.sb7.holdDraw = False
-        Me.sb7.Lit = True
         Me.sb7.Location = New System.Drawing.Point(484, 126)
         Me.sb7.Name = "sb7"
-        Me.sb7.RedAlert = LCARS.LCARSalert.Normal
         Me.sb7.Size = New System.Drawing.Size(64, 64)
         Me.sb7.TabIndex = 422
         Me.sb7.Tag = "7"
@@ -2111,23 +1455,14 @@ Partial Class frmKeyboard
         'sb6
         '
         Me.sb6._ForceCaps = False
-        Me.sb6.AutoEllipsis = False
-        Me.sb6.Beeping = False
         Me.sb6.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sb6.ButtonText = "6"
         Me.sb6.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sb6.ButtonTextHeight = -1
-        Me.sb6.Clickable = True
-        Me.sb6.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sb6.CustomAlertColor = System.Drawing.Color.Empty
         Me.sb6.Data = "6"
         Me.sb6.Data2 = "^"
-        Me.sb6.FlashInterval = 500
-        Me.sb6.holdDraw = False
-        Me.sb6.Lit = True
         Me.sb6.Location = New System.Drawing.Point(414, 126)
         Me.sb6.Name = "sb6"
-        Me.sb6.RedAlert = LCARS.LCARSalert.Normal
         Me.sb6.Size = New System.Drawing.Size(64, 64)
         Me.sb6.TabIndex = 421
         Me.sb6.Tag = "6"
@@ -2136,23 +1471,14 @@ Partial Class frmKeyboard
         'sb9
         '
         Me.sb9._ForceCaps = False
-        Me.sb9.AutoEllipsis = False
-        Me.sb9.Beeping = False
         Me.sb9.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sb9.ButtonText = "9"
         Me.sb9.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sb9.ButtonTextHeight = -1
-        Me.sb9.Clickable = True
-        Me.sb9.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sb9.CustomAlertColor = System.Drawing.Color.Empty
         Me.sb9.Data = "9"
         Me.sb9.Data2 = "("
-        Me.sb9.FlashInterval = 500
-        Me.sb9.holdDraw = False
-        Me.sb9.Lit = True
         Me.sb9.Location = New System.Drawing.Point(622, 126)
         Me.sb9.Name = "sb9"
-        Me.sb9.RedAlert = LCARS.LCARSalert.Normal
         Me.sb9.Size = New System.Drawing.Size(64, 64)
         Me.sb9.TabIndex = 420
         Me.sb9.Tag = "9"
@@ -2161,23 +1487,14 @@ Partial Class frmKeyboard
         'sb0
         '
         Me.sb0._ForceCaps = False
-        Me.sb0.AutoEllipsis = False
-        Me.sb0.Beeping = False
         Me.sb0.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sb0.ButtonText = "0"
         Me.sb0.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sb0.ButtonTextHeight = -1
-        Me.sb0.Clickable = True
-        Me.sb0.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sb0.CustomAlertColor = System.Drawing.Color.Empty
         Me.sb0.Data = "0"
         Me.sb0.Data2 = ")"
-        Me.sb0.FlashInterval = 500
-        Me.sb0.holdDraw = False
-        Me.sb0.Lit = True
         Me.sb0.Location = New System.Drawing.Point(692, 126)
         Me.sb0.Name = "sb0"
-        Me.sb0.RedAlert = LCARS.LCARSalert.Normal
         Me.sb0.Size = New System.Drawing.Size(64, 64)
         Me.sb0.TabIndex = 419
         Me.sb0.Tag = "10"
@@ -2186,23 +1503,14 @@ Partial Class frmKeyboard
         'sbMinus
         '
         Me.sbMinus._ForceCaps = False
-        Me.sbMinus.AutoEllipsis = False
-        Me.sbMinus.Beeping = False
         Me.sbMinus.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbMinus.ButtonText = "-"
         Me.sbMinus.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbMinus.ButtonTextHeight = -1
-        Me.sbMinus.Clickable = True
-        Me.sbMinus.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbMinus.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbMinus.Data = "-"
         Me.sbMinus.Data2 = "_"
-        Me.sbMinus.FlashInterval = 500
-        Me.sbMinus.holdDraw = False
-        Me.sbMinus.Lit = True
         Me.sbMinus.Location = New System.Drawing.Point(762, 126)
         Me.sbMinus.Name = "sbMinus"
-        Me.sbMinus.RedAlert = LCARS.LCARSalert.Normal
         Me.sbMinus.Size = New System.Drawing.Size(64, 64)
         Me.sbMinus.TabIndex = 418
         Me.sbMinus.Tag = "11"
@@ -2211,23 +1519,14 @@ Partial Class frmKeyboard
         'sbEqual
         '
         Me.sbEqual._ForceCaps = False
-        Me.sbEqual.AutoEllipsis = False
-        Me.sbEqual.Beeping = False
         Me.sbEqual.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbEqual.ButtonText = "="
         Me.sbEqual.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbEqual.ButtonTextHeight = -1
-        Me.sbEqual.Clickable = True
-        Me.sbEqual.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbEqual.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbEqual.Data = "="
         Me.sbEqual.Data2 = "+"
-        Me.sbEqual.FlashInterval = 500
-        Me.sbEqual.holdDraw = False
-        Me.sbEqual.Lit = True
         Me.sbEqual.Location = New System.Drawing.Point(833, 126)
         Me.sbEqual.Name = "sbEqual"
-        Me.sbEqual.RedAlert = LCARS.LCARSalert.Normal
         Me.sbEqual.Size = New System.Drawing.Size(64, 64)
         Me.sbEqual.TabIndex = 417
         Me.sbEqual.Tag = "12"
@@ -2236,23 +1535,14 @@ Partial Class frmKeyboard
         'sb4
         '
         Me.sb4._ForceCaps = False
-        Me.sb4.AutoEllipsis = False
-        Me.sb4.Beeping = False
         Me.sb4.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sb4.ButtonText = "4"
         Me.sb4.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sb4.ButtonTextHeight = -1
-        Me.sb4.Clickable = True
-        Me.sb4.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sb4.CustomAlertColor = System.Drawing.Color.Empty
         Me.sb4.Data = "4"
         Me.sb4.Data2 = "$"
-        Me.sb4.FlashInterval = 500
-        Me.sb4.holdDraw = False
-        Me.sb4.Lit = True
         Me.sb4.Location = New System.Drawing.Point(274, 126)
         Me.sb4.Name = "sb4"
-        Me.sb4.RedAlert = LCARS.LCARSalert.Normal
         Me.sb4.Size = New System.Drawing.Size(64, 64)
         Me.sb4.TabIndex = 416
         Me.sb4.Tag = "4"
@@ -2261,23 +1551,14 @@ Partial Class frmKeyboard
         'sb5
         '
         Me.sb5._ForceCaps = False
-        Me.sb5.AutoEllipsis = False
-        Me.sb5.Beeping = False
         Me.sb5.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sb5.ButtonText = "5"
         Me.sb5.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sb5.ButtonTextHeight = -1
-        Me.sb5.Clickable = True
-        Me.sb5.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sb5.CustomAlertColor = System.Drawing.Color.Empty
         Me.sb5.Data = "5"
         Me.sb5.Data2 = "%"
-        Me.sb5.FlashInterval = 500
-        Me.sb5.holdDraw = False
-        Me.sb5.Lit = True
         Me.sb5.Location = New System.Drawing.Point(344, 126)
         Me.sb5.Name = "sb5"
-        Me.sb5.RedAlert = LCARS.LCARSalert.Normal
         Me.sb5.Size = New System.Drawing.Size(64, 64)
         Me.sb5.TabIndex = 415
         Me.sb5.Tag = "5"
@@ -2286,23 +1567,15 @@ Partial Class frmKeyboard
         'sbBack
         '
         Me.sbBack._ForceCaps = False
-        Me.sbBack.AutoEllipsis = False
-        Me.sbBack.Beeping = False
         Me.sbBack.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbBack.ButtonText = "BACKSPACE"
         Me.sbBack.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbBack.ButtonTextHeight = -1
-        Me.sbBack.Clickable = True
         Me.sbBack.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.sbBack.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbBack.Data = "BACKSPACE"
         Me.sbBack.Data2 = "BACKSPACE"
-        Me.sbBack.FlashInterval = 500
-        Me.sbBack.holdDraw = False
-        Me.sbBack.Lit = True
         Me.sbBack.Location = New System.Drawing.Point(903, 126)
         Me.sbBack.Name = "sbBack"
-        Me.sbBack.RedAlert = LCARS.LCARSalert.Normal
         Me.sbBack.Size = New System.Drawing.Size(113, 64)
         Me.sbBack.TabIndex = 414
         Me.sbBack.Tag = "13"
@@ -2311,23 +1584,14 @@ Partial Class frmKeyboard
         'sb3
         '
         Me.sb3._ForceCaps = False
-        Me.sb3.AutoEllipsis = False
-        Me.sb3.Beeping = False
         Me.sb3.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sb3.ButtonText = "3"
         Me.sb3.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sb3.ButtonTextHeight = -1
-        Me.sb3.Clickable = True
-        Me.sb3.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sb3.CustomAlertColor = System.Drawing.Color.Empty
         Me.sb3.Data = "3"
         Me.sb3.Data2 = "#"
-        Me.sb3.FlashInterval = 500
-        Me.sb3.holdDraw = False
-        Me.sb3.Lit = True
         Me.sb3.Location = New System.Drawing.Point(204, 126)
         Me.sb3.Name = "sb3"
-        Me.sb3.RedAlert = LCARS.LCARSalert.Normal
         Me.sb3.Size = New System.Drawing.Size(64, 64)
         Me.sb3.TabIndex = 413
         Me.sb3.Tag = "3"
@@ -2336,23 +1600,14 @@ Partial Class frmKeyboard
         'sb2
         '
         Me.sb2._ForceCaps = False
-        Me.sb2.AutoEllipsis = False
-        Me.sb2.Beeping = False
         Me.sb2.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sb2.ButtonText = "2"
         Me.sb2.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sb2.ButtonTextHeight = -1
-        Me.sb2.Clickable = True
-        Me.sb2.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sb2.CustomAlertColor = System.Drawing.Color.Empty
         Me.sb2.Data = "2"
         Me.sb2.Data2 = "@"
-        Me.sb2.FlashInterval = 500
-        Me.sb2.holdDraw = False
-        Me.sb2.Lit = True
         Me.sb2.Location = New System.Drawing.Point(134, 126)
         Me.sb2.Name = "sb2"
-        Me.sb2.RedAlert = LCARS.LCARSalert.Normal
         Me.sb2.Size = New System.Drawing.Size(64, 64)
         Me.sb2.TabIndex = 412
         Me.sb2.Tag = "2"
@@ -2361,23 +1616,14 @@ Partial Class frmKeyboard
         'sb1
         '
         Me.sb1._ForceCaps = False
-        Me.sb1.AutoEllipsis = False
-        Me.sb1.Beeping = False
         Me.sb1.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sb1.ButtonText = "1"
         Me.sb1.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sb1.ButtonTextHeight = -1
-        Me.sb1.Clickable = True
-        Me.sb1.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sb1.CustomAlertColor = System.Drawing.Color.Empty
         Me.sb1.Data = "1"
         Me.sb1.Data2 = "!"
-        Me.sb1.FlashInterval = 500
-        Me.sb1.holdDraw = False
-        Me.sb1.Lit = True
         Me.sb1.Location = New System.Drawing.Point(64, 126)
         Me.sb1.Name = "sb1"
-        Me.sb1.RedAlert = LCARS.LCARSalert.Normal
         Me.sb1.Size = New System.Drawing.Size(64, 64)
         Me.sb1.TabIndex = 411
         Me.sb1.Tag = "1"
@@ -2386,23 +1632,15 @@ Partial Class frmKeyboard
         'sbTab
         '
         Me.sbTab._ForceCaps = False
-        Me.sbTab.AutoEllipsis = False
-        Me.sbTab.Beeping = False
         Me.sbTab.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbTab.ButtonText = "TAB"
         Me.sbTab.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbTab.ButtonTextHeight = -1
-        Me.sbTab.Clickable = True
         Me.sbTab.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.sbTab.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbTab.Data = "TAB"
         Me.sbTab.Data2 = "TAB"
-        Me.sbTab.FlashInterval = 500
-        Me.sbTab.holdDraw = False
-        Me.sbTab.Lit = True
         Me.sbTab.Location = New System.Drawing.Point(4, 196)
         Me.sbTab.Name = "sbTab"
-        Me.sbTab.RedAlert = LCARS.LCARSalert.Normal
         Me.sbTab.Size = New System.Drawing.Size(86, 64)
         Me.sbTab.TabIndex = 410
         Me.sbTab.Tag = "14."
@@ -2411,23 +1649,14 @@ Partial Class frmKeyboard
         'sbI
         '
         Me.sbI._ForceCaps = False
-        Me.sbI.AutoEllipsis = False
-        Me.sbI.Beeping = False
         Me.sbI.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbI.ButtonText = "i"
         Me.sbI.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbI.ButtonTextHeight = -1
-        Me.sbI.Clickable = True
-        Me.sbI.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbI.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbI.Data = "i"
         Me.sbI.Data2 = "I"
-        Me.sbI.FlashInterval = 500
-        Me.sbI.holdDraw = False
-        Me.sbI.Lit = True
         Me.sbI.Location = New System.Drawing.Point(586, 196)
         Me.sbI.Name = "sbI"
-        Me.sbI.RedAlert = LCARS.LCARSalert.Normal
         Me.sbI.Size = New System.Drawing.Size(64, 64)
         Me.sbI.TabIndex = 409
         Me.sbI.Tag = "22"
@@ -2436,23 +1665,14 @@ Partial Class frmKeyboard
         'sbU
         '
         Me.sbU._ForceCaps = False
-        Me.sbU.AutoEllipsis = False
-        Me.sbU.Beeping = False
         Me.sbU.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbU.ButtonText = "u"
         Me.sbU.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbU.ButtonTextHeight = -1
-        Me.sbU.Clickable = True
-        Me.sbU.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbU.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbU.Data = "u"
         Me.sbU.Data2 = "U"
-        Me.sbU.FlashInterval = 500
-        Me.sbU.holdDraw = False
-        Me.sbU.Lit = True
         Me.sbU.Location = New System.Drawing.Point(516, 196)
         Me.sbU.Name = "sbU"
-        Me.sbU.RedAlert = LCARS.LCARSalert.Normal
         Me.sbU.Size = New System.Drawing.Size(64, 64)
         Me.sbU.TabIndex = 408
         Me.sbU.Tag = "21"
@@ -2461,23 +1681,14 @@ Partial Class frmKeyboard
         'sbY
         '
         Me.sbY._ForceCaps = False
-        Me.sbY.AutoEllipsis = False
-        Me.sbY.Beeping = False
         Me.sbY.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbY.ButtonText = "y"
         Me.sbY.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbY.ButtonTextHeight = -1
-        Me.sbY.Clickable = True
-        Me.sbY.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbY.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbY.Data = "y"
         Me.sbY.Data2 = "Y"
-        Me.sbY.FlashInterval = 500
-        Me.sbY.holdDraw = False
-        Me.sbY.Lit = True
         Me.sbY.Location = New System.Drawing.Point(446, 196)
         Me.sbY.Name = "sbY"
-        Me.sbY.RedAlert = LCARS.LCARSalert.Normal
         Me.sbY.Size = New System.Drawing.Size(64, 64)
         Me.sbY.TabIndex = 407
         Me.sbY.Tag = "20"
@@ -2486,23 +1697,14 @@ Partial Class frmKeyboard
         'sbO
         '
         Me.sbO._ForceCaps = False
-        Me.sbO.AutoEllipsis = False
-        Me.sbO.Beeping = False
         Me.sbO.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbO.ButtonText = "o"
         Me.sbO.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbO.ButtonTextHeight = -1
-        Me.sbO.Clickable = True
-        Me.sbO.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbO.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbO.Data = "o"
         Me.sbO.Data2 = "O"
-        Me.sbO.FlashInterval = 500
-        Me.sbO.holdDraw = False
-        Me.sbO.Lit = True
         Me.sbO.Location = New System.Drawing.Point(656, 196)
         Me.sbO.Name = "sbO"
-        Me.sbO.RedAlert = LCARS.LCARSalert.Normal
         Me.sbO.Size = New System.Drawing.Size(64, 64)
         Me.sbO.TabIndex = 406
         Me.sbO.Tag = "23"
@@ -2511,23 +1713,14 @@ Partial Class frmKeyboard
         'sbP
         '
         Me.sbP._ForceCaps = False
-        Me.sbP.AutoEllipsis = False
-        Me.sbP.Beeping = False
         Me.sbP.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbP.ButtonText = "p"
         Me.sbP.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbP.ButtonTextHeight = -1
-        Me.sbP.Clickable = True
-        Me.sbP.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbP.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbP.Data = "p"
         Me.sbP.Data2 = "P"
-        Me.sbP.FlashInterval = 500
-        Me.sbP.holdDraw = False
-        Me.sbP.Lit = True
         Me.sbP.Location = New System.Drawing.Point(726, 196)
         Me.sbP.Name = "sbP"
-        Me.sbP.RedAlert = LCARS.LCARSalert.Normal
         Me.sbP.Size = New System.Drawing.Size(64, 64)
         Me.sbP.TabIndex = 405
         Me.sbP.Tag = "24"
@@ -2536,23 +1729,14 @@ Partial Class frmKeyboard
         'sbLBracket
         '
         Me.sbLBracket._ForceCaps = False
-        Me.sbLBracket.AutoEllipsis = False
-        Me.sbLBracket.Beeping = False
         Me.sbLBracket.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbLBracket.ButtonText = "["
         Me.sbLBracket.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbLBracket.ButtonTextHeight = -1
-        Me.sbLBracket.Clickable = True
-        Me.sbLBracket.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbLBracket.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbLBracket.Data = "["
         Me.sbLBracket.Data2 = "{"
-        Me.sbLBracket.FlashInterval = 500
-        Me.sbLBracket.holdDraw = False
-        Me.sbLBracket.Lit = True
         Me.sbLBracket.Location = New System.Drawing.Point(796, 196)
         Me.sbLBracket.Name = "sbLBracket"
-        Me.sbLBracket.RedAlert = LCARS.LCARSalert.Normal
         Me.sbLBracket.Size = New System.Drawing.Size(64, 64)
         Me.sbLBracket.TabIndex = 404
         Me.sbLBracket.Tag = "25"
@@ -2561,23 +1745,14 @@ Partial Class frmKeyboard
         'sbRBracket
         '
         Me.sbRBracket._ForceCaps = False
-        Me.sbRBracket.AutoEllipsis = False
-        Me.sbRBracket.Beeping = False
         Me.sbRBracket.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbRBracket.ButtonText = "]"
         Me.sbRBracket.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbRBracket.ButtonTextHeight = -1
-        Me.sbRBracket.Clickable = True
-        Me.sbRBracket.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbRBracket.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbRBracket.Data = "]"
         Me.sbRBracket.Data2 = "}"
-        Me.sbRBracket.FlashInterval = 500
-        Me.sbRBracket.holdDraw = False
-        Me.sbRBracket.Lit = True
         Me.sbRBracket.Location = New System.Drawing.Point(866, 196)
         Me.sbRBracket.Name = "sbRBracket"
-        Me.sbRBracket.RedAlert = LCARS.LCARSalert.Normal
         Me.sbRBracket.Size = New System.Drawing.Size(64, 64)
         Me.sbRBracket.TabIndex = 403
         Me.sbRBracket.Tag = "26"
@@ -2586,23 +1761,14 @@ Partial Class frmKeyboard
         'sbR
         '
         Me.sbR._ForceCaps = False
-        Me.sbR.AutoEllipsis = False
-        Me.sbR.Beeping = False
         Me.sbR.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbR.ButtonText = "r"
         Me.sbR.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbR.ButtonTextHeight = -1
-        Me.sbR.Clickable = True
-        Me.sbR.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbR.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbR.Data = "r"
         Me.sbR.Data2 = "R"
-        Me.sbR.FlashInterval = 500
-        Me.sbR.holdDraw = False
-        Me.sbR.Lit = True
         Me.sbR.Location = New System.Drawing.Point(306, 196)
         Me.sbR.Name = "sbR"
-        Me.sbR.RedAlert = LCARS.LCARSalert.Normal
         Me.sbR.Size = New System.Drawing.Size(64, 64)
         Me.sbR.TabIndex = 402
         Me.sbR.Tag = "18"
@@ -2611,23 +1777,14 @@ Partial Class frmKeyboard
         'sbT
         '
         Me.sbT._ForceCaps = False
-        Me.sbT.AutoEllipsis = False
-        Me.sbT.Beeping = False
         Me.sbT.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbT.ButtonText = "t"
         Me.sbT.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbT.ButtonTextHeight = -1
-        Me.sbT.Clickable = True
-        Me.sbT.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbT.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbT.Data = "t"
         Me.sbT.Data2 = "T"
-        Me.sbT.FlashInterval = 500
-        Me.sbT.holdDraw = False
-        Me.sbT.Lit = True
         Me.sbT.Location = New System.Drawing.Point(376, 196)
         Me.sbT.Name = "sbT"
-        Me.sbT.RedAlert = LCARS.LCARSalert.Normal
         Me.sbT.Size = New System.Drawing.Size(64, 64)
         Me.sbT.TabIndex = 401
         Me.sbT.Tag = "19"
@@ -2636,23 +1793,14 @@ Partial Class frmKeyboard
         'sbBackSlash
         '
         Me.sbBackSlash._ForceCaps = False
-        Me.sbBackSlash.AutoEllipsis = False
-        Me.sbBackSlash.Beeping = False
         Me.sbBackSlash.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbBackSlash.ButtonText = "\"
         Me.sbBackSlash.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbBackSlash.ButtonTextHeight = -1
-        Me.sbBackSlash.Clickable = True
-        Me.sbBackSlash.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbBackSlash.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbBackSlash.Data = "\"
         Me.sbBackSlash.Data2 = "|"
-        Me.sbBackSlash.FlashInterval = 500
-        Me.sbBackSlash.holdDraw = False
-        Me.sbBackSlash.Lit = True
         Me.sbBackSlash.Location = New System.Drawing.Point(936, 196)
         Me.sbBackSlash.Name = "sbBackSlash"
-        Me.sbBackSlash.RedAlert = LCARS.LCARSalert.Normal
         Me.sbBackSlash.Size = New System.Drawing.Size(80, 64)
         Me.sbBackSlash.TabIndex = 400
         Me.sbBackSlash.Tag = "27"
@@ -2661,23 +1809,14 @@ Partial Class frmKeyboard
         'sbE
         '
         Me.sbE._ForceCaps = False
-        Me.sbE.AutoEllipsis = False
-        Me.sbE.Beeping = False
         Me.sbE.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbE.ButtonText = "e"
         Me.sbE.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbE.ButtonTextHeight = -1
-        Me.sbE.Clickable = True
-        Me.sbE.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbE.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbE.Data = "e"
         Me.sbE.Data2 = "E"
-        Me.sbE.FlashInterval = 500
-        Me.sbE.holdDraw = False
-        Me.sbE.Lit = True
         Me.sbE.Location = New System.Drawing.Point(236, 196)
         Me.sbE.Name = "sbE"
-        Me.sbE.RedAlert = LCARS.LCARSalert.Normal
         Me.sbE.Size = New System.Drawing.Size(64, 64)
         Me.sbE.TabIndex = 399
         Me.sbE.Tag = "17"
@@ -2686,23 +1825,14 @@ Partial Class frmKeyboard
         'sbW
         '
         Me.sbW._ForceCaps = False
-        Me.sbW.AutoEllipsis = False
-        Me.sbW.Beeping = False
         Me.sbW.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbW.ButtonText = "w"
         Me.sbW.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbW.ButtonTextHeight = -1
-        Me.sbW.Clickable = True
-        Me.sbW.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbW.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbW.Data = "w"
         Me.sbW.Data2 = "W"
-        Me.sbW.FlashInterval = 500
-        Me.sbW.holdDraw = False
-        Me.sbW.Lit = True
         Me.sbW.Location = New System.Drawing.Point(166, 196)
         Me.sbW.Name = "sbW"
-        Me.sbW.RedAlert = LCARS.LCARSalert.Normal
         Me.sbW.Size = New System.Drawing.Size(64, 64)
         Me.sbW.TabIndex = 398
         Me.sbW.Tag = "16"
@@ -2711,23 +1841,14 @@ Partial Class frmKeyboard
         'sbQ
         '
         Me.sbQ._ForceCaps = False
-        Me.sbQ.AutoEllipsis = False
-        Me.sbQ.Beeping = False
         Me.sbQ.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbQ.ButtonText = "q"
         Me.sbQ.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbQ.ButtonTextHeight = -1
-        Me.sbQ.Clickable = True
-        Me.sbQ.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbQ.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbQ.Data = "q"
         Me.sbQ.Data2 = "Q"
-        Me.sbQ.FlashInterval = 500
-        Me.sbQ.holdDraw = False
-        Me.sbQ.Lit = True
         Me.sbQ.Location = New System.Drawing.Point(96, 196)
         Me.sbQ.Name = "sbQ"
-        Me.sbQ.RedAlert = LCARS.LCARSalert.Normal
         Me.sbQ.Size = New System.Drawing.Size(64, 64)
         Me.sbQ.TabIndex = 397
         Me.sbQ.Tag = "15"
@@ -2735,23 +1856,15 @@ Partial Class frmKeyboard
         '
         'btnnumlock
         '
-        Me.btnnumlock.AutoEllipsis = False
-        Me.btnnumlock.Beeping = False
         Me.btnnumlock.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.btnnumlock.ButtonText = "NUM LOCK"
         Me.btnnumlock.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnnumlock.ButtonTextHeight = -1
-        Me.btnnumlock.Clickable = True
         Me.btnnumlock.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.btnnumlock.CustomAlertColor = System.Drawing.Color.Empty
         Me.btnnumlock.Data = "NUM LOCK"
         Me.btnnumlock.Data2 = "NUM LOCK"
-        Me.btnnumlock.FlashInterval = 500
-        Me.btnnumlock.holdDraw = False
-        Me.btnnumlock.Lit = True
         Me.btnnumlock.Location = New System.Drawing.Point(165, 7)
         Me.btnnumlock.Name = "btnnumlock"
-        Me.btnnumlock.RedAlert = LCARS.LCARSalert.Normal
         Me.btnnumlock.Size = New System.Drawing.Size(97, 48)
         Me.btnnumlock.TabIndex = 417
         Me.btnnumlock.Tag = "15"
@@ -2759,23 +1872,15 @@ Partial Class frmKeyboard
         '
         'btnScrollLock
         '
-        Me.btnScrollLock.AutoEllipsis = False
-        Me.btnScrollLock.Beeping = False
         Me.btnScrollLock.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.btnScrollLock.ButtonText = "SCROLL LOK"
         Me.btnScrollLock.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnScrollLock.ButtonTextHeight = -1
-        Me.btnScrollLock.Clickable = True
         Me.btnScrollLock.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.btnScrollLock.CustomAlertColor = System.Drawing.Color.Empty
         Me.btnScrollLock.Data = "SCROLL LOK"
         Me.btnScrollLock.Data2 = "SCROLL LOK"
-        Me.btnScrollLock.FlashInterval = 500
-        Me.btnScrollLock.holdDraw = False
-        Me.btnScrollLock.Lit = True
         Me.btnScrollLock.Location = New System.Drawing.Point(165, 61)
         Me.btnScrollLock.Name = "btnScrollLock"
-        Me.btnScrollLock.RedAlert = LCARS.LCARSalert.Normal
         Me.btnScrollLock.Size = New System.Drawing.Size(97, 48)
         Me.btnScrollLock.TabIndex = 416
         Me.btnScrollLock.Tag = "15"
@@ -2783,23 +1888,15 @@ Partial Class frmKeyboard
         '
         'sbPgDown
         '
-        Me.sbPgDown.AutoEllipsis = False
-        Me.sbPgDown.Beeping = False
         Me.sbPgDown.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbPgDown.ButtonText = "PAGE DN"
         Me.sbPgDown.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbPgDown.ButtonTextHeight = -1
-        Me.sbPgDown.Clickable = True
         Me.sbPgDown.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.sbPgDown.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbPgDown.Data = "PAGE DN"
         Me.sbPgDown.Data2 = "PAGE DN"
-        Me.sbPgDown.FlashInterval = 500
-        Me.sbPgDown.holdDraw = False
-        Me.sbPgDown.Lit = True
         Me.sbPgDown.Location = New System.Drawing.Point(83, 61)
         Me.sbPgDown.Name = "sbPgDown"
-        Me.sbPgDown.RedAlert = LCARS.LCARSalert.Normal
         Me.sbPgDown.Size = New System.Drawing.Size(76, 48)
         Me.sbPgDown.TabIndex = 415
         Me.sbPgDown.Tag = "15"
@@ -2807,23 +1904,15 @@ Partial Class frmKeyboard
         '
         'sbPgUp
         '
-        Me.sbPgUp.AutoEllipsis = False
-        Me.sbPgUp.Beeping = False
         Me.sbPgUp.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbPgUp.ButtonText = "PAGE UP"
         Me.sbPgUp.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbPgUp.ButtonTextHeight = -1
-        Me.sbPgUp.Clickable = True
         Me.sbPgUp.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.sbPgUp.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbPgUp.Data = "PAGE UP"
         Me.sbPgUp.Data2 = "PAGE UP"
-        Me.sbPgUp.FlashInterval = 500
-        Me.sbPgUp.holdDraw = False
-        Me.sbPgUp.Lit = True
         Me.sbPgUp.Location = New System.Drawing.Point(3, 61)
         Me.sbPgUp.Name = "sbPgUp"
-        Me.sbPgUp.RedAlert = LCARS.LCARSalert.Normal
         Me.sbPgUp.Size = New System.Drawing.Size(74, 48)
         Me.sbPgUp.TabIndex = 414
         Me.sbPgUp.Tag = "15"
@@ -2832,23 +1921,15 @@ Partial Class frmKeyboard
         'sbREnter
         '
         Me.sbREnter._ForceCaps = False
-        Me.sbREnter.AutoEllipsis = False
-        Me.sbREnter.Beeping = False
         Me.sbREnter.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbREnter.ButtonText = "ENT"
         Me.sbREnter.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbREnter.ButtonTextHeight = -1
-        Me.sbREnter.Clickable = True
         Me.sbREnter.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.sbREnter.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbREnter.Data = "ENTER"
         Me.sbREnter.Data2 = "ENTER"
-        Me.sbREnter.FlashInterval = 500
-        Me.sbREnter.holdDraw = False
-        Me.sbREnter.Lit = True
         Me.sbREnter.Location = New System.Drawing.Point(210, 337)
         Me.sbREnter.Name = "sbREnter"
-        Me.sbREnter.RedAlert = LCARS.LCARSalert.Normal
         Me.sbREnter.Size = New System.Drawing.Size(51, 132)
         Me.sbREnter.TabIndex = 413
         Me.sbREnter.Tag = "12"
@@ -2857,23 +1938,14 @@ Partial Class frmKeyboard
         'sbRPeriod
         '
         Me.sbRPeriod._ForceCaps = False
-        Me.sbRPeriod.AutoEllipsis = False
-        Me.sbRPeriod.Beeping = False
         Me.sbRPeriod.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbRPeriod.ButtonText = "."
         Me.sbRPeriod.ButtonTextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.sbRPeriod.ButtonTextHeight = -1
-        Me.sbRPeriod.Clickable = True
-        Me.sbRPeriod.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbRPeriod.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbRPeriod.Data = "."
         Me.sbRPeriod.Data2 = "."
-        Me.sbRPeriod.FlashInterval = 500
-        Me.sbRPeriod.holdDraw = False
-        Me.sbRPeriod.Lit = True
         Me.sbRPeriod.Location = New System.Drawing.Point(210, 266)
         Me.sbRPeriod.Name = "sbRPeriod"
-        Me.sbRPeriod.RedAlert = LCARS.LCARSalert.Normal
         Me.sbRPeriod.Size = New System.Drawing.Size(51, 64)
         Me.sbRPeriod.TabIndex = 412
         Me.sbRPeriod.Tag = "12"
@@ -2882,23 +1954,15 @@ Partial Class frmKeyboard
         'sbRDel
         '
         Me.sbRDel._ForceCaps = False
-        Me.sbRDel.AutoEllipsis = False
-        Me.sbRDel.Beeping = False
         Me.sbRDel.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbRDel.ButtonText = "DEL"
         Me.sbRDel.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbRDel.ButtonTextHeight = -1
-        Me.sbRDel.Clickable = True
         Me.sbRDel.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.sbRDel.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbRDel.Data = "DEL"
         Me.sbRDel.Data2 = "DEL"
-        Me.sbRDel.FlashInterval = 500
-        Me.sbRDel.holdDraw = False
-        Me.sbRDel.Lit = True
         Me.sbRDel.Location = New System.Drawing.Point(141, 405)
         Me.sbRDel.Name = "sbRDel"
-        Me.sbRDel.RedAlert = LCARS.LCARSalert.Normal
         Me.sbRDel.Size = New System.Drawing.Size(63, 64)
         Me.sbRDel.TabIndex = 411
         Me.sbRDel.Tag = "12"
@@ -2907,23 +1971,14 @@ Partial Class frmKeyboard
         'sbR0
         '
         Me.sbR0._ForceCaps = False
-        Me.sbR0.AutoEllipsis = False
-        Me.sbR0.Beeping = False
         Me.sbR0.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbR0.ButtonText = "0"
         Me.sbR0.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbR0.ButtonTextHeight = -1
-        Me.sbR0.Clickable = True
-        Me.sbR0.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbR0.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbR0.Data = "0"
         Me.sbR0.Data2 = "INSERT"
-        Me.sbR0.FlashInterval = 500
-        Me.sbR0.holdDraw = False
-        Me.sbR0.Lit = True
         Me.sbR0.Location = New System.Drawing.Point(3, 406)
         Me.sbR0.Name = "sbR0"
-        Me.sbR0.RedAlert = LCARS.LCARSalert.Normal
         Me.sbR0.Size = New System.Drawing.Size(133, 64)
         Me.sbR0.TabIndex = 410
         Me.sbR0.Tag = "12"
@@ -2932,23 +1987,14 @@ Partial Class frmKeyboard
         'sbR3
         '
         Me.sbR3._ForceCaps = False
-        Me.sbR3.AutoEllipsis = False
-        Me.sbR3.Beeping = False
         Me.sbR3.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbR3.ButtonText = "3"
         Me.sbR3.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbR3.ButtonTextHeight = -1
-        Me.sbR3.Clickable = True
-        Me.sbR3.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbR3.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbR3.Data = "3"
         Me.sbR3.Data2 = "PGDN"
-        Me.sbR3.FlashInterval = 500
-        Me.sbR3.holdDraw = False
-        Me.sbR3.Lit = True
         Me.sbR3.Location = New System.Drawing.Point(141, 336)
         Me.sbR3.Name = "sbR3"
-        Me.sbR3.RedAlert = LCARS.LCARSalert.Normal
         Me.sbR3.Size = New System.Drawing.Size(64, 64)
         Me.sbR3.TabIndex = 409
         Me.sbR3.Tag = "12"
@@ -2957,23 +2003,14 @@ Partial Class frmKeyboard
         'sbR2
         '
         Me.sbR2._ForceCaps = False
-        Me.sbR2.AutoEllipsis = False
-        Me.sbR2.Beeping = False
         Me.sbR2.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbR2.ButtonText = "2"
         Me.sbR2.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbR2.ButtonTextHeight = -1
-        Me.sbR2.Clickable = True
-        Me.sbR2.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbR2.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbR2.Data = "2"
         Me.sbR2.Data2 = "DWN"
-        Me.sbR2.FlashInterval = 500
-        Me.sbR2.holdDraw = False
-        Me.sbR2.Lit = True
         Me.sbR2.Location = New System.Drawing.Point(72, 336)
         Me.sbR2.Name = "sbR2"
-        Me.sbR2.RedAlert = LCARS.LCARSalert.Normal
         Me.sbR2.Size = New System.Drawing.Size(64, 64)
         Me.sbR2.TabIndex = 408
         Me.sbR2.Tag = "12"
@@ -2982,23 +2019,14 @@ Partial Class frmKeyboard
         'sbR1
         '
         Me.sbR1._ForceCaps = False
-        Me.sbR1.AutoEllipsis = False
-        Me.sbR1.Beeping = False
         Me.sbR1.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbR1.ButtonText = "1"
         Me.sbR1.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbR1.ButtonTextHeight = -1
-        Me.sbR1.Clickable = True
-        Me.sbR1.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbR1.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbR1.Data = "1"
         Me.sbR1.Data2 = "END"
-        Me.sbR1.FlashInterval = 500
-        Me.sbR1.holdDraw = False
-        Me.sbR1.Lit = True
         Me.sbR1.Location = New System.Drawing.Point(3, 336)
         Me.sbR1.Name = "sbR1"
-        Me.sbR1.RedAlert = LCARS.LCARSalert.Normal
         Me.sbR1.Size = New System.Drawing.Size(64, 64)
         Me.sbR1.TabIndex = 407
         Me.sbR1.Tag = "12"
@@ -3007,23 +2035,14 @@ Partial Class frmKeyboard
         'sbR6
         '
         Me.sbR6._ForceCaps = False
-        Me.sbR6.AutoEllipsis = False
-        Me.sbR6.Beeping = False
         Me.sbR6.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbR6.ButtonText = "6"
         Me.sbR6.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbR6.ButtonTextHeight = -1
-        Me.sbR6.Clickable = True
-        Me.sbR6.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbR6.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbR6.Data = "6"
         Me.sbR6.Data2 = "RIGT"
-        Me.sbR6.FlashInterval = 500
-        Me.sbR6.holdDraw = False
-        Me.sbR6.Lit = True
         Me.sbR6.Location = New System.Drawing.Point(141, 266)
         Me.sbR6.Name = "sbR6"
-        Me.sbR6.RedAlert = LCARS.LCARSalert.Normal
         Me.sbR6.Size = New System.Drawing.Size(64, 64)
         Me.sbR6.TabIndex = 406
         Me.sbR6.Tag = "12"
@@ -3032,23 +2051,14 @@ Partial Class frmKeyboard
         'sbR5
         '
         Me.sbR5._ForceCaps = False
-        Me.sbR5.AutoEllipsis = False
-        Me.sbR5.Beeping = False
         Me.sbR5.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbR5.ButtonText = "5"
         Me.sbR5.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbR5.ButtonTextHeight = -1
-        Me.sbR5.Clickable = True
-        Me.sbR5.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbR5.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbR5.Data = "5"
         Me.sbR5.Data2 = "5"
-        Me.sbR5.FlashInterval = 500
-        Me.sbR5.holdDraw = False
-        Me.sbR5.Lit = True
         Me.sbR5.Location = New System.Drawing.Point(72, 266)
         Me.sbR5.Name = "sbR5"
-        Me.sbR5.RedAlert = LCARS.LCARSalert.Normal
         Me.sbR5.Size = New System.Drawing.Size(64, 64)
         Me.sbR5.TabIndex = 405
         Me.sbR5.Tag = "12"
@@ -3057,23 +2067,14 @@ Partial Class frmKeyboard
         'sbR4
         '
         Me.sbR4._ForceCaps = False
-        Me.sbR4.AutoEllipsis = False
-        Me.sbR4.Beeping = False
         Me.sbR4.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbR4.ButtonText = "4"
         Me.sbR4.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbR4.ButtonTextHeight = -1
-        Me.sbR4.Clickable = True
-        Me.sbR4.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbR4.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbR4.Data = "4"
         Me.sbR4.Data2 = "LEFT"
-        Me.sbR4.FlashInterval = 500
-        Me.sbR4.holdDraw = False
-        Me.sbR4.Lit = True
         Me.sbR4.Location = New System.Drawing.Point(3, 266)
         Me.sbR4.Name = "sbR4"
-        Me.sbR4.RedAlert = LCARS.LCARSalert.Normal
         Me.sbR4.Size = New System.Drawing.Size(64, 64)
         Me.sbR4.TabIndex = 404
         Me.sbR4.Tag = "12"
@@ -3082,23 +2083,14 @@ Partial Class frmKeyboard
         'sbREquals
         '
         Me.sbREquals._ForceCaps = False
-        Me.sbREquals.AutoEllipsis = False
-        Me.sbREquals.Beeping = False
         Me.sbREquals.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbREquals.ButtonText = "="
         Me.sbREquals.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbREquals.ButtonTextHeight = -1
-        Me.sbREquals.Clickable = True
-        Me.sbREquals.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbREquals.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbREquals.Data = "="
         Me.sbREquals.Data2 = "="
-        Me.sbREquals.FlashInterval = 500
-        Me.sbREquals.holdDraw = False
-        Me.sbREquals.Lit = True
         Me.sbREquals.Location = New System.Drawing.Point(210, 196)
         Me.sbREquals.Name = "sbREquals"
-        Me.sbREquals.RedAlert = LCARS.LCARSalert.Normal
         Me.sbREquals.Size = New System.Drawing.Size(51, 64)
         Me.sbREquals.TabIndex = 403
         Me.sbREquals.Tag = "12"
@@ -3107,23 +2099,14 @@ Partial Class frmKeyboard
         'sbR9
         '
         Me.sbR9._ForceCaps = False
-        Me.sbR9.AutoEllipsis = False
-        Me.sbR9.Beeping = False
         Me.sbR9.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbR9.ButtonText = "9"
         Me.sbR9.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbR9.ButtonTextHeight = -1
-        Me.sbR9.Clickable = True
-        Me.sbR9.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbR9.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbR9.Data = "9"
         Me.sbR9.Data2 = "PGUP"
-        Me.sbR9.FlashInterval = 500
-        Me.sbR9.holdDraw = False
-        Me.sbR9.Lit = True
         Me.sbR9.Location = New System.Drawing.Point(141, 196)
         Me.sbR9.Name = "sbR9"
-        Me.sbR9.RedAlert = LCARS.LCARSalert.Normal
         Me.sbR9.Size = New System.Drawing.Size(64, 64)
         Me.sbR9.TabIndex = 402
         Me.sbR9.Tag = "12"
@@ -3132,23 +2115,14 @@ Partial Class frmKeyboard
         'sbR8
         '
         Me.sbR8._ForceCaps = False
-        Me.sbR8.AutoEllipsis = False
-        Me.sbR8.Beeping = False
         Me.sbR8.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbR8.ButtonText = "8"
         Me.sbR8.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbR8.ButtonTextHeight = -1
-        Me.sbR8.Clickable = True
-        Me.sbR8.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbR8.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbR8.Data = "8"
         Me.sbR8.Data2 = "'UP'"
-        Me.sbR8.FlashInterval = 500
-        Me.sbR8.holdDraw = False
-        Me.sbR8.Lit = True
         Me.sbR8.Location = New System.Drawing.Point(72, 196)
         Me.sbR8.Name = "sbR8"
-        Me.sbR8.RedAlert = LCARS.LCARSalert.Normal
         Me.sbR8.Size = New System.Drawing.Size(64, 64)
         Me.sbR8.TabIndex = 401
         Me.sbR8.Tag = "12"
@@ -3157,23 +2131,14 @@ Partial Class frmKeyboard
         'sbR7
         '
         Me.sbR7._ForceCaps = False
-        Me.sbR7.AutoEllipsis = False
-        Me.sbR7.Beeping = False
         Me.sbR7.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbR7.ButtonText = "7"
         Me.sbR7.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbR7.ButtonTextHeight = -1
-        Me.sbR7.Clickable = True
-        Me.sbR7.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbR7.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbR7.Data = "7"
         Me.sbR7.Data2 = "HOME"
-        Me.sbR7.FlashInterval = 500
-        Me.sbR7.holdDraw = False
-        Me.sbR7.Lit = True
         Me.sbR7.Location = New System.Drawing.Point(3, 196)
         Me.sbR7.Name = "sbR7"
-        Me.sbR7.RedAlert = LCARS.LCARSalert.Normal
         Me.sbR7.Size = New System.Drawing.Size(64, 64)
         Me.sbR7.TabIndex = 400
         Me.sbR7.Tag = "12"
@@ -3182,23 +2147,14 @@ Partial Class frmKeyboard
         'sbRPlus
         '
         Me.sbRPlus._ForceCaps = False
-        Me.sbRPlus.AutoEllipsis = False
-        Me.sbRPlus.Beeping = False
         Me.sbRPlus.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbRPlus.ButtonText = "+"
         Me.sbRPlus.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbRPlus.ButtonTextHeight = -1
-        Me.sbRPlus.Clickable = True
-        Me.sbRPlus.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbRPlus.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbRPlus.Data = "+"
         Me.sbRPlus.Data2 = "+"
-        Me.sbRPlus.FlashInterval = 500
-        Me.sbRPlus.holdDraw = False
-        Me.sbRPlus.Lit = True
         Me.sbRPlus.Location = New System.Drawing.Point(210, 126)
         Me.sbRPlus.Name = "sbRPlus"
-        Me.sbRPlus.RedAlert = LCARS.LCARSalert.Normal
         Me.sbRPlus.Size = New System.Drawing.Size(52, 64)
         Me.sbRPlus.TabIndex = 399
         Me.sbRPlus.Tag = "12"
@@ -3207,23 +2163,14 @@ Partial Class frmKeyboard
         'sbRMinus
         '
         Me.sbRMinus._ForceCaps = False
-        Me.sbRMinus.AutoEllipsis = False
-        Me.sbRMinus.Beeping = False
         Me.sbRMinus.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbRMinus.ButtonText = "-"
         Me.sbRMinus.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbRMinus.ButtonTextHeight = -1
-        Me.sbRMinus.Clickable = True
-        Me.sbRMinus.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbRMinus.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbRMinus.Data = "-"
         Me.sbRMinus.Data2 = "-"
-        Me.sbRMinus.FlashInterval = 500
-        Me.sbRMinus.holdDraw = False
-        Me.sbRMinus.Lit = True
         Me.sbRMinus.Location = New System.Drawing.Point(141, 126)
         Me.sbRMinus.Name = "sbRMinus"
-        Me.sbRMinus.RedAlert = LCARS.LCARSalert.Normal
         Me.sbRMinus.Size = New System.Drawing.Size(64, 64)
         Me.sbRMinus.TabIndex = 398
         Me.sbRMinus.Tag = "12"
@@ -3232,23 +2179,14 @@ Partial Class frmKeyboard
         'sbRMultiply
         '
         Me.sbRMultiply._ForceCaps = False
-        Me.sbRMultiply.AutoEllipsis = False
-        Me.sbRMultiply.Beeping = False
         Me.sbRMultiply.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbRMultiply.ButtonText = "*"
         Me.sbRMultiply.ButtonTextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.sbRMultiply.ButtonTextHeight = -1
-        Me.sbRMultiply.Clickable = True
-        Me.sbRMultiply.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbRMultiply.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbRMultiply.Data = "*"
         Me.sbRMultiply.Data2 = "*"
-        Me.sbRMultiply.FlashInterval = 500
-        Me.sbRMultiply.holdDraw = False
-        Me.sbRMultiply.Lit = True
         Me.sbRMultiply.Location = New System.Drawing.Point(72, 126)
         Me.sbRMultiply.Name = "sbRMultiply"
-        Me.sbRMultiply.RedAlert = LCARS.LCARSalert.Normal
         Me.sbRMultiply.Size = New System.Drawing.Size(64, 64)
         Me.sbRMultiply.TabIndex = 397
         Me.sbRMultiply.Tag = "12"
@@ -3257,23 +2195,14 @@ Partial Class frmKeyboard
         'sbRForwardSlash
         '
         Me.sbRForwardSlash._ForceCaps = False
-        Me.sbRForwardSlash.AutoEllipsis = False
-        Me.sbRForwardSlash.Beeping = False
         Me.sbRForwardSlash.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbRForwardSlash.ButtonText = "/"
         Me.sbRForwardSlash.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbRForwardSlash.ButtonTextHeight = -1
-        Me.sbRForwardSlash.Clickable = True
-        Me.sbRForwardSlash.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbRForwardSlash.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbRForwardSlash.Data = "/"
         Me.sbRForwardSlash.Data2 = "/"
-        Me.sbRForwardSlash.FlashInterval = 500
-        Me.sbRForwardSlash.holdDraw = False
-        Me.sbRForwardSlash.Lit = True
         Me.sbRForwardSlash.Location = New System.Drawing.Point(3, 126)
         Me.sbRForwardSlash.Name = "sbRForwardSlash"
-        Me.sbRForwardSlash.RedAlert = LCARS.LCARSalert.Normal
         Me.sbRForwardSlash.Size = New System.Drawing.Size(64, 64)
         Me.sbRForwardSlash.TabIndex = 396
         Me.sbRForwardSlash.Tag = "12"

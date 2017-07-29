@@ -28,22 +28,12 @@ Partial Class frmTaskManager
         '
         'StandardButton1
         '
-        Me.StandardButton1.Beeping = False
         Me.StandardButton1.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.StandardButton1.ButtonText = "X"
         Me.StandardButton1.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.StandardButton1.ButtonTextHeight = 14
-        Me.StandardButton1.Clickable = True
         Me.StandardButton1.Color = LCARS.LCARScolorStyles.FunctionOffline
-        Me.StandardButton1.CustomAlertColor = System.Drawing.Color.Empty
-        Me.StandardButton1.Data = Nothing
-        Me.StandardButton1.Data2 = Nothing
-        Me.StandardButton1.FlashInterval = 500
-        Me.StandardButton1.holdDraw = False
-        Me.StandardButton1.Lit = True
         Me.StandardButton1.Location = New System.Drawing.Point(351, 0)
         Me.StandardButton1.Name = "StandardButton1"
-        Me.StandardButton1.RedAlert = LCARS.LCARSalert.Normal
         Me.StandardButton1.Size = New System.Drawing.Size(30, 32)
         Me.StandardButton1.TabIndex = 1
         Me.StandardButton1.Text = "X"

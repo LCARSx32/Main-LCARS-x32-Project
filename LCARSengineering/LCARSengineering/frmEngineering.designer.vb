@@ -76,7 +76,7 @@ Partial Class frmEngineering
         Me.Label4.ForeColor = System.Drawing.Color.Orange
         Me.Label4.Location = New System.Drawing.Point(137, 105)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(130, 28)
+        Me.Label4.Size = New System.Drawing.Size(129, 28)
         Me.Label4.TabIndex = 3
         Me.Label4.Text = "Memory Usage (%)"
         '
@@ -102,7 +102,7 @@ Partial Class frmEngineering
         Me.Label1.ForeColor = System.Drawing.Color.Orange
         Me.Label1.Location = New System.Drawing.Point(63, 471)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(145, 28)
+        Me.Label1.Size = New System.Drawing.Size(143, 28)
         Me.Label1.TabIndex = 5
         Me.Label1.Text = "Total Physical Memory"
         '
@@ -111,19 +111,9 @@ Partial Class frmEngineering
         Me.liMem.Beeping = True
         Me.liMem.ButtonText = "50%"
         Me.liMem.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.liMem.ButtonTextHeight = 14
         Me.liMem.Clickable = False
-        Me.liMem.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.liMem.Color2 = LCARS.LCARScolorStyles.FunctionUnavailable
-        Me.liMem.CustomAlertColor = System.Drawing.Color.Empty
-        Me.liMem.Data = Nothing
-        Me.liMem.Data2 = Nothing
-        Me.liMem.FlashInterval = 500
-        Me.liMem.holdDraw = False
-        Me.liMem.Lit = True
         Me.liMem.Location = New System.Drawing.Point(157, 126)
         Me.liMem.Name = "liMem"
-        Me.liMem.RedAlert = LCARS.LCARSalert.Normal
         Me.liMem.Size = New System.Drawing.Size(79, 342)
         Me.liMem.TabIndex = 77
         Me.liMem.Text = "50%"
@@ -134,19 +124,9 @@ Partial Class frmEngineering
         Me.liProc.Beeping = True
         Me.liProc.ButtonText = "50%"
         Me.liProc.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.liProc.ButtonTextHeight = 14
         Me.liProc.Clickable = False
-        Me.liProc.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.liProc.Color2 = LCARS.LCARScolorStyles.FunctionUnavailable
-        Me.liProc.CustomAlertColor = System.Drawing.Color.Empty
-        Me.liProc.Data = Nothing
-        Me.liProc.Data2 = Nothing
-        Me.liProc.FlashInterval = 500
-        Me.liProc.holdDraw = False
-        Me.liProc.Lit = True
         Me.liProc.Location = New System.Drawing.Point(34, 126)
         Me.liProc.Name = "liProc"
-        Me.liProc.RedAlert = LCARS.LCARSalert.Normal
         Me.liProc.Size = New System.Drawing.Size(79, 342)
         Me.liProc.TabIndex = 76
         Me.liProc.Text = "50%"
@@ -155,22 +135,12 @@ Partial Class frmEngineering
         'sbExitMyComp
         '
         Me.sbExitMyComp.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbExitMyComp.Beeping = False
         Me.sbExitMyComp.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbExitMyComp.ButtonText = "X"
         Me.sbExitMyComp.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
-        Me.sbExitMyComp.ButtonTextHeight = 14
-        Me.sbExitMyComp.Clickable = True
         Me.sbExitMyComp.Color = LCARS.LCARScolorStyles.FunctionOffline
-        Me.sbExitMyComp.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbExitMyComp.Data = Nothing
-        Me.sbExitMyComp.Data2 = Nothing
-        Me.sbExitMyComp.FlashInterval = 500
-        Me.sbExitMyComp.holdDraw = False
-        Me.sbExitMyComp.Lit = True
         Me.sbExitMyComp.Location = New System.Drawing.Point(599, 12)
         Me.sbExitMyComp.Name = "sbExitMyComp"
-        Me.sbExitMyComp.RedAlert = LCARS.LCARSalert.Normal
         Me.sbExitMyComp.Size = New System.Drawing.Size(29, 29)
         Me.sbExitMyComp.TabIndex = 72
         Me.sbExitMyComp.Text = "X"
@@ -497,19 +467,9 @@ Partial Class frmEngineering
         Me.TextButton1.ButtonText = "ENGINEERING"
         Me.TextButton1.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.TextButton1.ButtonTextHeight = 32
-        Me.TextButton1.ButtonType = LCARS.Controls.TextButton.TextButtonType.DoublePills
-        Me.TextButton1.Clickable = True
-        Me.TextButton1.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.TextButton1.CustomAlertColor = System.Drawing.Color.Empty
-        Me.TextButton1.Data = Nothing
-        Me.TextButton1.Data2 = Nothing
-        Me.TextButton1.FlashInterval = 500
-        Me.TextButton1.holdDraw = False
-        Me.TextButton1.Lit = True
         Me.TextButton1.Location = New System.Drawing.Point(12, 12)
         Me.TextButton1.Name = "TextButton1"
-        Me.TextButton1.RedAlert = LCARS.LCARSalert.Normal
-        Me.TextButton1.Size = New System.Drawing.Size(580, 31)
+        Me.TextButton1.Size = New System.Drawing.Size(580, 32)
         Me.TextButton1.TabIndex = 101
         Me.TextButton1.Text = "ENGINEERING"
         '

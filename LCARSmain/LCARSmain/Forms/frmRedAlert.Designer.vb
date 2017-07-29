@@ -36,22 +36,11 @@ Partial Class frmRedAlert
         'sbProperties
         '
         Me.sbProperties.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbProperties.Beeping = False
         Me.sbProperties.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbProperties.ButtonText = "MUTE"
         Me.sbProperties.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
-        Me.sbProperties.ButtonTextHeight = 14
-        Me.sbProperties.Clickable = True
-        Me.sbProperties.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbProperties.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbProperties.Data = Nothing
-        Me.sbProperties.Data2 = Nothing
-        Me.sbProperties.FlashInterval = 500
-        Me.sbProperties.holdDraw = False
-        Me.sbProperties.Lit = True
         Me.sbProperties.Location = New System.Drawing.Point(520, 89)
         Me.sbProperties.Name = "sbProperties"
-        Me.sbProperties.RedAlert = LCARS.LCARSalert.Normal
         Me.sbProperties.Size = New System.Drawing.Size(87, 26)
         Me.sbProperties.TabIndex = 72
         Me.sbProperties.Text = "MUTE"
@@ -60,46 +49,25 @@ Partial Class frmRedAlert
         '
         Me.FlatButton14.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.FlatButton14.Beeping = False
         Me.FlatButton14.ButtonText = ""
-        Me.FlatButton14.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.FlatButton14.ButtonTextHeight = 14
         Me.FlatButton14.Clickable = False
         Me.FlatButton14.Color = LCARS.LCARScolorStyles.StaticTan
-        Me.FlatButton14.CustomAlertColor = System.Drawing.Color.Empty
-        Me.FlatButton14.Data = Nothing
-        Me.FlatButton14.Data2 = Nothing
-        Me.FlatButton14.FlashInterval = 500
-        Me.FlatButton14.holdDraw = False
-        Me.FlatButton14.Lit = True
         Me.FlatButton14.Location = New System.Drawing.Point(509, 89)
         Me.FlatButton14.Name = "FlatButton14"
-        Me.FlatButton14.RedAlert = LCARS.LCARSalert.Normal
         Me.FlatButton14.Size = New System.Drawing.Size(5, 316)
         Me.FlatButton14.TabIndex = 76
         '
         'Elbow5
         '
         Me.Elbow5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Elbow5.Beeping = False
-        Me.Elbow5.ButtonHeight = 25
         Me.Elbow5.ButtonText = "OPTIONS"
         Me.Elbow5.ButtonTextAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.Elbow5.ButtonTextHeight = 14
         Me.Elbow5.ButtonWidth = 5
         Me.Elbow5.Clickable = False
         Me.Elbow5.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.Elbow5.CustomAlertColor = System.Drawing.Color.Empty
-        Me.Elbow5.Data = Nothing
-        Me.Elbow5.Data2 = Nothing
-        Me.Elbow5.ElbowRatio = New System.Drawing.Point(1, 1)
         Me.Elbow5.ElbowStyle = LCARS.Controls.Elbow.LCARSelbowStyles.UpperLeft
-        Me.Elbow5.FlashInterval = 500
-        Me.Elbow5.holdDraw = False
-        Me.Elbow5.Lit = True
         Me.Elbow5.Location = New System.Drawing.Point(509, 45)
         Me.Elbow5.Name = "Elbow5"
-        Me.Elbow5.RedAlert = LCARS.LCARSalert.Normal
         Me.Elbow5.Size = New System.Drawing.Size(113, 38)
         Me.Elbow5.TabIndex = 74
         Me.Elbow5.Text = "OPTIONS"
@@ -115,47 +83,24 @@ Partial Class frmRedAlert
         'Elbow6
         '
         Me.Elbow6.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Elbow6.Beeping = False
-        Me.Elbow6.ButtonHeight = 25
         Me.Elbow6.ButtonText = ""
-        Me.Elbow6.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.Elbow6.ButtonTextHeight = 14
         Me.Elbow6.ButtonWidth = 5
         Me.Elbow6.Clickable = False
         Me.Elbow6.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.Elbow6.CustomAlertColor = System.Drawing.Color.Empty
-        Me.Elbow6.Data = Nothing
-        Me.Elbow6.Data2 = Nothing
-        Me.Elbow6.ElbowRatio = New System.Drawing.Point(1, 1)
         Me.Elbow6.ElbowStyle = LCARS.Controls.Elbow.LCARSelbowStyles.LowerLeft
-        Me.Elbow6.FlashInterval = 500
-        Me.Elbow6.holdDraw = False
-        Me.Elbow6.Lit = True
         Me.Elbow6.Location = New System.Drawing.Point(509, 411)
         Me.Elbow6.Name = "Elbow6"
-        Me.Elbow6.RedAlert = LCARS.LCARSalert.Normal
         Me.Elbow6.Size = New System.Drawing.Size(113, 39)
         Me.Elbow6.TabIndex = 75
         '
         'StandardButton1
         '
         Me.StandardButton1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.StandardButton1.Beeping = False
         Me.StandardButton1.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.StandardButton1.ButtonText = "CANCEL ALERT"
         Me.StandardButton1.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
-        Me.StandardButton1.ButtonTextHeight = 14
-        Me.StandardButton1.Clickable = True
-        Me.StandardButton1.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.StandardButton1.CustomAlertColor = System.Drawing.Color.Empty
-        Me.StandardButton1.Data = Nothing
-        Me.StandardButton1.Data2 = Nothing
-        Me.StandardButton1.FlashInterval = 500
-        Me.StandardButton1.holdDraw = False
-        Me.StandardButton1.Lit = True
         Me.StandardButton1.Location = New System.Drawing.Point(520, 121)
         Me.StandardButton1.Name = "StandardButton1"
-        Me.StandardButton1.RedAlert = LCARS.LCARSalert.Normal
         Me.StandardButton1.Size = New System.Drawing.Size(87, 26)
         Me.StandardButton1.TabIndex = 77
         Me.StandardButton1.Text = "CANCEL ALERT"
@@ -163,22 +108,11 @@ Partial Class frmRedAlert
         'StandardButton2
         '
         Me.StandardButton2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.StandardButton2.Beeping = False
         Me.StandardButton2.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.StandardButton2.ButtonText = "TECHNICAL DATA"
         Me.StandardButton2.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
-        Me.StandardButton2.ButtonTextHeight = 14
-        Me.StandardButton2.Clickable = True
-        Me.StandardButton2.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.StandardButton2.CustomAlertColor = System.Drawing.Color.Empty
-        Me.StandardButton2.Data = Nothing
-        Me.StandardButton2.Data2 = Nothing
-        Me.StandardButton2.FlashInterval = 500
-        Me.StandardButton2.holdDraw = False
-        Me.StandardButton2.Lit = True
         Me.StandardButton2.Location = New System.Drawing.Point(520, 171)
         Me.StandardButton2.Name = "StandardButton2"
-        Me.StandardButton2.RedAlert = LCARS.LCARSalert.Normal
         Me.StandardButton2.Size = New System.Drawing.Size(87, 26)
         Me.StandardButton2.TabIndex = 78
         Me.StandardButton2.Text = "TECHNICAL DATA"
@@ -205,7 +139,7 @@ Partial Class frmRedAlert
         Me.Label1.ForeColor = System.Drawing.Color.Orange
         Me.Label1.Location = New System.Drawing.Point(175, 13)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(194, 72)
+        Me.Label1.Size = New System.Drawing.Size(196, 72)
         Me.Label1.TabIndex = 79
         Me.Label1.Text = "RED ALERT"
         '
@@ -213,21 +147,11 @@ Partial Class frmRedAlert
         '
         Me.FlatButton1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.FlatButton1.Beeping = False
         Me.FlatButton1.ButtonText = ""
-        Me.FlatButton1.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.FlatButton1.ButtonTextHeight = 14
         Me.FlatButton1.Clickable = False
         Me.FlatButton1.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.FlatButton1.CustomAlertColor = System.Drawing.Color.Empty
-        Me.FlatButton1.Data = Nothing
-        Me.FlatButton1.Data2 = Nothing
-        Me.FlatButton1.FlashInterval = 500
-        Me.FlatButton1.holdDraw = False
-        Me.FlatButton1.Lit = True
         Me.FlatButton1.Location = New System.Drawing.Point(617, 64)
         Me.FlatButton1.Name = "FlatButton1"
-        Me.FlatButton1.RedAlert = LCARS.LCARSalert.Normal
         Me.FlatButton1.Size = New System.Drawing.Size(5, 363)
         Me.FlatButton1.TabIndex = 59
         '

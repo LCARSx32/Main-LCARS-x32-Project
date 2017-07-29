@@ -33,23 +33,12 @@ Partial Class frmRunProgram
         '
         'TextButton1
         '
-        Me.TextButton1.Beeping = False
         Me.TextButton1.ButtonText = "RUN PROGRAM"
-        Me.TextButton1.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.TextButton1.ButtonTextHeight = 24
-        Me.TextButton1.ButtonType = LCARS.Controls.TextButton.TextButtonType.DoublePills
         Me.TextButton1.Clickable = False
-        Me.TextButton1.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.TextButton1.CustomAlertColor = System.Drawing.Color.Empty
-        Me.TextButton1.Data = Nothing
-        Me.TextButton1.Data2 = Nothing
-        Me.TextButton1.FlashInterval = 500
-        Me.TextButton1.holdDraw = False
-        Me.TextButton1.Lit = True
         Me.TextButton1.Location = New System.Drawing.Point(13, 13)
         Me.TextButton1.Name = "TextButton1"
-        Me.TextButton1.RedAlert = LCARS.LCARSalert.Normal
-        Me.TextButton1.Size = New System.Drawing.Size(405, 22)
+        Me.TextButton1.Size = New System.Drawing.Size(405, 24)
         Me.TextButton1.TabIndex = 0
         Me.TextButton1.Text = "RUN PROGRAM"
         '
@@ -65,65 +54,32 @@ Partial Class frmRunProgram
         '
         'fbBrowse
         '
-        Me.fbBrowse.Beeping = False
         Me.fbBrowse.ButtonText = "..."
         Me.fbBrowse.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.fbBrowse.ButtonTextHeight = 14
-        Me.fbBrowse.Clickable = True
-        Me.fbBrowse.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.fbBrowse.CustomAlertColor = System.Drawing.Color.Empty
-        Me.fbBrowse.Data = Nothing
-        Me.fbBrowse.Data2 = Nothing
-        Me.fbBrowse.FlashInterval = 500
-        Me.fbBrowse.holdDraw = False
-        Me.fbBrowse.Lit = True
         Me.fbBrowse.Location = New System.Drawing.Point(389, 67)
         Me.fbBrowse.Name = "fbBrowse"
-        Me.fbBrowse.RedAlert = LCARS.LCARSalert.Normal
         Me.fbBrowse.Size = New System.Drawing.Size(29, 29)
         Me.fbBrowse.TabIndex = 2
         Me.fbBrowse.Text = "..."
         '
         'sbOK
         '
-        Me.sbOK.Beeping = False
-        Me.sbOK.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbOK.ButtonText = "OK"
         Me.sbOK.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.sbOK.ButtonTextHeight = 14
-        Me.sbOK.Clickable = True
         Me.sbOK.Color = LCARS.LCARScolorStyles.PrimaryFunction
-        Me.sbOK.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbOK.Data = Nothing
-        Me.sbOK.Data2 = Nothing
-        Me.sbOK.FlashInterval = 500
-        Me.sbOK.holdDraw = False
-        Me.sbOK.Lit = True
         Me.sbOK.Location = New System.Drawing.Point(295, 129)
         Me.sbOK.Name = "sbOK"
-        Me.sbOK.RedAlert = LCARS.LCARSalert.Normal
         Me.sbOK.Size = New System.Drawing.Size(123, 31)
         Me.sbOK.TabIndex = 3
         Me.sbOK.Text = "OK"
         '
         'sbCancel
         '
-        Me.sbCancel.Beeping = False
-        Me.sbCancel.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbCancel.ButtonText = "CANCEL"
         Me.sbCancel.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.sbCancel.ButtonTextHeight = 14
-        Me.sbCancel.Clickable = True
         Me.sbCancel.Color = LCARS.LCARScolorStyles.CriticalFunction
-        Me.sbCancel.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbCancel.Data = Nothing
-        Me.sbCancel.Data2 = Nothing
-        Me.sbCancel.FlashInterval = 500
-        Me.sbCancel.holdDraw = False
-        Me.sbCancel.Lit = True
         Me.sbCancel.Location = New System.Drawing.Point(166, 129)
         Me.sbCancel.Name = "sbCancel"
-        Me.sbCancel.RedAlert = LCARS.LCARSalert.Normal
         Me.sbCancel.Size = New System.Drawing.Size(123, 31)
         Me.sbCancel.TabIndex = 3
         Me.sbCancel.Text = "CANCEL"

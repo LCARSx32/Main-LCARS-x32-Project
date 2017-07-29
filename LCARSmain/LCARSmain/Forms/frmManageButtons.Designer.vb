@@ -86,23 +86,11 @@ Partial Class frmManageButtons
         'sbUBaddCancel
         '
         Me.sbUBaddCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbUBaddCancel.AutoEllipsis = False
-        Me.sbUBaddCancel.Beeping = False
-        Me.sbUBaddCancel.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbUBaddCancel.ButtonText = "DONE"
         Me.sbUBaddCancel.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.sbUBaddCancel.ButtonTextHeight = 14
-        Me.sbUBaddCancel.Clickable = True
         Me.sbUBaddCancel.Color = LCARS.LCARScolorStyles.PrimaryFunction
-        Me.sbUBaddCancel.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbUBaddCancel.Data = Nothing
-        Me.sbUBaddCancel.Data2 = Nothing
-        Me.sbUBaddCancel.FlashInterval = 500
-        Me.sbUBaddCancel.holdDraw = False
-        Me.sbUBaddCancel.Lit = True
         Me.sbUBaddCancel.Location = New System.Drawing.Point(538, 128)
         Me.sbUBaddCancel.Name = "sbUBaddCancel"
-        Me.sbUBaddCancel.RedAlert = LCARS.LCARSalert.Normal
         Me.sbUBaddCancel.Size = New System.Drawing.Size(79, 27)
         Me.sbUBaddCancel.TabIndex = 9
         Me.sbUBaddCancel.Text = "DONE"
@@ -132,23 +120,11 @@ Partial Class frmManageButtons
         'sbUBbrowse
         '
         Me.sbUBbrowse.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbUBbrowse.AutoEllipsis = False
-        Me.sbUBbrowse.Beeping = False
-        Me.sbUBbrowse.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbUBbrowse.ButtonText = "..."
         Me.sbUBbrowse.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
-        Me.sbUBbrowse.ButtonTextHeight = 14
-        Me.sbUBbrowse.Clickable = True
         Me.sbUBbrowse.Color = LCARS.LCARScolorStyles.NavigationFunction
-        Me.sbUBbrowse.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbUBbrowse.Data = Nothing
-        Me.sbUBbrowse.Data2 = Nothing
-        Me.sbUBbrowse.FlashInterval = 500
-        Me.sbUBbrowse.holdDraw = False
-        Me.sbUBbrowse.Lit = True
         Me.sbUBbrowse.Location = New System.Drawing.Point(538, 80)
         Me.sbUBbrowse.Name = "sbUBbrowse"
-        Me.sbUBbrowse.RedAlert = LCARS.LCARSalert.Normal
         Me.sbUBbrowse.Size = New System.Drawing.Size(79, 29)
         Me.sbUBbrowse.TabIndex = 6
         Me.sbUBbrowse.Text = "..."
@@ -156,23 +132,11 @@ Partial Class frmManageButtons
         'sbUBok
         '
         Me.sbUBok.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbUBok.AutoEllipsis = False
-        Me.sbUBok.Beeping = False
-        Me.sbUBok.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbUBok.ButtonText = "OK"
         Me.sbUBok.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.sbUBok.ButtonTextHeight = 14
-        Me.sbUBok.Clickable = True
         Me.sbUBok.Color = LCARS.LCARScolorStyles.StaticBlue
-        Me.sbUBok.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbUBok.Data = Nothing
-        Me.sbUBok.Data2 = Nothing
-        Me.sbUBok.FlashInterval = 500
-        Me.sbUBok.holdDraw = False
-        Me.sbUBok.Lit = True
         Me.sbUBok.Location = New System.Drawing.Point(459, 128)
         Me.sbUBok.Name = "sbUBok"
-        Me.sbUBok.RedAlert = LCARS.LCARSalert.Normal
         Me.sbUBok.Size = New System.Drawing.Size(73, 27)
         Me.sbUBok.TabIndex = 3
         Me.sbUBok.Text = "OK"
@@ -196,23 +160,11 @@ Partial Class frmManageButtons
         'sbRemoveUB
         '
         Me.sbRemoveUB.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbRemoveUB.AutoEllipsis = False
-        Me.sbRemoveUB.Beeping = False
-        Me.sbRemoveUB.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbRemoveUB.ButtonText = "REMOVE"
         Me.sbRemoveUB.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.sbRemoveUB.ButtonTextHeight = 14
-        Me.sbRemoveUB.Clickable = True
         Me.sbRemoveUB.Color = LCARS.LCARScolorStyles.FunctionOffline
-        Me.sbRemoveUB.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbRemoveUB.Data = Nothing
-        Me.sbRemoveUB.Data2 = Nothing
-        Me.sbRemoveUB.FlashInterval = 500
-        Me.sbRemoveUB.holdDraw = False
-        Me.sbRemoveUB.Lit = True
         Me.sbRemoveUB.Location = New System.Drawing.Point(538, 201)
         Me.sbRemoveUB.Name = "sbRemoveUB"
-        Me.sbRemoveUB.RedAlert = LCARS.LCARSalert.Normal
         Me.sbRemoveUB.Size = New System.Drawing.Size(79, 32)
         Me.sbRemoveUB.TabIndex = 3
         Me.sbRemoveUB.Text = "REMOVE"
@@ -220,23 +172,11 @@ Partial Class frmManageButtons
         'sbToTop
         '
         Me.sbToTop.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbToTop.AutoEllipsis = False
-        Me.sbToTop.Beeping = False
-        Me.sbToTop.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbToTop.ButtonText = "MOVE TO TOP"
         Me.sbToTop.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.sbToTop.ButtonTextHeight = 14
-        Me.sbToTop.Clickable = True
         Me.sbToTop.Color = LCARS.LCARScolorStyles.StaticBlue
-        Me.sbToTop.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbToTop.Data = Nothing
-        Me.sbToTop.Data2 = Nothing
-        Me.sbToTop.FlashInterval = 500
-        Me.sbToTop.holdDraw = False
-        Me.sbToTop.Lit = True
         Me.sbToTop.Location = New System.Drawing.Point(155, 201)
         Me.sbToTop.Name = "sbToTop"
-        Me.sbToTop.RedAlert = LCARS.LCARSalert.Normal
         Me.sbToTop.Size = New System.Drawing.Size(104, 32)
         Me.sbToTop.TabIndex = 2
         Me.sbToTop.Text = "MOVE TO TOP"
@@ -244,23 +184,11 @@ Partial Class frmManageButtons
         'sbUp
         '
         Me.sbUp.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbUp.AutoEllipsis = False
-        Me.sbUp.Beeping = False
-        Me.sbUp.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbUp.ButtonText = "MOVE UP"
         Me.sbUp.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.sbUp.ButtonTextHeight = 14
-        Me.sbUp.Clickable = True
         Me.sbUp.Color = LCARS.LCARScolorStyles.StaticBlue
-        Me.sbUp.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbUp.Data = Nothing
-        Me.sbUp.Data2 = Nothing
-        Me.sbUp.FlashInterval = 500
-        Me.sbUp.holdDraw = False
-        Me.sbUp.Lit = True
         Me.sbUp.Location = New System.Drawing.Point(265, 201)
         Me.sbUp.Name = "sbUp"
-        Me.sbUp.RedAlert = LCARS.LCARSalert.Normal
         Me.sbUp.Size = New System.Drawing.Size(84, 32)
         Me.sbUp.TabIndex = 2
         Me.sbUp.Text = "MOVE UP"
@@ -268,23 +196,11 @@ Partial Class frmManageButtons
         'sbDown
         '
         Me.sbDown.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbDown.AutoEllipsis = False
-        Me.sbDown.Beeping = False
-        Me.sbDown.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbDown.ButtonText = "MOVE DOWN"
         Me.sbDown.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.sbDown.ButtonTextHeight = 14
-        Me.sbDown.Clickable = True
         Me.sbDown.Color = LCARS.LCARScolorStyles.StaticBlue
-        Me.sbDown.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbDown.Data = Nothing
-        Me.sbDown.Data2 = Nothing
-        Me.sbDown.FlashInterval = 500
-        Me.sbDown.holdDraw = False
-        Me.sbDown.Lit = True
         Me.sbDown.Location = New System.Drawing.Point(355, 201)
         Me.sbDown.Name = "sbDown"
-        Me.sbDown.RedAlert = LCARS.LCARSalert.Normal
         Me.sbDown.Size = New System.Drawing.Size(98, 32)
         Me.sbDown.TabIndex = 2
         Me.sbDown.Text = "MOVE DOWN"
@@ -292,23 +208,11 @@ Partial Class frmManageButtons
         'sbEditUB
         '
         Me.sbEditUB.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbEditUB.AutoEllipsis = False
-        Me.sbEditUB.Beeping = False
-        Me.sbEditUB.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbEditUB.ButtonText = "EDIT"
         Me.sbEditUB.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.sbEditUB.ButtonTextHeight = 14
-        Me.sbEditUB.Clickable = True
         Me.sbEditUB.Color = LCARS.LCARScolorStyles.StaticBlue
-        Me.sbEditUB.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbEditUB.Data = Nothing
-        Me.sbEditUB.Data2 = Nothing
-        Me.sbEditUB.FlashInterval = 500
-        Me.sbEditUB.holdDraw = False
-        Me.sbEditUB.Lit = True
         Me.sbEditUB.Location = New System.Drawing.Point(459, 201)
         Me.sbEditUB.Name = "sbEditUB"
-        Me.sbEditUB.RedAlert = LCARS.LCARSalert.Normal
         Me.sbEditUB.Size = New System.Drawing.Size(73, 32)
         Me.sbEditUB.TabIndex = 2
         Me.sbEditUB.Text = "EDIT"
@@ -318,11 +222,8 @@ Partial Class frmManageButtons
         Me.lstUserButtons.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lstUserButtons.BackColor = System.Drawing.Color.Black
         Me.lstUserButtons.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.lstUserButtons.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.lstUserButtons.Font = New System.Drawing.Font("LCARS", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lstUserButtons.ForeColor = System.Drawing.Color.Orange
         Me.lstUserButtons.FormattingEnabled = True
         Me.lstUserButtons.ItemHeight = 28
         Me.lstUserButtons.Location = New System.Drawing.Point(0, 3)
@@ -346,23 +247,12 @@ Partial Class frmManageButtons
         'sbExitMyComp
         '
         Me.sbExitMyComp.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbExitMyComp.AutoEllipsis = False
-        Me.sbExitMyComp.Beeping = False
         Me.sbExitMyComp.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbExitMyComp.ButtonText = "X"
         Me.sbExitMyComp.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
-        Me.sbExitMyComp.ButtonTextHeight = 14
-        Me.sbExitMyComp.Clickable = True
         Me.sbExitMyComp.Color = LCARS.LCARScolorStyles.FunctionOffline
-        Me.sbExitMyComp.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbExitMyComp.Data = Nothing
-        Me.sbExitMyComp.Data2 = Nothing
-        Me.sbExitMyComp.FlashInterval = 500
-        Me.sbExitMyComp.holdDraw = False
-        Me.sbExitMyComp.Lit = True
         Me.sbExitMyComp.Location = New System.Drawing.Point(596, 3)
         Me.sbExitMyComp.Name = "sbExitMyComp"
-        Me.sbExitMyComp.RedAlert = LCARS.LCARSalert.Normal
         Me.sbExitMyComp.Size = New System.Drawing.Size(33, 32)
         Me.sbExitMyComp.TabIndex = 87
         Me.sbExitMyComp.Text = "X"
@@ -371,22 +261,11 @@ Partial Class frmManageButtons
         '
         Me.sbTitle.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbTitle.Beeping = False
-        Me.sbTitle.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbTitle.ButtonText = "PERSONAL BUTTONS MANAGER"
-        Me.sbTitle.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.sbTitle.ButtonTextHeight = 20
         Me.sbTitle.Clickable = False
-        Me.sbTitle.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbTitle.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbTitle.Data = Nothing
-        Me.sbTitle.Data2 = Nothing
-        Me.sbTitle.FlashInterval = 500
-        Me.sbTitle.holdDraw = False
-        Me.sbTitle.Lit = True
         Me.sbTitle.Location = New System.Drawing.Point(12, 3)
         Me.sbTitle.Name = "sbTitle"
-        Me.sbTitle.RedAlert = LCARS.LCARSalert.Normal
         Me.sbTitle.Size = New System.Drawing.Size(578, 32)
         Me.sbTitle.TabIndex = 88
         Me.sbTitle.Text = "PERSONAL BUTTONS MANAGER"

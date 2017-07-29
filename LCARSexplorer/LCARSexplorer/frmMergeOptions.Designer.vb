@@ -34,45 +34,25 @@ Partial Class frmMergeOptions
         '
         'tbTitle
         '
-        Me.tbTitle.Beeping = False
         Me.tbTitle.ButtonText = "MERGE DIRECTORY?"
-        Me.tbTitle.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.tbTitle.ButtonTextHeight = 24
-        Me.tbTitle.ButtonType = LCARS.Controls.TextButton.TextButtonType.DoublePills
         Me.tbTitle.Clickable = False
         Me.tbTitle.Color = LCARS.LCARScolorStyles.FunctionOffline
-        Me.tbTitle.CustomAlertColor = System.Drawing.Color.Empty
-        Me.tbTitle.Data = Nothing
-        Me.tbTitle.Data2 = Nothing
-        Me.tbTitle.FlashInterval = 500
-        Me.tbTitle.holdDraw = False
-        Me.tbTitle.Lit = True
         Me.tbTitle.Location = New System.Drawing.Point(12, 12)
         Me.tbTitle.Name = "tbTitle"
-        Me.tbTitle.RedAlert = LCARS.LCARSalert.Normal
-        Me.tbTitle.Size = New System.Drawing.Size(390, 22)
+        Me.tbTitle.Size = New System.Drawing.Size(390, 24)
         Me.tbTitle.TabIndex = 0
         Me.tbTitle.Text = "MERGE DIRECTORY?"
         '
         'tbBottom
         '
-        Me.tbBottom.Beeping = False
         Me.tbBottom.ButtonText = ""
-        Me.tbBottom.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.tbBottom.ButtonTextHeight = 24
-        Me.tbBottom.ButtonType = LCARS.Controls.TextButton.TextButtonType.DoublePills
         Me.tbBottom.Clickable = False
         Me.tbBottom.Color = LCARS.LCARScolorStyles.FunctionOffline
-        Me.tbBottom.CustomAlertColor = System.Drawing.Color.Empty
-        Me.tbBottom.Data = Nothing
-        Me.tbBottom.Data2 = Nothing
-        Me.tbBottom.FlashInterval = 500
-        Me.tbBottom.holdDraw = False
-        Me.tbBottom.Lit = True
         Me.tbBottom.Location = New System.Drawing.Point(12, 153)
         Me.tbBottom.Name = "tbBottom"
-        Me.tbBottom.RedAlert = LCARS.LCARSalert.Normal
-        Me.tbBottom.Size = New System.Drawing.Size(390, 22)
+        Me.tbBottom.Size = New System.Drawing.Size(390, 24)
         Me.tbBottom.TabIndex = 1
         '
         'lblPrompt
@@ -85,110 +65,59 @@ Partial Class frmMergeOptions
         '
         'sbDoNotCopy
         '
-        Me.sbDoNotCopy.Beeping = False
-        Me.sbDoNotCopy.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbDoNotCopy.ButtonText = "DO NOT COPY"
         Me.sbDoNotCopy.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.sbDoNotCopy.ButtonTextHeight = 14
-        Me.sbDoNotCopy.Clickable = True
         Me.sbDoNotCopy.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.sbDoNotCopy.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbDoNotCopy.Data = Nothing
-        Me.sbDoNotCopy.Data2 = Nothing
-        Me.sbDoNotCopy.FlashInterval = 500
-        Me.sbDoNotCopy.holdDraw = False
         Me.sbDoNotCopy.Lit = False
         Me.sbDoNotCopy.Location = New System.Drawing.Point(13, 69)
         Me.sbDoNotCopy.Name = "sbDoNotCopy"
-        Me.sbDoNotCopy.RedAlert = LCARS.LCARSalert.Normal
         Me.sbDoNotCopy.Size = New System.Drawing.Size(144, 22)
         Me.sbDoNotCopy.TabIndex = 3
         Me.sbDoNotCopy.Text = "DO NOT COPY"
         '
         'sbmerge
         '
-        Me.sbmerge.Beeping = False
-        Me.sbmerge.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbmerge.ButtonText = "MERGE DIRECTORIES"
         Me.sbmerge.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.sbmerge.ButtonTextHeight = 14
-        Me.sbmerge.Clickable = True
         Me.sbmerge.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.sbmerge.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbmerge.Data = Nothing
-        Me.sbmerge.Data2 = Nothing
-        Me.sbmerge.FlashInterval = 500
-        Me.sbmerge.holdDraw = False
         Me.sbmerge.Lit = False
         Me.sbmerge.Location = New System.Drawing.Point(13, 97)
         Me.sbmerge.Name = "sbmerge"
-        Me.sbmerge.RedAlert = LCARS.LCARSalert.Normal
         Me.sbmerge.Size = New System.Drawing.Size(144, 22)
         Me.sbmerge.TabIndex = 3
         Me.sbmerge.Text = "MERGE DIRECTORIES"
         '
         'sbKeepBoth
         '
-        Me.sbKeepBoth.Beeping = False
-        Me.sbKeepBoth.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbKeepBoth.ButtonText = "KEEP BOTH DIRECTORIES"
         Me.sbKeepBoth.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.sbKeepBoth.ButtonTextHeight = 14
-        Me.sbKeepBoth.Clickable = True
         Me.sbKeepBoth.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.sbKeepBoth.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbKeepBoth.Data = Nothing
-        Me.sbKeepBoth.Data2 = Nothing
-        Me.sbKeepBoth.FlashInterval = 500
-        Me.sbKeepBoth.holdDraw = False
         Me.sbKeepBoth.Lit = False
         Me.sbKeepBoth.Location = New System.Drawing.Point(13, 125)
         Me.sbKeepBoth.Name = "sbKeepBoth"
-        Me.sbKeepBoth.RedAlert = LCARS.LCARSalert.Normal
         Me.sbKeepBoth.Size = New System.Drawing.Size(144, 22)
         Me.sbKeepBoth.TabIndex = 3
         Me.sbKeepBoth.Text = "KEEP BOTH DIRECTORIES"
         '
         'sbOK
         '
-        Me.sbOK.Beeping = False
-        Me.sbOK.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbOK.ButtonText = "OK"
         Me.sbOK.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.sbOK.ButtonTextHeight = 14
-        Me.sbOK.Clickable = True
         Me.sbOK.Color = LCARS.LCARScolorStyles.PrimaryFunction
-        Me.sbOK.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbOK.Data = Nothing
-        Me.sbOK.Data2 = Nothing
-        Me.sbOK.FlashInterval = 500
-        Me.sbOK.holdDraw = False
-        Me.sbOK.Lit = True
         Me.sbOK.Location = New System.Drawing.Point(319, 125)
         Me.sbOK.Name = "sbOK"
-        Me.sbOK.RedAlert = LCARS.LCARSalert.Normal
         Me.sbOK.Size = New System.Drawing.Size(83, 22)
         Me.sbOK.TabIndex = 3
         Me.sbOK.Text = "OK"
         '
         'sbGlobal
         '
-        Me.sbGlobal.Beeping = False
-        Me.sbGlobal.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbGlobal.ButtonText = "USE FOR ALL OTHER CONFLICTS"
         Me.sbGlobal.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.sbGlobal.ButtonTextHeight = 14
-        Me.sbGlobal.Clickable = True
         Me.sbGlobal.Color = LCARS.LCARScolorStyles.PrimaryFunction
-        Me.sbGlobal.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbGlobal.Data = Nothing
-        Me.sbGlobal.Data2 = Nothing
-        Me.sbGlobal.FlashInterval = 500
-        Me.sbGlobal.holdDraw = False
         Me.sbGlobal.Lit = False
         Me.sbGlobal.Location = New System.Drawing.Point(230, 69)
         Me.sbGlobal.Name = "sbGlobal"
-        Me.sbGlobal.RedAlert = LCARS.LCARSalert.Normal
         Me.sbGlobal.Size = New System.Drawing.Size(172, 22)
         Me.sbGlobal.TabIndex = 3
         Me.sbGlobal.Text = "USE FOR ALL OTHER CONFLICTS"

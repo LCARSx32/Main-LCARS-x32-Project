@@ -34,22 +34,11 @@ Partial Class frmUpdate
         'sbCancel
         '
         Me.sbCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbCancel.Beeping = False
-        Me.sbCancel.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbCancel.ButtonText = "CANCEL"
         Me.sbCancel.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.sbCancel.ButtonTextHeight = 14
-        Me.sbCancel.Clickable = True
         Me.sbCancel.Color = LCARS.LCARScolorStyles.CriticalFunction
-        Me.sbCancel.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbCancel.Data = Nothing
-        Me.sbCancel.Data2 = Nothing
-        Me.sbCancel.FlashInterval = 500
-        Me.sbCancel.holdDraw = False
-        Me.sbCancel.Lit = True
         Me.sbCancel.Location = New System.Drawing.Point(518, 387)
         Me.sbCancel.Name = "sbCancel"
-        Me.sbCancel.RedAlert = LCARS.LCARSalert.Normal
         Me.sbCancel.Size = New System.Drawing.Size(126, 35)
         Me.sbCancel.TabIndex = 0
         Me.sbCancel.Text = "CANCEL"
@@ -58,22 +47,11 @@ Partial Class frmUpdate
         '
         Me.tbTitle.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbTitle.Beeping = False
         Me.tbTitle.ButtonText = "LCARS UPDATE"
-        Me.tbTitle.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.tbTitle.ButtonTextHeight = 24
-        Me.tbTitle.ButtonType = LCARS.Controls.TextButton.TextButtonType.DoublePills
         Me.tbTitle.Clickable = False
-        Me.tbTitle.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.tbTitle.CustomAlertColor = System.Drawing.Color.Empty
-        Me.tbTitle.Data = Nothing
-        Me.tbTitle.Data2 = Nothing
-        Me.tbTitle.FlashInterval = 500
-        Me.tbTitle.holdDraw = False
-        Me.tbTitle.Lit = True
         Me.tbTitle.Location = New System.Drawing.Point(13, 13)
         Me.tbTitle.Name = "tbTitle"
-        Me.tbTitle.RedAlert = LCARS.LCARSalert.Normal
         Me.tbTitle.Size = New System.Drawing.Size(631, 24)
         Me.tbTitle.TabIndex = 1
         Me.tbTitle.Text = "LCARS UPDATE"
@@ -106,22 +84,13 @@ Partial Class frmUpdate
         'sbNext
         '
         Me.sbNext.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbNext.Beeping = False
-        Me.sbNext.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbNext.ButtonText = "NEXT"
         Me.sbNext.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.sbNext.ButtonTextHeight = 14
         Me.sbNext.Clickable = False
         Me.sbNext.Color = LCARS.LCARScolorStyles.PrimaryFunction
-        Me.sbNext.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbNext.Data = Nothing
-        Me.sbNext.Data2 = Nothing
-        Me.sbNext.FlashInterval = 500
-        Me.sbNext.holdDraw = False
         Me.sbNext.Lit = False
         Me.sbNext.Location = New System.Drawing.Point(386, 387)
         Me.sbNext.Name = "sbNext"
-        Me.sbNext.RedAlert = LCARS.LCARSalert.Normal
         Me.sbNext.Size = New System.Drawing.Size(126, 35)
         Me.sbNext.TabIndex = 0
         Me.sbNext.Text = "NEXT"

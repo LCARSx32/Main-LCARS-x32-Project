@@ -150,22 +150,12 @@ Partial Class frmAutoDestruct
         'hpExternal
         '
         Me.hpExternal.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.hpExternal.Beeping = False
-        Me.hpExternal.ButtonStyle = LCARS.Controls.HalfPillButton.LCARSbuttonStyles.PillRight
         Me.hpExternal.ButtonText = "EXTERNAL"
         Me.hpExternal.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.hpExternal.ButtonTextHeight = 18
-        Me.hpExternal.Clickable = True
         Me.hpExternal.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.hpExternal.CustomAlertColor = System.Drawing.Color.Empty
-        Me.hpExternal.Data = Nothing
-        Me.hpExternal.Data2 = Nothing
-        Me.hpExternal.FlashInterval = 500
-        Me.hpExternal.holdDraw = False
-        Me.hpExternal.Lit = True
         Me.hpExternal.Location = New System.Drawing.Point(308, 370)
         Me.hpExternal.Name = "hpExternal"
-        Me.hpExternal.RedAlert = LCARS.LCARSalert.Normal
         Me.hpExternal.Size = New System.Drawing.Size(133, 35)
         Me.hpExternal.TabIndex = 120
         Me.hpExternal.Text = "EXTERNAL"
@@ -176,18 +166,8 @@ Partial Class frmAutoDestruct
         Me.fbMode.Beeping = True
         Me.fbMode.ButtonText = "MODE SELECT"
         Me.fbMode.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.fbMode.ButtonTextHeight = 14
-        Me.fbMode.Clickable = True
-        Me.fbMode.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.fbMode.CustomAlertColor = System.Drawing.Color.Empty
-        Me.fbMode.Data = Nothing
-        Me.fbMode.Data2 = Nothing
-        Me.fbMode.FlashInterval = 500
-        Me.fbMode.holdDraw = False
-        Me.fbMode.Lit = True
         Me.fbMode.Location = New System.Drawing.Point(833, 137)
         Me.fbMode.Name = "fbMode"
-        Me.fbMode.RedAlert = LCARS.LCARSalert.Normal
         Me.fbMode.Size = New System.Drawing.Size(91, 92)
         Me.fbMode.TabIndex = 108
         Me.fbMode.Text = "MODE SELECT"
@@ -197,19 +177,9 @@ Partial Class frmAutoDestruct
         Me.fbSelected.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.fbSelected.Beeping = True
         Me.fbSelected.ButtonText = ""
-        Me.fbSelected.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.fbSelected.ButtonTextHeight = 14
-        Me.fbSelected.Clickable = True
         Me.fbSelected.Color = LCARS.LCARScolorStyles.Orange
-        Me.fbSelected.CustomAlertColor = System.Drawing.Color.Empty
-        Me.fbSelected.Data = Nothing
-        Me.fbSelected.Data2 = Nothing
-        Me.fbSelected.FlashInterval = 500
-        Me.fbSelected.holdDraw = False
-        Me.fbSelected.Lit = True
         Me.fbSelected.Location = New System.Drawing.Point(267, 247)
         Me.fbSelected.Name = "fbSelected"
-        Me.fbSelected.RedAlert = LCARS.LCARSalert.Normal
         Me.fbSelected.Size = New System.Drawing.Size(35, 35)
         Me.fbSelected.TabIndex = 107
         '
@@ -217,21 +187,12 @@ Partial Class frmAutoDestruct
         '
         Me.hpAlarm.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.hpAlarm.Beeping = True
-        Me.hpAlarm.ButtonStyle = LCARS.Controls.HalfPillButton.LCARSbuttonStyles.PillRight
         Me.hpAlarm.ButtonText = "ALARM"
         Me.hpAlarm.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.hpAlarm.ButtonTextHeight = 18
-        Me.hpAlarm.Clickable = True
         Me.hpAlarm.Color = LCARS.LCARScolorStyles.PrimaryFunction
-        Me.hpAlarm.CustomAlertColor = System.Drawing.Color.Empty
-        Me.hpAlarm.Data = Nothing
-        Me.hpAlarm.Data2 = Nothing
-        Me.hpAlarm.FlashInterval = 500
-        Me.hpAlarm.holdDraw = False
-        Me.hpAlarm.Lit = True
         Me.hpAlarm.Location = New System.Drawing.Point(308, 247)
         Me.hpAlarm.Name = "hpAlarm"
-        Me.hpAlarm.RedAlert = LCARS.LCARSalert.Normal
         Me.hpAlarm.Size = New System.Drawing.Size(133, 35)
         Me.hpAlarm.TabIndex = 106
         Me.hpAlarm.Text = "ALARM"
@@ -240,21 +201,12 @@ Partial Class frmAutoDestruct
         '
         Me.hpLogOff.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.hpLogOff.Beeping = True
-        Me.hpLogOff.ButtonStyle = LCARS.Controls.HalfPillButton.LCARSbuttonStyles.PillRight
         Me.hpLogOff.ButtonText = "LOG OFF"
         Me.hpLogOff.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.hpLogOff.ButtonTextHeight = 18
-        Me.hpLogOff.Clickable = True
         Me.hpLogOff.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.hpLogOff.CustomAlertColor = System.Drawing.Color.Empty
-        Me.hpLogOff.Data = Nothing
-        Me.hpLogOff.Data2 = Nothing
-        Me.hpLogOff.FlashInterval = 500
-        Me.hpLogOff.holdDraw = False
-        Me.hpLogOff.Lit = True
         Me.hpLogOff.Location = New System.Drawing.Point(308, 329)
         Me.hpLogOff.Name = "hpLogOff"
-        Me.hpLogOff.RedAlert = LCARS.LCARSalert.Normal
         Me.hpLogOff.Size = New System.Drawing.Size(133, 35)
         Me.hpLogOff.TabIndex = 105
         Me.hpLogOff.Text = "LOG OFF"
@@ -263,21 +215,12 @@ Partial Class frmAutoDestruct
         '
         Me.hpShutDown.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.hpShutDown.Beeping = True
-        Me.hpShutDown.ButtonStyle = LCARS.Controls.HalfPillButton.LCARSbuttonStyles.PillRight
         Me.hpShutDown.ButtonText = "SHUT DOWN"
         Me.hpShutDown.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.hpShutDown.ButtonTextHeight = 18
-        Me.hpShutDown.Clickable = True
         Me.hpShutDown.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.hpShutDown.CustomAlertColor = System.Drawing.Color.Empty
-        Me.hpShutDown.Data = Nothing
-        Me.hpShutDown.Data2 = Nothing
-        Me.hpShutDown.FlashInterval = 500
-        Me.hpShutDown.holdDraw = False
-        Me.hpShutDown.Lit = True
         Me.hpShutDown.Location = New System.Drawing.Point(308, 288)
         Me.hpShutDown.Name = "hpShutDown"
-        Me.hpShutDown.RedAlert = LCARS.LCARSalert.Normal
         Me.hpShutDown.Size = New System.Drawing.Size(133, 35)
         Me.hpShutDown.TabIndex = 104
         Me.hpShutDown.Text = "SHUT DOWN"
@@ -285,21 +228,12 @@ Partial Class frmAutoDestruct
         'fbMilliseconds
         '
         Me.fbMilliseconds.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.fbMilliseconds.Beeping = False
         Me.fbMilliseconds.ButtonText = "MILLISECONDS"
         Me.fbMilliseconds.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
-        Me.fbMilliseconds.ButtonTextHeight = 14
         Me.fbMilliseconds.Clickable = False
         Me.fbMilliseconds.Color = LCARS.LCARScolorStyles.StaticBlue
-        Me.fbMilliseconds.CustomAlertColor = System.Drawing.Color.Empty
-        Me.fbMilliseconds.Data = Nothing
-        Me.fbMilliseconds.Data2 = Nothing
-        Me.fbMilliseconds.FlashInterval = 500
-        Me.fbMilliseconds.holdDraw = False
-        Me.fbMilliseconds.Lit = True
         Me.fbMilliseconds.Location = New System.Drawing.Point(643, 137)
         Me.fbMilliseconds.Name = "fbMilliseconds"
-        Me.fbMilliseconds.RedAlert = LCARS.LCARSalert.Normal
         Me.fbMilliseconds.Size = New System.Drawing.Size(184, 92)
         Me.fbMilliseconds.TabIndex = 103
         Me.fbMilliseconds.Text = "MILLISECONDS"
@@ -307,22 +241,12 @@ Partial Class frmAutoDestruct
         'sbCancel
         '
         Me.sbCancel.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.sbCancel.Beeping = False
-        Me.sbCancel.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbCancel.ButtonText = "CANCEL"
         Me.sbCancel.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.sbCancel.ButtonTextHeight = 22
-        Me.sbCancel.Clickable = True
         Me.sbCancel.Color = LCARS.LCARScolorStyles.PrimaryFunction
-        Me.sbCancel.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbCancel.Data = Nothing
-        Me.sbCancel.Data2 = Nothing
-        Me.sbCancel.FlashInterval = 500
-        Me.sbCancel.holdDraw = False
-        Me.sbCancel.Lit = True
         Me.sbCancel.Location = New System.Drawing.Point(643, 247)
         Me.sbCancel.Name = "sbCancel"
-        Me.sbCancel.RedAlert = LCARS.LCARSalert.Normal
         Me.sbCancel.Size = New System.Drawing.Size(135, 49)
         Me.sbCancel.TabIndex = 101
         Me.sbCancel.Text = "CANCEL"
@@ -330,22 +254,12 @@ Partial Class frmAutoDestruct
         'sbStart
         '
         Me.sbStart.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.sbStart.Beeping = False
-        Me.sbStart.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbStart.ButtonText = "START"
         Me.sbStart.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.sbStart.ButtonTextHeight = 22
-        Me.sbStart.Clickable = True
         Me.sbStart.Color = LCARS.LCARScolorStyles.FunctionOffline
-        Me.sbStart.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbStart.Data = Nothing
-        Me.sbStart.Data2 = Nothing
-        Me.sbStart.FlashInterval = 500
-        Me.sbStart.holdDraw = False
-        Me.sbStart.Lit = True
         Me.sbStart.Location = New System.Drawing.Point(502, 247)
         Me.sbStart.Name = "sbStart"
-        Me.sbStart.RedAlert = LCARS.LCARSalert.Normal
         Me.sbStart.Size = New System.Drawing.Size(135, 49)
         Me.sbStart.TabIndex = 100
         Me.sbStart.Text = "START"
@@ -353,21 +267,12 @@ Partial Class frmAutoDestruct
         'fbSeconds
         '
         Me.fbSeconds.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.fbSeconds.Beeping = False
         Me.fbSeconds.ButtonText = "SECONDS"
         Me.fbSeconds.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
-        Me.fbSeconds.ButtonTextHeight = 14
         Me.fbSeconds.Clickable = False
         Me.fbSeconds.Color = LCARS.LCARScolorStyles.StaticBlue
-        Me.fbSeconds.CustomAlertColor = System.Drawing.Color.Empty
-        Me.fbSeconds.Data = Nothing
-        Me.fbSeconds.Data2 = Nothing
-        Me.fbSeconds.FlashInterval = 500
-        Me.fbSeconds.holdDraw = False
-        Me.fbSeconds.Lit = True
         Me.fbSeconds.Location = New System.Drawing.Point(502, 137)
         Me.fbSeconds.Name = "fbSeconds"
-        Me.fbSeconds.RedAlert = LCARS.LCARSalert.Normal
         Me.fbSeconds.Size = New System.Drawing.Size(135, 92)
         Me.fbSeconds.TabIndex = 99
         Me.fbSeconds.Text = "SECONDS"
@@ -375,21 +280,12 @@ Partial Class frmAutoDestruct
         'fbMinutes
         '
         Me.fbMinutes.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.fbMinutes.Beeping = False
         Me.fbMinutes.ButtonText = "MINUTES"
         Me.fbMinutes.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
-        Me.fbMinutes.ButtonTextHeight = 14
         Me.fbMinutes.Clickable = False
         Me.fbMinutes.Color = LCARS.LCARScolorStyles.StaticBlue
-        Me.fbMinutes.CustomAlertColor = System.Drawing.Color.Empty
-        Me.fbMinutes.Data = Nothing
-        Me.fbMinutes.Data2 = Nothing
-        Me.fbMinutes.FlashInterval = 500
-        Me.fbMinutes.holdDraw = False
-        Me.fbMinutes.Lit = True
         Me.fbMinutes.Location = New System.Drawing.Point(361, 137)
         Me.fbMinutes.Name = "fbMinutes"
-        Me.fbMinutes.RedAlert = LCARS.LCARSalert.Normal
         Me.fbMinutes.Size = New System.Drawing.Size(135, 92)
         Me.fbMinutes.TabIndex = 97
         Me.fbMinutes.Text = "MINUTES"
@@ -402,18 +298,10 @@ Partial Class frmAutoDestruct
         Me.tbTitle.ButtonText = "INITIATE AUTO DESTRUCT SEQUENCE"
         Me.tbTitle.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.tbTitle.ButtonTextHeight = 32
-        Me.tbTitle.ButtonType = LCARS.Controls.TextButton.TextButtonType.DoublePills
         Me.tbTitle.Clickable = False
         Me.tbTitle.Color = LCARS.LCARScolorStyles.FunctionOffline
-        Me.tbTitle.CustomAlertColor = System.Drawing.Color.Empty
-        Me.tbTitle.Data = Nothing
-        Me.tbTitle.Data2 = Nothing
-        Me.tbTitle.FlashInterval = 500
-        Me.tbTitle.holdDraw = False
-        Me.tbTitle.Lit = True
         Me.tbTitle.Location = New System.Drawing.Point(5, 5)
         Me.tbTitle.Name = "tbTitle"
-        Me.tbTitle.RedAlert = LCARS.LCARSalert.Normal
         Me.tbTitle.Size = New System.Drawing.Size(1013, 35)
         Me.tbTitle.TabIndex = 93
         Me.tbTitle.Text = "INITIATE AUTO DESTRUCT SEQUENCE"
@@ -421,21 +309,12 @@ Partial Class frmAutoDestruct
         'fbHours
         '
         Me.fbHours.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.fbHours.Beeping = False
         Me.fbHours.ButtonText = "HOURS"
         Me.fbHours.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
-        Me.fbHours.ButtonTextHeight = 14
         Me.fbHours.Clickable = False
         Me.fbHours.Color = LCARS.LCARScolorStyles.StaticBlue
-        Me.fbHours.CustomAlertColor = System.Drawing.Color.Empty
-        Me.fbHours.Data = Nothing
-        Me.fbHours.Data2 = Nothing
-        Me.fbHours.FlashInterval = 500
-        Me.fbHours.holdDraw = False
-        Me.fbHours.Lit = True
         Me.fbHours.Location = New System.Drawing.Point(220, 137)
         Me.fbHours.Name = "fbHours"
-        Me.fbHours.RedAlert = LCARS.LCARSalert.Normal
         Me.fbHours.Size = New System.Drawing.Size(135, 92)
         Me.fbHours.TabIndex = 95
         Me.fbHours.Text = "HOURS"

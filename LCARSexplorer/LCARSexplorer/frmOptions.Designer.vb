@@ -24,21 +24,21 @@ Partial Class frmOptions
     Private Sub InitializeComponent()
         Me.sbOK = New LCARS.Controls.StandardButton
         Me.tcOptions = New LCARS.Controls.x32TabControl
-        Me.xtcView = CType(New LCARS.Controls.x32TabPage, LCARS.Controls.x32TabPage)
+        Me.xtcView = New LCARS.Controls.x32TabPage
         Me.tglDimHidden = New LCARS.Controls.ToggleButton
         Me.tglColor = New LCARS.Controls.ToggleButton
         Me.tglCheck = New LCARS.Controls.ToggleButton
         Me.tglReparse = New LCARS.Controls.ToggleButton
         Me.tglSystem = New LCARS.Controls.ToggleButton
         Me.tglShowHidden = New LCARS.Controls.ToggleButton
-        Me.tabMain = CType(New LCARS.Controls.x32TabPage, LCARS.Controls.x32TabPage)
+        Me.tabMain = New LCARS.Controls.x32TabPage
         Me.fbClickMode = New LCARS.Controls.FlatButton
         Me.hpDouble = New LCARS.Controls.HalfPillButton
         Me.hpSingle = New LCARS.Controls.HalfPillButton
         Me.txtStartDir = New System.Windows.Forms.TextBox
         Me.lblClickMode = New System.Windows.Forms.Label
         Me.lblStartDir = New System.Windows.Forms.Label
-        Me.tabShortcuts = CType(New LCARS.Controls.x32TabPage, LCARS.Controls.x32TabPage)
+        Me.tabShortcuts = New LCARS.Controls.x32TabPage
         Me.fbEdit = New LCARS.Controls.FlatButton
         Me.fbDown = New LCARS.Controls.FlatButton
         Me.fbAdd = New LCARS.Controls.FlatButton
@@ -54,22 +54,11 @@ Partial Class frmOptions
         '
         'sbOK
         '
-        Me.sbOK.Beeping = False
-        Me.sbOK.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.Pill
         Me.sbOK.ButtonText = "OK"
         Me.sbOK.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.sbOK.ButtonTextHeight = 14
-        Me.sbOK.Clickable = True
         Me.sbOK.Color = LCARS.LCARScolorStyles.PrimaryFunction
-        Me.sbOK.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbOK.Data = Nothing
-        Me.sbOK.Data2 = Nothing
-        Me.sbOK.FlashInterval = 500
-        Me.sbOK.holdDraw = False
-        Me.sbOK.Lit = True
         Me.sbOK.Location = New System.Drawing.Point(12, 288)
         Me.sbOK.Name = "sbOK"
-        Me.sbOK.RedAlert = LCARS.LCARSalert.Normal
         Me.sbOK.Size = New System.Drawing.Size(101, 30)
         Me.sbOK.TabIndex = 2
         Me.sbOK.Text = "OK"
@@ -77,12 +66,12 @@ Partial Class frmOptions
         'tcOptions
         '
         Me.tcOptions.BackColor = System.Drawing.Color.Black
-        Me.tcOptions.Controls.Add(Me.xtcView)
         Me.tcOptions.Controls.Add(Me.tabMain)
+        Me.tcOptions.Controls.Add(Me.xtcView)
         Me.tcOptions.Controls.Add(Me.tabShortcuts)
         Me.tcOptions.Location = New System.Drawing.Point(12, 12)
         Me.tcOptions.Name = "tcOptions"
-        Me.tcOptions.SelectedTab = Me.xtcView
+        Me.tcOptions.SelectedTab = Me.tabMain
         Me.tcOptions.Size = New System.Drawing.Size(511, 306)
         Me.tcOptions.TabIndex = 5
         Me.tcOptions.TabPages.Add(Me.tabMain)
@@ -111,150 +100,66 @@ Partial Class frmOptions
         '
         'tglDimHidden
         '
-        Me.tglDimHidden.Beeping = False
         Me.tglDimHidden.ButtonText = "DIM HIDDEN FILES"
-        Me.tglDimHidden.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.tglDimHidden.ButtonTextHeight = 14
-        Me.tglDimHidden.Clickable = True
         Me.tglDimHidden.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
-        Me.tglDimHidden.CustomAlertColor = System.Drawing.Color.Empty
-        Me.tglDimHidden.Data = Nothing
-        Me.tglDimHidden.Data2 = Nothing
-        Me.tglDimHidden.FlashInterval = 500
-        Me.tglDimHidden.holdDraw = False
-        Me.tglDimHidden.Lit = True
         Me.tglDimHidden.Location = New System.Drawing.Point(7, 195)
         Me.tglDimHidden.Name = "tglDimHidden"
-        Me.tglDimHidden.RedAlert = LCARS.LCARSalert.Normal
-        Me.tglDimHidden.SideBlockColor = LCARS.LCARScolorStyles.Orange
         Me.tglDimHidden.SideText = "ON"
-        Me.tglDimHidden.SideTextColor = LCARS.LCARScolorStyles.Orange
-        Me.tglDimHidden.SideTextWidth = -1
         Me.tglDimHidden.Size = New System.Drawing.Size(239, 33)
         Me.tglDimHidden.TabIndex = 0
         Me.tglDimHidden.Text = "DIM HIDDEN FILES"
         '
         'tglColor
         '
-        Me.tglColor.Beeping = False
         Me.tglColor.ButtonText = "COLOR FILES BY EXTENSION"
-        Me.tglColor.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.tglColor.ButtonTextHeight = 14
-        Me.tglColor.Clickable = True
         Me.tglColor.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
-        Me.tglColor.CustomAlertColor = System.Drawing.Color.Empty
-        Me.tglColor.Data = Nothing
-        Me.tglColor.Data2 = Nothing
-        Me.tglColor.FlashInterval = 500
-        Me.tglColor.holdDraw = False
-        Me.tglColor.Lit = True
         Me.tglColor.Location = New System.Drawing.Point(7, 156)
         Me.tglColor.Name = "tglColor"
-        Me.tglColor.RedAlert = LCARS.LCARSalert.Normal
-        Me.tglColor.SideBlockColor = LCARS.LCARScolorStyles.Orange
         Me.tglColor.SideText = "ON"
-        Me.tglColor.SideTextColor = LCARS.LCARScolorStyles.Orange
-        Me.tglColor.SideTextWidth = -1
         Me.tglColor.Size = New System.Drawing.Size(239, 33)
         Me.tglColor.TabIndex = 0
         Me.tglColor.Text = "COLOR FILES BY EXTENSION"
         '
         'tglCheck
         '
-        Me.tglCheck.Beeping = False
         Me.tglCheck.ButtonText = "HIDE INACCESSIBLE DIRECTORIES"
-        Me.tglCheck.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.tglCheck.ButtonTextHeight = 14
-        Me.tglCheck.Clickable = True
         Me.tglCheck.Color = LCARS.LCARScolorStyles.NavigationFunction
-        Me.tglCheck.CustomAlertColor = System.Drawing.Color.Empty
-        Me.tglCheck.Data = Nothing
-        Me.tglCheck.Data2 = Nothing
-        Me.tglCheck.FlashInterval = 500
-        Me.tglCheck.holdDraw = False
-        Me.tglCheck.Lit = True
         Me.tglCheck.Location = New System.Drawing.Point(7, 117)
         Me.tglCheck.Name = "tglCheck"
-        Me.tglCheck.RedAlert = LCARS.LCARSalert.Normal
-        Me.tglCheck.SideBlockColor = LCARS.LCARScolorStyles.Orange
         Me.tglCheck.SideText = "ON"
-        Me.tglCheck.SideTextColor = LCARS.LCARScolorStyles.Orange
-        Me.tglCheck.SideTextWidth = -1
         Me.tglCheck.Size = New System.Drawing.Size(239, 33)
         Me.tglCheck.TabIndex = 0
         Me.tglCheck.Text = "HIDE INACCESSIBLE DIRECTORIES"
         '
         'tglReparse
         '
-        Me.tglReparse.Beeping = False
         Me.tglReparse.ButtonText = "SHOW REPARSE POINTS"
-        Me.tglReparse.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.tglReparse.ButtonTextHeight = 14
-        Me.tglReparse.Clickable = True
         Me.tglReparse.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.tglReparse.CustomAlertColor = System.Drawing.Color.Empty
-        Me.tglReparse.Data = Nothing
-        Me.tglReparse.Data2 = Nothing
-        Me.tglReparse.FlashInterval = 500
-        Me.tglReparse.holdDraw = False
-        Me.tglReparse.Lit = True
         Me.tglReparse.Location = New System.Drawing.Point(7, 78)
         Me.tglReparse.Name = "tglReparse"
-        Me.tglReparse.RedAlert = LCARS.LCARSalert.Normal
-        Me.tglReparse.SideBlockColor = LCARS.LCARScolorStyles.Orange
         Me.tglReparse.SideText = "ON"
-        Me.tglReparse.SideTextColor = LCARS.LCARScolorStyles.Orange
-        Me.tglReparse.SideTextWidth = -1
         Me.tglReparse.Size = New System.Drawing.Size(239, 33)
         Me.tglReparse.TabIndex = 0
         Me.tglReparse.Text = "SHOW REPARSE POINTS"
         '
         'tglSystem
         '
-        Me.tglSystem.Beeping = False
         Me.tglSystem.ButtonText = "SHOW SYSTEM ITEMS"
-        Me.tglSystem.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.tglSystem.ButtonTextHeight = 14
-        Me.tglSystem.Clickable = True
         Me.tglSystem.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.tglSystem.CustomAlertColor = System.Drawing.Color.Empty
-        Me.tglSystem.Data = Nothing
-        Me.tglSystem.Data2 = Nothing
-        Me.tglSystem.FlashInterval = 500
-        Me.tglSystem.holdDraw = False
-        Me.tglSystem.Lit = True
         Me.tglSystem.Location = New System.Drawing.Point(7, 39)
         Me.tglSystem.Name = "tglSystem"
-        Me.tglSystem.RedAlert = LCARS.LCARSalert.Normal
-        Me.tglSystem.SideBlockColor = LCARS.LCARScolorStyles.Orange
         Me.tglSystem.SideText = "ON"
-        Me.tglSystem.SideTextColor = LCARS.LCARScolorStyles.Orange
-        Me.tglSystem.SideTextWidth = -1
         Me.tglSystem.Size = New System.Drawing.Size(239, 33)
         Me.tglSystem.TabIndex = 0
         Me.tglSystem.Text = "SHOW SYSTEM ITEMS"
         '
         'tglShowHidden
         '
-        Me.tglShowHidden.Beeping = False
         Me.tglShowHidden.ButtonText = "SHOW HIDDEN ITEMS"
-        Me.tglShowHidden.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.tglShowHidden.ButtonTextHeight = 14
-        Me.tglShowHidden.Clickable = True
         Me.tglShowHidden.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.tglShowHidden.CustomAlertColor = System.Drawing.Color.Empty
-        Me.tglShowHidden.Data = Nothing
-        Me.tglShowHidden.Data2 = Nothing
-        Me.tglShowHidden.FlashInterval = 500
-        Me.tglShowHidden.holdDraw = False
-        Me.tglShowHidden.Lit = True
         Me.tglShowHidden.Location = New System.Drawing.Point(7, 0)
         Me.tglShowHidden.Name = "tglShowHidden"
-        Me.tglShowHidden.RedAlert = LCARS.LCARSalert.Normal
-        Me.tglShowHidden.SideBlockColor = LCARS.LCARScolorStyles.Orange
         Me.tglShowHidden.SideText = "ON"
-        Me.tglShowHidden.SideTextColor = LCARS.LCARScolorStyles.Orange
-        Me.tglShowHidden.SideTextWidth = -1
         Me.tglShowHidden.Size = New System.Drawing.Size(239, 33)
         Me.tglShowHidden.TabIndex = 0
         Me.tglShowHidden.Text = "SHOW HIDDEN ITEMS"
@@ -280,64 +185,30 @@ Partial Class frmOptions
         '
         'fbClickMode
         '
-        Me.fbClickMode.Beeping = False
         Me.fbClickMode.ButtonText = ""
-        Me.fbClickMode.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.fbClickMode.ButtonTextHeight = 14
         Me.fbClickMode.Clickable = False
         Me.fbClickMode.Color = LCARS.LCARScolorStyles.CriticalFunction
-        Me.fbClickMode.CustomAlertColor = System.Drawing.Color.Empty
-        Me.fbClickMode.Data = Nothing
-        Me.fbClickMode.Data2 = Nothing
-        Me.fbClickMode.FlashInterval = 500
-        Me.fbClickMode.holdDraw = False
-        Me.fbClickMode.Lit = True
         Me.fbClickMode.Location = New System.Drawing.Point(7, 91)
         Me.fbClickMode.Name = "fbClickMode"
-        Me.fbClickMode.RedAlert = LCARS.LCARSalert.Normal
         Me.fbClickMode.Size = New System.Drawing.Size(25, 25)
         Me.fbClickMode.TabIndex = 6
         '
         'hpDouble
         '
-        Me.hpDouble.Beeping = False
-        Me.hpDouble.ButtonStyle = LCARS.Controls.HalfPillButton.LCARSbuttonStyles.PillRight
         Me.hpDouble.ButtonText = "DOUBLE CLICK"
-        Me.hpDouble.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.hpDouble.ButtonTextHeight = 14
-        Me.hpDouble.Clickable = True
         Me.hpDouble.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.hpDouble.CustomAlertColor = System.Drawing.Color.Empty
-        Me.hpDouble.Data = Nothing
-        Me.hpDouble.Data2 = Nothing
-        Me.hpDouble.FlashInterval = 500
-        Me.hpDouble.holdDraw = False
-        Me.hpDouble.Lit = True
         Me.hpDouble.Location = New System.Drawing.Point(38, 122)
         Me.hpDouble.Name = "hpDouble"
-        Me.hpDouble.RedAlert = LCARS.LCARSalert.Normal
         Me.hpDouble.Size = New System.Drawing.Size(130, 25)
         Me.hpDouble.TabIndex = 5
         Me.hpDouble.Text = "DOUBLE CLICK"
         '
         'hpSingle
         '
-        Me.hpSingle.Beeping = False
-        Me.hpSingle.ButtonStyle = LCARS.Controls.HalfPillButton.LCARSbuttonStyles.PillRight
         Me.hpSingle.ButtonText = "SINGLE CLICK"
-        Me.hpSingle.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.hpSingle.ButtonTextHeight = 14
-        Me.hpSingle.Clickable = True
         Me.hpSingle.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.hpSingle.CustomAlertColor = System.Drawing.Color.Empty
-        Me.hpSingle.Data = Nothing
-        Me.hpSingle.Data2 = Nothing
-        Me.hpSingle.FlashInterval = 500
-        Me.hpSingle.holdDraw = False
-        Me.hpSingle.Lit = True
         Me.hpSingle.Location = New System.Drawing.Point(38, 91)
         Me.hpSingle.Name = "hpSingle"
-        Me.hpSingle.RedAlert = LCARS.LCARSalert.Normal
         Me.hpSingle.Size = New System.Drawing.Size(130, 25)
         Me.hpSingle.TabIndex = 5
         Me.hpSingle.Text = "SINGLE CLICK"
@@ -397,105 +268,45 @@ Partial Class frmOptions
         '
         'fbEdit
         '
-        Me.fbEdit.Beeping = False
         Me.fbEdit.ButtonText = "EDIT"
-        Me.fbEdit.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.fbEdit.ButtonTextHeight = 14
-        Me.fbEdit.Clickable = True
-        Me.fbEdit.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.fbEdit.CustomAlertColor = System.Drawing.Color.Empty
-        Me.fbEdit.Data = Nothing
-        Me.fbEdit.Data2 = Nothing
-        Me.fbEdit.FlashInterval = 500
-        Me.fbEdit.holdDraw = False
-        Me.fbEdit.Lit = True
         Me.fbEdit.Location = New System.Drawing.Point(162, 214)
         Me.fbEdit.Name = "fbEdit"
-        Me.fbEdit.RedAlert = LCARS.LCARSalert.Normal
         Me.fbEdit.Size = New System.Drawing.Size(75, 26)
         Me.fbEdit.TabIndex = 1
         Me.fbEdit.Text = "EDIT"
         '
         'fbDown
         '
-        Me.fbDown.Beeping = False
         Me.fbDown.ButtonText = "MOVE DOWN"
-        Me.fbDown.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.fbDown.ButtonTextHeight = 14
-        Me.fbDown.Clickable = True
-        Me.fbDown.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.fbDown.CustomAlertColor = System.Drawing.Color.Empty
-        Me.fbDown.Data = Nothing
-        Me.fbDown.Data2 = Nothing
-        Me.fbDown.FlashInterval = 500
-        Me.fbDown.holdDraw = False
-        Me.fbDown.Lit = True
         Me.fbDown.Location = New System.Drawing.Point(324, 214)
         Me.fbDown.Name = "fbDown"
-        Me.fbDown.RedAlert = LCARS.LCARSalert.Normal
         Me.fbDown.Size = New System.Drawing.Size(75, 26)
         Me.fbDown.TabIndex = 1
         Me.fbDown.Text = "MOVE DOWN"
         '
         'fbAdd
         '
-        Me.fbAdd.Beeping = False
         Me.fbAdd.ButtonText = "ADD"
-        Me.fbAdd.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.fbAdd.ButtonTextHeight = 14
-        Me.fbAdd.Clickable = True
-        Me.fbAdd.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.fbAdd.CustomAlertColor = System.Drawing.Color.Empty
-        Me.fbAdd.Data = Nothing
-        Me.fbAdd.Data2 = Nothing
-        Me.fbAdd.FlashInterval = 500
-        Me.fbAdd.holdDraw = False
-        Me.fbAdd.Lit = True
         Me.fbAdd.Location = New System.Drawing.Point(0, 214)
         Me.fbAdd.Name = "fbAdd"
-        Me.fbAdd.RedAlert = LCARS.LCARSalert.Normal
         Me.fbAdd.Size = New System.Drawing.Size(75, 26)
         Me.fbAdd.TabIndex = 1
         Me.fbAdd.Text = "ADD"
         '
         'fbRemove
         '
-        Me.fbRemove.Beeping = False
         Me.fbRemove.ButtonText = "REMOVE"
-        Me.fbRemove.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.fbRemove.ButtonTextHeight = 14
-        Me.fbRemove.Clickable = True
-        Me.fbRemove.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.fbRemove.CustomAlertColor = System.Drawing.Color.Empty
-        Me.fbRemove.Data = Nothing
-        Me.fbRemove.Data2 = Nothing
-        Me.fbRemove.FlashInterval = 500
-        Me.fbRemove.holdDraw = False
-        Me.fbRemove.Lit = True
         Me.fbRemove.Location = New System.Drawing.Point(81, 214)
         Me.fbRemove.Name = "fbRemove"
-        Me.fbRemove.RedAlert = LCARS.LCARSalert.Normal
         Me.fbRemove.Size = New System.Drawing.Size(75, 26)
         Me.fbRemove.TabIndex = 1
         Me.fbRemove.Text = "REMOVE"
         '
         'fbUp
         '
-        Me.fbUp.Beeping = False
         Me.fbUp.ButtonText = "MOVE UP"
-        Me.fbUp.ButtonTextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.fbUp.ButtonTextHeight = 14
-        Me.fbUp.Clickable = True
-        Me.fbUp.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.fbUp.CustomAlertColor = System.Drawing.Color.Empty
-        Me.fbUp.Data = Nothing
-        Me.fbUp.Data2 = Nothing
-        Me.fbUp.FlashInterval = 500
-        Me.fbUp.holdDraw = False
-        Me.fbUp.Lit = True
         Me.fbUp.Location = New System.Drawing.Point(243, 214)
         Me.fbUp.Name = "fbUp"
-        Me.fbUp.RedAlert = LCARS.LCARSalert.Normal
         Me.fbUp.Size = New System.Drawing.Size(75, 26)
         Me.fbUp.TabIndex = 1
         Me.fbUp.Text = "MOVE UP"
