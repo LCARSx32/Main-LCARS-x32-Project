@@ -19,20 +19,18 @@ Partial Class frmMyComp
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
-        Dim LcarScolor2 As LCARS.LCARScolor = New LCARS.LCARScolor
+        Dim LcarScolor1 As LCARS.LCARScolor = New LCARS.LCARScolor
         Me.pnlVisible = New System.Windows.Forms.Panel
-        Me.tmrMouseSelect = New System.Windows.Forms.Timer(Me.components)
+        Me.sbOpenWith = New LCARS.Controls.StandardButton
+        Me.sbFormat = New LCARS.Controls.StandardButton
+        Me.sbNewFolder = New LCARS.Controls.StandardButton
+        Me.sbEdit = New LCARS.Controls.StandardButton
         Me.pnlEdit = New System.Windows.Forms.Panel
         Me.sbRename = New LCARS.Controls.StandardButton
         Me.sbCut = New LCARS.Controls.StandardButton
         Me.sbPaste = New LCARS.Controls.StandardButton
         Me.sbDelete = New LCARS.Controls.StandardButton
         Me.sbCopy = New LCARS.Controls.StandardButton
-        Me.sbEdit = New LCARS.Controls.StandardButton
-        Me.sbFormat = New LCARS.Controls.StandardButton
-        Me.sbOpenWith = New LCARS.Controls.StandardButton
-        Me.sbNewFolder = New LCARS.Controls.StandardButton
         Me.pnlShortcuts = New System.Windows.Forms.Panel
         Me.pnlSystemDefined = New System.Windows.Forms.Panel
         Me.fbShortcutsBorder = New LCARS.Controls.FlatButton
@@ -76,9 +74,98 @@ Partial Class frmMyComp
         Me.pnlVisible.Size = New System.Drawing.Size(87, 281)
         Me.pnlVisible.TabIndex = 54
         '
-        'tmrMouseSelect
+        'sbOpenWith
         '
-        Me.tmrMouseSelect.Interval = 500
+        Me.sbOpenWith.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.sbOpenWith.Beeping = False
+        Me.sbOpenWith.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
+        Me.sbOpenWith.ButtonText = "OPEN WITH"
+        Me.sbOpenWith.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
+        Me.sbOpenWith.ButtonTextHeight = 14
+        Me.sbOpenWith.Clickable = True
+        Me.sbOpenWith.Color = LCARS.LCARScolorStyles.MiscFunction
+        Me.sbOpenWith.CustomAlertColor = System.Drawing.Color.Empty
+        Me.sbOpenWith.Data = Nothing
+        Me.sbOpenWith.Data2 = Nothing
+        Me.sbOpenWith.FlashInterval = 500
+        Me.sbOpenWith.holdDraw = False
+        Me.sbOpenWith.Lit = True
+        Me.sbOpenWith.Location = New System.Drawing.Point(0, 96)
+        Me.sbOpenWith.Name = "sbOpenWith"
+        Me.sbOpenWith.RedAlert = LCARS.LCARSalert.Normal
+        Me.sbOpenWith.Size = New System.Drawing.Size(87, 26)
+        Me.sbOpenWith.TabIndex = 42
+        Me.sbOpenWith.Text = "OPEN WITH"
+        '
+        'sbFormat
+        '
+        Me.sbFormat.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.sbFormat.Beeping = False
+        Me.sbFormat.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
+        Me.sbFormat.ButtonText = "FORMAT"
+        Me.sbFormat.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
+        Me.sbFormat.ButtonTextHeight = 14
+        Me.sbFormat.Clickable = True
+        Me.sbFormat.Color = LCARS.LCARScolorStyles.FunctionOffline
+        Me.sbFormat.CustomAlertColor = System.Drawing.Color.Empty
+        Me.sbFormat.Data = Nothing
+        Me.sbFormat.Data2 = Nothing
+        Me.sbFormat.FlashInterval = 500
+        Me.sbFormat.holdDraw = False
+        Me.sbFormat.Lit = True
+        Me.sbFormat.Location = New System.Drawing.Point(0, 32)
+        Me.sbFormat.Name = "sbFormat"
+        Me.sbFormat.RedAlert = LCARS.LCARSalert.Normal
+        Me.sbFormat.Size = New System.Drawing.Size(87, 26)
+        Me.sbFormat.TabIndex = 52
+        Me.sbFormat.Text = "FORMAT"
+        Me.sbFormat.Visible = False
+        '
+        'sbNewFolder
+        '
+        Me.sbNewFolder.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.sbNewFolder.Beeping = False
+        Me.sbNewFolder.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
+        Me.sbNewFolder.ButtonText = "NEW FOLDER"
+        Me.sbNewFolder.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
+        Me.sbNewFolder.ButtonTextHeight = 14
+        Me.sbNewFolder.Clickable = True
+        Me.sbNewFolder.Color = LCARS.LCARScolorStyles.MiscFunction
+        Me.sbNewFolder.CustomAlertColor = System.Drawing.Color.Empty
+        Me.sbNewFolder.Data = Nothing
+        Me.sbNewFolder.Data2 = Nothing
+        Me.sbNewFolder.FlashInterval = 500
+        Me.sbNewFolder.holdDraw = False
+        Me.sbNewFolder.Lit = True
+        Me.sbNewFolder.Location = New System.Drawing.Point(0, 64)
+        Me.sbNewFolder.Name = "sbNewFolder"
+        Me.sbNewFolder.RedAlert = LCARS.LCARSalert.Normal
+        Me.sbNewFolder.Size = New System.Drawing.Size(87, 26)
+        Me.sbNewFolder.TabIndex = 42
+        Me.sbNewFolder.Text = "NEW FOLDER"
+        '
+        'sbEdit
+        '
+        Me.sbEdit.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.sbEdit.Beeping = False
+        Me.sbEdit.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
+        Me.sbEdit.ButtonText = "EDIT"
+        Me.sbEdit.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
+        Me.sbEdit.ButtonTextHeight = 14
+        Me.sbEdit.Clickable = True
+        Me.sbEdit.Color = LCARS.LCARScolorStyles.PrimaryFunction
+        Me.sbEdit.CustomAlertColor = System.Drawing.Color.Empty
+        Me.sbEdit.Data = Nothing
+        Me.sbEdit.Data2 = Nothing
+        Me.sbEdit.FlashInterval = 500
+        Me.sbEdit.holdDraw = False
+        Me.sbEdit.Lit = True
+        Me.sbEdit.Location = New System.Drawing.Point(0, 0)
+        Me.sbEdit.Name = "sbEdit"
+        Me.sbEdit.RedAlert = LCARS.LCARSalert.Normal
+        Me.sbEdit.Size = New System.Drawing.Size(87, 26)
+        Me.sbEdit.TabIndex = 52
+        Me.sbEdit.Text = "EDIT"
         '
         'pnlEdit
         '
@@ -208,99 +295,6 @@ Partial Class frmMyComp
         Me.sbCopy.Size = New System.Drawing.Size(87, 26)
         Me.sbCopy.TabIndex = 42
         Me.sbCopy.Text = "COPY"
-        '
-        'sbEdit
-        '
-        Me.sbEdit.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbEdit.Beeping = False
-        Me.sbEdit.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
-        Me.sbEdit.ButtonText = "EDIT"
-        Me.sbEdit.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
-        Me.sbEdit.ButtonTextHeight = 14
-        Me.sbEdit.Clickable = True
-        Me.sbEdit.Color = LCARS.LCARScolorStyles.PrimaryFunction
-        Me.sbEdit.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbEdit.Data = Nothing
-        Me.sbEdit.Data2 = Nothing
-        Me.sbEdit.FlashInterval = 500
-        Me.sbEdit.holdDraw = False
-        Me.sbEdit.Lit = True
-        Me.sbEdit.Location = New System.Drawing.Point(0, 0)
-        Me.sbEdit.Name = "sbEdit"
-        Me.sbEdit.RedAlert = LCARS.LCARSalert.Normal
-        Me.sbEdit.Size = New System.Drawing.Size(87, 26)
-        Me.sbEdit.TabIndex = 52
-        Me.sbEdit.Text = "EDIT"
-        '
-        'sbFormat
-        '
-        Me.sbFormat.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbFormat.Beeping = False
-        Me.sbFormat.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
-        Me.sbFormat.ButtonText = "FORMAT"
-        Me.sbFormat.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
-        Me.sbFormat.ButtonTextHeight = 14
-        Me.sbFormat.Clickable = True
-        Me.sbFormat.Color = LCARS.LCARScolorStyles.FunctionOffline
-        Me.sbFormat.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbFormat.Data = Nothing
-        Me.sbFormat.Data2 = Nothing
-        Me.sbFormat.FlashInterval = 500
-        Me.sbFormat.holdDraw = False
-        Me.sbFormat.Lit = True
-        Me.sbFormat.Location = New System.Drawing.Point(0, 32)
-        Me.sbFormat.Name = "sbFormat"
-        Me.sbFormat.RedAlert = LCARS.LCARSalert.Normal
-        Me.sbFormat.Size = New System.Drawing.Size(87, 26)
-        Me.sbFormat.TabIndex = 52
-        Me.sbFormat.Text = "FORMAT"
-        Me.sbFormat.Visible = False
-        '
-        'sbOpenWith
-        '
-        Me.sbOpenWith.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbOpenWith.Beeping = False
-        Me.sbOpenWith.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
-        Me.sbOpenWith.ButtonText = "OPEN WITH"
-        Me.sbOpenWith.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
-        Me.sbOpenWith.ButtonTextHeight = 14
-        Me.sbOpenWith.Clickable = True
-        Me.sbOpenWith.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbOpenWith.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbOpenWith.Data = Nothing
-        Me.sbOpenWith.Data2 = Nothing
-        Me.sbOpenWith.FlashInterval = 500
-        Me.sbOpenWith.holdDraw = False
-        Me.sbOpenWith.Lit = True
-        Me.sbOpenWith.Location = New System.Drawing.Point(0, 96)
-        Me.sbOpenWith.Name = "sbOpenWith"
-        Me.sbOpenWith.RedAlert = LCARS.LCARSalert.Normal
-        Me.sbOpenWith.Size = New System.Drawing.Size(87, 26)
-        Me.sbOpenWith.TabIndex = 42
-        Me.sbOpenWith.Text = "OPEN WITH"
-        '
-        'sbNewFolder
-        '
-        Me.sbNewFolder.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbNewFolder.Beeping = False
-        Me.sbNewFolder.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
-        Me.sbNewFolder.ButtonText = "NEW FOLDER"
-        Me.sbNewFolder.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
-        Me.sbNewFolder.ButtonTextHeight = 14
-        Me.sbNewFolder.Clickable = True
-        Me.sbNewFolder.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.sbNewFolder.CustomAlertColor = System.Drawing.Color.Empty
-        Me.sbNewFolder.Data = Nothing
-        Me.sbNewFolder.Data2 = Nothing
-        Me.sbNewFolder.FlashInterval = 500
-        Me.sbNewFolder.holdDraw = False
-        Me.sbNewFolder.Lit = True
-        Me.sbNewFolder.Location = New System.Drawing.Point(0, 64)
-        Me.sbNewFolder.Name = "sbNewFolder"
-        Me.sbNewFolder.RedAlert = LCARS.LCARSalert.Normal
-        Me.sbNewFolder.Size = New System.Drawing.Size(87, 26)
-        Me.sbNewFolder.TabIndex = 42
-        Me.sbNewFolder.Text = "NEW FOLDER"
         '
         'pnlShortcuts
         '
@@ -849,7 +843,7 @@ Partial Class frmMyComp
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.gridMyComp.Beeping = False
-        Me.gridMyComp.ColorsAvailable = LcarScolor2
+        Me.gridMyComp.ColorsAvailable = LcarScolor1
         Me.gridMyComp.ControlAddingDirection = LCARS.Controls.ButtonGrid.ControlDirection.Vertical
         Me.gridMyComp.ControlPadding = 5
         Me.gridMyComp.ControlSize = New System.Drawing.Size(150, 30)
@@ -896,7 +890,6 @@ Partial Class frmMyComp
     Friend WithEvents sbOptions As LCARS.Controls.StandardButton
     Friend WithEvents sbProperties As LCARS.Controls.StandardButton
     Friend WithEvents pnlVisible As System.Windows.Forms.Panel
-    Friend WithEvents tmrMouseSelect As System.Windows.Forms.Timer
     Friend WithEvents sbUpDir As LCARS.Controls.StandardButton
     Friend WithEvents sbClose As LCARS.Controls.StandardButton
     Friend WithEvents sbRename As LCARS.Controls.StandardButton

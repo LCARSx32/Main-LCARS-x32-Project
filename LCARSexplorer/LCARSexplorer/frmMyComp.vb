@@ -28,14 +28,117 @@ Public Class frmMyComp
     Public curPath As String = My.Settings.startDir
     Dim selectedButtons As New List(Of LCARS.IDataControl)
     Dim selStart As Point
-    Dim curSelected As LCComplexButton
-    Dim cancelClick As Boolean
+    Dim clickStart As DateTime
+    Dim moved As Boolean
     Dim mySelection As New frmSelect()
     Dim nextInChain As IntPtr
 
 #End Region
 
+#Region " Selection Support "
+    Private ReadOnly Property cancelClick() As Boolean
+        Get
+            Return moved OrElse (Now - clickStart) > TimeSpan.FromMilliseconds(500)
+        End Get
+    End Property
 
+    Private Sub OnSelectStart()
+        selectedButtons.Clear()
+        checkSelected(Rectangle.Empty)
+    End Sub
+
+    Private Sub OnSelectionChanged()
+        If selectedButtons.Count = 1 Then
+            sbRename.Lit = True
+            sbRename.Clickable = True
+        Else
+            sbRename.Lit = False
+            sbRename.Clickable = False
+        End If
+    End Sub
+
+    Private Sub item_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs)
+        clickStart = Now
+    End Sub
+
+    Private Sub item_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs)
+        If Not moved AndAlso (Now - clickStart) > TimeSpan.FromMilliseconds(500) Then
+            selectedButtons.Add(sender)
+            DirectCast(sender, LCComplexButton).RedAlert = LCARS.LCARSalert.White
+        End If
+    End Sub
+
+    Private Sub pnlMyComp_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles gridMyComp.MouseDown
+        If e.Button <> Windows.Forms.MouseButtons.Left Then Return
+        OnSelectStart()
+        moved = False
+        selStart = e.Location
+    End Sub
+
+    Private Sub pnlMyComp_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles gridMyComp.MouseMove
+        If e.Button = Windows.Forms.MouseButtons.Left Then
+            moved = True
+            Dim selectionRect As Rectangle = getSelectionRect(e.Location)
+            mySelection.Bounds = gridMyComp.RectangleToScreen(selectionRect)
+            If Not mySelection.Visible Then
+                mySelection.Show()
+            End If
+
+            checkSelected(selectionRect)
+        End If
+    End Sub
+
+    Private Sub pnlMyComp_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles gridMyComp.MouseUp
+        If moved Then
+            checkSelected(getSelectionRect(e.Location), True)
+        End If
+        mySelection.Hide()
+    End Sub
+
+    Private Function getSelectionRect(ByVal p As Point) As Rectangle
+        Dim x1, x2, y1, y2 As Integer
+
+        If p.X > selStart.X Then
+            x1 = selStart.X
+            x2 = p.X
+        Else
+            x1 = p.X
+            x2 = selStart.X
+        End If
+
+        If p.Y > selStart.Y Then
+            y1 = selStart.Y
+            y2 = p.Y
+        Else
+            y1 = p.Y
+            y2 = selStart.Y
+        End If
+
+        Return New Rectangle(x1, y1, x2 - x1, y2 - y1)
+    End Function
+
+    Private Sub checkSelected(ByVal selectionRect As Rectangle, Optional ByVal rememberSelection As Boolean = False)
+        Dim myButton As LCComplexButton
+        For i As Integer = 0 To gridMyComp.Count - 1
+            myButton = DirectCast(gridMyComp.Items(i), LCComplexButton)
+
+            If Not myButton.HoldDraw AndAlso myButton.Bounds.IntersectsWith(selectionRect) Then
+                If myButton.RedAlert <> LCARS.LCARSalert.White Then
+                    myButton.RedAlert = LCARS.LCARSalert.White
+                End If
+                If rememberSelection Then
+                    selectedButtons.Add(myButton)
+                End If
+            Else
+                If myButton.RedAlert <> LCARS.LCARSalert.Normal Then
+                    myButton.RedAlert = LCARS.LCARSalert.Normal
+                End If
+            End If
+        Next
+
+        OnSelectionChanged()
+    End Sub
+#End Region
 
     Protected Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
         Select Case m.Msg
@@ -147,21 +250,6 @@ Public Class frmMyComp
                MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, _
                "Not available")
         DirectCast(sender, LCComplexButton).RedAlert = LCARS.LCARSalert.Normal
-    End Sub
-
-    Private Sub item_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs)
-        If Not tmrMouseSelect.Enabled Then
-            selectedButtons.Clear()
-            checkSelected(Rectangle.Empty)
-            curSelected = CType(sender, LCComplexButton)
-            tmrMouseSelect.Enabled = True
-        End If
-    End Sub
-
-    Private Sub item_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs)
-        curSelected = Nothing
-        tmrMouseSelect.Enabled = False
-        cancelClick = False
     End Sub
 
     Public Sub loadDir(ByVal newpath As String)
@@ -283,83 +371,6 @@ Public Class frmMyComp
         End If
     End Sub
 
-    Private Sub pnlMyComp_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles gridMyComp.MouseDown
-        selectedButtons.Clear()
-        checkSelected(Rectangle.Empty)
-        selStart = e.Location
-    End Sub
-
-    Private Sub pnlMyComp_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles gridMyComp.MouseMove
-        If e.Button = Windows.Forms.MouseButtons.Left Then
-            tmrMouseSelect.Enabled = False
-            Dim selectionRect As Rectangle = getSelectionRect(e.Location)
-            mySelection.Bounds = gridMyComp.RectangleToScreen(selectionRect)
-            If Not mySelection.Visible Then
-                mySelection.Show()
-            End If
-
-            checkSelected(selectionRect)
-        End If
-    End Sub
-
-    Private Function getSelectionRect(ByVal p As Point) As Rectangle
-        Dim x1, x2, y1, y2 As Integer
-
-        If p.X > selStart.X Then
-            x1 = selStart.X
-            x2 = p.X
-        Else
-            x1 = p.X
-            x2 = selStart.X
-        End If
-
-        If p.Y > selStart.Y Then
-            y1 = selStart.Y
-            y2 = p.Y
-        Else
-            y1 = p.Y
-            y2 = selStart.Y
-        End If
-
-        Return New Rectangle(x1, y1, x2 - x1, y2 - y1)
-    End Function
-
-    Private Sub checkSelected(ByVal selectionRect As Rectangle, Optional ByVal rememberSelection As Boolean = False)
-        Dim myButton As LCComplexButton
-        For i As Integer = 0 To gridMyComp.Count - 1
-            myButton = DirectCast(gridMyComp.Items(i), LCComplexButton)
-
-            If Not myButton.HoldDraw AndAlso myButton.Bounds.IntersectsWith(selectionRect) Then
-                If myButton.RedAlert <> LCARS.LCARSalert.White Then
-                    myButton.RedAlert = LCARS.LCARSalert.White
-                End If
-                If rememberSelection Then
-                    selectedButtons.Add(myButton)
-                End If
-            Else
-                If myButton.RedAlert <> LCARS.LCARSalert.Normal Then
-                    myButton.RedAlert = LCARS.LCARSalert.Normal
-                End If
-            End If
-        Next
-
-        If selectedButtons.Count = 1 Then
-            sbRename.Lit = True
-            sbRename.Clickable = True
-        Else
-            sbRename.Lit = False
-            sbRename.Clickable = False
-        End If
-    End Sub
-
-    Private Sub pnlMyComp_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles gridMyComp.MouseUp
-        If Not e.Location = selStart Then
-            checkSelected(getSelectionRect(e.Location), True)
-        End If
-        mySelection.Hide()
-    End Sub
-
-
     Private Sub sbProperties_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbProperties.Click
         If selectedButtons.Count > 0 Then
             Dim props As New frmProperties(getSelectedFiles())
@@ -393,21 +404,6 @@ Public Class frmMyComp
         sbOptions.Enabled = en
         sbGoTo.Enabled = en
         sbRefresh.Enabled = en
-    End Sub
-    Private Sub tmrMouseSelect_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrMouseSelect.Tick
-        If Not curSelected Is Nothing Then
-            cancelClick = True
-            curSelected.RedAlert = LCARS.LCARSalert.White
-            selectedButtons.Add(curSelected)
-        End If
-        tmrMouseSelect.Enabled = False
-        If selectedButtons.Count = 1 Then
-            sbRename.Lit = True
-            sbRename.Clickable = True
-        Else
-            sbRename.Lit = False
-            sbRename.Clickable = False
-        End If
     End Sub
 
     Private Sub sbUpDir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbUpDir.Click
