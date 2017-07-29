@@ -4,8 +4,8 @@ Imports Microsoft.Win32
 Public Class frmFileSelect
 
     Dim curPath As String = ""
-    Dim extensions() As String = {}
     Dim myResult As Windows.Forms.DialogResult
+    Dim extensions As New List(Of String)
     Dim oloc As Point
 
     Private Sub sbUp_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbUp.Click
@@ -115,13 +115,11 @@ Public Class frmFileSelect
                     End If
                     Dim fileAttr As FileAttributes = curFile.Attributes
                     If (fileAttr <> FileAttributes.Hidden Or My.Settings.showHidden = True) Then
-                        Dim i As Integer = 1
-                        While (i < extensions.Length)
-                            If (curFile.Extension = extensions(i) And curFile.Extension <> "") Then
+                        For Each myExt As String In extensions
+                            If (curFile.Extension = myExt And curFile.Extension <> "") Then
                                 CurItems.Add(curFile)
                             End If
-                            i += 1
-                        End While
+                        Next
                     End If
                 Catch ex As Exception
                 End Try
@@ -205,7 +203,6 @@ Public Class frmFileSelect
 
     End Sub
 
-
     Private Sub myFile_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         lblCurrentSelected.Text = sender.data
     End Sub
@@ -230,14 +227,12 @@ Public Class frmFileSelect
         InitializeComponent()
         ' Add any initialization after the InitializeComponent() call.
         curPath = startDir
-        While (filters.Length > 0)
-            Dim index As Integer = filters.IndexOf(",")
-            If (index <> 0) Then
-                extensions = extend(extensions, filters.Substring(0, index))
-                fbExt.Text += filters.Substring(0, index) & vbNewLine
-                filters = filters.Remove(0, index + 1)
-            End If
-        End While
+        extensions.AddRange(filters.Split(","c))
+        Dim myBuilder As New System.Text.StringBuilder()
+        For Each myext As String In extensions
+            myBuilder.AppendLine(myext)
+        Next
+        fbExt.Text = myBuilder.ToString()
         hpPrompt.Text = title
     End Sub
     Public Property Result() As Windows.Forms.DialogResult
@@ -253,11 +248,7 @@ Public Class frmFileSelect
             Return lblCurrentSelected.Text
         End Get
     End Property
-    Private Function extend(ByVal array() As String, ByVal item As String) As String()
-        ReDim Preserve array(array.Length + 1)
-        array(array.Length - 1) = item
-        Return array
-    End Function
+
     'moving dialog box
 
     Private Sub elbTop_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles elbTop.MouseDown
