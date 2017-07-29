@@ -411,7 +411,7 @@ Public Class LCARSbuttonClass
     ''' <summary>
     ''' Sets the visibility of the text
     ''' </summary>
-    Protected Property lblTextVisible() As Boolean
+    Protected Property textVisible() As Boolean
         Get
             Return _textVisible
         End Get
@@ -425,7 +425,7 @@ Public Class LCARSbuttonClass
     ''' Location of label used to display text
     ''' </summary>
     <Browsable(False), EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)> _
-       Public Overridable Property lblTextLoc() As Point
+       Protected Overridable Property textLoc() As Point
         Get
             Return _textLocation
         End Get
@@ -440,7 +440,7 @@ Public Class LCARSbuttonClass
     ''' </summary>
     ''' <remarks>This label does not auto-size, and should be handled accordingly.</remarks>
     <Browsable(False), EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)> _
-        Public Overridable Property lblTextSize() As Size
+        Protected Overridable Property textSize() As Size
         Get
             Return _textSize
         End Get
@@ -586,7 +586,7 @@ Public Class LCARSbuttonClass
     End Sub
 
     Private Sub lblText_MouseEnter(ByVal sender As Object, ByVal e As EventArgs) Handles Me.MouseEnter
-        If Me.CreateGraphics.MeasureString(myText, _font).Width > lblTextSize.Width Then
+        If Me.CreateGraphics.MeasureString(myText, _font).Width > textSize.Width Then
             tmrTextScroll.Interval = 200
             oAlign = _textAlign
             If _textAlign <= 16 Then
@@ -696,7 +696,7 @@ Public Class LCARSbuttonClass
         Else
             e.Graphics.DrawImage(UnLitButton, 0, 0)
         End If
-        If lblTextVisible Then
+        If textVisible Then
             DrawText(e.Graphics)
         End If
     End Sub
@@ -735,8 +735,8 @@ Public Class LCARSbuttonClass
         g.FillRectangle(myBrush, Me.Size.Height \ 2, 0, Me.Size.Width - Me.Size.Height, Me.Size.Height)
         g.FillEllipse(myBrush, Me.Size.Width - Me.Size.Height, 0, Me.Size.Height, Me.Size.Height)
         'Draw text:
-        Me.lblTextLoc = New Point(0, 0)
-        Me.lblTextSize = New Point(Me.Width - Me.Height, Me.Height)
+        Me.textLoc = New Point(0, 0)
+        Me.textSize = New Point(Me.Width - Me.Height, Me.Height)
         g.Dispose()
         Return mybitmap
     End Function

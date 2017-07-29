@@ -180,8 +180,8 @@ Namespace Controls
 
             'draw the main button area
             g.FillRectangle(myBrush, curLeft, 0, (Me.Width - curLeft) - (Me.Height + (Me.Height \ 10)), Me.Height)
-            Me.lblTextLoc = New Point(curLeft, 0)
-            Me.lblTextSize = New Point((Me.Width - curLeft) - (Me.Height \ 2), Me.Height)
+            Me.textLoc = New Point(curLeft, 0)
+            Me.textSize = New Point((Me.Width - curLeft) - (Me.Height \ 2), Me.Height)
             curLeft += (Me.Width - curLeft) - (Me.Height + (Me.Height \ 10))
 
             curLeft -= Me.Height \ 10

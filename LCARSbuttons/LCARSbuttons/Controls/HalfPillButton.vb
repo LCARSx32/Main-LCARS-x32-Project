@@ -96,13 +96,13 @@ Namespace Controls
                 Case LCARSbuttonStyles.PillRight
                     g.FillRectangle(myBrush, 0, 0, Me.Size.Width - (Me.Size.Height \ 2), Me.Size.Height)
                     g.FillEllipse(myBrush, Me.Size.Width - Me.Size.Height, 0, Me.Size.Height, Me.Size.Height)
-                    Me.lblTextLoc = New Point(0, 0)
+                    Me.textLoc = New Point(0, 0)
                 Case LCARSbuttonStyles.PillLeft
                     g.FillRectangle(myBrush, Me.Size.Height \ 2, 0, Me.Size.Width - (Me.Size.Height \ 2), Me.Size.Height)
                     g.FillEllipse(myBrush, 0, 0, Me.Size.Height, Me.Size.Height)
-                    Me.lblTextLoc = New Point(Me.Height \ 2, 0)
+                    Me.textLoc = New Point(Me.Height \ 2, 0)
             End Select
-            Me.lblTextSize = New Size(Me.Size.Width - (Me.Size.Height \ 2), Me.Size.Height)
+            Me.textSize = New Size(Me.Size.Width - (Me.Size.Height \ 2), Me.Size.Height)
             g.Dispose()
             Return mybitmap
         End Function

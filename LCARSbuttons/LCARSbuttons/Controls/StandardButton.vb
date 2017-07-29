@@ -113,8 +113,8 @@ Namespace Controls
                 g.FillEllipse(myBrush, Me.Size.Width - Me.Size.Height, 0, Me.Size.Height, Me.Size.Height)
 
 
-                Me.lblTextLoc = New Point(Me.Height \ 2, 0)
-                Me.lblTextSize = New Size(Me.Width - Me.Height, Me.Height)
+                Me.textLoc = New Point(Me.Height \ 2, 0)
+                Me.textSize = New Size(Me.Width - Me.Height, Me.Height)
 
             Else
                 g.FillEllipse(myBrush, New Rectangle(0, 0, quarterHeight, quarterHeight))
@@ -142,8 +142,8 @@ Namespace Controls
                         g.FillRectangle(Brushes.Black, mybitmap.GetBounds(System.Drawing.GraphicsUnit.Pixel))
                         g.DrawImage(slant, mypoints)
 
-                        Me.lblTextLoc = New Point(Me.Width \ 4, 0)
-                        Me.lblTextSize = New Size(Me.Width - (Me.Width \ 2), Me.Height)
+                        Me.textLoc = New Point(Me.Width \ 4, 0)
+                        Me.textSize = New Size(Me.Width - (Me.Width \ 2), Me.Height)
                     Case LCARSbuttonStyles.RoundedSquareBackSlant
 
                         Dim slant As Bitmap = New Bitmap(mybitmap)
@@ -157,11 +157,11 @@ Namespace Controls
                         g.FillRectangle(Brushes.Black, mybitmap.GetBounds(System.Drawing.GraphicsUnit.Pixel))
                         g.DrawImage(slant, mypoints)
 
-                        Me.lblTextLoc = New Point(Me.Width \ 4, 0)
-                        Me.lblTextSize = New Size(Me.Width - (Me.Width \ 2), Me.Height)
+                        Me.textLoc = New Point(Me.Width \ 4, 0)
+                        Me.textSize = New Size(Me.Width - (Me.Width \ 2), Me.Height)
                     Case Else
-                        Me.lblTextLoc = New Point(0, 0)
-                        Me.lblTextSize = New Size(Me.Width, Me.Height)
+                        Me.textLoc = New Point(0, 0)
+                        Me.textSize = New Size(Me.Width, Me.Height)
                 End Select
             End If
             g.Dispose()

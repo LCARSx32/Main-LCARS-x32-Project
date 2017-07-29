@@ -134,7 +134,7 @@ Namespace Controls
                 End If
 
             Next
-            lblTextSize = Me.Size
+            textSize = Me.Size
             g.Dispose()
 
             Return mybitmap

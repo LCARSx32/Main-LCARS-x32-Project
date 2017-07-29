@@ -13,8 +13,6 @@ Namespace Controls
             InitializeComponent()
 
             'Add any initialization after the InitializeComponent() call
-            'RemoveHandler lblText.MouseEnter, AddressOf MyBase.lblText_MouseEnter
-            'RemoveHandler lblText.MouseLeave, AddressOf MyBase.lblText_MouseLeave
         End Sub
 
         'UserControl1 overrides dispose to clean up the component list.
@@ -109,7 +107,6 @@ Namespace Controls
             End Get
             Set(ByVal value As String)
                 myText = value.ToUpper
-                'Me.lblText.Text = ""
                 textSize = getFontDimmensions(New Font("LCARS", textHeight, FontStyle.Regular, GraphicsUnit.Point), myText)
                 Me.DrawAllButtons()
             End Set
@@ -201,7 +198,7 @@ Namespace Controls
                         textSize = New FontData
                         textSize.Height = Me.Height
                     End If
-                    lblTextVisible = False
+                    textVisible = False
                     mybitmap = New Bitmap(Me.Size.Width, textSize.Height)
                     g = Graphics.FromImage(mybitmap)
 

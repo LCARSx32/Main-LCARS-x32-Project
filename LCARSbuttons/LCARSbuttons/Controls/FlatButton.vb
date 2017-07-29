@@ -75,7 +75,7 @@ Namespace Controls
             g.FillRectangle(myBrush, 0, 0, mybitmap.Width, mybitmap.Height)
 
             'Set up text:
-            Me.lblTextSize = Me.Size
+            Me.textSize = Me.Size
             g.Dispose()
             Return mybitmap
         End Function

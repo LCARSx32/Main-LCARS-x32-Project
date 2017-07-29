@@ -101,7 +101,7 @@ Namespace Controls
 #Region " Subs "
 
         Private Sub PieButton_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Resize
-            Me.lblTextSize = Me.Size
+            Me.textSize = Me.Size
         End Sub
 
 #End Region

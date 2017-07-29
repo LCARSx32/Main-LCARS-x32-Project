@@ -179,7 +179,7 @@ Namespace Controls
             End Select
 
             g.DrawImage(buffer, myPoints)
-            Me.lblTextSize = Me.Size
+            Me.textSize = Me.Size
             g.Dispose()
             Return mybitmap
 
