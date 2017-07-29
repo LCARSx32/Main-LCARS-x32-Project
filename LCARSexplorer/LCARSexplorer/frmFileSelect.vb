@@ -4,8 +4,8 @@ Imports Microsoft.Win32
 Public Class frmFileSelect
 
     Dim curPath As String = ""
-    Dim myResult As Windows.Forms.DialogResult
     Dim extensions As New List(Of String)
+    Dim _selectedPath As String
     Dim oloc As Point
 
     Private Sub sbUp_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbUp.Click
@@ -204,22 +204,18 @@ Public Class frmFileSelect
     End Sub
 
     Private Sub myFile_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        lblCurrentSelected.Text = sender.data
+        Dim btn As LCComplexButton = DirectCast(sender, LCComplexButton)
+        lblCurrentSelected.Text = btn.Text
+        _selectedPath = CStr(btn.Data)
     End Sub
     Private Sub frmFileSelect_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         lblCurrentSelected.Text = ""
         loadDir(curPath)
     End Sub
 
-    Private Sub sbCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbCancel.Click
-        Result = Windows.Forms.DialogResult.Cancel
-        Me.Close()
-    End Sub
-
     Private Sub sbOK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbOK.Click
-        If (lblCurrentSelected.Text <> "") Then
-            result = Windows.Forms.DialogResult.OK
-            Me.Close()
+        If lblCurrentSelected.Text = "" Then
+            Me.DialogResult = Windows.Forms.DialogResult.Cancel
         End If
     End Sub
     Public Sub New(Optional ByVal startDir As String = "", Optional ByVal filters As String = "", Optional ByVal title As String = "")
@@ -235,17 +231,10 @@ Public Class frmFileSelect
         fbExt.Text = myBuilder.ToString()
         hpPrompt.Text = title
     End Sub
-    Public Property Result() As Windows.Forms.DialogResult
-        Get
-            Return myResult
-        End Get
-        Set(ByVal value as Windows.Forms.DialogResult)
-            myResult = value
-        End Set
-    End Property
+
     Public ReadOnly Property ReturnPath() As String
         Get
-            Return lblCurrentSelected.Text
+            Return _selectedPath
         End Get
     End Property
 

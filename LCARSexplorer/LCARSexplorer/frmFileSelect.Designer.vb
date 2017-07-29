@@ -48,6 +48,7 @@ Partial Class frmFileSelect
         Me.elbTop.CustomAlertColor = System.Drawing.Color.Empty
         Me.elbTop.Data = Nothing
         Me.elbTop.Data2 = Nothing
+        Me.elbTop.DialogResult = System.Windows.Forms.DialogResult.None
         Me.elbTop.ElbowRatio = New System.Drawing.Point(1, 1)
         Me.elbTop.ElbowStyle = LCARS.Controls.Elbow.LCARSelbowStyles.UpperLeft
         Me.elbTop.FlashInterval = 500
@@ -72,6 +73,7 @@ Partial Class frmFileSelect
         Me.elbBottom.CustomAlertColor = System.Drawing.Color.Empty
         Me.elbBottom.Data = Nothing
         Me.elbBottom.Data2 = Nothing
+        Me.elbBottom.DialogResult = System.Windows.Forms.DialogResult.None
         Me.elbBottom.ElbowRatio = New System.Drawing.Point(1, 1)
         Me.elbBottom.ElbowStyle = LCARS.Controls.Elbow.LCARSelbowStyles.LowerLeft
         Me.elbBottom.FlashInterval = 500
@@ -94,6 +96,7 @@ Partial Class frmFileSelect
         Me.sbUp.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbUp.Data = Nothing
         Me.sbUp.Data2 = Nothing
+        Me.sbUp.DialogResult = System.Windows.Forms.DialogResult.None
         Me.sbUp.FlashInterval = 500
         Me.sbUp.holdDraw = False
         Me.sbUp.Lit = False
@@ -115,6 +118,7 @@ Partial Class frmFileSelect
         Me.fbExt.CustomAlertColor = System.Drawing.Color.Empty
         Me.fbExt.Data = Nothing
         Me.fbExt.Data2 = Nothing
+        Me.fbExt.DialogResult = System.Windows.Forms.DialogResult.None
         Me.fbExt.FlashInterval = 500
         Me.fbExt.holdDraw = False
         Me.fbExt.Lit = True
@@ -136,6 +140,7 @@ Partial Class frmFileSelect
         Me.sbOK.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbOK.Data = Nothing
         Me.sbOK.Data2 = Nothing
+        Me.sbOK.DialogResult = System.Windows.Forms.DialogResult.OK
         Me.sbOK.FlashInterval = 500
         Me.sbOK.holdDraw = False
         Me.sbOK.Lit = True
@@ -158,6 +163,7 @@ Partial Class frmFileSelect
         Me.sbCancel.CustomAlertColor = System.Drawing.Color.Empty
         Me.sbCancel.Data = Nothing
         Me.sbCancel.Data2 = Nothing
+        Me.sbCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.sbCancel.FlashInterval = 500
         Me.sbCancel.holdDraw = False
         Me.sbCancel.Lit = True
@@ -191,6 +197,7 @@ Partial Class frmFileSelect
         Me.hpLocation.CustomAlertColor = System.Drawing.Color.Empty
         Me.hpLocation.Data = Nothing
         Me.hpLocation.Data2 = Nothing
+        Me.hpLocation.DialogResult = System.Windows.Forms.DialogResult.None
         Me.hpLocation.FlashInterval = 500
         Me.hpLocation.holdDraw = False
         Me.hpLocation.Lit = True
@@ -213,6 +220,7 @@ Partial Class frmFileSelect
         Me.hpPrompt.CustomAlertColor = System.Drawing.Color.Empty
         Me.hpPrompt.Data = Nothing
         Me.hpPrompt.Data2 = Nothing
+        Me.hpPrompt.DialogResult = System.Windows.Forms.DialogResult.None
         Me.hpPrompt.FlashInterval = 500
         Me.hpPrompt.holdDraw = False
         Me.hpPrompt.Lit = True
@@ -239,9 +247,11 @@ Partial Class frmFileSelect
         '
         'frmFileSelect
         '
+        Me.AcceptButton = Me.sbOK
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Black
+        Me.CancelButton = Me.sbCancel
         Me.ClientSize = New System.Drawing.Size(505, 497)
         Me.Controls.Add(Me.gridMyComp)
         Me.Controls.Add(Me.hpPrompt)
@@ -267,8 +277,8 @@ Partial Class frmFileSelect
     Friend WithEvents fbExt As LCARS.Controls.FlatButton
     Friend WithEvents sbOK As LCARS.Controls.StandardButton
     Friend WithEvents sbCancel As LCARS.Controls.StandardButton
-    Friend WithEvents lblCurrentSelected As System.Windows.Forms.Label
     Friend WithEvents hpLocation As LCARS.Controls.HalfPillButton
     Friend WithEvents hpPrompt As LCARS.Controls.HalfPillButton
     Friend WithEvents gridMyComp As LCARS.Controls.ButtonGrid
+    Private WithEvents lblCurrentSelected As System.Windows.Forms.Label
 End Class

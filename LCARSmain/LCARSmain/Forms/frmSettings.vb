@@ -798,7 +798,7 @@ Public Class frmSettings
     Private Sub fbBrowseSound_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbBrowseSound.Click
         Dim myFileSelect As New LCARSexplorer.frmFileSelect(Application.StartupPath, ".wav,", "Select a sound file")
         myFileSelect.ShowDialog()
-        If myFileSelect.Result = Windows.Forms.DialogResult.OK Then
+        If myFileSelect.DialogResult = Windows.Forms.DialogResult.OK Then
             If System.IO.File.Exists(myFileSelect.ReturnPath) Then
                 Dim temp As AlertEntry = alertList(lstAlerts.SelectedIndex)
                 temp.Sound = myFileSelect.ReturnPath
@@ -933,7 +933,7 @@ Public Class frmSettings
         Dim myFileSelect As New LCARSexplorer.frmFileSelect(Application.StartupPath, ".wav,", "Select a sound file")
         myFileSelect.ShowDialog()
         soundEditing = True
-        If myFileSelect.Result = Windows.Forms.DialogResult.OK Then
+        If myFileSelect.DialogResult = Windows.Forms.DialogResult.OK Then
             If System.IO.File.Exists(myFileSelect.ReturnPath) Then
                 Try
                     CType(lstSounds.SelectedItem, LCARSSound).Path = myFileSelect.ReturnPath

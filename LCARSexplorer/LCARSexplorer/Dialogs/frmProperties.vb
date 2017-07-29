@@ -145,8 +145,8 @@ Public Class frmProperties
         MsgBox("This function is not fully working; everything displays properly, but no changes to file associations are made.")
         Dim mySelect As frmFileSelect = New frmFileSelect("C:\Program Files\", ".exe,.bat,", "Select program executable")
         mySelect.ShowDialog()
-        If (mySelect.Result = Windows.Forms.DialogResult.OK) Then
-            Dim newProg As String = mySelect.lblCurrentSelected.Text
+        If (mySelect.DialogResult = Windows.Forms.DialogResult.OK) Then
+            Dim newProg As String = mySelect.ReturnPath
             'need to find which registry key to edit
         End If
     End Sub

@@ -542,8 +542,8 @@ Public Class frmMyComp
         If (selectedButtons.Count = 1) Then
             Dim mySelect As frmFileSelect = New frmFileSelect("C:\Program Files\", ".exe,.bat,", "Select program executable")
             mySelect.ShowDialog()
-            If (mySelect.Result = Windows.Forms.DialogResult.OK) Then
-                Dim newProg As String = mySelect.lblCurrentSelected.Text
+            If (mySelect.DialogResult = Windows.Forms.DialogResult.OK) Then
+                Dim newProg As String = mySelect.ReturnPath
                 Shell("""" & newProg & """" & " """ & CStr(selectedButtons(0).Data) & """", AppWinStyle.NormalFocus)
             End If
         Else
