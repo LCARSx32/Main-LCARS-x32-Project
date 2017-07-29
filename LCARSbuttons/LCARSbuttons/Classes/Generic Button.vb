@@ -106,7 +106,6 @@ Public Class LCARSbuttonClass
     Protected _textAlign As ContentAlignment = ContentAlignment.TopLeft
     Protected _font As Font = New Font("LCARS", textHeight, FontStyle.Regular, GraphicsUnit.Point)
     Protected _ellipsisMode As EllipsisModes = EllipsisModes.Character
-    Protected _autoEllipsis As Boolean = True
     Protected _textVisible As Boolean = True
     Protected _textSize As Size = Me.Size
     Protected _textLocation As Point = New Point(0, 0)
@@ -248,25 +247,6 @@ Public Class LCARSbuttonClass
         End Get
         Set(ByVal value As Boolean)
             forceCapital = value
-        End Set
-    End Property
-
-    ''' <summary>
-    ''' Cuts off text that is longer than the control with ...
-    ''' </summary>
-    ''' <value>New AutoEllipsis setting</value>
-    ''' <returns>Current AutoEllipsis setting</returns>
-    ''' <remarks>
-    ''' If the text is longer than the control, it will be shown in a marquee when the user mouses over it. 
-    ''' </remarks>
-    <DefaultValue(True)> _
-       Public Property AutoEllipsis() As Boolean
-        Get
-            Return _autoEllipsis
-        End Get
-        Set(ByVal value As Boolean)
-            _autoEllipsis = value
-            Me.Invalidate()
         End Set
     End Property
 
@@ -772,7 +752,7 @@ Public Class LCARSbuttonClass
             Dim area As Rectangle = New Rectangle(_textLocation, _textSize)
             Dim format As New StringFormat()
             format.FormatFlags = StringFormatFlags.NoWrap
-            If tmrTextScroll.Enabled Or Not _autoEllipsis Then
+            If tmrTextScroll.Enabled Or Not AutoEllipsis Then
                 If _ellipsisMode = EllipsisModes.Character Then
                     format.Trimming = StringTrimming.Character
                 Else
