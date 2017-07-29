@@ -1,6 +1,4 @@
-﻿Option Strict On
-
-Imports System.IO
+﻿Imports System.IO
 
 Module modCommon
     ''' <summary>

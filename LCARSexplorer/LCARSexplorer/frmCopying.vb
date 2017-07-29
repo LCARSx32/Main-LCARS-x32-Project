@@ -1,6 +1,4 @@
-﻿Option Strict On
-
-Imports System.IO
+﻿Imports System.IO
 Imports System.Threading
 
 'TODO: Use better signaling than thread abort

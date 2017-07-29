@@ -1,6 +1,7 @@
 Imports System.IO
 Imports LCARS.UI
 Imports Microsoft.Win32
+Imports LCARS.LightweightControls
 Public Class frmFileSelect
 
     Dim curPath As String = ""
@@ -69,7 +70,7 @@ Public Class frmFileSelect
     End Sub
 
     Private Sub drive_click(ByVal sender As Object, ByVal e As EventArgs)
-        loadDir(CType(sender, LCARS.LightweightControls.LCComplexButton).Data)
+        loadDir(CStr(CType(sender, LCARS.LightweightControls.LCComplexButton).Data))
     End Sub
 
     Public Sub loadDir(ByVal newpath As String)

@@ -1,6 +1,4 @@
-﻿Option Strict On
-
-Public Class frmMergeOptions
+﻿Public Class frmMergeOptions
     Dim _action As MergeOptions = MergeOptions.Undecided
     Dim _IsGlobal As Boolean = False
     Public ReadOnly Property action() As MergeOptions
