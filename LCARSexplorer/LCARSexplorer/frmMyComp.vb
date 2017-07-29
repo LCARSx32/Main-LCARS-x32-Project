@@ -22,7 +22,6 @@ Public Class frmMyComp
     Private Const WM_DESTROY As Integer = &H2
     Private Const WM_DRAWCLIPBOARD As Integer = &H308
     Private Const WM_CHANGECBCHAIN As Integer = &H30D
-    Private Const WS_EX_APPWINDOW As Integer = &H40000
 #End Region
 
 #Region " Global Variables "
