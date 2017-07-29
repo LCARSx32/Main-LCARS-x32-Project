@@ -14,8 +14,8 @@ Imports System.Windows.Forms.Design
 ''' </remarks>
 <System.ComponentModel.DefaultEvent("Click"), Designer(GetType(GenericButtonDesigner))> _
 Public Class LCARSbuttonClass
-    Inherits System.Windows.Forms.Control
     Implements LCARS.IAlertable, LCARS.IBeeping, LCARS.IColorable, IButtonControl
+    Inherits System.Windows.Forms.Button
 
 
 #Region " Control Design Information "
@@ -89,7 +89,6 @@ Public Class LCARSbuttonClass
     Private Shared Sound As New System.Media.SoundPlayer(My.Resources._207)
     Dim buttonData As Object
     Dim buttonData2 As Object
-    Private _dialogResult As DialogResult
     Dim noDraw As Boolean = False
     Protected textHeight As Integer = 14
     Dim doBeep As Boolean = False
@@ -827,27 +826,6 @@ Public Class LCARSbuttonClass
         Return mybitmap
     End Function
 
-#End Region
-
-#Region " IButtonControl Support "
-    Public Property DialogResult() As System.Windows.Forms.DialogResult Implements System.Windows.Forms.IButtonControl.DialogResult
-        Get
-            Return _dialogResult
-        End Get
-        Set(ByVal value As System.Windows.Forms.DialogResult)
-            If [Enum].IsDefined(GetType(DialogResult), value) Then
-                Me._dialogResult = value
-            End If
-        End Set
-    End Property
-
-    Public Overridable Sub NotifyDefault(ByVal value As Boolean) Implements System.Windows.Forms.IButtonControl.NotifyDefault
-
-    End Sub
-
-    Public Sub PerformClick() Implements System.Windows.Forms.IButtonControl.PerformClick
-        doClick(Me, EventArgs.Empty)
-    End Sub
 #End Region
 End Class
 #End Region
