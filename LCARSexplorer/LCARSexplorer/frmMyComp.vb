@@ -28,7 +28,7 @@ Public Class frmMyComp
 #Region " Global Variables "
 
     Public curPath As String = My.Settings.startDir
-    Dim selectedButtons As New List(Of LCComplexButton)
+    Dim selectedButtons As New List(Of LCARS.IDataControl)
     Dim selStart As Point
     Dim curSelected As LCComplexButton
     Dim cancelClick As Boolean

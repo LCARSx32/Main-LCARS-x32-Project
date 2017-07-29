@@ -14,8 +14,8 @@ Imports System.Windows.Forms.Design
 ''' </remarks>
 <System.ComponentModel.DefaultEvent("Click"), Designer(GetType(GenericButtonDesigner))> _
 Public Class LCARSbuttonClass
-    Implements LCARS.IAlertable, LCARS.IBeeping, LCARS.IColorable, IButtonControl
     Inherits System.Windows.Forms.Button
+    Implements LCARS.IAlertable, LCARS.IBeeping, LCARS.IColorable, IDataControl
 
 
 #Region " Control Design Information "
@@ -336,7 +336,7 @@ Public Class LCARSbuttonClass
     ''' This is for the programmer's convenience in associating information with a control. There is no built-in functionality, 
     ''' so it is exactly what you make it.
     ''' </remarks>
-    Public Property Data() As Object
+    Public Property Data() As Object Implements IDataControl.Data
         Get
             Return buttonData
         End Get
@@ -354,7 +354,7 @@ Public Class LCARSbuttonClass
     ''' This is for the programmer's convenience in associating information with a control. There is no built-in functionality, 
     ''' so it is exactly what you make it.
     ''' </remarks>
-    Public Property Data2() As Object
+    Public Property Data2() As Object Implements IDataControl.Data2
         Get
             Return buttonData2
         End Get

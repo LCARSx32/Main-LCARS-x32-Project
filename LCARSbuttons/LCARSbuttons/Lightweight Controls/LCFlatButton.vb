@@ -10,7 +10,7 @@ Namespace LightweightControls
     ''' Several other controls derive from this one by overriding <see cref="LCFlatButton.Redraw">Redraw</see> and adding properties.
     ''' </remarks>
     Public Class LCFlatButton
-        Implements ILightweightControl, LCARS.IAlertable, IDisposable, IBeeping, IColorable
+        Implements ILightweightControl, LCARS.IAlertable, IDisposable, IBeeping, IColorable, IDataControl
 
         ''' <summary>
         ''' The bitmap of the control's interface
@@ -442,7 +442,7 @@ Namespace LightweightControls
         ''' This is for the programmer's convenience in associating information with a control. There is no built-in functionality, 
         ''' so it is exactly what you make it.
         ''' </remarks>
-        Public Property Data() As Object
+        Public Property Data() As Object Implements IDataControl.Data
             Get
                 Return _data
             End Get
@@ -458,7 +458,7 @@ Namespace LightweightControls
         ''' This is for the programmer's convenience in associating information with a control. There is no built-in functionality, 
         ''' so it is exactly what you make it.
         ''' </remarks>
-        Public Property Data2() As Object
+        Public Property Data2() As Object Implements IDataControl.Data2
             Get
                 Return _data2
             End Get
