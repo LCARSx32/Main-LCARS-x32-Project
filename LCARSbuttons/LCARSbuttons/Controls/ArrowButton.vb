@@ -64,7 +64,9 @@ Namespace Controls
             End Set
         End Property
 
-        <Browsable(False), EditorBrowsable(EditorBrowsableState.Never)> _
+        <Browsable(False)> _
+        <DefaultValue("")> _
+        <EditorBrowsable(EditorBrowsableState.Never)> _
         Public Overrides Property ButtonText() As String
             Get
                 Return ""
@@ -94,17 +96,7 @@ Namespace Controls
             End Set
         End Property
 
-        <Browsable(False), EditorBrowsable(EditorBrowsableState.Never)> _
-        Public Shadows Property AutoEllipsis()
-            Get
-                Return Nothing
-            End Get
-            Set(ByVal value)
-
-            End Set
-        End Property
-
-
+        <DefaultValue(GetType(LCARSarrowDirection), "Up")> _
         Public Property ArrowDirection() As LCARS.LCARSarrowDirection
             Get
                 Return ArrowDir

@@ -1,4 +1,5 @@
 ﻿Imports System.Drawing
+Imports System.ComponentModel
 
 Namespace Controls
     <System.ComponentModel.DefaultEvent("Click")> _
@@ -64,7 +65,7 @@ Namespace Controls
 #End Region
 
 #Region " Properties "
-
+        <DefaultValue(GetType(PieButtonStyles), "UpperLeft")> _
         Public Property ButtonStyle() As PieButtonStyles
             Get
                 Return _ButtonStyle
@@ -75,6 +76,7 @@ Namespace Controls
             End Set
         End Property
 
+        <DefaultValue(0)> _
         Public Property CircleRadius() As Integer
             Get
                 Return _CircleRadius
@@ -85,6 +87,7 @@ Namespace Controls
             End Set
         End Property
 
+        <DefaultValue(GetType(Point), "0, 0")> _
         Public Property CircleLocation() As Point
             Get
                 Return _CircleLocation

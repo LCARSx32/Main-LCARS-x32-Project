@@ -1,5 +1,6 @@
 ﻿Imports System.Windows.Forms
 Imports System.Drawing
+Imports System.ComponentModel
 
 Namespace Controls
     ''' <summary>
@@ -47,7 +48,7 @@ Namespace Controls
         Public Sub New()
             MyBase.New()
             myScroll = New LCARS.Controls.TrackBar()
-            Me.MinimumSize = New Size(50, 50)
+            Me.Size = New Size(100, 100)
             With myScroll
                 .Width = Me.Width
                 .Height = 30
@@ -160,6 +161,7 @@ Namespace Controls
         ''' Important note: The width set here is a minimum. The controls will by dynamically sized to take up the full width of the
         ''' grid. The height, however, will be used directly.
         ''' </remarks>
+        <DefaultValue(GetType(Size), "150, 70")> _
         Public Property ControlSize() As Size
             Get
                 Return New Size(componentWidth, componentHeight)
@@ -186,6 +188,7 @@ Namespace Controls
         ''' to position controls may vary it by one pixel.<br />
         ''' Note that setting this to its current value will not trigger a redraw.
         ''' </remarks>
+        <DefaultValue(5)> _
         Public Property ControlPadding() As Integer
             Get
                 Return myPadding
@@ -209,6 +212,7 @@ Namespace Controls
         ''' <br />
         ''' Setting this property to its current value will not trigger a redraw.
         ''' </remarks>
+        <DefaultValue(GetType(ControlDirection), "Vertical")> _
         Public Property ControlAddingDirection() As ControlDirection
             Get
                 Return _direction
@@ -225,6 +229,7 @@ Namespace Controls
         ''' <summary>
         ''' Returns current page displayed
         ''' </summary>
+        <DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)> _
         Public Property CurrentPage() As Integer
             Get
                 Return myScroll.CurrentPage

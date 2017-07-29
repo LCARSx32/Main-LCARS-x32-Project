@@ -11,8 +11,8 @@ Namespace Controls
         Dim mySize As Point
 
 #Region " Properties "
-        <DefaultValue(100)> _
-                Public Property Color2() As LCARScolorStyles
+        <DefaultValue(GetType(LCARS.LCARScolorStyles), "FunctionUnavailable")> _
+        Public Property Color2() As LCARScolorStyles
             Get
                 Return myColor2
             End Get

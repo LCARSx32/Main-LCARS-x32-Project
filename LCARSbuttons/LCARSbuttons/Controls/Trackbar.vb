@@ -1,11 +1,12 @@
 ﻿Imports System.Drawing
 Imports System.Windows.Forms
+Imports System.ComponentModel
 
 Namespace Controls
     <System.ComponentModel.DefaultEvent("Scroll")> _
     Public Class TrackBar
         Inherits Windows.Forms.Control
-        Public Event Scroll(ByVal sender As System.Object, ByVal e As System.EventArgs)
+        Public Event Scroll As EventHandler
         'Global Variables
         Private _pages As Integer = 1
         Private _CurrentPage As Integer = 1
@@ -18,6 +19,7 @@ Namespace Controls
         Dim movingButton As New FlatButton
 
 #Region " Properties "
+        <DefaultValue(1)> _
         Public Property CurrentPage() As Integer
             Get
                 Return _CurrentPage
@@ -35,6 +37,7 @@ Namespace Controls
             End Set
         End Property
 
+        <DefaultValue(1)> _
         Public Property Pages() As Integer
             Get
                 Return _pages
@@ -59,6 +62,8 @@ Namespace Controls
                 End If
             End Set
         End Property
+
+        <DefaultValue(GetType(LCARScolorStyles), "StaticTan")> _
         Public Property TickColor() As LCARScolorStyles
             Get
                 Return _color
@@ -68,6 +73,8 @@ Namespace Controls
                 Me.Invalidate()
             End Set
         End Property
+
+        <DefaultValue(True)> _
         Public Property Beeping() As Boolean
             Get
                 Return _beeping
@@ -120,7 +127,6 @@ Namespace Controls
             Me.SetStyle(ControlStyles.ContainerControl, True)
             Me.UpdateStyles()
             Me.SuspendLayout()
-            Me.BackColor = Color.Black
             Me.Size = New Size(250, 15)
             Me.ResumeLayout()
         End Sub

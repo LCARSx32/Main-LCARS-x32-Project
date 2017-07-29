@@ -1,4 +1,5 @@
 ﻿Imports System.Drawing
+Imports System.ComponentModel
 
 Namespace Controls
 
@@ -51,6 +52,7 @@ Namespace Controls
 #End Region
 
 #Region " Properties "
+        <DefaultValue(GetType(LCARSbuttonStyles), "Pill")> _
         Public Property ButtonStyle() As LCARSbuttonStyles
             Get
                 Return myButtonType

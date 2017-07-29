@@ -1,7 +1,8 @@
 ﻿Imports System.Drawing
 Imports System.Windows.Forms
+Imports System.ComponentModel
+
 Namespace Controls
-    <System.ComponentModel.DefaultEvent("Click")> _
     Public Class ComplexButton
         Inherits LCARS.LCARSbuttonClass
 
@@ -65,6 +66,7 @@ Namespace Controls
             End Set
         End Property
 
+        <DefaultValue(-1)> _
         Public Property SideTextWidth() As Integer
             Get
                 Return staticWidth
@@ -75,6 +77,7 @@ Namespace Controls
             End Set
         End Property
 
+        <DefaultValue(GetType(LCARS.LCARScolorStyles), "Orange")> _
         Public Property SideTextColor() As LCARS.LCARScolorStyles
             Get
                 Return SideColor
@@ -85,6 +88,7 @@ Namespace Controls
             End Set
         End Property
 
+        <DefaultValue(GetType(LCARS.LCARScolorStyles), "Orange")> _
         Public Property SideBlockColor() As LCARS.LCARScolorStyles
             Get
                 Return sideBoxColor

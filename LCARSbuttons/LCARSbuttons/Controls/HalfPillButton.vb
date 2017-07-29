@@ -1,4 +1,5 @@
 ﻿Imports System.Drawing
+Imports System.ComponentModel
 
 Namespace Controls
     <System.ComponentModel.DefaultEvent("Click")> _
@@ -46,7 +47,7 @@ Namespace Controls
 #End Region
         Dim _ButtonType As LCARSbuttonStyles = LCARSbuttonStyles.PillRight
 #Region " Properties "
-
+        <DefaultValue(GetType(LCARSbuttonStyles), "PillRight")> _
         Public Property ButtonStyle() As LCARSbuttonStyles
             Get
                 Return _ButtonType

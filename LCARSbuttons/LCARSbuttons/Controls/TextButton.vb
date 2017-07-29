@@ -1,4 +1,5 @@
 ﻿Imports System.Drawing
+Imports System.ComponentModel
 
 Namespace Controls
     <System.ComponentModel.DefaultEvent("Click")> _
@@ -48,7 +49,7 @@ Namespace Controls
 
         Dim myType As TextButtonType = TextButtonType.DoublePills
         Dim myTextAlign As ContentAlignment = ContentAlignment.MiddleRight
-        Dim textSize As FontData
+        Shadows textSize As FontData
 
 #End Region
 
@@ -69,6 +70,7 @@ Namespace Controls
 
 #Region " Properties "
 
+        <DefaultValue(GetType(TextButtonType), "DoublePills")> _
         Public Property ButtonType() As TextButtonType
             Get
                 Return myType
@@ -79,6 +81,7 @@ Namespace Controls
             End Set
         End Property
 
+        <DefaultValue(GetType(ContentAlignment), "MiddleRight")> _
         Public Overrides Property ButtonTextAlign() As System.Drawing.ContentAlignment
             Get
                 Return myTextAlign

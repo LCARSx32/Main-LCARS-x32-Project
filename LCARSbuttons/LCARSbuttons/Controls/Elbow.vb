@@ -71,7 +71,7 @@ Namespace Controls
 #End Region
 
 #Region " Properties "
-
+        <DefaultValue(GetType(Point), "1, 1")> _
         Public Property ElbowRatio() As Point
             Get
                 Return ratio
@@ -82,7 +82,7 @@ Namespace Controls
             End Set
         End Property
 
-
+        <DefaultValue(200)> _
         Public Property ButtonWidth() As Integer
             Get
                 Return barWidth
@@ -93,6 +93,7 @@ Namespace Controls
             End Set
         End Property
 
+        <DefaultValue(25)> _
         Public Property ButtonHeight() As Integer
             Get
                 Return barHeight
@@ -103,6 +104,7 @@ Namespace Controls
             End Set
         End Property
 
+        <DefaultValue(GetType(LCARSelbowStyles), "UpperRight")> _
         Public Property ElbowStyle() As LCARSelbowStyles
             Get
                 Return Style

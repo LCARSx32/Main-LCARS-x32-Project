@@ -14,6 +14,7 @@ Namespace Controls
         Private _redAlert As LCARSalert = LCARSalert.Normal
         Private _customAlertColor As Color = Nothing
 
+        <Browsable(False)> _
         <DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)> _
         Public Property ColorsAvailable() As LCARScolor Implements IColorable.ColorsAvailable
             Get
@@ -29,6 +30,14 @@ Namespace Controls
             Me.Invalidate()
         End Sub
 
+        Public Sub ResetCustomAlertColor()
+            _customAlertColor = Color.Empty
+        End Sub
+
+        Public Function ShouldSerializeCustomAlertColor() As Boolean
+            Return _customAlertColor <> Color.Empty
+        End Function
+
         Public Property CustomAlertColor() As System.Drawing.Color Implements IAlertable.CustomAlertColor
             Get
                 Return _customAlertColor
@@ -42,7 +51,7 @@ Namespace Controls
             End Set
         End Property
 
-        <DefaultValue(LCARSalert.Normal)> _
+        <DefaultValue(GetType(LCARSalert), "Normal")> _
         Public Property RedAlert() As LCARSalert Implements IAlertable.RedAlert
             Get
                 Return _redAlert
@@ -73,7 +82,7 @@ Namespace Controls
         Public Event ValueChanged As EventHandler
 
 #Region " Properties "
-        <DefaultValue(LCARScolorStyles.MiscFunction)> _
+        <DefaultValue(GetType(LCARScolorStyles), "MiscFunction")> _
         Public Property MainColor() As LCARScolorStyles
             Get
                 Return _color
@@ -85,7 +94,7 @@ Namespace Controls
             End Set
         End Property
 
-        <DefaultValue(LCARScolorStyles.PrimaryFunction)> _
+        <DefaultValue(GetType(LCARScolorStyles), "PrimaryFunction")> _
         Public Property ButtonColor() As LCARScolorStyles
             Get
                 Return _color2

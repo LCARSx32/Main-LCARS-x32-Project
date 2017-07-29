@@ -13,7 +13,7 @@ Namespace Controls
             ResetBackColor()
             ResetForeColor()
             ResetBorderStyle()
-            MyBase.DrawMode = Windows.Forms.DrawMode.OwnerDrawFixed
+            Me.DrawMode = Windows.Forms.DrawMode.OwnerDrawFixed
         End Sub
 
 #Region " Overriding default property values "
@@ -29,6 +29,9 @@ Namespace Controls
             Return Not defFont.Equals(Font)
         End Function
 
+        <Browsable(False)> _
+        <EditorBrowsable(EditorBrowsableState.Never)> _
+        <DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)> _
         Public Overrides Property Font() As System.Drawing.Font
             Get
                 Return MyBase.Font
@@ -50,6 +53,15 @@ Namespace Controls
         Public Function ShouldSerializeBackColor() As Boolean
             Return Not defBackColor = MyBase.BackColor
         End Function
+
+        Public Overrides Property BackColor() As System.Drawing.Color
+            Get
+                Return MyBase.BackColor
+            End Get
+            Set(ByVal value As System.Drawing.Color)
+                MyBase.BackColor = value
+            End Set
+        End Property
 #End Region
 
 #Region " Fore Color "
@@ -60,8 +72,17 @@ Namespace Controls
         End Sub
 
         Public Function ShouldSerializeForeColor() As Boolean
-            Return Not MyBase.ForeColor = defForeColor
+            Return Not ForeColor = defForeColor
         End Function
+
+        Public Overrides Property ForeColor() As System.Drawing.Color
+            Get
+                Return MyBase.ForeColor
+            End Get
+            Set(ByVal value As System.Drawing.Color)
+                MyBase.ForeColor = value
+            End Set
+        End Property
 #End Region
 
 #Region " Border "
@@ -74,7 +95,17 @@ Namespace Controls
         Public Function ShouldSerializeBorderStyle() As Boolean
             Return MyBase.BorderStyle <> defBorder
         End Function
+
+        Public Shadows Property BorderStyle()
+            Get
+                Return MyBase.BorderStyle
+            End Get
+            Set(ByVal value)
+                MyBase.BorderStyle = value
+            End Set
+        End Property
 #End Region
+
 #End Region
 
         Protected Overrides Sub OnDrawItem(ByVal e As System.Windows.Forms.DrawItemEventArgs)

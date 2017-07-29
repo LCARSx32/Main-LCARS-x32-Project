@@ -1,5 +1,6 @@
 ﻿Imports System.Drawing
 Imports System.Windows.Forms
+Imports System.ComponentModel
 
 Namespace Controls
     ''' <summary>
@@ -198,6 +199,7 @@ Namespace Controls
         ''' <remarks>
         ''' Setting this property will cause all subcontrols to reload their colors
         ''' </remarks>
+        <DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)> _
         Public Property ColorsAvailable() As LCARScolor Implements IColorable.ColorsAvailable
             Get
                 Return _colorsAvailable
@@ -211,6 +213,7 @@ Namespace Controls
         ''' <summary>
         ''' Allows beeping to be set for all current windowless controls
         ''' </summary>
+        <DefaultValue(False)> _
         Public Property Beeping() As Boolean Implements IBeeping.Beeping
             Get
                 Return _beeping

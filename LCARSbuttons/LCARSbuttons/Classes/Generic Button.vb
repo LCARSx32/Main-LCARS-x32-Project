@@ -182,7 +182,7 @@ Public Class LCARSbuttonClass
     ''' Size can be changed through other properties.
     ''' </remarks>
     <Browsable(False), EditorBrowsable(EditorBrowsableState.Advanced)> _
-        Public Overrides Property Font() As System.Drawing.Font
+    Public Overrides Property Font() As System.Drawing.Font
         Get
             Return _font
         End Get
@@ -214,8 +214,8 @@ Public Class LCARSbuttonClass
     ''' <value>New alignment to use</value>
     ''' <returns>Current alignment</returns>
     ''' <remarks>Be careful if using this with an elbow; it can have interesting results...</remarks>
-    <DefaultValue(ContentAlignment.BottomRight)> _
-        Public Overridable Property ButtonTextAlign() As ContentAlignment
+    <DefaultValue(GetType(ContentAlignment), "TopLeft")> _
+    Public Overridable Property ButtonTextAlign() As ContentAlignment
         Get
             Return _textAlign
         End Get
@@ -241,7 +241,7 @@ Public Class LCARSbuttonClass
     ''' you should be sure to use .ToUpper() to ensure they are the same case.
     ''' </remarks>
     <DefaultValue(True)> _
-        Public Property _ForceCaps() As Boolean
+    Public Property _ForceCaps() As Boolean
         Get
             Return forceCapital
         End Get
@@ -258,6 +258,7 @@ Public Class LCARSbuttonClass
     ''' <remarks>
     ''' If you are using a control as a static element, set this to false to prevent the user from trying to click on it.
     ''' </remarks>
+    <DefaultValue(True)> _
     Public Property Clickable() As Boolean
         Get
             Return canClick
@@ -276,7 +277,7 @@ Public Class LCARSbuttonClass
     ''' This works by setting the RedAlert property of the control. If you use it, it should be for good reason.
     ''' </remarks>
     <DefaultValue(False)> _
-        Public Property Flash() As Boolean
+    Public Property Flash() As Boolean
         Get
             Return flashing
         End Get
@@ -299,6 +300,7 @@ Public Class LCARSbuttonClass
     ''' <value>New flash length</value>
     ''' <returns>Current flash length</returns>
     ''' <remarks></remarks>
+    <DefaultValue(500)> _
     Public Property FlashInterval() As Integer
         Get
             Return flashingInterval
@@ -317,6 +319,7 @@ Public Class LCARSbuttonClass
     ''' This should be used to reduce CPU load when making many changes to a button's state that would require a redraw. Just
     ''' remember to set it to True when you've finished.
     ''' </remarks>
+    <DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)> _
     Public Property holdDraw() As Boolean
         Get
             Return noDraw
@@ -345,6 +348,14 @@ Public Class LCARSbuttonClass
         End Set
     End Property
 
+    Public Sub ResetData()
+        buttonData = Nothing
+    End Sub
+
+    Public Function ShouldSerializeData() As Boolean
+        Return buttonData IsNot Nothing
+    End Function
+
     ''' <summary>
     ''' Data field for the control
     ''' </summary>
@@ -363,6 +374,14 @@ Public Class LCARSbuttonClass
         End Set
     End Property
 
+    Public Sub ResetData2()
+        buttonData2 = Nothing
+    End Sub
+
+    Public Function ShouldSerializeData2() As Boolean
+        Return buttonData2 IsNot Nothing
+    End Function
+
     ''' <summary>
     ''' Primary color of the control.
     ''' </summary>
@@ -370,8 +389,8 @@ Public Class LCARSbuttonClass
     ''' Do not attempt to use colors for visual effect. Color mappings may be changed by the end user, completely eliminating
     ''' any color matchings that may exist. Use colors based on the control's function.
     ''' </remarks>
-    <DefaultValue(LCARS.LCARScolorStyles.NavigationFunction)> _
-        Public Property Color() As LCARS.LCARScolorStyles
+    <DefaultValue(GetType(LCARS.LCARScolorStyles), "MiscFunction")> _
+    Public Property Color() As LCARS.LCARScolorStyles
         Get
             Return myColor
         End Get
@@ -387,8 +406,7 @@ Public Class LCARSbuttonClass
     ''' <remarks>
     ''' The button's <see cref="Text">Text</see> property is an alias of this property.
     ''' </remarks>
-    <DefaultValue("LCARS Button")> _
-        Public Overridable Property ButtonText() As String
+    Public Overridable Property ButtonText() As String
         Get
             Return myText
         End Get
@@ -424,8 +442,7 @@ Public Class LCARSbuttonClass
     ''' <summary>
     ''' Location of label used to display text
     ''' </summary>
-    <Browsable(False), EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)> _
-       Protected Overridable Property textLoc() As Point
+    Protected Overridable Property textLoc() As Point
         Get
             Return _textLocation
         End Get
@@ -439,8 +456,7 @@ Public Class LCARSbuttonClass
     ''' Size of label used to display text
     ''' </summary>
     ''' <remarks>This label does not auto-size, and should be handled accordingly.</remarks>
-    <Browsable(False), EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)> _
-        Protected Overridable Property textSize() As Size
+    Protected Overridable Property textSize() As Size
         Get
             Return _textSize
         End Get
@@ -456,6 +472,7 @@ Public Class LCARSbuttonClass
     ''' <remarks>
     ''' For the <see cref="LCARS.Controls.TextButton">Text Button</see>, this directly sets the height of the control.
     ''' </remarks>
+    <DefaultValue(14)> _
     Public Overridable Property ButtonTextHeight() As Integer
         Get
             Return textHeight
@@ -494,6 +511,7 @@ Public Class LCARSbuttonClass
     ''' A control that is not lit has been dimmed by applying an alpha layer. This can be used to show a function that is availiable,
     ''' but turned off. An offline function should use the offline function color.
     ''' </remarks>
+    <DefaultValue(True)> _
     Public Overridable Property Lit() As Boolean
         Get
             Return isLit
@@ -507,6 +525,7 @@ Public Class LCARSbuttonClass
     ''' <summary>
     ''' The alert status of the control.
     ''' </summary>
+    <DefaultValue(GetType(LCARS.LCARSalert), "Normal")> _
     Public Property RedAlert() As LCARS.LCARSalert Implements IAlertable.RedAlert
         Get
             Return inRedAlert
@@ -539,12 +558,21 @@ Public Class LCARSbuttonClass
         End Set
     End Property
 
+    Public Sub ResetCustomAlertColor()
+        _customAlertColor = Drawing.Color.Empty
+    End Sub
+
+    Public Function ShouldSerializeCustomAlertColor() As Boolean
+        Return _customAlertColor <> Drawing.Color.Empty
+    End Function
+
     ''' <summary>
     ''' Sets whether the control will beep when clicked.
     ''' </summary>
     ''' <remarks>
     ''' This property should be set on application startup to match the global setting. This must be done manually.
     ''' </remarks>
+    <DefaultValue(False)> _
     Public Overridable Property Beeping() As Boolean Implements IBeeping.Beeping
         Get
             Return doBeep
