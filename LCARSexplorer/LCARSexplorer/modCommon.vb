@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports LCARS.LightweightControls
 
 Module modCommon
     ''' <summary>
@@ -80,4 +81,12 @@ Module modCommon
     Public Function FileHasFlag(ByVal fileAttributes As FileAttributes, ByVal flag As FileAttributes) As Boolean
         Return (fileAttributes And flag) = flag
     End Function
+
+    Public Sub associateClickHandler(ByVal control As LCComplexButton, ByVal handler As EventHandler)
+        If My.Settings.ClickMode = "Single" Then
+            AddHandler control.Click, handler
+        Else
+            AddHandler control.DoubleClick, handler
+        End If
+    End Sub
 End Module

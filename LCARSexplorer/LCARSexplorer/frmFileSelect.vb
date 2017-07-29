@@ -6,70 +6,61 @@ Public Class frmFileSelect
 
     Dim curPath As String = ""
     Dim extensions As New List(Of String)
-    Dim _selectedPath As String
+    Dim _selectedPath As String = ""
     Dim oloc As Point
 
     Private Sub sbUp_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbUp.Click
-
-        If curPath <> "" Then
-            curPath = curPath.Substring(0, Len(curPath) - 1)
-            If InStr(curPath, "\") > 0 Then
-                curPath = curPath.Substring(0, InStrRev(curPath, "\") - 1)
-                If curPath.Length = 2 Then
-                    curPath += "\"
-                End If
-                loadDir(curPath)
-            Else
-                sbUp.Lit = False
-                curPath = ""
-                loadMyComp()
-            End If
-        End If
+        If curPath = "" Then Return
+        loadDir(Path.GetDirectoryName(curPath))
     End Sub
     Private Sub loadMyComp()
-        Dim myDrives() As DriveInfo = DriveInfo.GetDrives
-        gridMyComp.ControlSize = New Size((gridMyComp.Width - 38) \ 2, 30)
         gridMyComp.Clear()
 
-
-        hpLocation.ButtonText = "MY COMPUTER"
-        Me.Text = "MY COMPUTER"
+        gridMyComp.Text = "MY COMPUTER"
+        sbUp.Lit = False
 
         Dim beeping As Boolean = LCARS.x32.modSettings.ButtonBeep
-        For Each myDrive As DriveInfo In myDrives
+        For Each myDrive As DriveInfo In DriveInfo.GetDrives()
             Dim myButton As New LCARS.LightweightControls.LCComplexButton 'LCARS.Controls.ComplexButton
             myButton.HoldDraw = True
 
             If myDrive.IsReady Then
                 myButton.Color = LCARS.LCARScolorStyles.NavigationFunction
-                myButton.Text = myDrive.VolumeLabel & " (" & myDrive.Name & ")"
-                myButton.SideText = ToDriveSize(myDrive.TotalSize)
-                If My.Settings.ClickMode = "Single" Then
-                    AddHandler myButton.Click, AddressOf drive_click
+                If myDrive.VolumeLabel = "" Then
+                    myButton.Text = "Local Disk (" & myDrive.Name & ")"
                 Else
-                    AddHandler myButton.DoubleClick, AddressOf drive_click
+                    myButton.Text = myDrive.VolumeLabel & " (" & myDrive.Name & ")"
                 End If
+                myButton.SideText = ToDriveSize(myDrive.TotalSize)
+                associateClickHandler(myButton, AddressOf directory_click)
             Else
-                myButton.Color = LCARS.LCARScolorStyles.FunctionOffline
+                myButton.Color = LCARS.LCARScolorStyles.FunctionUnavailable
                 myButton.Text = "DRIVE OFFLINE (" & myDrive.Name & ")"
                 myButton.SideText = "--"
-                If My.Settings.ClickMode = "Single" Then
-                    AddHandler myButton.Click, AddressOf myErrorAlert
-                Else
-                    AddHandler myButton.DoubleClick, AddressOf myErrorAlert
-                End If
+                associateClickHandler(myButton, AddressOf offlineDrive_Click)
             End If
 
-            myButton.Data = myDrive.Name
+            myButton.Data = myDrive.RootDirectory.FullName()
             myButton.Beeping = beeping
             myButton.HoldDraw = False
 
             gridMyComp.Add(myButton)
         Next
-
     End Sub
 
-    Private Sub drive_click(ByVal sender As Object, ByVal e As EventArgs)
+    Private Sub offlineDrive_Click(ByVal sender As Object, ByVal e As EventArgs)
+        MsgBox("Drive not ready.", MsgBoxStyle.OkOnly, "Drive offline")
+        DirectCast(sender, LCComplexButton).RedAlert = LCARS.LCARSalert.Normal
+    End Sub
+
+    Private Sub reparsePoint_Click(ByVal sender As Object, ByVal e As EventArgs)
+        MsgBox("Reparse points cannot (yet) be traversed", _
+               MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, _
+               "Not available")
+        DirectCast(sender, LCComplexButton).RedAlert = LCARS.LCARSalert.Normal
+    End Sub
+
+    Private Sub directory_click(ByVal sender As Object, ByVal e As EventArgs)
         loadDir(CStr(CType(sender, LCARS.LightweightControls.LCComplexButton).Data))
     End Sub
 
@@ -82,113 +73,87 @@ Public Class frmFileSelect
             Dim myDir As DirectoryInfo = New DirectoryInfo(newpath)
 
             curPath = newpath
-            Dim CurItems As New List(Of FileSystemInfo)
 
-            Dim title As String = System.IO.Path.GetFileNameWithoutExtension(curPath)
+            Dim title As String = Path.GetFileNameWithoutExtension(curPath)
             If title <> "" Then
-                hpLocation.ButtonText = title
-                Me.Text = title
+                gridMyComp.Text = title
             Else
-                hpLocation.ButtonText = newpath
-                Me.Text = newpath
+                gridMyComp.Text = newpath
             End If
-
-
-            'get directories and add them to the list
-            For Each curDir As DirectoryInfo In myDir.GetDirectories
-                Try
-                    If (My.Settings.check = True) Then
-                        curDir.GetDirectories()
-                    End If
-                    Dim dirAttr As FileAttributes = curDir.Attributes
-                    If (dirAttr <> FileAttributes.Hidden Or My.Settings.showHidden = True) Then
-                        CurItems.Add(curDir)
-                    End If
-                Catch ex As Exception
-
-                End Try
-            Next
-            'get files and add them to the list
-            For Each curFile As FileInfo In myDir.GetFiles
-                Try
-                    If My.Settings.check Then
-                        Dim blank As String = curFile.Extension
-                    End If
-                    Dim fileAttr As FileAttributes = curFile.Attributes
-                    If (fileAttr <> FileAttributes.Hidden Or My.Settings.showHidden = True) Then
-                        For Each myExt As String In extensions
-                            If (curFile.Extension = myExt And curFile.Extension <> "") Then
-                                CurItems.Add(curFile)
-                            End If
-                        Next
-                    End If
-                Catch ex As Exception
-                End Try
-            Next
 
             Dim beeping As Boolean = LCARS.x32.modSettings.ButtonBeep
             gridMyComp.Clear()
             gridMyComp.ControlSize = New Size(300, 30)
-            For Each curItem As FileSystemInfo In CurItems
+            For Each curItem As FileSystemInfo In myDir.GetFileSystemInfos()
+                Dim fileAttr As FileAttributes = curItem.Attributes
+                Dim hidden As Boolean = FileHasFlag(fileAttr, FileAttributes.Hidden)
+                Dim system As Boolean = FileHasFlag(fileAttr, FileAttributes.System)
+                Dim directory As Boolean = FileHasFlag(fileAttr, FileAttributes.Directory)
+                Dim reparsePoint As Boolean = FileHasFlag(fileAttr, FileAttributes.ReparsePoint)
+                Dim canStat As Boolean = True
+                Dim subDirs() As FileSystemInfo = Nothing
+                If directory And Not reparsePoint Then
+                    Try
+                        subDirs = DirectCast(curItem, DirectoryInfo).GetDirectories()
+                    Catch ex As Exception
+                        canStat = False
+                    End Try
+                End If
+                If hidden And Not My.Settings.showHidden Or _
+                    system And Not My.Settings.showSystem Or _
+                    reparsePoint And Not My.Settings.showReparse Or _
+                    My.Settings.check And Not canStat Then
+                    Continue For
+                End If
 
-                Dim myButton As New LCARS.LightweightControls.LCComplexButton()
+                Dim myButton As New LCComplexButton()
 
                 myButton.HoldDraw = True
 
-                If curItem.GetType() Is GetType(DirectoryInfo) Then
-                    Try
+                If My.Settings.dimHidden Then myButton.Lit = Not hidden
+
+                If reparsePoint Then
+                    myButton.Color = LCARS.LCARScolorStyles.FunctionUnavailable
+                    myButton.SideText = "--"
+                    associateClickHandler(myButton, AddressOf reparsePoint_Click)
+                ElseIf directory Then
+                    If canStat Then
                         Dim curDir As DirectoryInfo = CType(curItem, DirectoryInfo)
                         myButton.Color = LCARS.LCARScolorStyles.NavigationFunction
-                        myButton.SideText = curDir.GetDirectories.GetUpperBound(0) + 1 & "." & curDir.GetFiles.GetUpperBound(0) + 1
-                        If My.Settings.ClickMode = "Single" Then
-                            AddHandler myButton.Click, AddressOf drive_click
-                        Else
-                            AddHandler myButton.DoubleClick, AddressOf drive_click
-                        End If
-                    Catch ex As Exception
+                        myButton.SideText = subDirs.Length & "." & curDir.GetFiles().Length
+                        associateClickHandler(myButton, AddressOf directory_click)
+                    Else
                         myButton.SideText = "--"
                         myButton.Color = LCARS.LCARScolorStyles.FunctionOffline
-                        If My.Settings.ClickMode = "Single" Then
-                            AddHandler myButton.Click, AddressOf myErrorAlert
-                        Else
-                            AddHandler myButton.DoubleClick, AddressOf myErrorAlert
-                        End If
-                    End Try
-
+                        associateClickHandler(myButton, AddressOf myErrorAlert)
+                    End If
                 Else
-                    Try
-                        If My.Settings.ColorFiles Then
-                            Dim mycolors() As String = myButton.ColorsAvailable.getColors
-                            mycolors(2) = getExtColor(System.IO.Path.GetExtension(curItem.Name))
-                            myButton.ColorsAvailable.setColors(mycolors)
+                    Dim ext As String = Path.GetExtension(curItem.FullName)
+                    Dim match As Boolean = False
+                    For Each myExt As String In extensions
+                        If (ext = myExt And ext <> "") Then
+                            match = True
+                            Exit For
                         End If
+                    Next
+                    If Not match Then Continue For
 
-                        myButton.Color = LCARS.LCARScolorStyles.MiscFunction
-                        Dim ext As String = System.IO.Path.GetExtension(curItem.FullName).Replace(".", "")
-                        If ext <> "" Then
-                            If ext.Length > 6 Then
-                                ext = ext.Substring(0, 6) & "."
-                            End If
-                            myButton.SideText = ext.ToUpper
-                        Else
-                            myButton.SideText = "---"
-                        End If
-                        If My.Settings.ClickMode = "Single" Then
-                            AddHandler myButton.Click, AddressOf myFile_Click
-                        Else
-                            AddHandler myButton.DoubleClick, AddressOf myFile_Click
-                        End If
+                    If My.Settings.ColorFiles Then
+                        Dim mycolors() As String = myButton.ColorsAvailable.getColors
+                        mycolors(LCARS.LCARScolorStyles.MiscFunction) = getExtColor(Path.GetExtension(curItem.Name))
+                        myButton.ColorsAvailable.setColors(mycolors)
+                    End If
 
-                    Catch ex As Exception
-                        myButton.SideText = "--"
-                        myButton.Color = LCARS.LCARScolorStyles.FunctionOffline
-                        If My.Settings.ClickMode = "Single" Then
-                            AddHandler myButton.Click, AddressOf myErrorAlert
-                        Else
-                            AddHandler myButton.DoubleClick, AddressOf myErrorAlert
+                    myButton.Color = LCARS.LCARScolorStyles.MiscFunction
+                    If ext <> "" Then
+                        If ext.Length > 6 Then
+                            ext = ext.Substring(0, 6) & "."
                         End If
-                    End Try
-
+                        myButton.SideText = ext.ToUpper
+                    Else
+                        myButton.SideText = "---"
+                    End If
+                    associateClickHandler(myButton, AddressOf myFile_Click)
                 End If
 
                 myButton.Text = curItem.Name
@@ -197,9 +162,7 @@ Public Class frmFileSelect
                 myButton.HoldDraw = False
 
                 gridMyComp.Add(myButton)
-
             Next
-
         End If
 
     End Sub
@@ -215,7 +178,7 @@ Public Class frmFileSelect
     End Sub
 
     Private Sub sbOK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbOK.Click
-        If lblCurrentSelected.Text = "" Then
+        If _selectedPath = "" Then
             Me.DialogResult = Windows.Forms.DialogResult.Cancel
         End If
     End Sub
@@ -271,4 +234,8 @@ Public Class frmFileSelect
         End If
     End Sub
 
+    Private Sub gridMyComp_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles gridMyComp.TextChanged
+        Me.Text = gridMyComp.Text
+        hpLocation.Text = gridMyComp.Text
+    End Sub
 End Class

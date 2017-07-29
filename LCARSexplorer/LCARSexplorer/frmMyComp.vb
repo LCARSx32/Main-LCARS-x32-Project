@@ -164,14 +164,6 @@ Public Class frmMyComp
         cancelClick = False
     End Sub
 
-    Private Sub associateClickHandler(ByVal control As LCComplexButton, ByVal handler As EventHandler)
-        If My.Settings.ClickMode = "Single" Then
-            AddHandler control.Click, handler
-        Else
-            AddHandler control.DoubleClick, handler
-        End If
-    End Sub
-
     Public Sub loadDir(ByVal newpath As String)
         If newpath = "" Then
             loadMyComp()
