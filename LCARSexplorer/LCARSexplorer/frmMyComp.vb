@@ -5,7 +5,6 @@ Imports LCARS.LightweightControls
 
 'To do:
 'Finish file associations
-'Add support for arbitrary selections
 'Improve context menu
 
 Public Class frmMyComp
@@ -23,10 +22,19 @@ Public Class frmMyComp
     Private Const WM_CHANGECBCHAIN As Integer = &H30D
 #End Region
 
+#Region " Enum "
+    Private Enum SelectMode
+        Clear = 0
+        Add = 1
+        Symmetric = 2
+    End Enum
+#End Region
+
 #Region " Global Variables "
 
     Public curPath As String = My.Settings.startDir
-    Dim selectedButtons As New List(Of LCARS.IDataControl)
+    Dim selectedButtons As New HashSet(Of LCARS.IDataControl)
+    Dim selMode As SelectMode
     Dim selStart As Point
     Dim clickStart As DateTime
     Dim moved As Boolean
@@ -43,8 +51,17 @@ Public Class frmMyComp
     End Property
 
     Private Sub OnSelectStart()
-        selectedButtons.Clear()
-        checkSelected(Rectangle.Empty)
+        If My.Computer.Keyboard.ShiftKeyDown Then
+            selMode = SelectMode.Add
+        ElseIf My.Computer.Keyboard.CtrlKeyDown Then
+            selMode = SelectMode.Symmetric
+        Else
+            selMode = SelectMode.Clear
+            For Each myButton As LCComplexButton In selectedButtons
+                myButton.RedAlert = LCARS.LCARSalert.Normal
+            Next
+            selectedButtons.clear()
+        End If
     End Sub
 
     Private Sub OnSelectionChanged()
@@ -63,7 +80,7 @@ Public Class frmMyComp
 
     Private Sub item_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs)
         If Not moved AndAlso (Now - clickStart) > TimeSpan.FromMilliseconds(500) Then
-            selectedButtons.Add(sender)
+            selectedButtons.add(DirectCast(sender, LCARS.IDataControl))
             DirectCast(sender, LCComplexButton).RedAlert = LCARS.LCARSalert.White
         End If
     End Sub
@@ -119,18 +136,30 @@ Public Class frmMyComp
 
     Private Sub checkSelected(ByVal selectionRect As Rectangle, Optional ByVal rememberSelection As Boolean = False)
         Dim myButton As LCComplexButton
-        For i As Integer = 0 To gridMyComp.Count - 1
+        For i As Integer = gridMyComp.CurrentPage * gridMyComp.PageSize _
+                To Math.Min(gridMyComp.Count - 1, _
+                            (gridMyComp.CurrentPage + 1) * gridMyComp.PageSize - 1)
             myButton = DirectCast(gridMyComp.Items(i), LCComplexButton)
 
-            If Not myButton.HoldDraw AndAlso myButton.Bounds.IntersectsWith(selectionRect) Then
-                If myButton.RedAlert <> LCARS.LCARSalert.White Then
+            If myButton.Bounds.IntersectsWith(selectionRect) Then
+                If selMode = SelectMode.Symmetric Then
+                    If selectedButtons.contains(myButton) Then
+                        myButton.RedAlert = LCARS.LCARSalert.Normal
+                        If rememberSelection Then selectedButtons.remove(myButton)
+                    Else
+                        myButton.RedAlert = LCARS.LCARSalert.White
+                        If rememberSelection Then selectedButtons.add(myButton)
+                    End If
+                Else
                     myButton.RedAlert = LCARS.LCARSalert.White
-                End If
-                If rememberSelection Then
-                    selectedButtons.Add(myButton)
+                    If rememberSelection Then
+                        selectedButtons.add(myButton)
+                    End If
                 End If
             Else
-                If myButton.RedAlert <> LCARS.LCARSalert.Normal Then
+                If selectedButtons.contains(myButton) Then
+                    myButton.RedAlert = LCARS.LCARSalert.White
+                Else
                     myButton.RedAlert = LCARS.LCARSalert.Normal
                 End If
             End If
@@ -497,7 +526,7 @@ Public Class frmMyComp
 
     Private Sub sbRename_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbRename.Click
         If selectedButtons.Count = 1 Then
-            Dim path As String = DirectCast(selectedButtons(0).Data, String)
+            Dim path As String = DirectCast(selectedButtons.first().Data, String)
             Dim ren As New frmRename(path)
             dockDialog(ren)
             AddHandler ren.FormClosed, AddressOf dialog_closed_reload
@@ -531,7 +560,7 @@ Public Class frmMyComp
             mySelect.ShowDialog()
             If (mySelect.DialogResult = Windows.Forms.DialogResult.OK) Then
                 Dim newProg As String = mySelect.ReturnPath
-                Shell("""" & newProg & """" & " """ & CStr(selectedButtons(0).Data) & """", AppWinStyle.NormalFocus)
+                Shell("""" & newProg & """" & " """ & CStr(selectedButtons.first().Data) & """", AppWinStyle.NormalFocus)
             End If
         Else
             MsgBox("Please select one file", MsgBoxStyle.Information)
