@@ -17,6 +17,7 @@ Namespace Controls
         Protected myList As New List(Of LightweightControls.ILightweightControl)
         Dim oldMouseMovePoint As Point
         Dim oldMouseDownPoint As Point
+        Dim oldMouseDownControl As LightweightControls.ILightweightControl
         Dim _beeping As Boolean = GetSetting("LCARS x32", "Application", "ButtonBeep", "TRUE")
         Dim WithEvents _colorsAvailable As New LCARS.LCARScolor
         'Events
@@ -70,6 +71,7 @@ Namespace Controls
         ''' Clears all current controls from the control
         ''' </summary>
         Public Sub Clear()
+            oldMouseDownControl = Nothing
             For Each mybutton As LCARS.LightweightControls.ILightweightControl In myList
                 RemoveHandler mybutton.Update, AddressOf drawButton
             Next
@@ -80,8 +82,10 @@ Namespace Controls
         Private Sub Me_MouseDown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.MouseDown
             Dim localPoint As Point = PointToClient(Cursor.Position)
             oldMouseDownPoint = localPoint
+            oldMouseDownControl = Nothing
             For i As Integer = myList.Count - 1 To 0 Step -1
                 If myList(i).Bounds.Contains(localPoint) And myList(i).HoldDraw = False Then
+                    oldMouseDownControl = myList(i)
                     myList(i).doEvent(LightweightControls.ILightweightControl.LightweightEvents.MouseDown)
                     Exit For
                 End If
@@ -90,17 +94,14 @@ Namespace Controls
         'Passes MouseUp and click events to the child controls if applicable
         Private Sub Me_MouseUp(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.MouseUp
             Dim localPoint As Point = PointToClient(Cursor.Position)
-            For i As Integer = myList.Count - 1 To 0 Step -1
-                Dim button As LightweightControls.ILightweightControl = myList(i)
-                If button.Bounds.Contains(localPoint) And myList(i).HoldDraw = False Then
-                    'If the mouse is still where it was, do a click event too.
-                    If localPoint = oldMouseDownPoint Then
-                        button.doClick()
-                    End If
-                    button.doEvent(LightweightControls.ILightweightControl.LightweightEvents.MouseUp)
-                    Exit For
+            If oldMouseDownControl IsNot Nothing Then
+                If localPoint = oldMouseDownPoint Then
+                    oldMouseDownControl.doClick()
                 End If
-            Next
+            End If
+            If oldMouseDownControl IsNot Nothing Then
+                oldMouseDownControl.doEvent(LightweightControls.ILightweightControl.LightweightEvents.MouseUp)
+            End If
         End Sub
         'Passes MouseOver events to the child controls as MouseMove, MouseEnter, and MouseLeave events
         Private Sub Me_MouseOver(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.MouseMove
