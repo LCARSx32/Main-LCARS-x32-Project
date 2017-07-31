@@ -126,6 +126,7 @@
     <Compile Include="frmSelect.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="HashSet.vb" />
     <Compile Include="modCommon.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
