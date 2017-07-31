@@ -37,7 +37,7 @@ Namespace Controls
         Dim myScroll As LCARS.Controls.TrackBar
         Dim myPadding As Integer = 5
         Dim curPage As Integer = 0
-        Dim pageSize As Integer = 1
+        Dim _pageSize As Integer = 1
         Dim _direction As ControlDirection = ControlDirection.Vertical
         Dim oldSize As Size
 
@@ -87,7 +87,7 @@ Namespace Controls
                     rowNumber = 1
                 End If
                 'Dim myheight As Integer = (Me.Height - myScroll.Height) / (rowNumber + myPadding)
-                pageSize = columnNumber * rowNumber
+                _pageSize = columnNumber * rowNumber
                 Dim x As Integer = 0
                 Dim y As Integer = 0
                 Dim i As Integer = 0
@@ -141,7 +141,7 @@ Namespace Controls
             curPage = myScroll.CurrentPage
             For i As Integer = 0 To myList.Count - 1
 
-                If i >= pageSize * (curPage) And i < pageSize * (curPage + 1) Then
+                If i >= _pageSize * (curPage) And i < _pageSize * (curPage + 1) Then
                     myList(i).HoldDraw = False
                 Else
                     myList(i).HoldDraw = True
@@ -248,6 +248,16 @@ Namespace Controls
         Public ReadOnly Property PageCount() As Integer
             Get
                 Return myScroll.Pages
+            End Get
+        End Property
+
+        ''' <summary>
+        ''' Returns the number of controls on a single page.
+        ''' </summary>
+        ''' <remarks></remarks>
+        Public ReadOnly Property PageSize() As Integer
+            Get
+                Return _pageSize
             End Get
         End Property
 #End Region
