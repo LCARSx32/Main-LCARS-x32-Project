@@ -1,6 +1,7 @@
 ﻿Imports System.Drawing
 Imports System.Windows.Forms
 Imports System.ComponentModel
+Imports LCARS.LightweightControls
 
 Namespace Controls
     ''' <summary>
@@ -14,10 +15,10 @@ Namespace Controls
         Implements LCARS.IColorable, IBeeping
 
         'Global Variables
-        Protected myList As New List(Of LightweightControls.ILightweightControl)
-        Dim oldMouseMovePoint As Point
+        Protected myList As New List(Of ILightweightControl)
+        Dim oldMouseMoveControl As ILightweightControl
         Dim oldMouseDownPoint As Point
-        Dim oldMouseDownControl As LightweightControls.ILightweightControl
+        Dim oldMouseDownControl As ILightweightControl
         Dim _beeping As Boolean = GetSetting("LCARS x32", "Application", "ButtonBeep", "TRUE")
         Dim WithEvents _colorsAvailable As New LCARS.LCARScolor
         'Events
@@ -34,7 +35,7 @@ Namespace Controls
         ''' The lightweight control's parent property will be set to the current instance for the 
         ''' purposes of easier multithreading.
         ''' </remarks>
-        Public Sub Add(ByVal item As LightweightControls.ILightweightControl)
+        Public Sub Add(ByVal item As ILightweightControl)
             item.SetParent(Me)
             myList.Add(item)
             AddHandler item.Update, AddressOf drawButton
@@ -58,7 +59,7 @@ Namespace Controls
                 If Not myList(i).HoldDraw Then g.DrawImage(myList(i).GetBitmap(), myList(i).Bounds)
             Next
         End Sub
-        Private Sub drawButton(ByVal sender As LightweightControls.ILightweightControl)
+        Private Sub drawButton(ByVal sender As ILightweightControl)
             Try
                 Dim g As Graphics = Me.CreateGraphics()
                 g.DrawImage(sender.GetBitmap(), New Point(sender.Bounds.Left, sender.Bounds.Top))
@@ -68,90 +69,85 @@ Namespace Controls
             End Try
         End Sub
         ''' <summary>
+        ''' Finds the topmost visible control whose bounds contain the given point if existant
+        ''' </summary>
+        ''' <param name="pt">Point to search for</param>
+        ''' <returns>Control found or Nothing</returns>
+        Public Function ControlFromPoint(ByVal pt As Point) As ILightweightControl
+            For i As Integer = myList.Count - 1 To 0 Step -1
+                If Not myList(i).HoldDraw AndAlso myList(i).Bounds.Contains(pt) Then
+                    Return myList(i)
+                End If
+            Next
+            Return Nothing
+        End Function
+        ''' <summary>
         ''' Clears all current controls from the control
         ''' </summary>
         Public Sub Clear()
             oldMouseDownControl = Nothing
-            For Each mybutton As LCARS.LightweightControls.ILightweightControl In myList
+            oldMouseMoveControl = Nothing
+            For Each mybutton As ILightweightControl In myList
                 RemoveHandler mybutton.Update, AddressOf drawButton
             Next
             myList.Clear()
             Me.CreateGraphics().Clear(Color.Black)
         End Sub
         'Passes MouseDown events to the child controls
-        Private Sub Me_MouseDown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.MouseDown
-            Dim localPoint As Point = PointToClient(Cursor.Position)
-            oldMouseDownPoint = localPoint
-            oldMouseDownControl = Nothing
-            For i As Integer = myList.Count - 1 To 0 Step -1
-                If myList(i).Bounds.Contains(localPoint) And myList(i).HoldDraw = False Then
-                    oldMouseDownControl = myList(i)
-                    myList(i).doEvent(LightweightControls.ILightweightControl.LightweightEvents.MouseDown)
-                    Exit For
-                End If
-            Next
+        Private Sub Me_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles Me.MouseDown
+            oldMouseDownPoint = e.Location
+            oldMouseDownControl = ControlFromPoint(e.Location)
+            If oldMouseDownControl IsNot Nothing Then
+                oldMouseDownControl.doEvent(ILightweightControl.LightweightEvents.MouseDown)
+            End If
         End Sub
         'Passes MouseUp and click events to the child controls if applicable
-        Private Sub Me_MouseUp(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.MouseUp
-            Dim localPoint As Point = PointToClient(Cursor.Position)
-            If oldMouseDownControl IsNot Nothing Then
+        Private Sub Me_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles Me.MouseUp
+            Dim localPoint As Point = e.Location
+            'Cache this value against the click event destroying the control
+            Dim ctrl As ILightweightControl = oldMouseDownControl
+            If ctrl IsNot Nothing Then
                 If localPoint = oldMouseDownPoint Then
-                    oldMouseDownControl.doClick()
+                    ctrl.doClick()
                 End If
-            End If
-            If oldMouseDownControl IsNot Nothing Then
-                oldMouseDownControl.doEvent(LightweightControls.ILightweightControl.LightweightEvents.MouseUp)
+                ctrl.doEvent(ILightweightControl.LightweightEvents.MouseUp)
             End If
         End Sub
         'Passes MouseOver events to the child controls as MouseMove, MouseEnter, and MouseLeave events
-        Private Sub Me_MouseOver(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.MouseMove
-            Dim localPoint As Point = PointToClient(Cursor.Position)
-            Dim foundTop As Boolean = False 'Top level control found
-            For i As Integer = myList.Count - 1 To 0 Step -1
-                If Not myList(i).HoldDraw Then
-                    If myList(i).Bounds.Contains(localPoint) And Not foundTop Then
-                        If myList(i).Bounds.Contains(oldMouseMovePoint) Then
-                            myList(i).doEvent(LightweightControls.ILightweightControl.LightweightEvents.MouseMove)
-                        Else
-                            myList(i).doEvent(LightweightControls.ILightweightControl.LightweightEvents.MouseEnter)
-                        End If
-                        foundTop = True
-                    Else
-                        If myList(i).Bounds.Contains(oldMouseMovePoint) Then
-                            myList(i).doEvent(LightweightControls.ILightweightControl.LightweightEvents.MouseLeave)
-                        End If
-                    End If
+        Private Sub Me_MouseOver(ByVal sender As Object, ByVal e As MouseEventArgs) Handles Me.MouseMove
+            Dim newMove As ILightweightControl = ControlFromPoint(e.Location)
+            If oldMouseMoveControl IsNot newMove Then
+                If oldMouseMoveControl IsNot Nothing Then
+                    oldMouseMoveControl.doEvent(ILightweightControl.LightweightEvents.MouseLeave)
                 End If
-            Next
-            oldMouseMovePoint = localPoint
+                If newMove IsNot Nothing Then
+                    newMove.doEvent(ILightweightControl.LightweightEvents.MouseEnter)
+                End If
+                oldMouseMoveControl = newMove
+            ElseIf oldMouseMoveControl IsNot Nothing Then
+                oldMouseMoveControl.doEvent(ILightweightControl.LightweightEvents.MouseMove)
+            End If
         End Sub
 
         Private Sub Me_MouseLeave(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.MouseLeave
-            For i As Integer = myList.Count - 1 To 0 Step -1
-                If Not myList(i).HoldDraw Then
-                    If myList(i).Bounds.Contains(oldMouseMovePoint) Then
-                        myList(i).doEvent(LightweightControls.ILightweightControl.LightweightEvents.MouseLeave)
-                    End If
-                End If
-            Next
-            oldMouseMovePoint = Nothing
+            If oldMouseMoveControl IsNot Nothing Then
+                oldMouseMoveControl.doEvent(ILightweightControl.LightweightEvents.MouseLeave)
+            End If
         End Sub
 
         'Passes DoubleClick events to the child controls
         Private Sub Me_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.DoubleClick
             Dim localPoint As Point = PointToClient(Cursor.Position)
-            For i As Integer = myList.Count - 1 To 0 Step -1
-                If Not myList(i).HoldDraw And myList(i).Bounds.Contains(localPoint) Then
-                    myList(i).doEvent(LightweightControls.ILightweightControl.LightweightEvents.DoubleClick)
-                    Exit For
-                End If
-            Next
+            Dim ctrl As ILightweightControl = ControlFromPoint(localPoint)
+            If ctrl IsNot Nothing Then
+                ctrl.doEvent(ILightweightControl.LightweightEvents.DoubleClick)
+            End If
         End Sub
 
         'Updates colors of child controls
         Private Sub ReloadColors() Handles _colorsAvailable.ColorsUpdated
             Dim temp As IColorable
-            For Each mycontrol As LightweightControls.ILightweightControl In myList
+            For Each mycontrol As ILightweightControl In myList
                 temp = TryCast(mycontrol, IColorable)
                 If Not temp Is Nothing Then
                     temp.ColorsAvailable.ReloadColors()
@@ -174,11 +170,11 @@ Namespace Controls
         ''' However, this property can also be used to replace a control at a given point. Under no circumstances should this be
         ''' used to delete a control.
         ''' </remarks>
-        Default Public Property Items(ByVal index As Integer) As LightweightControls.ILightweightControl
+        Default Public Property Items(ByVal index As Integer) As ILightweightControl
             Get
                 Return myList(index)
             End Get
-            Set(ByVal value As LightweightControls.ILightweightControl)
+            Set(ByVal value As ILightweightControl)
                 myList(index) = value
                 Me.Invalidate()
             End Set
@@ -222,7 +218,7 @@ Namespace Controls
             Set(ByVal value As Boolean)
                 _beeping = value
                 Dim temp As IBeeping
-                For Each mycontrol As LCARS.LightweightControls.ILightweightControl In myList
+                For Each mycontrol As ILightweightControl In myList
                     temp = TryCast(mycontrol, IBeeping)
                     If Not temp Is Nothing Then
                         temp.Beeping = value
