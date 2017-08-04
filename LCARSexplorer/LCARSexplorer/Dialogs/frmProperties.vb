@@ -89,16 +89,8 @@ Public Class frmProperties
                 lblAccessedValue.Text = LCARS.Stardate.getStardate(System.IO.File.GetLastAccessTime(path)).ToString()
             End If
             'finding what it opens with
-            sbChangeProgram.Visible = True
-            Try
-                Dim strExtension As String = System.IO.Path.GetExtension(path)
-                Dim myKey As RegistryKey = Registry.ClassesRoot.OpenSubKey(strExtension)
-                Dim myKeyTwo As RegistryKey = Registry.ClassesRoot.OpenSubKey(CStr(myKey.GetValue("")) & "\shell\open\command")
-                lblOpensWithValue.Text = CStr(myKeyTwo.GetValue(""))
-            Catch ex As Exception
-                lblOpensWithValue.Text = ""
-                sbChangeProgram.Visible = False
-            End Try
+            lblOpensWithValue.Text = GetTypeOpenWith(System.IO.Path.GetExtension(path))
+            sbChangeProgram.Visible = String.IsNullOrEmpty(lblOpensWithValue.Text)
         Catch ex As Exception
             lblSizeValue.Text = "N/A"
             lblCreatedValue.Text = "N/A"

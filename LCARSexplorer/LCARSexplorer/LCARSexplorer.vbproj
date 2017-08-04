@@ -90,6 +90,7 @@
     <Compile Include="Dialogs\frmRename.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FileAssociations.vb" />
     <Compile Include="frmMergeOptions.Designer.vb">
       <DependentUpon>frmMergeOptions.vb</DependentUpon>
     </Compile>
