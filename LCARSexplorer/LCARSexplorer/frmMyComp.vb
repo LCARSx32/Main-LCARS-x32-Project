@@ -1,5 +1,4 @@
 Imports System.IO
-Imports Microsoft.Win32
 Imports LCARS.UI
 Imports LCARS.LightweightControls
 
@@ -289,6 +288,13 @@ Public Class frmMyComp
             pnlVisible.Visible = True
 
             Dim myDir As DirectoryInfo = New DirectoryInfo(newpath)
+            Dim infos() As FileSystemInfo
+            Try
+                infos = myDir.GetFileSystemInfos()
+            Catch ex As Exception
+                MsgBox(String.Format("Unable to access path: {0}", newpath), MsgBoxStyle.OkOnly Or MsgBoxStyle.Exclamation, "Access Denied")
+                Return
+            End Try
 
             curPath = newpath
 
@@ -302,7 +308,7 @@ Public Class frmMyComp
             gridMyComp.Clear()
             gridMyComp.ControlSize = New Size(300, 30)
             Dim beeping As Boolean = LCARS.x32.modSettings.ButtonBeep
-            For Each curItem As FileSystemInfo In myDir.GetFileSystemInfos()
+            For Each curItem As FileSystemInfo In infos
                 Dim fileAttr As FileAttributes = curItem.Attributes
                 Dim hidden As Boolean = FileHasFlag(fileAttr, FileAttributes.Hidden)
                 Dim system As Boolean = FileHasFlag(fileAttr, FileAttributes.System)
@@ -679,8 +685,7 @@ Public Class frmMyComp
         pnlSystemDefined.Visible = False
         Dim newPath As String = inputbox("Enter a path to go to.", "Enter Path", curPath)
         If Directory.Exists(newPath) And (Not newPath = "") Then
-            curPath = newPath
-            loadDir(curPath)
+            loadDir(newPath)
         End If
     End Sub
 
