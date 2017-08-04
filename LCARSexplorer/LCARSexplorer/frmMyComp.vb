@@ -78,7 +78,11 @@ Public Class frmMyComp
         clickStart = Now
     End Sub
 
-    Private Sub item_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs)
+    Private Sub item_Click(ByVal sender As Object, ByVal e As EventArgs)
+        ' This is a Click handler, rather than a MouseUp handler because Click events
+        ' are raised before MouseUp events, and if the Click handler takes more than
+        ' 500 ms to complete, the file would be selected. Therefore, this has to be
+        ' processed (and added) before the main click handler.
         If Not moved AndAlso (Now - clickStart) > TimeSpan.FromMilliseconds(500) Then
             selectedButtons.add(DirectCast(sender, LCARS.IDataControl))
             DirectCast(sender, LCComplexButton).RedAlert = LCARS.LCARSalert.White
@@ -233,6 +237,11 @@ Public Class frmMyComp
         For Each myDrive As DriveInfo In DriveInfo.GetDrives()
             Dim myButton As New LCComplexButton
             myButton.HoldDraw = True
+            myButton.Data = myDrive.RootDirectory.FullName()
+            myButton.Beeping = beeping
+            myButton.HoldDraw = False
+            AddHandler myButton.MouseDown, AddressOf item_MouseDown
+            AddHandler myButton.Click, AddressOf item_Click
 
             If myDrive.IsReady Then
                 myButton.Color = LCARS.LCARScolorStyles.NavigationFunction
@@ -250,13 +259,6 @@ Public Class frmMyComp
                 associateClickHandler(myButton, AddressOf offlineDrive_Click)
             End If
 
-            AddHandler myButton.MouseDown, AddressOf item_MouseDown
-            AddHandler myButton.MouseUp, AddressOf item_MouseUp
-
-            myButton.Data = myDrive.RootDirectory.FullName()
-            myButton.Beeping = beeping
-            myButton.HoldDraw = False
-
             gridMyComp.Add(myButton)
         Next
     End Sub
@@ -264,13 +266,11 @@ Public Class frmMyComp
     Private Sub offlineDrive_Click(ByVal sender As Object, ByVal e As EventArgs)
         If cancelClick Then Return
         MsgBox("Drive not ready.", MsgBoxStyle.OkOnly, "Drive offline")
-        DirectCast(sender, LCComplexButton).RedAlert = LCARS.LCARSalert.Normal
     End Sub
 
     Private Sub directory_click(ByVal sender As Object, ByVal e As EventArgs)
-        If Not cancelClick Then
-            loadDir(CStr(DirectCast(sender, LCComplexButton).Data))
-        End If
+        If cancelClick Then Return
+        loadDir(CStr(DirectCast(sender, LCComplexButton).Data))
     End Sub
 
     Private Sub reparsePoint_Click(ByVal sender As Object, ByVal e As EventArgs)
@@ -278,7 +278,6 @@ Public Class frmMyComp
         MsgBox("Reparse points cannot (yet) be traversed", _
                MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, _
                "Not available")
-        DirectCast(sender, LCComplexButton).RedAlert = LCARS.LCARSalert.Normal
     End Sub
 
     Public Sub loadDir(ByVal newpath As String)
@@ -328,8 +327,14 @@ Public Class frmMyComp
                 Dim myButton As New LCComplexButton()
 
                 myButton.HoldDraw = True
-
+                myButton.Text = curItem.Name
+                myButton.Data = curItem.FullName
+                myButton.Beeping = beeping
+                myButton.HoldDraw = False
                 If My.Settings.dimHidden Then myButton.Lit = Not hidden
+
+                AddHandler myButton.MouseDown, AddressOf item_MouseDown
+                AddHandler myButton.Click, AddressOf item_Click
 
                 If reparsePoint Then
                     myButton.Color = LCARS.LCARScolorStyles.FunctionUnavailable
@@ -366,38 +371,29 @@ Public Class frmMyComp
                     associateClickHandler(myButton, AddressOf myFile_Click)
                 End If
 
-                AddHandler myButton.MouseDown, AddressOf item_MouseDown
-                AddHandler myButton.MouseUp, AddressOf item_MouseUp
-
-                myButton.Text = curItem.Name
-                myButton.Data = curItem.FullName
-                myButton.Beeping = beeping
-                myButton.HoldDraw = False
-
                 gridMyComp.Add(myButton)
             Next
         End If
     End Sub
 
     Private Sub myFile_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        If Not cancelClick Then
-            Dim btn As LCComplexButton = DirectCast(sender, LCComplexButton)
-            Dim file As String = DirectCast(btn.Data, String)
-            Try
-                Dim myNewProcess As New System.Diagnostics.ProcessStartInfo
-                Dim myProcess As Process
+        If cancelClick Then Return
+        Dim btn As LCComplexButton = DirectCast(sender, LCComplexButton)
+        Dim file As String = DirectCast(btn.Data, String)
+        Try
+            Dim myNewProcess As New System.Diagnostics.ProcessStartInfo
+            Dim myProcess As Process
 
-                myNewProcess.FileName = file
-                myNewProcess.WorkingDirectory = curPath
-                myProcess = Process.Start(myNewProcess)
-            Catch
-                Try
-                    Shell(file, AppWinStyle.NormalFocus)
-                Catch ex As Exception
-                    MsgBox("Error: " & vbNewLine & vbNewLine & ex.Message)
-                End Try
+            myNewProcess.FileName = file
+            myNewProcess.WorkingDirectory = curPath
+            myProcess = Process.Start(myNewProcess)
+        Catch
+            Try
+                Shell(file, AppWinStyle.NormalFocus)
+            Catch ex As Exception
+                MsgBox("Error: " & vbNewLine & vbNewLine & ex.Message)
             End Try
-        End If
+        End Try
     End Sub
 
     Private Sub sbProperties_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbProperties.Click
@@ -613,10 +609,10 @@ Public Class frmMyComp
         loadDir(CStr(CType(sender, LCComplexButton).Data))
     End Sub
     Private Sub myErrorAlert(ByVal sender As Object, ByVal e As EventArgs)
+        If cancelClick Then Return
         LCARS.Alerts.ActivateAlert("Red", Me.Handle)
         MsgBox("Error: Access Denied", MsgBoxStyle.Critical, "Access Denied")
         LCARS.Alerts.DeactivateAlert(Me.Handle)
-        DirectCast(sender, LCComplexButton).RedAlert = LCARS.LCARSalert.Normal
     End Sub
 
     Private Sub sbRefresh_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbRefresh.Click
