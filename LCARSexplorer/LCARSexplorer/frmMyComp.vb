@@ -38,6 +38,7 @@ Public Class frmMyComp
     Dim clickStart As DateTime
     Dim moved As Boolean
     Dim mySelection As New frmSelect()
+    Dim selectTime As TimeSpan = TimeSpan.FromMilliseconds(500)
     Dim nextInChain As IntPtr
 
 #End Region
@@ -45,7 +46,7 @@ Public Class frmMyComp
 #Region " Selection Support "
     Private ReadOnly Property cancelClick() As Boolean
         Get
-            Return moved OrElse (Now - clickStart) > TimeSpan.FromMilliseconds(500)
+            Return moved OrElse (Now - clickStart) > selectTime
         End Get
     End Property
 
@@ -82,7 +83,7 @@ Public Class frmMyComp
         ' are raised before MouseUp events, and if the Click handler takes more than
         ' 500 ms to complete, the file would be selected. Therefore, this has to be
         ' processed (and added) before the main click handler.
-        If Not moved AndAlso (Now - clickStart) > TimeSpan.FromMilliseconds(500) Then
+        If Not moved AndAlso (Now - clickStart) > selectTime Then
             Dim ctrl As LCComplexButton = DirectCast(sender, LCComplexButton)
             If selMode = SelectMode.Symmetric And selectedButtons.contains(ctrl) Then
                 selectedButtons.remove(ctrl)
