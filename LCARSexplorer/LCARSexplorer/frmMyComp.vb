@@ -65,13 +65,12 @@ Public Class frmMyComp
     End Sub
 
     Private Sub OnSelectionChanged()
-        If selectedButtons.Count = 1 Then
-            sbRename.Lit = True
-            sbRename.Clickable = True
-        Else
-            sbRename.Lit = False
-            sbRename.Clickable = False
-        End If
+        Dim oneSelected As Boolean = (selectedButtons.Count = 1)
+        sbRename.Lit = oneSelected
+        sbRename.Clickable = oneSelected
+        sbOpenWith.Lit = oneSelected
+        Dim atLeastOne As Boolean = (selectedButtons.Count > 0)
+        sbProperties.Lit = atLeastOne
     End Sub
 
     Private Sub item_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs)
@@ -120,6 +119,7 @@ Public Class frmMyComp
             checkSelected(getSelectionRect(e.Location), True)
         End If
         mySelection.Hide()
+        OnSelectionChanged()
     End Sub
 
     Private Function getSelectionRect(ByVal p As Point) As Rectangle
@@ -174,8 +174,6 @@ Public Class frmMyComp
                 End If
             End If
         Next
-
-        OnSelectionChanged()
     End Sub
 #End Region
 
@@ -225,6 +223,7 @@ Public Class frmMyComp
         End If
         nextInChain = SetClipboardViewer(Me.Handle)
         Clipboard_Changed()
+        OnSelectionChanged()
         LCARS.SetBeeping(Me)
         loadDir(curPath)
     End Sub
@@ -290,10 +289,6 @@ Public Class frmMyComp
         If newpath = "" Then
             loadMyComp()
         Else
-            sbUpDir.Lit = True
-
-            pnlVisible.Visible = True
-
             Dim myDir As DirectoryInfo = New DirectoryInfo(newpath)
             Dim infos() As FileSystemInfo
             Try
@@ -304,6 +299,8 @@ Public Class frmMyComp
             End Try
 
             curPath = newpath
+            sbUpDir.Lit = True
+            pnlVisible.Visible = True
 
             Dim title As String = Path.GetFileNameWithoutExtension(curPath)
             If title <> "" Then
