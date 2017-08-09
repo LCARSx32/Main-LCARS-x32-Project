@@ -83,8 +83,14 @@ Public Class frmMyComp
         ' 500 ms to complete, the file would be selected. Therefore, this has to be
         ' processed (and added) before the main click handler.
         If Not moved AndAlso (Now - clickStart) > TimeSpan.FromMilliseconds(500) Then
-            selectedButtons.add(DirectCast(sender, LCARS.IDataControl))
-            DirectCast(sender, LCComplexButton).RedAlert = LCARS.LCARSalert.White
+            Dim ctrl As LCComplexButton = DirectCast(sender, LCComplexButton)
+            If selMode = SelectMode.Symmetric And selectedButtons.contains(ctrl) Then
+                selectedButtons.remove(ctrl)
+                ctrl.RedAlert = LCARS.LCARSalert.Normal
+            Else
+                selectedButtons.add(ctrl)
+                ctrl.RedAlert = LCARS.LCARSalert.White
+            End If
         End If
     End Sub
 
