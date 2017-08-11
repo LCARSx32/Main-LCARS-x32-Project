@@ -78,6 +78,7 @@
     <Import Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClipboardListener.vb" />
     <Compile Include="Dialogs\frmProperties.Designer.vb">
       <DependentUpon>frmProperties.vb</DependentUpon>
     </Compile>

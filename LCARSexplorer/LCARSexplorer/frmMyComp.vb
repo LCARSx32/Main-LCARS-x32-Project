@@ -9,18 +9,6 @@ Imports LCARS.LightweightControls
 Public Class frmMyComp
     Inherits LCARS.LCARSForm
 
-#Region " API "
-    Private Declare Auto Function SendMessage Lib "user32.dll" (ByVal hWnd As IntPtr, ByVal msg As Integer, ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
-
-    Private Declare Auto Function SetClipboardViewer Lib "user32" (ByVal hWndNewViewer As IntPtr) As IntPtr
-
-    Private Declare Auto Function ChangeClipboardChain Lib "user32" (ByVal hwndRemove As IntPtr, ByVal hwndNewNext As IntPtr) As Boolean
-
-    Private Const WM_DESTROY As Integer = &H2
-    Private Const WM_DRAWCLIPBOARD As Integer = &H308
-    Private Const WM_CHANGECBCHAIN As Integer = &H30D
-#End Region
-
 #Region " Enum "
     Private Enum SelectMode
         Clear = 0
@@ -39,7 +27,7 @@ Public Class frmMyComp
     Dim moved As Boolean
     Dim mySelection As New frmSelect()
     Dim selectTime As TimeSpan = TimeSpan.FromMilliseconds(500)
-    Dim nextInChain As IntPtr
+    Dim clipListener As ClipboardListener
 
 #End Region
 
@@ -177,32 +165,6 @@ Public Class frmMyComp
     End Sub
 #End Region
 
-    Protected Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
-        Select Case m.Msg
-            Case WM_DRAWCLIPBOARD
-                Clipboard_Changed()
-                If nextInChain <> IntPtr.Zero Then
-                    SendMessage(nextInChain, WM_DRAWCLIPBOARD, Nothing, Nothing)
-                End If
-                m.Result = IntPtr.Zero
-            Case WM_CHANGECBCHAIN
-                If m.WParam = nextInChain Then
-                    nextInChain = m.LParam
-                End If
-                If nextInChain <> IntPtr.Zero Then
-                    SendMessage(nextInChain, WM_CHANGECBCHAIN, m.WParam, m.LParam)
-                End If
-                m.Result = IntPtr.Zero
-            Case WM_DESTROY
-                ChangeClipboardChain(Me.Handle, nextInChain)
-                MyBase.WndProc(m)
-            Case Else
-                MyBase.WndProc(m)
-        End Select
-    End Sub
-
-
-
     Private Sub frmMyComp_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
         If e.KeyData = Keys.PageDown Then
             If gridMyComp.CurrentPage + 1 < gridMyComp.PageCount Then
@@ -221,8 +183,9 @@ Public Class frmMyComp
                 curPath = Command()
             End If
         End If
-        nextInChain = SetClipboardViewer(Me.Handle)
-        Clipboard_Changed()
+        clipListener = New ClipboardListener(Me)
+        AddHandler clipListener.ClipboardChanged, AddressOf Me.Clipboard_Changed
+        Clipboard_Changed(Me, EventArgs.Empty)
         OnSelectionChanged()
         LCARS.SetBeeping(Me)
         loadDir(curPath)
@@ -502,7 +465,7 @@ Public Class frmMyComp
         End If
     End Sub
 
-    Private Sub Clipboard_Changed()
+    Private Sub Clipboard_Changed(ByVal sender As Object, ByVal e As EventArgs)
         sbPaste.Lit = Clipboard.ContainsFileDropList()
         sbPaste.Clickable = sbPaste.Lit
     End Sub
