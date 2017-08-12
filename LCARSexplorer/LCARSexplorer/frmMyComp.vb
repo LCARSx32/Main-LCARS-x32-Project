@@ -27,7 +27,7 @@ Public Class frmMyComp
     Dim moved As Boolean
     Dim mySelection As New frmSelect()
     Dim selectTime As TimeSpan = TimeSpan.FromMilliseconds(500)
-    Dim clipListener As ClipboardListener
+    Dim WithEvents clipListener As New ClipboardListener(Me)
 
 #End Region
 
@@ -183,8 +183,6 @@ Public Class frmMyComp
                 curPath = Command()
             End If
         End If
-        clipListener = New ClipboardListener(Me)
-        AddHandler clipListener.ClipboardChanged, AddressOf Me.Clipboard_Changed
         Clipboard_Changed(Me, EventArgs.Empty)
         OnSelectionChanged()
         LCARS.SetBeeping(Me)
@@ -465,7 +463,7 @@ Public Class frmMyComp
         End If
     End Sub
 
-    Private Sub Clipboard_Changed(ByVal sender As Object, ByVal e As EventArgs)
+    Private Sub Clipboard_Changed(ByVal sender As Object, ByVal e As EventArgs) Handles clipListener.ClipboardChanged
         sbPaste.Lit = Clipboard.ContainsFileDropList()
         sbPaste.Clickable = sbPaste.Lit
     End Sub
