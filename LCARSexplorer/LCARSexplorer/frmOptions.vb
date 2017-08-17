@@ -26,19 +26,10 @@ Public Class frmOptions
         Me.Close()
     End Sub
 
-    Private Sub lstShortcutNames_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstShortcutNames.SelectedIndexChanged
-        lstShortcuts.SelectedIndex = lstShortcutNames.SelectedIndex
-    End Sub
-
-    Private Sub lstShortcuts_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstShortcuts.SelectedIndexChanged
-        lstShortcutNames.SelectedIndex = lstShortcuts.SelectedIndex
-    End Sub
     Private Sub reloadList()
         lstShortcuts.Items.Clear()
-        lstShortcutNames.Items.Clear()
         For i As Integer = 0 To My.Settings.shortcuts.Count - 1
-            lstShortcuts.Items.Add(My.Settings.shortcuts.Item(i))
-            lstShortcutNames.Items.Add(My.Settings.shortcutNames.Item(i))
+            lstShortcuts.Items.Add(My.Settings.shortcutNames(i) & vbTab & My.Settings.shortcuts(i))
         Next
     End Sub
     Private Sub fbAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbAdd.Click
@@ -83,7 +74,6 @@ Public Class frmOptions
             My.Settings.shortcutNames.Insert(lstShortcuts.SelectedIndex + 1, strtemp)
             reloadList()
         End If
-
     End Sub
 
     Private Sub fbEdit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbEdit.Click
@@ -104,6 +94,7 @@ Public Class frmOptions
         My.Settings.ClickMode = "Double"
     End Sub
 
+#Region " View toggles "
     Private Sub tglShowHidden_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tglShowHidden.Click
         My.Settings.showHidden = tglShowHidden.State
     End Sub
@@ -127,4 +118,6 @@ Public Class frmOptions
     Private Sub tglDimHidden_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tglDimHidden.Click
         My.Settings.dimHidden = tglDimHidden.State
     End Sub
+#End Region
+
 End Class

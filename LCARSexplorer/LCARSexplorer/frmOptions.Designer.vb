@@ -24,13 +24,6 @@ Partial Class frmOptions
     Private Sub InitializeComponent()
         Me.sbOK = New LCARS.Controls.StandardButton
         Me.tcOptions = New LCARS.Controls.x32TabControl
-        Me.xtcView = New LCARS.Controls.x32TabPage
-        Me.tglDimHidden = New LCARS.Controls.ToggleButton
-        Me.tglColor = New LCARS.Controls.ToggleButton
-        Me.tglCheck = New LCARS.Controls.ToggleButton
-        Me.tglReparse = New LCARS.Controls.ToggleButton
-        Me.tglSystem = New LCARS.Controls.ToggleButton
-        Me.tglShowHidden = New LCARS.Controls.ToggleButton
         Me.tabMain = New LCARS.Controls.x32TabPage
         Me.fbClickMode = New LCARS.Controls.FlatButton
         Me.hpDouble = New LCARS.Controls.HalfPillButton
@@ -38,22 +31,29 @@ Partial Class frmOptions
         Me.txtStartDir = New System.Windows.Forms.TextBox
         Me.lblClickMode = New System.Windows.Forms.Label
         Me.lblStartDir = New System.Windows.Forms.Label
+        Me.xtcView = New LCARS.Controls.x32TabPage
+        Me.tglDimHidden = New LCARS.Controls.ToggleButton
+        Me.tglColor = New LCARS.Controls.ToggleButton
+        Me.tglCheck = New LCARS.Controls.ToggleButton
+        Me.tglReparse = New LCARS.Controls.ToggleButton
+        Me.tglSystem = New LCARS.Controls.ToggleButton
+        Me.tglShowHidden = New LCARS.Controls.ToggleButton
         Me.tabShortcuts = New LCARS.Controls.x32TabPage
         Me.fbEdit = New LCARS.Controls.FlatButton
         Me.fbDown = New LCARS.Controls.FlatButton
         Me.fbAdd = New LCARS.Controls.FlatButton
         Me.fbRemove = New LCARS.Controls.FlatButton
         Me.fbUp = New LCARS.Controls.FlatButton
-        Me.lstShortcutNames = New System.Windows.Forms.ListBox
-        Me.lstShortcuts = New System.Windows.Forms.ListBox
+        Me.lstShortcuts = New LCARS.Controls.LCARSList
         Me.tcOptions.SuspendLayout()
-        Me.xtcView.SuspendLayout()
         Me.tabMain.SuspendLayout()
+        Me.xtcView.SuspendLayout()
         Me.tabShortcuts.SuspendLayout()
         Me.SuspendLayout()
         '
         'sbOK
         '
+        Me.sbOK.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.sbOK.ButtonText = "OK"
         Me.sbOK.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbOK.Color = LCARS.LCARScolorStyles.PrimaryFunction
@@ -65,10 +65,13 @@ Partial Class frmOptions
         '
         'tcOptions
         '
+        Me.tcOptions.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.tcOptions.BackColor = System.Drawing.Color.Black
         Me.tcOptions.Controls.Add(Me.tabMain)
-        Me.tcOptions.Controls.Add(Me.xtcView)
         Me.tcOptions.Controls.Add(Me.tabShortcuts)
+        Me.tcOptions.Controls.Add(Me.xtcView)
         Me.tcOptions.Location = New System.Drawing.Point(12, 12)
         Me.tcOptions.Name = "tcOptions"
         Me.tcOptions.SelectedTab = Me.tabMain
@@ -78,91 +81,6 @@ Partial Class frmOptions
         Me.tcOptions.TabPages.Add(Me.xtcView)
         Me.tcOptions.TabPages.Add(Me.tabShortcuts)
         Me.tcOptions.Text = "X32TabControl1"
-        '
-        'xtcView
-        '
-        Me.xtcView.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.xtcView.BackColor = System.Drawing.Color.Black
-        Me.xtcView.Color = LCARS.LCARScolorStyles.MiscFunction
-        Me.xtcView.Controls.Add(Me.tglDimHidden)
-        Me.xtcView.Controls.Add(Me.tglColor)
-        Me.xtcView.Controls.Add(Me.tglCheck)
-        Me.xtcView.Controls.Add(Me.tglReparse)
-        Me.xtcView.Controls.Add(Me.tglSystem)
-        Me.xtcView.Controls.Add(Me.tglShowHidden)
-        Me.xtcView.Location = New System.Drawing.Point(0, 26)
-        Me.xtcView.Name = "xtcView"
-        Me.xtcView.Size = New System.Drawing.Size(401, 280)
-        Me.xtcView.TabIndex = 7
-        Me.xtcView.Text = "VIEW"
-        '
-        'tglDimHidden
-        '
-        Me.tglDimHidden.ButtonText = "DIM HIDDEN FILES"
-        Me.tglDimHidden.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
-        Me.tglDimHidden.Location = New System.Drawing.Point(7, 195)
-        Me.tglDimHidden.Name = "tglDimHidden"
-        Me.tglDimHidden.SideText = "ON"
-        Me.tglDimHidden.Size = New System.Drawing.Size(239, 33)
-        Me.tglDimHidden.TabIndex = 0
-        Me.tglDimHidden.Text = "DIM HIDDEN FILES"
-        '
-        'tglColor
-        '
-        Me.tglColor.ButtonText = "COLOR FILES BY EXTENSION"
-        Me.tglColor.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
-        Me.tglColor.Location = New System.Drawing.Point(7, 156)
-        Me.tglColor.Name = "tglColor"
-        Me.tglColor.SideText = "ON"
-        Me.tglColor.Size = New System.Drawing.Size(239, 33)
-        Me.tglColor.TabIndex = 0
-        Me.tglColor.Text = "COLOR FILES BY EXTENSION"
-        '
-        'tglCheck
-        '
-        Me.tglCheck.ButtonText = "HIDE INACCESSIBLE DIRECTORIES"
-        Me.tglCheck.Color = LCARS.LCARScolorStyles.NavigationFunction
-        Me.tglCheck.Location = New System.Drawing.Point(7, 117)
-        Me.tglCheck.Name = "tglCheck"
-        Me.tglCheck.SideText = "ON"
-        Me.tglCheck.Size = New System.Drawing.Size(239, 33)
-        Me.tglCheck.TabIndex = 0
-        Me.tglCheck.Text = "HIDE INACCESSIBLE DIRECTORIES"
-        '
-        'tglReparse
-        '
-        Me.tglReparse.ButtonText = "SHOW REPARSE POINTS"
-        Me.tglReparse.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.tglReparse.Location = New System.Drawing.Point(7, 78)
-        Me.tglReparse.Name = "tglReparse"
-        Me.tglReparse.SideText = "ON"
-        Me.tglReparse.Size = New System.Drawing.Size(239, 33)
-        Me.tglReparse.TabIndex = 0
-        Me.tglReparse.Text = "SHOW REPARSE POINTS"
-        '
-        'tglSystem
-        '
-        Me.tglSystem.ButtonText = "SHOW SYSTEM ITEMS"
-        Me.tglSystem.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.tglSystem.Location = New System.Drawing.Point(7, 39)
-        Me.tglSystem.Name = "tglSystem"
-        Me.tglSystem.SideText = "ON"
-        Me.tglSystem.Size = New System.Drawing.Size(239, 33)
-        Me.tglSystem.TabIndex = 0
-        Me.tglSystem.Text = "SHOW SYSTEM ITEMS"
-        '
-        'tglShowHidden
-        '
-        Me.tglShowHidden.ButtonText = "SHOW HIDDEN ITEMS"
-        Me.tglShowHidden.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.tglShowHidden.Location = New System.Drawing.Point(7, 0)
-        Me.tglShowHidden.Name = "tglShowHidden"
-        Me.tglShowHidden.SideText = "ON"
-        Me.tglShowHidden.Size = New System.Drawing.Size(239, 33)
-        Me.tglShowHidden.TabIndex = 0
-        Me.tglShowHidden.Text = "SHOW HIDDEN ITEMS"
         '
         'tabMain
         '
@@ -246,6 +164,92 @@ Partial Class frmOptions
         Me.lblStartDir.TabIndex = 3
         Me.lblStartDir.Text = "Start Directory:"
         '
+        'xtcView
+        '
+        Me.xtcView.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.xtcView.BackColor = System.Drawing.Color.Black
+        Me.xtcView.Color = LCARS.LCARScolorStyles.MiscFunction
+        Me.xtcView.Controls.Add(Me.tglDimHidden)
+        Me.xtcView.Controls.Add(Me.tglColor)
+        Me.xtcView.Controls.Add(Me.tglCheck)
+        Me.xtcView.Controls.Add(Me.tglReparse)
+        Me.xtcView.Controls.Add(Me.tglSystem)
+        Me.xtcView.Controls.Add(Me.tglShowHidden)
+        Me.xtcView.ForeColor = System.Drawing.Color.Orange
+        Me.xtcView.Location = New System.Drawing.Point(0, 26)
+        Me.xtcView.Name = "xtcView"
+        Me.xtcView.Size = New System.Drawing.Size(401, 280)
+        Me.xtcView.TabIndex = 7
+        Me.xtcView.Text = "VIEW"
+        '
+        'tglDimHidden
+        '
+        Me.tglDimHidden.ButtonText = "DIM HIDDEN FILES"
+        Me.tglDimHidden.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
+        Me.tglDimHidden.Location = New System.Drawing.Point(7, 195)
+        Me.tglDimHidden.Name = "tglDimHidden"
+        Me.tglDimHidden.SideText = "ON"
+        Me.tglDimHidden.Size = New System.Drawing.Size(239, 33)
+        Me.tglDimHidden.TabIndex = 0
+        Me.tglDimHidden.Text = "DIM HIDDEN FILES"
+        '
+        'tglColor
+        '
+        Me.tglColor.ButtonText = "COLOR FILES BY EXTENSION"
+        Me.tglColor.Color = LCARS.LCARScolorStyles.LCARSDisplayOnly
+        Me.tglColor.Location = New System.Drawing.Point(7, 156)
+        Me.tglColor.Name = "tglColor"
+        Me.tglColor.SideText = "ON"
+        Me.tglColor.Size = New System.Drawing.Size(239, 33)
+        Me.tglColor.TabIndex = 0
+        Me.tglColor.Text = "COLOR FILES BY EXTENSION"
+        '
+        'tglCheck
+        '
+        Me.tglCheck.ButtonText = "HIDE INACCESSIBLE DIRECTORIES"
+        Me.tglCheck.Color = LCARS.LCARScolorStyles.NavigationFunction
+        Me.tglCheck.Location = New System.Drawing.Point(7, 117)
+        Me.tglCheck.Name = "tglCheck"
+        Me.tglCheck.SideText = "ON"
+        Me.tglCheck.Size = New System.Drawing.Size(239, 33)
+        Me.tglCheck.TabIndex = 0
+        Me.tglCheck.Text = "HIDE INACCESSIBLE DIRECTORIES"
+        '
+        'tglReparse
+        '
+        Me.tglReparse.ButtonText = "SHOW REPARSE POINTS"
+        Me.tglReparse.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.tglReparse.Location = New System.Drawing.Point(7, 78)
+        Me.tglReparse.Name = "tglReparse"
+        Me.tglReparse.SideText = "ON"
+        Me.tglReparse.Size = New System.Drawing.Size(239, 33)
+        Me.tglReparse.TabIndex = 0
+        Me.tglReparse.Text = "SHOW REPARSE POINTS"
+        '
+        'tglSystem
+        '
+        Me.tglSystem.ButtonText = "SHOW SYSTEM ITEMS"
+        Me.tglSystem.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.tglSystem.Location = New System.Drawing.Point(7, 39)
+        Me.tglSystem.Name = "tglSystem"
+        Me.tglSystem.SideText = "ON"
+        Me.tglSystem.Size = New System.Drawing.Size(239, 33)
+        Me.tglSystem.TabIndex = 0
+        Me.tglSystem.Text = "SHOW SYSTEM ITEMS"
+        '
+        'tglShowHidden
+        '
+        Me.tglShowHidden.ButtonText = "SHOW HIDDEN ITEMS"
+        Me.tglShowHidden.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.tglShowHidden.Location = New System.Drawing.Point(7, 0)
+        Me.tglShowHidden.Name = "tglShowHidden"
+        Me.tglShowHidden.SideText = "ON"
+        Me.tglShowHidden.Size = New System.Drawing.Size(239, 33)
+        Me.tglShowHidden.TabIndex = 0
+        Me.tglShowHidden.Text = "SHOW HIDDEN ITEMS"
+        '
         'tabShortcuts
         '
         Me.tabShortcuts.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -253,13 +257,12 @@ Partial Class frmOptions
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.tabShortcuts.BackColor = System.Drawing.Color.Black
         Me.tabShortcuts.Color = LCARS.LCARScolorStyles.NavigationFunction
+        Me.tabShortcuts.Controls.Add(Me.lstShortcuts)
         Me.tabShortcuts.Controls.Add(Me.fbEdit)
         Me.tabShortcuts.Controls.Add(Me.fbDown)
         Me.tabShortcuts.Controls.Add(Me.fbAdd)
         Me.tabShortcuts.Controls.Add(Me.fbRemove)
         Me.tabShortcuts.Controls.Add(Me.fbUp)
-        Me.tabShortcuts.Controls.Add(Me.lstShortcutNames)
-        Me.tabShortcuts.Controls.Add(Me.lstShortcuts)
         Me.tabShortcuts.Location = New System.Drawing.Point(0, 26)
         Me.tabShortcuts.Name = "tabShortcuts"
         Me.tabShortcuts.Size = New System.Drawing.Size(401, 280)
@@ -268,6 +271,7 @@ Partial Class frmOptions
         '
         'fbEdit
         '
+        Me.fbEdit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.fbEdit.ButtonText = "EDIT"
         Me.fbEdit.Location = New System.Drawing.Point(162, 214)
         Me.fbEdit.Name = "fbEdit"
@@ -277,6 +281,7 @@ Partial Class frmOptions
         '
         'fbDown
         '
+        Me.fbDown.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.fbDown.ButtonText = "MOVE DOWN"
         Me.fbDown.Location = New System.Drawing.Point(324, 214)
         Me.fbDown.Name = "fbDown"
@@ -286,6 +291,7 @@ Partial Class frmOptions
         '
         'fbAdd
         '
+        Me.fbAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.fbAdd.ButtonText = "ADD"
         Me.fbAdd.Location = New System.Drawing.Point(0, 214)
         Me.fbAdd.Name = "fbAdd"
@@ -295,6 +301,7 @@ Partial Class frmOptions
         '
         'fbRemove
         '
+        Me.fbRemove.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.fbRemove.ButtonText = "REMOVE"
         Me.fbRemove.Location = New System.Drawing.Point(81, 214)
         Me.fbRemove.Name = "fbRemove"
@@ -304,6 +311,7 @@ Partial Class frmOptions
         '
         'fbUp
         '
+        Me.fbUp.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.fbUp.ButtonText = "MOVE UP"
         Me.fbUp.Location = New System.Drawing.Point(243, 214)
         Me.fbUp.Name = "fbUp"
@@ -311,31 +319,19 @@ Partial Class frmOptions
         Me.fbUp.TabIndex = 1
         Me.fbUp.Text = "MOVE UP"
         '
-        'lstShortcutNames
-        '
-        Me.lstShortcutNames.BackColor = System.Drawing.Color.Black
-        Me.lstShortcutNames.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lstShortcutNames.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lstShortcutNames.ForeColor = System.Drawing.Color.Orange
-        Me.lstShortcutNames.FormattingEnabled = True
-        Me.lstShortcutNames.ItemHeight = 21
-        Me.lstShortcutNames.Location = New System.Drawing.Point(0, 4)
-        Me.lstShortcutNames.Name = "lstShortcutNames"
-        Me.lstShortcutNames.Size = New System.Drawing.Size(121, 170)
-        Me.lstShortcutNames.TabIndex = 0
-        '
         'lstShortcuts
         '
-        Me.lstShortcuts.BackColor = System.Drawing.Color.Black
-        Me.lstShortcuts.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lstShortcuts.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lstShortcuts.ForeColor = System.Drawing.Color.Orange
+        Me.lstShortcuts.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lstShortcuts.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.lstShortcuts.FormattingEnabled = True
-        Me.lstShortcuts.ItemHeight = 21
-        Me.lstShortcuts.Location = New System.Drawing.Point(120, 4)
+        Me.lstShortcuts.ItemHeight = 25
+        Me.lstShortcuts.Location = New System.Drawing.Point(0, 0)
         Me.lstShortcuts.Name = "lstShortcuts"
-        Me.lstShortcuts.Size = New System.Drawing.Size(278, 170)
-        Me.lstShortcuts.TabIndex = 0
+        Me.lstShortcuts.Size = New System.Drawing.Size(401, 202)
+        Me.lstShortcuts.TabIndex = 2
+        Me.lstShortcuts.TabStops = New Single() {150.0!}
         '
         'frmOptions
         '
@@ -345,16 +341,16 @@ Partial Class frmOptions
         Me.ClientSize = New System.Drawing.Size(535, 330)
         Me.Controls.Add(Me.sbOK)
         Me.Controls.Add(Me.tcOptions)
-        Me.ForeColor = System.Drawing.Color.OrangeRed
+        Me.ForeColor = System.Drawing.Color.Orange
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmOptions"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "frmOptions"
         Me.tcOptions.ResumeLayout(False)
         Me.tcOptions.PerformLayout()
-        Me.xtcView.ResumeLayout(False)
         Me.tabMain.ResumeLayout(False)
         Me.tabMain.PerformLayout()
+        Me.xtcView.ResumeLayout(False)
         Me.tabShortcuts.ResumeLayout(False)
         Me.ResumeLayout(False)
 
@@ -365,8 +361,6 @@ Partial Class frmOptions
     Friend WithEvents tcOptions As LCARS.Controls.x32TabControl
     Friend WithEvents tabMain As LCARS.Controls.x32TabPage
     Friend WithEvents tabShortcuts As LCARS.Controls.x32TabPage
-    Friend WithEvents lstShortcuts As System.Windows.Forms.ListBox
-    Friend WithEvents lstShortcutNames As System.Windows.Forms.ListBox
     Friend WithEvents fbUp As LCARS.Controls.FlatButton
     Friend WithEvents fbAdd As LCARS.Controls.FlatButton
     Friend WithEvents fbRemove As LCARS.Controls.FlatButton
@@ -383,4 +377,5 @@ Partial Class frmOptions
     Friend WithEvents tglShowHidden As LCARS.Controls.ToggleButton
     Friend WithEvents tglColor As LCARS.Controls.ToggleButton
     Friend WithEvents tglDimHidden As LCARS.Controls.ToggleButton
+    Friend WithEvents lstShortcuts As LCARS.Controls.LCARSList
 End Class
