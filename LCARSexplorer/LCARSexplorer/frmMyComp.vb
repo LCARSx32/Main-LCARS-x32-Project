@@ -185,6 +185,7 @@ Public Class frmMyComp
         End If
         Clipboard_Changed(Me, EventArgs.Empty)
         OnSelectionChanged()
+        loadShortcuts()
         LCARS.SetBeeping(Me)
         loadDir(curPath)
     End Sub
@@ -537,6 +538,7 @@ Public Class frmMyComp
     Private Sub sbOptions_Click(ByVal senter As System.Object, ByVal e As System.EventArgs) Handles sbOptions.Click
         frmOptions.ShowDialog()
         loadDir(curPath)
+        loadShortcuts()
     End Sub
 
     Private Sub sbEdit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbEdit.Click
@@ -551,7 +553,6 @@ Public Class frmMyComp
         pnlSystemDefined.Visible = Not pnlSystemDefined.Visible
         If pnlSystemDefined.Visible Then
             pnlEdit.Visible = False
-            loadShortcuts()
             pnlSystemDefined.BringToFront()
         End If
     End Sub
