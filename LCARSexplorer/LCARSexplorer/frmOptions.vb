@@ -1,3 +1,5 @@
+Imports LCARS.UI
+
 Public Class frmOptions
 
     Private Sub frmOptions_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -33,8 +35,10 @@ Public Class frmOptions
         Next
     End Sub
     Private Sub fbAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbAdd.Click
-        Dim strLable As String = InputBox("Enter name for new shortcut", "New Shortcut", "New Shortcut")
-        Dim strPath As String = InputBox("Enter path of new shortcut", "New Shortcut", "")
+        Dim strLable As String = inputbox("Enter name for new shortcut", "New Shortcut", "New Shortcut")
+        If strLable = String.Empty Then Return
+        Dim strPath As String = inputbox("Enter path of new shortcut", "New Shortcut", "")
+        If strPath = String.Empty Then Return
         If (System.IO.Directory.Exists(strPath)) Then
             My.Settings.shortcuts.Add(strPath)
             My.Settings.shortcutNames.Add(strLable)
@@ -42,6 +46,10 @@ Public Class frmOptions
         Else
             MsgBox("Invalid path")
         End If
+    End Sub
+
+    Private Sub fbAddSystem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbAddSystem.Click
+        MsgBox("Not implemented yet!")
     End Sub
 
     Private Sub fbRemove_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbRemove.Click
@@ -53,27 +61,30 @@ Public Class frmOptions
     End Sub
 
     Private Sub fbUp_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbUp.Click
-        If (lstShortcuts.SelectedIndex > 0) Then
-            Dim strtemp As String = My.Settings.shortcuts.Item(lstShortcuts.SelectedIndex)
-            My.Settings.shortcuts.RemoveAt(lstShortcuts.SelectedIndex)
-            My.Settings.shortcuts.Insert(lstShortcuts.SelectedIndex - 1, strtemp)
-            strtemp = My.Settings.shortcutNames.Item(lstShortcuts.SelectedIndex)
-            My.Settings.shortcutNames.RemoveAt(lstShortcuts.SelectedIndex)
-            My.Settings.shortcutNames.Insert(lstShortcuts.SelectedIndex - 1, strtemp)
-            reloadList()
-        End If
+        Dim index As Integer = lstShortcuts.SelectedIndex
+        If index < 1 Then Return
+        Dim strtemp As String = My.Settings.shortcuts.Item(index)
+        My.Settings.shortcuts.RemoveAt(index)
+        My.Settings.shortcuts.Insert(index - 1, strtemp)
+        strtemp = My.Settings.shortcutNames.Item(index)
+        My.Settings.shortcutNames.RemoveAt(index)
+        My.Settings.shortcutNames.Insert(index - 1, strtemp)
+        reloadList()
+        lstShortcuts.SelectedIndex = index - 1
     End Sub
 
     Private Sub fbDown_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbDown.Click
-        If (lstShortcuts.SelectedIndex <> -1 And lstShortcuts.SelectedIndex < lstShortcuts.Items.Count - 1) Then
-            Dim strtemp As String = My.Settings.shortcuts.Item(lstShortcuts.SelectedIndex)
-            My.Settings.shortcuts.RemoveAt(lstShortcuts.SelectedIndex)
-            My.Settings.shortcuts.Insert(lstShortcuts.SelectedIndex + 1, strtemp)
-            strtemp = My.Settings.shortcutNames.Item(lstShortcuts.SelectedIndex)
-            My.Settings.shortcutNames.RemoveAt(lstShortcuts.SelectedIndex)
-            My.Settings.shortcutNames.Insert(lstShortcuts.SelectedIndex + 1, strtemp)
-            reloadList()
-        End If
+        Dim index As Integer = lstShortcuts.SelectedIndex
+        If index < 0 Then Return
+        If index = lstShortcuts.Items.Count - 1 Then Return
+        Dim strtemp As String = My.Settings.shortcuts.Item(index)
+        My.Settings.shortcuts.RemoveAt(index)
+        My.Settings.shortcuts.Insert(index + 1, strtemp)
+        strtemp = My.Settings.shortcutNames.Item(index)
+        My.Settings.shortcutNames.RemoveAt(index)
+        My.Settings.shortcutNames.Insert(index + 1, strtemp)
+        reloadList()
+        lstShortcuts.SelectedIndex = index + 1
     End Sub
 
     Private Sub fbEdit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbEdit.Click

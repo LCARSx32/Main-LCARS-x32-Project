@@ -24,13 +24,14 @@ Partial Class frmOptions
     Private Sub InitializeComponent()
         Me.sbOK = New LCARS.Controls.StandardButton
         Me.tcOptions = New LCARS.Controls.x32TabControl
-        Me.tabMain = New LCARS.Controls.x32TabPage
-        Me.fbClickMode = New LCARS.Controls.FlatButton
-        Me.hpDouble = New LCARS.Controls.HalfPillButton
-        Me.hpSingle = New LCARS.Controls.HalfPillButton
-        Me.txtStartDir = New System.Windows.Forms.TextBox
-        Me.lblClickMode = New System.Windows.Forms.Label
-        Me.lblStartDir = New System.Windows.Forms.Label
+        Me.tabShortcuts = New LCARS.Controls.x32TabPage
+        Me.lstShortcuts = New LCARS.Controls.LCARSList
+        Me.fbEdit = New LCARS.Controls.FlatButton
+        Me.fbDown = New LCARS.Controls.FlatButton
+        Me.fbAddSystem = New LCARS.Controls.FlatButton
+        Me.fbAdd = New LCARS.Controls.FlatButton
+        Me.fbRemove = New LCARS.Controls.FlatButton
+        Me.fbUp = New LCARS.Controls.FlatButton
         Me.xtcView = New LCARS.Controls.x32TabPage
         Me.tglDimHidden = New LCARS.Controls.ToggleButton
         Me.tglColor = New LCARS.Controls.ToggleButton
@@ -38,17 +39,17 @@ Partial Class frmOptions
         Me.tglReparse = New LCARS.Controls.ToggleButton
         Me.tglSystem = New LCARS.Controls.ToggleButton
         Me.tglShowHidden = New LCARS.Controls.ToggleButton
-        Me.tabShortcuts = New LCARS.Controls.x32TabPage
-        Me.fbEdit = New LCARS.Controls.FlatButton
-        Me.fbDown = New LCARS.Controls.FlatButton
-        Me.fbAdd = New LCARS.Controls.FlatButton
-        Me.fbRemove = New LCARS.Controls.FlatButton
-        Me.fbUp = New LCARS.Controls.FlatButton
-        Me.lstShortcuts = New LCARS.Controls.LCARSList
+        Me.tabMain = New LCARS.Controls.x32TabPage
+        Me.fbClickMode = New LCARS.Controls.FlatButton
+        Me.hpDouble = New LCARS.Controls.HalfPillButton
+        Me.hpSingle = New LCARS.Controls.HalfPillButton
+        Me.txtStartDir = New System.Windows.Forms.TextBox
+        Me.lblClickMode = New System.Windows.Forms.Label
+        Me.lblStartDir = New System.Windows.Forms.Label
         Me.tcOptions.SuspendLayout()
-        Me.tabMain.SuspendLayout()
-        Me.xtcView.SuspendLayout()
         Me.tabShortcuts.SuspendLayout()
+        Me.xtcView.SuspendLayout()
+        Me.tabMain.SuspendLayout()
         Me.SuspendLayout()
         '
         'sbOK
@@ -57,7 +58,7 @@ Partial Class frmOptions
         Me.sbOK.ButtonText = "OK"
         Me.sbOK.ButtonTextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.sbOK.Color = LCARS.LCARScolorStyles.PrimaryFunction
-        Me.sbOK.Location = New System.Drawing.Point(12, 288)
+        Me.sbOK.Location = New System.Drawing.Point(12, 346)
         Me.sbOK.Name = "sbOK"
         Me.sbOK.Size = New System.Drawing.Size(101, 30)
         Me.sbOK.TabIndex = 2
@@ -69,100 +70,112 @@ Partial Class frmOptions
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.tcOptions.BackColor = System.Drawing.Color.Black
-        Me.tcOptions.Controls.Add(Me.tabMain)
         Me.tcOptions.Controls.Add(Me.tabShortcuts)
         Me.tcOptions.Controls.Add(Me.xtcView)
+        Me.tcOptions.Controls.Add(Me.tabMain)
         Me.tcOptions.Location = New System.Drawing.Point(12, 12)
         Me.tcOptions.Name = "tcOptions"
-        Me.tcOptions.SelectedTab = Me.tabMain
-        Me.tcOptions.Size = New System.Drawing.Size(511, 306)
+        Me.tcOptions.SelectedTab = Me.tabShortcuts
+        Me.tcOptions.Size = New System.Drawing.Size(615, 364)
         Me.tcOptions.TabIndex = 5
         Me.tcOptions.TabPages.Add(Me.tabMain)
         Me.tcOptions.TabPages.Add(Me.xtcView)
         Me.tcOptions.TabPages.Add(Me.tabShortcuts)
         Me.tcOptions.Text = "X32TabControl1"
         '
-        'tabMain
+        'tabShortcuts
         '
-        Me.tabMain.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.tabShortcuts.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tabMain.BackColor = System.Drawing.Color.Black
-        Me.tabMain.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.tabMain.Controls.Add(Me.fbClickMode)
-        Me.tabMain.Controls.Add(Me.hpDouble)
-        Me.tabMain.Controls.Add(Me.hpSingle)
-        Me.tabMain.Controls.Add(Me.txtStartDir)
-        Me.tabMain.Controls.Add(Me.lblClickMode)
-        Me.tabMain.Controls.Add(Me.lblStartDir)
-        Me.tabMain.Location = New System.Drawing.Point(0, 26)
-        Me.tabMain.Name = "tabMain"
-        Me.tabMain.Size = New System.Drawing.Size(401, 280)
-        Me.tabMain.TabIndex = 4
-        Me.tabMain.Text = "MAIN OPTIONS"
+        Me.tabShortcuts.BackColor = System.Drawing.Color.Black
+        Me.tabShortcuts.Color = LCARS.LCARScolorStyles.NavigationFunction
+        Me.tabShortcuts.Controls.Add(Me.lstShortcuts)
+        Me.tabShortcuts.Controls.Add(Me.fbEdit)
+        Me.tabShortcuts.Controls.Add(Me.fbDown)
+        Me.tabShortcuts.Controls.Add(Me.fbAddSystem)
+        Me.tabShortcuts.Controls.Add(Me.fbAdd)
+        Me.tabShortcuts.Controls.Add(Me.fbRemove)
+        Me.tabShortcuts.Controls.Add(Me.fbUp)
+        Me.tabShortcuts.Location = New System.Drawing.Point(0, 26)
+        Me.tabShortcuts.Name = "tabShortcuts"
+        Me.tabShortcuts.Size = New System.Drawing.Size(505, 338)
+        Me.tabShortcuts.TabIndex = 5
+        Me.tabShortcuts.Text = "MANAGE SHORTCUTS"
         '
-        'fbClickMode
+        'lstShortcuts
         '
-        Me.fbClickMode.ButtonText = ""
-        Me.fbClickMode.Clickable = False
-        Me.fbClickMode.Color = LCARS.LCARScolorStyles.CriticalFunction
-        Me.fbClickMode.Location = New System.Drawing.Point(7, 91)
-        Me.fbClickMode.Name = "fbClickMode"
-        Me.fbClickMode.Size = New System.Drawing.Size(25, 25)
-        Me.fbClickMode.TabIndex = 6
+        Me.lstShortcuts.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lstShortcuts.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.lstShortcuts.FormattingEnabled = True
+        Me.lstShortcuts.ItemHeight = 25
+        Me.lstShortcuts.Location = New System.Drawing.Point(0, 0)
+        Me.lstShortcuts.Name = "lstShortcuts"
+        Me.lstShortcuts.Size = New System.Drawing.Size(505, 252)
+        Me.lstShortcuts.TabIndex = 2
+        Me.lstShortcuts.TabStops = New Single() {150.0!}
         '
-        'hpDouble
+        'fbEdit
         '
-        Me.hpDouble.ButtonText = "DOUBLE CLICK"
-        Me.hpDouble.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.hpDouble.Location = New System.Drawing.Point(38, 122)
-        Me.hpDouble.Name = "hpDouble"
-        Me.hpDouble.Size = New System.Drawing.Size(130, 25)
-        Me.hpDouble.TabIndex = 5
-        Me.hpDouble.Text = "DOUBLE CLICK"
+        Me.fbEdit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.fbEdit.ButtonText = "EDIT"
+        Me.fbEdit.Location = New System.Drawing.Point(243, 272)
+        Me.fbEdit.Name = "fbEdit"
+        Me.fbEdit.Size = New System.Drawing.Size(75, 26)
+        Me.fbEdit.TabIndex = 1
+        Me.fbEdit.Text = "EDIT"
         '
-        'hpSingle
+        'fbDown
         '
-        Me.hpSingle.ButtonText = "SINGLE CLICK"
-        Me.hpSingle.Color = LCARS.LCARScolorStyles.SystemFunction
-        Me.hpSingle.Location = New System.Drawing.Point(38, 91)
-        Me.hpSingle.Name = "hpSingle"
-        Me.hpSingle.Size = New System.Drawing.Size(130, 25)
-        Me.hpSingle.TabIndex = 5
-        Me.hpSingle.Text = "SINGLE CLICK"
+        Me.fbDown.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.fbDown.ButtonText = "MOVE DOWN"
+        Me.fbDown.Location = New System.Drawing.Point(405, 272)
+        Me.fbDown.Name = "fbDown"
+        Me.fbDown.Size = New System.Drawing.Size(75, 26)
+        Me.fbDown.TabIndex = 1
+        Me.fbDown.Text = "MOVE DOWN"
         '
-        'txtStartDir
+        'fbAddSystem
         '
-        Me.txtStartDir.BackColor = System.Drawing.Color.Black
-        Me.txtStartDir.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtStartDir.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtStartDir.ForeColor = System.Drawing.Color.OrangeRed
-        Me.txtStartDir.Location = New System.Drawing.Point(4, 24)
-        Me.txtStartDir.Name = "txtStartDir"
-        Me.txtStartDir.Size = New System.Drawing.Size(284, 29)
-        Me.txtStartDir.TabIndex = 4
+        Me.fbAddSystem.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.fbAddSystem.ButtonText = "ADD SYSTEM"
+        Me.fbAddSystem.Location = New System.Drawing.Point(81, 272)
+        Me.fbAddSystem.Name = "fbAddSystem"
+        Me.fbAddSystem.Size = New System.Drawing.Size(75, 26)
+        Me.fbAddSystem.TabIndex = 1
+        Me.fbAddSystem.Text = "ADD SYSTEM"
         '
-        'lblClickMode
+        'fbAdd
         '
-        Me.lblClickMode.AutoSize = True
-        Me.lblClickMode.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblClickMode.ForeColor = System.Drawing.Color.Orange
-        Me.lblClickMode.Location = New System.Drawing.Point(3, 66)
-        Me.lblClickMode.Name = "lblClickMode"
-        Me.lblClickMode.Size = New System.Drawing.Size(59, 21)
-        Me.lblClickMode.TabIndex = 3
-        Me.lblClickMode.Text = "Click Mode"
+        Me.fbAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.fbAdd.ButtonText = "ADD"
+        Me.fbAdd.Location = New System.Drawing.Point(0, 272)
+        Me.fbAdd.Name = "fbAdd"
+        Me.fbAdd.Size = New System.Drawing.Size(75, 26)
+        Me.fbAdd.TabIndex = 1
+        Me.fbAdd.Text = "ADD"
         '
-        'lblStartDir
+        'fbRemove
         '
-        Me.lblStartDir.AutoSize = True
-        Me.lblStartDir.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblStartDir.ForeColor = System.Drawing.Color.Orange
-        Me.lblStartDir.Location = New System.Drawing.Point(3, 0)
-        Me.lblStartDir.Name = "lblStartDir"
-        Me.lblStartDir.Size = New System.Drawing.Size(80, 21)
-        Me.lblStartDir.TabIndex = 3
-        Me.lblStartDir.Text = "Start Directory:"
+        Me.fbRemove.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.fbRemove.ButtonText = "REMOVE"
+        Me.fbRemove.Location = New System.Drawing.Point(162, 272)
+        Me.fbRemove.Name = "fbRemove"
+        Me.fbRemove.Size = New System.Drawing.Size(75, 26)
+        Me.fbRemove.TabIndex = 1
+        Me.fbRemove.Text = "REMOVE"
+        '
+        'fbUp
+        '
+        Me.fbUp.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.fbUp.ButtonText = "MOVE UP"
+        Me.fbUp.Location = New System.Drawing.Point(324, 272)
+        Me.fbUp.Name = "fbUp"
+        Me.fbUp.Size = New System.Drawing.Size(75, 26)
+        Me.fbUp.TabIndex = 1
+        Me.fbUp.Text = "MOVE UP"
         '
         'xtcView
         '
@@ -180,7 +193,7 @@ Partial Class frmOptions
         Me.xtcView.ForeColor = System.Drawing.Color.Orange
         Me.xtcView.Location = New System.Drawing.Point(0, 26)
         Me.xtcView.Name = "xtcView"
-        Me.xtcView.Size = New System.Drawing.Size(401, 280)
+        Me.xtcView.Size = New System.Drawing.Size(505, 338)
         Me.xtcView.TabIndex = 7
         Me.xtcView.Text = "VIEW"
         '
@@ -250,95 +263,94 @@ Partial Class frmOptions
         Me.tglShowHidden.TabIndex = 0
         Me.tglShowHidden.Text = "SHOW HIDDEN ITEMS"
         '
-        'tabShortcuts
+        'tabMain
         '
-        Me.tabShortcuts.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.tabMain.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tabShortcuts.BackColor = System.Drawing.Color.Black
-        Me.tabShortcuts.Color = LCARS.LCARScolorStyles.NavigationFunction
-        Me.tabShortcuts.Controls.Add(Me.lstShortcuts)
-        Me.tabShortcuts.Controls.Add(Me.fbEdit)
-        Me.tabShortcuts.Controls.Add(Me.fbDown)
-        Me.tabShortcuts.Controls.Add(Me.fbAdd)
-        Me.tabShortcuts.Controls.Add(Me.fbRemove)
-        Me.tabShortcuts.Controls.Add(Me.fbUp)
-        Me.tabShortcuts.Location = New System.Drawing.Point(0, 26)
-        Me.tabShortcuts.Name = "tabShortcuts"
-        Me.tabShortcuts.Size = New System.Drawing.Size(401, 280)
-        Me.tabShortcuts.TabIndex = 5
-        Me.tabShortcuts.Text = "MANAGE SHORTCUTS"
+        Me.tabMain.BackColor = System.Drawing.Color.Black
+        Me.tabMain.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.tabMain.Controls.Add(Me.fbClickMode)
+        Me.tabMain.Controls.Add(Me.hpDouble)
+        Me.tabMain.Controls.Add(Me.hpSingle)
+        Me.tabMain.Controls.Add(Me.txtStartDir)
+        Me.tabMain.Controls.Add(Me.lblClickMode)
+        Me.tabMain.Controls.Add(Me.lblStartDir)
+        Me.tabMain.Location = New System.Drawing.Point(0, 26)
+        Me.tabMain.Name = "tabMain"
+        Me.tabMain.Size = New System.Drawing.Size(505, 338)
+        Me.tabMain.TabIndex = 4
+        Me.tabMain.Text = "MAIN OPTIONS"
         '
-        'fbEdit
+        'fbClickMode
         '
-        Me.fbEdit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.fbEdit.ButtonText = "EDIT"
-        Me.fbEdit.Location = New System.Drawing.Point(162, 214)
-        Me.fbEdit.Name = "fbEdit"
-        Me.fbEdit.Size = New System.Drawing.Size(75, 26)
-        Me.fbEdit.TabIndex = 1
-        Me.fbEdit.Text = "EDIT"
+        Me.fbClickMode.ButtonText = ""
+        Me.fbClickMode.Clickable = False
+        Me.fbClickMode.Color = LCARS.LCARScolorStyles.CriticalFunction
+        Me.fbClickMode.Location = New System.Drawing.Point(7, 91)
+        Me.fbClickMode.Name = "fbClickMode"
+        Me.fbClickMode.Size = New System.Drawing.Size(25, 25)
+        Me.fbClickMode.TabIndex = 6
         '
-        'fbDown
+        'hpDouble
         '
-        Me.fbDown.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.fbDown.ButtonText = "MOVE DOWN"
-        Me.fbDown.Location = New System.Drawing.Point(324, 214)
-        Me.fbDown.Name = "fbDown"
-        Me.fbDown.Size = New System.Drawing.Size(75, 26)
-        Me.fbDown.TabIndex = 1
-        Me.fbDown.Text = "MOVE DOWN"
+        Me.hpDouble.ButtonText = "DOUBLE CLICK"
+        Me.hpDouble.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.hpDouble.Location = New System.Drawing.Point(38, 122)
+        Me.hpDouble.Name = "hpDouble"
+        Me.hpDouble.Size = New System.Drawing.Size(130, 25)
+        Me.hpDouble.TabIndex = 5
+        Me.hpDouble.Text = "DOUBLE CLICK"
         '
-        'fbAdd
+        'hpSingle
         '
-        Me.fbAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.fbAdd.ButtonText = "ADD"
-        Me.fbAdd.Location = New System.Drawing.Point(0, 214)
-        Me.fbAdd.Name = "fbAdd"
-        Me.fbAdd.Size = New System.Drawing.Size(75, 26)
-        Me.fbAdd.TabIndex = 1
-        Me.fbAdd.Text = "ADD"
+        Me.hpSingle.ButtonText = "SINGLE CLICK"
+        Me.hpSingle.Color = LCARS.LCARScolorStyles.SystemFunction
+        Me.hpSingle.Location = New System.Drawing.Point(38, 91)
+        Me.hpSingle.Name = "hpSingle"
+        Me.hpSingle.Size = New System.Drawing.Size(130, 25)
+        Me.hpSingle.TabIndex = 5
+        Me.hpSingle.Text = "SINGLE CLICK"
         '
-        'fbRemove
+        'txtStartDir
         '
-        Me.fbRemove.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.fbRemove.ButtonText = "REMOVE"
-        Me.fbRemove.Location = New System.Drawing.Point(81, 214)
-        Me.fbRemove.Name = "fbRemove"
-        Me.fbRemove.Size = New System.Drawing.Size(75, 26)
-        Me.fbRemove.TabIndex = 1
-        Me.fbRemove.Text = "REMOVE"
+        Me.txtStartDir.BackColor = System.Drawing.Color.Black
+        Me.txtStartDir.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtStartDir.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtStartDir.ForeColor = System.Drawing.Color.OrangeRed
+        Me.txtStartDir.Location = New System.Drawing.Point(4, 24)
+        Me.txtStartDir.Name = "txtStartDir"
+        Me.txtStartDir.Size = New System.Drawing.Size(284, 29)
+        Me.txtStartDir.TabIndex = 4
         '
-        'fbUp
+        'lblClickMode
         '
-        Me.fbUp.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.fbUp.ButtonText = "MOVE UP"
-        Me.fbUp.Location = New System.Drawing.Point(243, 214)
-        Me.fbUp.Name = "fbUp"
-        Me.fbUp.Size = New System.Drawing.Size(75, 26)
-        Me.fbUp.TabIndex = 1
-        Me.fbUp.Text = "MOVE UP"
+        Me.lblClickMode.AutoSize = True
+        Me.lblClickMode.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblClickMode.ForeColor = System.Drawing.Color.Orange
+        Me.lblClickMode.Location = New System.Drawing.Point(3, 66)
+        Me.lblClickMode.Name = "lblClickMode"
+        Me.lblClickMode.Size = New System.Drawing.Size(59, 21)
+        Me.lblClickMode.TabIndex = 3
+        Me.lblClickMode.Text = "Click Mode"
         '
-        'lstShortcuts
+        'lblStartDir
         '
-        Me.lstShortcuts.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lstShortcuts.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.lstShortcuts.FormattingEnabled = True
-        Me.lstShortcuts.ItemHeight = 25
-        Me.lstShortcuts.Location = New System.Drawing.Point(0, 0)
-        Me.lstShortcuts.Name = "lstShortcuts"
-        Me.lstShortcuts.Size = New System.Drawing.Size(401, 202)
-        Me.lstShortcuts.TabIndex = 2
-        Me.lstShortcuts.TabStops = New Single() {150.0!}
+        Me.lblStartDir.AutoSize = True
+        Me.lblStartDir.Font = New System.Drawing.Font("LCARS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblStartDir.ForeColor = System.Drawing.Color.Orange
+        Me.lblStartDir.Location = New System.Drawing.Point(3, 0)
+        Me.lblStartDir.Name = "lblStartDir"
+        Me.lblStartDir.Size = New System.Drawing.Size(80, 21)
+        Me.lblStartDir.TabIndex = 3
+        Me.lblStartDir.Text = "Start Directory:"
         '
         'frmOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Black
-        Me.ClientSize = New System.Drawing.Size(535, 330)
+        Me.ClientSize = New System.Drawing.Size(639, 388)
         Me.Controls.Add(Me.sbOK)
         Me.Controls.Add(Me.tcOptions)
         Me.ForeColor = System.Drawing.Color.Orange
@@ -348,10 +360,10 @@ Partial Class frmOptions
         Me.Text = "frmOptions"
         Me.tcOptions.ResumeLayout(False)
         Me.tcOptions.PerformLayout()
+        Me.tabShortcuts.ResumeLayout(False)
+        Me.xtcView.ResumeLayout(False)
         Me.tabMain.ResumeLayout(False)
         Me.tabMain.PerformLayout()
-        Me.xtcView.ResumeLayout(False)
-        Me.tabShortcuts.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -378,4 +390,5 @@ Partial Class frmOptions
     Friend WithEvents tglColor As LCARS.Controls.ToggleButton
     Friend WithEvents tglDimHidden As LCARS.Controls.ToggleButton
     Friend WithEvents lstShortcuts As LCARS.Controls.LCARSList
+    Friend WithEvents fbAddSystem As LCARS.Controls.FlatButton
 End Class

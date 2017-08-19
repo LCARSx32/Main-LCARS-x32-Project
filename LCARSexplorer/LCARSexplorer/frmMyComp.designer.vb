@@ -32,15 +32,11 @@ Partial Class frmMyComp
         Me.sbCopy = New LCARS.Controls.StandardButton
         Me.pnlShortcuts = New System.Windows.Forms.Panel
         Me.pnlSystemDefined = New System.Windows.Forms.Panel
+        Me.abShortcutsDown = New LCARS.Controls.ArrowButton
+        Me.abShortcutsUp = New LCARS.Controls.ArrowButton
         Me.fbShortcutsBorder = New LCARS.Controls.FlatButton
         Me.sbSaveCurrent = New LCARS.Controls.StandardButton
         Me.sbEnterPath = New LCARS.Controls.StandardButton
-        Me.sbVideos = New LCARS.Controls.StandardButton
-        Me.sbMusic = New LCARS.Controls.StandardButton
-        Me.sbPictures = New LCARS.Controls.StandardButton
-        Me.sbDocuments = New LCARS.Controls.StandardButton
-        Me.sbDesktop = New LCARS.Controls.StandardButton
-        Me.sbMyComp = New LCARS.Controls.StandardButton
         Me.elbShortcutsBottom = New LCARS.Controls.Elbow
         Me.elbShortcutsTop = New LCARS.Controls.Elbow
         Me.sbClose = New LCARS.Controls.StandardButton
@@ -207,52 +203,68 @@ Partial Class frmMyComp
         '
         'pnlShortcuts
         '
-        Me.pnlShortcuts.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pnlShortcuts.AutoScroll = True
-        Me.pnlShortcuts.Location = New System.Drawing.Point(107, 26)
+        Me.pnlShortcuts.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pnlShortcuts.Location = New System.Drawing.Point(14, 42)
         Me.pnlShortcuts.Name = "pnlShortcuts"
-        Me.pnlShortcuts.Size = New System.Drawing.Size(95, 267)
+        Me.pnlShortcuts.Size = New System.Drawing.Size(88, 268)
         Me.pnlShortcuts.TabIndex = 94
         '
         'pnlSystemDefined
         '
-        Me.pnlSystemDefined.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pnlSystemDefined.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlSystemDefined.AutoScroll = True
+        Me.pnlSystemDefined.Controls.Add(Me.abShortcutsDown)
+        Me.pnlSystemDefined.Controls.Add(Me.abShortcutsUp)
         Me.pnlSystemDefined.Controls.Add(Me.pnlShortcuts)
         Me.pnlSystemDefined.Controls.Add(Me.fbShortcutsBorder)
         Me.pnlSystemDefined.Controls.Add(Me.sbSaveCurrent)
         Me.pnlSystemDefined.Controls.Add(Me.sbEnterPath)
-        Me.pnlSystemDefined.Controls.Add(Me.sbVideos)
-        Me.pnlSystemDefined.Controls.Add(Me.sbMusic)
-        Me.pnlSystemDefined.Controls.Add(Me.sbPictures)
-        Me.pnlSystemDefined.Controls.Add(Me.sbDocuments)
-        Me.pnlSystemDefined.Controls.Add(Me.sbDesktop)
-        Me.pnlSystemDefined.Controls.Add(Me.sbMyComp)
         Me.pnlSystemDefined.Controls.Add(Me.elbShortcutsBottom)
         Me.pnlSystemDefined.Controls.Add(Me.elbShortcutsTop)
-        Me.pnlSystemDefined.Location = New System.Drawing.Point(317, 177)
+        Me.pnlSystemDefined.Location = New System.Drawing.Point(415, 93)
         Me.pnlSystemDefined.Name = "pnlSystemDefined"
-        Me.pnlSystemDefined.Size = New System.Drawing.Size(200, 326)
+        Me.pnlSystemDefined.Size = New System.Drawing.Size(102, 419)
         Me.pnlSystemDefined.TabIndex = 94
         Me.pnlSystemDefined.Visible = False
         '
+        'abShortcutsDown
+        '
+        Me.abShortcutsDown.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.abShortcutsDown.ArrowDirection = LCARS.LCARSarrowDirection.Down
+        Me.abShortcutsDown.Location = New System.Drawing.Point(14, 316)
+        Me.abShortcutsDown.Name = "abShortcutsDown"
+        Me.abShortcutsDown.Size = New System.Drawing.Size(88, 10)
+        Me.abShortcutsDown.TabIndex = 96
+        '
+        'abShortcutsUp
+        '
+        Me.abShortcutsUp.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.abShortcutsUp.Location = New System.Drawing.Point(14, 26)
+        Me.abShortcutsUp.Name = "abShortcutsUp"
+        Me.abShortcutsUp.Size = New System.Drawing.Size(88, 10)
+        Me.abShortcutsUp.TabIndex = 96
+        '
         'fbShortcutsBorder
         '
+        Me.fbShortcutsBorder.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.fbShortcutsBorder.ButtonText = ""
         Me.fbShortcutsBorder.Clickable = False
         Me.fbShortcutsBorder.Color = LCARS.LCARScolorStyles.StaticTan
-        Me.fbShortcutsBorder.Location = New System.Drawing.Point(3, 43)
+        Me.fbShortcutsBorder.Location = New System.Drawing.Point(3, 40)
         Me.fbShortcutsBorder.Name = "fbShortcutsBorder"
-        Me.fbShortcutsBorder.Size = New System.Drawing.Size(5, 240)
+        Me.fbShortcutsBorder.Size = New System.Drawing.Size(5, 339)
         Me.fbShortcutsBorder.TabIndex = 95
         '
         'sbSaveCurrent
         '
-        Me.sbSaveCurrent.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.sbSaveCurrent.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.sbSaveCurrent.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbSaveCurrent.ButtonText = "SAVE CURRENT"
         Me.sbSaveCurrent.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
-        Me.sbSaveCurrent.Location = New System.Drawing.Point(14, 253)
+        Me.sbSaveCurrent.Location = New System.Drawing.Point(14, 364)
         Me.sbSaveCurrent.Name = "sbSaveCurrent"
         Me.sbSaveCurrent.Size = New System.Drawing.Size(87, 26)
         Me.sbSaveCurrent.TabIndex = 52
@@ -260,121 +272,48 @@ Partial Class frmMyComp
         '
         'sbEnterPath
         '
-        Me.sbEnterPath.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.sbEnterPath.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.sbEnterPath.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
         Me.sbEnterPath.ButtonText = "ENTER PATH"
         Me.sbEnterPath.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
-        Me.sbEnterPath.Location = New System.Drawing.Point(14, 221)
+        Me.sbEnterPath.Color = LCARS.LCARScolorStyles.NavigationFunction
+        Me.sbEnterPath.Location = New System.Drawing.Point(14, 332)
         Me.sbEnterPath.Name = "sbEnterPath"
         Me.sbEnterPath.Size = New System.Drawing.Size(87, 26)
         Me.sbEnterPath.TabIndex = 52
         Me.sbEnterPath.Text = "ENTER PATH"
         '
-        'sbVideos
-        '
-        Me.sbVideos.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbVideos.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
-        Me.sbVideos.ButtonText = "MY VIDEOS"
-        Me.sbVideos.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
-        Me.sbVideos.Color = LCARS.LCARScolorStyles.NavigationFunction
-        Me.sbVideos.Location = New System.Drawing.Point(14, 189)
-        Me.sbVideos.Name = "sbVideos"
-        Me.sbVideos.Size = New System.Drawing.Size(87, 26)
-        Me.sbVideos.TabIndex = 52
-        Me.sbVideos.Text = "MY VIDEOS"
-        '
-        'sbMusic
-        '
-        Me.sbMusic.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbMusic.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
-        Me.sbMusic.ButtonText = "MY MUSIC"
-        Me.sbMusic.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
-        Me.sbMusic.Color = LCARS.LCARScolorStyles.NavigationFunction
-        Me.sbMusic.Location = New System.Drawing.Point(14, 157)
-        Me.sbMusic.Name = "sbMusic"
-        Me.sbMusic.Size = New System.Drawing.Size(87, 26)
-        Me.sbMusic.TabIndex = 52
-        Me.sbMusic.Text = "MY MUSIC"
-        '
-        'sbPictures
-        '
-        Me.sbPictures.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbPictures.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
-        Me.sbPictures.ButtonText = "MY PICTURES"
-        Me.sbPictures.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
-        Me.sbPictures.Color = LCARS.LCARScolorStyles.NavigationFunction
-        Me.sbPictures.Location = New System.Drawing.Point(14, 125)
-        Me.sbPictures.Name = "sbPictures"
-        Me.sbPictures.Size = New System.Drawing.Size(87, 26)
-        Me.sbPictures.TabIndex = 52
-        Me.sbPictures.Text = "MY PICTURES"
-        '
-        'sbDocuments
-        '
-        Me.sbDocuments.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbDocuments.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
-        Me.sbDocuments.ButtonText = "MY DOCUMENTS"
-        Me.sbDocuments.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
-        Me.sbDocuments.Color = LCARS.LCARScolorStyles.NavigationFunction
-        Me.sbDocuments.Location = New System.Drawing.Point(14, 93)
-        Me.sbDocuments.Name = "sbDocuments"
-        Me.sbDocuments.Size = New System.Drawing.Size(87, 26)
-        Me.sbDocuments.TabIndex = 52
-        Me.sbDocuments.Text = "MY DOCUMENTS"
-        '
-        'sbDesktop
-        '
-        Me.sbDesktop.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbDesktop.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
-        Me.sbDesktop.ButtonText = "DESKTOP"
-        Me.sbDesktop.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
-        Me.sbDesktop.Color = LCARS.LCARScolorStyles.NavigationFunction
-        Me.sbDesktop.Location = New System.Drawing.Point(14, 61)
-        Me.sbDesktop.Name = "sbDesktop"
-        Me.sbDesktop.Size = New System.Drawing.Size(87, 26)
-        Me.sbDesktop.TabIndex = 52
-        Me.sbDesktop.Text = "DESKTOP"
-        '
-        'sbMyComp
-        '
-        Me.sbMyComp.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sbMyComp.ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
-        Me.sbMyComp.ButtonText = "MY COMPUTER"
-        Me.sbMyComp.ButtonTextAlign = System.Drawing.ContentAlignment.BottomRight
-        Me.sbMyComp.Color = LCARS.LCARScolorStyles.NavigationFunction
-        Me.sbMyComp.Location = New System.Drawing.Point(14, 29)
-        Me.sbMyComp.Name = "sbMyComp"
-        Me.sbMyComp.Size = New System.Drawing.Size(87, 26)
-        Me.sbMyComp.TabIndex = 52
-        Me.sbMyComp.Text = "MY COMPUTER"
-        '
         'elbShortcutsBottom
         '
+        Me.elbShortcutsBottom.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.elbShortcutsBottom.ButtonHeight = 20
         Me.elbShortcutsBottom.ButtonText = ""
         Me.elbShortcutsBottom.ButtonWidth = 5
         Me.elbShortcutsBottom.Clickable = False
         Me.elbShortcutsBottom.Color = LCARS.LCARScolorStyles.StaticBlue
         Me.elbShortcutsBottom.ElbowStyle = LCARS.Controls.Elbow.LCARSelbowStyles.LowerLeft
-        Me.elbShortcutsBottom.Location = New System.Drawing.Point(3, 289)
+        Me.elbShortcutsBottom.Location = New System.Drawing.Point(3, 385)
         Me.elbShortcutsBottom.Name = "elbShortcutsBottom"
-        Me.elbShortcutsBottom.Size = New System.Drawing.Size(197, 34)
+        Me.elbShortcutsBottom.Size = New System.Drawing.Size(99, 34)
         Me.elbShortcutsBottom.TabIndex = 53
         '
         'elbShortcutsTop
         '
+        Me.elbShortcutsTop.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.elbShortcutsTop.ButtonHeight = 20
-        Me.elbShortcutsTop.ButtonText = "SYSTEM SHORTCUTS"
+        Me.elbShortcutsTop.ButtonText = "SHORTCUTS"
         Me.elbShortcutsTop.ButtonTextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.elbShortcutsTop.ButtonWidth = 5
         Me.elbShortcutsTop.Clickable = False
         Me.elbShortcutsTop.Color = LCARS.LCARScolorStyles.StaticBlue
         Me.elbShortcutsTop.ElbowStyle = LCARS.Controls.Elbow.LCARSelbowStyles.UpperLeft
-        Me.elbShortcutsTop.Location = New System.Drawing.Point(3, 3)
+        Me.elbShortcutsTop.Location = New System.Drawing.Point(3, 0)
         Me.elbShortcutsTop.Name = "elbShortcutsTop"
-        Me.elbShortcutsTop.Size = New System.Drawing.Size(197, 34)
+        Me.elbShortcutsTop.Size = New System.Drawing.Size(99, 34)
         Me.elbShortcutsTop.TabIndex = 53
-        Me.elbShortcutsTop.Text = "SYSTEM SHORTCUTS"
+        Me.elbShortcutsTop.Text = "SHORTCUTS"
         '
         'sbClose
         '
@@ -539,8 +478,8 @@ Partial Class frmMyComp
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Black
         Me.ClientSize = New System.Drawing.Size(640, 562)
-        Me.Controls.Add(Me.gridMyComp)
         Me.Controls.Add(Me.pnlSystemDefined)
+        Me.Controls.Add(Me.gridMyComp)
         Me.Controls.Add(Me.pnlEdit)
         Me.Controls.Add(Me.sbClose)
         Me.Controls.Add(Me.sbGoTo)
@@ -589,17 +528,13 @@ Partial Class frmMyComp
     Friend WithEvents pnlShortcuts As System.Windows.Forms.Panel
     Friend WithEvents sbRefresh As LCARS.Controls.StandardButton
     Friend WithEvents pnlSystemDefined As System.Windows.Forms.Panel
-    Friend WithEvents sbMyComp As LCARS.Controls.StandardButton
-    Friend WithEvents sbDocuments As LCARS.Controls.StandardButton
-    Friend WithEvents sbDesktop As LCARS.Controls.StandardButton
-    Friend WithEvents sbVideos As LCARS.Controls.StandardButton
-    Friend WithEvents sbMusic As LCARS.Controls.StandardButton
-    Friend WithEvents sbPictures As LCARS.Controls.StandardButton
     Friend WithEvents elbShortcutsTop As LCARS.Controls.Elbow
     Friend WithEvents fbShortcutsBorder As LCARS.Controls.FlatButton
     Friend WithEvents elbShortcutsBottom As LCARS.Controls.Elbow
     Friend WithEvents sbEnterPath As LCARS.Controls.StandardButton
     Friend WithEvents sbSaveCurrent As LCARS.Controls.StandardButton
     Friend WithEvents gridMyComp As LCARS.Controls.ButtonGrid
+    Friend WithEvents abShortcutsDown As LCARS.Controls.ArrowButton
+    Friend WithEvents abShortcutsUp As LCARS.Controls.ArrowButton
 
 End Class

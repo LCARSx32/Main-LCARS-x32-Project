@@ -178,6 +178,7 @@ Public Class frmMyComp
     End Sub
 
     Private Sub frmMyComp_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        My.Settings.TryUpgrade()
         If Command() <> "" Then
             If Directory.Exists(Command) Then
                 curPath = Command()
@@ -560,16 +561,23 @@ Public Class frmMyComp
         pnlShortcuts.Controls.Clear()
         For i As Integer = 0 To My.Settings.shortcuts.Count - 1
             Dim myShortcut As New LCARS.Controls.StandardButton
+            Dim shortcutPath As String = My.Settings.shortcuts.Item(i)
             With myShortcut
                 .holdDraw = True
-                .Data = My.Settings.shortcuts.Item(i)
                 .Text = My.Settings.shortcutNames.Item(i)
+                If shortcutPath.StartsWith(SystemShortcut.systemPrefix) Then
+                    Dim s As SystemShortcut = SystemShortcut.FromSettingsName(shortcutPath)
+                    If s Is Nothing Then Continue For
+                    .Color = LCARS.LCARScolorStyles.SystemFunction
+                    .Data = s.Location
+                Else
+                    .Color = LCARS.LCARScolorStyles.NavigationFunction
+                    .Data = shortcutPath
+                End If
                 .ButtonStyle = LCARS.Controls.StandardButton.LCARSbuttonStyles.RoundedSquare
-                .Color = LCARS.LCARScolorStyles.NavigationFunction
-                .Width = 87
+                .Width = pnlShortcuts.Width
                 .Height = 26
-                .Left = 3
-                .Top = i * 32 + 3
+                .Top = i * 32
             End With
             AddHandler myShortcut.Click, AddressOf MyShortcut_Click
             myShortcut.holdDraw = False
@@ -578,7 +586,7 @@ Public Class frmMyComp
     End Sub
     Private Sub MyShortcut_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         pnlSystemDefined.Visible = False
-        loadDir(CStr(CType(sender, LCComplexButton).Data))
+        loadDir(DirectCast(DirectCast(sender, LCARS.IDataControl).Data, String))
     End Sub
     Private Sub myErrorAlert(ByVal sender As Object, ByVal e As EventArgs)
         If cancelClick Then Return
@@ -590,62 +598,6 @@ Public Class frmMyComp
     Private Sub sbRefresh_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbRefresh.Click
         loadDir(curPath)
     End Sub
-
-#Region " System-defined shortcuts "
-
-    Private Sub sbMyComp_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbMyComp.Click
-        pnlSystemDefined.Visible = False
-        loadDir("")
-    End Sub
-
-    Private Sub sbDesktop_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbDesktop.Click
-        pnlSystemDefined.Visible = False
-        loadDir(My.Computer.FileSystem.SpecialDirectories.Desktop)
-    End Sub
-
-    Private Sub sbDocuments_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbDocuments.Click
-        pnlSystemDefined.Visible = False
-        loadDir(My.Computer.FileSystem.SpecialDirectories.MyDocuments)
-    End Sub
-
-    Private Sub sbPictures_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbPictures.Click
-        pnlSystemDefined.Visible = False
-        loadDir(My.Computer.FileSystem.SpecialDirectories.MyPictures)
-    End Sub
-
-    Private Sub sbMusic_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbMusic.Click
-        pnlSystemDefined.Visible = False
-        loadDir(My.Computer.FileSystem.SpecialDirectories.MyMusic)
-    End Sub
-
-    Private Sub sbVideos_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbVideos.Click
-        pnlSystemDefined.Visible = False
-        Dim result As String = GetSetting("LCARS x32", "Application", "Videos", "")
-        If result = "" Then
-            Try
-                Dim myReg As Microsoft.Win32.RegistryKey = Microsoft.Win32.Registry.CurrentUser
-                myReg = myReg.OpenSubKey("Software\Microsoft\Windows\CurrentVersion\explorer\Shell Folders\", False)
-                result = CStr(myReg.GetValue("My Video"))
-                SaveSetting("LCARS x32", "Application", "Videos", result)
-            Catch ex As Exception
-            End Try
-            If result = "" Then
-                Dim res As MsgBoxResult = MsgBox("Unable to find ""My Videos"". Would you like to manually set the path?", MsgBoxStyle.YesNo)
-                If res = MsgBoxResult.Yes Then
-                    result = inputbox("Input the complete path to your ""My Videos"" directory:", "Input My Videos directory")
-                    If System.IO.Directory.Exists(result) Then
-                        SaveSetting("LCARS x32", "Application", "Videos", result)
-                        loadDir(result)
-                    End If
-                End If
-            Else
-                loadDir(result)
-            End If
-        Else
-            loadDir(result)
-        End If
-    End Sub
-#End Region
 
     Private Sub sbEnterPath_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbEnterPath.Click
         pnlSystemDefined.Visible = False
@@ -682,5 +634,25 @@ Public Class frmMyComp
     Private Sub gridMyComp_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles gridMyComp.TextChanged
         Me.Text = gridMyComp.Text
         tbTitle.Text = gridMyComp.Text
+    End Sub
+
+    Private Sub abShortcutsUp_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles abShortcutsUp.Click
+        If pnlShortcuts.Controls(0).Top < 0 Then
+            Dim offset As Integer = pnlShortcuts.Controls(0).Height + 6
+            For Each ctrl As Control In pnlShortcuts.Controls
+                ctrl.Top += offset
+                ctrl.Visible = ctrl.Top >= 0 AndAlso ctrl.Bottom <= pnlShortcuts.Height
+            Next
+        End If
+    End Sub
+
+    Private Sub abShortcutsDown_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles abShortcutsDown.Click
+        If pnlShortcuts.Controls(pnlShortcuts.Controls.Count - 1).Bottom > pnlShortcuts.Height Then
+            Dim offset As Integer = pnlShortcuts.Controls(0).Height + 6
+            For Each ctrl As Control In pnlShortcuts.Controls
+                ctrl.Top -= offset
+                ctrl.Visible = ctrl.Top >= 0 AndAlso ctrl.Bottom <= pnlShortcuts.Height
+            Next
+        End If
     End Sub
 End Class
