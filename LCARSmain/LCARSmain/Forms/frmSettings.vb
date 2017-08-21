@@ -116,29 +116,11 @@ Public Class frmSettings
             MsgBox(shellPath)
         End If
 
-        cbVoice.Lit = CBool(GetSetting("LCARS x32", "Application", "SpeechOn", "TRUE"))
-
-        If cbVoice.Lit Then
-            cbVoice.SideText = "ON"
-        Else
-            cbVoice.SideText = "OFF"
-        End If
-
-        cpxVoiceTimeout.Lit = LCARS.x32.modSettings.CommandTimeoutEnabled
-        If cpxVoiceTimeout.Lit Then
-            cpxVoiceTimeout.SideText = "ON"
-        Else
-            cpxVoiceTimeout.SideText = "OFF"
-        End If
-
+        tglVoice.State = CBool(GetSetting("LCARS x32", "Application", "SpeechOn", "TRUE"))
+        tglVoiceTimeout.State = LCARS.x32.modSettings.CommandTimeoutEnabled
         txtCommandTimeout.Text = LCARS.x32.modSettings.CommandTimeout.ToString()
 
-        cbDates.Lit = CBool(GetSetting("LCARS x32", "Application", "Stardate", "FALSE"))
-        If cbDates.Lit Then
-            cbDates.SideText = "ON"
-        Else
-            cbDates.SideText = "OFF"
-        End If
+        tglDates.State = CBool(GetSetting("LCARS x32", "Application", "Stardate", "FALSE"))
 
         Dim selectedMainScreen As Integer = MainScreen(screenIndex)
 
@@ -151,16 +133,9 @@ Public Class frmSettings
                 picMain3_Click(sender, e)
             Case 4
                 picMain4_Click(sender, e)
-
         End Select
 
-        cbAutoHide.Lit = AutoHide(screenIndex)
-
-        If cbAutoHide.Lit Then
-            cbAutoHide.SideText = "ON"
-        Else
-            cbAutoHide.SideText = "OFF"
-        End If
+        tglAutoHide.State = AutoHide(screenIndex)
 
         'Speech Command Config
         txtLanguageCode.Text = GetSetting("LCARS X32", "Application", "SpeechCode", "409")
@@ -198,12 +173,7 @@ Public Class frmSettings
 
         'Updates
         lblVersion.Text = "Program Version: " & New LCARSUpdate.ProgramVersions(Application.StartupPath & "\versions.txt").getGlobalVersion()
-        cpxAutoUpdates.Lit = CBool(GetSetting("LCARS X32", "Application", "Updates", "FALSE"))
-        If cpxAutoUpdates.Lit Then
-            cpxAutoUpdates.SideText = "ON"
-        Else
-            cpxAutoUpdates.SideText = "OFF"
-        End If
+        tglAutoUpdates.State = CBool(GetSetting("LCARS X32", "Application", "Updates", "FALSE"))
         If GetSetting("LCARSUpdate", "Config", "UpdatePath", "release") = "experimental" Then
             fbChannelDot.Top = hpExperimental.Top
         ElseIf GetSetting("LCARSUpdate", "Config", "UpdatePath", "release") = "release" Then
@@ -222,15 +192,9 @@ Public Class frmSettings
         loadAlerts()
 
         'Debug switch
-        cbDebug.Lit = CBool(GetSetting("LCARS x32", "Application", "DebugSwitch", "FALSE"))
-        If cbDebug.Lit Then
-            cbDebug.SideText = "ON"
-        End If
+        tglDebug.State = CBool(GetSetting("LCARS x32", "Application", "DebugSwitch", "FALSE"))
 
-        cpxDDE.Lit = LCARS.x32.modSettings.DDEEnabled
-        If cpxDDE.Lit Then
-            cpxDDE.SideText = "OFF"
-        End If
+        tglDDE.State = LCARS.x32.modSettings.DDEEnabled
 
         'Load Colors
         myFiles = System.IO.Directory.GetFiles(Application.StartupPath & "\colors", "*.lxcp")
@@ -386,20 +350,13 @@ Public Class frmSettings
 
     End Sub
 
-    Private Sub cbAutoHide_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbAutoHide.Click
-        cbAutoHide.Lit = Not cbAutoHide.Lit
-
-        If cbAutoHide.Lit Then
-            cbAutoHide.SideText = "ON"
+    Private Sub cbAutoHide_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tglAutoHide.Click
+        If tglAutoHide.State Then
             SetAutoHide(IAutohide.AutoHideModes.Hidden, screenIndex)
-
         Else
-            cbAutoHide.SideText = "OFF"
             SetAutoHide(IAutohide.AutoHideModes.Disabled, screenIndex)
         End If
-
-        AutoHide(screenIndex) = cbAutoHide.Lit
-
+        AutoHide(screenIndex) = tglAutoHide.State
     End Sub
 
     Private Sub ltcSettings_SelectedTabChanged(ByVal Tab As LCARS.Controls.x32TabPage, ByVal TabIndex As System.Int32) Handles ltcSettings.SelectedTabChanged
@@ -472,15 +429,8 @@ Public Class frmSettings
         End If
     End Sub
 
-    Private Sub cbDates_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbDates.Click
-        cbDates.Lit = Not cbDates.Lit
-        If cbDates.Lit Then
-            cbDates.SideText = "ON"
-            SaveSetting("LCARS x32", "Application", "Stardate", "TRUE")
-        Else
-            cbDates.SideText = "OFF"
-            SaveSetting("LCARS x32", "Application", "Stardate", "FALSE")
-        End If
+    Private Sub cbDates_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tglDates.Click
+        SaveSetting("LCARS x32", "Application", "Stardate", tglDates.State.ToString())
     End Sub
 
     Private Sub lstLanguages_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lstLanguages.SelectedIndexChanged
@@ -513,17 +463,9 @@ Public Class frmSettings
 
 #Region " Voice Command Settings "
 
-    Private Sub cbVoice_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbVoice.Click
-        cbVoice.Lit = Not cbVoice.Lit
-
-        SaveSetting("LCARS x32", "Application", "SpeechOn", cbVoice.Lit.ToString())
-
-        If cbVoice.Lit Then
-            cbVoice.SideText = "ON"
-        Else
-            cbVoice.SideText = "OFF"
-        End If
-        modSpeech.SpeechEnabled = cbVoice.Lit
+    Private Sub cbVoice_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tglVoice.Click
+        SaveSetting("LCARS x32", "Application", "SpeechOn", tglVoice.State.ToString())
+        modSpeech.SpeechEnabled = tglVoice.State
     End Sub
 
     Dim editedCommand As Integer = -1
@@ -651,28 +593,15 @@ Public Class frmSettings
         End If
     End Sub
 
-    Private Sub cpxVoiceTimeout_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cpxVoiceTimeout.Click
-        cpxVoiceTimeout.Lit = Not cpxVoiceTimeout.Lit
-        If cpxVoiceTimeout.Lit Then
-            cpxVoiceTimeout.SideText = "ON"
-        Else
-            cpxVoiceTimeout.SideText = "OFF"
-        End If
-        LCARS.x32.modSettings.CommandTimeoutEnabled = cpxVoiceTimeout.Lit
+    Private Sub cpxVoiceTimeout_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tglVoiceTimeout.Click
+        LCARS.x32.modSettings.CommandTimeoutEnabled = tglVoiceTimeout.State
         'No need to manually cancel the current timeout; it checks automatically.
     End Sub
 
 #End Region
 
-    Private Sub cpxAutoUpdates_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cpxAutoUpdates.Click
-        cpxAutoUpdates.Lit = Not cpxAutoUpdates.Lit
-        If cpxAutoUpdates.Lit Then
-            cpxAutoUpdates.SideText = "ON"
-            SaveSetting("LCARS X32", "Application", "Updates", "TRUE")
-        Else
-            cpxAutoUpdates.SideText = "OFF"
-            SaveSetting("LCARS X32", "Application", "Updates", "FALSE")
-        End If
+    Private Sub cpxAutoUpdates_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tglAutoUpdates.Click
+        SaveSetting("LCARS X32", "Application", "Updates", tglAutoUpdates.State.ToString())
     End Sub
 
     Private Sub sbCheck_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbCheck.Click
@@ -783,16 +712,8 @@ Public Class frmSettings
         End If
     End Sub
 
-    Private Sub cbDebug_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbDebug.Click
-        If CBool(GetSetting("LCARS x32", "Application", "DebugSwitch", "TRUE")) Then
-            SaveSetting("LCARS x32", "Application", "DebugSwitch", "FALSE")
-            cbDebug.SideText = "OFF"
-            cbDebug.Lit = False
-        Else
-            SaveSetting("LCARS x32", "Application", "DebugSwitch", "TRUE")
-            cbDebug.SideText = "ON"
-            cbDebug.Lit = True
-        End If
+    Private Sub cbDebug_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tglDebug.Click
+        SaveSetting("LCARS x32", "Application", "DebugSwitch", tglDebug.State.ToString())
     End Sub
 
     Private Sub fbBrowseSound_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbBrowseSound.Click
@@ -824,8 +745,8 @@ Public Class frmSettings
                 picMain4_Click(Nothing, Nothing)
         End Select
         'Autohide
-        cbAutoHide.Lit = AutoHide(screenIndex)
-        cbAutoHide.SideText = If(AutoHide(screenIndex), "ON", "OFF")
+        tglAutoHide.Lit = AutoHide(screenIndex)
+        tglAutoHide.SideText = If(AutoHide(screenIndex), "ON", "OFF")
         'Wallpaper
         If Wallpaper(screenIndex) = "FederationLogo" Then
             picWallpaper.Image = My.Resources.federationLogo
@@ -996,12 +917,10 @@ Public Class frmSettings
     End Sub
 #End Region
 
-    Private Sub cpxDDE_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cpxDDE.Click
-        cpxDDE.Lit = Not cpxDDE.Lit
-        LCARS.x32.modSettings.DDEEnabled = cpxDDE.Lit
-        cpxDDE.SideText = If(cpxDDE.Lit, "ON", "OFF")
+    Private Sub cpxDDE_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tglDDE.Click
+        LCARS.x32.modSettings.DDEEnabled = tglDDE.State
         If shellMode Then
-            If cpxDDE.Lit Then
+            If tglDDE.State Then
                 initDDE()
             Else
                 deinitDDE()
