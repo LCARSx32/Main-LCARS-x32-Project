@@ -1024,7 +1024,7 @@ public Class modBusiness
 
     Public Sub myForm_Closing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs)
         e.Cancel = True
-        myDeactivate.doClick(sender, e)
+        myDeactivateButton_Click(sender, e)
     End Sub
 
     Private Function FindRoot(ByVal hWnd As Integer) As Integer
