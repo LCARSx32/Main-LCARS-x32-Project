@@ -139,6 +139,13 @@ Namespace My.Resources
             End Get
         End Property
         
+        Friend ReadOnly Property frmmainscreen5() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("frmmainscreen5", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
         Friend ReadOnly Property Please_confirm() As System.IO.UnmanagedMemoryStream
             Get
                 Return ResourceManager.GetStream("Please_confirm", resourceCulture)

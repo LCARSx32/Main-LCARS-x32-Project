@@ -633,7 +633,7 @@ Public Enum SetWindowPosFlags As UInteger
         typeList.Add(GetType(frmMainscreen2))
         typeList.Add(GetType(frmMainscreen3))
         typeList.Add(GetType(frmMainscreen4))
-
+        typeList.Add(GetType(frmMainscreen5))
         'Further code to find custom main screens
         Return typeList
     End Function

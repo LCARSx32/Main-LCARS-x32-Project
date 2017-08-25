@@ -114,6 +114,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Main screens\frmMainscreen5.Designer.vb">
+      <DependentUpon>frmMainscreen5.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Main screens\frmMainscreen5.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmManageButtons.Designer.vb">
@@ -221,6 +224,10 @@
       <DependentUpon>frmMainscreen3.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Main screens\frmMainscreen5.resx">
+      <DependentUpon>frmMainscreen5.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmManageButtons.resx">
       <SubType>Designer</SubType>
       <DependentUpon>frmManageButtons.vb</DependentUpon>
@@ -310,6 +317,7 @@
     </Content>
     <Content Include="Resources\computer.wav" />
     <Content Include="Resources\computerbeep_43.wav" />
+    <None Include="Resources\Images\frmmainscreen5.jpg" />
     <None Include="Resources\Images\frmmainscreen4.jpg" />
     <None Include="Resources\Images\frmmainscreen3.jpg" />
     <None Include="Resources\Images\frmmainscreen2.jpg" />
