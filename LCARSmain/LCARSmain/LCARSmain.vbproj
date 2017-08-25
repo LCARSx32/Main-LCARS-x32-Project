@@ -94,10 +94,10 @@
     <Compile Include="Forms\frmAlerts.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmMainscreen1.vb">
+    <Compile Include="Forms\Main screens\frmMainscreen1.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmMainscreen1.Designer.vb">
+    <Compile Include="Forms\Main screens\frmMainscreen1.Designer.vb">
       <DependentUpon>frmMainscreen1.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
@@ -107,10 +107,13 @@
     <Compile Include="Forms\frmFirstRun.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmMainscreen3.designer.vb">
+    <Compile Include="Forms\Main screens\frmMainscreen3.designer.vb">
       <DependentUpon>frmMainscreen3.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\frmMainscreen3.vb">
+    <Compile Include="Forms\Main screens\frmMainscreen3.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Main screens\frmMainscreen5.Designer.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmManageButtons.Designer.vb">
@@ -155,20 +158,20 @@
     <Compile Include="Forms\frmStartup.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmMainscreen4.designer.vb">
+    <Compile Include="Forms\Main screens\frmMainscreen4.designer.vb">
       <DependentUpon>frmMainscreen4.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\frmMainscreen4.vb">
+    <Compile Include="Forms\Main screens\frmMainscreen4.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Interfaces\IAutohide.vb" />
     <Compile Include="Interfaces\IMainScreen.vb" />
     <Compile Include="Modules\CommonScreen.vb" />
     <Compile Include="Modules\keyboard.vb" />
-    <Compile Include="Forms\frmMainscreen2.Designer.vb">
+    <Compile Include="Forms\Main screens\frmMainscreen2.Designer.vb">
       <DependentUpon>frmMainscreen2.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\frmMainscreen2.vb">
+    <Compile Include="Forms\Main screens\frmMainscreen2.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Modules\modAlerts.vb" />
@@ -206,7 +209,7 @@
       <DependentUpon>frmAlerts.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmMainscreen1.resx">
+    <EmbeddedResource Include="Forms\Main screens\frmMainscreen1.resx">
       <SubType>Designer</SubType>
       <DependentUpon>frmMainscreen1.vb</DependentUpon>
     </EmbeddedResource>
@@ -214,7 +217,7 @@
       <SubType>Designer</SubType>
       <DependentUpon>frmFirstRun.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmMainscreen3.resx">
+    <EmbeddedResource Include="Forms\Main screens\frmMainscreen3.resx">
       <DependentUpon>frmMainscreen3.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -242,11 +245,11 @@
       <SubType>Designer</SubType>
       <DependentUpon>frmStartup.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmMainscreen2.resx">
+    <EmbeddedResource Include="Forms\Main screens\frmMainscreen2.resx">
       <SubType>Designer</SubType>
       <DependentUpon>frmMainscreen2.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmMainscreen4.resx">
+    <EmbeddedResource Include="Forms\Main screens\frmMainscreen4.resx">
       <DependentUpon>frmMainscreen4.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
