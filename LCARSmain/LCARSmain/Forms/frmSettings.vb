@@ -31,6 +31,7 @@ Public Class frmSettings
     Dim customList As New List(Of CustomEntry)
     Dim alertList As New List(Of AlertEntry)
     Dim screenIndex As Integer = 0
+    Dim selectedMainScreen As LCScreenImage = Nothing
 
     Private Class AliasEntry
         Public Command As String
@@ -122,18 +123,21 @@ Public Class frmSettings
 
         tglDates.State = CBool(GetSetting("LCARS x32", "Application", "Stardate", "FALSE"))
 
-        Dim selectedMainScreen As Integer = MainScreen(screenIndex)
-
-        Select Case selectedMainScreen
-            Case 1
-                picMain1_Click(sender, e)
-            Case 2
-                picMain2_Click(sender, e)
-            Case 3
-                picMain3_Click(sender, e)
-            Case 4
-                picMain4_Click(sender, e)
-        End Select
+        'Load main screen types
+        Dim mainScreenIndex As Integer = 1
+        For Each myScreenType As Type In getMainScreenTypes()
+            Dim myScreen As New LCScreenImage()
+            myScreen.Text = myScreenType.Name
+            myScreen.Data = mainScreenIndex
+            Dim pInfo As Reflection.PropertyInfo = myScreenType.GetProperty("ScreenImage")
+            If Not pInfo Is Nothing Then
+                myScreen.Image = CType(pInfo.GetValue(Nothing, Nothing),  _
+                                    System.Drawing.Bitmap)
+            End If
+            AddHandler myScreen.Click, AddressOf mainScreen_Click
+            gridScreens.Add(myScreen)
+            mainScreenIndex += 1
+        Next
 
         tglAutoHide.State = AutoHide(screenIndex)
 
@@ -262,23 +266,6 @@ Public Class frmSettings
         End If
     End Sub
 
-
-
-    Private Sub picMain1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles picMain1.Click
-        picSelect.Location = New Point(picMain1.Left - 19, picMain1.Top - 15)
-        MainScreen(screenIndex) = 1
-    End Sub
-
-    Private Sub picMain2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles picMain2.Click
-        picSelect.Location = New Point(picMain2.Left - 19, picMain2.Top - 15)
-        MainScreen(screenIndex) = 2
-    End Sub
-
-    Private Sub picMain3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles picMain3.Click
-        picSelect.Location = New Point(picMain3.Left - 19, picMain3.Top - 15)
-        MainScreen(screenIndex) = 3
-    End Sub
-
     Private Sub sbExitMyComp_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbExitMyComp.Click
         Me.Close()
     End Sub
@@ -341,12 +328,6 @@ Public Class frmSettings
         Catch ex As Exception
             LCARS.UI.MsgBox("Could not launch SetShell.exe.  Please make sure it is in the same directory as LCARSmain.exe." & vbNewLine & vbNewLine & ex.Message, MsgBoxStyle.OkCancel, "ERROR")
         End Try
-
-    End Sub
-
-    Private Sub picMain4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles picMain4.Click
-        picSelect.Location = New Point(picMain4.Left - 19, picMain4.Top - 15)
-        MainScreen(screenIndex) = 4
 
     End Sub
 
@@ -730,20 +711,26 @@ Public Class frmSettings
 
     End Sub
 
+    Private Sub mainScreen_Click(ByVal sender As Object, ByVal e As EventArgs)
+        If selectedMainScreen IsNot Nothing Then
+            selectedMainScreen.Selected = False
+        End If
+        Dim s As LCScreenImage = CType(sender, LCScreenImage)
+        s.Selected = True
+        MainScreen(screenIndex) = CInt(s.Data)
+        selectedMainScreen = s
+    End Sub
+
     Private Sub myScreen_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         pnlScreenSpecific.Visible = True
         screenIndex = Integer.Parse(CType(sender, Label).Text)
         'Main screen
-        Select Case MainScreen(screenIndex)
-            Case 1
-                picMain1_Click(Nothing, Nothing)
-            Case 2
-                picMain2_Click(Nothing, Nothing)
-            Case 3
-                picMain3_Click(Nothing, Nothing)
-            Case 4
-                picMain4_Click(Nothing, Nothing)
-        End Select
+        Dim mainScreenIndex As Integer = MainScreen(screenIndex)
+        If selectedMainScreen IsNot Nothing Then
+            selectedMainScreen.Selected = False
+        End If
+        selectedMainScreen = CType(gridScreens.Items(mainScreenIndex - 1), LCScreenImage)
+        selectedMainScreen.Selected = True
         'Autohide
         tglAutoHide.Lit = AutoHide(screenIndex)
         tglAutoHide.SideText = If(AutoHide(screenIndex), "ON", "OFF")
@@ -791,6 +778,7 @@ Public Class frmSettings
         fbWallpaper.RedAlert = LCARS.LCARSalert.Normal
         fbMainScreen.RedAlert = LCARS.LCARSalert.White
         fbLanguage.RedAlert = LCARS.LCARSalert.Normal
+        Dim selectedScreen As Integer = MainScreen(screenIndex)
     End Sub
 
     Private Sub fbLanguage_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbLanguage.Click
