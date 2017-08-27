@@ -412,18 +412,12 @@ Public Class frmStartup
         Dim b As New modBusiness(i)
         curBusiness.Add(b)
         Dim myForm As Form
-        Select Case modSettings.MainScreen(i)
-            Case 1
-                myForm = New frmMainscreen1(b)
-            Case 2
-                myForm = New frmMainscreen2(b)
-            Case 3
-                myForm = New frmMainscreen3(b)
-            Case 4
-                myForm = New frmMainscreen4(b)
-            Case Else
-                myForm = New frmFirstRun
-        End Select
+        Try
+            Dim screenType As Type = getMainScreenTypes()(modSettings.MainScreen(i) - 1)
+            myForm = CType(Activator.CreateInstance(screenType, b), Form)
+        Catch ex As Exception
+            myForm = New frmMainscreen1(b)
+        End Try
         b.init(myForm)
     End Sub
 
