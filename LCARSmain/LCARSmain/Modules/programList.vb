@@ -257,8 +257,17 @@ Public Module programList
         Dim resourceIndex As Integer = Integer.Parse(m.Groups(2).Value)
         Dim realLib As String = Environment.ExpandEnvironmentVariables(libStr)
 
+        'Set up error handling if needed
+        'Note: This should probably be called on startup once, but I don't know
+        ' how it would affect the .NET framework if I did so.
+        SetApplicationErrorHandling()
+
         'Load library
         Dim hLib As IntPtr = LoadLibrary(realLib)
+
+        'Clear error handling
+        ClearApplicationErrorHandling()
+
         If hLib = IntPtr.Zero Then Return Nothing
 
         'Get string

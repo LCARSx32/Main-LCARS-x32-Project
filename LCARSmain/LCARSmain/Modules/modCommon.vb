@@ -445,6 +445,52 @@ Public Enum SetWindowPosFlags As UInteger
     Public Const WM_DDE_LAST As Integer = WM_DDE_FIRST + 8
 
 #End Region
+
+#Region " Error Mode "
+    <Flags()> _
+    Private Enum NativeErrorModes As UInt32
+        SystemDefault = 0
+        FailCriticalErrors = 1
+        NoGPFaultErrorBox = 2
+        NoAlignmentFaultExcept = 4
+        NoOpenFileErrorBox = 8
+        Invalid = 1024
+    End Enum
+
+    Private Declare Auto Function SetThreadErrorMode Lib "kernel32" (ByVal dwNewMode As UInt32, ByRef lpOldMode As UInt32) As Boolean
+    Private Declare Auto Function SetErrorMode Lib "kernel32" (ByVal uMode As UInt32) As UInt32
+
+    Private oldMode As NativeErrorModes = NativeErrorModes.Invalid
+    Private noErrorMode As Boolean = False
+
+    Public Sub SetApplicationErrorHandling()
+        If noErrorMode Then Return
+        Try
+            SetThreadErrorMode(NativeErrorModes.FailCriticalErrors, oldMode)
+        Catch ex As EntryPointNotFoundException
+            Try
+                oldMode = SetErrorMode(NativeErrorModes.FailCriticalErrors)
+            Catch ex2 As EntryPointNotFoundException
+                noErrorMode = True
+            End Try
+        End Try
+    End Sub
+
+    Public Sub ClearApplicationErrorHandling()
+        If noErrorMode Then Return
+        If oldMode = NativeErrorModes.Invalid Then Return
+        Dim currentMode As NativeErrorModes
+        Try
+            SetThreadErrorMode(oldMode, currentMode)
+        Catch ex As EntryPointNotFoundException
+            Try
+                SetErrorMode(oldMode)
+            Catch ex2 As EntryPointNotFoundException
+            End Try
+        End Try
+        oldMode = NativeErrorModes.Invalid
+    End Sub
+#End Region
 #End Region
 
     Public Sub SetWallpaper(ByVal wall As Image, ByVal ScreenIndex As Integer)
