@@ -7,6 +7,8 @@ Public Class frmPic
 
     'index keeps track of where we are in the array.  It represents the location of the current image.
     Dim index As Integer
+    Dim origpicboxwidth As Integer
+    Dim origpicboxheight As Integer
 
     Private Sub frmPic_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         'sets initial picture box status to empty & prevents icon from displaying in pic box
@@ -16,9 +18,8 @@ Public Class frmPic
         Dim file As String()
         file = Environment.GetCommandLineArgs()
         If file.Length > 1 Then
-            TextBox3.Text = (file(1).ToString())
             'loads image into picturebox
-            picturebox1.ImageLocation = TextBox3.Text
+            picturebox1.ImageLocation = file(1).ToString()
 
         Else
 
@@ -126,15 +127,8 @@ Public Class frmPic
 
         End If
 
-        Dim origpicboxwidth As Integer = picturebox1.Width
-        TextBox1.Text = origpicboxwidth
-
-        Dim origpicboxheight As Integer = picturebox1.Height
-        TextBox2.Text = origpicboxheight
-
-
-
-
+        origpicboxwidth = picturebox1.Width
+        origpicboxheight = picturebox1.Height
     End Sub
 
     Private Sub abNext_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles abNext.Click
@@ -190,18 +184,8 @@ Public Class frmPic
     End Sub
 
     Private Sub fbActual_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbActual.Click
-
         If picturebox1.Image IsNot Nothing Then
             picturebox1.SizeMode = PictureBoxSizeMode.Zoom
-
-            Dim origpicboxwidth As Integer
-            origpicboxwidth = Convert.ToInt32(TextBox1.Text)
-            origpicboxwidth = Integer.Parse(TextBox1.Text)
-
-            Dim origpicboxheight As Integer
-            origpicboxheight = Convert.ToInt32(TextBox2.Text)
-            origpicboxheight = Integer.Parse(TextBox2.Text)
-
             picturebox1.Size = New Size(origpicboxwidth, origpicboxheight)
 
             Dim picboxlocx As Integer = 3
@@ -209,11 +193,7 @@ Public Class frmPic
             picturebox1.Location = New Point(picboxlocx, picboxlocy)
 
             pbZoom.ButtonText = "ZOOM: " & Strings.FormatPercent(picturebox1.Width / picturebox1.Image.Width, 0)
-
-
         End If
-
-
     End Sub
 
 
@@ -238,9 +218,8 @@ Public Class frmPic
     End Sub
 
 
-    Private Sub sbExitMyComp_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbExitMyComp.Click
+    Private Sub sbExit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sbExit.Click
         Me.Close()
-        End
     End Sub
 
 
