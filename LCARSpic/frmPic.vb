@@ -9,6 +9,7 @@ Public Class frmPic
     Dim index As Integer
     Dim origpicboxwidth As Integer
     Dim origpicboxheight As Integer
+    Const shiftDelta As Integer = 30
 
     Private Sub frmPic_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         'sets initial picture box status to empty & prevents icon from displaying in pic box
@@ -222,94 +223,29 @@ Public Class frmPic
         Me.Close()
     End Sub
 
+    Private shiftButton As LCARS.Controls.FlatButton
 
-
-    Private Sub picturebox1_MouseEnter(ByVal sender As Object, ByVal e As System.EventArgs) Handles picturebox1.MouseEnter
-
-        picturebox1.Focus()
-
+    Private Sub shiftButtonDown(ByVal sender As Object, ByVal e As EventArgs) Handles up.MouseDown, dwn.MouseDown, lft.MouseDown, rht.MouseDown
+        If picturebox1.Image Is Nothing Then Return
+        shiftButton = DirectCast(sender, LCARS.Controls.FlatButton)
+        tmrShift.Start()
+        shiftTimer_Tick(sender, e)
     End Sub
 
+    Private Sub shiftButtonUp(ByVal sender As Object, ByVal e As EventArgs) Handles up.MouseUp, dwn.MouseUp, lft.MouseUp, rht.MouseUp
+        tmrShift.Stop()
+        shiftButton = Nothing
+    End Sub
 
-    Private Sub dwn_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles dwn.MouseDown
-        If picturebox1.Image IsNot Nothing Then
-            tmrdown.Enabled = True
+    Private Sub shiftTimer_Tick(ByVal sender As Object, ByVal e As EventArgs) Handles tmrShift.Tick
+        If shiftButton Is up Then
+            picturebox1.Top += shiftDelta
+        ElseIf shiftButton Is dwn Then
+            picturebox1.Top -= shiftDelta
+        ElseIf shiftButton Is lft Then
+            picturebox1.Left += shiftDelta
+        ElseIf shiftButton Is rht Then
+            picturebox1.Left -= shiftDelta
         End If
-    End Sub
-
-    Private Sub dwn_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles dwn.MouseUp
-        tmrdown.Enabled = False
-    End Sub
-    Private Sub tmrdown_Tick(ByVal sender As Object, ByVal e As System.EventArgs) Handles tmrdown.Tick
-        shiftdown()
-    End Sub
-    Private Sub shiftdown()
-        Dim picboxlocy As Integer = picturebox1.Location.Y - 30
-        Dim picboxlocx As Integer = picturebox1.Location.X
-        picturebox1.Location = New Point(picboxlocx, picboxlocy)
-    End Sub
-
-    Private Sub lft_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lft.MouseDown
-        If picturebox1.Image IsNot Nothing Then
-            tmrleft.Enabled = True
-        End If
-    End Sub
-
-    Private Sub lft_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lft.MouseUp
-        tmrleft.Enabled = False
-    End Sub
-
-    Private Sub tmrleft_Tick(ByVal sender As Object, ByVal e As System.EventArgs) Handles tmrleft.Tick
-        shiftleft()
-    End Sub
-    Private Sub shiftleft()
-
-        Dim picboxlocy As Integer = picturebox1.Location.Y
-        Dim picboxlocx As Integer = picturebox1.Location.X + 30
-        picturebox1.Location = New Point(picboxlocx, picboxlocy)
-
-    End Sub
-    Private Sub rht_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles rht.MouseDown
-        If picturebox1.Image IsNot Nothing Then
-            tmrright.Enabled = True
-        End If
-    End Sub
-
-    Private Sub rht_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles rht.MouseUp
-        tmrright.Enabled = False
-    End Sub
-
-    Private Sub tmrright_Tick(ByVal sender As Object, ByVal e As System.EventArgs) Handles tmrright.Tick
-        shiftright()
-    End Sub
-
-    Private Sub shiftright()
-
-        Dim picboxlocy As Integer = picturebox1.Location.Y
-        Dim picboxlocx As Integer = picturebox1.Location.X - 30
-        picturebox1.Location = New Point(picboxlocx, picboxlocy)
-
-    End Sub
-    Private Sub up_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles up.MouseDown
-        If picturebox1.Image IsNot Nothing Then
-            tmrup.Enabled = True
-        End If
-    End Sub
-
-    Private Sub up_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles up.MouseUp
-        tmrup.Enabled = False
-    End Sub
-
-    Private Sub tmrup_Tick(ByVal sender As Object, ByVal e As System.EventArgs) Handles tmrup.Tick
-        shiftup()
-    End Sub
-
-    Private Sub shiftup()
-
-        Dim picboxlocy As Integer = picturebox1.Location.Y + 30
-        Dim picboxlocx As Integer = picturebox1.Location.X
-        picturebox1.Location = New Point(picboxlocx, picboxlocy)
-
-
     End Sub
 End Class
