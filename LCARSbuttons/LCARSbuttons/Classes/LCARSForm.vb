@@ -1,4 +1,5 @@
 ﻿Imports System.Runtime.InteropServices
+Imports System.Drawing
 
 ''' <summary>
 ''' A base Form class to handle common LCARS functions
@@ -180,5 +181,10 @@ Public Class LCARSForm
     ''' </summary>
     Protected Overridable Sub OnLCARSClosing()
         Me.Close()
+    End Sub
+
+    Public Sub New()
+        Me.BackColor = Color.Black
+        Me.ForeColor = Color.Orange
     End Sub
 End Class
