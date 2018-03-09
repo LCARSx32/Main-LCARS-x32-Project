@@ -230,7 +230,7 @@ Label072:
 
         Public Shared Property CommandTimeout() As Double
             Get
-                Return CDbl(GetSetting("LCARS x32", "Application", "CommandTimeout", "5.0"))
+                Return CDbl(GetSetting("LCARS x32", "Application", "CommandTimeout", "5"))
             End Get
             Set(ByVal value As Double)
                 If value < 0 Then value = 1
