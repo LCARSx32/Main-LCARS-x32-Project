@@ -49,7 +49,17 @@ Public Class frmOptions
     End Sub
 
     Private Sub fbAddSystem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbAddSystem.Click
-        MsgBox("Not implemented yet!")
+        Dim shortcuts() As SystemShortcut = SystemShortcut.DefinedFolders
+        Dim shortcutNames As New List(Of String)
+        For Each s As SystemShortcut In shortcuts
+            shortcutNames.Add(s.Name)
+        Next
+        Dim d As New ChoiceDialog(Of SystemShortcut)(shortcuts, shortcutNames.ToArray())
+        d.ShowDialog()
+        If d.SelectedItem Is Nothing Then Return
+        My.Settings.shortcuts.Add(d.SelectedItem.SettingsName)
+        My.Settings.shortcutNames.Add(d.SelectedItem.Name)
+        reloadList()
     End Sub
 
     Private Sub fbRemove_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles fbRemove.Click
